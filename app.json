@@ -1,13 +1,16 @@
 {
   "expo": {
-    "name": "turbo-learning",
+    "name": "Turbo Learning",
     "slug": "turbo-learning",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "turbo-learning",
+    "plugins": ["expo-router"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.turbile.turbo-learning"
     },
     "android": {
       "adaptiveIcon": {
@@ -16,10 +19,11 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "package": "com.turbile.turbo_learning"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     }
   }
 }
