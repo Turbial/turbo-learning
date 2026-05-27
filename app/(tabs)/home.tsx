@@ -106,17 +106,24 @@ function WeeksView({
       (u) => u.order_num >= startDay && u.order_num <= endDay
     );
 
-    // Simple status logic: Day 1 is "current", rest locked (will improve with enrollment data)
+    // Real progress: completed units → next is current, rest locked
     weeks.push({
       weekNum: w + 1,
       title: weekTitles[w] ?? `Week ${w + 1}`,
       goal: weekGoals[w] ?? "",
-      days: weekUnits.map((u) => ({
-        day: u.order_num,
-        unitId: u.id,
-        title: u.title,
-        status: u.order_num === 1 ? "current" : "locked",
-      })),
+      days: weekUnits.map((u, idx) => {
+        const isDone = completedUnitIds.has(u.id);
+        // The first non-completed unit is "current"
+        const prevAllDone = weekUnits.slice(0, idx).every((pu) => completedUnitIds.has(pu.id));
+        const isCurrent = !isDone && prevAllDone;
+        const isLocked = !isDone && !isCurrent;
+        return {
+          day: u.order_num,
+          unitId: u.id,
+          title: u.title,
+          status: (isDone ? "done" : isCurrent ? "current" : "locked") as "current" | "locked" | "done",
+        };
+      }),
     });
   }
 

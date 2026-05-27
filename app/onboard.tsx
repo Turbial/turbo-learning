@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../src/theme/tokens";
+import { useAuth } from "../src/data/useAuth";
+import { useUpdateProfile, useEnroll } from "../src/data/queries";
 
 const goals = [
   { key: "automate", label: "Automate my work", emoji: "⚡" },
@@ -30,8 +32,22 @@ export default function OnboardScreen() {
   const [learnTime, setLearnTime] = useState("Morning");
   const [name, setName] = useState("");
 
-  const handleComplete = () => {
-    // Store preferences locally for M1 (Supabase auth comes later)
+  const { user } = useAuth();
+  const updateProfile = useUpdateProfile();
+  const enroll = useEnroll();
+
+  const handleComplete = async () => {
+    if (user) {
+      // Save preferences to Supabase
+      updateProfile.mutate({
+        name: name.trim() || undefined,
+        goal,
+        daily_mins: dailyMins,
+        learn_time: learnTime,
+      });
+      // Auto-enroll in AI Operator
+      enroll.mutate({ programSlug: "ai-operator" });
+    }
     router.replace("/(tabs)/home");
   };
 

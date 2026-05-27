@@ -237,3 +237,77 @@ export function useUpdateProfile() {
     },
   });
 }
+
+export function useEnroll() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ programSlug }: { programSlug: string }) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      // Get program id from slug
+      const { data: program } = await supabase
+        .from("programs")
+        .select("id")
+        .eq("slug", programSlug)
+        .single();
+      if (!program) throw new Error("Program not found");
+
+      // Upsert enrollment (idempotent)
+      const { error } = await supabase
+        .from("enrollments")
+        .upsert({ user_id: user.id, program_id: program.id });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["enrollment"] });
+    },
+  });
+}
+
+export function useEnrollment(programSlug: string | undefined) {
+  return useQuery({
+    queryKey: ["enrollment", programSlug],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return null;
+
+      const { data: program } = await supabase
+        .from("programs")
+        .select("id")
+        .eq("slug", programSlug)
+        .single();
+      if (!program) return null;
+
+      const { data } = await supabase
+        .from("enrollments")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("program_id", program.id)
+        .single();
+      return data;
+    },
+    enabled: !!programSlug,
+  });
+}
+
+export function useLessonProgressMap(userId: string | undefined) {
+  return useQuery({
+    queryKey: ["lessonProgressMap", userId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("lesson_progress")
+        .select("lesson_id, lessons(unit_id)")
+        .eq("user_id", userId);
+      if (error) throw error;
+      // Map unit_id → completed
+      const map = new Set<string>();
+      data?.forEach((row: any) => {
+        if (row.lessons?.unit_id) map.add(row.lessons.unit_id);
+      });
+      return map;
+    },
+    enabled: !!userId,
+  });
+}
