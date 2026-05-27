@@ -2,7 +2,7 @@
 
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import { colors, spacing, radius, fontSize } from "@/src/theme/tokens";
+import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 
 export default function ProgressScreen() {
   return (

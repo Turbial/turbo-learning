@@ -11,7 +11,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { router } from "expo-router";
-import { colors, spacing, radius, fontSize } from "@/src/theme/tokens";
+import { colors, spacing, radius, fontSize } from "../src/theme/tokens";
 
 const goals = [
   { key: "automate", label: "Automate my work", emoji: "⚡" },

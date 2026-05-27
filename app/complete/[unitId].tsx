@@ -3,7 +3,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
-import { colors, spacing, radius, fontSize } from "@/src/theme/tokens";
+import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 
 export default function CompleteScreen() {
   const { unitId, xp, score } = useLocalSearchParams<{

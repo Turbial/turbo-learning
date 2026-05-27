@@ -3,13 +3,13 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet, SafeAreaView, Text } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
-import { LessonPlayer } from "@/src/engine";
-import type { Lesson, Step } from "@/src/engine/types";
-import { colors } from "@/src/theme/tokens";
+import { LessonPlayer } from "../../src/engine";
+import type { Lesson, Step } from "../../src/engine/types";
+import { colors } from "../../src/theme/tokens";
 
 // For M1–M2, load from local JSON instead of Supabase.
 // In M3+, this becomes a TanStack Query fetch from Supabase.
-import day1Json from "@/src/content/ai_operator/day1.json";
+import day1Json from "../../src/content/ai_operator/day1.json";
 
 // Map of available lessons (local JSON → Supabase in M3+)
 const LOCAL_LESSONS: Record<string, { unitId: string; lesson: Lesson }> = {

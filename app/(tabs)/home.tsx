@@ -3,7 +3,7 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
 import { router } from "expo-router";
-import { colors, spacing, radius, fontSize } from "@/src/theme/tokens";
+import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 
 // Mock data — will be fetched from Supabase via TanStack Query
 const weeks = [
