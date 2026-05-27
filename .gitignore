@@ -39,3 +39,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# supabase local state
+supabase/.temp/
+# env files with secrets
+.env
