@@ -1,47 +1,76 @@
-// ─── Lesson Player Screen — loads a lesson and drives the LessonPlayer ───
+// ─── Lesson Player Screen — loads lesson from Supabase, drives LessonPlayer ───
 
 import React, { useCallback } from "react";
-import { View, StyleSheet, SafeAreaView, Text } from "react-native";
+import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { LessonPlayer } from "../../src/engine";
 import type { Lesson, Step } from "../../src/engine/types";
 import { colors } from "../../src/theme/tokens";
+import { useAuth } from "../../src/data/useAuth";
+import { useLesson, useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 
-// For M1–M2, load from local JSON instead of Supabase.
-// In M3+, this becomes a TanStack Query fetch from Supabase.
+// Local fallback for Day 1 when Supabase isn't ready
 import day1Json from "../../src/content/ai_operator/day1.json";
 
-// Map of available lessons (local JSON → Supabase in M3+)
-const LOCAL_LESSONS: Record<string, { unitId: string; lesson: Lesson }> = {
+const LOCAL_LESSONS: Record<string, Lesson> = {
   "1": {
+    id: "day1-local",
     unitId: "day1",
-    lesson: {
-      id: "day1",
-      unitId: "day1",
-      orderNum: 1,
-      title: day1Json.title,
-      estMinutes: day1Json.estMinutes,
-      steps: day1Json.steps as Step[],
-    },
+    orderNum: 1,
+    title: day1Json.title,
+    estMinutes: day1Json.estMinutes,
+    steps: day1Json.steps as Step[],
   },
 };
 
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const lessonData = LOCAL_LESSONS[id ?? "1"];
+  const { user } = useAuth();
+
+  // Try Supabase first, fall back to local JSON
+  const supabaseQuery = useLesson(id);
+  const localLesson = LOCAL_LESSONS[id ?? "1"];
+  const completeMutation = useCompleteLesson();
+
+  const lesson: Lesson | undefined = supabaseQuery.data ?? localLesson;
+  const isLoading = supabaseQuery.isLoading && !localLesson;
 
   const handleComplete = useCallback(
     (sessionXp: number, score: number) => {
-      const unitId = lessonData?.unitId ?? "day1";
+      if (user && supabaseQuery.data) {
+        // Persist to Supabase
+        completeMutation.mutate({
+          userId: user.id,
+          lessonId: supabaseQuery.data.id,
+          xpEarned: sessionXp,
+          score,
+        });
+      }
+
       router.replace({
         pathname: "/complete/[unitId]",
-        params: { unitId, xp: sessionXp, score: Math.round(score * 100) },
+        params: {
+          unitId: lesson?.unitId ?? "day1",
+          xp: sessionXp,
+          score: Math.round(score * 100),
+        },
       });
     },
-    [lessonData],
+    [user, supabaseQuery.data, lesson, completeMutation],
   );
 
-  if (!lessonData) {
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.center}>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={styles.loadingText}>Loading lesson...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (!lesson) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
@@ -53,8 +82,6 @@ export default function LessonScreen() {
       </SafeAreaView>
     );
   }
-
-  const { lesson } = lessonData;
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -71,6 +98,7 @@ export default function LessonScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   center: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  loadingText: { marginTop: 12, fontSize: 15, color: colors.textMuted },
   missingText: { fontSize: 18, fontWeight: "700", color: colors.textSecondary, marginBottom: 12 },
   backLink: { fontSize: 16, fontWeight: "600", color: colors.primary },
 });

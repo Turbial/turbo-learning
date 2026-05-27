@@ -1,63 +1,33 @@
-// ─── Home / Journey — the learning path map ───
+// ─── Home / Journey — uses real data from Supabase ───
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
-
-// Mock data — will be fetched from Supabase via TanStack Query
-const weeks = [
-  {
-    week: 1,
-    title: "Foundation",
-    goal: "Understand AI and build your first workflows",
-    days: [
-      { day: 1, title: "What AI Actually Is", status: "current" as const },
-      { day: 2, title: "The Tool Landscape", status: "locked" as const },
-      { day: 3, title: "Your First AI Workflow", status: "locked" as const },
-      { day: 4, title: "Prompt Engineering 101", status: "locked" as const },
-      { day: 5, title: "AI for Writing & Content", status: "locked" as const },
-      { day: 6, title: "AI for Research", status: "locked" as const },
-      { day: 7, title: "Week 1 Checkpoint", status: "locked" as const },
-    ],
-  },
-  {
-    week: 2,
-    title: "Automation",
-    goal: "Build workflows that run without you",
-    days: Array.from({ length: 7 }, (_, i) => ({
-      day: i + 8,
-      title: `Day ${i + 8}`,
-      status: "locked" as const,
-    })),
-  },
-  {
-    week: 3,
-    title: "Systems",
-    goal: "Create multi-tool AI systems",
-    days: Array.from({ length: 7 }, (_, i) => ({
-      day: i + 15,
-      title: `Day ${i + 15}`,
-      status: "locked" as const,
-    })),
-  },
-  {
-    week: 4,
-    title: "Launch",
-    goal: "Ship your AI workforce",
-    days: Array.from({ length: 7 }, (_, i) => ({
-      day: i + 22,
-      title: `Day ${i + 22}`,
-      status: "locked" as const,
-    })),
-  },
-];
+import { useAuth } from "../../src/data/useAuth";
+import { useProfile, useUnits, useProgram } from "../../src/data/queries";
 
 export default function HomeScreen() {
-  const handleDayPress = (day: number, status: string) => {
+  const { user } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: program } = useProgram("ai-operator");
+  const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
+
+  const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
+    // Pass unit ID to lesson screen; it'll fetch the lesson
     router.push(`/lesson/${day}`);
   };
+
+  if (profileLoading || unitsLoading) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.center}>
+          <ActivityIndicator size="large" color={colors.primary} />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -65,22 +35,22 @@ export default function HomeScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>AI Operator</Text>
+            <Text style={styles.greeting}>{program?.title ?? "AI Operator"}</Text>
             <Text style={styles.subtitle}>28-Day Program</Text>
           </View>
           <View style={styles.statsRow}>
             <View style={styles.stat}>
-              <Text style={styles.statValue}>0</Text>
-              <Text style={styles.statLabel}>Day</Text>
+              <Text style={styles.statValue}>{profile?.level ?? 1}</Text>
+              <Text style={styles.statLabel}>Level</Text>
             </View>
             <View style={styles.statDivider} />
             <View style={styles.stat}>
-              <Text style={styles.statValue}>0</Text>
+              <Text style={styles.statValue}>{profile?.xp ?? 0}</Text>
               <Text style={styles.statLabel}>XP</Text>
             </View>
             <View style={styles.statDivider} />
             <View style={styles.stat}>
-              <Text style={styles.statValue}>🔥</Text>
+              <Text style={styles.statValue}>{profile?.streak ?? 0}🔥</Text>
               <Text style={styles.statLabel}>Streak</Text>
             </View>
           </View>
@@ -90,87 +60,148 @@ export default function HomeScreen() {
         <View style={styles.journey}>
           <Text style={styles.sectionTitle}>Your Journey</Text>
 
-          {weeks.map((week) => (
-            <View key={week.week} style={styles.weekCard}>
-              <View style={styles.weekHeader}>
-                <View>
-                  <Text style={styles.weekLabel}>WEEK {week.week}</Text>
-                  <Text style={styles.weekTitle}>{week.title}</Text>
-                </View>
-                <Text style={styles.weekGoal}>{week.goal}</Text>
-              </View>
-
-              <View style={styles.daysList}>
-                {week.days.map((d) => {
-                  const isCurrent = d.status === "current";
-                  const isDone = d.status === "done";
-                  const isLocked = d.status === "locked";
-
-                  return (
-                    <TouchableOpacity
-                      key={d.day}
-                      style={[
-                        styles.dayRow,
-                        isCurrent && styles.dayRowCurrent,
-                        isLocked && styles.dayRowLocked,
-                      ]}
-                      onPress={() => handleDayPress(d.day, d.status)}
-                      activeOpacity={isLocked ? 1 : 0.7}
-                      disabled={isLocked}
-                    >
-                      <View
-                        style={[
-                          styles.dayCircle,
-                          isDone && styles.dayCircleDone,
-                          isCurrent && styles.dayCircleCurrent,
-                          isLocked && styles.dayCircleLocked,
-                        ]}
-                      >
-                        {isDone ? (
-                          <Text style={styles.dayCheck}>✓</Text>
-                        ) : (
-                          <Text
-                            style={[
-                              styles.dayNum,
-                              isCurrent && styles.dayNumCurrent,
-                              isLocked && styles.dayNumLocked,
-                            ]}
-                          >
-                            {d.day}
-                          </Text>
-                        )}
-                      </View>
-                      <View style={styles.dayInfo}>
-                        <Text
-                          style={[
-                            styles.dayTitle,
-                            isLocked && styles.dayTitleLocked,
-                          ]}
-                        >
-                          {d.title}
-                        </Text>
-                        {isCurrent && (
-                          <View style={styles.currentBadge}>
-                            <Text style={styles.currentBadgeText}>▶ Continue</Text>
-                          </View>
-                        )}
-                      </View>
-                      {isLocked && <Text style={styles.lockIcon}>🔒</Text>}
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            </View>
-          ))}
+          {units ? (
+            <WeeksView units={units} onDayPress={handleDayPress} />
+          ) : (
+            <Text style={styles.emptyText}>Loading program...</Text>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
+function WeeksView({
+  units,
+  onDayPress,
+}: {
+  units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
+  onDayPress: (day: number, unitId: string, status: string) => void;
+}) {
+  // Group units into weeks (7 days each)
+  const weeks: Array<{
+    weekNum: number;
+    title: string;
+    goal: string;
+    days: Array<{
+      day: number;
+      unitId: string;
+      title: string;
+      status: "current" | "locked" | "done";
+    }>;
+  }> = [];
+
+  const weekTitles = ["Foundation", "Automation", "Systems", "Launch"];
+  const weekGoals = [
+    "Understand AI and build your first workflows",
+    "Build automations that run without you",
+    "Create multi-tool AI systems",
+    "Ship your AI workforce",
+  ];
+
+  for (let w = 0; w < 4; w++) {
+    const startDay = w * 7 + 1;
+    const endDay = Math.min(startDay + 6, 28);
+    const weekUnits = units.filter(
+      (u) => u.order_num >= startDay && u.order_num <= endDay
+    );
+
+    // Simple status logic: Day 1 is "current", rest locked (will improve with enrollment data)
+    weeks.push({
+      weekNum: w + 1,
+      title: weekTitles[w] ?? `Week ${w + 1}`,
+      goal: weekGoals[w] ?? "",
+      days: weekUnits.map((u) => ({
+        day: u.order_num,
+        unitId: u.id,
+        title: u.title,
+        status: u.order_num === 1 ? "current" : "locked",
+      })),
+    });
+  }
+
+  return (
+    <>
+      {weeks.map((week) => (
+        <View key={week.weekNum} style={styles.weekCard}>
+          <View style={styles.weekHeader}>
+            <View>
+              <Text style={styles.weekLabel}>WEEK {week.weekNum}</Text>
+              <Text style={styles.weekTitle}>{week.title}</Text>
+            </View>
+            <Text style={styles.weekGoal}>{week.goal}</Text>
+          </View>
+
+          <View style={styles.daysList}>
+            {week.days.map((d) => {
+              const isCurrent = d.status === "current";
+              const isDone = d.status === "done";
+              const isLocked = d.status === "locked";
+
+              return (
+                <TouchableOpacity
+                  key={d.day}
+                  style={[
+                    styles.dayRow,
+                    isCurrent && styles.dayRowCurrent,
+                    isLocked && styles.dayRowLocked,
+                  ]}
+                  onPress={() => onDayPress(d.day, d.unitId, d.status)}
+                  activeOpacity={isLocked ? 1 : 0.7}
+                  disabled={isLocked}
+                >
+                  <View
+                    style={[
+                      styles.dayCircle,
+                      isDone && styles.dayCircleDone,
+                      isCurrent && styles.dayCircleCurrent,
+                      isLocked && styles.dayCircleLocked,
+                    ]}
+                  >
+                    {isDone ? (
+                      <Text style={styles.dayCheck}>✓</Text>
+                    ) : (
+                      <Text
+                        style={[
+                          styles.dayNum,
+                          isCurrent && styles.dayNumCurrent,
+                          isLocked && styles.dayNumLocked,
+                        ]}
+                      >
+                        {d.day}
+                      </Text>
+                    )}
+                  </View>
+                  <View style={styles.dayInfo}>
+                    <Text
+                      style={[
+                        styles.dayTitle,
+                        isLocked && styles.dayTitleLocked,
+                      ]}
+                    >
+                      {d.title}
+                    </Text>
+                    {isCurrent && (
+                      <View style={styles.currentBadge}>
+                        <Text style={styles.currentBadgeText}>▶ Continue</Text>
+                      </View>
+                    )}
+                  </View>
+                  {isLocked && <Text style={styles.lockIcon}>🔒</Text>}
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+      ))}
+    </>
+  );
+}
+
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   scroll: { flex: 1 },
+  center: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.bg },
   header: {
     backgroundColor: colors.primary,
     padding: spacing.lg,
@@ -207,6 +238,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     marginBottom: spacing.md,
   },
+  emptyText: { fontSize: fontSize.sm, color: colors.textMuted, textAlign: "center", marginTop: 40 },
   weekCard: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
