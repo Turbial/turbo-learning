@@ -1,5 +1,50 @@
 // ─── Theme tokens — single source of truth for design system ───
 
+// Per-product themed color scale (used by Claude's ThemeContext + UI primitives)
+export type ColorScale = {
+  background: string;
+  surface: string;
+  surfaceAlt: string;
+  border: string;
+  text: string;
+  textMuted: string;
+  accent: string;
+  accentText: string;
+  accentSoft: string;
+  success: string;
+  error: string;
+};
+
+export type Theme = {
+  name: string;
+  colors: { light: ColorScale; dark: ColorScale };
+};
+
+// Structural tokens used by Claude's UI system
+export const motion = {
+  duration: { fast: 150, base: 250, slow: 400, xpBurst: 600 },
+} as const;
+
+export const sizing = { tapTargetMin: 44, buttonHeight: 48, fieldMinHeight: 96 } as const;
+
+export const lineHeight = { tight: 1.2, normal: 1.4, relaxed: 1.6 } as const;
+
+// Default light color scale for the AI Operator theme (used by ThemeContext)
+export const defaultColorScale: ColorScale = {
+  background: "#FAF8F5",
+  surface: "#FFFFFF",
+  surfaceAlt: "#F5F0EB",
+  border: "#e8e2d9",
+  text: "#2D241C",
+  textMuted: "#A09484",
+  accent: "#059669",
+  accentText: "#FFFFFF",
+  accentSoft: "#ecfdf5",
+  success: "#4E8A5C",
+  error: "#ef4444",
+};
+
+// Legacy flat colors object (used by our existing components)
 export const colors = {
   // Brand
   primary: "#059669",
