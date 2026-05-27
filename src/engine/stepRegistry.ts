@@ -39,6 +39,12 @@ import CopyActionStep from "./components/steps/CopyActionStep";
 import PasteCaptureStep from "./components/steps/PasteCaptureStep";
 import ReflectionStep from "./components/steps/ReflectionStep";
 import CompletionStep from "./components/steps/CompletionStep";
+import FillBlankStep from "./components/steps/FillBlankStep";
+import MatchStepComp from "./components/steps/MatchStep";
+import QuizStepComp from "./components/steps/QuizStep";
+import CompareStep from "./components/steps/CompareStep";
+import BadgeUnlockStep from "./components/steps/BadgeUnlockStep";
+import StreakCommitStep from "./components/steps/StreakCommitStep";
 import FallbackStep from "./components/steps/FallbackStep";
 
 // ─── Scoring helpers ───
@@ -123,13 +129,13 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: false },
   },
   fillblank: {
-    component: FallbackStep as any, // Not yet built
+    component: FillBlankStep as any,
     validate: fillBlankCorrect,
     score: fillBlankRescore,
     behavior: { requiresInteraction: true },
   },
   match: {
-    component: FallbackStep as any, // Not yet built (M4)
+    component: MatchStepComp as any,
     behavior: { requiresInteraction: true },
   },
   good_fit: {
@@ -139,7 +145,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true, autoAdvanceMs: 2000 },
   },
   quiz: {
-    component: FallbackStep as any, // Not yet built (M4)
+    component: QuizStepComp as any,
     behavior: { requiresInteraction: true },
   },
   builder: {
@@ -155,7 +161,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   compare: {
-    component: FallbackStep as any, // Not yet built (M4)
+    component: CompareStep as any,
     behavior: { requiresInteraction: true },
   },
   reflection: {
@@ -163,15 +169,15 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   badge_unlock: {
-    component: FallbackStep as any, // Not yet built (M4)
+    component: BadgeUnlockStep as any,
     behavior: { requiresInteraction: false, autoAdvanceMs: 4000 },
   },
   streak_commitment: {
-    component: FallbackStep as any, // Not yet built (M4)
+    component: StreakCommitStep as any,
     behavior: { requiresInteraction: true },
   },
   reminder_setup: {
-    component: FallbackStep as any, // Not yet built (M4)
+    component: FallbackStep as any, // Deferred — requires native push permissions
     behavior: { requiresInteraction: true },
   },
   completion: {
