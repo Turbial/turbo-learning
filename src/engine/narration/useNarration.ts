@@ -1,80 +1,120 @@
-// ─── Narration abstraction ───
-// V1: expo-speech (native) / Web Speech API (web)
+// ─── Narration abstraction — platform-aware TTS ───
+// Native: expo-speech. Web: Web Speech API.
 // V2: pre-generated MP3 via expo-audio (swap implementation, same interface)
 
-import type { NarrationController } from "./types";
+import { Platform } from "react-native";
+import type { NarrationController } from "../types";
 
-/**
- * Creates a narration controller that wraps the platform-native TTS.
- * On native: uses expo-speech. On web: uses Web Speech API.
- * The `text` parameter is set once per step and replayed on demand.
- */
-export function createNarration(
+type NarrationCallbacks = {
+  onStart?: () => void;
+  onEnd?: () => void;
+};
+
+// ═══ Native: expo-speech ═══
+// Lazy-imported to avoid web bundling issues
+
+async function createNativeNarration(
   text: string,
-  onStart?: () => void,
-  onEnd?: () => void,
+  cbs: NarrationCallbacks,
+): Promise<NarrationController> {
+  let playing = false;
+  let speed = 1.0;
+
+  try {
+    const { Speech } = await import("expo-speech");
+
+    const controller: NarrationController = {
+      get isPlaying() { return playing; },
+      get speed() { return speed; },
+      setSpeed(s: number) { speed = s; },
+      get transcript() { return text; },
+
+      play() {
+        if (playing) return;
+        Speech.speak(text, {
+          rate: speed,
+          onStart: () => { playing = true; cbs.onStart?.(); },
+          onDone: () => { playing = false; cbs.onEnd?.(); },
+          onStopped: () => { playing = false; },
+        });
+      },
+
+      pause() {
+        Speech.pause();
+        playing = false;
+      },
+
+      stop() {
+        Speech.stop();
+        playing = false;
+      },
+    };
+
+    return controller;
+  } catch {
+    // expo-speech not available, fall through to web
+    return createWebNarration(text, cbs);
+  }
+}
+
+// ═══ Web: Web Speech API ═══
+
+function createWebNarration(
+  text: string,
+  cbs: NarrationCallbacks,
 ): NarrationController {
   let playing = false;
   let speed = 1.0;
   let utterance: SpeechSynthesisUtterance | null = null;
 
-  // V1: Web Speech API (works in all browsers; expo-speech on native)
-  // We use a web-first implementation here since the engine is cross-platform.
-  // On native, expo-speech would be used instead — same interface.
-
   const controller: NarrationController = {
-    get isPlaying() {
-      return playing;
-    },
-    get speed() {
-      return speed;
-    },
-    setSpeed(s: number) {
-      speed = s;
-    },
-    get transcript() {
-      return text;
-    },
+    get isPlaying() { return playing; },
+    get speed() { return speed; },
+    setSpeed(s: number) { speed = s; },
+    get transcript() { return text; },
 
     play() {
-      if (playing) return;
-
-      // Web Speech API path
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = speed;
-        utterance.onstart = () => {
-          playing = true;
-          onStart?.();
-        };
-        utterance.onend = () => {
-          playing = false;
-          onEnd?.();
-        };
-        utterance.onerror = () => {
-          playing = false;
-          onEnd?.();
-        };
-        window.speechSynthesis.speak(utterance);
-      }
+      if (playing || typeof window === "undefined" || !window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = speed;
+      utterance.onstart = () => { playing = true; cbs.onStart?.(); };
+      utterance.onend = () => { playing = false; cbs.onEnd?.(); };
+      utterance.onerror = () => { playing = false; cbs.onEnd?.(); };
+      window.speechSynthesis.speak(utterance);
     },
 
     pause() {
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.pause();
-        playing = false;
-      }
+      window.speechSynthesis?.pause();
+      playing = false;
     },
 
     stop() {
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        playing = false;
-      }
+      window.speechSynthesis?.cancel();
+      playing = false;
       utterance = null;
     },
   };
 
   return controller;
+}
+
+// ═══ Factory ═══
+
+export function createNarration(
+  text: string,
+  onStart?: () => void,
+  onEnd?: () => void,
+): NarrationController {
+  const cbs: NarrationCallbacks = { onStart, onEnd };
+  if (Platform.OS !== "web") {
+    // Return a sync stub; native impl resolves async
+    const stub = createWebNarration(text, cbs);
+    createNativeNarration(text, cbs).then((native) => {
+      // Swap in native controller via object mutation
+      Object.assign(stub, native);
+    });
+    return stub;
+  }
+  return createWebNarration(text, cbs);
 }

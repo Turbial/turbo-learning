@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { useAuth } from "../src/data/useAuth";
+import { useOfflineSync } from "../src/data/useOfflineSync";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +20,7 @@ const queryClient = new QueryClient({
 
 function AuthGate({ children }: { children: React.ReactNode }) {
   const { user, isLoading, signInAnonymously } = useAuth();
-  const segments = useSegments();
+  useOfflineSync(); // handles offline queue flush
 
   useEffect(() => {
     if (isLoading) return;

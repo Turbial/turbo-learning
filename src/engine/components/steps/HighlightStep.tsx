@@ -1,16 +1,26 @@
 // ─── HighlightStep — text with highlighted phrases ───
 
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import { colors } from "../../../theme/tokens";
 
 export default function HighlightStep({ step, narration }: StepProps) {
   const s = step as { body: string; highlights: string[] };
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     narration.play();
-    return () => narration.stop();
+    setIsPlaying(true);
+    const interval = setInterval(() => setIsPlaying(narration.isPlaying), 200);
+    return () => { clearInterval(interval); narration.stop(); };
   }, []);
+
+  const togglePlay = () => {
+    if (narration.isPlaying) narration.pause();
+    else narration.play();
+    setIsPlaying(narration.isPlaying);
+  };
 
   // Split body by highlight phrases and render them highlighted
   const parts = splitByHighlights(s.body, s.highlights);
@@ -26,7 +36,25 @@ export default function HighlightStep({ step, narration }: StepProps) {
           ),
         )}
       </Text>
-      {narration.isPlaying && (
+      {/* Audio controls */}
+      <View style={styles.audioBar}>
+        <TouchableOpacity style={styles.playBtn} onPress={togglePlay} activeOpacity={0.7}>
+          <Text style={styles.playIcon}>{isPlaying ? "⏸" : "▶"}</Text>
+        </TouchableOpacity>
+        <View style={styles.speedGroup}>
+          {[0.8, 1, 1.5, 2].map((sp) => (
+            <TouchableOpacity
+              key={sp}
+              style={[styles.speedBtn, narration.speed === sp && styles.speedBtnActive]}
+              onPress={() => narration.setSpeed(sp)}
+              activeOpacity={0.7}
+            >
+              <Text style={[styles.speedText, narration.speed === sp && styles.speedTextActive]}>{sp}x</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+      {isPlaying && (
         <View style={styles.listeningBadge}>
           <Text style={styles.listeningText}>🔊 Listening...</Text>
         </View>
@@ -71,19 +99,25 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 2,
   },
+  audioBar: {
+    flexDirection: "row", alignItems: "center", gap: 12, marginTop: 20,
+    backgroundColor: colors.surface, borderRadius: 14, padding: 10,
+    borderWidth: 1, borderColor: colors.surfaceBorder,
+  },
+  playBtn: {
+    width: 44, height: 44, borderRadius: 22, backgroundColor: colors.primary,
+    justifyContent: "center", alignItems: "center",
+  },
+  playIcon: { fontSize: 18, color: "#fff" },
+  speedGroup: { flexDirection: "row", gap: 4 },
+  speedBtn: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 },
+  speedBtnActive: { backgroundColor: colors.primaryDim },
+  speedText: { fontSize: 13, fontWeight: "600", color: colors.textMuted },
+  speedTextActive: { color: colors.primary },
   listeningBadge: {
-    marginTop: 20,
-    alignSelf: "flex-start",
-    backgroundColor: "#ecfdf5",
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#a7f3d0",
+    marginTop: 12, alignSelf: "flex-start", backgroundColor: "#ecfdf5",
+    paddingHorizontal: 14, paddingVertical: 6, borderRadius: 20,
+    borderWidth: 1, borderColor: "#a7f3d0",
   },
-  listeningText: {
-    fontSize: 13,
-    color: "#059669",
-    fontWeight: "600",
-  },
+  listeningText: { fontSize: 12, color: "#059669", fontWeight: "600" },
 });
