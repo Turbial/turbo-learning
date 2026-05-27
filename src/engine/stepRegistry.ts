@@ -118,6 +118,12 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     score: mcRescore,
     behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
   },
+  scenario: {
+    component: McStep as any,
+    validate: mcCorrect,
+    score: mcRescore,
+    behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
+  },
   tf: {
     component: TrueFalseStep as any,
     validate: tfCorrect,
