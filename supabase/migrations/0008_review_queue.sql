@@ -1,6 +1,10 @@
 -- PREVIEW — review & approve before applying with the service key.
 -- 0008 Spaced repetition. review_queue table exists (0001); this adds the scheduler RPC
 -- (expanding interval) + the streak-at-risk helper used by the cron edge function.
+
+-- Add unique constraint for upsert: one review entry per user per step
+alter table review_queue add constraint if not exists review_queue_user_step_unique unique (user_id, step_id);
+
 create or replace function public.schedule_review(p_step_id text, p_lesson_id uuid, p_correct boolean)
 returns void language plpgsql security definer set search_path = public, pg_temp as $$
 declare v_user uuid := auth.uid(); v_interval int; v_ease numeric;
@@ -13,7 +17,12 @@ begin
   insert into review_queue (user_id, step_id, lesson_id, due_at, interval_days, ease, last_result)
   values (v_user, p_step_id, p_lesson_id, now() + (v_interval || ' days')::interval, v_interval, v_ease,
           case when p_correct then 'pass' else 'fail' end)
-  on conflict (id) do nothing;
+  on conflict (user_id, step_id) do update set
+    lesson_id = excluded.lesson_id,
+    due_at = excluded.due_at,
+    interval_days = excluded.interval_days,
+    ease = excluded.ease,
+    last_result = excluded.last_result;
 end; $$;
 grant execute on function public.schedule_review(text, uuid, boolean) to authenticated;
 
