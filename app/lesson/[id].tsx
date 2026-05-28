@@ -40,7 +40,6 @@ export default function LessonScreen() {
       if (user && supabaseQuery.data) {
         // Persist to Supabase
         completeMutation.mutate({
-          userId: user.id,
           lessonId: supabaseQuery.data.id,
           xpEarned: sessionXp,
           score,

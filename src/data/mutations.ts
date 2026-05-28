@@ -23,17 +23,17 @@ export async function upsertStepResponse(params: {
 }
 
 // Finalize a lesson exactly once. The RPC is idempotent: a second call adds no XP.
-// Pass the user's LOCAL date so streaks respect their timezone.
+// @deprecated — prefer useCompleteLesson() from queries.ts (TanStack Query wrapper).
+// Requires migration 0011: complete_lesson now derives user from auth.uid().
 export async function completeLesson(params: {
   lessonId: string;
-  sessionXp: number;
-  localDate?: string; // 'YYYY-MM-DD'; defaults to device local date
+  xpEarned: number;
+  score: number;
 }): Promise<CompleteLessonResult> {
-  const localDate = params.localDate ?? new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
   const { data, error } = await supabase.rpc('complete_lesson', {
     p_lesson_id: params.lessonId,
-    p_session_xp: params.sessionXp,
-    p_local_date: localDate,
+    p_xp_earned: params.xpEarned,
+    p_score: params.score,
   });
   if (error) throw error;
   return data as CompleteLessonResult;
