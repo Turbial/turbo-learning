@@ -201,7 +201,8 @@ export default function LessonPlayer({
             ← Back
           </Text>
         )}
-        {!handler.behavior.requiresInteraction && (
+        {/* Show Continue for non-interactive steps OR after user has answered an interactive step */}
+        {(!handler.behavior.requiresInteraction || responses[step.id] !== undefined) && (
           <Text style={styles.continueBtn} onPress={handleContinue}>
             {playerState.isLast ? "Complete →" : "Continue →"}
           </Text>
