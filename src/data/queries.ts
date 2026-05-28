@@ -305,3 +305,25 @@ export function useLessonProgressMap(userId: string | undefined) {
     enabled: !!userId,
   });
 }
+
+// ─── Active program slug (first enrollment) ───
+export function useActiveProgramSlug() {
+  const { data: { user } } = {} as any;
+  return useQuery({
+    queryKey: ["activeProgramSlug"],
+    queryFn: async () => {
+      const { data: { user: u } } = await supabase.auth.getUser();
+      if (!u) return null;
+      const { data: enrollment } = await supabase
+        .from("enrollments")
+        .select("program_id, programs!inner(slug)")
+        .eq("user_id", u.id)
+        .limit(1)
+        .single();
+      // Cast to access nested joined data
+      const row = enrollment as any;
+      return row?.programs?.slug as string | null;
+    },
+    staleTime: 10 * 60 * 1000,
+  });
+}
