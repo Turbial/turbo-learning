@@ -31,21 +31,32 @@ import InfoStep from "./components/steps/InfoStep";
 import ScenarioCardStep from "./components/steps/ScenarioCardStep";
 import ExampleStep from "./components/steps/ExampleStep";
 import McStep from "./components/steps/McStep";
-import TrueFalseStep from "./components/steps/TrueFalseStep";
 import HighlightStep from "./components/steps/HighlightStep";
 import GoodFitStep from "./components/steps/GoodFitStep";
 import BuilderStep from "./components/steps/BuilderStep";
 import CopyActionStep from "./components/steps/CopyActionStep";
-import PasteCaptureStep from "./components/steps/PasteCaptureStep";
-import ReflectionStep from "./components/steps/ReflectionStep";
-import CompletionStep from "./components/steps/CompletionStep";
-import FillBlankStep from "./components/steps/FillBlankStep";
-import MatchStepComp from "./components/steps/MatchStep";
 import QuizStepComp from "./components/steps/QuizStep";
 import CompareStep from "./components/steps/CompareStep";
-import BadgeUnlockStep from "./components/steps/BadgeUnlockStep";
-import StreakCommitStep from "./components/steps/StreakCommitStep";
 import FallbackStep from "./components/steps/FallbackStep";
+
+// ─── New step components from Google Drive spec (onNext/onXP interface) ───
+import NewTrueFalseStep from "../components/lesson/steps/TrueFalseStep";
+import NewFillBlankStep from "../components/lesson/steps/FillBlankStep";
+import NewMatchStep from "../components/lesson/steps/MatchStep";
+import NewPasteCaptureStep from "../components/lesson/steps/PasteCaptureStep";
+import NewReflectionStep from "../components/lesson/steps/ReflectionStep";
+import NewCompletionStep from "../components/lesson/steps/CompletionStep";
+import NewBadgeUnlockStep from "../components/lesson/steps/BadgeUnlockStep";
+import NewStreakStep from "../components/lesson/steps/StreakStep";
+import NewCommitStep from "../components/lesson/steps/CommitStep";
+
+// ─── Adapter: bridges onNext/onXP components to engine's onAnswer/onContinue ───
+import { createElement } from "react";
+function adaptStep(Component: React.ComponentType<{ step: any; onNext: () => void; onXP: (x: number) => void }>): React.ComponentType<StepProps> {
+  return function AdaptedStep({ step, onAnswer, onContinue }: StepProps) {
+    return createElement(Component, { step, onNext: onContinue, onXP: (xp: number) => onAnswer(xp) });
+  };
+}
 
 // ─── Scoring helpers ───
 
@@ -125,23 +136,19 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
   },
   tf: {
-    component: TrueFalseStep as any,
-    validate: tfCorrect,
-    score: tfRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 1500 },
+    component: adaptStep(NewTrueFalseStep) as any,
+    behavior: { requiresInteraction: true },
   },
   highlight: {
     component: HighlightStep as any,
     behavior: { requiresInteraction: false },
   },
   fillblank: {
-    component: FillBlankStep as any,
-    validate: fillBlankCorrect,
-    score: fillBlankRescore,
+    component: adaptStep(NewFillBlankStep) as any,
     behavior: { requiresInteraction: true },
   },
   match: {
-    component: MatchStepComp as any,
+    component: adaptStep(NewMatchStep) as any,
     behavior: { requiresInteraction: true },
   },
   good_fit: {
@@ -163,7 +170,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   paste_capture: {
-    component: PasteCaptureStep as any,
+    component: adaptStep(NewPasteCaptureStep) as any,
     behavior: { requiresInteraction: true },
   },
   compare: {
@@ -171,23 +178,23 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   reflection: {
-    component: ReflectionStep as any,
+    component: adaptStep(NewReflectionStep) as any,
     behavior: { requiresInteraction: true },
   },
   badge_unlock: {
-    component: BadgeUnlockStep as any,
-    behavior: { requiresInteraction: false, autoAdvanceMs: 4000 },
+    component: adaptStep(NewBadgeUnlockStep) as any,
+    behavior: { requiresInteraction: false },
   },
   streak_commitment: {
-    component: StreakCommitStep as any,
-    behavior: { requiresInteraction: true },
+    component: adaptStep(NewStreakStep) as any,
+    behavior: { requiresInteraction: false },
   },
   reminder_setup: {
     component: FallbackStep as any, // Deferred — requires native push permissions
     behavior: { requiresInteraction: true },
   },
   completion: {
-    component: CompletionStep as any,
+    component: adaptStep(NewCompletionStep) as any,
     behavior: { requiresInteraction: false },
   },
 };
