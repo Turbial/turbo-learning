@@ -11,6 +11,7 @@ import { useLesson, useLessonByUnit, useCompleteLesson } from "../../src/data/qu
 
 // Local fallbacks when Supabase isn't ready
 import aiDay1 from "../../src/content/ai_operator/day1.json";
+import aiDay2 from "../../src/content/ai_operator/day2.json";
 import duoDay1 from "../../src/content/duo/day1.json";
 import duoDay2 from "../../src/content/duo/day2.json";
 import duoDay3 from "../../src/content/duo/day3.json";
@@ -20,7 +21,7 @@ import duoDay6 from "../../src/content/duo/day6.json";
 import duoDay7 from "../../src/content/duo/day7.json";
 
 const DAY_CONTENT: Record<string, any> = {
-  "ai-1": aiDay1,
+  "ai-1": aiDay1, "ai-2": aiDay2,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
   "duo-7": duoDay7,
