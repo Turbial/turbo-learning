@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "unit": "day7",
+  "title": "Day 7: Your Marriage Blueprint",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d7-info-1",
+      "type": "info",
+      "title": "You've Done the Hardest Part",
+      "body": "This week, you looked at your marriage honestly — maybe more honestly than you have in years.\n\nYou identified the Four Pillars: Foundation, Connection, Household, Repair.\nYou recognized the Four Horsemen that predict failure.\nYou learned about bids for connection and the invisible mental load.\nYou audited your trust, respect, intimacy, money habits, and repair patterns.\n\nThat's not just information. That's a map.\n\nToday, we turn that map into a blueprint.",
+      "xp": 5
+    },
+    {
+      "id": "d7-highlight-1",
+      "type": "highlight",
+      "body": "Most couples never do what you just did this week.\n\nThey sense something's off. They know it could be better. But they never stop long enough to look at it clearly.\n\nYou stopped. You looked. That alone puts you ahead of 90% of couples.\n\nNow let's build.",
+      "highlights": ["never stop long enough", "You stopped. You looked.", "Now let's build."],
+      "xp": 5
+    },
+    {
+      "id": "d7-reflection-1",
+      "type": "reflection",
+      "title": "Pillar by Pillar: Your Assessment",
+      "prompt": "For each pillar, rate where your marriage is right now (1=needs serious work, 5=thriving). Be honest:\n\nFoundation (trust, respect, values): __/5\nConnection (emotional + physical intimacy): __/5\nHousehold (money, labor, logistics): __/5\nRepair (conflict resolution + recovery): __/5\n\nWhich is strongest? Which needs the most attention right now?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d7-info-2",
+      "type": "info",
+      "title": "Focus: Pick Your Priority",
+      "body": "You can't fix everything at once. The couples who succeed pick ONE pillar to focus on first.\n\nThe rule: pick the pillar that's causing the most pain right now. Not the one you 'should' fix. Not the one that seems easiest. The one that keeps you up at night.\n\nWhy? Because momentum matters. Fix the biggest leak first and everything else gets easier.\n\nOver Weeks 2–4, we'll strengthen each pillar systematically. But your priority pillar gets extra attention.",
+      "xp": 5
+    },
+    {
+      "id": "d7-mc-1",
+      "type": "mc",
+      "question": "Which pillar will be your priority focus?",
+      "options": [
+        "Foundation — We need to rebuild trust and alignment",
+        "Connection — We feel distant and need to reconnect",
+        "Household — Money and logistics are creating constant friction",
+        "Repair — Our fights are damaging and we don't recover well"
+      ],
+      "correct": -1,
+      "feedback": [
+        "Foundation it is. Weeks 2–4 will cover all pillars, but you'll get extra focus on rebuilding the fundamentals — trust exercises, values conversations, and respect practices.",
+        "Connection is your priority. Weeks 2–4 will cover all pillars, but you'll get extra focus on emotional intimacy, bids for connection, and rebuilding friendship.",
+        "Household is your priority. Weeks 2–4 will cover all pillars, but you'll get extra focus on money conversations, labor fairness, and reducing household stress.",
+        "Repair is your priority. Weeks 2–4 will cover all pillars, but you'll get extra focus on conflict skills, repair scripts, and recovery practices."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d7-info-3",
+      "type": "info",
+      "title": "What's Coming: Weeks 2–4",
+      "body": "Week 2 — Safety (Days 8–14): Emotional safety, vulnerability, creating a marriage where both people can be themselves.\n\nWeek 3 — Connection (Days 15–21): Deepening intimacy, rebuilding friendship, keeping the spark alive in long-term partnership.\n\nWeek 4 — Mission (Days 22–28): Shared vision, building a life together, becoming a team that's pointed in the same direction.\n\nEach week builds on the last. Each pillar gets its deep dive. And every day, small actions that add up to real change.",
+      "xp": 5
+    },
+    {
+      "id": "d7-reflection-2",
+      "type": "reflection",
+      "title": "Your Marriage Vision",
+      "prompt": "Fast forward one year. Your marriage is thriving — not perfect, but genuinely good. What's different?\n\n• What do you notice about how you talk to each other?\n• How do you handle conflict?\n• What does a typical Tuesday look like?\n\nWrite your vision. Not a fantasy — a real picture of what you're building toward.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d7-info-4",
+      "type": "info",
+      "title": "Week 1 Complete",
+      "body": "You did it. Week 1 — the hardest week — is complete.\n\nYou know where you are. You know where you want to go. You have a priority pillar and a vision for your marriage.\n\nThat's not nothing. That's everything.\n\nTake a moment to acknowledge what you've done this week. Most people talk about improving their marriage. You actually started.\n\nWeek 2 begins tomorrow: Safety. Building a marriage where both of you can breathe.",
+      "xp": 10
+    },
+    {
+      "id": "d7-badge-1",
+      "type": "badgeUnlock",
+      "title": "Achievement Unlocked: Week 1 Complete",
+      "body": "You completed the Diagnosis phase. You looked at your marriage honestly across all four pillars — and you didn't look away. That takes courage.\n\nBadge earned: The Truth-Teller",
+      "badge": "truth_teller",
+      "xp": 50
+    }
+  ]
+}

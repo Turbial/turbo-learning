@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "unit": "day2",
+  "title": "Day 2: Why Couples Drift Apart",
+  "estMinutes": 10,
+  "steps": [
+    {
+      "id": "d2-info-1",
+      "type": "info",
+      "title": "The Drift Is Silent",
+      "body": "Couples don't wake up one day and decide to drift apart. It happens in inches.\n\nA conversation that didn't happen. A bid for connection that got ignored. A resentment that went unspoken. Over months and years, these inches become miles.\n\nJohn Gottman, who studied thousands of couples over four decades, found something remarkable: he could predict divorce with 94% accuracy by watching just 15 minutes of a couple talking.\n\nThe signs are visible. You just have to know what to look for.",
+      "xp": 5
+    },
+    {
+      "id": "d2-highlight-1",
+      "type": "highlight",
+      "body": "The distance between you didn't appear overnight.\n\nIt's the sum of a thousand tiny moments where you turned away instead of toward each other.\n\nThe good news? You can turn back toward each other starting right now.",
+      "highlights": ["didn't appear overnight", "turned away instead of toward", "turn back toward"],
+      "xp": 5
+    },
+    {
+      "id": "d2-info-2",
+      "type": "info",
+      "title": "The Four Horsemen",
+      "body": "Gottman identified four communication patterns that predict relationship failure. He called them the Four Horsemen:\n\n1. Criticism — Attacking your partner's character, not their behavior\n2. Contempt — The single biggest predictor of divorce. Mockery, eye-rolling, sneering.\n3. Defensiveness — Playing the victim, making excuses, counter-attacking\n4. Stonewalling — Shutting down, withdrawing, refusing to engage\n\nEvery couple does these sometimes. The danger isn't doing them once — it's when they become the default.",
+      "xp": 5
+    },
+    {
+      "id": "d2-mc-1",
+      "type": "mc",
+      "question": "Which of the Four Horsemen is the single biggest predictor of divorce?",
+      "options": [
+        "Criticism",
+        "Contempt",
+        "Defensiveness",
+        "Stonewalling"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Correct. Contempt — mockery, eye-rolling, sneering — is the most destructive pattern. It communicates disgust and superiority, making repair nearly impossible.",
+        "Not this one. While all four are dangerous, contempt is the most corrosive. It's the one that makes the other three harder to recover from."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d2-reflection-1",
+      "type": "reflection",
+      "title": "Recognize Any Horsemen?",
+      "prompt": "Which of the Four Horsemen — criticism, contempt, defensiveness, or stonewalling — shows up most often in your relationship?\n\nDon't judge yourself or your partner. Just notice. Awareness is the first step to change.",
+      "minChars": 20,
+      "xp": 15
+    },
+    {
+      "id": "d2-info-3",
+      "type": "info",
+      "title": "Bids for Connection",
+      "body": "A 'bid' is any attempt to connect — a question, a touch, a look, a comment about the weather. They're tiny, easy to miss, and incredibly important.\n\nGottman found that couples who stay together respond positively to each other's bids 86% of the time.\n\nCouples who divorce? Only 33%.\n\nThe difference between thriving and failing isn't the absence of problems. It's the presence of response.",
+      "xp": 5
+    },
+    {
+      "id": "d2-scenario-1",
+      "type": "scenario_card",
+      "title": "The Missed Bid",
+      "body": "Your partner says, \"Look at that sunset.\"\n\nYou have three choices:\n\n1. Turn toward — look up, engage. \"Wow, the colors are amazing tonight.\"\n2. Turn away — ignore it, keep scrolling. Maybe grunt in acknowledgment.\n3. Turn against — dismiss it. \"I'm busy, can't you see?\"\n\nThe sunset isn't about the sunset. It's a bid. They're saying: \"I want to share a moment with you.\"\n\nHow you respond shapes the next decade of your marriage."
+    },
+    {
+      "id": "d2-tf-1",
+      "type": "tf",
+      "question": "Most couples who divorce have more conflicts than couples who stay together.",
+      "correct": false,
+      "feedback": [
+        "Correct. Research shows that happy couples and unhappy couples have about the same number of conflicts. The difference is how they repair afterward. It's not about avoiding fights — it's about recovering from them.",
+        "Actually, research shows similar conflict levels. The difference is in how couples respond to bids for connection and how they repair after disagreements."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d2-reflection-2",
+      "type": "reflection",
+      "title": "Your Bid Response Rate",
+      "prompt": "Think about yesterday. How many times did your partner make a bid for connection — a question, a look, a touch? And how did you respond?\n\nWhat's one small way you could turn toward a bid today that you might have missed yesterday?",
+      "minChars": 20,
+      "xp": 15
+    },
+    {
+      "id": "d2-info-4",
+      "type": "info",
+      "title": "Tomorrow: The Foundation Audit",
+      "body": "Today you learned why couples drift — the Horsemen that predict failure and the bids that predict success.\n\nTomorrow, we go deeper. You'll audit your Foundation — the trust, respect, and shared values that everything else rests on.\n\nUntil then, here's your mission: notice one bid for connection today and turn toward it. Just one.",
+      "xp": 5
+    }
+  ]
+}

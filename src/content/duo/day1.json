@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "unit": "day1",
+  "title": "Day 1: The Honest Starting Line",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d1-info-1",
+      "type": "info",
+      "title": "Welcome to Duo",
+      "body": "You're here because you want more from your marriage. Not because it's broken — but because you know it could be better.\n\nHere's a stat that should make you angry: 77% of couples say they're not thriving. Not failing. Not fighting. Just... not thriving.\n\nThat's three out of four couples settling for fine when they could have extraordinary.\n\nThis program isn't about fixing what's broken. It's about building what's missing. Over the next 28 days, you'll diagnose where you actually are, strengthen your foundation, and build the skills that turn a good marriage into a great one.\n\nLet's start with the truth.",
+      "xp": 5
+    },
+    {
+      "id": "d1-highlight-1",
+      "type": "highlight",
+      "body": "77% of couples aren't thriving.\n\nNot because they don't love each other.\nNot because they're incompatible.\n\nBecause nobody taught them how to build a marriage.\n\nWe get more training for a driver's license than for the most important relationship of our lives. That ends today.",
+      "highlights": ["77%", "nobody taught them", "That ends today"],
+      "xp": 5
+    },
+    {
+      "id": "d1-reflection-1",
+      "type": "reflection",
+      "title": "Where Are You Really?",
+      "prompt": "On a scale of 1–10, how would you rate your marriage right now? Be honest. Nobody else will see this.\n\nNow ask yourself: what's the gap between the number you'd tell a friend and the real number?",
+      "minChars": 20,
+      "xp": 10
+    },
+    {
+      "id": "d1-info-2",
+      "type": "info",
+      "title": "The Four Pillars",
+      "body": "Every thriving marriage stands on four pillars. When one wobbles, the whole thing feels unstable — even if you can't name why.\n\n1. Foundation — Trust, respect, shared values. The ground you build on.\n2. Connection — Emotional and physical intimacy. The reason you chose each other.\n3. Household — Money, chores, logistics. The machinery of daily life.\n4. Repair — Conflict resolution and recovery. Because every marriage has ruptures.\n\nOver the next 28 days, we'll strengthen each pillar. But first — you need to see them clearly.",
+      "xp": 5
+    },
+    {
+      "id": "d1-match-1",
+      "type": "match",
+      "title": "Match the Pillar",
+      "question": "Match each pillar to its domain:",
+      "pairs": [
+        { "left": "Foundation", "right": "Trust, respect, shared values" },
+        { "left": "Connection", "right": "Emotional and physical intimacy" },
+        { "left": "Household", "right": "Money, chores, logistics" },
+        { "left": "Repair", "right": "Conflict resolution and recovery" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d1-tf-1",
+      "type": "tf",
+      "question": "If one pillar is weak, the other three can fully compensate.",
+      "correct": false,
+      "feedback": [
+        "Correct. Each pillar supports the others. A weak foundation makes connection harder. Poor repair erodes trust. They're interconnected — you can't ignore one and expect the others to hold.",
+        "Not quite. The pillars are interconnected. When one is weak, it puts strain on the others. You can't have great connection on a cracked foundation."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d1-reflection-2",
+      "type": "reflection",
+      "title": "Your Strongest and Weakest Pillar",
+      "prompt": "Looking at the four pillars — Foundation, Connection, Household, Repair — which feels strongest in your marriage right now? Which feels like it needs the most attention?\n\nNo judgment. Just observation.",
+      "minChars": 20,
+      "xp": 15
+    },
+    {
+      "id": "d1-info-3",
+      "type": "info",
+      "title": "The Promise of This Program",
+      "body": "In 28 days, you won't have a perfect marriage. That's not the goal.\n\nYou'll have something better: clarity about where you are, tools to strengthen every pillar, and a partner who's on the same journey.\n\nDay 1 is about honesty. The foundation of everything we'll build.\n\nTomorrow: understanding why couples drift apart — and how to recognize the early signs.",
+      "xp": 5
+    },
+    {
+      "id": "d1-streak-1",
+      "type": "streakCommit",
+      "title": "Your Daily Commitment",
+      "body": "The hardest part of any 28-day journey is Day 1. You just did it.\n\nCommit to showing up tomorrow. Same time, same place.\n\nYour marriage deserves 28 days of attention. You both do.",
+      "xp": 10
+    }
+  ]
+}

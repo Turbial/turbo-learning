@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "unit": "day6",
+  "title": "Day 6: The Repair Reflex",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d6-info-1",
+      "type": "info",
+      "title": "You Will Fight",
+      "body": "Every couple fights. The question isn't whether you fight — it's whether you recover.\n\nThe Repair pillar is about what happens after the rupture:\n\n• How quickly do you come back together?\n• Who reaches out first?\n• Does the repair actually heal, or just paper over the crack?\n\nCouples who thrive aren't couples who never fight. They're couples who have mastered the art of coming back.",
+      "xp": 5
+    },
+    {
+      "id": "d6-highlight-1",
+      "type": "highlight",
+      "body": "The goal isn't to stop fighting.\n\nThe goal is to fight well — and recover better.\n\nA good fight clarifies. A bad fight contaminates.\n\nA good repair heals. A bad repair delays the next explosion.",
+      "highlights": ["fight well — and recover better", "clarifies vs contaminates", "heals vs delays"],
+      "xp": 5
+    },
+    {
+      "id": "d6-info-2",
+      "type": "info",
+      "title": "Your Conflict Style",
+      "body": "Everyone has a default conflict style. Understanding yours — and your partner's — is half the battle.\n\n1. The Pursuer — wants to talk it out NOW, gets anxious with distance\n2. The Withdrawer — needs space to process, gets overwhelmed by intensity\n3. The Debater — wants to win the argument, treats conflict like a courtroom\n4. The Avoider — would rather pretend it didn't happen, hopes it goes away\n\nNone of these are wrong. But when pursuer meets withdrawer, or debater meets avoider — the conflict style clash becomes its own problem.",
+      "xp": 5
+    },
+    {
+      "id": "d6-mc-1",
+      "type": "mc",
+      "question": "Which is your default conflict style?",
+      "options": [
+        "Pursuer — I want to resolve it immediately",
+        "Withdrawer — I need space to think first",
+        "Debater — I want to make my case clearly",
+        "Avoider — I'd rather move past it"
+      ],
+      "correct": -1,
+      "feedback": [
+        "No right or wrong answer here — just self-awareness. Pursuers need to learn to give space. Withdrawers need to learn to come back.",
+        "No right or wrong answer here — just self-awareness. Pursuers need to learn to give space. Withdrawers need to learn to come back.",
+        "No right or wrong answer here — just self-awareness. Pursuers need to learn to give space. Withdrawers need to learn to come back.",
+        "No right or wrong answer here — just self-awareness. Pursuers need to learn to give space. Withdrawers need to learn to come back."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d6-info-3",
+      "type": "info",
+      "title": "The Anatomy of Repair",
+      "body": "Effective repair has three parts:\n\n1. Stop the bleed — Take a break BEFORE you say something you can't take back. 20 minutes minimum. Your nervous system needs time to calm down.\n\n2. Own your piece — Not 'I'm sorry you felt that way.' Real ownership: 'I got defensive instead of listening. That wasn't fair.'\n\n3. Reconnect — A touch, a shared laugh, a moment of 'we're still us.' Repair isn't complete until you feel like a team again.\n\nMost couples skip step 3. Don't.",
+      "xp": 5
+    },
+    {
+      "id": "d6-reflection-1",
+      "type": "reflection",
+      "title": "Your Repair Pattern",
+      "prompt": "Think about your last conflict:\n\n• How long did it take to come back together?\n• Who reached out first?\n• Did the repair actually resolve anything, or just smooth things over?\n\nWhat would a better repair look like next time?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d6-tf-1",
+      "type": "tf",
+      "question": "Taking a break during a fight means you're avoiding the problem.",
+      "correct": false,
+      "feedback": [
+        "Correct. Taking a break when emotions are flooding (heart rate above 100 BPM, can't think clearly) isn't avoidance — it's physiological necessity. You literally can't have a productive conversation when your nervous system is in fight-or-flight mode. A 20-minute break lets your body calm down so your brain can come back online.",
+        "Not quite. When you're emotionally flooded — heart racing, can't think — your brain literally can't process conflict productively. A 20-minute break isn't avoidance; it's giving your nervous system time to reset so you can actually resolve the issue."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-scenario-1",
+      "type": "scenario_card",
+      "title": "Good Repair vs Bad Repair",
+      "body": "Bad repair: 'Fine, I'm sorry, okay? Can we just move on?'\n\nGood repair: 'I was defensive when you brought up the money stuff. I felt attacked and I shut down. That didn't help. Can we try again — I'll listen this time.'\n\nThe difference?\n\nBad repair avoids accountability.\nGood repair names what happened and offers a do-over.\n\nYour partner doesn't need you to be perfect. They need you to be accountable."
+    },
+    {
+      "id": "d6-copy-action-1",
+      "type": "copyAction",
+      "title": "Your Repair Script",
+      "prompt": "Write a repair script for your next conflict. Fill in the blanks:\n\n'When [situation], I [my part of the problem]. Next time, I'll [what I'll do differently].'\n\nExample: 'When we argue about the kids, I escalate instead of listening. Next time, I'll take a breath and ask what you're really worried about.'\n\nHaving a script ready makes it easier to use when you need it.",
+      "xp": 10
+    },
+    {
+      "id": "d6-info-4",
+      "type": "info",
+      "title": "Tomorrow: Your Marriage Blueprint",
+      "body": "You've audited all four pillars — Foundation, Connection, Household, and Repair. You know your strengths and your growth edges.\n\nTomorrow, you'll put it all together into a blueprint — a clear picture of where your marriage is and where you want it to go.\n\nThis is the turning point. Week 1 was diagnosis. Week 2 is about building.",
+      "xp": 5
+    }
+  ]
+}
