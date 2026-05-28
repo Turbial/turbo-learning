@@ -247,3 +247,13 @@ export type NarrationController = {
   setSpeed: (s: number) => void;
   transcript: string;
 };
+
+// ─── RPC result types ───
+
+export type CompleteLessonResult = {
+  xp_earned: number;
+  total_xp: number;
+  new_level: number;
+  streak: number;
+  already_completed: boolean;
+};
