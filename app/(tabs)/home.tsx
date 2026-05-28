@@ -77,7 +77,7 @@ function WeeksView({
   completedUnitIds,
   onDayPress,
 }: {
-  units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
+  units: Array<{ id: string; order_num: number; label: string; title: string; program_id?: string }>;
   completedUnitIds: Set<string>;
   onDayPress: (day: number, unitId: string, status: string) => void;
 }) {
