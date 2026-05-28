@@ -1,21 +1,25 @@
 {
   "version": 1,
   "unit": "day3",
-  "title": "Day 3: The Operator's Toolkit — All Step Types",
+  "title": "Day 3: The Operator's Toolkit \u2014 All Step Types",
   "estMinutes": 25,
   "steps": [
     {
       "id": "d3-info-1",
       "type": "info",
       "title": "Day 3: Your Complete Toolkit",
-      "body": "Today is special. Instead of just learning one concept, you're going to experience every type of interaction the platform offers.\n\nBy the end of this lesson, you'll have seen all 19 step types — and you'll be ready to work through any day in the program with confidence.\n\nLet's run through your toolkit.",
+      "body": "Today is special. Instead of just learning one concept, you're going to experience every type of interaction the platform offers.\n\nBy the end of this lesson, you'll have seen all 19 step types \u2014 and you'll be ready to work through any day in the program with confidence.\n\nLet's run through your toolkit.",
       "xp": 5
     },
     {
       "id": "d3-highlight-1",
       "type": "highlight",
-      "body": "An AI Operator doesn't just ask questions — they build systems.\n\nThe difference between someone who uses AI and someone who operates AI is simple: operators build repeatable workflows that produce consistent results, while users have one-off conversations they can never quite reproduce.",
-      "highlights": ["build systems", "repeatable workflows", "consistent results"],
+      "body": "An AI Operator doesn't just ask questions \u2014 they build systems.\n\nThe difference between someone who uses AI and someone who operates AI is simple: operators build repeatable workflows that produce consistent results, while users have one-off conversations they can never quite reproduce.",
+      "highlights": [
+        "build systems",
+        "repeatable workflows",
+        "consistent results"
+      ],
       "xp": 5
     },
     {
@@ -30,10 +34,10 @@
       ],
       "correct": 1,
       "feedback": [
-        "Exactly. Operators think in systems and workflows — not individual prompts. Every interaction is designed to be reproducible.",
-        "Not quite. The key isn't the tool or the model — it's the mindset. Operators build systems that work consistently, every time.",
+        "Exactly. Operators think in systems and workflows \u2014 not individual prompts. Every interaction is designed to be reproducible.",
+        "Not quite. The key isn't the tool or the model \u2014 it's the mindset. Operators build systems that work consistently, every time.",
         "This is a common misconception. You don't need to code to operate AI effectively. The operator mindset is about workflow design, not programming.",
-        "Operating AI happens wherever the work is — often in the same tools you already use."
+        "Operating AI happens wherever the work is \u2014 often in the same tools you already use."
       ],
       "xp": 10
     },
@@ -49,7 +53,7 @@
       "question": "Tom should write a single generic email template and just change the name each week.",
       "correct": false,
       "feedback": [
-        "Correct — you spotted the trap. Generic templates lose the personalization that makes client updates valuable. Tom needs a system that generates personalized drafts, not a shortcut that destroys quality.",
+        "Correct \u2014 you spotted the trap. Generic templates lose the personalization that makes client updates valuable. Tom needs a system that generates personalized drafts, not a shortcut that destroys quality.",
         "Think about what the clients actually need: personalized updates that demonstrate attention to their account. A generic template undermines trust. The right answer is building an AI workflow that personalizes at scale."
       ],
       "xp": 10
@@ -59,10 +63,14 @@
       "type": "fillblank",
       "question": "Complete the operator's mantra: 'Don't just prompt. Build a _____.'",
       "answer": "system",
-      "aliases": ["workflow", "pipeline", "process"],
+      "aliases": [
+        "workflow",
+        "pipeline",
+        "process"
+      ],
       "feedback": [
         "Perfect. Operators think in systems, not one-off prompts. Building systems is what separates operators from users.",
-        "Close — the core idea is building something repeatable. Think 'system', 'workflow', or 'pipeline'."
+        "Close \u2014 the core idea is building something repeatable. Think 'system', 'workflow', or 'pipeline'."
       ],
       "xp": 10
     },
@@ -86,11 +94,11 @@
     {
       "id": "d3-goodfit-2",
       "type": "good_fit",
-      "question": "Creating a saved prompt template with project context fields, quality criteria, and a review checklist — then using it for every client update.",
+      "question": "Creating a saved prompt template with project context fields, quality criteria, and a review checklist \u2014 then using it for every client update.",
       "correct": "good",
       "feedback": [
         "Exactly right. You've built a repeatable system with quality controls. The template, context fields, and checklist make this an operator workflow.",
-        "This IS operating. Every element — template, context fields, quality criteria — makes it repeatable and consistent. That's the operator mindset."
+        "This IS operating. Every element \u2014 template, context fields, quality criteria \u2014 makes it repeatable and consistent. That's the operator mindset."
       ],
       "xp": 10
     },
@@ -98,19 +106,43 @@
       "id": "d3-match-1",
       "type": "match",
       "pairs": [
-        { "left": "System", "right": "A repeatable workflow" },
-        { "left": "Prompt", "right": "A single instruction to AI" },
-        { "left": "Template", "right": "A reusable structure" },
-        { "left": "Review", "right": "Human quality control step" }
+        {
+          "left": "System",
+          "right": "A repeatable workflow"
+        },
+        {
+          "left": "Prompt",
+          "right": "A single instruction to AI"
+        },
+        {
+          "left": "Template",
+          "right": "A reusable structure"
+        },
+        {
+          "left": "Review",
+          "right": "Human quality control step"
+        }
       ]
     },
     {
       "id": "d3-builder-1",
       "type": "builder",
       "fields": [
-        { "id": "client", "label": "Client Name", "placeholder": "e.g. Acme Corp" },
-        { "id": "project", "label": "Project Name", "placeholder": "e.g. Q3 Website Redesign" },
-        { "id": "progress", "label": "Progress This Week", "placeholder": "e.g. Completed wireframes, started homepage design" }
+        {
+          "id": "client",
+          "label": "Client Name",
+          "placeholder": "e.g. Acme Corp"
+        },
+        {
+          "id": "project",
+          "label": "Project Name",
+          "placeholder": "e.g. Q3 Website Redesign"
+        },
+        {
+          "id": "progress",
+          "label": "Progress This Week",
+          "placeholder": "e.g. Completed wireframes, started homepage design"
+        }
       ],
       "template": "Hi {{client}} team,\n\nHere's your weekly update on {{project}}:\n\nThis week's progress: {{progress}}\n\nNext steps: We'll continue development and send another update next week.\n\nBest,\nTom",
       "xp": 20
@@ -121,24 +153,37 @@
       "questions": [
         {
           "id": "q1",
-          "type": "mc",
           "question": "What's the core difference between a user and an operator?",
-          "options": ["Operators use better tools", "Operators build repeatable systems", "Operators work faster", "Operators have more experience"],
-          "correct": 1
+          "options": [
+            "Operators use better tools",
+            "Operators build repeatable systems",
+            "Operators work faster",
+            "Operators have more experience"
+          ],
+          "correct": 1,
+          "type": "mc"
         },
         {
           "id": "q2",
-          "type": "tf",
           "question": "An operator workflow should produce the same quality regardless of who runs it.",
-          "options": ["True", "False"],
-          "correct": 0
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 0,
+          "type": "mc"
         },
         {
           "id": "q3",
-          "type": "fillblank",
-          "question": "What's the final step in every operator workflow? _____",
-          "options": [],
-          "correct": 0
+          "question": "What's the final step in every operator workflow?",
+          "options": [
+            "Delete everything and start over",
+            "Human review before sending",
+            "Post it on social media",
+            "Run it only once"
+          ],
+          "correct": 1,
+          "type": "mc"
         }
       ],
       "xp": 20
@@ -152,7 +197,7 @@
     {
       "id": "d3-paste-capture-1",
       "type": "paste_capture",
-      "body": "Paste the template you just copied — and add one thing you'd customize for your own use:",
+      "body": "Paste the template you just copied \u2014 and add one thing you'd customize for your own use:",
       "minLength": 30
     },
     {
@@ -165,18 +210,26 @@
       "type": "scenario",
       "question": "You've built a client update workflow that saves 8 hours/week. What should you do next?",
       "options": [
-        "Keep using it — great work!",
+        "Keep using it \u2014 great work!",
         "Document it so your team can use it too",
         "Sell it as a product",
         "Post about it on LinkedIn"
       ],
       "correct": 1,
       "feedback": [
-        "Using it is good — but the operator mindset means scaling your impact. When you document and share the workflow, your entire team gains 8 hours/week. That's exponential leverage.",
-        "This is the operator move. Document it, share it, and suddenly your team saves collective hundreds of hours. One workflow → many operators → massive impact.",
+        "Using it is good \u2014 but the operator mindset means scaling your impact. When you document and share the workflow, your entire team gains 8 hours/week. That's exponential leverage.",
+        "This is the operator move. Document it, share it, and suddenly your team saves collective hundreds of hours. One workflow \u2192 many operators \u2192 massive impact.",
         "Selling it is an option, but the operator mindset prioritizes team leverage first. Document and share internally before productizing.",
         "Sharing is great, but documenting a repeatable process for your team creates more immediate value than a social post."
       ],
+      "xp": 10
+    },
+    {
+      "id": "d3-chat-1",
+      "type": "chat",
+      "greeting": "Hi! I'm your AI Operator tutor. Ask me anything about building repeatable workflows, the operator mindset, or how to apply what you learned today to your own work.",
+      "placeholder": "e.g. How do I find a task worth automating?",
+      "systemPrompt": "You are a supportive AI Operator tutor helping a learner understand how to build repeatable AI workflows. The learner has just finished a lesson about the difference between one-off prompting and building systems. Keep answers concise (2-3 sentences), practical, and encouraging. Reference concepts from the lesson: workflow design, repeatability, human review, and scaling from user to operator. Use examples where helpful.",
       "xp": 10
     },
     {
@@ -187,7 +240,12 @@
           "id": "r1",
           "type": "single_choice",
           "label": "Which of these is most like your current AI usage?",
-          "options": ["I ask one-off questions", "I have a few saved prompts", "I've built at least one repeatable workflow", "I build workflows for my team"]
+          "options": [
+            "I ask one-off questions",
+            "I have a few saved prompts",
+            "I've built at least one repeatable workflow",
+            "I build workflows for my team"
+          ]
         },
         {
           "id": "r2",
@@ -205,20 +263,25 @@
     {
       "id": "d3-streak-1",
       "type": "streak_commitment",
-      "commitOptions": [3, 7, 14, 30]
+      "commitOptions": [
+        3,
+        7,
+        14,
+        30
+      ]
     },
     {
       "id": "d3-info-2",
       "type": "info",
       "title": "You've Seen the Full Toolkit",
-      "body": "Today you experienced every step type in the platform:\n\n• Info & Scenario Cards — context and framing\n• Highlights — key concepts emphasized\n• Multiple Choice & True/False — knowledge checks\n• Fill in the Blank — precise recall\n• Good Fit — judgment and discernment\n• Match — connect related concepts\n• Builder — create your own outputs\n• Quiz — compound assessment\n• Copy & Paste Capture — real-world tool use\n• Compare — analytical reasoning\n• Reflection — personal application\n• Badge Unlock & Streak Commitment — motivation and habit-building\n\nFrom here on, every day will use a subset of these tools to teach you specific skills. You're ready.",
+      "body": "Today you experienced every step type in the platform:\n\n\u2022 Info & Scenario Cards \u2014 context and framing\n\u2022 Highlights \u2014 key concepts emphasized\n\u2022 Multiple Choice & True/False \u2014 knowledge checks\n\u2022 Fill in the Blank \u2014 precise recall\n\u2022 Good Fit \u2014 judgment and discernment\n\u2022 Match \u2014 connect related concepts\n\u2022 Builder \u2014 create your own outputs\n\u2022 Quiz \u2014 compound assessment\n\u2022 Copy & Paste Capture \u2014 real-world tool use\n\u2022 Compare \u2014 analytical reasoning\n\u2022 Reflection \u2014 personal application\n\u2022 Badge Unlock & Streak Commitment \u2014 motivation and habit-building\n\nFrom here on, every day will use a subset of these tools to teach you specific skills. You're ready.",
       "xp": 5
     },
     {
       "id": "d3-completion-1",
       "type": "completion",
       "title": "Day 3 Complete!",
-      "body": "You've experienced every interaction type the platform offers. From here, every lesson will feel familiar — you know the rhythm. Keep your streak alive and come back tomorrow for Day 4: Your First Automation Pipeline."
+      "body": "You've experienced every interaction type the platform offers. From here, every lesson will feel familiar \u2014 you know the rhythm. Keep your streak alive and come back tomorrow for Day 4: Your First Automation Pipeline."
     }
   ]
 }

@@ -22,8 +22,8 @@ export default function QuizStep({ step, onAnswer }: StepProps) {
   const handleSubmit = () => {
     if (!allAnswered) return;
     setSubmitted(true);
-    const correctCount = questions.filter((q) => answers[q.id] === q.correct).length;
-    onAnswer(correctCount);
+    // Pass answers as Record<string, number | string> so the registry validator can index by question id
+    onAnswer(answers);
   };
 
   return (

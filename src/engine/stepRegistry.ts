@@ -47,6 +47,7 @@ import EngineReflectionStep from "./components/steps/ReflectionStep";
 import EngineBadgeUnlockStep from "./components/steps/BadgeUnlockStep";
 import EngineStreakCommitStep from "./components/steps/StreakCommitStep";
 import EngineCompletionStep from "./components/steps/CompletionStep";
+import ChatStep from "./components/steps/ChatStep";
 
 // ─── Scoring helpers ───
 
@@ -181,8 +182,8 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
       const r = res as Record<string, number | string>;
       const s = _step as import("./types").QuizStep;
       let correct = 0;
-      s.questions.forEach((q, i) => {
-        const userAnswer = r[`q${i}`];
+      s.questions.forEach((q) => {
+        const userAnswer = r[q.id];
         if (userAnswer !== undefined && String(userAnswer) === String(q.correct)) correct++;
       });
       return correct === s.questions.length;
@@ -192,8 +193,8 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
       const r = res as Record<string, number | string>;
       const s = _step as import("./types").QuizStep;
       let correct = 0;
-      s.questions.forEach((q, i) => {
-        if (String(r[`q${i}`] ?? "") === String(q.correct)) correct++;
+      s.questions.forEach((q) => {
+        if (String(r[q.id] ?? "") === String(q.correct)) correct++;
       });
       return Math.round((s.xp ?? 10) * (correct / s.questions.length));
     },
@@ -242,5 +243,10 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   completion: {
     component: EngineCompletionStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
+  },
+  chat: {
+    component: ChatStep as React.ComponentType<StepProps<any>>,
+    score: defRescore,
+    behavior: { requiresInteraction: true },
   },
 };

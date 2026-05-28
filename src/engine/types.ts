@@ -139,6 +139,13 @@ export type ReminderStep = StepBase & {
   reminderOptions: string[];
 };
 
+export type ChatStep = StepBase & {
+  type: "chat";
+  greeting?: string;
+  placeholder?: string;
+  systemPrompt?: string;
+};
+
 export type CompletionStep = StepBase & {
   type: "completion";
   title?: string;
@@ -165,6 +172,7 @@ export type Step =
   | BadgeUnlockStep
   | StreakCommitStep
   | ReminderStep
+  | ChatStep
   | CompletionStep;
 
 // ─── Content types ───
