@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { ToastProvider } from "../src/components/feedback/Toast";
 import { useAuth } from "../src/data/useAuth";
 import { useOfflineSync } from "../src/data/useOfflineSync";
 
@@ -19,17 +20,20 @@ const queryClient = new QueryClient({
 });
 
 function AuthGate({ children }: { children: React.ReactNode }) {
-  const { user, isLoading, signInAnonymously } = useAuth();
+  const { user, isLoading } = useAuth();
+  const segments = useSegments();
   useOfflineSync(); // handles offline queue flush
 
   useEffect(() => {
     if (isLoading) return;
 
-    if (!user) {
-      // Sign in anonymously
-      signInAnonymously();
+    const inAuthGroup = segments[0] === "auth";
+
+    if (!user && !inAuthGroup) {
+      // Not authenticated and not on an auth page → redirect to login
+      router.replace("/auth/login");
     }
-  }, [user, isLoading, signInAnonymously]);
+  }, [user, isLoading, segments]);
 
   if (isLoading) {
     return (
@@ -47,21 +51,38 @@ export default function RootLayout() {
     <GestureHandlerRootView style={styles.root}>
       <QueryClientProvider client={queryClient}>
         <StatusBar style="dark" />
-        <AuthGate>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
-            <Stack.Screen name="onboard" />
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen
-              name="lesson/[id]"
-              options={{ animation: "slide_from_right" }}
-            />
-            <Stack.Screen
-              name="complete/[unitId]"
-              options={{ animation: "fade" }}
-            />
-          </Stack>
-        </AuthGate>
+        <ToastProvider>
+          <AuthGate>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="index" />
+              <Stack.Screen name="onboard" />
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen
+                name="lesson/[id]"
+                options={{ animation: "slide_from_right" }}
+              />
+              <Stack.Screen
+                name="complete/[unitId]"
+                options={{ animation: "fade" }}
+              />
+              <Stack.Screen
+                name="auth/login"
+                options={{ animation: "slide_from_bottom" }}
+              />
+              <Stack.Screen
+                name="auth/register"
+                options={{ animation: "slide_from_bottom" }}
+              />
+              <Stack.Screen name="auth/forgot-password" />
+              <Stack.Screen name="checkout/[plan]" />
+              <Stack.Screen name="deliverable/[id]" />
+              <Stack.Screen name="pricing" />
+              <Stack.Screen name="profile/index" />
+              <Stack.Screen name="profile/settings" />
+              <Stack.Screen name="programs/index" />
+            </Stack>
+          </AuthGate>
+        </ToastProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>
   );

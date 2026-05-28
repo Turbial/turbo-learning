@@ -42,8 +42,8 @@ export default function OnboardScreen() {
       updateProfile.mutate({
         name: name.trim() || undefined,
         goal,
-        daily_mins: dailyMins,
-        learn_time: learnTime,
+        dailyMins,
+        learnTime,
       });
       // Auto-enroll in AI Operator
       enroll.mutate({ programSlug: "ai-operator" });

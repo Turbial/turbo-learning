@@ -89,6 +89,7 @@ export const spacing = {
   lg: 24,
   xl: 32,
   xxl: 48,
+  xxxl: 64,
 };
 
 export const radius = {
@@ -97,6 +98,7 @@ export const radius = {
   lg: 16,
   xl: 20,
   full: 9999,
+  pill: 9999,
 };
 
 export const fontSize = {
@@ -107,6 +109,13 @@ export const fontSize = {
   xl: 22,
   xxl: 28,
   hero: 34,
+  // Semantic aliases — used by auth screens, pricing, etc.
+  body: 14,
+  bodyLg: 16,
+  caption: 12,
+  subtitle: 18,
+  title: 22,
+  display: 28,
 };
 
 export const fontWeight = {
