@@ -9,27 +9,43 @@ import { colors } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useLesson, useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 
-// Local fallback for Day 1 when Supabase isn't ready
-import day1Json from "../../src/content/ai_operator/day1.json";
+// Local fallbacks when Supabase isn't ready
+import aiDay1 from "../../src/content/ai_operator/day1.json";
+import duoDay1 from "../../src/content/duo/day1.json";
+import duoDay2 from "../../src/content/duo/day2.json";
+import duoDay3 from "../../src/content/duo/day3.json";
+import duoDay4 from "../../src/content/duo/day4.json";
+import duoDay5 from "../../src/content/duo/day5.json";
+import duoDay6 from "../../src/content/duo/day6.json";
+import duoDay7 from "../../src/content/duo/day7.json";
 
-const LOCAL_LESSONS: Record<string, Lesson> = {
-  "1": {
-    id: "day1-local",
-    unitId: "day1",
-    orderNum: 1,
-    title: day1Json.title,
-    estMinutes: day1Json.estMinutes,
-    steps: day1Json.steps as Step[],
-  },
+const DAY_CONTENT: Record<string, any> = {
+  "ai-1": aiDay1,
+  "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
+  "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
+  "duo-7": duoDay7,
 };
 
+const LOCAL_LESSONS: Record<string, Lesson> = {};
+for (const [key, json] of Object.entries(DAY_CONTENT)) {
+  LOCAL_LESSONS[key] = {
+    id: `${key}-local`,
+    unitId: `day${key.split("-")[1]}`,
+    orderNum: parseInt(key.split("-")[1]),
+    title: json.title,
+    estMinutes: json.estMinutes,
+    steps: json.steps as Step[],
+  };
+}
+
 export default function LessonScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, program } = useLocalSearchParams<{ id: string; program?: string }>();
   const { user } = useAuth();
 
   // Try Supabase first, fall back to local JSON
   const supabaseQuery = useLesson(id);
-  const localLesson = LOCAL_LESSONS[id ?? "1"];
+  const localKey = program ? `${program}-${id}` : id ?? "1";
+  const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS[id ?? "1"];
   const completeMutation = useCompleteLesson();
 
   const lesson: Lesson | undefined = supabaseQuery.data ?? localLesson;

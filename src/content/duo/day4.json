@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "unit": "day4",
+  "title": "Day 4: The Connection Check",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d4-info-1",
+      "type": "info",
+      "title": "More Than Date Night",
+      "body": "Connection isn't about grand gestures. It's about the space between you.\n\nSome couples talk for hours but never feel truly seen. Others say ten words a day and feel profoundly connected. Why?\n\nBecause connection has two layers:\n\n1. Emotional intimacy — feeling known, understood, and safe\n2. Physical intimacy — touch, affection, sex, presence\n\nMost couples focus on the physical when the emotional needs attention. Or vice versa. Today, we look at both.",
+      "xp": 5
+    },
+    {
+      "id": "d4-highlight-1",
+      "type": "highlight",
+      "body": "The question isn't 'Do you still love each other?'\n\nIt's 'Do you still LIKE each other?'\n\nLove endures. Liking requires attention. It's the difference between staying together and wanting to be together.",
+      "highlights": ["Do you still LIKE each other?", "Love endures. Liking requires attention."],
+      "xp": 5
+    },
+    {
+      "id": "d4-reflection-1",
+      "type": "reflection",
+      "title": "Emotional Intimacy Check",
+      "prompt": "Answer honestly:\n\n• When something good happens, is your partner the first person you want to tell?\n• When something hard happens, do you feel safe being vulnerable with them?\n• When was the last time you had a conversation that wasn't about logistics (kids, money, schedules)?\n\nWhat do your answers tell you?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d4-info-2",
+      "type": "info",
+      "title": "The Friendship Factor",
+      "body": "Gottman's research revealed something counterintuitive: the happiest couples treat each other like best friends.\n\nThey know each other's inner worlds — stresses, dreams, pet peeves, favorite movies. They have inside jokes. They're curious about each other's days.\n\nRomance without friendship is a house without a foundation. Friendship without romance is roommates. You need both.",
+      "xp": 5
+    },
+    {
+      "id": "d4-tf-1",
+      "type": "tf",
+      "question": "Physical intimacy problems are usually really about physical issues.",
+      "correct": false,
+      "feedback": [
+        "Correct. Physical intimacy problems are almost always emotional intimacy problems wearing a physical mask. When couples feel emotionally disconnected, physical connection suffers — not the other way around.",
+        "Not quite. Most physical intimacy issues stem from emotional disconnection — feeling unseen, unappreciated, or unsafe. Fix the emotional connection and the physical often follows."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-reflection-2",
+      "type": "reflection",
+      "title": "The Friendship Audit",
+      "prompt": "How well do you know your partner's inner world right now?\n\n• What's their biggest stressor this week?\n• What are they excited about?\n• What's a small thing that would make their day better?\n\nIf you don't know the answers — that's not a failure. It's information. Use it.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d4-info-3",
+      "type": "info",
+      "title": "Physical Intimacy: The Candid Part",
+      "body": "Physical intimacy matters. It's not shallow to care about it. It's human.\n\nThe question isn't 'How often?' — that's the wrong metric. The question is: does your physical connection feel mutual, wanted, and connecting for both of you?\n\nWhen it does, it's glue. When it doesn't, it's a wedge.\n\nThis isn't about performance. It's about presence.",
+      "xp": 5
+    },
+    {
+      "id": "d4-scenario-1",
+      "type": "scenario_card",
+      "title": "Two Kinds of Rejection",
+      "body": "Scenario A: Your partner initiates physically. You're not in the mood. You say, \"Not right now\" and roll over.\n\nScenario B: Same situation. You say, \"I'm not in that headspace right now, but I love that you want me. Can we just hold each other for a few minutes?\"\n\nSame outcome. Completely different message.\n\nScenario A says: I'm rejecting YOU.\nScenario B says: I'm not in that space, but I'm not rejecting US.\n\nConnection lives in the difference."
+    },
+    {
+      "id": "d4-copy-action-1",
+      "type": "copyAction",
+      "title": "Connect Today",
+      "prompt": "One small action today to strengthen connection:\n\n• Ask about their day and actually listen (no phone, no TV)\n• Give a 20-second hug (it releases oxytocin)\n• Tell them something you appreciate — specific, not generic\n\nWrite your commitment:",
+      "xp": 10
+    },
+    {
+      "id": "d4-info-4",
+      "type": "info",
+      "title": "Tomorrow: The Household Reality",
+      "body": "Connection is the heart. But tomorrow, we tackle the least romantic — and often most divisive — pillar: the Household. Money, chores, logistics. The stuff that kills romance when it's not working.",
+      "xp": 5
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "unit": "day3",
+  "title": "Day 3: The Foundation Audit",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d3-info-1",
+      "type": "info",
+      "title": "What Holds You Up",
+      "body": "Every marriage has a foundation. You might not think about it — until it cracks.\n\nThe Foundation pillar includes three things:\n\n1. Trust — Do you believe your partner has your back?\n2. Respect — Do you admire who they are, not just what they do for you?\n3. Shared Values — Are you pointed in the same direction?\n\nToday you're going to audit all three. Not to judge your marriage — to see it clearly.",
+      "xp": 5
+    },
+    {
+      "id": "d3-highlight-1",
+      "type": "highlight",
+      "body": "Trust isn't about fidelity. It's about reliability.\n\nDo they do what they say they'll do?\nDo they show up when it matters?\nCan you be vulnerable without fear of being used against you?\n\nThat's the foundation. Everything else is architecture.",
+      "highlights": ["reliability", "do what they say", "vulnerable without fear"],
+      "xp": 5
+    },
+    {
+      "id": "d3-reflection-1",
+      "type": "reflection",
+      "title": "Trust Check",
+      "prompt": "Rate these statements 1–5 (1=not true, 5=absolutely true):\n\n• I trust my partner to follow through on commitments\n• I can share my fears without worrying they'll be used against me\n• My partner has my back, even when we disagree\n\nWhich scored lowest? What would it take to move that number up by one point?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d3-info-2",
+      "type": "info",
+      "title": "Respect: More Than Politeness",
+      "body": "Respect isn't about manners. It's about admiration.\n\nDo you respect your partner's judgment, their character, their way of moving through the world? Do you feel respected BY them?\n\nWhen respect erodes, everything else follows. You can love someone you don't respect — but you can't build a partnership with them.\n\nRespect is the quiet pillar. You don't notice it until it's gone. Then you notice nothing else.",
+      "xp": 5
+    },
+    {
+      "id": "d3-reflection-2",
+      "type": "reflection",
+      "title": "Respect Inventory",
+      "prompt": "List three things you genuinely admire about your partner. Not what they DO — who they ARE.\n\nNow: when was the last time you told them?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d3-info-3",
+      "type": "info",
+      "title": "Values: The Invisible Rudder",
+      "body": "Shared values don't mean you agree on everything. It means you're heading in the same direction.\n\nMoney, family, faith, ambition, lifestyle — these are the big-ticket values. When they align, small disagreements feel small. When they don't, everything feels big.\n\nThe danger isn't having different values. It's never talking about them.",
+      "xp": 5
+    },
+    {
+      "id": "d3-match-1",
+      "type": "match",
+      "title": "Values Alignment",
+      "question": "For each area, how aligned are you and your partner? Match your honest assessment:",
+      "pairs": [
+        { "left": "Money — spending vs saving", "right": "Reflect on this" },
+        { "left": "Family — boundaries and expectations", "right": "Reflect on this" },
+        { "left": "Ambition — career and growth", "right": "Reflect on this" },
+        { "left": "Lifestyle — how you spend your time", "right": "Reflect on this" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d3-reflection-3",
+      "type": "reflection",
+      "title": "Your Foundation Score",
+      "prompt": "Across Trust, Respect, and Shared Values — where is your foundation strongest? Where is it showing cracks?\n\nBe honest. This is just for you. The goal isn't a perfect score — it's clarity about where to focus.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d3-copy-action-1",
+      "type": "copyAction",
+      "title": "One Small Pour",
+      "prompt": "Your foundation isn't built in a day. But you can pour a little concrete today.\n\nWrite one specific thing you'll do in the next 24 hours to strengthen trust, show respect, or align on values.\n\nExample: 'I'll tell my partner one thing I admire about them — specifically, not generically.'",
+      "xp": 10
+    },
+    {
+      "id": "d3-info-4",
+      "type": "info",
+      "title": "Tomorrow: The Connection Check",
+      "body": "Foundation is the ground you build on. But a house isn't a home without connection.\n\nTomorrow, we audit the second pillar: emotional and physical intimacy. How connected are you really — beyond the daily logistics?",
+      "xp": 5
+    }
+  ]
+}

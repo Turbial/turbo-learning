@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "unit": "day5",
+  "title": "Day 5: The Household Reality",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d5-info-1",
+      "type": "info",
+      "title": "The Unsexy Pillar",
+      "body": "Nobody dreams about chore charts and budget spreadsheets. But here's the truth: money and household management are the #1 topic couples fight about.\n\nNot because couples are shallow.\nBecause the household is where values become visible.\n\nHow you spend money shows what you value. How you divide labor shows what you respect. How you handle stress shows what matters.\n\nToday, we audit the Household pillar — without judgment, without scorekeeping. Just clarity.",
+      "xp": 5
+    },
+    {
+      "id": "d5-highlight-1",
+      "type": "highlight",
+      "body": "You don't fight about dishes.\n\nYou fight about feeling unseen, unappreciated, and taken for granted.\n\nThe dishes are just the delivery vehicle.",
+      "highlights": ["You don't fight about dishes", "feeling unseen", "delivery vehicle"],
+      "xp": 5
+    },
+    {
+      "id": "d5-info-2",
+      "type": "info",
+      "title": "The Three Household Stressors",
+      "body": "Every household has three pressure points:\n\n1. Money — earning, spending, saving, debt. Different money personalities create friction.\n2. Labor — who does what, the invisible mental load, the second shift\n3. Logistics — schedules, childcare, family obligations, the calendar Tetris\n\nWhen these run smoothly, they're invisible. When they don't, they dominate every conversation.",
+      "xp": 5
+    },
+    {
+      "id": "d5-reflection-1",
+      "type": "reflection",
+      "title": "Money Personality",
+      "prompt": "Are you a saver or a spender? A planner or a figure-it-out-later person? What about your partner?\n\nWhere do your money personalities clash? Where do they complement each other?\n\nThere's no right answer. There's only awareness.",
+      "minChars": 20,
+      "xp": 15
+    },
+    {
+      "id": "d5-info-3",
+      "type": "info",
+      "title": "The Invisible Load",
+      "body": "The 'mental load' is the cognitive work of running a household — remembering appointments, noticing what's running low, planning meals, tracking school forms.\n\nResearch consistently shows this load falls disproportionately on women, even in 'equal' partnerships.\n\nThe danger isn't the imbalance itself — it's the invisibility. When one partner doesn't see the work, they can't appreciate it. When the other partner's work is invisible, resentment builds silently.",
+      "xp": 5
+    },
+    {
+      "id": "d5-tf-1",
+      "type": "tf",
+      "question": "The partner who does more visible household work (dishes, trash, yard) usually carries the bigger mental load.",
+      "correct": false,
+      "feedback": [
+        "Correct. Visible work and mental load are different things. The mental load — remembering, planning, tracking — is often invisible and usually falls on one partner regardless of who does the visible chores.",
+        "Not quite. The mental load — planning, remembering, tracking — is invisible work that often isn't shared equally even when physical chores are. The person tracking appointments and remembering school forms may be carrying a heavier cognitive burden."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-reflection-2",
+      "type": "reflection",
+      "title": "Your Household Reality",
+      "prompt": "Who carries the mental load in your household? Be honest.\n\nWho remembers the appointments, notices what's needed, plans ahead?\n\nIf there's an imbalance — not guilt, just information. What's one thing you could take off their plate?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d5-scenario-1",
+      "type": "scenario_card",
+      "title": "The Money Conversation",
+      "body": "Money conversations go wrong when they become about character — 'you're irresponsible' / 'you're controlling.'\n\nThey go right when they become about values:\n\nInstead of: 'You spend too much on X.'\nTry: 'I worry about our savings goals. Can we look at the numbers together?'\n\nInstead of: 'You're so cheap.'\nTry: 'I want us to enjoy our money too. Can we find a balance that works for both of us?'\n\nThe difference is 'us against the problem' vs 'me against you.'"
+    },
+    {
+      "id": "d5-copy-action-1",
+      "type": "copyAction",
+      "title": "One Household Improvement",
+      "prompt": "What's one small change you can make this week to reduce household stress?\n\nIdeas: take one thing off their mental load list, have a no-blame money check-in, acknowledge something they do that you've been taking for granted.\n\nWrite your commitment:",
+      "xp": 10
+    },
+    {
+      "id": "d5-info-4",
+      "type": "info",
+      "title": "Tomorrow: The Repair Reflex",
+      "body": "Household stress is inevitable. But what happens after the stress — the fight, the frustration, the disconnect — is what separates thriving couples from surviving ones.\n\nTomorrow: how you fight, how you recover, and why repair is the most underrated relationship skill.",
+      "xp": 5
+    }
+  ]
+}

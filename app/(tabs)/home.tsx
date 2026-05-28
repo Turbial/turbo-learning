@@ -5,19 +5,20 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Act
 import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
-import { useProfile, useUnits, useProgram, useLessonProgressMap } from "../../src/data/queries";
+import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgramSlug } from "../../src/data/queries";
 
 export default function HomeScreen() {
   const { user } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
-  const { data: program } = useProgram("ai-operator");
+  const { data: activeSlug } = useActiveProgramSlug();
+  const programSlug = activeSlug || "ai-operator";
+  const { data: program } = useProgram(programSlug);
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
 
   const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
-    // Pass unit ID to lesson screen; it'll fetch the lesson
-    router.push(`/lesson/${day}`);
+    router.push({ pathname: `/lesson/${day}`, params: { program: programSlug } });
   };
 
   if (profileLoading || unitsLoading) {
@@ -77,7 +78,7 @@ function WeeksView({
   completedUnitIds,
   onDayPress,
 }: {
-  units: Array<{ id: string; order_num: number; label: string; title: string; program_id?: string }>;
+  units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
   completedUnitIds: Set<string>;
   onDayPress: (day: number, unitId: string, status: string) => void;
 }) {
