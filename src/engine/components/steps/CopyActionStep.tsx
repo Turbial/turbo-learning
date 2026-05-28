@@ -1,16 +1,24 @@
 // ─── CopyActionStep — shows text to copy, then triggers paste step ───
+// Uses sourceStepId to look up a previous response as copy source when available.
 
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import { StepProps } from "../../stepRegistry";
 
-export default function CopyActionStep({ step, onAnswer }: StepProps) {
+export default function CopyActionStep({ step, onAnswer, state }: StepProps) {
   const s = step as any;
 
+  // sourceStepId allows referencing another step's response as the copy source
+  const sourceText: string = s.sourceStepId && state?.responses?.[s.sourceStepId]
+    ? (typeof state.responses[s.sourceStepId] === "string"
+        ? state.responses[s.sourceStepId] as string
+        : JSON.stringify(state.responses[s.sourceStepId]))
+    : s.body;
+
   const handleCopy = async () => {
-    await Clipboard.setStringAsync(s.body);
-    onAnswer({ copied: s.body });
+    await Clipboard.setStringAsync(sourceText);
+    onAnswer({ copied: sourceText });
   };
 
   return (
@@ -18,7 +26,7 @@ export default function CopyActionStep({ step, onAnswer }: StepProps) {
       <Text style={styles.instruction}>Copy this to use in the next step:</Text>
 
       <View style={styles.codeBox}>
-        <Text style={styles.codeText}>{s.body}</Text>
+        <Text style={styles.codeText}>{sourceText}</Text>
       </View>
 
       <TouchableOpacity style={styles.btn} onPress={handleCopy} activeOpacity={0.8}>

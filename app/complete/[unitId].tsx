@@ -1,9 +1,10 @@
 // ─── Unit Complete Screen — XP tally, streak fire, continue ───
 
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
+import { useProfile } from "../../src/data/queries";
 
 export default function CompleteScreen() {
   const { unitId, xp, score } = useLocalSearchParams<{
@@ -11,9 +12,11 @@ export default function CompleteScreen() {
     xp: string;
     score: string;
   }>();
+  const { data: profile, isLoading } = useProfile();
 
   const xpNum = parseInt(xp ?? "0", 10);
   const scoreNum = parseInt(score ?? "100", 10);
+  const streakDays = profile?.streak ?? 1;
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -38,12 +41,26 @@ export default function CompleteScreen() {
           </View>
         </View>
 
-        {/* Streak */}
+        {/* Streak — shows real value from Supabase */}
         <View style={styles.streakCard}>
           <Text style={styles.streakEmoji}>🔥</Text>
           <View>
-            <Text style={styles.streakLabel}>Streak started!</Text>
-            <Text style={styles.streakHint}>Come back tomorrow to keep it going.</Text>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={colors.primary} />
+            ) : (
+              <>
+                <Text style={styles.streakLabel}>
+                  {streakDays === 1 ? "Streak started!" : `${streakDays}-day streak!`}
+                </Text>
+                <Text style={styles.streakHint}>
+                  {streakDays < 3
+                    ? "Come back tomorrow to keep it going."
+                    : streakDays < 7
+                    ? "You're building real momentum. Keep it up!"
+                    : "You're on fire. This is becoming a habit."}
+                </Text>
+              </>
+            )}
           </View>
         </View>
 

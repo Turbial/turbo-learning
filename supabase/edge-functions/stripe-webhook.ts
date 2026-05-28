@@ -73,9 +73,12 @@ Deno.serve(async (req: Request) => {
     });
   } catch (err) {
     console.error(`Error handling ${event.type}:`, err);
-    // Return 200 anyway so Stripe doesn't retry (we log the error)
-    return new Response(JSON.stringify({ received: true, error: String(err) }), {
-      status: 200,
+    // Return 400 for data integrity failures (e.g. missing user_id) so Stripe retries.
+    // Return 500 for unexpected errors.
+    const message = String(err);
+    const status = message.includes('Missing user_id') ? 400 : 500;
+    return new Response(JSON.stringify({ error: message }), {
+      status,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -91,7 +94,7 @@ async function handleCheckoutCompleted(event: Stripe.Event, admin: ReturnType<ty
 
   if (!userId) {
     console.error('checkout.session.completed: no user_id in session');
-    return;
+    throw new Error('Missing user_id — client_reference_id and metadata.user_id are both null/undefined');
   }
 
   const subscriptionId = typeof session.subscription === 'string'
@@ -145,7 +148,7 @@ async function handleSubscriptionUpdated(event: Stripe.Event, admin: ReturnType<
   const userId = subscription.metadata?.user_id;
   if (!userId) {
     console.error('subscription.updated: no user_id in metadata');
-    return;
+    throw new Error('Missing user_id in subscription metadata');
   }
 
   const isActive = subscription.status === 'active' || subscription.status === 'trialing';
@@ -185,7 +188,7 @@ async function handleSubscriptionDeleted(event: Stripe.Event, admin: ReturnType<
   const userId = subscription.metadata?.user_id;
   if (!userId) {
     console.error('subscription.deleted: no user_id in metadata');
-    return;
+    throw new Error('Missing user_id in subscription metadata');
   }
 
   const { error } = await admin.from('subscriptions').upsert({

@@ -14,6 +14,8 @@ export function defaultScore(step: Step): number {
   return step.xp ?? BASE_XP;
 }
 
+// Awards base XP for wrong answers as participation credit (intentional — keeps
+// users motivated even when they get an answer wrong). Correct answers get base + bonus.
 export function mcScore(step: McStep, selected: number): number {
   const base = step.xp ?? BASE_XP;
   return selected === step.correct ? base + BONUS_PERFECT : base;

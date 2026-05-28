@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { ToastProvider } from "../src/components/feedback/Toast";
+import ErrorBoundary from "../src/components/ui/ErrorBoundary";
 import { useAuth } from "../src/data/useAuth";
 import { useOfflineSync } from "../src/data/useOfflineSync";
 
@@ -32,6 +33,9 @@ function AuthGate({ children }: { children: React.ReactNode }) {
     if (!user && !inAuthGroup) {
       // Not authenticated and not on an auth page → redirect to login
       router.replace("/auth/login");
+    } else if (user && inAuthGroup) {
+      // Already authenticated on an auth page → redirect to home
+      router.replace("/(tabs)/home");
     }
   }, [user, isLoading, segments]);
 
@@ -51,6 +55,7 @@ export default function RootLayout() {
     <GestureHandlerRootView style={styles.root}>
       <QueryClientProvider client={queryClient}>
         <StatusBar style="dark" />
+        <ErrorBoundary>
         <ToastProvider>
           <AuthGate>
             <Stack screenOptions={{ headerShown: false }}>
@@ -83,6 +88,7 @@ export default function RootLayout() {
             </Stack>
           </AuthGate>
         </ToastProvider>
+        </ErrorBoundary>
       </QueryClientProvider>
     </GestureHandlerRootView>
   );

@@ -108,13 +108,32 @@ export function createNarration(
 ): NarrationController {
   const cbs: NarrationCallbacks = { onStart, onEnd };
   if (Platform.OS !== "web") {
-    // Return a sync stub; native impl resolves async
-    const stub = createWebNarration(text, cbs);
+    // Deferred: start with a web-hybrid stub, swap in native controller when ready.
+    // All calls (play/pause/stop) are routed through a targetRef to avoid
+    // Object.assign mutation which can trigger Web Speech API on native devices.
+    const webStub = createWebNarration(text, cbs);
+    let target: NarrationController = webStub;
+    let nativeReady = false;
+
     createNativeNarration(text, cbs).then((native) => {
-      // Swap in native controller via object mutation
-      Object.assign(stub, native);
+      // Stop the web stub before swapping to avoid overlapping audio
+      webStub.stop();
+      target = native;
+      nativeReady = true;
     });
-    return stub;
+
+    return {
+      get isPlaying() { return target.isPlaying; },
+      get speed() { return target.speed; },
+      setSpeed(s: number) { target.setSpeed(s); },
+      get transcript() { return text; },
+      play() {
+        if (!nativeReady) return; // Don't play web speech on native
+        target.play();
+      },
+      pause() { target.pause(); },
+      stop() { target.stop(); },
+    };
   }
   return createWebNarration(text, cbs);
 }

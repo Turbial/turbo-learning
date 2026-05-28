@@ -1,4 +1,5 @@
 // ─── Offline sync hook — flushes queued writes on reconnect ───
+// Uses upsert to safely retry writes. Failed writes stay in queue for retry.
 
 import { useEffect, useRef } from "react";
 import { AppState, AppStateStatus } from "react-native";
@@ -6,14 +7,14 @@ import { supabase } from "./supabase";
 import { useOfflineQueueStore } from "../store/offlineQueue";
 
 export function useOfflineSync() {
-  const { queue, flush, size } = useOfflineQueueStore();
+  const { queue, remove, peek, size } = useOfflineQueueStore();
   const flushingRef = useRef(false);
 
   const processQueue = async () => {
     if (flushingRef.current || size() === 0) return;
     flushingRef.current = true;
 
-    const writes = flush();
+    const writes = peek();
     let succeeded = 0;
     let failed = 0;
 
@@ -21,12 +22,13 @@ export function useOfflineSync() {
       try {
         const { error } = await supabase
           .from(write.table as any)
-          .insert(write.payload);
+          .upsert(write.payload);
 
         if (error) {
           console.warn("Offline flush failed for", write.table, error.message);
           failed++;
         } else {
+          remove(write.id);
           succeeded++;
         }
       } catch (err) {
@@ -36,7 +38,7 @@ export function useOfflineSync() {
     }
 
     if (failed > 0) {
-      console.log(`Offline flush: ${succeeded} succeeded, ${failed} failed`);
+      console.log(`Offline flush: ${succeeded} succeeded, ${failed} failed (kept in queue for retry)`);
     }
 
     flushingRef.current = false;
@@ -54,8 +56,9 @@ export function useOfflineSync() {
     return () => sub.remove();
   }, []);
 
-  // Also flush periodically while active
+  // Also flush periodically while active (and on mount if items queued from previous session)
   useEffect(() => {
+    if (size() > 0) processQueue();
     const interval = setInterval(() => {
       if (size() > 0) processQueue();
     }, 30000); // every 30 seconds
