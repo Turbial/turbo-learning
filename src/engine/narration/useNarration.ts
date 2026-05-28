@@ -21,7 +21,7 @@ async function createNativeNarration(
   let speed = 1.0;
 
   try {
-    const { Speech } = await import("expo-speech");
+    const ExpoSpeech = await import("expo-speech");
 
     const controller: NarrationController = {
       get isPlaying() { return playing; },
@@ -31,7 +31,7 @@ async function createNativeNarration(
 
       play() {
         if (playing) return;
-        Speech.speak(text, {
+        ExpoSpeech.speak(text, {
           rate: speed,
           onStart: () => { playing = true; cbs.onStart?.(); },
           onDone: () => { playing = false; cbs.onEnd?.(); },
@@ -40,12 +40,12 @@ async function createNativeNarration(
       },
 
       pause() {
-        Speech.pause();
+        ExpoSpeech.pause();
         playing = false;
       },
 
       stop() {
-        Speech.stop();
+        ExpoSpeech.stop();
         playing = false;
       },
     };

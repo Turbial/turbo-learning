@@ -63,7 +63,7 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Your Journey</Text>
 
           {units ? (
-            <WeeksView units={units} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
+            <WeeksView units={units as any} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
           ) : (
             <Text style={styles.emptyText}>Loading program...</Text>
           )}

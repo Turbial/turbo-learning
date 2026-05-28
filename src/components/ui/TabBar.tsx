@@ -9,7 +9,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const { colors } = useTheme();
   return (
     <View style={{ flexDirection: 'row', backgroundColor: colors.surface, borderTopWidth: 1, borderTopColor: colors.border, paddingBottom: spacing.md }}>
-      {state.routes.map((route, i) => {
+      {state.routes.map((route: { key: string; name: string }, i: number) => {
         const focused = state.index === i;
         const { options } = descriptors[route.key];
         const label = (options.title ?? route.name) as string;
