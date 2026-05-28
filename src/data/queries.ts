@@ -90,15 +90,11 @@ export function useProfile() {
         .eq("id", user.id)
         .single();
 
+      // Profile creation is handled by DB trigger (migration 0010_auto_create_profile).
+      // Do NOT insert from the client — this queryFn fires on every retry and would
+      // create duplicate attempts. Return null until the trigger creates the row.
       if (error && error.code === "PGRST116") {
-        // Profile doesn't exist yet — create it
-        const { data: newProfile, error: insertError } = await supabase
-          .from("profiles")
-          .insert({ id: user.id })
-          .select("*")
-          .single();
-        if (insertError) throw insertError;
-        return newProfile as UserProfile;
+        return null;
       }
 
       if (error) throw error;

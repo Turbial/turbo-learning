@@ -42,6 +42,13 @@ export default function LessonPlayer({
   const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
   const { stepIndex, sessionXp, responses, correctCount, totalGraded } = session;
 
+  // Keep a ref of latest state so auto-advance timeouts never read stale closures
+  const sessionRef = useRef(session);
+  sessionRef.current = session;
+
+  // Guard against double-firing onComplete
+  const completedRef = useRef(false);
+
   // Current step and handler
   const step: Step | undefined = steps[stepIndex];
   const handler = step ? stepRegistry[step.type] : null;
@@ -67,12 +74,29 @@ export default function LessonPlayer({
     };
   }, []);
 
+  // ─── Completion check — useEffect-based instead of inside setTimeout ───
+  // This avoids the stale-closure race condition when auto-advancing on the last step.
+  // When stepIndex advances past the last step, fire onComplete with sessionRef.current.
+  useEffect(() => {
+    if (stepIndex >= steps.length && !completedRef.current) {
+      completedRef.current = true;
+      const snap = sessionRef.current;
+      const score = completionScore(snap);
+      onComplete?.(snap.sessionXp, score);
+    }
+  }, [stepIndex, steps.length, onComplete]);
+
+  // Reset completed guard when lesson id changes
+  useEffect(() => {
+    completedRef.current = false;
+  }, [lessonId]);
+
   // ─── Handlers ───
 
   const handleContinue = useCallback(() => {
     if (step && isLastStep(stepIndex, steps.length)) {
-      // Lesson complete
       const score = completionScore(session);
+      completedRef.current = true;
       onComplete?.(sessionXp, score);
       return;
     }
@@ -86,19 +110,14 @@ export default function LessonPlayer({
       const xp = handler.score?.(step, res) ?? step.xp ?? 10;
       dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct });
 
-      // Auto-advance if configured
+      // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
       if (handler.behavior.autoAdvanceMs) {
         setTimeout(() => {
-          if (isLastStep(stepIndex, steps.length)) {
-            const score = completionScore({ ...session, responses: { ...responses, [step.id]: res } });
-            onComplete?.(sessionXp + xp, score);
-          } else {
-            dispatch({ type: "ADVANCE" });
-          }
+          dispatch({ type: "ADVANCE" });
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler, stepIndex, steps.length, session, sessionXp, responses, onComplete],
+    [step, handler],
   );
 
   const handleBack = useCallback(() => {

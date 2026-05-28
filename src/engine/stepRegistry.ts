@@ -25,7 +25,7 @@ export interface StepHandler<S extends Step = Step> {
   };
 }
 
-// ─── Import step components ───
+// ─── Import step components (engine-native, all using StepProps interface) ───
 
 import InfoStep from "./components/steps/InfoStep";
 import ScenarioCardStep from "./components/steps/ScenarioCardStep";
@@ -38,25 +38,14 @@ import CopyActionStep from "./components/steps/CopyActionStep";
 import QuizStepComp from "./components/steps/QuizStep";
 import CompareStep from "./components/steps/CompareStep";
 import FallbackStep from "./components/steps/FallbackStep";
-
-// ─── New step components from Google Drive spec (onNext/onXP interface) ───
-import NewTrueFalseStep from "../components/lesson/steps/TrueFalseStep";
-import NewFillBlankStep from "../components/lesson/steps/FillBlankStep";
-import NewMatchStep from "../components/lesson/steps/MatchStep";
-import NewPasteCaptureStep from "../components/lesson/steps/PasteCaptureStep";
-import NewReflectionStep from "../components/lesson/steps/ReflectionStep";
-import NewCompletionStep from "../components/lesson/steps/CompletionStep";
-import NewBadgeUnlockStep from "../components/lesson/steps/BadgeUnlockStep";
-import NewStreakStep from "../components/lesson/steps/StreakStep";
-import NewCommitStep from "../components/lesson/steps/CommitStep";
-
-// ─── Adapter: bridges onNext/onXP components to engine's onAnswer/onContinue ───
-import { createElement } from "react";
-function adaptStep(Component: React.ComponentType<{ step: any; onNext: () => void; onXP: (x: number) => void }>): React.ComponentType<StepProps> {
-  return function AdaptedStep({ step, onAnswer, onContinue }: StepProps) {
-    return createElement(Component, { step, onNext: onContinue, onXP: (xp: number) => onAnswer(xp) });
-  };
-}
+import EngineTrueFalseStep from "./components/steps/TrueFalseStep";
+import EngineFillBlankStep from "./components/steps/FillBlankStep";
+import EngineMatchStep from "./components/steps/MatchStep";
+import EnginePasteCaptureStep from "./components/steps/PasteCaptureStep";
+import EngineReflectionStep from "./components/steps/ReflectionStep";
+import EngineBadgeUnlockStep from "./components/steps/BadgeUnlockStep";
+import EngineStreakCommitStep from "./components/steps/StreakCommitStep";
+import EngineCompletionStep from "./components/steps/CompletionStep";
 
 // ─── Scoring helpers ───
 
@@ -66,6 +55,7 @@ import {
   tfScore,
   goodFitScore,
   fillBlankScore,
+  matchScore,
 } from "./scoring";
 
 // ─── Validation helpers ───
@@ -93,6 +83,20 @@ function fillBlankCorrect(step: Step, res: StepResponse): boolean {
   return normalized === s.answer.toLowerCase() || aliases.includes(normalized);
 }
 
+function matchCorrect(step: Step, res: StepResponse): boolean {
+  const s = step as import("./types").MatchStep;
+  if (typeof res !== "object" || !res) return false;
+  const matches = res as Record<number, number>;
+  return s.pairs.every((_, i) => matches[i] === i);
+}
+
+function matchCountCorrect(step: Step, res: StepResponse): number {
+  const s = step as import("./types").MatchStep;
+  if (typeof res !== "object" || !res) return 0;
+  const matches = res as Record<number, number>;
+  return s.pairs.filter((_, i) => matches[i] === i).length;
+}
+
 // ─── Rescore helpers ───
 
 function mcRescore(step: Step, res: StepResponse): number {
@@ -107,8 +111,14 @@ function goodFitRescore(step: Step, res: StepResponse): number {
 function fillBlankRescore(step: Step, res: StepResponse): number {
   return fillBlankScore(step as import("./types").FillBlankStep, res as string);
 }
+function matchRescore(step: Step, res: StepResponse): number {
+  return matchScore(step as import("./types").MatchStep, matchCountCorrect(step, res));
+}
+function defRescore(step: Step): number {
+  return defaultScore(step);
+}
 
-// ─── Registry (with real components) ───
+// ─── Registry ───
 
 export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   info: {
@@ -136,7 +146,9 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
   },
   tf: {
-    component: adaptStep(NewTrueFalseStep) as any,
+    component: EngineTrueFalseStep as any,
+    validate: tfCorrect,
+    score: tfRescore,
     behavior: { requiresInteraction: true },
   },
   highlight: {
@@ -144,11 +156,15 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: false },
   },
   fillblank: {
-    component: adaptStep(NewFillBlankStep) as any,
+    component: EngineFillBlankStep as any,
+    validate: fillBlankCorrect,
+    score: fillBlankRescore,
     behavior: { requiresInteraction: true },
   },
   match: {
-    component: adaptStep(NewMatchStep) as any,
+    component: EngineMatchStep as any,
+    validate: matchCorrect,
+    score: matchRescore,
     behavior: { requiresInteraction: true },
   },
   good_fit: {
@@ -159,34 +175,63 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   },
   quiz: {
     component: QuizStepComp as any,
+    validate: (_step: Step, res: StepResponse) => {
+      if (typeof res !== "object" || !res) return false;
+      const r = res as Record<string, number | string>;
+      const s = _step as import("./types").QuizStep;
+      let correct = 0;
+      s.questions.forEach((q, i) => {
+        const userAnswer = r[`q${i}`];
+        if (userAnswer !== undefined && String(userAnswer) === String(q.correct)) correct++;
+      });
+      return correct === s.questions.length;
+    },
+    score: (_step: Step, res: StepResponse) => {
+      if (typeof res !== "object" || !res) return 0;
+      const r = res as Record<string, number | string>;
+      const s = _step as import("./types").QuizStep;
+      let correct = 0;
+      s.questions.forEach((q, i) => {
+        if (String(r[`q${i}`] ?? "") === String(q.correct)) correct++;
+      });
+      return Math.round((s.xp ?? 10) * (correct / s.questions.length));
+    },
     behavior: { requiresInteraction: true },
   },
   builder: {
     component: BuilderStep as any,
+    // Builder steps are always "correct" (subjective); award base XP
+    score: defRescore,
     behavior: { requiresInteraction: true },
   },
   copy_action: {
     component: CopyActionStep as any,
+    score: defRescore,
     behavior: { requiresInteraction: true },
   },
   paste_capture: {
-    component: adaptStep(NewPasteCaptureStep) as any,
+    component: EnginePasteCaptureStep as any,
+    score: defRescore,
     behavior: { requiresInteraction: true },
   },
   compare: {
     component: CompareStep as any,
+    score: defRescore,
     behavior: { requiresInteraction: true },
   },
   reflection: {
-    component: adaptStep(NewReflectionStep) as any,
+    component: EngineReflectionStep as any,
+    // Subjective — always award participation XP
+    score: defRescore,
     behavior: { requiresInteraction: true },
   },
   badge_unlock: {
-    component: adaptStep(NewBadgeUnlockStep) as any,
+    component: EngineBadgeUnlockStep as any,
     behavior: { requiresInteraction: false },
   },
   streak_commitment: {
-    component: adaptStep(NewStreakStep) as any,
+    component: EngineStreakCommitStep as any,
+    score: defRescore,
     behavior: { requiresInteraction: false },
   },
   reminder_setup: {
@@ -194,7 +239,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   completion: {
-    component: adaptStep(NewCompletionStep) as any,
+    component: EngineCompletionStep as any,
     behavior: { requiresInteraction: false },
   },
 };
