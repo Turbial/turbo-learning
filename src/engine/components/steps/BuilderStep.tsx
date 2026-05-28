@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { BuilderStep as BuilderStepType } from "../../types";
 
 export default function BuilderStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as BuilderStepType;
   const [values, setValues] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 

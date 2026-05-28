@@ -1,9 +1,9 @@
 // ─── BadgeUnlockStep — animated badge reveal ───
 
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { StepProps } from "../../stepRegistry";
-import { colors } from "../../../theme/tokens";
+import type { BadgeUnlockStep as BadgeUnlockStepType } from "../../types";
 
 const BADGE_INFO: Record<string, { name: string; icon: string; desc: string }> = {
   first_day: { name: "First Steps", icon: "👣", desc: "Completed your first day of learning." },
@@ -17,7 +17,7 @@ const BADGE_INFO: Record<string, { name: string; icon: string; desc: string }> =
 };
 
 export default function BadgeUnlockStep({ step }: StepProps) {
-  const s = step as any;
+  const s = step as BadgeUnlockStepType;
   const badge = BADGE_INFO[s.badgeSlug] ?? { name: s.badgeSlug, icon: "🏅", desc: "Badge unlocked!" };
 
   return (

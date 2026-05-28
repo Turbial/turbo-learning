@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { FillBlankStep as FillBlankStepType } from "../../types";
 import { colors } from "../../../theme/tokens";
 
 export default function FillBlankStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as FillBlankStepType;
   const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
 

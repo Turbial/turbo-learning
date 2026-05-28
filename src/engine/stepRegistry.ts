@@ -2,6 +2,7 @@
 // Adding a step type = add a component + one entry here.
 // The LessonPlayer never changes.
 
+import React from "react";
 import type { Step, StepResponse, NarrationController } from "./types";
 import type { LessonPlayerState } from "./LessonPlayer";
 
@@ -122,59 +123,59 @@ function defRescore(step: Step): number {
 
 export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   info: {
-    component: InfoStep as any,
+    component: InfoStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
   },
   scenario_card: {
-    component: ScenarioCardStep as any,
+    component: ScenarioCardStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
   },
   example: {
-    component: ExampleStep as any,
+    component: ExampleStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
   },
   mc: {
-    component: McStep as any,
+    component: McStep as React.ComponentType<StepProps<any>>,
     validate: mcCorrect,
     score: mcRescore,
     behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
   },
   scenario: {
-    component: McStep as any,
+    component: McStep as React.ComponentType<StepProps<any>>,
     validate: mcCorrect,
     score: mcRescore,
     behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
   },
   tf: {
-    component: EngineTrueFalseStep as any,
+    component: EngineTrueFalseStep as React.ComponentType<StepProps<any>>,
     validate: tfCorrect,
     score: tfRescore,
     behavior: { requiresInteraction: true },
   },
   highlight: {
-    component: HighlightStep as any,
+    component: HighlightStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
   },
   fillblank: {
-    component: EngineFillBlankStep as any,
+    component: EngineFillBlankStep as React.ComponentType<StepProps<any>>,
     validate: fillBlankCorrect,
     score: fillBlankRescore,
     behavior: { requiresInteraction: true },
   },
   match: {
-    component: EngineMatchStep as any,
+    component: EngineMatchStep as React.ComponentType<StepProps<any>>,
     validate: matchCorrect,
     score: matchRescore,
     behavior: { requiresInteraction: true },
   },
   good_fit: {
-    component: GoodFitStep as any,
+    component: GoodFitStep as React.ComponentType<StepProps<any>>,
     validate: goodFitCorrect,
     score: goodFitRescore,
     behavior: { requiresInteraction: true, autoAdvanceMs: 2000 },
   },
   quiz: {
-    component: QuizStepComp as any,
+    component: QuizStepComp as React.ComponentType<StepProps<any>>,
     validate: (_step: Step, res: StepResponse) => {
       if (typeof res !== "object" || !res) return false;
       const r = res as Record<string, number | string>;
@@ -199,47 +200,47 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   builder: {
-    component: BuilderStep as any,
+    component: BuilderStep as React.ComponentType<StepProps<any>>,
     // Builder steps are always "correct" (subjective); award base XP
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
   copy_action: {
-    component: CopyActionStep as any,
+    component: CopyActionStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
   paste_capture: {
-    component: EnginePasteCaptureStep as any,
+    component: EnginePasteCaptureStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
   compare: {
-    component: CompareStep as any,
+    component: CompareStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
   reflection: {
-    component: EngineReflectionStep as any,
+    component: EngineReflectionStep as React.ComponentType<StepProps<any>>,
     // Subjective — always award participation XP
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
   badge_unlock: {
-    component: EngineBadgeUnlockStep as any,
+    component: EngineBadgeUnlockStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
   },
   streak_commitment: {
-    component: EngineStreakCommitStep as any,
+    component: EngineStreakCommitStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: false },
   },
   reminder_setup: {
-    component: FallbackStep as any, // Deferred — requires native push permissions
+    component: FallbackStep as React.ComponentType<StepProps<any>>, // Deferred — requires native push permissions
     behavior: { requiresInteraction: true },
   },
   completion: {
-    component: EngineCompletionStep as any,
+    component: EngineCompletionStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
   },
 };

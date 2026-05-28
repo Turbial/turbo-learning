@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { CompareStep as CompareStepType } from "../../types";
 import { colors } from "../../../theme/tokens";
 
 export default function CompareStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as CompareStepType;
   const [text, setText] = useState("");
   const [submitted, setSubmitted] = useState(false);
 

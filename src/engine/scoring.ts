@@ -14,21 +14,21 @@ export function defaultScore(step: Step): number {
   return step.xp ?? BASE_XP;
 }
 
-// Awards base XP for wrong answers as participation credit (intentional — keeps
-// users motivated even when they get an answer wrong). Correct answers get base + bonus.
+// Wrong answers = 0 XP. Participation XP was intentionally awarded in v0 to keep
+// users motivated, but feedback showed it rewards guessing. Only correct answers earn XP.
 export function mcScore(step: McStep, selected: number): number {
   const base = step.xp ?? BASE_XP;
-  return selected === step.correct ? base + BONUS_PERFECT : base;
+  return selected === step.correct ? base + BONUS_PERFECT : 0;
 }
 
 export function tfScore(step: TrueFalseStep, selected: boolean): number {
   const base = step.xp ?? BASE_XP;
-  return selected === step.correct ? base + BONUS_PERFECT : base;
+  return selected === step.correct ? base + BONUS_PERFECT : 0;
 }
 
 export function goodFitScore(step: GoodFitStep, selected: "good" | "notideal"): number {
   const base = step.xp ?? BASE_XP;
-  return selected === step.correct ? base + BONUS_PERFECT : base;
+  return selected === step.correct ? base + BONUS_PERFECT : 0;
 }
 
 export function fillBlankScore(step: FillBlankStep, answer: string): number {
@@ -37,7 +37,7 @@ export function fillBlankScore(step: FillBlankStep, answer: string): number {
   const isCorrect =
     normalized === step.answer.toLowerCase() ||
     (step.aliases?.some((a) => normalized === a.toLowerCase()) ?? false);
-  return isCorrect ? base + BONUS_PERFECT : base;
+  return isCorrect ? base + BONUS_PERFECT : 0;
 }
 
 export function matchScore(step: MatchStep, correctCount: number): number {

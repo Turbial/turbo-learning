@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { StreakCommitStep as StreakCommitStepType } from "../../types";
 import { colors } from "../../../theme/tokens";
 
 export default function StreakCommitStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as StreakCommitStepType;
   const options = s.commitOptions as number[];
   const [selected, setSelected] = useState<number | null>(null);
 

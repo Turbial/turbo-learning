@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { PasteCaptureStep as PasteCaptureStepType } from "../../types";
 
 export default function PasteCaptureStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as PasteCaptureStepType;
   const [text, setText] = useState("");
   const minLength = s.minLength ?? 20;
   const isValid = text.trim().length >= minLength;

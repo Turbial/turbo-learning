@@ -1,13 +1,14 @@
 // ─── CopyActionStep — shows text to copy, then triggers paste step ───
 // Uses sourceStepId to look up a previous response as copy source when available.
 
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import { StepProps } from "../../stepRegistry";
+import type { CopyActionStep as CopyActionStepType } from "../../types";
 
 export default function CopyActionStep({ step, onAnswer, state }: StepProps) {
-  const s = step as any;
+  const s = step as CopyActionStepType;
 
   // sourceStepId allows referencing another step's response as the copy source
   const sourceText: string = s.sourceStepId && state?.responses?.[s.sourceStepId]

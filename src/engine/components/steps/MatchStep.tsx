@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { MatchStep as MatchStepType } from "../../types";
 import { colors } from "../../../theme/tokens";
 
 export default function MatchStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as MatchStepType;
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
   const [matches, setMatches] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);

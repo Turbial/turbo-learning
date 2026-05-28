@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { TrueFalseStep as TrueFalseStepType } from "../../types";
 
 export default function TrueFalseStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as TrueFalseStepType;
   const [selected, setSelected] = useState<boolean | null>(null);
   const [submitted, setSubmitted] = useState(false);
 

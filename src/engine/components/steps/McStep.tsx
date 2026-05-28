@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { McStep as McStepType } from "../../types";
 
 export default function McStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as McStepType;
   const [selected, setSelected] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -68,7 +69,7 @@ export default function McStep({ step, onAnswer }: StepProps) {
           <Text style={styles.feedbackText}>
             {isCorrect
               ? s.feedback[0]
-              : (s.feedback.length > 2 && selected !== null
+              : (selected !== null && s.feedback[selected]
                   ? s.feedback[selected]
                   : s.feedback[1]) || "Not quite. The correct answer is highlighted above."}
           </Text>

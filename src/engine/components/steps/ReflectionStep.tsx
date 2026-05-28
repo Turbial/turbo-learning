@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { ReflectionStep as ReflectionStepType } from "../../types";
 
 export default function ReflectionStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as ReflectionStepType;
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 

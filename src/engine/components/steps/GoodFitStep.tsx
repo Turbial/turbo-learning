@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
+import type { GoodFitStep as GoodFitStepType } from "../../types";
 
 export default function GoodFitStep({ step, onAnswer }: StepProps) {
-  const s = step as any;
+  const s = step as GoodFitStepType;
   const [selected, setSelected] = useState<"good" | "notideal" | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
