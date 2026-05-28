@@ -234,6 +234,7 @@ export type SessionState = {
   responses: Record<string, StepResponse>;
   correctCount: number;
   totalGraded: number;
+  comboStreak: number;
 };
 
 // ─── Narration ───

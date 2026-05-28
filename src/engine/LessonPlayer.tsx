@@ -8,6 +8,7 @@ import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
 import { createNarration } from "./narration/useNarration";
+import { applyCombo, getComboLabel, getComboMultiplier } from "./scoring";
 
 // ─── Props ───
 
@@ -27,6 +28,9 @@ export interface LessonPlayerState {
   responses: Record<string, StepResponse>;
   correctCount: number;
   totalGraded: number;
+  comboStreak: number;
+  comboMultiplier: number;
+  comboLabel: string;
   isLast: boolean;
   progress: number; // 0–1
 }
@@ -40,7 +44,7 @@ export default function LessonPlayer({
   allowBack = true,
 }: LessonPlayerProps) {
   const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
-  const { stepIndex, sessionXp, responses, correctCount, totalGraded } = session;
+  const { stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak } = session;
 
   // Keep a ref of latest state so auto-advance timeouts never read stale closures
   const sessionRef = useRef(session);
@@ -107,8 +111,17 @@ export default function LessonPlayer({
     (res: StepResponse) => {
       if (!step || !handler) return;
       const correct = handler.validate?.(step, res);
-      const xp = handler.score?.(step, res) ?? step.xp ?? 10;
-      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct });
+
+      // Calculate base XP
+      const baseXp = handler.score?.(step, res) ?? step.xp ?? 10;
+
+      // Compute combo streak: increment on correct, reset on wrong
+      const newComboStreak = correct ? comboStreak + 1 : 0;
+
+      // Apply combo multiplier to XP
+      const xp = applyCombo(baseXp, newComboStreak);
+
+      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct, comboStreak: newComboStreak });
 
       // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
       if (handler.behavior.autoAdvanceMs) {
@@ -117,7 +130,7 @@ export default function LessonPlayer({
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler],
+    [step, handler, comboStreak],
   );
 
   const handleBack = useCallback(() => {
@@ -126,6 +139,9 @@ export default function LessonPlayer({
 
   // ─── Derived state ───
 
+  const comboMultiplier = getComboMultiplier(comboStreak);
+  const comboLabel = getComboLabel(comboStreak);
+
   const playerState: LessonPlayerState = useMemo(
     () => ({
       stepIndex,
@@ -133,10 +149,13 @@ export default function LessonPlayer({
       responses,
       correctCount,
       totalGraded,
+      comboStreak,
+      comboMultiplier,
+      comboLabel,
       isLast: isLastStep(stepIndex, steps.length),
       progress: steps.length > 0 ? stepIndex / steps.length : 0,
     }),
-    [stepIndex, sessionXp, responses, correctCount, totalGraded, steps.length],
+    [stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak, comboMultiplier, comboLabel, steps.length],
   );
 
   // ─── Render ───
