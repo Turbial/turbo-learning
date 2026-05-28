@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgramSlug } from "../../src/data/queries";
+import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
 
 export default function HomeScreen() {
   const { user } = useAuth();
@@ -15,13 +16,17 @@ export default function HomeScreen() {
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
 
+  // Fall back to local units when Supabase RLS isn't configured for anon reads
+  const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"];
+  const displayUnits = units ?? fallbackUnits;
+
   const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
     // Pass unit UUID so Supabase can look up the lesson; day number as fallback
     router.push({ pathname: `/lesson/${unitId}`, params: { program: programSlug, day: String(day) } });
   };
 
-  if (profileLoading || unitsLoading) {
+  if (profileLoading) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
@@ -62,8 +67,8 @@ export default function HomeScreen() {
         <View style={styles.journey}>
           <Text style={styles.sectionTitle}>Your Journey</Text>
 
-          {units ? (
-            <WeeksView units={units as any} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
+          {displayUnits.length > 0 ? (
+            <WeeksView units={displayUnits as any} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
           ) : (
             <Text style={styles.emptyText}>Loading program...</Text>
           )}

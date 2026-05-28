@@ -6,7 +6,7 @@
 //   day    — day number for local fallback when UUID lookup fails
 
 import { useCallback } from "react";
-import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator } from "react-native";
+import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { LessonPlayer } from "../../src/engine";
 import type { Lesson, Step } from "../../src/engine/types";
@@ -102,9 +102,9 @@ export default function LessonScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
           <Text style={styles.missingText}>Lesson not found.</Text>
-          <Text style={styles.backLink} onPress={() => router.back()}>
-            ← Go back
-          </Text>
+          <TouchableOpacity onPress={() => router.replace("/(tabs)/home")}>
+            <Text style={styles.homeLink}>🏠 Home</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -112,6 +112,10 @@ export default function LessonScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
+      {/* Home button */}
+      <TouchableOpacity style={styles.homeBtn} onPress={() => router.replace("/(tabs)/home")}>
+        <Text style={styles.homeBtnText}>🏠</Text>
+      </TouchableOpacity>
       <LessonPlayer
         steps={lesson.steps}
         lessonId={lesson.id}
@@ -128,4 +132,13 @@ const styles = StyleSheet.create({
   loadingText: { marginTop: 12, fontSize: 15, color: colors.textMuted },
   missingText: { fontSize: 18, fontWeight: "700", color: colors.textSecondary, marginBottom: 12 },
   backLink: { fontSize: 16, fontWeight: "600", color: colors.primary },
+  homeBtn: {
+    position: "absolute",
+    top: 12,
+    right: 16,
+    zIndex: 10,
+    padding: 8,
+  },
+  homeBtnText: { fontSize: 22 },
+  homeLink: { fontSize: 16, fontWeight: "600", color: colors.primary, marginTop: 12 },
 });
