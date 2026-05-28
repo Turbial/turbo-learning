@@ -5,13 +5,14 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Act
 import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
-import { useProfile, useUnits, useProgram } from "../../src/data/queries";
+import { useProfile, useUnits, useProgram, useLessonProgressMap } from "../../src/data/queries";
 
 export default function HomeScreen() {
   const { user } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
   const { data: program } = useProgram("ai-operator");
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
+  const { data: completedUnitIds } = useLessonProgressMap(user?.id);
 
   const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
@@ -61,7 +62,7 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Your Journey</Text>
 
           {units ? (
-            <WeeksView units={units} onDayPress={handleDayPress} />
+            <WeeksView units={units} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
           ) : (
             <Text style={styles.emptyText}>Loading program...</Text>
           )}
@@ -73,9 +74,11 @@ export default function HomeScreen() {
 
 function WeeksView({
   units,
+  completedUnitIds,
   onDayPress,
 }: {
   units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
+  completedUnitIds: Set<string>;
   onDayPress: (day: number, unitId: string, status: string) => void;
 }) {
   // Group units into weeks (7 days each)

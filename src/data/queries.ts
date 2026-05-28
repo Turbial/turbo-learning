@@ -163,18 +163,16 @@ export function useCompleteLesson() {
 
   return useMutation({
     mutationFn: async ({
-      userId,
       lessonId,
       xpEarned,
       score,
     }: {
-      userId: string;
       lessonId: string;
       xpEarned: number;
       score: number;
     }) => {
+      // Requires migration 0011: complete_lesson now derives user from auth.uid()
       const { data, error } = await supabase.rpc("complete_lesson", {
-        p_user_id: userId,
         p_lesson_id: lessonId,
         p_xp_earned: xpEarned,
         p_score: score,
