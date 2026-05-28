@@ -1,5 +1,4 @@
 // app/pricing.tsx — fetches plans from Supabase and links to Stripe checkout.
-import React from 'react';
 import { View, Text, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';

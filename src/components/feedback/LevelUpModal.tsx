@@ -1,5 +1,6 @@
 // components/feedback/LevelUpModal.tsx — full-screen level-up celebration.
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import { Modal, View, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { spacing, fontSize, fontWeight } from '../../theme/tokens';

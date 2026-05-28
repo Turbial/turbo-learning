@@ -1,6 +1,6 @@
+import { createContext, useCallback, useContext, useRef, useState } from 'react';
 // components/feedback/Toast.tsx — non-blocking toast + provider/hook.
-import React, { createContext, useCallback, useContext, useRef, useState } from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { radius, spacing, fontSize } from '../../theme/tokens';
 

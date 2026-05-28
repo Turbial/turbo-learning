@@ -1,6 +1,5 @@
 // ─── Home / Journey — uses real data from Supabase ───
 
-import React from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
@@ -18,7 +17,8 @@ export default function HomeScreen() {
 
   const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
-    router.push({ pathname: `/lesson/${day}`, params: { program: programSlug } });
+    // Pass unit UUID so Supabase can look up the lesson; day number as fallback
+    router.push({ pathname: `/lesson/${unitId}`, params: { program: programSlug, day: String(day) } });
   };
 
   if (profileLoading || unitsLoading) {
@@ -120,7 +120,6 @@ function WeeksView({
         // The first non-completed unit is "current"
         const prevAllDone = weekUnits.slice(0, idx).every((pu) => completedUnitIds.has(pu.id));
         const isCurrent = !isDone && prevAllDone;
-        const isLocked = !isDone && !isCurrent;
         return {
           day: u.order_num,
           unitId: u.id,

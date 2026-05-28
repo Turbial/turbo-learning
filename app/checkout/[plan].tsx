@@ -1,5 +1,6 @@
 // app/checkout/[plan].tsx — starts hosted Stripe checkout for the selected plan.
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { View, Text } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { startCheckout } from '../../src/integrations/stripe';

@@ -1,5 +1,6 @@
 // app/auth/forgot-password.tsx — request reset + confirmation state.
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { View, Text } from 'react-native';
 import { Link } from 'expo-router';
 import { supabase } from '../../src/data/supabase';

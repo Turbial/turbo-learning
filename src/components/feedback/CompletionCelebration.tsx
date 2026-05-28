@@ -1,5 +1,6 @@
 // components/feedback/CompletionCelebration.tsx — lesson-complete motion (drop into the Unit Complete screen).
-import React, { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
 import { Animated, View, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { spacing, fontSize, fontWeight } from '../../theme/tokens';

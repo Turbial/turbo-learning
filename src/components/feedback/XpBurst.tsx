@@ -1,5 +1,6 @@
 // components/feedback/XpBurst.tsx — "+N XP" flies up & fades when XP is earned.
-import React, { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+
 import { Animated, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { fontWeight, motion } from '../../theme/tokens';

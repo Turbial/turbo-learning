@@ -99,13 +99,13 @@ export default function LessonPlayer({
 
   const handleContinue = useCallback(() => {
     if (step && isLastStep(stepIndex, steps.length)) {
-      const score = completionScore(session);
-      completedRef.current = true;
-      onComplete?.(sessionXp, score);
+      // Advance past the last step — the useEffect below catches stepIndex >= steps.length
+      // and calls onComplete with sessionRef.current (stable, no stale closure)
+      dispatch({ type: "ADVANCE" });
       return;
     }
     dispatch({ type: "ADVANCE" });
-  }, [step, stepIndex, steps.length, session, sessionXp, onComplete]);
+  }, [step, stepIndex, steps.length]);
 
   const handleAnswer = useCallback(
     (res: StepResponse) => {

@@ -1,14 +1,12 @@
 // ─── Unit Complete Screen — XP tally, streak fire, continue ───
 
-import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useProfile } from "../../src/data/queries";
 
 export default function CompleteScreen() {
-  const { unitId, xp, score } = useLocalSearchParams<{
-    unitId: string;
+  const { xp, score } = useLocalSearchParams<{
     xp: string;
     score: string;
   }>();

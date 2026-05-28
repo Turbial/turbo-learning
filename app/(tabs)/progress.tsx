@@ -1,17 +1,16 @@
 // ─── Progress — XP, streaks, badges (real data from Supabase) ───
 
-import React from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, ActivityIndicator } from "react-native";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useBadges, useProgress } from "../../src/data/queries";
-import { xpToLevel, xpToNextLevel } from "../../src/engine/scoring";
+import { xpToNextLevel } from "../../src/engine/scoring";
 
 export default function ProgressScreen() {
   const { user } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
-  const { data: badges, isLoading: badgesLoading } = useBadges(user?.id);
-  const { data: progress, isLoading: progressLoading } = useProgress(user?.id);
+  const { data: badges } = useBadges(user?.id);
+  const { data: progress } = useProgress(user?.id);
 
   if (profileLoading) {
     return (

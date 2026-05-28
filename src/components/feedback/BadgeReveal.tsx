@@ -1,5 +1,6 @@
 // components/feedback/BadgeReveal.tsx — badge unlock celebration (scale + glow + confetti).
-import React, { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
 import { Animated, View, Text, Modal } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { spacing, fontSize, fontWeight, radius } from '../../theme/tokens';

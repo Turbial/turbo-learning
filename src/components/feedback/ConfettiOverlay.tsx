@@ -1,5 +1,6 @@
 // components/feedback/ConfettiOverlay.tsx — lightweight confetti (no extra deps).
-import React, { useEffect, useRef } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
+
 import { Animated, View, useWindowDimensions } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 

@@ -1,5 +1,6 @@
 // app/profile/index.tsx — edit name, avatar, goal, daily mins, learn time.
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { View, Text, ScrollView } from 'react-native';
 import { supabase } from '../../src/data/supabase';
 import { Field } from '../../src/components/ui/Field';

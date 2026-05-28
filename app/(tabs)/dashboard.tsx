@@ -1,5 +1,4 @@
 // app/(tabs)/dashboard.tsx — single-page hub: level/XP/streak header, 28-day grid, stats, quick start.
-import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Card } from '../../src/components/ui/Card';

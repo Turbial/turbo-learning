@@ -1,6 +1,7 @@
 // ─── Onboarding — single-scroll intro, goal setting, program entry ───
 
-import React, { useState } from "react";
+import { useState } from 'react';
+
 import {
   View,
   Text,
