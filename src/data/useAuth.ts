@@ -60,6 +60,16 @@ export function useAuth(): AuthState {
       });
       if (error) return { error: error.message };
 
+      // Create profile row so complete_lesson RPC works
+      if (data.user) {
+        const { error: profileErr } = await supabase.from("profiles").upsert({
+          id: data.user.id,
+          email: data.user.email,
+          name: name || "",
+        }, { onConflict: "id" });
+        if (profileErr) console.warn("Profile creation warning:", profileErr.message);
+      }
+
       // If mailer_autoconfirm is on, session is created immediately.
       // If not, user exists but session is null — they need to confirm email.
       const needsConfirmation = !data.session && !!data.user;
