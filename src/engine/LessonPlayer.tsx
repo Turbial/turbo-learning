@@ -3,7 +3,7 @@
 // Product-agnostic. Content controls the rhythm; the engine just plays it.
 
 import React, { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
-import { View, StyleSheet, ActivityIndicator, Text } from "react-native";
+import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
@@ -45,6 +45,7 @@ export default function LessonPlayer({
 }: LessonPlayerProps) {
   const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
   const { stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak } = session;
+  const [stepError, setStepError] = React.useState<string | null>(null);
 
   // Keep a ref of latest state so auto-advance timeouts never read stale closures
   const sessionRef = useRef(session);
@@ -185,13 +186,25 @@ export default function LessonPlayer({
 
       {/* Step content */}
       <View style={styles.stepArea}>
-        <StepComponent
-          step={step}
-          onAnswer={handleAnswer}
-          onContinue={handleContinue}
-          narration={getNarration()}
-          state={playerState}
-        />
+        {stepError ? (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorTitle}>⚠️ Something went wrong</Text>
+            <Text style={styles.errorDetail}>{stepError}</Text>
+            <TouchableOpacity style={styles.errorSkipBtn} onPress={() => { setStepError(null); dispatch({ type: "ADVANCE" }); }}>
+              <Text style={styles.errorSkipText}>Skip this step →</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <StepErrorBoundary stepId={step.id} onError={(msg) => setStepError(msg)}>
+            <StepComponent
+              step={step}
+              onAnswer={handleAnswer}
+              onContinue={handleContinue}
+              narration={getNarration()}
+              state={playerState}
+            />
+          </StepErrorBoundary>
+        )}
       </View>
 
       {/* Navigation */}
@@ -272,4 +285,46 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     marginLeft: "auto",
   },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  errorTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#92400e",
+    marginBottom: 8,
+  },
+  errorDetail: {
+    fontSize: 14,
+    color: "#A09484",
+    textAlign: "center",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+  errorSkipBtn: {
+    backgroundColor: "#059669",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 14,
+  },
+  errorSkipText: { color: "#fff", fontSize: 16, fontWeight: "700" },
 });
+
+// ─── StepErrorBoundary — catches render errors in individual steps ───
+
+class StepErrorBoundary extends React.Component<{
+  stepId: string;
+  onError: (msg: string) => void;
+  children: React.ReactNode;
+}> {
+  componentDidCatch(error: Error) {
+    this.props.onError(error.message);
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
