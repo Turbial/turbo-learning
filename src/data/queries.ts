@@ -308,7 +308,6 @@ export function useLessonProgressMap(userId: string | undefined) {
 
 // ─── Active program slug (first enrollment) ───
 export function useActiveProgramSlug() {
-  const { data: { user } } = {} as any;
   return useQuery({
     queryKey: ["activeProgramSlug"],
     queryFn: async () => {
