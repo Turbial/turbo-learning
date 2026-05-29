@@ -1,14 +1,14 @@
 {
   "version": 1,
   "unit": "day2",
-  "title": "Day 2: Building Your First AI Automation — All Step Types",
+  "title": "Day 2: Building Your First AI Automation \u2014 All Step Types",
   "estMinutes": 25,
   "steps": [
     {
       "id": "d2-info-1",
       "type": "info",
       "title": "Today You Build Something Real",
-      "body": "Yesterday you learned what AI actually is. Today you're going to build something.\n\nBy the end of this session, you'll have created your first real AI automation — a workflow that does actual work while you watch.\n\nWe're going to use every tool in the toolbox. Pay attention to each one — you'll be combining them later.\n\nLet's build.",
+      "body": "Yesterday you learned what AI actually is. Today you're going to build something.\n\nBy the end of this session, you'll have created your first real AI automation \u2014 a workflow that does actual work while you watch.\n\nWe're going to use every tool in the toolbox. Pay attention to each one \u2014 you'll be combining them later.\n\nLet's build.",
       "xp": 5
     },
     {
@@ -36,7 +36,7 @@
       "correct": 1,
       "feedback": [
         "Exactly. Operators build systems that chain AI actions together. Anyone can write a prompt. Operators build the assembly line.",
-        "Good guess, but no. You don't need coding skills or premium tools. The difference is architectural — building systems vs. writing individual prompts."
+        "Good guess, but no. You don't need coding skills or premium tools. The difference is architectural \u2014 building systems vs. writing individual prompts."
       ],
       "xp": 10
     },
@@ -44,7 +44,7 @@
       "id": "d2-scenario-card-1",
       "type": "scenario_card",
       "title": "Sarah's Transformation",
-      "body": "Sarah runs a small marketing agency with 12 clients. Every Monday she spends 4 hours manually:\n\n1. Pulling analytics from each client dashboard\n2. Writing a performance summary\n3. Drafting recommendations\n4. Formatting everything into a report\n5. Emailing it to each client\n\nAfter building her first automation:\n\n• AI pulls the analytics via API\n• AI writes the summary and recommendations\n• AI formats the report\n• AI drafts the email\n• Sarah reviews for 20 minutes, then hits send\n\nShe reclaimed 3.5 hours every Monday. That's 14 hours a month. That's a full work week every two months.",
+      "body": "Sarah runs a small marketing agency with 12 clients. Every Monday she spends 4 hours manually:\n\n1. Pulling analytics from each client dashboard\n2. Writing a performance summary\n3. Drafting recommendations\n4. Formatting everything into a report\n5. Emailing it to each client\n\nAfter building her first automation:\n\n\u2022 AI pulls the analytics via API\n\u2022 AI writes the summary and recommendations\n\u2022 AI formats the report\n\u2022 AI drafts the email\n\u2022 Sarah reviews for 20 minutes, then hits send\n\nShe reclaimed 3.5 hours every Monday. That's 14 hours a month. That's a full work week every two months.",
       "xp": 5
     },
     {
@@ -53,7 +53,7 @@
       "question": "To build an AI automation, you need to know how to code.",
       "correct": false,
       "feedback": [
-        "Correct! Modern AI tools let you build automations through natural language and visual interfaces. You describe what you want, and the AI handles the implementation. The most valuable skill isn't coding — it's knowing WHAT to automate.",
+        "Correct! Modern AI tools let you build automations through natural language and visual interfaces. You describe what you want, and the AI handles the implementation. The most valuable skill isn't coding \u2014 it's knowing WHAT to automate.",
         "Actually, no. Modern AI platforms are designed for non-programmers. If you can describe a process clearly, you can automate it."
       ],
       "xp": 10
@@ -61,12 +61,17 @@
     {
       "id": "d2-fillblank-1",
       "type": "fillblank",
-      "question": "The core building block of any AI automation is called a ______ — a single step that takes input, processes it, and produces output.",
+      "question": "The core building block of any AI automation is called a ______ \u2014 a single step that takes input, processes it, and produces output.",
       "answer": "node",
-      "aliases": ["action", "step", "task", "block"],
+      "aliases": [
+        "action",
+        "step",
+        "task",
+        "block"
+      ],
       "feedback": [
-        "Perfect! Every automation is built from nodes — discrete steps that transform data. Chain enough nodes together and you have a workflow.",
-        "Close — the term we use is 'node.' Think of it as one link in the chain. Each node does one specific thing well."
+        "Perfect! Every automation is built from nodes \u2014 discrete steps that transform data. Chain enough nodes together and you have a workflow.",
+        "Close \u2014 the term we use is 'node.' Think of it as one link in the chain. Each node does one specific thing well."
       ],
       "xp": 10
     },
@@ -74,7 +79,7 @@
       "id": "d2-example-1",
       "type": "example",
       "title": "Anatomy of a Workflow Node",
-      "prompt": "Here's how a single node works:\n\nTRIGGER → New email arrives in inbox\n  ↓\nACTION → AI reads and categorizes email\n  ↓\nCONDITION → Is it a client inquiry?\n  ↓ YES              ↓ NO\nSend to CRM       Archive with label\n\nEvery automation you build follows this pattern. The complexity comes from chaining nodes together — not from any individual step."
+      "prompt": "Here's how a single node works:\n\nTRIGGER \u2192 New email arrives in inbox\n  \u2193\nACTION \u2192 AI reads and categorizes email\n  \u2193\nCONDITION \u2192 Is it a client inquiry?\n  \u2193 YES              \u2193 NO\nSend to CRM       Archive with label\n\nEvery automation you build follows this pattern. The complexity comes from chaining nodes together \u2014 not from any individual step."
     },
     {
       "id": "d2-goodfit-1",
@@ -93,7 +98,7 @@
       "question": "Having a creative brainstorming session for a new brand name.",
       "correct": "notideal",
       "feedback": [
-        "Right. Brainstorming benefits from human creativity, emotional intelligence, and contextual understanding that AI can assist with but shouldn't fully replace. Use AI as a thought partner — not a replacement.",
+        "Right. Brainstorming benefits from human creativity, emotional intelligence, and contextual understanding that AI can assist with but shouldn't fully replace. Use AI as a thought partner \u2014 not a replacement.",
         "This isn't great for full automation. AI can suggest names, but brand identity needs human taste, emotion, and cultural context. Use AI to generate options, not make the final call."
       ],
       "xp": 10
@@ -102,10 +107,22 @@
       "id": "d2-match-1",
       "type": "match",
       "pairs": [
-        { "left": "Trigger", "right": "The event that starts the workflow" },
-        { "left": "Action", "right": "What the AI does when triggered" },
-        { "left": "Condition", "right": "A decision point that branches the flow" },
-        { "left": "Output", "right": "The final result delivered to you or a system" }
+        {
+          "left": "Trigger",
+          "right": "The event that starts the workflow"
+        },
+        {
+          "left": "Action",
+          "right": "What the AI does when triggered"
+        },
+        {
+          "left": "Condition",
+          "right": "A decision point that branches the flow"
+        },
+        {
+          "left": "Output",
+          "right": "The final result delivered to you or a system"
+        }
       ],
       "xp": 15
     },
@@ -113,9 +130,21 @@
       "id": "d2-builder-1",
       "type": "builder",
       "fields": [
-        { "id": "trigger", "label": "What event starts your automation?", "placeholder": "e.g., New email, form submission, schedule time" },
-        { "id": "action", "label": "What should the AI do?", "placeholder": "e.g., Read and categorize, summarize, extract data" },
-        { "id": "output", "label": "Where should the result go?", "placeholder": "e.g., Spreadsheet, Slack message, email reply" }
+        {
+          "id": "trigger",
+          "label": "What event starts your automation?",
+          "placeholder": "e.g., New email, form submission, schedule time"
+        },
+        {
+          "id": "action",
+          "label": "What should the AI do?",
+          "placeholder": "e.g., Read and categorize, summarize, extract data"
+        },
+        {
+          "id": "output",
+          "label": "Where should the result go?",
+          "placeholder": "e.g., Spreadsheet, Slack message, email reply"
+        }
       ],
       "template": "When {trigger} occurs, the AI will {action} and send the result to {output}.",
       "xp": 15
@@ -127,19 +156,34 @@
         {
           "id": "q1",
           "question": "What's the first step in building any AI automation?",
-          "options": ["Write code", "Identify a repetitive task", "Buy AI software", "Hire a developer"],
+          "options": [
+            "Write code",
+            "Identify a repetitive task",
+            "Buy AI software",
+            "Hire a developer"
+          ],
           "correct": 1
         },
         {
           "id": "q2",
           "question": "How many nodes minimum does a useful automation need?",
-          "options": ["At least 10", "At least 1 — even a single node can be useful", "At least 5", "At least 3"],
+          "options": [
+            "At least 10",
+            "At least 1 \u2014 even a single node can be useful",
+            "At least 5",
+            "At least 3"
+          ],
           "correct": 1
         },
         {
           "id": "q3",
           "question": "What's the most valuable skill for an AI Operator?",
-          "options": ["Python programming", "Knowing what to automate", "Graphic design", "Video editing"],
+          "options": [
+            "Python programming",
+            "Knowing what to automate",
+            "Graphic design",
+            "Video editing"
+          ],
           "correct": 1
         }
       ],
@@ -170,8 +214,8 @@
       "type": "scenario",
       "question": "You've built an automation that categorizes incoming emails. It works 95% of the time. The other 5% of emails go to a 'review' folder. What should you do?",
       "options": [
-        "Scrap the automation — 5% error rate is too high",
-        "Review the 5% manually — the automation saved you 95% of the work",
+        "Scrap the automation \u2014 5% error rate is too high",
+        "Review the 5% manually \u2014 the automation saved you 95% of the work",
         "Keep tweaking until it's 100% perfect before using it",
         "Add a second AI to review the 5%"
       ],
@@ -185,9 +229,28 @@
     {
       "id": "d2-reflection-1",
       "type": "reflection",
-      "prompt": "Look at your work from the last week. Identify ONE task you do repeatedly that follows a clear pattern — something with consistent inputs, rules, and outputs.\n\nDescribe the task. What triggers it? What information do you need? What do you produce at the end?",
+      "prompt": "Look at your work from the last week. Identify ONE task you do repeatedly that follows a clear pattern \u2014 something with consistent inputs, rules, and outputs.\n\nDescribe the task. What triggers it? What information do you need? What do you produce at the end?",
       "minChars": 30,
-      "xp": 15
+      "xp": 15,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "How confident are you in building your first automation?",
+          "options": [
+            "Not confident yet",
+            "Somewhat confident",
+            "Pretty confident",
+            "Ready to build"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What's the first repetitive task you'd like to automate with AI?",
+          "placeholder": "Describe the task..."
+        }
+      ]
     },
     {
       "id": "d2-badge-unlock-1",
@@ -198,7 +261,11 @@
     {
       "id": "d2-streak-1",
       "type": "streak_commitment",
-      "commitOptions": [7, 14, 30],
+      "commitOptions": [
+        7,
+        14,
+        30
+      ],
       "xp": 5
     },
     {
@@ -212,7 +279,7 @@
       "id": "d2-completion-1",
       "type": "completion",
       "title": "Day 2 Complete!",
-      "body": "You just designed your first AI automation workflow. More importantly, you learned how to think like an operator — not someone who uses AI, but someone who builds with it.\n\nTomorrow: Chain reactions. You'll connect multiple nodes into a pipeline that handles an entire business process.",
+      "body": "You just designed your first AI automation workflow. More importantly, you learned how to think like an operator \u2014 not someone who uses AI, but someone who builds with it.\n\nTomorrow: Chain reactions. You'll connect multiple nodes into a pipeline that handles an entire business process.",
       "xp": 15
     }
   ]

@@ -6,6 +6,7 @@ import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgramSlug } from "../../src/data/queries";
 import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
 export default function HomeScreen() {
   const { user } = useAuth();
@@ -15,6 +16,13 @@ export default function HomeScreen() {
   const { data: program } = useProgram(programSlug);
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+
+  // Merge Supabase progress with local progress (either can work)
+  const allCompletedIds = new Set([
+    ...(completedUnitIds ?? new Set<string>()),
+    ...localCompletedIds,
+  ]);
 
   // Fall back to local units when Supabase RLS isn't configured for anon reads
   const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"];
@@ -68,7 +76,7 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Your Journey</Text>
 
           {displayUnits.length > 0 ? (
-            <WeeksView units={displayUnits as any} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
+            <WeeksView units={displayUnits as any} completedUnitIds={allCompletedIds} onDayPress={handleDayPress} />
           ) : (
             <Text style={styles.emptyText}>Loading program...</Text>
           )}

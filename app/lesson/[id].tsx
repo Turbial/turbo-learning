@@ -13,6 +13,7 @@ import type { Lesson, Step } from "../../src/engine/types";
 import { colors } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
 // Local fallbacks when Supabase isn't available or lesson not found there
 import aiDay1 from "../../src/content/ai_operator/day1.json";
@@ -48,6 +49,7 @@ for (const [key, json] of Object.entries(DAY_CONTENT)) {
 export default function LessonScreen() {
   const { id, program, day } = useLocalSearchParams<{ id: string; program?: string; day?: string }>();
   const { user } = useAuth();
+  const markLocalCompleted = useLocalProgressStore((s) => s.markCompleted);
 
   // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
   const supabaseQuery = useLessonByUnit(id);
@@ -73,6 +75,10 @@ export default function LessonScreen() {
           },
         );
       }
+
+      // Always mark as completed locally (even when Supabase is unreachable)
+      // This enables day-to-day progression even without DB access
+      markLocalCompleted(id);
 
       router.replace({
         pathname: "/complete/[unitId]",
