@@ -152,6 +152,12 @@ export type CompletionStep = StepBase & {
   body: string;
 };
 
+export type PromptGeneratorStep = StepBase & {
+  type: "prompt_generator";
+  categories: string[];
+  promptTemplate: string;
+};
+
 // ─── Discriminated union ───
 
 export type Step =
@@ -173,7 +179,8 @@ export type Step =
   | StreakCommitStep
   | ReminderStep
   | ChatStep
-  | CompletionStep;
+  | CompletionStep
+  | PromptGeneratorStep;
 
 // ─── Content types ───
 

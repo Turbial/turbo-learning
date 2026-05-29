@@ -48,6 +48,7 @@ import EngineBadgeUnlockStep from "./components/steps/BadgeUnlockStep";
 import EngineStreakCommitStep from "./components/steps/StreakCommitStep";
 import EngineCompletionStep from "./components/steps/CompletionStep";
 import ChatStep from "./components/steps/ChatStep";
+import PromptGeneratorStep from "./components/steps/PromptGeneratorStep";
 
 // ─── Scoring helpers ───
 
@@ -246,6 +247,11 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   },
   chat: {
     component: ChatStep as React.ComponentType<StepProps<any>>,
+    score: defRescore,
+    behavior: { requiresInteraction: true },
+  },
+  prompt_generator: {
+    component: PromptGeneratorStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
