@@ -9,3 +9,4 @@ export type { MachineAction } from "./lessonMachine";
 export * from "./scoring";
 export * from "./types";
 export { createNarration } from "./narration/useNarration";
+export * from "./feedback/haptics";

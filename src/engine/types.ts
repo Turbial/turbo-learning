@@ -145,6 +145,42 @@ export type CompletionStep = StepBase & {
   body: string;
 };
 
+// ─── BeforeAfter ───
+
+export type BeforeAfterStep = StepBase & {
+  type: "before_after";
+  title?: string;
+  beforePrompt: string;
+  afterPrompt: string;
+  lesson: string;
+};
+
+// ─── ToolGrid ───
+
+export type ToolCardData = {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  color: string;
+};
+
+export type ToolGridStep = StepBase & {
+  type: "tool_grid";
+  question: string;
+  tools: ToolCardData[];
+  minSelect: number;
+  maxSelect: number;
+};
+
+// ─── Confidence ───
+
+export type ConfidenceRatingStep = StepBase & {
+  type: "confidence_rating";
+  question: string;
+  levels: { key: string; label: string; emoji: string }[];
+};
+
 // ─── Discriminated union ───
 
 export type Step =
@@ -165,7 +201,10 @@ export type Step =
   | BadgeUnlockStep
   | StreakCommitStep
   | ReminderStep
-  | CompletionStep;
+  | CompletionStep
+  | ConfidenceRatingStep
+  | BeforeAfterStep
+  | ToolGridStep;
 
 // ─── Content types ───
 

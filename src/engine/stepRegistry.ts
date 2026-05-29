@@ -47,6 +47,9 @@ import EngineReflectionStep from "./components/steps/ReflectionStep";
 import EngineBadgeUnlockStep from "./components/steps/BadgeUnlockStep";
 import EngineStreakCommitStep from "./components/steps/StreakCommitStep";
 import EngineCompletionStep from "./components/steps/CompletionStep";
+import ConfidenceRating from "./components/steps/ConfidenceRating";
+import BeforeAfterStepComp from "./components/steps/BeforeAfterStep";
+import ToolGridStepComp from "./components/steps/ToolGridStep";
 
 // ─── Scoring helpers ───
 
@@ -238,6 +241,20 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   reminder_setup: {
     component: FallbackStep as React.ComponentType<StepProps<any>>, // Deferred — requires native push permissions
     behavior: { requiresInteraction: true },
+  },
+  before_after: {
+    component: BeforeAfterStepComp as React.ComponentType<StepProps<any>>,
+    behavior: { requiresInteraction: false },
+  },
+  tool_grid: {
+    component: ToolGridStepComp as React.ComponentType<StepProps<any>>,
+    score: defRescore,
+    behavior: { requiresInteraction: true },
+  },
+  confidence_rating: {
+    component: ConfidenceRating as React.ComponentType<StepProps<any>>,
+    score: defRescore,
+    behavior: { requiresInteraction: true, autoAdvanceMs: 1200 },
   },
   completion: {
     component: EngineCompletionStep as React.ComponentType<StepProps<any>>,
