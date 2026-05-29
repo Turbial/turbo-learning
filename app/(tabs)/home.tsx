@@ -2,9 +2,10 @@
 
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
-import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
+import { colors, spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgramSlug } from "../../src/data/queries";
+import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
 import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
@@ -17,6 +18,7 @@ export default function HomeScreen() {
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
   const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+  const { data: streakRisk } = useStreakAtRisk(user?.id);
 
   // Merge Supabase progress with local progress (either can work)
   const allCompletedIds = new Set([
@@ -70,6 +72,45 @@ export default function HomeScreen() {
             </View>
           </View>
         </View>
+
+        {/* Streak at-risk warning */}
+        {streakRisk?.isAtRisk && (
+          <View
+            style={{
+              backgroundColor: colors.warningBg,
+              borderRadius: radius.lg,
+              padding: spacing.md,
+              margin: spacing.md,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: spacing.sm,
+              borderWidth: 1,
+              borderColor: colors.warningBorder,
+            }}
+          >
+            <Text style={{ fontSize: 24 }}>⚠️</Text>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  fontSize: fontSize.sm,
+                  fontWeight: fontWeight.bold,
+                  color: "#92400e",
+                }}
+              >
+                Your {streakRisk.streakDays}-day streak is at risk!
+              </Text>
+              <Text
+                style={{ fontSize: fontSize.xs, color: "#a16207", marginTop: 2 }}
+              >
+                Complete a lesson in the next {streakRisk.expiresInHours}h to keep
+                it going.
+                {streakRisk.shieldCount > 0
+                  ? ` ${streakRisk.shieldCount} shield${streakRisk.shieldCount !== 1 ? "s" : ""} ready.`
+                  : ""}
+              </Text>
+            </View>
+          </View>
+        )}
 
         {/* Journey Map */}
         <View style={styles.journey}>
