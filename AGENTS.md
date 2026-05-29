@@ -5,7 +5,7 @@
 - **Name:** Turbo Learning — Unified Guided Experience Platform
 - **Repo:** `Turbial/turbo-learning`
 - **Stack:** Expo (React Native) + Supabase + TypeScript
-- **Owner:** Turbile CEO (Builder)
+- **Owner:** Turbo CEO
 - **Phase:** M0–M1 complete; M2 step renderer complete; M3 gamification in progress
 
 ## Architecture (Non-Negotiables)
