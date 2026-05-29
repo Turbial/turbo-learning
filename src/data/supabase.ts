@@ -27,3 +27,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 
 // Re-export for convenience
 export type { Session, User } from "@supabase/supabase-js";
+
+// Stripe publishable key — safe for client-side
+export const STRIPE_PUBLISHABLE_KEY =
+  process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY ??
+  "pk_live_51PoJ6MKz6MSMiK7wYjNTYkcLxHkNdqUFNbj9jGJh0SbiSQY0aO4JAd2KfP0E7mJJ2eMIrI8QLJU2q3bTL5ApkUL5";
