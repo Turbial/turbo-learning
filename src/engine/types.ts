@@ -152,10 +152,26 @@ export type CompletionStep = StepBase & {
   body: string;
 };
 
+export type PromptGeneratorField = {
+  id: string;
+  label: string;
+  placeholder?: string;
+};
+
 export type PromptGeneratorStep = StepBase & {
   type: "prompt_generator";
-  categories: string[];
-  promptTemplate: string;
+  topic?: string;
+  template: string;
+  fields?: PromptGeneratorField[];
+  title?: string;
+  subtitle?: string;
+};
+
+export type ChatStep = StepBase & {
+  type: "chat";
+  greeting: string;
+  placeholder: string;
+  systemPrompt: string;
 };
 
 // ─── Discriminated union ───
@@ -178,9 +194,9 @@ export type Step =
   | BadgeUnlockStep
   | StreakCommitStep
   | ReminderStep
-  | ChatStep
   | CompletionStep
-  | PromptGeneratorStep;
+  | PromptGeneratorStep
+  | ChatStep;
 
 // ─── Content types ───
 
@@ -258,6 +274,7 @@ export type SessionState = {
 export type NarrationController = {
   play: () => void;
   pause: () => void;
+  resume: () => void;
   stop: () => void;
   isPlaying: boolean;
   speed: number;
