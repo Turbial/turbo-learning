@@ -22,9 +22,8 @@ export default function CompleteScreen() {
         {/* Celebration */}
         <Text style={styles.emoji}>🎉</Text>
         <Text style={styles.title}>Day Complete!</Text>
-        <Text style={styles.subtitle}>
-          {scoreNum >= 80 ? "Great work! You're off to an amazing start." : "Nice job! Every day builds momentum."}
-        </Text>
+        <Text style={styles.dayLabel}>You finished another day of the program</Text>
+        
 
         {/* XP / Score */}
         <View style={styles.statsRow}>
@@ -103,6 +102,12 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     textAlign: "center",
     lineHeight: 24,
+    marginBottom: spacing.xl,
+  },
+  dayLabel: {
+    fontSize: fontSize.sm,
+    color: colors.textMuted,
+    textAlign: "center",
     marginBottom: spacing.xl,
   },
   statsRow: {
