@@ -36,7 +36,7 @@ npx expo build:web       # production web build
 | M0: Architecture + schema | ✅ Architecture doc approved; schema pending review |
 | M1: App shell + routing | ✅ Built — needs smoke test |
 | M2: Step renderer + 12 core types | ✅ All 12 M2 components built |
-| M3: Gamification (XP/streak/badges) | 🔜 |
+| M3: Gamification (XP/streak/badges/leaderboard) | ✅ Built — XP bursts, completion celebration, level-up modal, badge reveal, leaderboard tab, streak-at-risk warnings, shield UI, profile badges |
 | M4: Full step catalog + polish | 🔜 |
 | M5: Audio V1 | 🔜 |
 | M6: Retention (push/offline) | 🔜 |
@@ -44,9 +44,11 @@ npx expo build:web       # production web build
 
 ## Step Types — Implementation Status
 
-**Built (12):** info, scenario_card, example, mc, tf, highlight, good_fit, builder, copy_action, paste_capture, reflection, completion
+**Built (13):** info, scenario_card, example, mc, tf, highlight, good_fit, builder, copy_action, paste_capture, reflection, completion, prompt_generator
 
-**M4 (6):** fillblank, match, quiz, compare, badge_unlock, streak_commitment, reminder_setup — currently render FallbackStep
+**M3 Gamification components built:** badge_unlock (BadgeUnlockStep), streak_commitment (StreakCommitStep)
+
+**Deferred (native-only):** reminder_setup — requires push notification permissions; uses FallbackStep until M6
 
 ## Key Files
 
