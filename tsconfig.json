@@ -4,6 +4,8 @@
     "strict": true
   },
   "exclude": [
-    "supabase/edge-functions"
+    "supabase/edge-functions",
+    "supabase/functions",
+    "supabase"
   ]
 }

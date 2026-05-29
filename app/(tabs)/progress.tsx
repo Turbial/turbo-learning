@@ -1,6 +1,7 @@
 // ─── Progress — XP, streaks, badges (real data from Supabase) ───
 
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, ActivityIndicator, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useBadges, useProgress } from "../../src/data/queries";
@@ -8,6 +9,7 @@ import { xpToNextLevel } from "../../src/engine/scoring";
 
 export default function ProgressScreen() {
   const { user } = useAuth();
+  const router = useRouter();
   const { data: profile, isLoading: profileLoading } = useProfile();
   const { data: badges } = useBadges(user?.id);
   const { data: progress } = useProgress(user?.id);
@@ -88,6 +90,15 @@ export default function ProgressScreen() {
             </View>
           )}
         </View>
+
+        {/* Leaderboard link */}
+        <TouchableOpacity
+          style={styles.leaderboardLink}
+          onPress={() => router.push("/(tabs)/leaderboard")}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.leaderboardLinkText}>🏆 View Leaderboard</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -199,5 +210,19 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     textAlign: "center",
     lineHeight: 20,
+  },
+  leaderboardLink: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    padding: spacing.md + 4,
+    borderWidth: 1,
+    borderColor: colors.surfaceBorder,
+    alignItems: "center",
+    marginTop: spacing.sm,
+  },
+  leaderboardLinkText: {
+    fontSize: fontSize.md,
+    fontWeight: "700",
+    color: colors.primary,
   },
 });

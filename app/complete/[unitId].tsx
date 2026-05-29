@@ -1,44 +1,108 @@
-// ─── Unit Complete Screen — XP tally, streak fire, continue ───
+// ─── Unit Complete Screen — XP tally, streak fire, level-up celebration, badge reveal ───
 
+import { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
-import { useProfile } from "../../src/data/queries";
+import { useProfile, useBadges } from "../../src/data/queries";
+import { CompletionCelebration } from "../../src/components/feedback/CompletionCelebration";
+import { LevelUpModal } from "../../src/components/feedback/LevelUpModal";
+import { BadgeReveal } from "../../src/components/feedback/BadgeReveal";
+import { xpToLevel } from "../../src/engine/scoring";
+
+const BADGE_INFO: Record<string, { name: string; icon: string }> = {
+  first_day: { name: "First Steps", icon: "👣" },
+  week_streak: { name: "7-Day Streak", icon: "🔥" },
+  two_week_streak: { name: "14-Day Streak", icon: "💪" },
+  month_streak: { name: "30-Day Streak", icon: "👑" },
+};
 
 export default function CompleteScreen() {
-  const { xp, score } = useLocalSearchParams<{
+  const { xp, score, totalXp, newLevel, streak: streakParam } = useLocalSearchParams<{
     xp: string;
     score: string;
+    totalXp?: string;
+    newLevel?: string;
+    streak?: string;
   }>();
   const { data: profile, isLoading } = useProfile();
+  const { data: badges } = useBadges(profile?.id);
 
   const xpNum = parseInt(xp ?? "0", 10);
   const scoreNum = parseInt(score ?? "100", 10);
-  const streakDays = profile?.streak ?? 1;
+  const streakDays = profile?.streak ?? parseInt(streakParam ?? "1", 10);
+
+  // Level-up detection: compare previous level from profile (before update) vs new
+  const prevLevel = profile ? xpToLevel((profile.xp ?? 0) - xpNum) : parseInt(newLevel ?? "1", 10) - 1;
+  const currentLevel = parseInt(newLevel ?? String(profile?.level ?? 1), 10);
+  const didLevelUp = currentLevel > prevLevel;
+
+  // Badge reveal: show the most recent badge that hasn't been seen
+  const [showLevelUp, setShowLevelUp] = useState(false);
+  const [badgeQueue, setBadgeQueue] = useState<Array<{ slug: string; name: string; icon: string }>>([]);
+  const [activeBadge, setActiveBadge] = useState<{ slug: string; name: string; icon: string } | null>(null);
+  const [seenSlugs, setSeenSlugs] = useState<Set<string>>(new Set());
+
+  // Detect new badges when badge data loads
+  useEffect(() => {
+    if (!badges || badges.length === 0) return;
+    const newBadges: Array<{ slug: string; name: string; icon: string }> = [];
+    for (const b of badges) {
+      const badgeRow = b as any;
+      const slug = badgeRow.badges?.slug;
+      if (slug && BADGE_INFO[slug] && !seenSlugs.has(slug)) {
+        newBadges.push({ slug, ...BADGE_INFO[slug] });
+      }
+    }
+    if (newBadges.length > 0) {
+      setBadgeQueue((prev) => [...prev, ...newBadges]);
+    }
+  }, [badges, seenSlugs]);
+
+  // Trigger level-up modal after a short delay
+  useEffect(() => {
+    if (didLevelUp) {
+      const timer = setTimeout(() => setShowLevelUp(true), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [didLevelUp]);
+
+  // Show first badge in queue
+  useEffect(() => {
+    if (badgeQueue.length > 0 && !activeBadge) {
+      const timer = setTimeout(() => {
+        setActiveBadge(badgeQueue[0]);
+      }, didLevelUp ? 2000 : 800);
+      return () => clearTimeout(timer);
+    }
+  }, [badgeQueue, activeBadge, didLevelUp]);
+
+  const handleLevelUpClose = useCallback(() => {
+    setShowLevelUp(false);
+  }, []);
+
+  const handleBadgeClose = useCallback(() => {
+    if (activeBadge) {
+      setSeenSlugs((prev) => new Set(prev).add(activeBadge.slug));
+    }
+    setActiveBadge(null);
+    setBadgeQueue((prev) => prev.slice(1));
+  }, [activeBadge]);
+
+  const levelNames = ["Beginner", "Learner", "Builder", "Operator", "Master"];
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
-        {/* Celebration */}
-        <Text style={styles.emoji}>🎉</Text>
-        <Text style={styles.title}>Day Complete!</Text>
-        <Text style={styles.dayLabel}>You finished another day of the program</Text>
-        
+        {/* Animated XP counter + streak */}
+        <CompletionCelebration xpEarned={xpNum} streak={streakDays} />
 
-        {/* XP / Score */}
-        <View style={styles.statsRow}>
-          <View style={styles.stat}>
-            <Text style={styles.statValue}>+{xpNum}</Text>
-            <Text style={styles.statLabel}>XP Earned</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.stat}>
-            <Text style={styles.statValue}>{scoreNum}%</Text>
-            <Text style={styles.statLabel}>Score</Text>
-          </View>
+        {/* Score ring */}
+        <View style={styles.scorePill}>
+          <Text style={styles.scoreText}>{scoreNum}% Score</Text>
         </View>
 
-        {/* Streak — shows real value from Supabase */}
+        {/* Streak card with dynamic message */}
         <View style={styles.streakCard}>
           <Text style={styles.streakEmoji}>🔥</Text>
           <View>
@@ -61,6 +125,14 @@ export default function CompleteScreen() {
           </View>
         </View>
 
+        {/* Total XP from DB */}
+        {totalXp && (
+          <Text style={styles.totalXpText}>
+            {parseInt(totalXp, 10).toLocaleString()} total XP
+            {currentLevel > 1 ? ` · Level ${currentLevel} ${levelNames[Math.min(currentLevel - 1, 4)] ?? "Master"}` : ""}
+          </Text>
+        )}
+
         {/* Actions */}
         <TouchableOpacity
           style={styles.btnPrimary}
@@ -78,6 +150,24 @@ export default function CompleteScreen() {
           <Text style={styles.btnSecondaryText}>View Progress</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Level-up modal */}
+      <LevelUpModal
+        visible={showLevelUp}
+        level={currentLevel}
+        levelName={levelNames[Math.min(currentLevel - 1, 4)] ?? `Master +${currentLevel - 5}`}
+        onClose={handleLevelUpClose}
+      />
+
+      {/* Badge reveal — shows one at a time from queue */}
+      {activeBadge && (
+        <BadgeReveal
+          visible={!!activeBadge}
+          name={activeBadge.name}
+          icon={activeBadge.icon}
+          onClose={handleBadgeClose}
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -90,41 +180,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: spacing.lg,
   },
-  emoji: { fontSize: 72, marginBottom: spacing.md },
-  title: {
-    fontSize: fontSize.xxl,
-    fontWeight: "800",
-    color: colors.textPrimary,
-    marginBottom: spacing.sm,
-  },
-  subtitle: {
-    fontSize: fontSize.md,
-    color: colors.textSecondary,
-    textAlign: "center",
-    lineHeight: 24,
-    marginBottom: spacing.xl,
-  },
-  dayLabel: {
-    fontSize: fontSize.sm,
-    color: colors.textMuted,
-    textAlign: "center",
-    marginBottom: spacing.xl,
-  },
-  statsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.xl,
+  scorePill: {
     backgroundColor: colors.surface,
-    borderRadius: radius.lg,
-    padding: spacing.lg,
+    borderRadius: radius.full,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
     borderWidth: 1,
     borderColor: colors.surfaceBorder,
     marginBottom: spacing.md,
   },
-  stat: { alignItems: "center" },
-  statValue: { fontSize: fontSize.xxl, fontWeight: "800", color: colors.primary },
-  statLabel: { fontSize: fontSize.xs, color: colors.textMuted, marginTop: 4 },
-  statDivider: { width: 1, height: 40, backgroundColor: colors.surfaceBorder },
+  scoreText: { fontSize: fontSize.md, fontWeight: "700", color: colors.primary },
   streakCard: {
     flexDirection: "row",
     alignItems: "center",
@@ -134,13 +199,19 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     borderWidth: 1,
     borderColor: colors.warningBorder,
-    marginBottom: spacing.xl,
+    marginBottom: spacing.md,
     width: "100%",
     maxWidth: 320,
   },
   streakEmoji: { fontSize: 32 },
   streakLabel: { fontSize: fontSize.md, fontWeight: "700", color: "#92400e" },
   streakHint: { fontSize: fontSize.xs, color: "#a16207", marginTop: 2 },
+  totalXpText: {
+    fontSize: fontSize.sm,
+    color: colors.textMuted,
+    fontWeight: "600",
+    marginBottom: spacing.xl,
+  },
   btnPrimary: {
     backgroundColor: colors.primary,
     paddingVertical: 16,

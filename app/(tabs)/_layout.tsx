@@ -35,6 +35,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📊</Text>,
         }}
       />
+      <Tabs.Screen
+        name="leaderboard"
+        options={{
+          tabBarLabel: "Ranks",
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🏆</Text>,
+        }}
+      />
     </Tabs>
   );
 }

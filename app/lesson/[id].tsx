@@ -65,31 +65,50 @@ export default function LessonScreen() {
     (sessionXp: number, score: number) => {
       const dbLessonId = supabaseQuery.data?.id;
       if (user && dbLessonId) {
-        // Persist to Supabase — fire-and-forget; navigation is instant
         completeMutation.mutate(
           { lessonId: dbLessonId, xpEarned: sessionXp, score },
           {
+            onSuccess: (result: any) => {
+              markLocalCompleted(id);
+              router.replace({
+                pathname: "/complete/[unitId]",
+                params: {
+                  unitId: lesson?.unitId ?? "day1",
+                  xp: sessionXp,
+                  score: Math.round(score * 100),
+                  totalXp: String(result?.total_xp ?? 0),
+                  newLevel: String(result?.new_level ?? 1),
+                  streak: String(result?.streak ?? 1),
+                },
+              });
+            },
             onError: (err) => {
               console.warn("complete_lesson RPC failed:", err);
+              markLocalCompleted(id);
+              router.replace({
+                pathname: "/complete/[unitId]",
+                params: {
+                  unitId: lesson?.unitId ?? "day1",
+                  xp: sessionXp,
+                  score: Math.round(score * 100),
+                },
+              });
             },
           },
         );
+      } else {
+        markLocalCompleted(id);
+        router.replace({
+          pathname: "/complete/[unitId]",
+          params: {
+            unitId: lesson?.unitId ?? "day1",
+            xp: sessionXp,
+            score: Math.round(score * 100),
+          },
+        });
       }
-
-      // Always mark as completed locally (even when Supabase is unreachable)
-      // This enables day-to-day progression even without DB access
-      markLocalCompleted(id);
-
-      router.replace({
-        pathname: "/complete/[unitId]",
-        params: {
-          unitId: lesson?.unitId ?? "day1",
-          xp: sessionXp,
-          score: Math.round(score * 100),
-        },
-      });
     },
-    [user, supabaseQuery.data, lesson, completeMutation],
+    [user, supabaseQuery.data, lesson, completeMutation, id, markLocalCompleted],
   );
 
   if (isLoading) {

@@ -2,13 +2,14 @@
 // Drives progression, accumulates XP, persists state.
 // Product-agnostic. Content controls the rhythm; the engine just plays it.
 
-import React, { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
 import { createNarration } from "./narration/useNarration";
 import { applyCombo, getComboLabel, getComboMultiplier } from "./scoring";
+import { XpBurst } from "../components/feedback/XpBurst";
 
 // ─── Props ───
 
@@ -53,6 +54,20 @@ export default function LessonPlayer({
 
   // Guard against double-firing onComplete
   const completedRef = useRef(false);
+
+  // XP burst animation state
+  const [xpBursts, setXpBursts] = useState<{ id: number; xp: number }[]>([]);
+  const xpBurstIdRef = useRef(0);
+
+  const spawnXpBurst = useCallback((xp: number) => {
+    if (xp <= 0) return;
+    const id = xpBurstIdRef.current++;
+    setXpBursts((prev) => [...prev, { id, xp }]);
+  }, []);
+
+  const removeXpBurst = useCallback((id: number) => {
+    setXpBursts((prev) => prev.filter((b) => b.id !== id));
+  }, []);
 
   // Current step and handler
   const step: Step | undefined = steps[stepIndex];
@@ -123,6 +138,11 @@ export default function LessonPlayer({
       const xp = applyCombo(baseXp, newComboStreak);
 
       dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct, comboStreak: newComboStreak });
+
+      // Spawn XP burst animation when user earns XP
+      if (xp > 0) {
+        spawnXpBurst(xp);
+      }
 
       // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
       if (handler.behavior.autoAdvanceMs) {
@@ -205,6 +225,15 @@ export default function LessonPlayer({
             />
           </StepErrorBoundary>
         )}
+      </View>
+
+      {/* XP burst overlay */}
+      <View style={styles.xpBurstLayer} pointerEvents="none">
+        {xpBursts.map((burst) => (
+          <View key={burst.id} style={styles.xpBurstItem}>
+            <XpBurst xp={burst.xp} onDone={() => removeXpBurst(burst.id)} />
+          </View>
+        ))}
       </View>
 
       {/* Navigation */}
@@ -311,6 +340,17 @@ const styles = StyleSheet.create({
     borderRadius: 14,
   },
   errorSkipText: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  xpBurstLayer: {
+    position: "absolute",
+    top: 60,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    zIndex: 20,
+  },
+  xpBurstItem: {
+    position: "absolute",
+  },
 });
 
 // ─── StepErrorBoundary — catches render errors in individual steps ───
