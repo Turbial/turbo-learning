@@ -3,7 +3,7 @@
 ## Project Identity
 - **Name:** Turbo Learning — Unified Guided Experience Platform
 - **Stack:** Expo (React Native) + Supabase + TypeScript
-- **Owner:** Turbile CEO (Builder)
+- **Owner:** Turbo CEO
 - **Repo:** github.com/Turbial/turbo-learning
 
 ## Architecture
