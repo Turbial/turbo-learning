@@ -140,13 +140,13 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     component: McStep as React.ComponentType<StepProps<any>>,
     validate: mcCorrect,
     score: mcRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
+    behavior: { requiresInteraction: true },
   },
   scenario: {
     component: McStep as React.ComponentType<StepProps<any>>,
     validate: mcCorrect,
     score: mcRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
+    behavior: { requiresInteraction: true },
   },
   tf: {
     component: EngineTrueFalseStep as React.ComponentType<StepProps<any>>,
@@ -174,7 +174,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     component: GoodFitStep as React.ComponentType<StepProps<any>>,
     validate: goodFitCorrect,
     score: goodFitRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 2000 },
+    behavior: { requiresInteraction: true },
   },
   quiz: {
     component: QuizStepComp as React.ComponentType<StepProps<any>>,
