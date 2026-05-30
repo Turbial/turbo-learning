@@ -76,6 +76,14 @@ export function useAuth(): AuthState {
       });
       if (error) return { error: error.message };
 
+      // Detect duplicate signup: Supabase returns a fake/obfuscated user with
+      // empty identities when the email is already registered (to prevent email
+      // enumeration). Show a clear message instead of the misleading
+      // "check your email" screen.
+      if (data.user && data.user.identities && data.user.identities.length === 0) {
+        return { error: "An account with this email already exists. Sign in instead." };
+      }
+
       // Create profile row so complete_lesson RPC works
       if (data.user) {
         const { error: profileErr } = await supabase.from("profiles").upsert({
