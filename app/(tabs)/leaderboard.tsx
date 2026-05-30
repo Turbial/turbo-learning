@@ -65,8 +65,9 @@ export default function LeaderboardScreen() {
       {/* Error */}
       {isError && (
         <View style={styles.center}>
-          <Text style={styles.emptyText}>Couldn't load leaderboard.</Text>
-          <Text style={styles.emptyHint}>Pull to retry or check your connection.</Text>
+          <Text style={styles.emptyEmoji}>⚠️</Text>
+          <Text style={styles.emptyTitle}>Couldn't load leaderboard</Text>
+          <Text style={styles.emptyHint}>Check your connection and try again later.</Text>
         </View>
       )}
 
