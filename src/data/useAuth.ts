@@ -1,8 +1,18 @@
 // ─── Auth hook — email/password sign-in + session management ───
 
 import { useEffect, useState, useCallback } from "react";
+import { Platform } from "react-native";
 import { supabase } from "./supabase";
 import type { Session, User } from "@supabase/supabase-js";
+
+// Resolve the app origin for email redirect links (verification, reset, etc.)
+function getAppOrigin(): string {
+  if (Platform.OS === "web" && typeof window !== "undefined") {
+    return window.location.origin;
+  }
+  // Native mobile — use the scheme defined in app.json
+  return "turbo-learning://";
+}
 
 export interface AuthState {
   session: Session | null;
@@ -53,10 +63,16 @@ export function useAuth(): AuthState {
 
   const signUpWithEmail = useCallback(
     async (email: string, password: string, name: string) => {
+      // Resolve app origin at call time so the redirect works from any
+      // deployment (dev, staging, production) without the stale SITE_URL.
+      const emailRedirectTo = getAppOrigin();
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: { data: { name } },
+        options: {
+          data: { name },
+          emailRedirectTo,
+        },
       });
       if (error) return { error: error.message };
 

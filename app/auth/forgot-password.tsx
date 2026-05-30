@@ -29,7 +29,13 @@ export default function ForgotPassword() {
     }
 
     setBusy(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email.trim());
+    // Point reset link back to our app (same origin the user is on)
+    const redirectTo = typeof window !== "undefined"
+      ? `${window.location.origin}/auth/login`
+      : "turbo-learning://auth/login";
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo,
+    });
     setBusy(false);
 
     if (error) {
