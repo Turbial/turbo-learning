@@ -68,6 +68,7 @@ export default function Register() {
         style={{
           flex: 1,
           justifyContent: 'center',
+          alignItems: 'center',
           padding: spacing.xl,
           gap: spacing.md,
           backgroundColor: colors.background,
@@ -78,6 +79,7 @@ export default function Register() {
             color: colors.text,
             fontSize: fontSize.title,
             fontWeight: fontWeight.bold,
+            textAlign: 'center',
           }}
         >
           Check your email
@@ -87,6 +89,7 @@ export default function Register() {
             color: colors.textMuted,
             fontSize: fontSize.bodyLg,
             lineHeight: 22,
+            textAlign: 'center',
           }}
         >
           We sent a confirmation link to {email}. Click the link to verify your
@@ -111,6 +114,7 @@ export default function Register() {
         style={{
           flex: 1,
           justifyContent: 'center',
+          alignItems: 'center',
           padding: spacing.xl,
           gap: spacing.md,
         }}
@@ -120,6 +124,7 @@ export default function Register() {
             color: colors.text,
             fontSize: fontSize.display,
             fontWeight: fontWeight.bold,
+            textAlign: 'center',
           }}
         >
           Create your account

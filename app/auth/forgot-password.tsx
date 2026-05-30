@@ -44,6 +44,7 @@ export default function ForgotPassword() {
       style={{
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
         padding: spacing.xl,
         gap: spacing.md,
         backgroundColor: colors.background,
@@ -54,6 +55,7 @@ export default function ForgotPassword() {
           color: colors.text,
           fontSize: fontSize.title,
           fontWeight: fontWeight.bold,
+          textAlign: 'center',
         }}
       >
         Reset your password
