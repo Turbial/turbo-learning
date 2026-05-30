@@ -176,10 +176,14 @@ export default function LessonPlayer({
   const handleAnswer = useCallback(
     (res: StepResponse) => {
       if (!step || !handler) return;
+
+      // Don't reward XP for re-answering the same step
+      const alreadyAnswered = responses[step.id] !== undefined;
+
       const correct = handler.validate?.(step, res);
 
-      // Calculate base XP
-      const baseXp = handler.score?.(step, res) ?? step.xp ?? 10;
+      // Calculate base XP (only for first answer)
+      const baseXp = alreadyAnswered ? 0 : (handler.score?.(step, res) ?? step.xp ?? 10);
 
       // Compute combo streak: increment on correct, reset on wrong
       const newComboStreak = correct ? comboStreak + 1 : 0;
@@ -189,7 +193,7 @@ export default function LessonPlayer({
 
       dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct, comboStreak: newComboStreak });
 
-      // Spawn XP burst animation when user earns XP
+      // Spawn XP burst animation when user earns XP (only on first answer)
       if (xp > 0) {
         spawnXpBurst(xp);
         // Persist XP incrementally so Journey/Progress/Dashboard reflect it immediately
@@ -203,7 +207,7 @@ export default function LessonPlayer({
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler, comboStreak, addXp],
+    [step, handler, comboStreak, addXp, responses],
   );
 
   const handleBack = useCallback(() => {
