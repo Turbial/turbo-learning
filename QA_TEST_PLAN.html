@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turbo Learning — QA Test Plan</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #2D241C; line-height: 1.6; padding: 20px; max-width: 900px; margin: 0 auto; }
+  h1 { color: #059669; font-size: 2em; margin-bottom: 4px; }
+  .meta { color: #9B8E7A; font-size: 0.9em; margin-bottom: 24px; }
+  .meta a { color: #059669; }
+  h2 { color: #2D241C; font-size: 1.4em; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e8e2d9; }
+  h3 { color: #3D3228; font-size: 1.15em; margin: 20px 0 8px; }
+  p, li { color: #3D3228; }
+  ul, ol { margin-left: 20px; }
+  li { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.95em; }
+  th, td { padding: 8px 12px; text-align: left; border: 1px solid #e8e2d9; }
+  th { background: #ecfdf5; color: #059669; font-weight: 700; }
+  tr:nth-child(even) { background: #FDFBF8; }
+  .tc { background: #fff; border: 1px solid #e8e2d9; border-radius: 10px; padding: 20px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .tc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .tc-id { background: #059669; color: #fff; padding: 4px 12px; border-radius: 6px; font-weight: 700; font-size: 0.85em; }
+  .tc-priority { font-size: 0.85em; padding: 4px 10px; border-radius: 6px; font-weight: 700; }
+  .critical { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+  .high { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+  .medium { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+  .low { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+  .steps { background: #FDFBF8; border-left: 3px solid #059669; padding: 12px 16px; margin: 8px 0; border-radius: 0 6px 6px 0; }
+  .expected { background: #ecfdf5; border-left: 3px solid #059669; padding: 12px 16px; margin: 8px 0; border-radius: 0 6px 6px 0; }
+  .expected ul { list-style: none; margin-left: 0; }
+  .expected li::before { content: "☐ "; color: #059669; font-weight: bold; }
+  .prereq { color: #6B5E50; font-size: 0.85em; font-style: italic; margin-bottom: 8px; }
+  .regression { margin-top: 40px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 700; margin-right: 4px; }
+  .badge-crit { background: #fef2f2; color: #dc2626; }
+  .badge-high { background: #fffbeb; color: #d97706; }
+  .badge-med { background: #eff6ff; color: #2563eb; }
+  .badge-low { background: #f0fdf4; color: #16a34a; }
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e8e2d9; color: #9B8E7A; font-size: 0.85em; }
+  code { background: #f3f0eb; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+  .checklist { margin-top: 8px; }
+  .checklist td:first-child { font-weight: 600; }
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    .tc { padding: 14px; }
+    .tc-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🧪 Turbo Learning — QA Test Plan</h1>
+<div class="meta">
+  <strong>Product:</strong> <a href="http://178.105.166.126:3092">http://178.105.166.126:3092</a><br>
+  <strong>GitHub:</strong> <a href="https://github.com/Turbial/turbo-learning">github.com/Turbial/turbo-learning</a><br>
+  <strong>Stack:</strong> React Native Web (Expo) + Supabase + Stripe + PayPal<br>
+  <strong>Date:</strong> 2026-05-30 · <strong>16 test cases</strong>
+</div>
+
+<h2>🔧 Test Environment Setup</h2>
+<h3>Prerequisites</h3>
+<ul>
+  <li>A modern browser (Chrome/Firefox/Edge latest)</li>
+  <li>A valid email address (for registration testing)</li>
+  <li>Use <strong>incognito/private window</strong> for fresh-user tests</li>
+</ul>
+
+<h3>Test Accounts</h3>
+<table>
+  <tr><th>Account</th><th>Email</th><th>Password</th><th>Purpose</th></tr>
+  <tr><td>Fresh user</td><td>Create during test</td><td>6+ chars</td><td>Registration + onboarding + first lesson</td></tr>
+  <tr><td>Returning user</td><td>Create during test</td><td>6+ chars</td><td>Login + continuing progress</td></tr>
+  <tr><td>Premium test</td><td>TBD (contact dev)</td><td>—</td><td>Subscription feature testing</td></tr>
+</table>
+
+<!-- TC-01 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-01</span>
+    <span class="tc-priority critical">CRITICAL</span>
+  </div>
+  <h3>Landing Page + Registration</h3>
+  <div class="prereq">Prerequisites: Clear browser cookies/cache, or use incognito window.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>http://178.105.166.126:3092</code></li>
+      <li>Verify the page redirects to <code>/auth/login</code></li>
+      <li>Click "Create your account" link (or navigate to <code>/auth/register</code>)</li>
+      <li>Enter a test name (2+ characters)</li>
+      <li>Enter a unique test email (<code>qa-test-{timestamp}@example.com</code>)</li>
+      <li>Enter a password (6+ characters)</li>
+      <li>Click "Create account"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Redirects to onboarding screen (<code>/onboard</code>) immediately</li>
+      <li>Does <strong>NOT</strong> skip to home screen (Bug #1 fix verification)</li>
+      <li>If email confirmation is enabled, shows "Check your email" message</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-02 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-02</span>
+    <span class="tc-priority critical">CRITICAL</span>
+  </div>
+  <h3>Onboarding Flow</h3>
+  <div class="prereq">Prerequisites: Freshly registered account (from TC-01).</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>After registration, you land on Welcome screen ("Welcome to Turbo Academy")</li>
+      <li>Click "Get Started"</li>
+      <li>Enter a name in "What should we call you?" → Click Continue</li>
+      <li>Select a goal (tap one of 5 options)</li>
+      <li>Click Continue</li>
+      <li>Select daily minutes (5–30) AND learning time (Morning/Afternoon/Evening/Night)</li>
+      <li>Click "Start Learning"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>All 4 onboarding steps render with emoji icons</li>
+      <li>Progress dots at bottom update (4 dots, fills as you progress)</li>
+      <li>Name field requires at least 1 character</li>
+      <li>Goal selection requires a choice (button disabled until selected)</li>
+      <li>"Start Learning" redirects to the Journey tab</li>
+      <li>Journey tab shows "AI Operator" program with 28-day grid</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-03 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-03</span>
+    <span class="tc-priority critical">CRITICAL</span>
+  </div>
+  <h3>Login + Session Persistence</h3>
+  <div class="prereq">Prerequisites: Account created in TC-01.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Click the Settings tab → "Sign out"</li>
+      <li>Verify you're redirected to login page</li>
+      <li>Enter the test email + password</li>
+      <li>Click "Sign in"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Login succeeds and redirects to onboarding (first time) or home (returning)</li>
+      <li>Previously completed days show as ✅ (green/done state)</li>
+      <li>XP and streak persist from previous session</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-04 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-04</span>
+    <span class="tc-priority critical">CRITICAL</span>
+  </div>
+  <h3>Day 1 Lesson — Complete Flow</h3>
+  <div class="prereq">Prerequisites: Logged in, on Journey tab.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Tap Day 1 ("What AI Actually Is" or similar title)</li>
+      <li>Step through each step in the lesson:
+        <ul>
+          <li><strong>Info steps:</strong> Read and tap "Continue"</li>
+          <li><strong>Scenario cards:</strong> Read and tap primary button</li>
+          <li><strong>MC question:</strong> Select an answer → verify feedback → auto-advances</li>
+          <li><strong>True/False:</strong> Select True or False → verify feedback → tap Continue</li>
+          <li><strong>Good Fit:</strong> Select judgment → verify auto-advance</li>
+          <li><strong>Fill in the Blank:</strong> Type answer → verify feedback</li>
+          <li><strong>Builder:</strong> Fill all fields → click "Build It"</li>
+          <li><strong>Reflection:</strong> Write in text areas → click "Save Reflection"</li>
+          <li><strong>Completion:</strong> See XP tally</li>
+        </ul>
+      </li>
+      <li>On completion screen, verify: XP counter animates, score %, streak card</li>
+      <li>Click "Continue Journey"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>All step types render without errors</li>
+      <li>Progress bar at top fills as you advance (green bar, 4px tall)</li>
+      <li>← Back button works after step 2</li>
+      <li>"Continue →" appears after answering interactive steps</li>
+      <li>No "Cannot read properties of undefined" errors</li>
+      <li>Completion screen shows XP earned, score, streak</li>
+      <li>Badge unlock dialog appears for "First Steps" badge</li>
+      <li>Redirected to Journey tab</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-05 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-05</span>
+    <span class="tc-priority high">HIGH</span>
+  </div>
+  <h3>Progress Tab Verification</h3>
+  <div class="prereq">Prerequisites: Completed Day 1 (TC-04).</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Tap the "Progress" tab (📊)</li>
+      <li>Verify displayed stats</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Shows Level (should be Level 1 if Day 1 completed)</li>
+      <li>Shows XP total (~71 XP from Day 1)</li>
+      <li>Shows streak count (fire emoji)</li>
+      <li>Shows badges earned ("First Steps" badge visible)</li>
+      <li>Shield count displayed</li>
+      <li>"Get Shield" button present</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-06 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-06</span>
+    <span class="tc-priority high">HIGH</span>
+  </div>
+  <h3>Leaderboard</h3>
+  <div class="prereq">Prerequisites: Logged in with progress.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Tap the "Ranks" tab (🏆)</li>
+      <li>Scroll through the leaderboard</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Leaderboard renders without errors</li>
+      <li>Test user appears in the list</li>
+      <li>XP values displayed correctly</li>
+      <li>Levels displayed</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-07 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-07</span>
+    <span class="tc-priority high">HIGH</span>
+  </div>
+  <h3>Dashboard Tab</h3>
+  <div class="prereq">Prerequisites: Logged in with progress.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Tap the "Dashboard" tab (📋)</li>
+      <li>Verify all widgets render</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Level + XP header card visible</li>
+      <li>Streak fire icon visible</li>
+      <li>"Start today's lesson" button (shows correct current day)</li>
+      <li>28-day grid renders (28 squares)</li>
+      <li>Completed days highlighted in green</li>
+      <li>Current day highlighted with border</li>
+      <li>Progress ring circle shows completion percentage</li>
+      <li>Day streak count displayed</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-08 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-08</span>
+    <span class="tc-priority critical">CRITICAL</span>
+  </div>
+  <h3>Week Locking (Bug #2 Regression)</h3>
+  <div class="prereq">Prerequisites: Completed Day 1 only.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>On Journey tab, scroll to Week 1</li>
+      <li>Verify: Day 1 = done (✅), Day 2 = current (▶), Days 3–7 = locked (🔒)</li>
+      <li>Scroll to Week 2</li>
+      <li>Verify: Day 8 is locked (🔒), <strong>not</strong> "current"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Day 2 shows as "current" after Day 1 done</li>
+      <li>Days 8, 15, 22 show as locked until previous week's last day is completed</li>
+      <li>Locked days are not tappable</li>
+      <li>Week headers display correctly (Foundation, Automation, Systems, Launch)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-09 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-09</span>
+    <span class="tc-priority high">HIGH</span>
+  </div>
+  <h3>Pricing Page + Plan Display</h3>
+  <div class="prereq">Prerequisites: Logged in.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>/pricing</code></li>
+      <li>Verify both plans display</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Free plan card visible: "Free", with features list</li>
+      <li>Pro plan card visible: "Pro", "$9.99/mo", with features list</li>
+      <li>Free plan shows "Get started" button</li>
+      <li>Pro plan shows "Upgrade" button</li>
+      <li>No loading errors or blank cards</li>
+      <li>Plan data loaded from Supabase (not hardcoded)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-10 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-10</span>
+    <span class="tc-priority high">HIGH</span>
+  </div>
+  <h3>Checkout Flow (Stripe + PayPal)</h3>
+  <div class="prereq">Prerequisites: Logged in.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>/pricing</code></li>
+      <li>Click "Upgrade" on the Pro plan</li>
+      <li>Verify the checkout selection screen appears</li>
+      <li>Verify "💳 Credit / Debit Card" option shows</li>
+      <li>Verify "🅿️ PayPal" option shows (if PayPal keys configured)</li>
+      <li>Click "Pay with Card"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Checkout page renders with plan name + price</li>
+      <li>"Pay with Card" button is clickable</li>
+      <li>Stripe redirects to hosted checkout page</li>
+      <li>Cancel button returns to pricing page</li>
+      <li>Error messages display if something fails</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-11 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-11</span>
+    <span class="tc-priority medium">MEDIUM</span>
+  </div>
+  <h3>Profile Page</h3>
+  <div class="prereq">Prerequisites: Logged in.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>/profile/index</code></li>
+      <li>Edit name field → click "Save changes"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Avatar displays (shows initial if no avatar set)</li>
+      <li>Name, level, XP displayed</li>
+      <li>Streak shield card visible with count</li>
+      <li>Badges section shows earned badges</li>
+      <li>"Save changes" works and shows success toast</li>
+      <li>"Get Shield" button present (clickable)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-12 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-12</span>
+    <span class="tc-priority medium">MEDIUM</span>
+  </div>
+  <h3>Settings + Sign Out</h3>
+  <div class="prereq">Prerequisites: Logged in.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>/profile/settings</code></li>
+      <li>Toggle "Daily reminders" switch</li>
+      <li>Select a reminder time (Morning/Afternoon/Evening)</li>
+      <li>Click "Sign out"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Notification toggle switches states</li>
+      <li>Time slot selection highlights selected option</li>
+      <li>Sign out works → redirects to login page</li>
+      <li>After sign out, protected routes redirect to login</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-13 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-13</span>
+    <span class="tc-priority medium">MEDIUM</span>
+  </div>
+  <h3>Forgot Password</h3>
+  <div class="prereq">Prerequisites: Registered email.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>/auth/login</code></li>
+      <li>Click "Forgot password" link</li>
+      <li>Enter registered email address</li>
+      <li>Click "Send reset link"</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>Shows "Reset your password" title</li>
+      <li>After submit, shows confirmation message</li>
+      <li>"Back to sign in" link works</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-14 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-14</span>
+    <span class="tc-priority high">HIGH</span>
+  </div>
+  <h3>Error Handling + Edge Cases</h3>
+  <div class="prereq">Prerequisites: Logged in where applicable.</div>
+  <div class="steps"><strong>Invalid Auth Tests:</strong>
+    <ol>
+      <li>Log in with wrong password → Error message displays</li>
+      <li>Register with existing email → Error message displays</li>
+      <li>Register with name &lt; 2 characters → Validation error</li>
+      <li>Register with password &lt; 6 characters → Validation error</li>
+    </ol>
+    <br>
+    <strong>Empty States:</strong>
+    <ol start="5">
+      <li>Fresh account with no progress → Journey shows Day 1 as current, rest locked</li>
+      <li>Progress tab with no data → Shows Level 1, 0 XP, no badges</li>
+    </ol>
+    <br>
+    <strong>Navigation:</strong>
+    <ol start="7">
+      <li>During a lesson, tap ← Back on step 3+ → Returns to previous step</li>
+      <li>From lesson, tap 🏠 icon → Returns to Journey tab</li>
+    </ol>
+    <br>
+    <strong>Refresh:</strong>
+    <ol start="9">
+      <li>Mid-lesson, refresh the page → Auth session persists</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>All validation errors display user-friendly messages</li>
+      <li>No white screens or crashes on edge cases</li>
+      <li>Back navigation works correctly</li>
+      <li>Home button in lesson returns to Journey</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-15 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-15</span>
+    <span class="tc-priority low">LOW</span>
+  </div>
+  <h3>Programs Catalog</h3>
+  <div class="prereq">Prerequisites: Logged in.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Navigate to <code>/programs/index</code></li>
+      <li>Verify program cards display</li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>"AI Operator" program card visible</li>
+      <li>"DUO" program card visible (if active)</li>
+      <li>Enroll/Continue button on each card</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TC-16 -->
+<div class="tc">
+  <div class="tc-header">
+    <span class="tc-id">TC-16</span>
+    <span class="tc-priority low">LOW</span>
+  </div>
+  <h3>Cross-Browser Verification</h3>
+  <div class="prereq">Prerequisites: Test account available.</div>
+  <div class="steps"><strong>Steps:</strong>
+    <ol>
+      <li>Run TC-01 through TC-04 on each browser:
+        <ul>
+          <li>Chrome (latest)</li>
+          <li>Firefox (latest)</li>
+          <li>Safari (if macOS available)</li>
+          <li>Mobile Chrome (responsive view)</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+  <div class="expected"><strong>Expected Results:</strong>
+    <ul>
+      <li>All pages render correctly on each browser</li>
+      <li>Forms submit correctly on each browser</li>
+      <li>No layout breaks or visual glitches</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Bug Regression -->
+<h2 class="regression">🐛 Bug Regression Checklist</h2>
+<p>These are previously fixed bugs — verify they stay fixed.</p>
+<table class="checklist">
+  <tr><th>Bug</th><th>Test</th><th>Status</th></tr>
+  <tr><td>BuilderStep crash (missing fields)</td><td>TC-04: Builder step in Day 3 lesson</td><td>☐</td></tr>
+  <tr><td>Onboarding bypass</td><td>TC-01: After register, goes to /onboard, not /home</td><td>☐</td></tr>
+  <tr><td>Days 8/15/22 unlocked</td><td>TC-08: Week 2 Day 8 shows as locked</td><td>☐</td></tr>
+  <tr><td>Progress bar invisible</td><td>TC-04: Green bar visible at top of lesson</td><td>☐</td></tr>
+  <tr><td>Plans page blank</td><td>TC-09: Plans load from Supabase</td><td>☐</td></tr>
+  <tr><td>Dashboard tab missing</td><td>TC-07: Dashboard tab visible in bottom nav</td><td>☐</td></tr>
+  <tr><td>Lesson not found (UUID in URL)</td><td>Day 3 lesson at /lesson/UUID loads correctly</td><td>☐</td></tr>
+</table>
+
+<!-- Completion Criteria -->
+<h2>✅ Test Completion Criteria</h2>
+<table>
+  <tr><th>Priority</th><th>Test Cases</th><th>Pass Threshold</th></tr>
+  <tr>
+    <td><span class="badge badge-crit">CRITICAL</span></td>
+    <td>TC-01, TC-02, TC-03, TC-04, TC-08</td>
+    <td><strong>100%</strong></td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>TC-05, TC-06, TC-07, TC-09, TC-10, TC-14</td>
+    <td><strong>100%</strong></td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-med">MEDIUM</span></td>
+    <td>TC-11, TC-12, TC-13</td>
+    <td><strong>90%</strong></td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-low">LOW</span></td>
+    <td>TC-15, TC-16</td>
+    <td>Best effort</td>
+  </tr>
+</table>
+
+<!-- Bug Report Format -->
+<h2>📝 Reporting Issues</h2>
+<p>For each bug found, include:</p>
+<ol>
+  <li><strong>Test Case ID:</strong> Which TC step failed</li>
+  <li><strong>URL:</strong> Full URL where it happened</li>
+  <li><strong>Steps to reproduce:</strong> Exact actions</li>
+  <li><strong>Expected:</strong> What should happen</li>
+  <li><strong>Actual:</strong> What happened (screenshots)</li>
+  <li><strong>Browser + Version:</strong> e.g., Chrome 128</li>
+  <li><strong>Console errors:</strong> DevTools (F12) → Console tab → copy red errors</li>
+</ol>
+
+<div class="footer">
+  <strong>Developer:</strong> Turbo CEO · <strong>Repo:</strong> <a href="https://github.com/Turbial/turbo-learning">github.com/Turbial/turbo-learning</a><br>
+  <strong>Server:</strong> 178.105.166.126 (Hetzner) · <strong>Database:</strong> Supabase <code>afgmlkduuapquqkcqdsk</code><br>
+  <strong>Slack:</strong> #turboceo
+</div>
+
+</body>
+</html>
