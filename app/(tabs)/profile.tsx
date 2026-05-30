@@ -13,6 +13,14 @@ import { spacing, fontSize, fontWeight, radius, colors as themeColors } from "..
 import { useProfile, useBadges } from "../../src/data/queries";
 import { useStreakShield } from "../../src/data/useStreakShield";
 
+const GOAL_LABELS: Record<string, { label: string; emoji: string }> = {
+  automate: { label: "Automate my work", emoji: "⚡" },
+  career: { label: "Advance my career", emoji: "📈" },
+  business: { label: "Start an AI business", emoji: "🚀" },
+  learn: { label: "Understand AI better", emoji: "🧠" },
+  systems: { label: "Build AI systems", emoji: "🏗️" },
+};
+
 export default function Profile() {
   const { colors } = useTheme();
   const toast = useToast();
@@ -79,6 +87,43 @@ export default function Profile() {
           Level {profile?.level ?? 1} · {profile?.xp?.toLocaleString() ?? 0} XP
         </Text>
       </View>
+
+      {/* Onboarding selections — read-only */}
+      {(profile?.goal || (profile as any)?.daily_mins || (profile as any)?.learn_time) && (
+        <View
+          style={{
+            backgroundColor: colors.surface,
+            borderRadius: radius.lg,
+            padding: spacing.md,
+            borderWidth: 1,
+            borderColor: colors.border,
+            gap: spacing.sm,
+          }}
+        >
+          {profile?.goal && GOAL_LABELS[profile.goal] && (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
+              <Text style={{ fontSize: fontSize.lg }}>{GOAL_LABELS[profile.goal].emoji}</Text>
+              <View>
+                <Text style={{ color: colors.textMuted, fontSize: fontSize.xs }}>Main goal</Text>
+                <Text style={{ color: colors.text, fontSize: fontSize.body, fontWeight: fontWeight.semibold }}>
+                  {GOAL_LABELS[profile.goal].label}
+                </Text>
+              </View>
+            </View>
+          )}
+          {(profile as any)?.daily_mins && (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
+              <Text style={{ fontSize: fontSize.lg }}>⏱️</Text>
+              <View>
+                <Text style={{ color: colors.textMuted, fontSize: fontSize.xs }}>Daily commitment</Text>
+                <Text style={{ color: colors.text, fontSize: fontSize.body, fontWeight: fontWeight.semibold }}>
+                  {(profile as any).daily_mins} min{(profile as any)?.learn_time ? ` · ${(profile as any).learn_time}` : ""}
+                </Text>
+              </View>
+            </View>
+          )}
+        </View>
+      )}
 
       {/* Streak & Shield card */}
       <View
