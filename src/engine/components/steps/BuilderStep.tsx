@@ -5,12 +5,45 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 
 import { StepProps } from "../../stepRegistry";
 import type { BuilderStep as BuilderStepType } from "../../types";
 
+function parseFields(s: BuilderStepType): Array<{ id: string; label: string; placeholder?: string }> {
+  if (s.fields && s.fields.length > 0) return s.fields;
+
+  // Legacy format: the step has a "prompt" text but no structured fields.
+  // Extract field placeholders from the prompt or template text.
+  const text = (s as any).prompt || (s as any).body || s.template || "";
+  if (!text.trim()) return [];
+
+  // Try to parse numbered lines like "1. The role..." or bullet-like prompts
+  const lines = text.split("\n").filter((l: string) => l.trim());
+  const fields: Array<{ id: string; label: string; placeholder?: string }> = [];
+  for (const line of lines) {
+    const match = line.match(/^\d+\.?\s+(.+)/);
+    if (match) {
+      const label = match[1].trim();
+      fields.push({ id: `f${fields.length + 1}`, label, placeholder: `Enter ${label.toLowerCase()}...` });
+    }
+  }
+
+  // Fallback: single textarea for freeform prompt
+  if (fields.length === 0) {
+    const prompt = (s as any).prompt || (s as any).body || "";
+    fields.push({
+      id: "f1",
+      label: prompt.length > 120 ? prompt.slice(0, 120) + "..." : prompt || "Your response",
+      placeholder: "Write your response here...",
+    });
+  }
+
+  return fields;
+}
+
 export default function BuilderStep({ step, onAnswer }: StepProps) {
   const s = step as BuilderStepType;
+  const fields = parseFields(s);
   const [values, setValues] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
-  const allFilled = s.fields.every((f: any) => (values[f.id] ?? "").trim().length > 0);
+  const allFilled = fields.every((f: any) => (values[f.id] ?? "").trim().length > 0);
 
   const handleSubmit = () => {
     if (!allFilled) return;
@@ -22,7 +55,7 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
     <ScrollView style={styles.scroll} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
       <Text style={styles.instruction}>Fill in each field to build your output:</Text>
 
-      {s.fields.map((field: any, i: number) => (
+      {fields.map((field: any, i: number) => (
         <View key={field.id} style={styles.fieldGroup}>
           <Text style={styles.fieldLabel}>
             {i + 1}. {field.label}

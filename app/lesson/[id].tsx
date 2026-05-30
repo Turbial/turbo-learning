@@ -59,7 +59,9 @@ export default function LessonScreen() {
   // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
   const supabaseQuery = useLessonByUnit(id);
   const dayNum = day ?? id;
-  const localKey = program ? `${program}-${dayNum}` : dayNum ?? "1";
+  // Normalize program slug: "ai-operator" → "ai", "ai_for_everyone" → "ai"
+  const normalizedProgram = program?.startsWith("ai") ? "ai" : (program ?? "ai");
+  const localKey = `${normalizedProgram}-${dayNum}`;
   const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS["ai-1"];
   const completeMutation = useCompleteLesson();
 
