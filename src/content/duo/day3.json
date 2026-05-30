@@ -71,7 +71,7 @@
     },
     {
       "id": "d3-copy-action-1",
-      "type": "copyAction",
+      "type": "copy_action",
       "title": "One Small Pour",
       "prompt": "Your foundation isn't built in a day. But you can pour a little concrete today.\n\nWrite one specific thing you'll do in the next 24 hours to strengthen trust, show respect, or align on values.\n\nExample: 'I'll tell my partner one thing I admire about them — specifically, not generically.'",
       "xp": 10

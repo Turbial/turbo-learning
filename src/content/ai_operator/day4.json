@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "unit": "day4",
+  "title": "Day 4: Writing Great Prompts",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d4-info-1",
+      "type": "info",
+      "title": "Day 4: Writing Great Prompts",
+      "body": "The single skill that separates AI operators from AI dabblers is prompt writing. A great prompt gets you exactly what you need on the first try. A bad prompt wastes 10 minutes of back-and-forth.\n\nToday you'll learn the 4-part prompt formula that every professional AI operator uses.",
+      "xp": 5
+    },
+    {
+      "id": "d4-highlight-1",
+      "type": "highlight",
+      "body": "The 4-part prompt formula:\n\n1. ROLE — Tell the AI who to be (\"You are an expert copywriter...\")\n2. CONTEXT — Give it the background it needs (\"We're launching a productivity app for freelancers...\")\n3. TASK — Be specific about what you want (\"Write 3 headline options for our landing page that...\")\n4. FORMAT — Define the output structure (\"Each headline should be under 10 words, followed by a 2-sentence explanation\")",
+      "highlights": [
+        "ROLE — Tell the AI who to be",
+        "CONTEXT — Give it the background it needs",
+        "TASK — Be specific about what you want",
+        "FORMAT — Define the output structure"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d4-mc-1",
+      "type": "mc",
+      "question": "Which part of the 4-part formula tells the AI what kind of professional to act as?",
+      "options": [
+        "ROLE",
+        "CONTEXT",
+        "TASK",
+        "FORMAT"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Correct. ROLE sets the AI's persona — 'You are an expert negotiator' vs 'You are a kindergarten teacher' changes everything about how it responds.",
+        "CONTEXT gives background information, not the persona itself.",
+        "TASK says what to do, not who to be.",
+        "FORMAT defines structure — short, bulleted, JSON, etc."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-ex-1",
+      "type": "example",
+      "title": "Before and After",
+      "prompt": "❌ Bad: 'Write me a sales email'\n\n✅ Good: 'You are a B2B sales expert. Our company sells project management software to mid-size tech companies. Write a cold outreach email to a VP of Engineering. Keep it under 150 words, friendly but professional tone, with a clear call-to-action to book a 15-minute demo.'",
+      "xp": 5
+    },
+    {
+      "id": "d4-good-fit-1",
+      "type": "good_fit",
+      "question": "Is this a good prompt? \n\n'Make it better.'",
+      "correct": "notideal",
+      "feedback": [
+        "Exactly. Without context, the AI has no idea what 'it' is or what 'better' means. Good catch.",
+        "This is actually a terrible prompt. 'It' is undefined and 'better' has no criteria. The AI will guess and waste your time."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-tf-1",
+      "type": "tf",
+      "question": "True or false: Longer prompts are always better prompts.",
+      "correct": false,
+      "feedback": [
+        "Right. Length doesn't equal quality. A clear 3-sentence prompt with role+task+format beats a rambling paragraph. Be specific, not verbose.",
+        "Not quite. A prompt should be as long as it needs to be — no more. Specificity matters, not word count."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-builder-1",
+      "type": "builder",
+      "fields": [
+        { "id": "role", "label": "Role (who should the AI be?)", "placeholder": "e.g. Expert social media manager" },
+        { "id": "context", "label": "Context (what's the situation?)", "placeholder": "e.g. Launching a new fitness app for busy parents" },
+        { "id": "task", "label": "Task (what do you need?)", "placeholder": "e.g. Write 5 Instagram caption ideas" },
+        { "id": "format", "label": "Format (any output rules?)", "placeholder": "e.g. Under 150 chars each, include emoji" }
+      ],
+      "template": "You are a {role}. {context}. {task}. {format}.",
+      "xp": 15
+    },
+    {
+      "id": "d4-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "prompt_habit",
+          "prompt": "What's one task you do regularly that would benefit from a better prompt? Write the improved version.",
+          "placeholder": "I often ask AI to... but a better prompt would be...",
+          "minChars": 30
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-completion",
+      "type": "completion",
+      "title": "Day 4 Complete!",
+      "body": "You now have the 4-part prompt formula. This alone will save you hours every week. Tomorrow: building reusable prompt templates that you never have to rewrite.",
+      "xp": 5
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "unit": "day5",
+  "title": "Day 5: Templates & Reusability",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d5-info-1",
+      "type": "info",
+      "title": "Day 5: Templates & Reusability",
+      "body": "Yesterday you learned the 4-part prompt formula. Today we make it repeatable.\n\nThe difference between a good operator and a great one: good operators write good prompts. Great operators build templates so they never write the same prompt twice.\n\nToday you'll learn to create prompt templates — reusable structures that get consistent results every time.",
+      "xp": 5
+    },
+    {
+      "id": "d5-highlight-1",
+      "type": "highlight",
+      "body": "A template is a prompt with variables — blanks you fill in each time you use it. Instead of writing a new prompt for every email, every social post, every report, you write one template per task type and reuse it forever.\n\nThink of templates as your AI assistant's standard operating procedures. They ensure consistency across your entire workflow.",
+      "highlights": [
+        "templates",
+        "standard operating procedures",
+        "consistency"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5-ex-1",
+      "type": "example",
+      "title": "Template Example",
+      "prompt": "Here's a meeting summary template:\n\n\"You are an executive assistant. Summarize this meeting transcript: [PASTE TRANSCRIPT]\n\nFormat:\n- 3 key decisions made\n- Action items with owners and deadlines\n- Topics that need follow-up\n- Overall tone assessment (1 sentence)\n\nKeep it professional and concise.\"",
+      "xp": 5
+    },
+    {
+      "id": "d5-mc-1",
+      "type": "mc",
+      "question": "What's the main advantage of using prompt templates instead of writing prompts from scratch?",
+      "options": [
+        "Templates guarantee the AI won't make mistakes",
+        "Consistent structure and results across repeated tasks",
+        "Templates work with any AI model automatically",
+        "Templates are always shorter to write"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Templates don't eliminate AI errors — they make the output predictable so you can spot errors faster.",
+        "Correct. Templates give you the same quality output structure every time because the prompt structure is proven.",
+        "Templates may need adjustment between models. The structure helps but you still need to verify.",
+        "Templates may actually be longer because they're more detailed. But you write them once."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-fillblank-1",
+      "type": "fillblank",
+      "question": "Complete the sentence: A prompt template uses ___ that you fill in each time you use it.",
+      "answer": "variables",
+      "aliases": ["placeholders", "blanks", "slots"],
+      "feedback": [
+        "Correct! Variables/placeholders are the blank spots in your template that change each time.",
+        "The answer is 'variables' — the parts of a template that change between uses."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-builder-1",
+      "type": "builder",
+      "fields": [
+        { "id": "task_type", "label": "What task do you repeat often?", "placeholder": "e.g. Writing weekly status updates" },
+        { "id": "role", "label": "AI role for this task", "placeholder": "e.g. Project manager and clear communicator" },
+        { "id": "input", "label": "What input changes each time?", "placeholder": "e.g. This week's accomplishments and blockers" },
+        { "id": "output", "label": "Desired output format", "placeholder": "e.g. 3 bullet points per section, professional tone" }
+      ],
+      "template": "You are a {role}. Using this input: {input}, generate a {task_type}. Format: {output}.",
+      "xp": 15
+    },
+    {
+      "id": "d5-paste-capture-1",
+      "type": "paste_capture",
+      "body": "Paste your template from the builder step here so you can save it. This is your first reusable prompt template — use it from now on.",
+      "sourceStepId": "d5-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d5-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "template_ideas",
+          "prompt": "List 3 tasks in your work that would benefit from having a template. For each one, what would the variables be?",
+          "placeholder": "1. Task: ... Variables: ...\n2. Task: ... Variables: ...\n3. Task: ... Variables: ...",
+          "minChars": 30
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-completion",
+      "type": "completion",
+      "title": "Day 5 Complete!",
+      "body": "You now have templates — the key to scaling your AI output. One template, infinite uses. Tomorrow: automating multi-step workflows.",
+      "xp": 5
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "unit": "day7",
+  "title": "Day 7: Testing & Quality Control",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d7-info-1",
+      "type": "info",
+      "title": "Day 7: Testing & Quality Control",
+      "body": "You can write great prompts. You can build multi-step workflows. But can you trust the output?\n\nAI makes mistakes. It hallucinates facts, misunderstands context, and sometimes produces garbage that sounds convincing. The operator's job is to catch these before they reach anyone else.\n\nToday you'll learn how to test, verify, and quality-check everything your AI produces.",
+      "xp": 5
+    },
+    {
+      "id": "d7-highlight-1",
+      "type": "highlight",
+      "body": "The Operator's Quality Checklist:\n\n1. ACCURACY — Are the facts correct? AI invents sources, statistics, and quotes. Verify everything.\n2. RELEVANCE — Does the output actually answer what you asked? AI sometimes wanders.\n3. CONSISTENCY — Does it match your brand voice, style guide, and previous outputs?\n4. COMPLETENESS — Did it follow all your format instructions?",
+      "highlights": [
+        "ACCURACY",
+        "RELEVANCE",
+        "CONSISTENCY",
+        "COMPLETENESS"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d7-scenario-1",
+      "type": "scenario_card",
+      "title": "The Hallucination Test",
+      "body": "You ask an AI to write a blog post about 'The History of Project Management Software.' It confidently states: 'According to a 2023 Gartner report, 78% of project managers use AI tools.'\n\nSounds authoritative, right? But when you search for that Gartner report, it doesn't exist. The AI fabricated a statistic that looked real.\n\nAlways verify claims that include specific numbers, named sources, or dates. If you can't find the original source, cut it.",
+      "xp": 5
+    },
+    {
+      "id": "d7-mc-1",
+      "type": "mc",
+      "question": "An AI output includes a statistic: 'Studies show 64% of companies...' What should you do?",
+      "options": [
+        "Trust it — AI is usually accurate with statistics",
+        "Verify the source — AI often invents convincing-sounding statistics",
+        "Change the number to something that sounds more reasonable",
+        "Remove it without checking — statistics aren't important"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI hallucinates statistics constantly. Never trust a number without verifying the source.",
+        "Correct. Verify every statistic. If you can't find the original source, cut it or note it as unverified.",
+        "Changing the number doesn't solve the problem — it's still made up. Verify or remove.",
+        "Statistics often matter a lot. And removing without checking means you might remove a real one."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-tf-1",
+      "type": "tf",
+      "question": "True or false: If AI output sounds confident and professional, it's probably accurate.",
+      "correct": false,
+      "feedback": [
+        "Correct. Confidence is not accuracy. AI is designed to sound confident — it's a language model, not a fact engine. Always verify.",
+        "Wrong. AI's default mode is 'confident.' Even completely made-up information is delivered with the same authoritative tone as verified facts."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-fillblank-1",
+      "type": "fillblank",
+      "question": "AI's tendency to invent convincing but false information is called ___.",
+      "answer": "hallucination",
+      "aliases": ["hallucinations", "hallucinating", "confabulation"],
+      "feedback": [
+        "Correct. Hallucination is when AI generates false information that sounds real.",
+        "The term is 'hallucination' — when AI confidently states something that isn't true."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-good-fit-1",
+      "type": "good_fit",
+      "question": "Is this a good quality check? \n\n'Skim the output quickly, and if nothing jumps out as wrong, approve it.'",
+      "correct": "notideal",
+      "feedback": [
+        "Correct. Skimming is not quality control. You need systematic checking — accuracy, relevance, consistency, completeness. One pass per category.",
+        "This is actually poor practice. Skimming misses subtle errors that a systematic check catches. Good operators have a checklist, not a gut feeling."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-copy-action-1",
+      "type": "copy_action",
+      "body": "Copy this quality checklist and keep it wherever you use AI:\n\n1. ACCURACY — Verify all facts, stats, dates, and named sources\n2. RELEVANCE — Does this actually answer my request?\n3. CONSISTENCY — Does it match my tone, style, and previous work?\n4. COMPLETENESS — Did it follow all format instructions?",
+      "sourceStepId": "d7-info-1",
+      "xp": 5
+    },
+    {
+      "id": "d7-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "qc_system",
+          "prompt": "What's your personal quality control system going to be? Describe your process for checking AI output before you use it or share it.",
+          "placeholder": "When I get AI output, I will...",
+          "minChars": 30
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-badge-unlock",
+      "type": "badge_unlock",
+      "badgeSlug": "week_streak",
+      "xp": 5
+    },
+    {
+      "id": "d7-completion",
+      "type": "completion",
+      "title": "Day 7 Complete — Week 1 Done!",
+      "body": "You've completed your first week as an AI Operator. You can write professional prompts, build templates, design multi-step workflows, and quality-check everything you produce.\n\nThis is real skill. Most people never learn this. You just did it in 7 days.\n\nWeek 2 starts tomorrow: Automation that runs without you.",
+      "xp": 10
+    }
+  ]
+}

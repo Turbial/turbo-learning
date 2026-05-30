@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "unit": "day6",
+  "title": "Day 6: Multi-Step Workflows",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d6-info-1",
+      "type": "info",
+      "title": "Day 6: Multi-Step Workflows",
+      "body": "Single prompts are powerful. But the real magic happens when you chain multiple AI steps together — where the output of one step becomes the input for the next.\n\nThis is how AI operators build systems that handle complex work: research → analyze → draft → refine. Each step narrows and improves the result.\n\nToday you'll build your first multi-step workflow.",
+      "xp": 5
+    },
+    {
+      "id": "d6-highlight-1",
+      "type": "highlight",
+      "body": "A workflow is a chain of prompts where each step feeds the next. The pattern: INPUT → STEP 1 (process) → STEP 2 (refine) → STEP 3 (produce) → OUTPUT.\n\nThink of it like an assembly line. Each station adds value. By the end, you have something no single prompt could produce.",
+      "highlights": [
+        "INPUT → STEP 1 → STEP 2 → STEP 3 → OUTPUT",
+        "assembly line"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d6-scenario-1",
+      "type": "scenario_card",
+      "title": "The Content Workflow",
+      "body": "You're a marketing manager who needs to publish a thought leadership article every week. Instead of spending 4 hours writing each one, you build a 3-step workflow:\n\nStep 1: Research — AI scans trending topics in your industry and suggests 5 angles\nStep 2: Outline — AI creates a detailed outline with key points and supporting data\nStep 3: Draft — AI writes the full article following your outline and style guide\n\nEach step's output becomes the next step's input. Total time: 30 minutes instead of 4 hours.",
+      "xp": 5
+    },
+    {
+      "id": "d6-mc-1",
+      "type": "mc",
+      "question": "What makes a multi-step workflow more powerful than a single prompt?",
+      "options": [
+        "Each step generates more tokens",
+        "You can review and adjust between steps, and each step specializes",
+        "Multi-step workflows are faster because AI processes in parallel",
+        "Single prompts can only do one thing"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Token count isn't the point — quality and control are.",
+        "Correct. Between each step, you can check the output, adjust the next prompt, and ensure quality. Each step does one thing well.",
+        "AI processes steps sequentially in a workflow, not in parallel. The benefit is quality, not speed.",
+        "Single prompts can do multiple things — but they're harder to control and harder to get consistent results."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-match-1",
+      "type": "match",
+      "pairs": [
+        { "left": "Research step", "right": "Gather information and identify angles" },
+        { "left": "Analyze step", "right": "Process raw data into insights" },
+        { "left": "Draft step", "right": "Create the first version of output" },
+        { "left": "Refine step", "right": "Polish and improve the draft" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-compare-1",
+      "type": "compare",
+      "question": "Compare these two approaches: (1) One massive prompt asking for a complete article, vs (2) A 3-step workflow: research → outline → draft. Which produces better results and why?",
+      "xp": 10
+    },
+    {
+      "id": "d6-quiz-1",
+      "type": "quiz",
+      "questions": [
+        { "id": "q1", "question": "In a workflow, what happens between steps?", "options": ["Nothing — it runs automatically", "You review and adjust before proceeding", "The AI decides whether to continue"], "correct": 1 },
+        { "id": "q2", "question": "What's the minimum number of steps in a workflow?", "options": ["1", "2", "3"], "correct": 1 },
+        { "id": "q3", "question": "True or false: Workflows are only useful for writing tasks.", "options": ["True", "False"], "correct": 1 }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d6-builder-1",
+      "type": "builder",
+      "fields": [
+        { "id": "workflow_name", "label": "Name your workflow", "placeholder": "e.g. Weekly Content Pipeline" },
+        { "id": "step1", "label": "Step 1: What happens first?", "placeholder": "e.g. Research trending topics in [industry]" },
+        { "id": "step2", "label": "Step 2: What happens next?", "placeholder": "e.g. Create a detailed outline with key points" },
+        { "id": "step3", "label": "Step 3: Final output", "placeholder": "e.g. Write the full piece following the outline" }
+      ],
+      "template": "WORKFLOW: {workflow_name}\nStep 1: {step1}\nStep 2: {step2}\nStep 3: {step3}",
+      "xp": 15
+    },
+    {
+      "id": "d6-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "workflow_design",
+          "prompt": "Design a 3-step workflow for a task you do regularly. What happens at each step? Where do you review and adjust?",
+          "placeholder": "Task: ...\nStep 1: ...\nCheck: ...\nStep 2: ...\nCheck: ...\nStep 3: ...",
+          "minChars": 40
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-completion",
+      "type": "completion",
+      "title": "Day 6 Complete!",
+      "body": "You've built your first multi-step workflow. This is how professionals scale — by building systems, not one-off prompts. Tomorrow: quality control and testing your workflows.",
+      "xp": 5
+    }
+  ]
+}
