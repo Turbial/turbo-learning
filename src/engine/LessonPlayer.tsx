@@ -11,6 +11,7 @@ import { createNarration } from "./narration/useNarration";
 import { applyCombo, getComboLabel, getComboMultiplier } from "./scoring";
 import { XpBurst } from "../components/feedback/XpBurst";
 import { useLessonStateStore } from "../store/lessonStateStore";
+import { useAddXp } from "../data/queries";
 
 // ─── Props ───
 
@@ -48,6 +49,7 @@ export default function LessonPlayer({
   const savedState = useLessonStateStore((s) => s.current);
   const saveState = useLessonStateStore((s) => s.save);
   const clearSavedState = useLessonStateStore((s) => s.clear);
+  const addXp = useAddXp();
 
   // Restore saved progress if same lesson
   const initial = useMemo(() => {
@@ -185,6 +187,8 @@ export default function LessonPlayer({
       // Spawn XP burst animation when user earns XP
       if (xp > 0) {
         spawnXpBurst(xp);
+        // Persist XP incrementally so Journey/Progress/Dashboard reflect it immediately
+        addXp.mutate({ xp });
       }
 
       // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
@@ -194,7 +198,7 @@ export default function LessonPlayer({
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler, comboStreak],
+    [step, handler, comboStreak, addXp],
   );
 
   const handleBack = useCallback(() => {
