@@ -74,7 +74,22 @@ export function useAuth(): AuthState {
           emailRedirectTo,
         },
       });
-      if (error) return { error: error.message };
+      if (error) {
+        // Map raw Supabase errors to user-friendly messages.
+        const friendly: Record<string, string> = {
+          "email rate limit exceeded":
+            "Too many signup attempts. Please wait a minute before trying again.",
+          "over_email_send_rate_limit":
+            "Too many signup attempts. Please wait a minute before trying again.",
+          "User already registered":
+            "An account with this email already exists. Sign in instead.",
+        };
+        const msg = error.message.toLowerCase();
+        for (const [key, replacement] of Object.entries(friendly)) {
+          if (msg.includes(key)) return { error: replacement };
+        }
+        return { error: error.message };
+      }
 
       // Detect duplicate signup: Supabase returns a fake/obfuscated user with
       // empty identities when the email is already registered (to prevent email
