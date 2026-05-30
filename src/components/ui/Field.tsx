@@ -52,6 +52,8 @@ export function Field({
         padding: spacing.md,
         fontSize: fontSize.bodyLg,
         textAlignVertical: multiline ? 'top' : 'center',
+        maxWidth: 420,
+        width: '100%',
       }}
     />
   );
