@@ -8,7 +8,7 @@ import { colors } from "../../../theme/tokens";
 
 export default function QuizStep({ step, onAnswer }: StepProps) {
   const s = step as QuizStepType;
-  const questions = s.questions as Array<{ id: string; question: string; options: string[]; correct: number }>;
+  const questions = (s.questions as Array<{ id: string; question: string; options: string[]; correct: number }>) ?? [];
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState(false);
 

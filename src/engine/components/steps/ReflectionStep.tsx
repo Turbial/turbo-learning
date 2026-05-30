@@ -15,11 +15,16 @@ export default function ReflectionStep({ step, onAnswer }: StepProps) {
     onAnswer(answers);
   };
 
+  // Handle both legacy (prompt directly on step) and current (questions array) formats
+  const questions = s.questions && s.questions.length > 0
+    ? s.questions
+    : [{ id: "r1", prompt: (s as any).question || (s as any).prompt || "What are your thoughts?", placeholder: "Reflect here..." }];
+
   return (
     <ScrollView style={styles.scroll} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
       <Text style={styles.heading}>Take a moment to reflect:</Text>
 
-      {s.questions.map((q: any, i: number) => (
+      {questions.map((q: any, i: number) => (
         <View key={q.id} style={styles.qGroup}>
           <Text style={styles.qLabel}>
             {i + 1}. {q.prompt}
