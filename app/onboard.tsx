@@ -14,7 +14,7 @@ import {
 import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../src/theme/tokens";
 import { useAuth } from "../src/data/useAuth";
-import { useUpdateProfile, useEnroll } from "../src/data/queries";
+import { useProfile, useUpdateProfile, useEnroll } from "../src/data/queries";
 
 const goals = [
   { key: "automate", label: "Automate my work", emoji: "⚡" },
@@ -34,8 +34,27 @@ export default function OnboardScreen() {
   const [name, setName] = useState("");
 
   const { user } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
   const updateProfile = useUpdateProfile();
   const enroll = useEnroll();
+
+  // already onboarded → skip straight to home
+  if (profile?.onboarded) {
+    router.replace("/(tabs)/home");
+    return null;
+  }
+
+  // Show spinner while profile loads (prevents flash of onboarding for returning users)
+  if (profileLoading) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: 32, marginBottom: spacing.md }}>⏳</Text>
+          <Text style={{ color: colors.textMuted, fontSize: fontSize.md }}>Loading...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   const handleComplete = async () => {
     if (user) {
@@ -45,6 +64,7 @@ export default function OnboardScreen() {
         goal,
         dailyMins,
         learnTime,
+        onboarded: true,
       });
       // Auto-enroll in AI Operator
       enroll.mutate({ programSlug: "ai-operator" });
