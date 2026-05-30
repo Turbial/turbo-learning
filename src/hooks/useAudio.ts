@@ -17,6 +17,7 @@ interface UseAudioReturn {
   stop: () => void;
   setSpeed: (speed: number) => void;
   hasPlayed: boolean; // tracks if audio has been played at least once in this session
+  setOnFirstPlay: (fn: () => void) => void; // register one-shot callback for first play XP
 }
 
 export function useAudio({ text, autoPlay = false }: UseAudioOptions): UseAudioReturn {
@@ -25,6 +26,14 @@ export function useAudio({ text, autoPlay = false }: UseAudioOptions): UseAudioR
   const [hasPlayed, setHasPlayed] = useState(false);
   const speedRef = useRef(1.0);
   const currentWordRef = useRef(0);
+  const xpFiredRef = useRef(false);
+  // Callback for when audio first plays in a lesson session
+  const onFirstPlayRef = useRef<(() => void) | null>(null);
+
+  /** Register a callback that fires once per lesson when audio first plays */
+  const setOnFirstPlay = useCallback((fn: () => void) => {
+    onFirstPlayRef.current = fn;
+  }, []);
 
   // Keep speedRef in sync
   useEffect(() => {
@@ -41,7 +50,14 @@ export function useAudio({ text, autoPlay = false }: UseAudioOptions): UseAudioR
       language: "en-US",
       onStart: () => {
         setIsPlaying(true);
-        setHasPlayed(true);
+        if (!hasPlayed) {
+          setHasPlayed(true);
+          // Fire the one-time XP callback on first play
+          if (!xpFiredRef.current && onFirstPlayRef.current) {
+            xpFiredRef.current = true;
+            onFirstPlayRef.current();
+          }
+        }
       },
       onDone: () => {
         setIsPlaying(false);
@@ -112,5 +128,6 @@ export function useAudio({ text, autoPlay = false }: UseAudioOptions): UseAudioR
     stop,
     setSpeed: handleSetSpeed,
     hasPlayed,
+    setOnFirstPlay,
   };
 }

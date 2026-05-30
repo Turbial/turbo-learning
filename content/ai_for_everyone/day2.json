@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 2,
+    "unitLabel": "Day 2",
+    "unitTitle": "Writing Clear, Specific Prompts",
+    "lessonOrder": 1,
+    "lessonTitle": "Precision Unlocks Quality",
+    "minutes": 14
+  },
+  "steps": [
+    {
+      "id": "d2_s1",
+      "type": "info",
+      "title": "Welcome to Day 2",
+      "body": "Yesterday you asked AI your first real question. Today you will learn to make your prompts sharper — because vague prompts give vague answers.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d2_s2",
+      "type": "scenario_card",
+      "title": "Picture this",
+      "body": "You message a friend: 'Tell me about restaurants.' They will ask: 'What kind of food? Where? Budget?' AI works the same way — it needs specifics to give you something useful.",
+      "audioUrl": null,
+      "primaryButton": "I see",
+      "xp": 3
+    },
+    {
+      "id": "d2_s3",
+      "type": "example",
+      "title": "Vague vs. specific",
+      "prompt": "Vague: 'Give me travel ideas.'\n\nSpecific: 'Suggest a 5-day trip to Japan in November. I love food, quiet temples, and hiking. Budget is medium. No Tokyo.'",
+      "primaryButton": "See the difference",
+      "xp": 3
+    },
+    {
+      "id": "d2_s4",
+      "type": "info",
+      "title": "The three-part formula",
+      "body": "Clear prompts have three parts:\n\n1. Your goal — what you want AI to do.\n2. Key details — context, constraints, preferences.\n3. Format — how you want the answer structured.",
+      "audioUrl": null,
+      "primaryButton": "Got it",
+      "xp": 3
+    },
+    {
+      "id": "d2_s5",
+      "type": "mc",
+      "title": "Which prompt is clearer?",
+      "question": "Which of these would get a more useful answer?",
+      "options": [
+        "Write something about motivation.",
+        "Write a 200-word email encouraging a team to finish a project by Friday. Use a warm, supportive tone."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Too vague — AI has no idea what 'something' means.",
+        "Yes. Goal, context, tone, and format are all there."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d2_s6",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Adding more relevant detail to a prompt always improves the answer.",
+      "correct": true,
+      "feedback": [
+        "Think again — as long as details are relevant and not random, more is almost always better.",
+        "Correct. AI uses the detail to shape a more relevant answer."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s7",
+      "type": "highlight",
+      "title": "Spot the specifics",
+      "body": "Find the specific details in this prompt: Summarize a 3-page PDF about solar panel installation safety for a beginner. Give me 5 bullet points with simple language.",
+      "highlights": [
+        "3-page PDF",
+        "solar panel installation safety",
+        "beginner",
+        "5 bullet points",
+        "simple language"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d2_s8",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Explain quantum computing in one paragraph for someone who has never studied physics.",
+      "correct": "good",
+      "feedback": [
+        "Yes — you gave the goal, audience, and format clearly.",
+        "Right. This is a well-structured prompt."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s9a",
+      "type": "info",
+      "title": "One more to try",
+      "body": "Now try the opposite — a vague prompt. See if you can spot why it is not useful.",
+      "audioUrl": null,
+      "primaryButton": "Let me check",
+      "xp": 3
+    },
+    {
+      "id": "d2_s9",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Do something useful.",
+      "correct": "notideal",
+      "feedback": [
+        "That is too vague — AI has no idea what 'useful' means.",
+        "Indeed. This prompt gives no goal, context, or format."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s10",
+      "type": "info",
+      "title": "The same prompt gets different results",
+      "body": "Different AI tools can answer the same prompt differently. If you do not like the first result, try the prompt again or tweak your wording. Persistence pays off.",
+      "audioUrl": null,
+      "primaryButton": "I understand",
+      "xp": 3
+    },
+    {
+      "id": "d2_s11",
+      "type": "builder",
+      "title": "Build a specific prompt",
+      "fields": [
+        {
+          "id": "goal",
+          "label": "What should AI do?",
+          "placeholder": "plan a healthy weekly meal"
+        },
+        {
+          "id": "context",
+          "label": "What are your constraints or preferences?",
+          "placeholder": "vegetarian, 30-minute meals, feeds two"
+        },
+        {
+          "id": "format",
+          "label": "How should the answer look?",
+          "placeholder": "a table with days and meals"
+        }
+      ],
+      "template": "Please {{goal}}. Here are my constraints: {{context}}. Format the answer as {{format}}.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d2_s12",
+      "type": "copy_action",
+      "title": "Copy your prompt",
+      "body": "Good! Now copy this prompt and paste it into your favorite AI tool.",
+      "sourceStepId": "d2_s11",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d2_s13",
+      "type": "paste_capture",
+      "title": "Paste what AI returned",
+      "body": "Paste the AI's response here. We will keep it in your portfolio.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d2_s14",
+      "type": "reflection",
+      "title": "How was the result?",
+      "questions": [
+        {
+          "id": "quality",
+          "type": "single_choice",
+          "label": "How well did AI follow your instructions?",
+          "options": [
+            "Exactly what I wanted",
+            "Good, but missed some details",
+            "Off-topic or not useful"
+          ]
+        },
+        {
+          "id": "improvement",
+          "type": "textarea",
+          "label": "What would you add or change next time to make it better?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d2_s15",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "A good prompt has three parts: a clear goal, relevant ______, and a desired format.",
+      "answer": "details",
+      "aliases": [
+        "detail",
+        "context",
+        "constraints",
+        "information",
+        "specifics"
+      ],
+      "feedback": [
+        "That is right. Without specific detail, AI is guessing.",
+        "Close. The missing word is 'details' — the specific context AI needs."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s16",
+      "type": "match",
+      "title": "Match the problem to the fix",
+      "pairs": [
+        {
+          "left": "AI gave a one-sentence answer",
+          "right": "Add a format instruction"
+        },
+        {
+          "left": "AI answered about the wrong topic",
+          "right": "Make the goal clearer"
+        },
+        {
+          "left": "AI ignored your budget",
+          "right": "Include your constraint in the prompt"
+        }
+      ],
+      "xp": 12
+    },
+    {
+      "id": "d2_s17",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "Which part of a prompt tells AI how to structure its answer?",
+          "options": [
+            "The goal",
+            "The context",
+            "The format"
+          ],
+          "correct": 2
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "A shorter prompt with less detail usually gives better results.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "If AI ignores your constraint, the fix is to make your _____ clearer.",
+          "answer": "prompt",
+          "aliases": [
+            "instructions",
+            "request",
+            "context",
+            "question"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d2_s18",
+      "type": "badge_unlock",
+      "badgeSlug": "prompt_shaper"
+    },
+    {
+      "id": "d2_s19",
+      "type": "completion",
+      "title": "Day 2 complete",
+      "body": "You now know the three-part formula for clear prompts: goal, specific details, and format. Every time you use it, AI becomes more useful. See you tomorrow.",
+      "primaryButton": "Go to my journey"
+    }
+  ]
+}

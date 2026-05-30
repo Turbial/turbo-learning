@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 5,
+    "unitLabel": "Day 5",
+    "unitTitle": "Using AI for Research and Learning",
+    "lessonOrder": 1,
+    "lessonTitle": "Learn Anything Faster",
+    "minutes": 14
+  },
+  "steps": [
+    {
+      "id": "d5_s1",
+      "type": "info",
+      "title": "Welcome to Day 5",
+      "body": "AI can help you understand new topics, research decisions, and explain complex things in simple terms. Think of it as a tutor who never gets tired.",
+      "audioUrl": null,
+      "primaryButton": "Let's learn",
+      "xp": 3
+    },
+    {
+      "id": "d5_s2",
+      "type": "example",
+      "title": "Explain it like I am ten",
+      "prompt": "Explain how inflation works. Assume I know nothing about economics. Use everyday examples, like how the price of milk changes. Keep it to two paragraphs.",
+      "primaryButton": "That is a great approach",
+      "xp": 3
+    },
+    {
+      "id": "d5_s3",
+      "type": "scenario_card",
+      "title": "Imagine this",
+      "body": "Your child asks why the sky is blue. You are not sure how to explain it. You ask AI: 'Explain why the sky is blue in a way a 7-year-old would understand.' It gives you a clear, simple explanation in seconds.",
+      "audioUrl": null,
+      "primaryButton": "That is a superpower",
+      "xp": 3
+    },
+    {
+      "id": "d5_s4",
+      "type": "info",
+      "title": "Ask AI to teach you anything",
+      "body": "Tell AI your current knowledge level and what you want to learn. Ask it to explain step by step, use examples, or compare with something you already understand.",
+      "audioUrl": null,
+      "primaryButton": "Show me how",
+      "xp": 3
+    },
+    {
+      "id": "d5_s5",
+      "type": "mc",
+      "title": "Best learning prompt",
+      "question": "Which will teach you the most?",
+      "options": [
+        "Tell me about investing.",
+        "Explain investing to a complete beginner. Use simple terms and an example about buying a fruit tree that grows fruit you can sell."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Too broad — AI will give a generic overview.",
+        "Yes. The audience, analogy, and level of detail make it a great learning prompt."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5_s6",
+      "type": "highlight",
+      "title": "Find the learning instructions",
+      "body": "Explain how solar panels work. I am a complete beginner. Use an analogy about collecting sunlight like plants do. Keep it to three simple bullet points.",
+      "highlights": [
+        "how solar panels work",
+        "complete beginner",
+        "analogy about collecting sunlight",
+        "three simple bullet points"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d5_s7",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "When learning something new with AI, you should tell it what you already know so it can build from there.",
+      "correct": true,
+      "feedback": [
+        "Actually yes — AI adjusts its explanation based on your current level.",
+        "Exactly. 'I know the basics of HTML but nothing about CSS' helps AI start at the right level."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5_s8",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Compare two laptops I am considering for photo editing. I have a $1200 budget and need good screen color accuracy.",
+      "correct": "good",
+      "feedback": [
+        "Yes. AI can research and compare options based on your specific needs.",
+        "Right. This is a great use — comparison shopping with clear requirements."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5_s9a",
+      "type": "info",
+      "title": "Know AI's limits",
+      "body": "AI is great at general knowledge but does not know private details about people. See if you can spot the wrong kind of question.",
+      "audioUrl": null,
+      "primaryButton": "Show me",
+      "xp": 3
+    },
+    {
+      "id": "d5_s9",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Tell me the exact date and time of my next door neighbor's birthday.",
+      "correct": "notideal",
+      "feedback": [
+        "AI does not know personal information about people unless it is online or you tell it.",
+        "Exactly. AI cannot know private information about specific people."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5_s10",
+      "type": "info",
+      "title": "Ask for analogies and examples",
+      "body": "Analogies are the best way to understand new concepts. Ask AI: 'Explain this like I am a chef' or 'Give me an analogy from sports.' The right analogy can make something click instantly.",
+      "audioUrl": null,
+      "primaryButton": "I love this",
+      "xp": 3
+    },
+    {
+      "id": "d5_s11",
+      "type": "example",
+      "title": "Compare, contrast, decide",
+      "prompt": "Compare renting vs. buying a home. I have $30,000 saved and live in a medium-cost city. I plan to stay for 3 years. List pros and cons of each in a table. Then give your recommendation.",
+      "primaryButton": "Very practical",
+      "xp": 3
+    },
+    {
+      "id": "d5_s12",
+      "type": "builder",
+      "title": "Build a research question",
+      "fields": [
+        {
+          "id": "topic",
+          "label": "What do you want to learn about?",
+          "placeholder": "how to start a small vegetable garden"
+        },
+        {
+          "id": "level",
+          "label": "What is your current knowledge level?",
+          "placeholder": "I have never gardened before"
+        },
+        {
+          "id": "format",
+          "label": "How should AI explain it?",
+          "placeholder": "simple steps with a comparison table"
+        }
+      ],
+      "template": "Teach me about {{topic}}. {{level}}. Explain it in this format: {{format}}.",
+      "primaryButton": "Generate my question",
+      "xp": 15
+    },
+    {
+      "id": "d5_s13",
+      "type": "copy_action",
+      "title": "Copy your question",
+      "body": "Copy your learning prompt and paste it into an AI tool.",
+      "sourceStepId": "d5_s12",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d5_s14",
+      "type": "paste_capture",
+      "title": "Paste what AI taught you",
+      "body": "Paste the explanation here. You now have a quick reference card on this topic.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 10
+    },
+    {
+      "id": "d5_s15",
+      "type": "info",
+      "title": "Check AI's facts",
+      "body": "AI can make mistakes, especially about recent events or specific numbers. For important things, double-check with a quick search or another source. A good habit: ask AI for sources if it makes claims.",
+      "audioUrl": null,
+      "primaryButton": "Good advice",
+      "xp": 3
+    },
+    {
+      "id": "d5_s16",
+      "type": "reflection",
+      "title": "Was the explanation clear?",
+      "questions": [
+        {
+          "id": "clarity",
+          "type": "single_choice",
+          "label": "How clear was AI's explanation?",
+          "options": [
+            "Very clear — I understood it easily",
+            "Somewhat clear — got the main idea",
+            "Still confusing — needed more examples"
+          ]
+        },
+        {
+          "id": "analogy",
+          "type": "textarea",
+          "label": "What analogy or example would make it even clearer?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5_s17",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "AI can explain complex topics using ______, which compare new ideas to things you already understand.",
+      "answer": "analogies",
+      "aliases": [
+        "analogy",
+        "comparisons",
+        "examples"
+      ],
+      "feedback": [
+        "Right. Analogies connect new ideas to familiar ones.",
+        "Close. The answer is 'analogies' — comparing new to familiar."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5_s18",
+      "type": "match",
+      "title": "Match the approach to the need",
+      "pairs": [
+        {
+          "left": "You need to understand a complex topic",
+          "right": "Ask for an analogy from everyday life"
+        },
+        {
+          "left": "You are deciding between two options",
+          "right": "Ask for a pro/con comparison table"
+        },
+        {
+          "left": "You want to double-check AI's claim",
+          "right": "Search online or ask for sources"
+        }
+      ],
+      "xp": 12
+    },
+    {
+      "id": "d5_s19",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What makes AI explain things better for a beginner?",
+          "options": [
+            "Using technical vocabulary",
+            "Telling it your current level and asking for simple language",
+            "Asking it to write as fast as possible"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "The best way to understand a new concept with AI is:",
+          "options": [
+            "Read one long explanation",
+            "Ask for an analogy that connects it to something familiar",
+            "Ask the same question ten times"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "AI's answers about recent events or specific numbers are always correct.",
+          "correct": false
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d5_s20",
+      "type": "badge_unlock",
+      "badgeSlug": "curious_learner"
+    },
+    {
+      "id": "d5_s21",
+      "type": "completion",
+      "title": "Day 5 complete",
+      "body": "You now have a powerful study partner. AI can teach you anything at your pace, with analogies, examples, and comparisons. Always double-check important facts. See you tomorrow.",
+      "primaryButton": "Go to my journey"
+    }
+  ]
+}
