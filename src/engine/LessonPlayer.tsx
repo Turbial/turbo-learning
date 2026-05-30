@@ -10,6 +10,7 @@ import { lessonReducer, createInitialState, isLastStep, completionScore } from "
 import { createNarration } from "./narration/useNarration";
 import { applyCombo, getComboLabel, getComboMultiplier } from "./scoring";
 import { XpBurst } from "../components/feedback/XpBurst";
+import { useLessonStateStore } from "../store/lessonStateStore";
 
 // ─── Props ───
 
@@ -44,13 +45,52 @@ export default function LessonPlayer({
   onComplete,
   allowBack = true,
 }: LessonPlayerProps) {
-  const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
+  const savedState = useLessonStateStore((s) => s.current);
+  const saveState = useLessonStateStore((s) => s.save);
+  const clearSavedState = useLessonStateStore((s) => s.clear);
+
+  // Restore saved progress if same lesson
+  const initial = useMemo(() => {
+    const saved = savedState;
+    if (saved && saved.lessonId === lessonId) {
+      return {
+        lessonId,
+        stepIndex: Math.min(saved.stepIndex, steps.length - 1),
+        sessionXp: saved.sessionXp,
+        responses: saved.responses as Record<string, StepResponse>,
+        correctCount: saved.correctCount,
+        totalGraded: saved.totalGraded,
+        comboStreak: saved.comboStreak,
+      };
+    }
+    return createInitialState(lessonId);
+  }, [lessonId, savedState, steps.length]);
+
+  const hasRestored = useRef(initial.stepIndex > 0);
+
+  const [session, dispatch] = useReducer(lessonReducer, initial);
   const { stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak } = session;
   const [stepError, setStepError] = React.useState<string | null>(null);
 
   // Keep a ref of latest state so auto-advance timeouts never read stale closures
   const sessionRef = useRef(session);
   sessionRef.current = session;
+
+  // Persist mid-lesson state so the user can refresh without losing progress
+  useEffect(() => {
+    if (stepIndex > 0 || Object.keys(responses).length > 0) {
+      saveState({
+        lessonId,
+        stepIndex,
+        sessionXp,
+        responses,
+        correctCount,
+        totalGraded,
+        comboStreak,
+        savedAt: 0, // filled by store
+      });
+    }
+  }, [lessonId, stepIndex, sessionXp, JSON.stringify(responses), correctCount, totalGraded, comboStreak]);
 
   // Guard against double-firing onComplete
   const completedRef = useRef(false);
@@ -79,9 +119,11 @@ export default function LessonPlayer({
 
   const getNarration = useCallback((): NarrationController => {
     const text = getStepText(step);
+    // Extract audioUrl from step if present (pre-generated MP3)
+    const audioUrl = (step as { audioUrl?: string | null } | undefined)?.audioUrl ?? null;
     if (!narrationRef.current || currentStepIdRef.current !== step?.id) {
       narrationRef.current?.stop();
-      narrationRef.current = createNarration(text);
+      narrationRef.current = createNarration(text, audioUrl);
       currentStepIdRef.current = step?.id ?? null;
     }
     return narrationRef.current;
@@ -100,11 +142,12 @@ export default function LessonPlayer({
   useEffect(() => {
     if (stepIndex >= steps.length && !completedRef.current) {
       completedRef.current = true;
+      clearSavedState(); // Lesson done — don't resume here
       const snap = sessionRef.current;
       const score = completionScore(snap);
       onComplete?.(snap.sessionXp, score);
     }
-  }, [stepIndex, steps.length, onComplete]);
+  }, [stepIndex, steps.length, onComplete, clearSavedState]);
 
   // Reset completed guard when lesson id changes
   useEffect(() => {

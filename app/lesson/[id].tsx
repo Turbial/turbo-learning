@@ -14,6 +14,7 @@ import { colors } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
+import { useLessonStateStore } from "../../src/store/lessonStateStore";
 
 // Local fallbacks when Supabase isn't available or lesson not found there
 import aiDay1 from "../../src/content/ai_operator/day1.json";
@@ -55,6 +56,12 @@ export default function LessonScreen() {
   const { id, program, day } = useLocalSearchParams<{ id: string; program?: string; day?: string }>();
   const { user } = useAuth();
   const markLocalCompleted = useLocalProgressStore((s) => s.markCompleted);
+  const clearLessonState = useLessonStateStore((s) => s.clear);
+
+  const handleHome = useCallback(() => {
+    clearLessonState();
+    router.replace("/(tabs)/home");
+  }, [clearLessonState]);
 
   // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
   const supabaseQuery = useLessonByUnit(id);
@@ -134,7 +141,7 @@ export default function LessonScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
           <Text style={styles.missingText}>Lesson not found.</Text>
-          <TouchableOpacity onPress={() => router.replace("/(tabs)/home")}>
+          <TouchableOpacity onPress={handleHome}>
             <Text style={styles.homeLink}>🏠 Home</Text>
           </TouchableOpacity>
         </View>
@@ -145,7 +152,7 @@ export default function LessonScreen() {
   return (
     <SafeAreaView style={styles.safe}>
       {/* Home button */}
-      <TouchableOpacity style={styles.homeBtn} onPress={() => router.replace("/(tabs)/home")}>
+      <TouchableOpacity style={styles.homeBtn} onPress={handleHome}>
         <Text style={styles.homeBtnText}>🏠</Text>
       </TouchableOpacity>
       <LessonPlayer
