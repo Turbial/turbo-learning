@@ -171,9 +171,13 @@ function WeeksView({
       goal: weekGoals[w] ?? "",
       days: weekUnits.map((u, idx) => {
         const isDone = completedUnitIds.has(u.id);
-        // The first non-completed unit is "current"
-        const prevAllDone = weekUnits.slice(0, idx).every((pu) => completedUnitIds.has(pu.id));
-        const isCurrent = !isDone && prevAllDone;
+        // Day 1 is always available. For days 2+: current if previous day (N-1) is completed.
+        // This handles cross-week locking: Day 8 requires Day 7, Day 15 requires Day 14, etc.
+        const prevDayUnit = u.order_num > 1
+          ? units.find((pu) => pu.order_num === u.order_num - 1)
+          : null;
+        const prevDayDone = u.order_num === 1 || (prevDayUnit != null && completedUnitIds.has(prevDayUnit.id));
+        const isCurrent = !isDone && prevDayDone;
         return {
           day: u.order_num,
           unitId: u.id,

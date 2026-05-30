@@ -34,8 +34,9 @@ function AuthGate({ children }: { children: React.ReactNode }) {
       // Not authenticated and not on an auth page → redirect to login
       router.replace("/auth/login");
     } else if (user && inAuthGroup) {
-      // Already authenticated on an auth page → redirect to home
-      router.replace("/(tabs)/home");
+      // Already authenticated on an auth page → redirect to onboarding
+      // (onboard.tsx handles first-time vs returning: new users set goals, returning users skip to home)
+      router.replace("/onboard");
     }
   }, [user, isLoading, segments]);
 

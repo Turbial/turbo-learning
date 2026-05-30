@@ -286,10 +286,12 @@ const styles = StyleSheet.create({
   progressBar: {
     height: 4,
     backgroundColor: "#e0d9cf",
+    overflow: "hidden",
   },
   progressFill: {
-    height: "100%",
+    height: 4,
     backgroundColor: "#059669",
+    borderRadius: 2,
   },
   stepArea: {
     flex: 1,
