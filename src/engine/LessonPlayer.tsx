@@ -51,26 +51,31 @@ export default function LessonPlayer({
   const clearSavedState = useLessonStateStore((s) => s.clear);
   const addXp = useAddXp();
 
-  // Restore saved progress if same lesson
-  const initial = useMemo(() => {
+  const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
+
+  // Restore saved progress if same lesson — dispatched after Zustand's
+  // AsyncStorage persistence hydrates. Must use dispatch (not initial state)
+  // because useReducer only reads init on first render, but Zustand
+  // hydration arrives asynchronously.
+  const hasRestored = useRef(false);
+  useEffect(() => {
+    if (hasRestored.current) return;
     const saved = savedState;
-    if (saved && saved.lessonId === lessonId) {
-      return {
-        lessonId,
-        stepIndex: Math.min(saved.stepIndex, steps.length - 1),
-        sessionXp: saved.sessionXp,
-        responses: saved.responses as Record<string, StepResponse>,
-        correctCount: saved.correctCount,
-        totalGraded: saved.totalGraded,
-        comboStreak: saved.comboStreak,
-      };
+    if (saved && saved.lessonId === lessonId && saved.stepIndex > 0) {
+      hasRestored.current = true;
+      dispatch({
+        type: "RESTORE",
+        payload: {
+          stepIndex: Math.min(saved.stepIndex, steps.length - 1),
+          sessionXp: saved.sessionXp,
+          responses: saved.responses as Record<string, StepResponse>,
+          correctCount: saved.correctCount,
+          totalGraded: saved.totalGraded,
+          comboStreak: saved.comboStreak,
+        },
+      });
     }
-    return createInitialState(lessonId);
   }, [lessonId, savedState, steps.length]);
-
-  const hasRestored = useRef(initial.stepIndex > 0);
-
-  const [session, dispatch] = useReducer(lessonReducer, initial);
   const { stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak } = session;
   const [stepError, setStepError] = React.useState<string | null>(null);
 

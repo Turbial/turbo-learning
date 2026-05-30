@@ -7,6 +7,7 @@ export type MachineAction =
   | { type: "ADVANCE" }
   | { type: "BACK" }
   | { type: "ANSWER"; stepId: string; response: StepResponse; xp: number; correct?: boolean; comboStreak: number }
+  | { type: "RESTORE"; payload: Omit<SessionState, "lessonId"> }
   | { type: "RESET" };
 
 export function createInitialState(lessonId: string): SessionState {
@@ -43,6 +44,9 @@ export function lessonReducer(state: SessionState, action: MachineAction): Sessi
         comboStreak,
       };
     }
+
+    case "RESTORE":
+      return { ...state, ...action.payload };
 
     case "RESET":
       return createInitialState(state.lessonId);
