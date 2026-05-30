@@ -9,6 +9,7 @@ export interface Subscription {
   plan_slug: string | null;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
+  paypal_subscription_id: string | null;
   current_period_end: string | null;
 }
 
@@ -19,7 +20,7 @@ export function useSubscription(userId?: string) {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('subscriptions')
-        .select('tier, status, plan_id, stripe_customer_id, stripe_subscription_id, current_period_end')
+        .select('tier, status, plan_id, plan_slug, stripe_customer_id, stripe_subscription_id, paypal_subscription_id, current_period_end')
         .eq('user_id', userId)
         .maybeSingle();
 
@@ -32,6 +33,7 @@ export function useSubscription(userId?: string) {
           plan_id: null,
           stripe_customer_id: null,
           stripe_subscription_id: null,
+          paypal_subscription_id: null,
           current_period_end: null,
         }
       );
