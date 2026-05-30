@@ -1,6 +1,6 @@
 // integrations/paypal.ts — PayPal checkout + subscription management (client side).
-// PayPal Smart Buttons are rendered in the checkout flow.
-// For production, replace CLIENT_ID with the actual PayPal client ID from env.
+
+import { Linking } from 'react-native';
 
 const PAYPAL_CLIENT_ID =
   process.env.EXPO_PUBLIC_PAYPAL_CLIENT_ID ?? "";
@@ -35,9 +35,11 @@ export async function startPayPalCheckout(planSlug: string): Promise<void> {
   if (error) throw new Error(error.message);
   if (!data?.url) throw new Error("No PayPal checkout URL returned");
 
-  // Redirect to PayPal
+  // Redirect to PayPal (web: window.location, native: Linking)
   if (typeof window !== "undefined") {
     window.location.href = data.url;
+  } else {
+    await Linking.openURL(data.url);
   }
 }
 

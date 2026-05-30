@@ -9,7 +9,7 @@ import { supabase } from '../data/supabase';
  * @param planId - the plan ID from the plans table (e.g. 'premium_monthly', 'premium_annual')
  * @returns the Stripe Checkout URL
  */
-export async function startCheckout(planId: 'premium_monthly' | 'premium_annual'): Promise<string> {
+export async function startCheckout(planId: string): Promise<string> {
   const { data, error } = await supabase.functions.invoke('create-checkout', {
     body: { plan_id: planId },
   });

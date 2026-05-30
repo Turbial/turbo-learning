@@ -69,8 +69,8 @@ export default function Checkout() {
       </View>
 
       {err ? (
-        <View style={{ backgroundColor: colors.errorBg, padding: spacing.md, borderRadius: radius.md }}>
-          <Text style={{ color: colors.error, fontSize: fontSize.sm }}>{err}</Text>
+        <View style={{ backgroundColor: '#fef2f2', padding: spacing.md, borderRadius: radius.md, borderWidth: 1, borderColor: '#fecaca' }}>
+          <Text style={{ color: '#ef4444', fontSize: fontSize.sm }}>{err}</Text>
         </View>
       ) : null}
 

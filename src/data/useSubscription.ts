@@ -27,15 +27,16 @@ export function useSubscription(userId?: string) {
       if (error) throw error;
 
       return (
-        data ?? {
-          tier: 'free',
+        (data as Subscription) ?? ({
+          tier: 'free' as const,
           status: 'none',
           plan_id: null,
+          plan_slug: null,
           stripe_customer_id: null,
           stripe_subscription_id: null,
           paypal_subscription_id: null,
           current_period_end: null,
-        }
+        } as Subscription)
       );
     },
   });
