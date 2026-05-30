@@ -10,8 +10,6 @@ export default function HighlightStep({ step, narration }: StepProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    narration.play();
-    setIsPlaying(true);
     const interval = setInterval(() => setIsPlaying(narration.isPlaying), 200);
     return () => { clearInterval(interval); narration.stop(); };
   }, []);
