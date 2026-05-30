@@ -4,7 +4,7 @@
 **URL:** http://178.105.166.126:3092  
 **GitHub:** github.com/Turbial/turbo-learning  
 **Stack:** React Native Web (Expo) + Supabase  
-**Date:** 2026-05-30  
+**Date:** 2026-05-30 (revised — Session 2)  
 
 ---
 
@@ -13,46 +13,50 @@
 ### Prerequisites
 - A modern browser (Chrome/Firefox/Edge latest)
 - A valid email address (for registration testing)
-- Test plan ID: use **TS-XXXX** format for each test case logged
+- Incognito/private window recommended for fresh user tests
 
 ### Test Accounts
 | Account | Email | Password | Purpose |
 |---------|-------|----------|---------|
 | Fresh user | Create during test | 6+ chars | Registration + onboarding + first lesson |
-| Returning user | Create during test | 6+ chars | Login + continuing progress |
-| Premium test | TBD (contact dev) | — | Subscription feature testing |
+| Returning user | Use from previous session | 6+ chars | Login + continuing progress + resume |
 
 ---
 
-## TC-01: Landing Page + Registration
+## TC-01: Registration
 
 **Prerequisites:** Clear browser cookies/cache, or use incognito window.
 
 ### Steps
 1. Navigate to `http://178.105.166.126:3092`
 2. Verify the page redirects to `/auth/login`
-3. Click "Create your account" link (or navigate to `/auth/register`)
+3. Click "New here? Create an account" link
 4. Enter a test name (2+ characters)
 5. Enter a unique test email (`qa-test-{timestamp}@example.com`)
 6. Enter a password (6+ characters)  
 7. Click "Create account"
 
 ### Expected Results
-- [ ] Redirects to onboarding screen (`/onboard`) immediately
-- [ ] Does NOT skip to home screen (Bug #1 fix verification)
-- [ ] If email confirmation is enabled, shows "Check your email" message
+- [ ] Field widths capped at ~420px, centered on screen
+- [ ] Email validation works (rejects invalid emails)
+- [ ] Password validation works (rejects < 6 chars)
+- [ ] Name validation works (rejects < 2 chars)
+- [ ] On success: shows "Check your email" confirmation screen
+- [ ] If email already registered: shows "An account with this email already exists" error (not fake confirmation screen)
+- [ ] If rate-limited: shows "Too many signup attempts. Please wait a minute" (not raw "email rate limit exceeded")
+- [ ] Email verification link redirects to the live app (not localhost — no timeout)
 
 ---
 
 ## TC-02: Onboarding Flow
 
-**Prerequisites:** Freshly registered account (from TC-01).
+**Prerequisites:** Freshly registered + verified account.
 
 ### Steps
 1. After registration, you land on Welcome screen ("Welcome to Turbo Academy")
 2. Click "Get Started"
 3. Enter a name in "What should we call you?" → Click Continue
-4. Select a goal (tap one of the 5 options: Automate my work, Advance my career, etc.)
+4. Select a goal (tap one of the 5 options: ⚡ Automate my work, 📈 Advance my career, 🚀 Start an AI business, 🧠 Understand AI better, 🏗️ Build AI systems)
 5. Click Continue
 6. Select daily minutes (5, 10, 15, 20, or 30) AND learning time (Morning, Afternoon, Evening, Night)
 7. Click "Start Learning"
@@ -60,10 +64,14 @@
 ### Expected Results
 - [ ] All 4 onboarding steps render with emoji icons
 - [ ] Progress dots at bottom update (4 dots, fills as you progress)
-- [ ] Name field requires at least 1 character
+- [ ] Name field requires at least 1 character (button disabled until filled)
 - [ ] Goal selection requires a choice (button disabled until selected)
 - [ ] "Start Learning" redirects to the Journey tab
-- [ ] Journey tab shows "AI Operator" program with 28-day grid
+- [ ] Journey tab shows "AI Operator" program
+
+### Regression — Returning Users
+- [ ] Log out → Log back in → Goes **straight to Home** (skips onboarding entirely)
+- [ ] No flashing of the 4 onboarding steps for returning users
 
 ---
 
@@ -72,13 +80,14 @@
 **Prerequisites:** Account created in TC-01.
 
 ### Steps
-1. Click the Settings tab → "Sign out"
+1. Sign out (Profile tab → Sign out)
 2. Verify you're redirected to login page
 3. Enter the test email + password
 4. Click "Sign in"
 
 ### Expected Results
-- [ ] Login succeeds and redirects to onboarding (first time) or home (returning)
+- [ ] Login form is centered, fields at ~420px max width
+- [ ] Login succeeds and redirects to Home (not onboarding) for returning users
 - [ ] Previously completed days show as ✅ (green/done state)
 - [ ] XP and streak persist from previous session
 
@@ -91,35 +100,63 @@
 ### Steps
 1. Tap Day 1 ("What AI Actually Is" or similar title)
 2. Step through each step in the lesson:
-   - Info steps: Read and tap "Continue"
-   - Scenario cards: Read and tap primary button
-   - MC question: Select an answer → verify feedback appears → auto-advances
-   - True/False: Select True or False → verify feedback → tap Continue
-   - Good Fit: Select judgment → verify auto-advance
-   - Fill in the Blank: Type answer → verify feedback
-   - Builder: Fill all fields → click "Build It"
-   - Reflection: Write in text areas → click "Save Reflection"
-   - Completion: See XP tally
+   - **Info steps:** Read text → narration does NOT auto-play → press ▶ to start → press ⏸ to pause → tap speed (0.8x, 1x, 1.5x, 2x)
+   - **Highlight steps:** Same narration behavior as InfoStep (no auto-play)
+   - **MC question:** Select an answer → "Check Answer" → verify feedback appears → tap "Continue →" to advance (not auto-advancing)
+   - **True/False:** Select True or False → feedback appears → tap "Continue →"
+   - **Good Fit:** Select judgment → feedback appears → tap "Continue →" (not auto-advancing)
+   - **Fill in the Blank:** Type answer → "Check Answer" → verify feedback
+   - **Scenario cards:** Read and tap primary button
+   - **Builder:** Fill all fields → click "Build It"
+   - **Reflection:** Write in text areas → click "Save Reflection"
+   - **Completion step:** View completion summary
 3. On completion screen, verify:
    - XP counter animates
    - Score percentage displays
    - Streak card shows
+   - Badge unlock dialog for "First Steps"
    - "Continue Journey" button works
 4. Click "Continue Journey"
 
 ### Expected Results
 - [ ] All step types render without errors
-- [ ] Progress bar at top fills as you advance (green bar, 4px tall)
+- [ ] **Audio does NOT auto-play** on lesson load (user must press ▶)
+- [ ] **Speed change works while audio is playing** (tap 1.5x during playback → audio speeds up)
+- [ ] Progress bar at top fills as you advance (green bar)
 - [ ] ← Back button works after step 2
-- [ ] "Continue →" appears after answering interactive steps
-- [ ] No "Cannot read properties of undefined" errors (Bug fix verification)
+- [ ] "Continue →" appears after answering interactive steps (no auto-advance)
+- [ ] **Wrong answer shows correct ✗ feedback** (not "Correct" text next to ✗ icon)
+- [ ] No "Cannot read properties of undefined" errors
 - [ ] Completion screen shows XP earned, score, streak
-- [ ] Badge unlock dialog appears for "First Steps" badge
-- [ ] Redirected to Journey tab
+
+### Regression — XP
+- [ ] **XP earned per answer shows on Journey/Progress/Dashboard immediately** (not just at lesson end)
+- [ ] **Going back and re-answering same question does NOT duplicate XP** (no farming)
+- [ ] Level updates correctly with XP accumulation
 
 ---
 
-## TC-05: Progress Tab Verification
+## TC-05: Mid-Lesson Resume
+
+**Prerequisites:** Started a lesson (TC-04) but didn't finish — left mid-way.
+
+### Steps
+1. Start a lesson, answer 2-3 steps, then press 🏠 Home
+2. Verify Journey shows ▶ Continue on that day
+3. Tap ▶ Continue on that day
+4. Verify you resume at the step you left off
+5. Refresh the browser mid-lesson
+6. Verify you resume at the same step
+
+### Expected Results
+- [ ] **Resume works after navigating away** (not back to "Welcome to Day 1")
+- [ ] **Resume works after page refresh** (step index, XP, combo streak all preserved)
+- [ ] **Pressing 🏠 Home clears the resume state** (next visit starts fresh)
+- [ ] **Lesson completion clears the resume state** automatically
+
+---
+
+## TC-06: Progress Tab Verification
 
 **Prerequisites:** Completed Day 1 (TC-04).
 
@@ -128,32 +165,35 @@
 2. Verify displayed stats
 
 ### Expected Results
-- [ ] Shows Level (should be Level 1 if Day 1 completed)
-- [ ] Shows XP total (~71 XP from Day 1)
-- [ ] Shows streak count (fire emoji)
-- [ ] Shows badges earned ("First Steps" badge visible)
+- [ ] Shows Level (should be Level 1–2 if Day 1 completed)
+- [ ] Shows XP total (should reflect mid-lesson XP if earned during TC-05)
+- [ ] Shows streak count (🔥 emoji)
+- [ ] Badges section shows earned badges
 - [ ] Shield count displayed
 - [ ] "Get Shield" button present
 
 ---
 
-## TC-06: Leaderboard
+## TC-07: Leaderboard
 
 **Prerequisites:** Logged in with progress.
 
 ### Steps
 1. Tap the "Ranks" tab (🏆)
-2. Scroll through the leaderboard
+2. Switch between 🌍 Global and 👥 Friends tabs
+3. Scroll through the leaderboard
 
 ### Expected Results
 - [ ] Leaderboard renders without errors
-- [ ] Test user appears in the list (if other users exist)
+- [ ] Test user appears in the list
 - [ ] XP values displayed correctly
-- [ ] Levels displayed
+- [ ] Podium (top 3) renders with 🥇🥈🥉
+- [ ] Current user row highlighted
+- [ ] **Error state shows "Check your connection and try again later"** (not misleading "Pull to retry")
 
 ---
 
-## TC-07: Dashboard Tab
+## TC-08: Dashboard Tab
 
 **Prerequisites:** Logged in with progress.
 
@@ -164,16 +204,15 @@
 ### Expected Results
 - [ ] Level + XP header card visible
 - [ ] Streak fire icon visible
-- [ ] "Start today's lesson" button (shows correct current day)
-- [ ] 28-day grid renders (28 squares)
-- [ ] Completed days highlighted in green
+- [ ] "Start today's lesson" button
+- [ ] 28-day grid renders
+- [ ] Completed days highlighted
 - [ ] Current day highlighted with border
-- [ ] Progress ring circle shows completion percentage
-- [ ] Day streak count displayed
+- [ ] Progress ring shows completion percentage
 
 ---
 
-## TC-08: Week Locking (Bug #2 Verification)
+## TC-09: Week Locking
 
 **Prerequisites:** Completed Day 1 only.
 
@@ -186,94 +225,64 @@
 ### Expected Results
 - [ ] Day 2 shows as "current" after Day 1 done
 - [ ] Days 8, 15, 22 show as locked until previous week's last day is completed
-- [ ] Locked days are not tappable
-- [ ] Week headers display correctly (Week 1: Foundation, Week 2: Automation, etc.)
+- [ ] Locked days are not tappable (no response on tap)
+- [ ] Week headers display correctly
 
 ---
 
-## TC-09: Pricing Page + Plan Display
+## TC-10: Profile Tab
 
 **Prerequisites:** Logged in.
 
 ### Steps
-1. Navigate to `http://178.105.166.126:3092/pricing`
-2. Verify both plans display
+1. Tap the "Profile" tab (👤)
+2. Edit name field → click "Save changes"
+3. Edit learning goal → click "Save changes"
+4. Verify onboarding selections appear as read-only
+5. Click "Get Shield"
+6. Click "Sign out"
 
 ### Expected Results
-- [ ] Free plan card visible: "Free", with features list
-- [ ] Pro plan card visible: "Pro", "$9.99/mo", with features list
-- [ ] Free plan shows "Get started" button
-- [ ] Pro plan shows "Upgrade" button
-- [ ] No loading errors or blank cards
-- [ ] Plan data loaded from Supabase (not hardcoded)
+- [ ] Avatar displays (shows initial letter if no avatar set)
+- [ ] Name, level, XP displayed
+- [ ] **Onboarding selections shown as read-only:**
+  - "🎯 Main goal: [emoji] [label]"
+  - "⏱️ Daily commitment: [N] min · [Morning/Afternoon/Evening/Night]"
+- [ ] Streak shield card visible with count
+- [ ] Badges section shows earned badges
+- [ ] "Save changes" works with success toast
+- [ ] **"Get Shield" works** (no "null value in column shield_type" error)
+- [ ] **"Sign out" works → redirects to login** (previously hidden — Profile tab didn't exist in nav)
 
 ---
 
-## TC-10: Checkout Flow (Stripe)
+## TC-11: Pricing + Checkout
 
 **Prerequisites:** Logged in.
 
 ### Steps
 1. Navigate to `/pricing`
-2. Click "Upgrade" on the Pro plan
-3. Verify the checkout selection screen appears
-4. Verify "💳 Credit / Debit Card" option shows
-5. Verify "🅿️ PayPal" option shows (if PayPal keys configured)
-6. Click "Pay with Card"
+2. Verify both Free and Pro plans display
+3. Click "Upgrade" on Pro plan
+4. Verify checkout page renders
+5. Click "Pay with Card"
 
 ### Expected Results
+- [ ] Free plan card visible with features
+- [ ] Pro plan card with "$9.99/mo" and features
 - [ ] Checkout page renders with plan name + price
-- [ ] "Pay with Card" button is clickable
-- [ ] Stripe redirects to hosted checkout page (or shows auth error if not logged in with valid token)
+- [ ] Stripe redirects to hosted checkout (or appropriate error if keys incomplete)
 - [ ] Cancel button returns to pricing page
-- [ ] Error messages display if something fails
 
 ---
 
-## TC-11: Profile Page
-
-**Prerequisites:** Logged in.
-
-### Steps
-1. Navigate to `/profile/index`
-2. Edit name field → click "Save changes"
-3. Verify the profile updates
-
-### Expected Results
-- [ ] Avatar displays (shows initial if no avatar set)
-- [ ] Name, level, XP displayed
-- [ ] Streak shield card visible with count
-- [ ] Badges section shows earned badges
-- [ ] "Save changes" works and shows success toast
-- [ ] "Get Shield" button present (clickable)
-
----
-
-## TC-12: Settings + Sign Out
-
-**Prerequisites:** Logged in.
-
-### Steps
-1. Navigate to `/profile/settings`
-2. Toggle "Daily reminders" switch
-3. Select a reminder time (Morning, Afternoon, Evening)
-4. Click "Sign out"
-
-### Expected Results
-- [ ] Notification toggle switches states
-- [ ] Time slot selection highlights selected option
-- [ ] Sign out works → redirects to login page
-- [ ] After sign out, protected routes redirect to login
-
----
-
-## TC-13: Forgot Password
+## TC-12: Forgot Password
 
 **Prerequisites:** Registered email.
 
 ### Steps
 1. Navigate to `/auth/login`
-2. Click "Forgot password" link
+2. Click "Forgot password?" link
 3. Enter registered email address
 4. Click "Send reset link"
 
@@ -281,56 +290,44 @@
 - [ ] Shows "Reset your password" title
 - [ ] After submit, shows confirmation message
 - [ ] "Back to sign in" link works
-- [ ] If email sending is configured, email arrives with reset link
+- [ ] Reset link redirects to the live app (not localhost)
+- [ ] Password reset completes successfully
 
 ---
 
-## TC-14: Error Handling + Edge Cases
+## TC-13: Error Handling + Edge Cases
 
 ### Steps
 
 **Invalid auth:**
 1. Try logging in with wrong password → Error message displays
-2. Try registering with existing email → Error message displays
+2. Try registering with existing email → Shows "An account with this email already exists. Sign in instead."
 3. Try registering with name < 2 characters → Validation error
 4. Try registering with password < 6 characters → Validation error
+5. Rapid re-registration → Shows "Too many signup attempts. Please wait a minute"
 
 **Empty states:**
-5. Fresh account with no progress → Journey shows Day 1 as current, rest locked
-6. Progress tab with no data → Shows Level 1, 0 XP, no badges
+6. Fresh account with no progress → Journey shows Day 1 as current, rest locked
+7. Progress tab with no data → Shows Level 1, 0 XP, no badges
+8. Leaderboard with no data → Shows trophy emoji, "No rankings yet"
+9. Leaderboard error → Shows ⚠️ "Check your connection and try again later"
 
 **Back navigation:**
-7. During a lesson, tap ← Back on step 3+ → Returns to previous step
-8. From lesson, tap 🏠 icon → Returns to Journey tab
+10. During a lesson, tap ← Back on step 3+ → Returns to previous step
+11. From lesson, tap 🏠 → Returns to Journey (and clears resume state)
 
-**Refresh persistence:**
-9. Mid-lesson, refresh the page → Auth session persists, returns to lesson (may restart)
+**Speed change while audio playing:**
+12. On Info/Highlight step, press ▶ to play audio → tap 1.5x speed → audio speeds up immediately
 
 ### Expected Results
-- [ ] All validation errors display user-friendly messages
+- [ ] All validation errors display user-friendly messages (not raw Supabase errors)
 - [ ] No white screens or crashes on edge cases
 - [ ] Back navigation works correctly
 - [ ] Home button in lesson returns to Journey
 
 ---
 
-## TC-15: Programs Catalog
-
-**Prerequisites:** Logged in.
-
-### Steps
-1. Navigate to `/programs/index`
-2. Verify program cards display
-
-### Expected Results
-- [ ] "AI Operator" program card visible
-- [ ] "DUO" program card visible (if active)
-- [ ] Enroll/Continue button on each card
-- [ ] Enrolling switches button to "Continue"
-
----
-
-## TC-16: Cross-Browser Verification
+## TC-14: Cross-Browser Verification
 
 **Prerequisites:** Test account available.
 
@@ -339,52 +336,62 @@
    - Chrome (latest)
    - Firefox (latest)
    - Safari (if macOS available)
-   - Mobile Chrome (responsive view)
+   - Mobile Chrome (responsive view / device)
 
 ### Expected Results
 - [ ] All pages render correctly on each browser
 - [ ] Forms submit correctly on each browser
 - [ ] No layout breaks or visual glitches
+- [ ] Audio/speech works on supported browsers
 
 ---
 
-## Bug Regression Checklist
+## Bug Regression Checklist (Session 2 Fixes)
 
-These are previously fixed bugs — verify they stay fixed:
+These are fixed in this session — verify they stay fixed:
 
-| Bug | Test | Status |
-|-----|------|--------|
-| BuilderStep crash (missing fields) | TC-04: Builder step in Day 3 lesson | ☐ |
-| Onboarding bypass | TC-01: After register, goes to /onboard, not /home | ☐ |
-| Days 8/15/22 unlocked | TC-08: Week 2 Day 8 shows as locked | ☐ |
-| Progress bar invisible | TC-04: Green bar visible at top of lesson | ☐ |
-| Plans page blank | TC-09: Plans load from Supabase | ☐ |
-| Dashboard tab missing | TC-07: Dashboard tab visible in bottom nav | ☐ |
-| Lesson not found (UUID in URL) | TC-04: Day 3 lesson at `/lesson/3ad4d876-...` loads | ☐ |
+| # | Bug Description | Test | Verified? |
+|---|----------------|------|-----------|
+| B1 | Login/register fields too wide on web | TC-01, TC-03: fields capped at 420px, centered | ☐ |
+| B2 | Auth forms not centered on page | TC-01, TC-03: forms centered horizontally | ☐ |
+| B3 | Email verification link timed out | TC-01: verify link redirects to live app | ☐ |
+| B4 | Duplicate email shows "Check your email" instead of error | TC-13: shows "already exists" message | ☐ |
+| B5 | Email rate limit shows raw error message | TC-13: shows friendly "wait a minute" message | ☐ |
+| B6 | Leaderboard says "Pull to retry" (no pull-to-refresh) | TC-07: shows "Check your connection" instead | ☐ |
+| B7 | Lesson audio auto-plays on page load | TC-04: no auto-play, user presses ▶ | ☐ |
+| B8 | Speed change doesn't work while audio playing | TC-13: speed changes immediately mid-playback | ☐ |
+| B9 | Wrong MC answer shows "Correct" text next to ✗ | TC-04: shows correct wrong-answer feedback | ☐ |
+| B10 | Auto-advance after answering (user can't read feedback) | TC-04: "Continue →" button appears, no auto-skip | ☐ |
+| B11 | Page refresh mid-lesson resets to Day 1 | TC-05: resumes at same step | ☐ |
+| B12 | No logout button / no Profile tab | TC-10: Profile tab (👤) in bottom nav with Sign out | ☐ |
+| B13 | XP only commits at lesson end (not visible mid-lesson) | TC-04: XP visible on Journey/Progress immediately | ☐ |
+| B14 | Re-answering same question duplicates XP | TC-04: going back and re-answering = 0 XP | ☐ |
+| B15 | "Continue" goes to Day 1 instead of resuming | TC-05: resume works via Continue button | ☐ |
+| B16 | Logout+relogin shows onboarding every time | TC-02 regression: returning users skip onboarding | ☐ |
+| B17 | "Get Shield" fails with shield_type not-null error | TC-10: Get Shield works, shield count increments | ☐ |
 
 ---
 
 ## Test Completion Criteria
 
-All test cases must pass with the following minimum:
-
-- **Critical (5):** TC-01, TC-02, TC-03, TC-04, TC-08 — 100% pass required
-- **High (6):** TC-05, TC-06, TC-07, TC-09, TC-10, TC-14 — 100% pass required
-- **Medium (3):** TC-11, TC-12, TC-13 — 90% pass required
-- **Low (2):** TC-15, TC-16 — best effort
+- **Critical (6):** TC-01, TC-02, TC-03, TC-04, TC-05, TC-13 — 100% pass required
+- **High (5):** TC-06, TC-07, TC-08, TC-10, TC-12 — 100% pass required
+- **Medium (3):** TC-09, TC-11, TC-14 — 90% pass required
+- **Regression (17):** B1–B17 — 100% pass required (all previously fixed bugs)
 
 ---
 
 ## Reporting Issues
 
 For each bug found:
-1. **Test Case ID:** Which TC step failed
-2. **URL:** Full URL where it happened
-3. **Steps to reproduce:** Exact actions
-4. **Expected:** What should happen
-5. **Actual:** What happened (include screenshots)
-6. **Browser + Version:** e.g., Chrome 128
-7. **Console errors:** Open DevTools (F12) → Console tab → copy any red errors
+1. **Bug ID:** e.g., B18
+2. **Test Case ID:** Which TC step failed
+3. **URL:** Full URL where it happened
+4. **Steps to reproduce:** Exact actions
+5. **Expected:** What should happen
+6. **Actual:** What happened (attach screenshots)
+7. **Browser + Version:** e.g., Chrome 132
+8. **Console errors:** DevTools (F12) → Console tab → copy any red errors
 
 ---
 
