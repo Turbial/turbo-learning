@@ -1,15 +1,9 @@
 -- PREVIEW — review & approve before applying with the service key.
--- 0006 Payments: plans, subscriptions, payment history. Stripe is source of truth;
+-- 0006 Payments: subscriptions, payment history. Stripe is source of truth;
 -- the stripe-webhook edge function writes here via the service role.
-create table if not exists plans (
-  id text primary key,                 -- 'free' | 'premium_monthly' | 'premium_annual'
-  name text not null, price_cents int default 0, interval text, stripe_price_id text
-);
-insert into plans (id, name, price_cents, interval) values
-  ('free','Free',0,null),
-  ('premium_monthly','Premium (Monthly)',1900,'month'),
-  ('premium_annual','Premium (Annual)',15000,'year')
-on conflict (id) do nothing;
+-- Note: plans table already exists with a different schema (slug-based).
+-- Migration 0013 aligns it with the code's expectations (price_cents, interval).
+-- This migration does NOT re-create plans — it only seeds if columns match.
 
 create table if not exists subscriptions (
   user_id uuid primary key references profiles(id) on delete cascade,

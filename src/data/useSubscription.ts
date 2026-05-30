@@ -6,6 +6,7 @@ export interface Subscription {
   tier: 'free' | 'premium';
   status: string;
   plan_id: string | null;
+  plan_slug: string | null;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   current_period_end: string | null;

@@ -42,6 +42,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🏆</Text>,
         }}
       />
+      <Tabs.Screen
+        name="dashboard"
+        options={{
+          tabBarLabel: "Dashboard",
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📋</Text>,
+        }}
+      />
     </Tabs>
   );
 }

@@ -54,27 +54,31 @@ Deno.serve(async (req: Request) => {
 
     const userId = authData.user.id;
 
-    // Look up plan in the plans table
+    // Look up plan in the plans table by slug
     const { data: plan, error: planError } = await admin
       .from('plans')
-      .select('id, name, price_cents, interval, stripe_price_id')
-      .eq('id', plan_id)
+      .select('id, slug, name, price_cents, price_monthly_usd, interval, stripe_price_id, stripe_price_id_monthly')
+      .eq('slug', plan_id)
       .single();
 
     if (planError || !plan) {
       return json({ error: `Plan not found: ${plan_id}` }, 404);
     }
 
-    if (plan.id === 'free') {
+    if (plan.slug === 'free') {
       return json({ error: 'Cannot purchase the free plan' }, 400);
     }
+
+    // Determine the Stripe price ID to use
+    const stripePriceId = plan.stripe_price_id || plan.stripe_price_id_monthly;
+    const unitAmount = plan.price_cents || plan.price_monthly_usd || 999; // in cents
 
     // Build line_items — prefer stripe_price_id if configured
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    if (plan.stripe_price_id) {
+    if (stripePriceId) {
       lineItems.push({
-        price: plan.stripe_price_id,
+        price: stripePriceId,
         quantity: 1,
       });
     } else {
@@ -82,7 +86,7 @@ Deno.serve(async (req: Request) => {
       const priceData: Stripe.Checkout.SessionCreateParams.LineItem.PriceData = {
         currency: 'usd',
         product_data: { name: plan.name },
-        unit_amount: plan.price_cents,
+        unit_amount: unitAmount,
       };
 
       if (plan.interval === 'month') {
@@ -104,7 +108,7 @@ Deno.serve(async (req: Request) => {
       client_reference_id: userId,
       metadata: {
         user_id: userId,
-        plan_id: plan.id,
+        plan_slug: plan.slug,
       },
       success_url: `${origin}/dashboard?checkout=success`,
       cancel_url: `${origin}/pricing?checkout=cancelled`,
