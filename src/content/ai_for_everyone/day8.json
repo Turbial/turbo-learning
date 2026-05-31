@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 8,
+    "unitLabel": "Day 8",
+    "unitTitle": "Building Your AI Toolkit",
+    "lessonOrder": 1,
+    "lessonTitle": "Week Two — Building Phase",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d8_s1",
+      "type": "info",
+      "title": "Welcome to Week 2",
+      "body": "You survived Week 1. Now you know the basics: clear prompts, useful answers, and when to trust them. Week 2 is about building reusable tools and workflows so AI works for you without starting from scratch every time.",
+      "audioUrl": null,
+      "primaryButton": "Let's build",
+      "xp": 3
+    },
+    {
+      "id": "d8_s2",
+      "type": "info",
+      "title": "The Power of Templates",
+      "body": "Most people ask AI the same kinds of questions over and over. The smartest thing you can do is save a template. One good prompt template can save you hours every week.",
+      "audioUrl": null,
+      "primaryButton": "Show me an example",
+      "xp": 3
+    },
+    {
+      "id": "d8_s3",
+      "type": "example",
+      "title": "A reusable template",
+      "prompt": "I need to write a [type of message] to [audience]. The key point I want to communicate is: [main point]. The tone should be [tone]. Here is the context: [paste relevant details]. Please draft the message and suggest two alternative versions.",
+      "primaryButton": "I see the pattern",
+      "xp": 5
+    },
+    {
+      "id": "d8_s4",
+      "type": "mc",
+      "title": "Why templates work",
+      "question": "What makes a prompt template better than writing a fresh prompt each time?",
+      "options": [
+        "Templates are always perfect",
+        "They save time by reusing what works",
+        "You should never change a template",
+        "AI refuses to answer without a template"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Even good templates need tweaking, but they save you the hard part.",
+        "Exactly. The thinking is done — you just fill in the blanks.",
+        "Templates can and should be adjusted as you learn.",
+        "AI works fine without one, but templates make you faster."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8_s5",
+      "type": "scenario_card",
+      "title": "Your life, templated",
+      "body": "Think about what you asked AI this week. Was it writing an email? Planning meals? Summarizing an article? Drafting a reply? Whatever it was, that is a template waiting to happen.",
+      "audioUrl": null,
+      "primaryButton": "I am thinking...",
+      "xp": 3
+    },
+    {
+      "id": "d8_s6",
+      "type": "builder",
+      "title": "Build your first template",
+      "fields": [
+        {
+          "id": "situation",
+          "label": "What situation do you use AI for most?",
+          "placeholder": "writing emails to clients"
+        },
+        {
+          "id": "reusable_parts",
+          "label": "What parts stay the same every time?",
+          "placeholder": "my name, my role, the tone I use"
+        },
+        {
+          "id": "variable_parts",
+          "label": "What changes each time?",
+          "placeholder": "the recipient name, the topic"
+        }
+      ],
+      "template": "I regularly need help with {{situation}}. The parts that never change: {{reusable_parts}}. The parts that change each time: {{variable_parts}}. Create a fill-in-the-blank template I can reuse.",
+      "primaryButton": "Generate my template",
+      "xp": 15
+    },
+    {
+      "id": "d8_s7",
+      "type": "paste_capture",
+      "title": "Paste the template AI gave you",
+      "body": "Paste the template AI created for you. You will use it tomorrow.",
+      "minLength": 10,
+      "primaryButton": "Save template",
+      "xp": 10
+    },
+    {
+      "id": "d8_s8",
+      "type": "info",
+      "title": "Beyond text — your AI console",
+      "body": "Chat interfaces are fine, but the real unlock is building your own console of AI tools. A 'console' just means having your go-to AI apps and sites ready in one place — like bookmarks for different problems.",
+      "audioUrl": null,
+      "primaryButton": "Show me",
+      "xp": 3
+    },
+    {
+      "id": "d8_s9",
+      "type": "info",
+      "title": "Your starter console",
+      "body": "Pick your main AI chat tool (ChatGPT, Claude, Gemini, or Grok). Add bookmarks for: a writing tool, an image generator, a search tool. That is your console. You do not need more than that.",
+      "audioUrl": null,
+      "primaryButton": "Simple enough",
+      "xp": 3
+    },
+    {
+      "id": "d8_s10",
+      "type": "reflection",
+      "title": "Your AI console plan",
+      "questions": [
+        {
+          "id": "main_tool",
+          "type": "single_choice",
+          "label": "Which AI tool will be your main one?",
+          "options": [
+            "ChatGPT",
+            "Claude",
+            "Gemini",
+            "Grok"
+          ]
+        },
+        {
+          "id": "extra_tools",
+          "type": "textarea",
+          "label": "What other AI tools (image, search, writing) would you add to your console?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8_s11",
+      "type": "good_fit",
+      "title": "Good fit for a template?",
+      "question": "Write a single email to my boss.",
+      "correct": "good",
+      "feedback": [
+        "Yes. Writing is one of the best uses of AI prompting.",
+        "Exactly. Emails are perfect for templates."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d8_s12",
+      "type": "good_fit",
+      "title": "Good fit for a template?",
+      "question": "Tell me what I should have for breakfast.",
+      "correct": "notideal",
+      "feedback": [
+        "AI can suggest ideas, but this is a personal choice, not a task.",
+        "Right. AI can help plan meals, but decide what to eat yourself."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d8_s13",
+      "type": "quiz",
+      "title": "Quick check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the main benefit of prompt templates?",
+          "options": [
+            "You never need to change them",
+            "They save time by reusing what works",
+            "AI works better with templates"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "You should keep all your AI tools as separate browser tabs with no organization.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "A set of go-to AI tools arranged by use case is called an AI ______.",
+          "answer": "console",
+          "aliases": ["toolkit", "dashboard"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d8_s14",
+      "type": "streak_commitment",
+      "commitOptions": [14, 21, 28]
+    },
+    {
+      "id": "d8_s15",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"]
+    },
+    {
+      "id": "d8_s16",
+      "type": "badge_unlock",
+      "badgeSlug": "template_builder"
+    },
+    {
+      "id": "d8_s17",
+      "type": "completion",
+      "title": "Day 8 complete — Template Builder",
+      "body": "You built your first reusable template and designed your AI console. Tomorrow you will learn how to chain tools together into real workflows.",
+      "primaryButton": "See you tomorrow"
+    }
+  ]
+}

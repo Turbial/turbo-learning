@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 12,
+    "unitLabel": "Day 12",
+    "unitTitle": "AI Research — Find, Verify, Organize",
+    "lessonOrder": 1,
+    "lessonTitle": "Research with AI",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d12_s1",
+      "type": "info",
+      "title": "Welcome to Day 12",
+      "body": "AI is incredible at research — if you use it right. Today you learn the research workflow: find information, cross-check it, and organize it into something useful.",
+      "audioUrl": null,
+      "primaryButton": "Let's research",
+      "xp": 3
+    },
+    {
+      "id": "d12_s2",
+      "type": "example",
+      "title": "Research prompt",
+      "prompt": "I am researching [topic]. I need a clear overview covering: what it is, why it matters, who the key players are, and what is changing right now. For each point, include specific examples and tell me how confident you are in each claim.",
+      "primaryButton": "I like the confidence levels",
+      "xp": 5
+    },
+    {
+      "id": "d12_s3",
+      "type": "info",
+      "title": "The research workflow",
+      "body": "Step 1: Ask AI for a broad overview. Step 2: Ask follow-up questions on specific areas. Step 3: Ask AI for sources and counterpoints. Step 4: Cross-check critical facts yourself. Step 5: Ask AI to organize everything into a summary.",
+      "audioUrl": null,
+      "primaryButton": "Five steps — got it",
+      "xp": 3
+    },
+    {
+      "id": "d12_s4",
+      "type": "mc",
+      "title": "Why cross-check?",
+      "question": "Why should you cross-check AI research with other sources?",
+      "options": [
+        "AI is always wrong",
+        "AI can be confidently wrong or make things up",
+        "Cross-checking is optional",
+        "AI does not have access to the internet"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI is not always wrong, but it is not always right either.",
+        "Exactly. AI hallucinates — it sounds convincing even when it invents facts.",
+        "Cross-checking is essential for any important research.",
+        "Modern AI tools can search the internet, but the hallucination risk remains."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12_s5",
+      "type": "scenario_card",
+      "title": "A real research session",
+      "body": "You need to research the best accounting software for your small business. Without AI: hours of Googling, comparing features, reading reviews. With AI: ask for a comparison, then cross-check two claims that matter most to you.",
+      "audioUrl": null,
+      "primaryButton": "That saves serious time",
+      "xp": 3
+    },
+    {
+      "id": "d12_s6",
+      "type": "builder",
+      "title": "Build a research prompt",
+      "fields": [
+        {
+          "id": "topic",
+          "label": "What do you want to research?",
+          "placeholder": "best project management tools for a small team"
+        },
+        {
+          "id": "focus",
+          "label": "What specific questions do you need answered?",
+          "placeholder": "pricing, ease of use, integrations"
+        },
+        {
+          "id": "format",
+          "label": "What format would you like the answer in?",
+          "placeholder": "a side-by-side comparison table"
+        }
+      ],
+      "template": "Research {{topic}}. Focus on {{focus}}. Present the answer as {{format}}. For each claim, indicate your confidence level (high/medium/low). After the main answer, suggest 2-3 things I should verify myself before making a decision.",
+      "primaryButton": "Generate research prompt",
+      "xp": 15
+    },
+    {
+      "id": "d12_s7",
+      "type": "paste_capture",
+      "title": "Save your research",
+      "body": "Paste the research results AI gave you. You will cross-check them next.",
+      "minLength": 10,
+      "primaryButton": "Save research",
+      "xp": 10
+    },
+    {
+      "id": "d12_s8",
+      "type": "info",
+      "title": "How to cross-check",
+      "body": "Pick the 2-3 most critical claims from AI's output. Ask AI: 'Where did you get that information?' Ask a separate AI tool: 'Can you verify that [claim] is true?' Then do one quick Google search on the most important point. That is enough.",
+      "audioUrl": null,
+      "primaryButton": "Triple-check system",
+      "xp": 3
+    },
+    {
+      "id": "d12_s9",
+      "type": "highlight",
+      "title": "Spot the cross-check worthy claims",
+      "body": "Which of these AI claims should you definitely verify? '95% of businesses use this software.' 'The CEO's name is John Smith.' 'This tool costs $29/month.' 'The stock market opens at 9:30 AM.' 'All competitors charge less.'",
+      "highlights": [
+        "95% of businesses use this software",
+        "All competitors charge less"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d12_s10",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "If AI sounds confident and provides specific numbers, those numbers are always reliable.",
+      "correct": false,
+      "feedback": [
+        "Confidence and accuracy are unrelated in AI. Always verify specific numbers.",
+        "Right. AI sounds confident even when it is wrong."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d12_s11",
+      "type": "info",
+      "title": "Organizing research",
+      "body": "After you have the information, ask AI: 'Organize this into a short briefing document. Include: key findings, what I should verify, what questions are still open, and my recommended next steps.' This turns research into action.",
+      "audioUrl": null,
+      "primaryButton": "Research → action",
+      "xp": 3
+    },
+    {
+      "id": "d12_s12",
+      "type": "reflection",
+      "title": "Your research plan",
+      "questions": [
+        {
+          "id": "next_research",
+          "type": "textarea",
+          "label": "What is the next topic you want to research with AI?"
+        },
+        {
+          "id": "verify_approach",
+          "type": "single_choice",
+          "label": "How will you verify AI's most important claims?",
+          "options": [
+            "Google search on key claims",
+            "Ask a second AI tool",
+            "Ask a human expert",
+            "All of the above"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12_s13",
+      "type": "good_fit",
+      "title": "Good for AI research?",
+      "question": "Compare the top 3 CRM tools for my real estate business.",
+      "correct": "good",
+      "feedback": [
+        "Yes. Comparative research is one of AI's best use cases.",
+        "Exactly. Just verify the pricing and specific feature claims."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d12_s14",
+      "type": "good_fit",
+      "title": "Good for AI research?",
+      "question": "Tell me exactly what my medical test results mean and whether I need treatment.",
+      "correct": "notideal",
+      "feedback": [
+        "AI can give general information, but medical interpretation needs a doctor.",
+        "Right. Use AI for background research, not medical diagnosis."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d12_s15",
+      "type": "quiz",
+      "title": "Research check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is hallucination in AI?",
+          "options": [
+            "AI daydreaming",
+            "AI making up confident-sounding false information",
+            "AI refusing to answer"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "You should cross-check the most critical claims AI makes.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "The process of verifying AI's claims against other sources is called ______.",
+          "answer": "cross-checking",
+          "aliases": ["verification", "fact checking", "fact-checking"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d12_s16",
+      "type": "completion",
+      "title": "Day 12 complete — Research Pro",
+      "body": "You now know how to research with AI, verify critical claims, and organize findings. Tomorrow: using AI to prepare for meetings, calls, and interviews.",
+      "primaryButton": "See you tomorrow"
+    }
+  ]
+}

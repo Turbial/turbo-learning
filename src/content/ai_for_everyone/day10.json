@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 10,
+    "unitLabel": "Day 10",
+    "unitTitle": "Automating Repetitive Tasks",
+    "lessonOrder": 1,
+    "lessonTitle": "Automation Basics",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d10_s1",
+      "type": "info",
+      "title": "Welcome to Day 10",
+      "body": "You have templates. You have workflows. Today you learn automation — setting things up so AI does the routine work without you having to think about it.",
+      "audioUrl": null,
+      "primaryButton": "Automate me",
+      "xp": 3
+    },
+    {
+      "id": "d10_s2",
+      "type": "scenario_card",
+      "title": "What automation looks like",
+      "body": "Every morning you get 50+ emails. You spend 45 minutes sorting them. With automation, AI can summarize the inbox, flag urgent ones, draft replies to the routine ones, and leave you with only the 3 emails that actually need your brain.",
+      "audioUrl": null,
+      "primaryButton": "That would save me hours",
+      "xp": 3
+    },
+    {
+      "id": "d10_s3",
+      "type": "info",
+      "title": "The automation mindset",
+      "body": "Ask yourself: 'Am I doing the same thing more than 3 times?' If yes, automate it. Not with code — with AI prompts you have already designed. The template from Day 8? That is automation.",
+      "audioUrl": null,
+      "primaryButton": "I have been automating without knowing it",
+      "xp": 3
+    },
+    {
+      "id": "d10_s4",
+      "type": "example",
+      "title": "Automation prompt",
+      "prompt": "Every Monday I receive a list of tasks from my manager. Here is a sample: [paste sample]. Create a fill-in-the-blank prompt I can use every Monday to organize these into priority order, deadlines, and blocked items.",
+      "primaryButton": "I need this",
+      "xp": 5
+    },
+    {
+      "id": "d10_s5",
+      "type": "mc",
+      "title": "Spotting automation",
+      "question": "Which of these is a good candidate for AI automation?",
+      "options": [
+        "Strategizing a new business plan",
+        "Replying to a customer who asks the same question every week",
+        "Having a deep conversation with your partner",
+        "Making a difficult moral decision"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Strategy needs your human judgment — use AI for research, but not the plan itself.",
+        "Exactly. Repetitive tasks are what automation is made for.",
+        "Some conversations are best kept entirely human.",
+        "Moral decisions should stay with you."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10_s6",
+      "type": "builder",
+      "title": "Automate your routine",
+      "fields": [
+        {
+          "id": "repeat_task",
+          "label": "What routine task do you do at least once a week?",
+          "placeholder": "reading and replying to status update emails"
+        },
+        {
+          "id": "pain_point",
+          "label": "What is the most tedious part?",
+          "placeholder": "writing the same update over and over"
+        },
+        {
+          "id": "trigger",
+          "label": "What triggers this task?",
+          "placeholder": "I get an email with subject 'Weekly Status'"
+        }
+      ],
+      "template": "I have a weekly task: {{repeat_task}}. The tedious part is {{pain_point}}. It is triggered by {{trigger}}. Design a reusable AI automation that handles this for me.",
+      "primaryButton": "Generate automation",
+      "xp": 15
+    },
+    {
+      "id": "d10_s7",
+      "type": "paste_capture",
+      "title": "Save your automation",
+      "body": "Paste the automation AI designed for you. This is your weekly time-saver.",
+      "minLength": 10,
+      "primaryButton": "Save automation",
+      "xp": 10
+    },
+    {
+      "id": "d10_s8",
+      "type": "info",
+      "title": "The 80/20 rule of automation",
+      "body": "Do not aim for 100% automation. Aim for 80%. Let AI handle the bulk, review the output, and make adjustments. 80% automated, 20% you is the sweet spot.",
+      "audioUrl": null,
+      "primaryButton": "80/20 — got it",
+      "xp": 3
+    },
+    {
+      "id": "d10_s9",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "AI automation should aim to replace all of your work so you never have to check anything.",
+      "correct": false,
+      "feedback": [
+        "Automation is a helper, not a replacement. You always review.",
+        "Right. The goal is to save time, not hand over control."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d10_s10",
+      "type": "highlight",
+      "title": "Find the automation candidates",
+      "body": "Which of these daily activities should you automate with AI? Sorting inbox, writing thank-you notes, creative brainstorming for a new product, summarizing meeting notes, deciding team strategy, scheduling appointments.",
+      "highlights": [
+        "Sorting inbox",
+        "writing thank-you notes",
+        "summarizing meeting notes",
+        "scheduling appointments"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d10_s11",
+      "type": "reflection",
+      "title": "Your automation hit list",
+      "questions": [
+        {
+          "id": "top_automation",
+          "type": "textarea",
+          "label": "What is the #1 task you want to automate this week?"
+        },
+        {
+          "id": "time_saved",
+          "type": "single_choice",
+          "label": "How much time per week would that save?",
+          "options": [
+            "Less than 30 minutes",
+            "30 minutes to 1 hour",
+            "1-2 hours",
+            "More than 2 hours"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10_s12",
+      "type": "good_fit",
+      "title": "Good for automation?",
+      "question": "Draft a weekly status report based on my project notes.",
+      "correct": "good",
+      "feedback": [
+        "Yes. Routine reports are a classic automation win.",
+        "Exactly. You check the output, AI does the drafting."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d10_s13",
+      "type": "good_fit",
+      "title": "Good for automation?",
+      "question": "Apologize to my partner for forgetting our anniversary.",
+      "correct": "notideal",
+      "feedback": [
+        "AI can help draft something, but personal apologies should come from you.",
+        "Right. Some things need your real voice."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d10_s14",
+      "type": "quiz",
+      "title": "Automation check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the 80/20 rule of automation?",
+          "options": [
+            "AI does 80%, you do 20% review and adjust",
+            "You do 80%, AI does 20%",
+            "80% of tasks cannot be automated"
+          ],
+          "correct": 0
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "If you do the same task three times, you should consider automating it.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Tasks you do repeatedly are called ______ tasks.",
+          "answer": "repetitive",
+          "aliases": ["routine", "recurring"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d10_s15",
+      "type": "completion",
+      "title": "Day 10 complete — Automation Pro",
+      "body": "You now know how to spot automation opportunities and build hands-free AI workflows. Tomorrow: using AI to collaborate with others.",
+      "primaryButton": "See you tomorrow"
+    }
+  ]
+}

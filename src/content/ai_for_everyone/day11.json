@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 11,
+    "unitLabel": "Day 11",
+    "unitTitle": "Collaborating with AI — Your Co-Worker",
+    "lessonOrder": 1,
+    "lessonTitle": "AI as Teammate",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d11_s1",
+      "type": "info",
+      "title": "Welcome to Day 11",
+      "body": "So far you have treated AI like a tool you use. Today you shift your mindset: AI is not a tool — it is a co-worker. The best results come when you and AI work together, each doing what you do best.",
+      "audioUrl": null,
+      "primaryButton": "Team up with AI",
+      "xp": 3
+    },
+    {
+      "id": "d11_s2",
+      "type": "scenario_card",
+      "title": "You + AI = better than either alone",
+      "body": "You have context, judgment, and creativity. AI has speed, breadth, and memory. Together: you provide the 'what' and 'why', AI provides the draft, data, and alternatives. You edit, AI generates.",
+      "audioUrl": null,
+      "primaryButton": "That makes sense",
+      "xp": 3
+    },
+    {
+      "id": "d11_s3",
+      "type": "example",
+      "title": "Collaboration prompt",
+      "prompt": "I am planning a team workshop on [topic]. I have these ideas: [list ideas]. You act as my brainstorming partner. Challenge my assumptions, suggest what I might be missing, and help me organize the best ideas into a structure. Push back if something does not make sense.",
+      "primaryButton": "I like the push-back part",
+      "xp": 5
+    },
+    {
+      "id": "d11_s4",
+      "type": "info",
+      "title": "Roles for AI",
+      "body": "You can ask AI to play different roles: 'Act as my editor and improve this text.' 'Act as my devil's advocate and find flaws in this plan.' 'Act as my research assistant and find supporting data.' Each role gives you a different kind of help.",
+      "audioUrl": null,
+      "primaryButton": "Role play — I get it",
+      "xp": 3
+    },
+    {
+      "id": "d11_s5",
+      "type": "builder",
+      "title": "Give AI a role",
+      "fields": [
+        {
+          "id": "task",
+          "label": "What are you working on?",
+          "placeholder": "writing a proposal for a new client"
+        },
+        {
+          "id": "role",
+          "label": "What role should AI play?",
+          "placeholder": "editor who checks for clarity and impact"
+        },
+        {
+          "id": "your_part",
+          "label": "What will you contribute?",
+          "placeholder": "the key ideas and main arguments"
+        }
+      ],
+      "template": "I am working on {{task}}. I want you to act as my {{role}}. I will provide {{your_part}}. Ask clarifying questions before responding, then give me your best input.",
+      "primaryButton": "Set the role",
+      "xp": 15
+    },
+    {
+      "id": "d11_s6",
+      "type": "paste_capture",
+      "title": "Save this prompt",
+      "body": "Paste the collaboration prompt you just built. Use it as your go-to when you start a new project with AI.",
+      "minLength": 10,
+      "primaryButton": "Save prompt",
+      "xp": 10
+    },
+    {
+      "id": "d11_s7",
+      "type": "mc",
+      "title": "Role check",
+      "question": "Which role would make sense for this request: 'Here is my draft email. Make it more persuasive without changing the facts.'?",
+      "options": [
+        "AI as a calculator",
+        "AI as an editor",
+        "AI as a weather forecaster",
+        "AI as a delivery driver"
+      ],
+      "correct": 1,
+      "feedback": [
+        "A calculator role would be for numbers, not words.",
+        "Exactly. An editor improves the language while keeping the facts intact.",
+        "Weather forecasting is not relevant here.",
+        "Delivery is a physical task, not a text task."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11_s8",
+      "type": "scenario_card",
+      "title": "The review loop",
+      "body": "You send AI your work. AI improves it. You review. You refine. You send it back. This back-and-forth — the review loop — is how professionals work with AI. It is not one-and-done.",
+      "audioUrl": null,
+      "primaryButton": "Iteration, not perfection",
+      "xp": 3
+    },
+    {
+      "id": "d11_s9",
+      "type": "info",
+      "title": "How to disagree with AI",
+      "body": "AI gets things wrong. When it does, do not give up. Say: 'That is not quite right because...' or 'Can you try again but focus more on...' or 'I disagree because...' Correcting AI is part of the collaboration.",
+      "audioUrl": null,
+      "primaryButton": "Good — I should push back",
+      "xp": 3
+    },
+    {
+      "id": "d11_s10",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "If AI gives you an answer you do not like, you should accept it and move on.",
+      "correct": false,
+      "feedback": [
+        "No. You should push back, clarify, and iterate until it works.",
+        "Right. Collaboration means telling AI when it misses the mark."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d11_s11",
+      "type": "example",
+      "title": "Pushing back effectively",
+      "prompt": "That draft is too formal. The client is a long-time friend. Can you rewrite it in a warmer, more personal tone — like I am writing to someone I have known for years? Keep the same key points.",
+      "primaryButton": "Specific feedback works better",
+      "xp": 5
+    },
+    {
+      "id": "d11_s12",
+      "type": "reflection",
+      "title": "Your collaboration style",
+      "questions": [
+        {
+          "id": "first_role",
+          "type": "textarea",
+          "label": "What role would be most useful for AI in your daily work?"
+        },
+        {
+          "id": "pushback",
+          "type": "single_choice",
+          "label": "How comfortable are you pushing back on AI?",
+          "options": [
+            "Very comfortable",
+            "Somewhat comfortable",
+            "Not comfortable yet",
+            "I have never tried"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11_s13",
+      "type": "match",
+      "title": "Match the role to the ask",
+      "pairs": [
+        {
+          "left": "Find flaws in my business plan",
+          "right": "Devil's advocate"
+        },
+        {
+          "left": "Make my writing clearer",
+          "right": "Editor"
+        },
+        {
+          "left": "Find supporting data for my argument",
+          "right": "Research assistant"
+        },
+        {
+          "left": "Generate creative alternatives",
+          "right": "Brainstorming partner"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d11_s14",
+      "type": "good_fit",
+      "title": "Good for AI collaboration?",
+      "question": "Help me think through a complex decision by presenting pros and cons I might have missed.",
+      "correct": "good",
+      "feedback": [
+        "Yes. AI is great at expanding your perspective.",
+        "Right. The best collaboration is AI broadening your thinking."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d11_s15",
+      "type": "good_fit",
+      "title": "Good for AI collaboration?",
+      "question": "Make a final decision for me because I cannot decide.",
+      "correct": "notideal",
+      "feedback": [
+        "AI can help you think through it, but the final decision is yours.",
+        "Right. AI informs, you decide."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d11_s16",
+      "type": "quiz",
+      "title": "Collaboration check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the review loop?",
+          "options": [
+            "A single AI response",
+            "Iterative back-and-forth where you refine together",
+            "Asking AI to review itself"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "You should accept AI's first answer without changes.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Asking AI to act as an editor or researcher is called giving it a ______.",
+          "answer": "role",
+          "aliases": ["persona", "job"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d11_s17",
+      "type": "badge_unlock",
+      "badgeSlug": "collaborator"
+    },
+    {
+      "id": "d11_s18",
+      "type": "completion",
+      "title": "Day 11 complete — Collaborator",
+      "body": "You now see AI as a teammate, not just a tool. Tomorrow you learn how to use AI for research — finding, verifying, and organizing information.",
+      "primaryButton": "See you tomorrow"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 14,
+    "unitLabel": "Day 14",
+    "unitTitle": "Your Personal AI System — Week 2 Wrap",
+    "lessonOrder": 1,
+    "lessonTitle": "Building Your System",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d14_s1",
+      "type": "info",
+      "title": "Welcome to Day 14 — Final Day of Week 2",
+      "body": "Two weeks ago you learned how to ask AI a clear question. Now you have templates, workflows, automation, collaboration skills, research methods, and preparation systems. Today you bring it all together into one personal AI system.",
+      "audioUrl": null,
+      "primaryButton": "Build my system",
+      "xp": 3
+    },
+    {
+      "id": "d14_s2",
+      "type": "scenario_card",
+      "title": "Your week in review",
+      "body": "Day 8: Templates. Day 9: Workflows. Day 10: Automation. Day 11: Collaboration. Day 12: Research. Day 13: Preparation. Each day gave you a new building block. Today you assemble them into a system that works for your life.",
+      "audioUrl": null,
+      "primaryButton": "I have come a long way",
+      "xp": 3
+    },
+    {
+      "id": "d14_s3",
+      "type": "info",
+      "title": "Your AI system blueprint",
+      "body": "A personal AI system has four layers: (1) Your console — the tools you use daily. (2) Your templates — reusable prompts for common tasks. (3) Your workflows — chained steps for complex tasks. (4) Your automations — set-and-forget routines.",
+      "audioUrl": null,
+      "primaryButton": "Four layers — I see the structure",
+      "xp": 3
+    },
+    {
+      "id": "d14_s4",
+      "type": "builder",
+      "title": "Design your AI system",
+      "fields": [
+        {
+          "id": "daily_use",
+          "label": "What will you use AI for every day?",
+          "placeholder": "emails, planning my day, quick research"
+        },
+        {
+          "id": "weekly_use",
+          "label": "What will you use AI for weekly?",
+          "placeholder": "meeting prep, status reports, learning"
+        },
+        {
+          "id": "monthly_use",
+          "label": "What about monthly or occasional?",
+          "placeholder": "budget planning, project reviews, difficult conversations"
+        }
+      ],
+      "template": "Help me design my personal AI system. Daily: {{daily_use}}. Weekly: {{weekly_use}}. Monthly: {{monthly_use}}. For each category, recommend what type of AI tool, template, or workflow I should set up. Give me a one-page blueprint I can start using today.",
+      "primaryButton": "Build my blueprint",
+      "xp": 20
+    },
+    {
+      "id": "d14_s5",
+      "type": "paste_capture",
+      "title": "Save your blueprint",
+      "body": "Paste the AI system blueprint. This is your plan going forward.",
+      "minLength": 10,
+      "primaryButton": "Save my blueprint",
+      "xp": 15
+    },
+    {
+      "id": "d14_s6",
+      "type": "info",
+      "title": "The one-sentence test",
+      "body": "If someone asks you 'How do you use AI?', can you answer in one sentence? Try it: 'I use AI to draft my emails, prepare for meetings, and research decisions — and I always check the most important facts myself.' If you can say that, you have a system.",
+      "audioUrl": null,
+      "primaryButton": "I can say that",
+      "xp": 3
+    },
+    {
+      "id": "d14_s7",
+      "type": "info",
+      "title": "What comes next",
+      "body": "You do not stop here. Your system will evolve. New AI tools appear every month. Your life changes. The skill you have now — knowing how to integrate AI into your life — is permanent. The tools will change; your ability to use them will not.",
+      "audioUrl": null,
+      "primaryButton": "Skills over tools",
+      "xp": 3
+    },
+    {
+      "id": "d14_s8",
+      "type": "info",
+      "title": "The commitment",
+      "body": "Here is the truth: most people try AI once and give up. You are not most people. You spent 14 days building skills that will save you time every single day for the rest of your career. The question now is: will you keep using them?",
+      "audioUrl": null,
+      "primaryButton": "I will keep going",
+      "xp": 3
+    },
+    {
+      "id": "d14_s9",
+      "type": "reflection",
+      "title": "Your promise to yourself",
+      "questions": [
+        {
+          "id": "biggest_win",
+          "type": "textarea",
+          "label": "What is the single biggest way AI will change your daily life?"
+        },
+        {
+          "id": "keep_going",
+          "type": "single_choice",
+          "label": "Will you continue using what you have built?",
+          "options": [
+            "Yes, I am committed to my AI system",
+            "I will try, but I might forget",
+            "I am not sure yet",
+            "Probably not"
+          ]
+        },
+        {
+          "id": "next_step",
+          "type": "textarea",
+          "label": "What is the first thing you will do tomorrow with your AI system?"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d14_s10",
+      "type": "info",
+      "title": "Final thoughts",
+      "body": "AI is not going away. Every year it gets better, faster, and more integrated into daily life. You have a head start that most people will never have. Not because you are technical — because you showed up for 14 days and built the habit.",
+      "audioUrl": null,
+      "primaryButton": "Thank you",
+      "xp": 3
+    },
+    {
+      "id": "d14_s11",
+      "type": "quiz",
+      "title": "Final mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What are the four layers of a personal AI system?",
+          "options": [
+            "Console, Templates, Workflows, Automations",
+            "Chat, Email, Search, Video",
+            "Free, Basic, Pro, Enterprise"
+          ],
+          "correct": 0
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "How should you treat AI in your daily life?",
+          "options": [
+            "As a tool that replaces your thinking",
+            "As a collaborator that handles routine tasks while you focus on judgment and decisions",
+            "As something to avoid — it is unreliable"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "The most important skill you learned is how to adapt as AI tools evolve.",
+          "correct": true
+        },
+        {
+          "id": "q4",
+          "type": "fillblank",
+          "question": "A reusable prompt you use without starting from scratch is called a ______.",
+          "answer": "template",
+          "aliases": ["prompt template"]
+        },
+        {
+          "id": "q5",
+          "type": "fillblank",
+          "question": "The iterative back-and-forth refinement with AI is called the ______ loop.",
+          "answer": "review",
+          "aliases": ["feedback", "iteration"]
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d14_s12",
+      "type": "badge_unlock",
+      "badgeSlug": "ai_graduate"
+    },
+    {
+      "id": "d14_s13",
+      "type": "completion",
+      "title": "🏆 AI for Everyone — Complete!",
+      "body": "Congratulations. You completed the full 14-day program. You started knowing nothing about AI. You finish with templates, workflows, automations, research skills, and a personal AI system that works for your life. This is not the end — it is the beginning of how you work from now on.",
+      "primaryButton": "Start my journey"
+    }
+  ]
+}
