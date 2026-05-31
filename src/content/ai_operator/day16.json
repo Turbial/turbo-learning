@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "unit": "day16",
+  "title": "Day 16: AI for Marketing & Content",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d16-info-1",
+      "type": "info",
+      "title": "Marketing at Scale — The AI Content Engine",
+      "body": "Marketing is where AI delivers the most visible transformation. Content generation, SEO optimization, social media management, email campaigns, A/B testing — every marketing function gets faster with AI.\n\nBut there's a trap: AI-generated content that sounds like AI. Generic, lifeless, indistinguishable from every other brand using AI.\n\nThe AI Operator's advantage: you use AI for speed and scale, but you inject brand voice, strategic thinking, and human empathy into every output.\n\nToday you'll learn to build an AI content engine that produces quality at scale.",
+      "xp": 5
+    },
+    {
+      "id": "d16-highlight-1",
+      "type": "highlight",
+      "body": "The AI content stack:\n\nSEO Research → Content Brief → Draft → Visuals → Distribution → Measure\n\nAI handles: keyword clusters, outline generation, first drafts, image creation, multi-platform formatting, performance analysis.\n\nYou handle: brand voice definition, strategic direction, fact-checking, final edits, campaign strategy.\n\nThe operator sets the strategy. AI executes the tactics.",
+      "highlights": ["SEO Research → Content Brief → Draft → Visuals → Distribution → Measure", "brand voice definition", "strategy → tactics"],
+      "xp": 5
+    },
+    {
+      "id": "d16-mc-1",
+      "type": "mc",
+      "question": "What's the biggest risk of using AI for content marketing at scale?",
+      "options": [
+        "AI will replace all human marketers",
+        "Content becomes generic and loses brand differentiation — all your content sounds like everyone else's",
+        "It's too expensive to set up",
+        "Search engines penalize all AI-generated content"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. The biggest risk isn't quality — it's sameness. When everyone uses the same AI tools with the same prompts, content converges. The operator's edge is brand voice injection, strategic framing, and human editorial judgment.",
+        "Not quite. AI cost has dropped dramatically and search engines don't penalize AI content per se. The real risk is losing brand differentiation when everyone produces similar-looking content from similar AI prompts."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-example-1",
+      "type": "example",
+      "title": "The Brand Voice Injection Prompt",
+      "prompt": "This prompt turns generic AI content into brand-specific content:\n\n\"Write a [blog post / social post / email] about [TOPIC] for [BRAND NAME].\n\nOur brand voice guidelines:\n• Tone: [confident but not arrogant / friendly but professional / playful but informative]\n• Vocabulary: Avoid [jargon / buzzwords / complex terms]. Always use [specific terms we own]\n• Audience: [target audience description]\n• Length: [target word count]\n• Structure: [specific format they must follow]\n\nKey message we must communicate: [core message]\n\nHere are 3 examples of our best content for reference:\n[PASTE 3 EXAMPLES]\n\nNow write the piece matching this voice exactly.\"\n\nThen do a second pass: 'Rewrite this to sound less like AI and more like a human who knows their stuff.' The second pass is where the magic happens."
+    },
+    {
+      "id": "d16-scenario-1",
+      "type": "scenario_card",
+      "title": "The Content Operator — Nina's System",
+      "body": "Nina runs content for a B2B SaaS company. Before AI: 2 blog posts per week from 3 writers = $4,500/week.\n\nAfter AI content engine (Nina + AI tools):\n\nMonday morning: Nina reviews her SEO dashboard → identifies 3 high-opportunity topics (30 min)\nMonday AI: Generates outlines + first drafts for all 3 posts (automated, 0 min)\nTuesday: Nina edits and brand-voices each post — adds stories, examples, strategic framing (3 hours total for 3 posts)\nWednesday AI: Generates social posts, newsletter blurbs, and meta descriptions for each (automated, 0 min)\nWednesday Nina: Reviews and schedules across platforms (1 hour)\n\nResults: 3 high-quality posts/week instead of 2. Cost: $1,200/week (Nina's time). Output up 50%, cost down 73%.\n\nAnd Nina's work is more fun — she does strategy and creative direction, not formatting and publishing."
+    },
+    {
+      "id": "d16-tf-1",
+      "type": "tf",
+      "question": "For best results, AI-generated content should go through a human editorial pass focused on brand voice and strategic alignment before publishing.",
+      "correct": true,
+      "feedback": [
+        "Correct. AI generates excellent drafts but lacks brand-specific nuance, current context, and strategic judgment. The human editorial pass is where generic becomes great — and where you ensure differentiation.",
+        "True. AI is a world-class first-draft generator. But that's what it is — a first draft. The human editorial pass adds the brand voice, the timely references, the strategic framing that makes content stand out."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-info-2",
+      "type": "info",
+      "title": "Multi-Platform Content Pipeline",
+      "body": "One core idea → multiply across every platform:\n\n1. Core asset: Long-form blog post or video (2,000 words / 15 min)\n2. Social series: 5+ posts extracted (LinkedIn, Twitter, Instagram)\n3. Email version: Newsletter-formatted excerpt with CTA\n4. Audio version: AI-generated podcast snippet\n5. Visual assets: DALL-E generated images for each social post\n6. Repurposed: Slide deck, infographic, short-form video script\n\nEach adaptation takes the same core message and reformats it for the platform — consistent message, native format, no extra strategy work.",
+      "xp": 5
+    },
+    {
+      "id": "d16-builder-1",
+      "type": "builder",
+      "title": "Build Your Multi-Platform Content Plan",
+      "instruction": "Take ONE topic you'd want to create content about. Design a multi-platform content plan:\n\nCore Idea:\nBlog Post Angle:\n5 Social Media Posts (list each with platform, angle, and format):\nEmail Newsletter Version:\nVisual Asset Needed:\nAI Tools You'd Use:\nReview/Edit Process:",
+      "inputLabel": "Your multi-platform content plan",
+      "placeholder": "Core Idea: AI for small business accounting\nBlog Post: '5 Ways AI Saves 10 Hours/Week on Bookkeeping'\nSocial 1 (LinkedIn): Story about a founder who stopped dreading tax season\nSocial 2 (Twitter): Thread with 5 specific tools\n...",
+      "minChars": 60,
+      "xp": 20
+    },
+    {
+      "id": "d16-goodfit-1",
+      "type": "good_fit",
+      "question": "Your team needs to produce 20 localized versions of a product launch email for different regional markets with varying regulations and cultural references.",
+      "correct": "ideal",
+      "feedback": [
+        "Perfect for AI. The core message is fixed, but it needs adaptation for each market's language, regulations, and cultural context. AI handles the heavy lifting: translate → adapt for local regs → adjust cultural references → human reviews a sample.",
+        "This is an ideal AI use case. High volume (20 versions), variable elements (language, regulations, culture), fixed core message. AI handles adaptations, human reviews edge cases and high-value versions."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's one piece of content your business or team needs but never has time to create? How would an AI content engine change that?",
+          "placeholder": "The content gap and how AI fills it...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "Think of a brand whose content you admire. What makes their voice distinctive — and how would you encode that into prompts?",
+          "placeholder": "The brand, what makes them distinctive, and prompt strategies...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d16-highlight-2",
+      "type": "highlight",
+      "body": "The AI content operator's litmus test:\n\nCan someone tell this was made by AI? If yes, you're doing it wrong.\n\nGreat AI content is indistinguishable from great human content — because a human operator with taste, strategy, and brand sense directed every output.\n\nAI is your volume lever. You are your quality filter.",
+      "highlights": ["litmus test", "indistinguishable from great human content", "volume lever", "quality filter"],
+      "xp": 5
+    },
+    {
+      "id": "d16-completion-1",
+      "type": "completion",
+      "title": "Day 16 Complete!",
+      "body": "You now understand how to build an AI content engine that produces quality at scale — with SEO research, brand voice injection, multi-platform distribution, and human editorial oversight.\n\nTomorrow: AI for Sales & CRM — lead scoring, follow-up automation, and pipeline management with AI.",
+      "xp": 15
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "unit": "day17",
+  "title": "Day 17: AI for Sales & CRM",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d17-info-1",
+      "type": "info",
+      "title": "Sales Supercharged — AI in the Revenue Engine",
+      "body": "Sales is relationship business — but relationships depend on timely, relevant, personalized interactions. That's where AI changes everything.\n\nAI doesn't replace salespeople. It makes them faster, smarter, and more human by handling the parts that don't need human touch.\n\nToday you'll learn:\n• AI-powered lead scoring — finding the right prospects faster\n• Follow-up automation — never dropping a ball\n• Pipeline management — seeing exactly where to focus\n• Personalization at scale — making every outreach feel custom\n\nThe operators who win: they let AI handle the pattern matching while they handle the relationship building.",
+      "xp": 5
+    },
+    {
+      "id": "d17-highlight-1",
+      "type": "highlight",
+      "body": "AI sales wins:\n\n• Lead scoring accuracy: 3x better than rule-based systems\n• Follow-up response rates: 2x with AI-personalized outreach\n• Pipeline forecasting: 30% more accurate with AI pattern analysis\n• Time saved per rep: 5+ hours/week on admin and data entry\n\nThese are real numbers. AI in sales isn't coming — it's already outperforming.",
+      "highlights": ["3x better", "2x response rates", "30% more accurate", "5+ hours/week saved"],
+      "xp": 5
+    },
+    {
+      "id": "d17-mc-1",
+      "type": "mc",
+      "question": "A sales team has 500 leads in their CRM. Only 50 will convert. What's the best use of AI in this scenario?",
+      "options": [
+        "AI writes and sends a mass email to all 500 leads",
+        "AI scores each lead based on behavior, fit, and engagement — the team focuses on the top 50 scored leads",
+        "AI calls all 500 leads to qualify them",
+        "Ignore scoring — the team calls leads alphabetically"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI lead scoring analyzes dozens of signals (website visits, email engagement, company fit, job title, past behavior) and ranks leads by conversion probability. The team works the top tier first — where their time has the highest ROI.",
+        "Not quite. Mass outreach wastes everyone's time. AI's superpower is narrowing the focus — scoring leads so the team spends time on the ones most likely to convert."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17-example-1",
+      "type": "example",
+      "title": "The AI Sales Assistant Prompt",
+      "prompt": "For personalized outreach at scale, use this structure:\n\n\"I need to send a follow-up email to [Prospect Name], [Title] at [Company].\n\nContext:\n• They downloaded our whitepaper on [Topic] 5 days ago\n• Their company just announced [Recent News]\n• They viewed our pricing page yesterday\n• We've exchanged 2 previous emails (see below)\n\nDraft a follow-up that:\n1. References their recent company news (shows you follow them)\n2. Connects it to the whitepaper topic (shows relevance)\n3. Offers a specific next step (not 'let me know if interested')\n4. Is brief — under 100 words\n5. Sounds like a human, not a sales template\n\nPrevious emails: [PASTE THREAD]\"\n\nEach variable (prospect name, company, news, whitepaper) can be pulled from CRM fields — making personalization at scale a template with injected context."
+    },
+    {
+      "id": "d17-scenario-1",
+      "type": "scenario_card",
+      "title": "The Pipeline Accelerator — CloudSync's AI Sales Stack",
+      "body": "CloudSync, a B2B SaaS company, implemented AI across their sales workflow:\n\nBEFORE: 12 sales reps, each managing 150+ leads. Follow-up was erratic. Pipeline was a spreadsheet. Forecasts were always wrong.\n\nAFTER AI SALES STACK:\n• Lead scoring: AI analyzes CRM data + web behavior → assigns score to every lead\n• Auto-nurture: Middle-scored leads get AI-personalized email sequences (drip campaigns)\n• Smart alerts: Rep gets notified only when a high-score lead takes meaningful action\n• Conversation intel: AI analyzes call transcripts → surfaces competitor mentions, buying signals, common objections\n• Forecasting: AI predicts close probability for each deal based on historical patterns\n\nRESULTS: Reps focus on 20 high-value leads instead of 150 random ones. Pipeline accuracy up 40%. Follow-up response up 2x. Revenue per rep up 35%."
+    },
+    {
+      "id": "d17-tf-1",
+      "type": "tf",
+      "question": "AI-powered CRM tools mean sales teams should automate all customer communication with no human review.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI handles outreach drafts, lead scoring, and follow-up scheduling — but the human salesperson should review and personalize before sending. Especially for high-value deals where relationship matters.",
+        "False. Even the best AI personalization needs human judgment for high-stakes communication. AI drafts are starting points, not finished products. The human touch in sales is what builds trust."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17-info-2",
+      "type": "info",
+      "title": "The AI Sales Stack",
+      "body": "A complete AI-powered sales workflow:\n\n1. INTELLIGENCE — AI researches prospects (company news, recent funding, role changes, tech stack) and enriches CRM automatically\n\n2. SCORING — AI scores and segments leads by likelihood to convert, then routes to right rep or sequence\n\n3. ENGAGEMENT — AI drafts personalized outreach, suggests optimal send times, A/B tests subject lines\n\n4. TRACKING — AI monitors replies, flags buying signals, logs all interactions to CRM\n\n5. ANALYSIS — AI surfaces patterns: which messaging works, which objections repeat, which segments close fastest\n\nMost CRMs (HubSpot, Salesforce, Pipedrive) now have AI features built in. Start there before building custom.",
+      "xp": 5
+    },
+    {
+      "id": "d17-builder-1",
+      "type": "builder",
+      "title": "Design Your AI Sales Workflow",
+      "instruction": "Map out a complete AI-enhanced sales workflow for a product or service you're familiar with:\n\n1. How leads enter the system\n2. How AI scores and prioritizes\n3. What AI does for outreach (and what stays human)\n4. How follow-up is managed\n5. How pipeline is tracked and forecasted\n6. How performance data feeds back into improvement",
+      "inputLabel": "Your AI sales workflow design",
+      "placeholder": "Lead source: website form + LinkedIn outreach\nScoring: engagement level + company fit + budget signal\nAI outreach: personalized first email from template\nHuman: follows up on replies, handles calls, closes...",
+      "minChars": 60,
+      "xp": 20
+    },
+    {
+      "id": "d17-scenario-2",
+      "type": "scenario_card",
+      "title": "The Objection Handler — AI Coach for Sales Calls",
+      "body": "Mei is a new sales rep. She's great with people but struggles when prospects raise objections she hasn't heard before.\n\nHer company implements an AI call coach:\n\nDuring calls: AI listens in real-time, detects when an objection is raised, and surfaces a suggested response on Mei's screen\nAfter calls: AI generates a summary, highlights objections raised, and creates practice scenarios\nWeekly: AI identifies which objection types Mei handles well vs. poorly and recommends training\n\nIn 3 months, Mei's close rate goes from 18% to 34%. Not because AI replaced her — because AI gave her the playbook in real-time while she focused on human connection."
+    },
+    {
+      "id": "d17-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the most time-consuming sales or CRM task in your current workflow? How could AI change it?",
+          "placeholder": "The task, time spent, and AI alternative...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "If AI could handle all your lead research and initial outreach, how would your sales process change? What would you do with the extra time?",
+          "placeholder": "Your redesigned sales process with AI handling research and initial outreach...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d17-highlight-2",
+      "type": "highlight",
+      "body": "Best sales AI advice: Automate the outreach, personalize the connection.\n\nAI gets prospects to the conversation. You win the conversation.\n\nThe teams winning with AI sales tools aren't the ones sending more emails. They're the ones sending better emails to the right people — and then having better conversations because AI freed their mental bandwidth.",
+      "highlights": ["Automate the outreach, personalize the connection", "better conversations because AI freed their mental bandwidth"],
+      "xp": 5
+    },
+    {
+      "id": "d17-completion-1",
+      "type": "completion",
+      "title": "Day 17 Complete!",
+      "body": "You now understand how AI transforms sales and CRM: lead scoring that actually works, personalized outreach at scale, pipeline visibility that drives decisions, and AI coaching that makes every rep better.\n\nTomorrow: AI for Product Development — rapid prototyping, user research automation, and feature prioritization.",
+      "xp": 15
+    }
+  ]
+}

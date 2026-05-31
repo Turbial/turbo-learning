@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "unit": "day18",
+  "title": "Day 18: AI for Product Development",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d18-info-1",
+      "type": "info",
+      "title": "Ship Faster — AI in Product Development",
+      "body": "Product development is a cycle of ideas → validation → building → launching → learning. AI accelerates every phase.\n\nToday you'll learn:\n• Rapid prototyping with AI — from idea to working prototype in days, not weeks\n• User research automation — gathering insights without manual interviews\n• Feature prioritization — AI analyzes which features drive the most value\n• Technical documentation — AI generates specs, API docs, and release notes\n\nThe best product teams don't use AI to replace their thinking. They use it to reduce the time between idea and validated learning.",
+      "xp": 5
+    },
+    {
+      "id": "d18-highlight-1",
+      "type": "highlight",
+      "body": "Speed multipliers in product development:\n\n• UI mockups: 1 hour → 5 minutes with AI design tools\n• User story writing: 2 hours → 15 minutes with AI generation\n• Competitor analysis: 1 day → 30 minutes with AI research\n• PRD documents: 1 day → 1 hour with AI structuring\n• QA test cases: 1 day → 2 hours with AI generation\n\nThe product teams shipping fastest aren't working harder. They're using AI to eliminate the non-differentiating work.",
+      "highlights": ["1 hour → 5 minutes", "2 hours → 15 minutes", "1 day → 30 minutes", "non-differentiating work"],
+      "xp": 5
+    },
+    {
+      "id": "d18-mc-1",
+      "type": "mc",
+      "question": "A product manager wants to validate a new feature idea. What's the fastest AI-assisted validation approach?",
+      "options": [
+        "Build the full feature, launch it, and see what happens",
+        "Ask AI to generate a survey, analyze competitor features, create mockups, and draft user testing scripts — then run lightweight tests in 2-3 days",
+        "Present the idea to the team and vote on it",
+        "Ask AI to decide whether to build the feature"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI accelerates every validation step: survey generation, competitive analysis, mockup creation, and testing scripts. This lets you test an idea with real users in days instead of weeks — before committing to a full build.",
+        "Not quite. The fastest path is AI-assisted rapid validation: use AI to generate survey questions, build testable mockups from wireframes, research competitors, and draft test scripts. Validate with real users in days, then decide whether to build."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-example-1",
+      "type": "example",
+      "title": "PRD Generation Prompt",
+      "prompt": "Turn a feature idea into a complete Product Requirements Document:\n\n\"I want to build [FEATURE DESCRIPTION] for [PRODUCT NAME].\n\nGenerate a PRD with:\n\n1. Problem Statement — what problem does this solve, and for whom?\n2. Success Metrics — how do we measure if this feature works?\n3. User Stories — list 5-8 stories in 'As a [user], I want [goal], so that [reason]' format\n4. Functional Requirements — what the feature must do (numbered, testable)\n5. Non-Functional Requirements — performance, security, accessibility\n6. Edge Cases — 3-5 potential failure modes\n7. Out of Scope — explicitly what we're NOT building\n8. Dependencies — what else needs to exist for this to work\n\nFor each section, flag anything that needs product manager judgment vs. what AI can draft.\"\n\nThe result: a 70% complete PRD in 10 minutes. The PM fills in the remaining 30% — the strategic decisions only they can make."
+    },
+    {
+      "id": "d18-scenario-1",
+      "type": "scenario_card",
+      "title": "AI-Assisted Product Sprint — The Buildly Story",
+      "body": "Buildly is a 5-person startup with a big idea: AI-powered construction project management.\n\nWeek 1 (AI Accelerated): They use AI to:\n• Research 12 competitor products → feature comparison matrix (2 hours → 15 min)\n• Generate 30+ user stories from their target market interviews (3 days → 4 hours)\n• Create clickable wireframes in Figma using AI design plugins (1 week → 1 day)\n• Draft technical architecture document (2 days → 3 hours)\n\nWeek 2: User testing with 8 potential customers using AI-synthesized survey + interview guides\nWeek 3: AI generates test data, edge case scenarios, and draft documentation while developers code\nWeek 4: MVP ready — normally a 3-4 month process\n\nDid AI write the code? No. Did AI replace the designers? No. But AI eliminated weeks of overhead that had nothing to do with their product's unique value."
+    },
+    {
+      "id": "d18-tf-1",
+      "type": "tf",
+      "question": "AI is most valuable in the early stages of product development (ideation, validation, prototyping) rather than in the late stages (production deployment, scaling).",
+      "correct": true,
+      "feedback": [
+        "Correct. AI's biggest product development impact is accelerating the Build-Measure-Learn loop at the fuzzy front end — faster ideation, validation, and prototyping. In production, AI adds value in testing, monitoring, and docs, but the core differentiator at scale is human judgment.",
+        "True. The early stages have the most ambiguity and the highest leverage for speed. AI eliminates weeks of overhead in research, mockups, documentation — getting you to validated learning faster."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-goodfit-1",
+      "type": "good_fit",
+      "question": "You need to prioritize 20 feature requests for your product's next quarter. You have data on estimated effort, user impact, revenue potential, and development dependencies.",
+      "correct": "ideal",
+      "feedback": [
+        "Perfect for AI. Multiple structured data points with clear trade-offs is exactly what AI pattern analysis handles well. AI can weight each factor, surface conflicts, and rank features — while the PM applies strategic context AI can't know (company goals, partner commitments, market timing).",
+        "This is an ideal AI use case. Features have structured data (effort, impact, revenue) that AI can analyze and score. The PM provides the strategic context. Together, you get a prioritized roadmap that considers both data and judgment."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-info-2",
+      "type": "info",
+      "title": "AI in Each Product Phase",
+      "body": "How AI accelerates every product development phase:\n\n1. IDEATE — AI generates feature ideas from customer feedback, competitor analysis, and market trends\n\n2. VALIDATE — AI drafts surveys, creates testable mockups, generates user testing scripts, analyzes results\n\n3. SPEC — AI produces PRDs, user stories, acceptance criteria, and technical specs\n\n4. BUILD — AI generates boilerplate code, test cases, documentation, and release notes\n\n5. LAUNCH — AI creates launch materials, monitors launch metrics, flags anomalies\n\n6. LEARN — AI analyzes usage data, surfaces patterns, generates retrospective summaries\n\nAI doesn't replace a product manager. It gives them a team of assistants.",
+      "xp": 5
+    },
+    {
+      "id": "d18-builder-1",
+      "type": "builder",
+      "title": "Design an AI-Accelerated Product Sprint",
+      "instruction": "Think of a product or feature you'd like to build. Design a 2-week AI-accelerated sprint:\n\nWeek 1 — Validation: What would you create in the first week using AI?\nWeek 2 — Build: What would AI help you produce?\n\nFor each phase, list:\n• What AI generates\n• What you (human) decide\n• How long each step takes with vs. without AI",
+      "inputLabel": "Your AI-accelerated product sprint",
+      "placeholder": "Phase: Validation\nAI generates: survey, competitor analysis, mockups\nHuman decides: target segment, core value proposition\nTime saved: 5 days → 1 day\n\nPhase: Build\nAI generates: spec docs, test data, release notes\nHuman: architecture decisions, code quality, UX flows\nTime saved: 3 days → 1 day",
+      "minChars": 60,
+      "xp": 20
+    },
+    {
+      "id": "d18-scenario-2",
+      "type": "scenario_card",
+      "title": "User Research at AI Speed",
+      "body": "Tomas needs to understand why user retention drops after the first week. Traditional approach: schedule 15 user interviews (2 weeks), manually transcribe and tag themes (1 week), write report (2 days).\n\nAI-assisted approach:\n1. Export all in-app behavior data for users who churned in week 1\n2. AI analyzes behavioral patterns: which actions correlate with retention vs. churn (30 min)\n3. AI drafts 5 user interview scripts targeting specific behavioral segments (15 min)\n4. Record 5 interviews using AI transcription + theme extraction\n5. AI generates retention hypothesis report with supporting evidence (1 hour)\n\nTotal: 2 days instead of 3 weeks. More data-driven, less manual labor.\n\nTomas doesn't talk to fewer users. He talks to the right users with better questions — and gets insights faster."
+    },
+    {
+      "id": "d18-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the biggest bottleneck in your current product development process? Is it ideation, validation, building, or learning? How would AI accelerate that bottleneck?",
+          "placeholder": "The bottleneck and how AI accelerates it...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "If you could eliminate all documentation and specification writing from your product process, what would you do with that reclaimed time?",
+          "placeholder": "What you'd do with reclaimed time...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d18-highlight-2",
+      "type": "highlight",
+      "body": "The product teams that will own their markets:\n\nThey don't ship faster because they have more developers.\nThey ship faster because they've eliminated every non-essential task between idea and learning.\n\nAI is the elimination tool. Product judgment is the competitive advantage.\n\nOne without the other loses. Together, they win.",
+      "highlights": ["eliminated every non-essential task", "AI is the elimination tool", "Product judgment is the competitive advantage"],
+      "xp": 5
+    },
+    {
+      "id": "d18-completion-1",
+      "type": "completion",
+      "title": "Day 18 Complete!",
+      "body": "You now understand how AI transforms product development — accelerating every phase from ideation through launch while keeping human judgment at the center. Rapid validation, AI-generated documentation, automated user research, and smarter prioritization.\n\nTomorrow: AI for Finance & Accounting — automated reconciliation, forecasting, and expense management.",
+      "xp": 15
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "unit": "day15",
+  "title": "Day 15: AI for Business Operations",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d15-info-1",
+      "type": "info",
+      "title": "Welcome to Week 3 — Real Business Impact",
+      "body": "Weeks 1 and 2 gave you the skills to use AI and build systems. Now you learn something different: applying AI to specific business functions — operations, marketing, sales, product, finance, HR.\n\nToday: Business Operations. The engine room of every company.\n\nOperations is where AI delivers the fastest ROI: automating workflows, analyzing data, managing customer support, and optimizing processes. This is where you move from 'AI user' to 'AI-driven operator' of a real business function.",
+      "xp": 5
+    },
+    {
+      "id": "d15-highlight-1",
+      "type": "highlight",
+      "body": "Quickest AI wins in operations:\n\n• Support ticket triage → 70% reduction in first-response time\n• Data extraction from documents → 90% faster than manual\n• Workflow automation → 40+ hours saved per week per team\n• Process documentation → hours becomes minutes\n\nThese aren't hypothetical. They're documented results from real companies.",
+      "highlights": ["70% reduction in first-response time", "90% faster than manual", "40+ hours saved per week", "documented results"],
+      "xp": 5
+    },
+    {
+      "id": "d15-mc-1",
+      "type": "mc",
+      "question": "A company receives 500 support tickets per week. 60% are password resets, account status checks, and basic how-to questions. What's the highest-leverage AI ops move?",
+      "options": [
+        "Hire 3 more support agents to handle the volume",
+        "Build an AI chatbot trained on the FAQ and knowledge base to handle the 60% repetitive tickets",
+        "Ignore the ticket pattern — it's not that bad",
+        "Send mass emails to customers asking them to stop submitting tickets"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. The 60% of repetitive tickets are a perfect fit for AI automation. The chatbot handles Tier 0 questions instantly, humans handle the remaining 40% that need judgment. Both response time and team satisfaction improve.",
+        "Not quite. Hiring more people for repetitive work scales the problem instead of solving it. The leverage play is AI-handling the predictable 60% so your team focuses on the 40% that needs human expertise."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-scenario-1",
+      "type": "scenario_card",
+      "title": "The Ops Transformation — GreenLeaf Retail",
+      "body": "GreenLeaf is a mid-size retailer with 12 stores. Before AI ops:\n• Weekly inventory reports took 8 hours of manual spreadsheet work\n• Customer complaints sat unread for 3+ days\n• Employee onboarding paperwork took 2 weeks to process\n• Vendor invoices had 15% error rate going unnoticed\n\nAfter AI ops implementation:\n• Inventory reports are auto-generated daily from POS data — 15 minutes\n• AI triages customer complaints: urgent issues flagged within 1 hour\n• Onboarding: AI reviews documents, generates checklist, sends reminders — 2 days\n• Invoice errors detected in real-time by pattern-matching AI — 2% error rate\n\nInventory savings alone paid for the system in 3 months."
+    },
+    {
+      "id": "d15-tf-1",
+      "type": "tf",
+      "question": "AI is most useful in business operations for tasks that are high-volume, repetitive, and follow predictable patterns.",
+      "correct": true,
+      "feedback": [
+        "Correct. High-volume + repetitive + predictable = ideal AI automation territory. These are the tasks that drain human energy and benefit most from consistent, always-on AI processing.",
+        "Actually yes. AI excels at exactly these tasks: high frequency, low variability, clear success criteria. Operations is full of them — which is why AI ROI in ops is so fast."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-example-1",
+      "type": "example",
+      "title": "Build an Ops Automation — Invoice Data Extraction",
+      "prompt": "The setup: You receive 200 PDF invoices per week. Someone manually reads each one and enters vendor, amount, date, PO number, and line items into your accounting system.\n\nThe AI solution pipeline:\n\n1. Input: Invoices arrive in a shared email inbox\n2. AI layer: Custom GPT or Make scenario reads each PDF, extracts structured fields\n3. Validation: AI flags any invoice that doesn't match expected patterns (possible error)\n4. Output: Structured data goes into your accounting system via API\n5. Exception handling: Flagged invoices get human review (usually 5-10%)\n\nResult: One person reviews 10-20 invoices per day instead of 200. The AI handles 90% perfectly and improves over time."
+    },
+    {
+      "id": "d15-builder-1",
+      "type": "builder",
+      "title": "Design an Ops Automation for Your Context",
+      "instruction": "Think of one repetitive operational task in your business or work that:\n• Happens at least weekly\n• Follows a predictable pattern\n• Takes someone more than 2 hours per week\n• Has clear inputs and outputs\n\nDescribe the current process, the AI automation you'd build, and estimate the time saved.",
+      "inputLabel": "Your operations automation design",
+      "placeholder": "Task: [what's the repetitive process]\nCurrent time: [hours/week]\nAI solution: [how would you automate it]\nTime saved: [estimated hours/week]\nTools needed: [which no-code/AI tools]",
+      "minChars": 50,
+      "xp": 20
+    },
+    {
+      "id": "d15-info-2",
+      "type": "info",
+      "title": "Three Ops Automation Categories",
+      "body": "Most business ops automations fall into three buckets:\n\n1. DATA PIPELINES — Extract, transform, and load data from one system to another. Examples: invoice processing, report generation, database syncing.\n\n2. TRIAGE SYSTEMS — Route incoming items to the right person or process. Examples: support ticket routing, email classification, lead assignment.\n\n3. MONITORING & ALERTS — Watch for patterns and notify when something needs attention. Examples: inventory below threshold, unusual transaction detected, SLA breach warning.\n\nPick the category that matches your bottleneck and start there.",
+      "xp": 5
+    },
+    {
+      "id": "d15-scenario-2",
+      "type": "scenario_card",
+      "title": "Process Documentation — The Hidden Time Sink",
+      "body": "Maria's team has high turnover. Every time someone leaves, the next person spends weeks figuring out how processes work — tribal knowledge that walks out the door.\n\nAI solution:\n• She records a 20-min Loom walking through a process\n• Feeds the transcript into a GPT with instructions: 'Convert this into a step-by-step SOP document with screenshots described, common pitfalls, and FAQ'\n• The GPT produces a draft SOP in 2 minutes\n• Maria reviews and edits — 10 minutes\n\nResult: 12 SOPs created in a single afternoon. Previously: zero, because nobody had time.\n\nProcess documentation no longer has to compete with 'real work.' It IS real work — now done at AI speed."
+    },
+    {
+      "id": "d15-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What operational task in your work is the biggest time drain? Estimate hours per week. What would change if AI handled 80% of it?",
+          "placeholder": "The task, hours per week, and how your role would change...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "What would you do with the time saved from ops automation? Which higher-value work becomes possible?",
+          "placeholder": "How you'd reinvest the saved time...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d15-highlight-2",
+      "type": "highlight",
+      "body": "Operations is where AI goes from 'interesting' to 'indispensable.'\n\nWhen you automate a marketing task, you save marketing time.\nWhen you automate an operations task, you save EVERYONE'S time.\n\nThat's the multiplier effect of AI in ops. Don't just automate your job — automate the systems that everyone depends on.",
+      "highlights": ["'interesting' to 'indispensable'", "multiplier effect", "automate the systems everyone depends on"],
+      "xp": 5
+    },
+    {
+      "id": "d15-completion-1",
+      "type": "completion",
+      "title": "Day 15 Complete!",
+      "body": "You now understand the three categories of AI ops automation — data pipelines, triage systems, and monitoring alerts. You've seen real examples of companies cutting hours to minutes on operational tasks.\n\nTomorrow: AI for Marketing & Content — how to generate, personalize, and distribute content at scale.\n\nYou're building a complete AI operator toolkit, one business function at a time.",
+      "xp": 15
+    }
+  ]
+}
