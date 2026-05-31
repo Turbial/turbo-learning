@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 9,
+    "unitLabel": "Day 9",
+    "unitTitle": "Chaining Tools Into Workflows",
+    "lessonOrder": 1,
+    "lessonTitle": "Workflow Building",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d9_s1",
+      "type": "info",
+      "title": "Welcome to Day 9",
+      "body": "Yesterday you built a template. Today you learn how to chain tools together. One AI to summarize a document, another to draft a reply, another to check the tone — that is a workflow.",
+      "audioUrl": null,
+      "primaryButton": "Let's chain it up",
+      "xp": 3
+    },
+    {
+      "id": "d9_s2",
+      "type": "example",
+      "title": "A workflow example",
+      "prompt": "Here is a long article about [topic]. First, summarize it in 5 bullet points. Then, based on that summary, draft an email to my team explaining the key takeaways. Finally, check the email tone — is it clear and professional?",
+      "primaryButton": "That is three steps in one",
+      "xp": 5
+    },
+    {
+      "id": "d9_s3",
+      "type": "scenario_card",
+      "title": "A real workflow",
+      "body": "You get a long email from a client. Step 1: Ask AI to summarize the email. Step 2: Ask AI to draft a reply. Step 3: Ask AI to check the tone. Each step builds on the previous one. That is a workflow.",
+      "audioUrl": null,
+      "primaryButton": "I can see how this works",
+      "xp": 3
+    },
+    {
+      "id": "d9_s4",
+      "type": "info",
+      "title": "Workflow rules",
+      "body": "Rule 1: Each step should output something the next step can use. Rule 2: Add the output of each step to the next prompt. Rule 3: Use a separate chat thread for each workflow.",
+      "audioUrl": null,
+      "primaryButton": "Got it",
+      "xp": 3
+    },
+    {
+      "id": "d9_s5",
+      "type": "mc",
+      "title": "Check your understanding",
+      "question": "What is the main advantage of a workflow?",
+      "options": [
+        "It keeps everything in one long prompt",
+        "It breaks a complex task into manageable steps",
+        "It makes AI faster",
+        "It reduces the number of tools you need"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Actually, workflows use multiple focused prompts.",
+        "Right. Each step does one thing well, and the next step builds on it.",
+        "Speed varies, but the main benefit is accuracy.",
+        "You might use more tools in a workflow, not fewer."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9_s6",
+      "type": "highlight",
+      "title": "Spot the workflow steps",
+      "body": "Find the three distinct steps in this request: Take this meeting transcript, list the action items, then write a follow-up email assigning each item to the right person, and finally check the email for clarity.",
+      "highlights": [
+        "list the action items",
+        "write a follow-up email",
+        "check the email for clarity"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d9_s7",
+      "type": "builder",
+      "title": "Design your workflow",
+      "fields": [
+        {
+          "id": "task",
+          "label": "What multi-step task do you face regularly?",
+          "placeholder": "reviewing client proposals"
+        },
+        {
+          "id": "step1",
+          "label": "Step 1: What information comes in first?",
+          "placeholder": "I receive a PDF proposal"
+        },
+        {
+          "id": "step2",
+          "label": "Step 2: What do you need to do with it?",
+          "placeholder": "summarize the key points"
+        },
+        {
+          "id": "step3",
+          "label": "Step 3: What output do you need?",
+          "placeholder": "a brief recommendation email"
+        }
+      ],
+      "template": "I need a workflow for {{task}}. Step 1: I receive {{step1}}. Step 2: I need to {{step2}}. Step 3: I need {{step3}} as the final output. Break this into a step-by-step AI workflow.",
+      "primaryButton": "Build my workflow",
+      "xp": 15
+    },
+    {
+      "id": "d9_s8",
+      "type": "paste_capture",
+      "title": "Save your workflow",
+      "body": "Paste the workflow AI designed for you. You will use it tomorrow.",
+      "minLength": 10,
+      "primaryButton": "Save workflow",
+      "xp": 10
+    },
+    {
+      "id": "d9_s9",
+      "type": "compare",
+      "title": "Two tools, one task",
+      "question": "Run your workflow through your main AI tool. Then run the same task through a different AI tool. Which one handled the chain of steps better?",
+      "primaryButton": "I compared them",
+      "xp": 10
+    },
+    {
+      "id": "d9_s10",
+      "type": "info",
+      "title": "Pro tip: Copy-paste between AIs",
+      "body": "Sometimes one AI is better at step 1, another is better at step 3. Do not feel locked in. Take the output from one tool and paste it into another. Mixing tools is not cheating — it is strategy.",
+      "audioUrl": null,
+      "primaryButton": "Good to know",
+      "xp": 3
+    },
+    {
+      "id": "d9_s11",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Once you start using one AI tool for a workflow, you should never switch to another tool mid-way.",
+      "correct": false,
+      "feedback": [
+        "Actually, switching tools mid-workflow can give you better results for each step.",
+        "Right. Different tools have different strengths. Mix them freely."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d9_s12",
+      "type": "reflection",
+      "title": "Your workflow plan",
+      "questions": [
+        {
+          "id": "first_workflow",
+          "type": "textarea",
+          "label": "What is the first workflow you will set up this week?"
+        },
+        {
+          "id": "tools_used",
+          "type": "single_choice",
+          "label": "How many AI tools will your workflow use?",
+          "options": [
+            "One tool, multiple steps",
+            "Two different tools",
+            "Three or more tools"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9_s13",
+      "type": "good_fit",
+      "title": "Good fit for a workflow?",
+      "question": "Summarize a client email, draft a response, and check the tone.",
+      "correct": "good",
+      "feedback": [
+        "Yes — this is a textbook multi-step workflow.",
+        "Exactly. Each output feeds the next step."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d9_s14",
+      "type": "good_fit",
+      "title": "Good fit for a workflow?",
+      "question": "Decide if I should buy a new car.",
+      "correct": "notideal",
+      "feedback": [
+        "AI can help research, but the decision is yours alone.",
+        "Right. Use AI for research, but keep the decision for yourself."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d9_s15",
+      "type": "quiz",
+      "title": "Workflow check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is a workflow?",
+          "options": [
+            "A single long prompt",
+            "Chained steps where each step builds on the previous one",
+            "A template that never changes"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "It is okay to use different AI tools for different steps in the same workflow.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Breaking a complex task into smaller AI steps is called building a ______.",
+          "answer": "workflow",
+          "aliases": ["chain", "pipeline"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d9_s16",
+      "type": "completion",
+      "title": "Day 9 complete — Workflow Builder",
+      "body": "You now know how to chain AI tools into real workflows. Tomorrow you will learn how to use AI to automate repetitive tasks.",
+      "primaryButton": "See you tomorrow"
+    }
+  ]
+}

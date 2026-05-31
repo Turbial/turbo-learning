@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 13,
+    "unitLabel": "Day 13",
+    "unitTitle": "AI-Powered Preparation — Meetings, Calls, Interviews",
+    "lessonOrder": 1,
+    "lessonTitle": "Preparation with AI",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d13_s1",
+      "type": "info",
+      "title": "Welcome to Day 13",
+      "body": "One of the most practical uses of AI: preparation. Meetings, calls, interviews, difficult conversations — AI can help you prepare in minutes instead of hours.",
+      "audioUrl": null,
+      "primaryButton": "I need this",
+      "xp": 3
+    },
+    {
+      "id": "d13_s2",
+      "type": "example",
+      "title": "Meeting prep prompt",
+      "prompt": "I have a meeting tomorrow about [topic]. Here is what I know: [context]. The attendees are: [people] with these roles: [roles]. Help me prepare: (1) What are the key points I should raise? (2) What questions should I expect? (3) What should I follow up on after?",
+      "primaryButton": "That covers everything",
+      "xp": 5
+    },
+    {
+      "id": "d13_s3",
+      "type": "mc",
+      "title": "Prep check",
+      "question": "What is the biggest benefit of using AI for meeting prep?",
+      "options": [
+        "AI attends the meeting for you",
+        "You walk in organized instead of scrambling",
+        "AI takes over your calendar",
+        "Meetings become shorter"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI cannot attend for you — but it can make you much more effective.",
+        "Exactly. Preparation separates a good meeting from a wasted one.",
+        "AI can help organize, but your calendar is yours.",
+        "AI can help you stay focused, which can make meetings more efficient."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13_s4",
+      "type": "scenario_card",
+      "title": "A difficult conversation",
+      "body": "You need to give feedback to a team member who has been underperforming. Without AI: you stress, rehearse in your head, and either over-prepare or avoid it. With AI: role-play the conversation, get feedback on your approach, and walk in confident.",
+      "audioUrl": null,
+      "primaryButton": "Role-play with AI? Great idea",
+      "xp": 3
+    },
+    {
+      "id": "d13_s5",
+      "type": "example",
+      "title": "Role-play prompt",
+      "prompt": "I need to have a difficult conversation with my [colleague/friend/family member] about [issue]. Act as that person. I will say what I have prepared. After I say it, respond as they would. Then give me feedback on how I handled it and how I could improve.",
+      "primaryButton": "That is powerful",
+      "xp": 5
+    },
+    {
+      "id": "d13_s6",
+      "type": "info",
+      "title": "Preparation checklist",
+      "body": "For any important conversation: (1) Ask AI to predict what the other person might want or need. (2) Ask AI to draft a few opening lines. (3) Role-play the conversation with AI as the other person. (4) Ask for post-meeting follow-up templates.",
+      "audioUrl": null,
+      "primaryButton": "Four steps to prep",
+      "xp": 3
+    },
+    {
+      "id": "d13_s7",
+      "type": "builder",
+      "title": "Prepare for your next meeting",
+      "fields": [
+        {
+          "id": "meeting_type",
+          "label": "What type of meeting or conversation?",
+          "placeholder": "monthly check-in with my manager"
+        },
+        {
+          "id": "stakes",
+          "label": "What makes this conversation important?",
+          "placeholder": "I want to ask for a promotion"
+        },
+        {
+          "id": "outcome",
+          "label": "What is the best possible outcome?",
+          "placeholder": "agreement on a plan for the next 6 months"
+        }
+      ],
+      "template": "I have a {{meeting_type}} coming up. The stakes: {{stakes}}. The ideal outcome: {{outcome}}. Prepare me: what should I say, what should I expect them to say, and what should I follow up on?",
+      "primaryButton": "Prepare me",
+      "xp": 15
+    },
+    {
+      "id": "d13_s8",
+      "type": "paste_capture",
+      "title": "Save your prep notes",
+      "body": "Paste the preparation AI gave you. Review it before your meeting.",
+      "minLength": 10,
+      "primaryButton": "Save prep notes",
+      "xp": 10
+    },
+    {
+      "id": "d13_s9",
+      "type": "info",
+      "title": "Interview prep",
+      "body": "Interviews are the ultimate prep test. Ask AI: 'I am interviewing for a [role] at [company]. Give me 10 likely questions based on my resume [paste resume]. Then help me script strong answers using the STAR method.'",
+      "audioUrl": null,
+      "primaryButton": "STAR method prep",
+      "xp": 3
+    },
+    {
+      "id": "d13_s10",
+      "type": "highlight",
+      "title": "Spot the good prep tasks",
+      "body": "Which of these are good uses of AI for preparation? Scripting a sales call, deciding what to wear to a party, preparing for a performance review, predicting what your client will ask, choosing a restaurant for dinner.",
+      "highlights": [
+        "Scripting a sales call",
+        "preparing for a performance review",
+        "predicting what your client will ask"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d13_s11",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You should only use AI for formal business meetings, not for personal conversations.",
+      "correct": false,
+      "feedback": [
+        "AI works for any important conversation — personal or professional.",
+        "Right. Whether it is a difficult chat with a friend or a client meeting, prep helps."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d13_s12",
+      "type": "reflection",
+      "title": "Your prep plan",
+      "questions": [
+        {
+          "id": "next_prep",
+          "type": "textarea",
+          "label": "What conversation or meeting would AI help you prepare for this week?"
+        },
+        {
+          "id": "confidence",
+          "type": "single_choice",
+          "label": "How much more confident would you feel walking in prepared?",
+          "options": [
+            "Much more confident",
+            "Somewhat more confident",
+            "No difference",
+            "I already prepare well"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13_s13",
+      "type": "good_fit",
+      "title": "Good for AI prep?",
+      "question": "Role-play a negotiation with a potential client so I can practice my responses.",
+      "correct": "good",
+      "feedback": [
+        "Yes. Role-playing with AI is excellent practice.",
+        "Exactly. Practice makes perfect, and AI is a patient practice partner."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d13_s14",
+      "type": "good_fit",
+      "title": "Good for AI prep?",
+      "question": "Read the other person's mind and tell me exactly what they are thinking.",
+      "correct": "notideal",
+      "feedback": [
+        "AI cannot read minds. It can predict based on context, but not know for certain.",
+        "Right. AI predicts likely responses, it does not read minds."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d13_s15",
+      "type": "quiz",
+      "title": "Preparation check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is one way AI can help with difficult conversations?",
+          "options": [
+            "It has the conversation for you",
+            "Role-play the other person so you can practice",
+            "It sends an apology email automatically"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "AI can help prepare for both professional meetings and personal conversations.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Practicing a conversation with AI playing the other person is called ______.",
+          "answer": "role-play",
+          "aliases": ["role play", "roleplaying", "role-playing"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d13_s16",
+      "type": "completion",
+      "title": "Day 13 complete — Preparation Pro",
+      "body": "You can now use AI to prepare for any important conversation. Tomorrow: your final day of Week 2 — building your personal AI system.",
+      "primaryButton": "One more day!"
+    }
+  ]
+}
