@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day19",
+  "title": "Day 19: AI for Finance & Accounting",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d19-info-1",
+      "type": "info",
+      "title": "Money at Machine Speed — AI in Finance",
+      "body": "Finance and accounting run on patterns: invoices, receipts, transactions, reconciliations, reports. Pattern matching is what AI does best.\n\nToday you'll learn:\n• Automated invoice processing and reconciliation\n• AI-powered expense management\n• Financial forecasting with machine learning\n• Fraud detection and anomaly flagging\n• Report generation from raw data\n\nFinance professionals who use AI don't work fewer hours — they work on higher-value analysis instead of data entry.",
+      "xp": 5
+    },
+    {
+      "id": "d19-highlight-1",
+      "type": "highlight",
+      "body": "Real AI finance wins:\n\n• Reconciliation time: 8 hours → 15 minutes (AI matches transactions)\n• Invoice processing cost: $12 → $0.50 per invoice (AI extracts + validates)\n• Expense report fraud detection: 3x more accurate than manual review\n• Monthly close: 10 days → 2 days (AI automates data aggregation)\n• Forecasting accuracy: +25% with AI pattern recognition\n\nFinance is where AI pays for itself fastest — literally.",
+      "highlights": ["8 hours → 15 minutes", "$12 → $0.50", "3x more accurate", "10 days → 2 days", "+25% accuracy"],
+      "xp": 5
+    },
+    {
+      "id": "d19-mc-1",
+      "type": "mc",
+      "question": "A finance team spends 3 days every month manually reconciling bank statements against internal records. What's the best AI approach?",
+      "options": [
+        "Hire a temporary accountant for month-end",
+        "Set up AI-powered reconciliation that matches transactions by amount, date, reference — flags exceptions for human review",
+        "Stop reconciling — the difference is usually small",
+        "Build a custom software application from scratch"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI reconciliation tools match thousands of transactions in seconds using pattern matching. 95%+ match automatically, the remaining 5% (exceptions) go to a human. 3 days becomes 2 hours with better accuracy.",
+        "Not quite. The ideal solution is AI-powered reconciliation. Modern tools (Vic.ai, Bill, or custom GPT setups) automate the matching process and only surface exceptions. This turns a 3-day slog into a quick review."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19-scenario-1",
+      "type": "scenario_card",
+      "title": "The AI Finance Function — TrueNorth Consulting",
+      "body": "TrueNorth is a 50-person consulting firm. Before AI finance:\n• Monthly close took 8 business days\n• Expense reports took 2 weeks to process\n• Invoices had 12% error rate (wrong amounts, wrong clients)\n• Cash flow forecasting was a gut feel spreadsheet\n\nAfter AI finance implementation:\n• Receipts photographed via mobile app → AI extracts, categorizes, matches to credit card transactions\n• Invoices auto-created from timesheet data → AI checks against contract rates\n• Monthly close runs automatically on Day 1 → finance team reviews exceptions Days 1-2\n• AI forecasts cash flow based on historical patterns + pipeline data + payment cycles\n\nResults: Close in 2 days. Expenses processed 24h. Invoice errors below 1%. Finance team morale up because they do analysis now, not data entry."
+    },
+    {
+      "id": "d19-tf-1",
+      "type": "tf",
+      "question": "AI financial forecasting is accurate enough to completely replace human financial analysis and decision-making.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI pattern recognition improves forecast accuracy, but it can't account for unexpected market shifts, regulatory changes, or strategic decisions. AI forecasts are inputs to human judgment — not replacements for it.",
+        "False. AI dramatically improves forecasting by identifying patterns humans miss, but it can't predict black swan events, regulatory changes, or incorporate strategic context. The best forecasts combine AI analysis with human judgment."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19-example-1",
+      "type": "example",
+      "title": "AI Financial Analysis Prompt",
+      "prompt": "Use this prompt for financial data analysis:\n\n\"I have [TIME PERIOD] financial data for [COMPANY/ENTITY]:\n\n[PASTE DATA — revenue, expenses, cash flow, KPIs]\n\nAnalyze this data and produce:\n\n1. Key Trends — what's moving up, down, staying flat\n2. Anomalies — what's unexpected or outside normal ranges\n3. Ratio Analysis — gross margin, operating margin, burn rate, CAC, LTV\n4. Forecast — extrapolate next period based on trends (with confidence levels)\n5. Risks — 3-5 things to watch or investigate further\n6. Recommendations — 3 concrete actions based on the data\n\nFor each finding, note which data points support it and any caveats.\"\n\nThen validate the AI's findings against your domain knowledge before acting on them."
+    },
+    {
+      "id": "d19-builder-1",
+      "type": "builder",
+      "title": "Design Your AI Finance Workflow",
+      "instruction": "Think of a financial process you deal with (business or personal). Design an AI-assisted workflow:\n\nCurrent process:\nAI automation:\nTime saved:\nAccuracy improvement:\nTools you'd use:",
+      "inputLabel": "Your AI finance workflow",
+      "placeholder": "Process: Monthly expense categorization\nCurrent: Manually sorting 100+ receipts into categories\nAI solution: Receipt OCR → AI categorizes by vendor type → flags unusual expenses\nTools: Dext, Expensify, or custom GPT with receipt upload\nTime saved: 4 hours/month\nAccuracy: 95% automatic, 5% human review",
+      "minChars": 40,
+      "xp": 20
+    },
+    {
+      "id": "d19-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the most time-consuming financial task you deal with regularly? How much time per month?",
+          "placeholder": "The task and monthly time spent...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "If your financial reports were generated automatically with AI analysis, what business decisions would you make more confidently?",
+          "placeholder": "Decisions that would improve with faster, better data...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d19-highlight-2",
+      "type": "highlight",
+      "body": "Finance is where AI trust builds fastest — because the output is verifiable.\n\nEvery AI-generated reconciliation, forecast, or analysis can be checked. When the AI is right 95%+ of the time, trust compounds.\n\nStart with low-risk tasks (transaction matching), prove the accuracy, then expand to higher-stakes analysis.",
+      "highlights": ["output is verifiable", "trust compounds", "Start with low-risk tasks"],
+      "xp": 5
+    },
+    {
+      "id": "d19-completion-1",
+      "type": "completion",
+      "title": "Day 19 Complete!",
+      "body": "You now understand how AI transforms finance and accounting: automated reconciliation, intelligent expense management, pattern-based forecasting, and anomaly detection. Finance is one of the highest-ROI domains for AI automation.\n\nTomorrow: AI for HR & People Operations — recruitment automation, employee onboarding, performance management, and team analytics.",
+      "xp": 15
+    }
+  ]
+}

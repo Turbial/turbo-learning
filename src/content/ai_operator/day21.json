@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "unit": "day21",
+  "title": "Day 21: Week 3 Reflection & Connection — Your AI Ops Strategy",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d21-info-1",
+      "type": "info",
+      "title": "Week 3 Complete — Connection Phase",
+      "body": "You've completed the Connection Phase — applying AI to real business functions:\n\n• Day 15: AI for Business Operations — automation, triage, monitoring\n• Day 16: AI for Marketing & Content — content engines, brand voice, multi-platform\n• Day 17: AI for Sales & CRM — lead scoring, outreach, pipeline management\n• Day 18: AI for Product Development — prototyping, PRDs, user research\n• Day 19: AI for Finance & Accounting — reconciliation, forecasting, expense management\n• Day 20: AI for HR & People Operations — recruitment, onboarding, employee support\n\nToday you connect all of these into a comprehensive AI operations strategy for your own context.",
+      "xp": 5
+    },
+    {
+      "id": "d21-highlight-1",
+      "type": "highlight",
+      "body": "Week 1 was Foundation. Week 2 was Systems. Week 3 is Connection.\n\nYou now have: skills (Week 1) + systems (Week 2) + domain applications (Week 3).\n\nThe operator who can apply AI across operations, marketing, sales, product, finance, and HR doesn't just have a job — they run a business.",
+      "highlights": ["Foundation → Systems → Connection", "they run a business"],
+      "xp": 5
+    },
+    {
+      "id": "d21-mc-1",
+      "type": "mc",
+      "question": "What's the most effective way to prioritize which business function to automate with AI first?",
+      "options": [
+        "Automate everything at once across all departments",
+        "Start with the function that has the most high-volume, repetitive, low-judgment tasks — highest ROI, lowest risk",
+        "Start with the most strategic function (like product development)",
+        "Wait until you have a dedicated AI budget"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. The best starting point is the intersection of high volume + repetitive + low judgment. This is where AI delivers fastest ROI and lowest risk. Customer support, data entry, invoice processing, resume screening — these are ideal starting points.",
+        "Not quite. The best approach is to pick the lowest-risk, highest-volume, most repetitive function first. Prove AI works there, build trust, then expand to higher-stakes functions. This de-risks adoption and builds organizational confidence."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d21-scenario-1",
+      "type": "scenario_card",
+      "title": "The Connected Organization — OmniCorp's AI Transformation",
+      "body": "OmniCorp is a 200-person company that implemented AI across every business function — but not all at once.\n\nTheir rollout:\n\nMonth 1-2: Operations — support ticket triage + invoice processing. Quick wins, clear ROI.\nMonth 3-4: Marketing — content engine + social media scheduling. Team capacity doubles.\nMonth 5-6: Sales — lead scoring + personalized outreach. Pipeline grows 35%.\nMonth 7-8: Finance — automated reconciliation + expense management. Close time drops 80%.\nMonth 9-10: HR — AI screening + onboarding automation. Time-to-hire drops 60%.\nMonth 11-12: Product — PRD generation + user research automation. Ship velocity up 40%.\n\nThe key: each phase funded the next. Ops savings paid for marketing AI. Marketing growth paid for sales AI. The whole transformation was self-funding within 6 months."
+    },
+    {
+      "id": "d21-builder-1",
+      "type": "builder",
+      "title": "Build Your AI Ops Strategy",
+      "instruction": "Design a phased AI implementation strategy for an organization you're familiar with:\n\nPhase 1 (Quick Wins — Month 1): Which function? What automation? Expected ROI?\nPhase 2 (Expand — Months 2-3): Which function? What automation? How Phase 1 funds it?\nPhase 3 (Strategic — Months 4-6): Which function? What's the transformational impact?\n\nFor each phase, describe:\n• What you automate\n• What stays human\n• How you measure success\n• What tools you use",
+      "inputLabel": "Your AI operations strategy",
+      "placeholder": "Phase 1: Support ticket triage (ChatGPT + CRM integration)\nROI: 70% reduction in first-response time\nFunds: saves $5K/month → funds Phase 2\n\nPhase 2: Content engine (brand voice GPT + social scheduler)\nROI: 3x content output, same team size...",
+      "minChars": 80,
+      "xp": 25
+    },
+    {
+      "id": "d21-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Looking across all 6 business functions this week, which ONE would deliver the most transformative impact in your context? Why that one first?",
+          "placeholder": "The function and why it's the highest leverage...",
+          "minChars": 25
+        },
+        {
+          "id": "r2",
+          "prompt": "What's the biggest obstacle to AI adoption in your organization — skills, budget, culture, or tools? How would you overcome it?",
+          "placeholder": "The obstacle and your strategy to overcome it...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d21-highlight-2",
+      "type": "highlight",
+      "body": "Week 3 gave you the knowledge to transform any business function with AI.\n\nWeek 4 is where you become not just an operator — but a leader.\n\nThe Mission Phase: Values Audit, Capstone Project, and Graduation.\n\nYou're almost there. Keep going.",
+      "highlights": ["transform any business function", "a leader", "Mission Phase"],
+      "xp": 5
+    },
+    {
+      "id": "d21-completion-1",
+      "type": "completion",
+      "title": "Week 3 Complete!",
+      "body": "You've completed the Connection Phase — applying AI across six critical business functions. You understand where AI delivers the fastest ROI, how to phase implementation, and what stays human.\n\nNext week — the Mission Phase — you'll synthesize everything into a capstone project and graduate as a certified AI Operator.\n\nSee you on Day 22.",
+      "xp": 20
+    }
+  ]
+}

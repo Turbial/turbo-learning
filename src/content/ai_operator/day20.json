@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day20",
+  "title": "Day 20: AI for HR & People Operations",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d20-info-1",
+      "type": "info",
+      "title": "People at Scale — AI in HR",
+      "body": "HR is about people — but it's buried in processes: screening resumes, scheduling interviews, answering benefits questions, managing performance reviews, tracking compliance.\n\nAI handles the processes so HR professionals can focus on the people.\n\nToday you'll learn:\n• AI-powered recruitment — screening, matching, and initial outreach\n• Automated onboarding — from offer letter to day one readiness\n• Performance management — AI-facilitated reviews and feedback\n• Employee self-service — AI chatbots for HR questions\n• People analytics — understanding team health through data",
+      "xp": 5
+    },
+    {
+      "id": "d20-highlight-1",
+      "type": "highlight",
+      "body": "AI HR impact:\n\n• Time-to-hire: 45 days → 18 days (AI screening + matching)\n• Resume screening hours: 20 hours → 30 minutes (per 100 applicants)\n• Onboarding paperwork processing: 2 weeks → 2 days\n• HR ticket resolution: 3 days → instant (AI chatbot)\n• Employee satisfaction: +15% when AI handles admin (surveys show)\n\nHR teams using AI don't replace recruiters. They make recruiters 3x more effective.",
+      "highlights": ["45 days → 18 days", "20 hours → 30 minutes", "2 weeks → 2 days", "3x more effective"],
+      "xp": 5
+    },
+    {
+      "id": "d20-mc-1",
+      "type": "mc",
+      "question": "A recruiter receives 200 applications for a role. What's the highest-leverage use of AI in screening?",
+      "options": [
+        "AI sends rejection letters to all 200 — only interview people who re-apply",
+        "AI screens resumes against job requirements, ranks candidates by fit, and flags top matches for human review",
+        "AI conducts the first-round interviews for all 200 candidates",
+        "Skip screening — interview all 200 candidates"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI resume screening compares each application against the job requirements, experience level, and desired skills — ranking candidates by match quality. The recruiter reviews the top 20-30 instead of reading all 200.",
+        "Not quite. AI excels at pattern matching resumes against requirements — it can surface the top candidates in minutes. The recruiter then reviews the shortlist and adds human judgment that AI can't: culture fit, potential, soft skills."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-scenario-1",
+      "type": "scenario_card",
+      "title": "The AI-Powered HR Team — ScaleUp Tech",
+      "body": "ScaleUp Tech grew from 20 to 150 employees in 18 months. HR was drowning.\n\nBefore AI:\n• Hiring manager requests took 2 weeks to process\n• New hires waited 2+ weeks for equipment and system access\n• HR team answered the same 15 questions daily\n• Performance reviews happened late, inconsistent, stressful\n\nAfter AI HR stack:\n• AI screening: Resumes ranked automatically, recruiter reviews top 20%\n• AI onboarding bot: New hire submits docs once → bot provisions accounts, orders equipment, schedules orientation — all automated\n• HR chatbot: Answers 80% of employee questions instantly (benefits, PTO policy, expense policy)\n• AI review assistant: Generates performance review templates with past feedback, project history, and peer input — manager reviews and customizes\n\nResult: 1 HR manager supported 150 employees instead of 4. Hiring speed tripled. Employee satisfaction improved."
+    },
+    {
+      "id": "d20-tf-1",
+      "type": "tf",
+      "question": "AI should make the final hiring decision when screening candidates — it's more objective than humans.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI is a screening tool, not a decision-maker. It can surface bias in job descriptions, rank candidates by qualifications, and flag potential matches — but final hiring decisions need human judgment about culture fit, potential, team dynamics, and intangible qualities.",
+        "False. AI has its own biases (inherited from training data) and can't assess human qualities like values alignment, team chemistry, or growth potential. Use AI to surface candidates, not to select them."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-example-1",
+      "type": "example",
+      "title": "AI Onboarding Automation Prompt",
+      "prompt": "Build an automated onboarding checklist generator:\n\n\"I'm onboarding [NEW HIRE NAME], starting [DATE] as [ROLE] in [DEPARTMENT].\n\nGenerate a comprehensive onboarding plan:\n\nWeek 1 — Setup & Orientation:\n• Equipment needed and who orders it\n• Accounts to provision (email, Slack, CRM, etc.)\n• Orientation schedule with key people to meet\n• First-week learning objectives\n\nWeek 2-4 — Ramp Up:\n• Training materials by priority\n• Projects or tasks for each week\n• Milestones and check-in schedule\n• Buddy/mentor assignment\n\nMonth 2-3 — Independent:\n• Performance expectations\n• Key relationships to build\n• First review schedule\n\nFor each item, note: who is responsible (HR, manager, IT, the new hire) and the deadline.\"\n\nThis turns one input (name, role, start date) into a complete onboarding project plan."
+    },
+    {
+      "id": "d20-builder-1",
+      "type": "builder",
+      "title": "Design an AI HR Automation",
+      "instruction": "Pick one HR process (recruitment, onboarding, performance, employee support, compliance) and design an AI-assisted workflow:\n\nProcess:\nCurrent pain points:\nAI solution:\nWhat stays human:\nTime/cost savings:",
+      "inputLabel": "Your AI HR automation design",
+      "placeholder": "Process: Employee benefits enrollment\nPain points: 2-week processing, frequent errors, confused employees\nAI solution: Chatbot answers questions + auto-fills forms + routes exceptions\nHuman: Handles complex cases, reviews exceptions, manages vendor relationships\nSavings: 80% reduction in HR tickets, enrollment done in 2 days",
+      "minChars": 40,
+      "xp": 20
+    },
+    {
+      "id": "d20-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Think about your own onboarding experience at a job. What was painful? How would AI have helped?",
+          "placeholder": "The painful experience and the AI solution...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "What HR process in your organization gets the most complaints from employees? How could AI fix it?",
+          "placeholder": "The process, complaints, and AI fix...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d20-highlight-2",
+      "type": "highlight",
+      "body": "HR with AI isn't about replacing human connection — it's about removing the barriers to it.\n\nEvery hour an HR professional spends on paperwork is an hour they don't spend supporting an employee who needs help.\n\nAI takes the paperwork. Humans take the people.",
+      "highlights": ["removing the barriers to it", "AI takes the paperwork. Humans take the people."],
+      "xp": 5
+    },
+    {
+      "id": "d20-completion-1",
+      "type": "completion",
+      "title": "Day 20 Complete!",
+      "body": "You now understand how AI transforms HR and people operations: faster recruitment through intelligent screening, automated onboarding that starts before day one, AI chatbots that answer employee questions instantly, and people analytics that reveal team health.\n\nTomorrow: Week 3 Reflection & Connection — integrating all your business domain skills into a comprehensive AI operations strategy.",
+      "xp": 15
+    }
+  ]
+}
