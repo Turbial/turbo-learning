@@ -9,7 +9,7 @@ import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
 import { applyCombo, getComboLabel } from "./scoring";
 import { createNarration } from "./narration/useNarration";
-import { XpBurst } from "../../components/feedback/XpBurst";
+import { XpBurst } from "../components/feedback/XpBurst";
 
 // ─── Props ───
 
