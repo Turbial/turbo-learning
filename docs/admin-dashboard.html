@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EP — Admin Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d28;
+      --surface-alt: #222639;
+      --surface-hover: #252836;
+      --border: #2a2d3a;
+      --border-active: #3a3d5c;
+      --primary: #6c5ce7;
+      --primary-soft: rgba(108, 92, 231, 0.12);
+      --accent: #00d2ff;
+      --success: #00e676;
+      --warn: #ffc107;
+      --danger: #ff5252;
+      --text: #e8eaed;
+      --text-secondary: #9aa0a6;
+      --text-muted: #5f6368;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+
+    /* Header */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 1.5rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .header-right { display: flex; align-items: center; gap: 1rem; }
+    .last-updated {
+      font-size: 0.8rem; color: var(--text-muted);
+      background: var(--surface); padding: 0.4rem 0.8rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .refresh-btn {
+      background: var(--primary); color: #fff; border: none;
+      padding: 0.4rem 1rem; border-radius: var(--radius-sm); cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; transition: opacity 0.2s;
+    }
+    .refresh-btn:hover { opacity: 0.85; }
+    .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+      transition: border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card:hover { border-color: var(--border-active); }
+    .stat-card .icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+    .stat-card .value {
+      font-size: 1.8rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-secondary);
+      margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem; align-items: center;
+    }
+    .filters input, .filters select {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm); font-size: 0.85rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .filters input:focus, .filters select:focus { border-color: var(--primary); }
+    .filters input { flex: 1; min-width: 200px; }
+    .filter-count {
+      font-size: 0.85rem; color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* Student table */
+    .table-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: var(--surface-alt); }
+    th {
+      padding: 0.75rem 1rem; text-align: left;
+      font-size: 0.75rem; font-weight: 700; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      white-space: nowrap; cursor: pointer; user-select: none;
+    }
+    th:hover { color: var(--text); }
+    th.sorted { color: var(--accent); }
+    td {
+      padding: 0.75rem 1rem; border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    tr:hover td { background: var(--surface-hover); }
+
+    .student-name { font-weight: 600; }
+    .student-email { font-size: 0.8rem; color: var(--text-muted); }
+    .xp-cell { font-weight: 700; color: var(--accent); }
+    .level-badge {
+      display: inline-block;
+      background: var(--primary-soft); color: var(--primary);
+      padding: 0.15rem 0.5rem; border-radius: 4px;
+      font-size: 0.8rem; font-weight: 700;
+    }
+    .streak-cell { font-weight: 600; }
+    .streak-hot { color: var(--warn); }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      width: 100%; height: 6px; background: var(--border);
+      border-radius: 3px; overflow: hidden; margin-top: 4px;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.3s;
+    }
+
+    /* Status dots */
+    .status-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      margin-right: 6px;
+    }
+    .status-active { background: var(--success); }
+    .status-idle { background: var(--warn); }
+    .status-inactive { background: var(--danger); }
+
+    .last-active { font-size: 0.8rem; color: var(--text-muted); }
+    .program-badge {
+      display: inline-block;
+      background: var(--surface-alt); color: var(--text-secondary);
+      padding: 0.15rem 0.5rem; border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    /* Per-day chart */
+    .chart-section { margin-top: 2rem; }
+    .chart-section h2 {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.75rem;
+    }
+    .day-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 0.75rem;
+      text-align: center;
+    }
+    .day-card .day-num {
+      font-size: 0.75rem; color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .day-card .day-title {
+      font-size: 0.75rem; color: var(--text-secondary);
+      margin-bottom: 0.5rem; white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .day-card .day-rate {
+      font-size: 1.2rem; font-weight: 800;
+    }
+    .day-mini-bar {
+      height: 4px; background: var(--border); border-radius: 2px;
+      margin-top: 0.4rem; overflow: hidden;
+    }
+    .day-mini-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.5s;
+    }
+
+    /* Loading & empty */
+    .loading {
+      display: flex; justify-content: center; align-items: center;
+      padding: 4rem; color: var(--text-muted); gap: 0.75rem;
+    }
+    .spinner {
+      width: 24px; height: 24px; border: 3px solid var(--border);
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error {
+      text-align: center; padding: 2rem; color: var(--danger);
+    }
+    .empty {
+      text-align: center; padding: 3rem;
+      color: var(--text-muted);
+    }
+    .empty .emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .table-wrap { overflow-x: auto; }
+      .chart-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+      th, td { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <header>
+      <h1>📊 Educational Platform — Admin Dashboard</h1>
+      <div class="header-right">
+        <span class="last-updated" id="lastUpdated">Loading…</span>
+        <button class="refresh-btn" id="refreshBtn" onclick="loadAll()">↻ Refresh</button>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="icon">👥</div><div class="value" id="statStudents">—</div><div class="label">Total Students</div></div>
+      <div class="stat-card"><div class="icon">⚡</div><div class="value" id="statActive">—</div><div class="label">Active Today</div></div>
+      <div class="stat-card"><div class="icon">📈</div><div class="value" id="statCompletions">—</div><div class="label">Total Completions</div></div>
+      <div class="stat-card"><div class="icon">⭐</div><div class="value" id="statAvgXp">—</div><div class="label">Avg XP</div></div>
+      <div class="stat-card"><div class="icon">🏅</div><div class="value" id="statAvgLevel">—</div><div class="label">Avg Level</div></div>
+      <div class="stat-card"><div class="icon">🆕</div><div class="value" id="statNew">—</div><div class="label">New This Week</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="Search students by name or email…" oninput="applyFilters()">
+      <select id="programFilter" onchange="applyFilters()">
+        <option value="">All Programs</option>
+      </select>
+      <select id="statusFilter" onchange="applyFilters()">
+        <option value="">All Status</option>
+        <option value="active">Active Today</option>
+        <option value="idle">Idle >24h</option>
+        <option value="inactive">Inactive >7d</option>
+      </select>
+      <span class="filter-count" id="filterCount">Showing 0 students</span>
+    </div>
+
+    <!-- Student table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortBy('name')" id="th-name">Student ↕</th>
+            <th onclick="sortBy('xp')" id="th-xp">XP ↕</th>
+            <th onclick="sortBy('level')" id="th-level">Level ↕</th>
+            <th onclick="sortBy('streak')" id="th-streak">Streak ↕</th>
+            <th onclick="sortBy('daysCompleted')" id="th-progress">Progress ↕</th>
+            <th onclick="sortBy('lastActive')" id="th-active">Last Active ↕</th>
+            <th>Program</th>
+          </tr>
+        </thead>
+        <tbody id="studentTableBody">
+          <tr><td colspan="7" class="loading"><div class="spinner"></div> Loading students…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Per-day completion chart -->
+    <div class="chart-section">
+      <h2>📅 Completion by Day</h2>
+      <div class="chart-grid" id="dayChart">Loading…</div>
+    </div>
+  </div>
+
+  <script>
+    // ─── State ───
+    let allStudents = [];
+    let dayData = [];
+    let summaryData = {};
+    let sortField = 'xp';
+    let sortDir = -1; // -1 = desc
+
+    // ─── Load all data ───
+    async function loadAll() {
+      const btn = document.getElementById('refreshBtn');
+      btn.disabled = true;
+      btn.textContent = '↻ Loading…';
+
+      try {
+        const [summaryRes, studentsRes, dayRes] = await Promise.all([
+          fetch('/api/admin/summary'),
+          fetch('/api/admin/students'),
+          fetch('/api/admin/completion-by-day'),
+        ]);
+
+        const summary = await summaryRes.json();
+        const students = await studentsRes.json();
+        const days = await dayRes.json();
+
+        if (summary.ok) summaryData = summary.data;
+        if (students.ok) allStudents = students.data;
+        if (days.ok) dayData = days.data;
+
+        renderStats();
+        renderDayChart();
+        applyFilters();
+        document.getElementById('lastUpdated').textContent =
+          `Updated ${new Date().toLocaleTimeString()}`;
+      } catch (err) {
+        document.getElementById('studentTableBody').innerHTML =
+          `<tr><td colspan="7" class="error">⚠️ Error loading data: ${err.message}</td></tr>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '↻ Refresh';
+      }
+    }
+
+    // ─── Render stats ───
+    function renderStats() {
+      document.getElementById('statStudents').textContent = summaryData.totalStudents ?? '—';
+      document.getElementById('statActive').textContent = summaryData.activeToday ?? '—';
+      document.getElementById('statCompletions').textContent = summaryData.totalCompletions ?? '—';
+      document.getElementById('statAvgXp').textContent = summaryData.avgXp ?? '—';
+      document.getElementById('statAvgLevel').textContent = summaryData.avgLevel ?? '—';
+      document.getElementById('statNew').textContent = summaryData.newStudentsThisWeek ?? '—';
+    }
+
+    // ─── Render day chart ───
+    function renderDayChart() {
+      const el = document.getElementById('dayChart');
+      if (!dayData || dayData.length === 0) {
+        el.innerHTML = '<div class="empty"><div class="emoji">📅</div>No completion data yet</div>';
+        return;
+      }
+      el.innerHTML = dayData.map(d => {
+        const rate = d.completionRate || 0;
+        const color = rate >= 50 ? 'var(--success)' : rate >= 25 ? 'var(--warn)' : 'var(--danger)';
+        return `
+          <div class="day-card">
+            <div class="day-num">Day ${d.day}</div>
+            <div class="day-title" title="${escapeHtml(d.title)}">${escapeHtml(d.title)}</div>
+            <div class="day-rate" style="color:${color}">${rate}%</div>
+            <div class="day-mini-bar"><div class="day-mini-fill" style="width:${rate}%"></div></div>
+            <div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.25rem">${d.completions}/${d.totalStudents}</div>
+          </div>`;
+      }).join('');
+    }
+
+    // ─── Filter & Sort ───
+    function applyFilters() {
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+      const program = document.getElementById('programFilter').value;
+      const status = document.getElementById('statusFilter').value;
+
+      let filtered = allStudents.filter(s => {
+        if (search && !s.name.toLowerCase().includes(search) && !s.email.toLowerCase().includes(search)) return false;
+        if (program && s.program !== program) return false;
+        if (status === 'active') {
+          if (!s.lastActive) return false;
+          const hours = (Date.now() - new Date(s.lastActive).getTime()) / 3600000;
+          if (hours > 24) return false;
+        } else if (status === 'idle') {
+          if (!s.lastActive) return true;
+          const hours = (Date.now() - new Date(s.lastActive).getTime()) / 3600000;
+          if (hours <= 24 || hours > 168) return false;
+        } else if (status === 'inactive') {
+          if (!s.lastActive) return true;
+          const hours = (Date.now() - new Date(s.lastActive).getTime()) / 3600000;
+          if (hours <= 168) return false;
+        }
+        return true;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        let va = a[sortField], vb = b[sortField];
+        if (sortField === 'name') { va = (va || '').toLowerCase(); vb = (vb || '').toLowerCase(); return va < vb ? -sortDir : va > vb ? sortDir : 0; }
+        if (sortField === 'lastActive') { va = va ? new Date(va).getTime() : 0; vb = vb ? new Date(vb).getTime() : 0; }
+        if (va == null) va = 0; if (vb == null) vb = 0;
+        return va > vb ? sortDir : va < vb ? -sortDir : 0;
+      });
+
+      document.getElementById('filterCount').textContent = `Showing ${filtered.length} students`;
+      renderTable(filtered);
+      updateProgramFilter();
+    }
+
+    function sortBy(field) {
+      if (sortField === field) sortDir = -sortDir;
+      else { sortField = field; sortDir = -1; }
+      // Update header indicators
+      document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
+      const th = document.getElementById('th-' + field);
+      if (th) { th.classList.add('sorted'); th.textContent = th.textContent.replace(/[▲▼]/g,'') + (sortDir === -1 ? ' ▲' : ' ▼'); }
+      applyFilters();
+    }
+
+    // ─── Render table ───
+    function renderTable(students) {
+      const tbody = document.getElementById('studentTableBody');
+      if (!students || students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="empty"><div class="emoji">🔍</div>No students match your filters</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = students.map(s => {
+        const pct = s.totalLessons > 0 ? Math.round((s.daysCompleted / s.totalLessons) * 100) : 0;
+        const lastActive = s.lastActive ? timeAgo(new Date(s.lastActive)) : 'Never';
+        const isActive = s.lastActive && (Date.now() - new Date(s.lastActive).getTime()) < 86400000;
+        const isIdle = s.lastActive && (Date.now() - new Date(s.lastActive).getTime()) >= 86400000 && (Date.now() - new Date(s.lastActive).getTime()) < 604800000;
+        const statusClass = isActive ? 'status-active' : isIdle ? 'status-idle' : 'status-inactive';
+        return `
+          <tr>
+            <td>
+              <div class="student-name">${escapeHtml(s.name)}</div>
+              <div class="student-email">${escapeHtml(s.email)}</div>
+            </td>
+            <td class="xp-cell">${s.xp.toLocaleString()}</td>
+            <td><span class="level-badge">Lv ${s.level}</span></td>
+            <td class="streak-cell ${s.streak >= 7 ? 'streak-hot' : ''}">${s.streak > 0 ? '🔥 ' + s.streak + 'd' : '—'}</td>
+            <td>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem">
+                <span>${s.daysCompleted}/${s.totalLessons}</span>
+                <span style="color:var(--text-muted)">${pct}%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+            </td>
+            <td>
+              <span class="status-dot ${statusClass}"></span>
+              <span class="last-active">${lastActive}</span>
+            </td>
+            <td><span class="program-badge">${escapeHtml(s.program)}</span></td>
+          </tr>`;
+      }).join('');
+    }
+
+    // ─── Program filter options ───
+    function updateProgramFilter() {
+      const select = document.getElementById('programFilter');
+      const current = select.value;
+      const programs = [...new Set(allStudents.map(s => s.program).filter(Boolean))].sort();
+      select.innerHTML = '<option value="">All Programs</option>' +
+        programs.map(p => `<option value="${escapeHtml(p)}"${p === current ? ' selected' : ''}>${escapeHtml(p)}</option>`).join('');
+    }
+
+    // ─── Helpers ───
+    function timeAgo(date) {
+      const sec = Math.floor((Date.now() - date.getTime()) / 1000);
+      if (sec < 60) return 'just now';
+      const min = Math.floor(sec / 60);
+      if (min < 60) return min + 'm ago';
+      const hours = Math.floor(min / 60);
+      if (hours < 24) return hours + 'h ago';
+      const days = Math.floor(hours / 24);
+      return days + 'd ago';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // Auto-refresh every 60s
+    setInterval(loadAll, 60000);
+
+    // Initial load
+    loadAll();
+  </script>
+</body>
+</html>
