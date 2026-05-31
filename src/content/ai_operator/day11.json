@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "unit": "day11",
+  "title": "Day 11: Week 2 Capstone — Build Your Complete AI Operator System",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d11-info-1",
+      "type": "info",
+      "title": "Welcome to Your Week 2 Capstone",
+      "body": "Week 2: Complete. Here's What You Built.\n\nIn two weeks, you've gone from 'what is AI?' to designing complete operator systems.\n\nYou learned:\n• What AI actually is — a prediction engine, not magic\n• How to build automations that chain AI actions together\n• The complete operator's toolkit — every interaction type\n• How to write prompts that produce exactly what you need\n• Templates and reusability — build once, use forever\n• Multi-step workflows with branching logic\n• Testing and quality control — catch problems before they reach users\n• Which AI tool to use for which task (and why it matters)\n• Advanced prompt engineering techniques\n• Automation patterns — chaining, branching, and error handling\n\nAnd today, you put it all together into a complete system design.\n\nThis is the foundation. Week 3 builds on it — with real implementation, integration, and scaling.\n\nYou're not just an AI user anymore. You're an operator.",
+      "xp": 5
+    },
+    {
+      "id": "d11-highlight-1",
+      "type": "highlight",
+      "body": "Here's what you're building today:\n\nA COMPLETE AI OPERATOR SYSTEM that handles a real task in your work or life — end to end.\n\nIt will include:\n✅ Tool selection (which AI for which step)\n✅ Engineered prompts (ROLE + CONTEXT + FORMAT + CONSTRAINTS)\n✅ Automation chain (step-by-step workflow)\n✅ Branching logic (different paths for different cases)\n✅ Error handling (what to do when things go wrong)\n✅ A delivery mechanism (where the output goes)\n\nThis is what separates someone who 'uses AI' from someone who operates with it.",
+      "highlights": [
+        "COMPLETE AI OPERATOR SYSTEM",
+        "Tool selection",
+        "Engineered prompts",
+        "Automation chain",
+        "Branching logic",
+        "Error handling"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d11-mc-1",
+      "type": "mc",
+      "question": "What makes a 'complete AI operator system' different from a single automation?",
+      "options": [
+        "It uses more expensive AI models",
+        "It integrates tool selection, engineered prompts, workflow design, branching, error handling, and delivery into one documented, repeatable system",
+        "It requires a team of engineers to build",
+        "It's the same thing — just a different name"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. An operator system is the full stack — strategic tool choice, precise prompts, robust workflow logic, fallback handling, and a clear output. It's designed to be handed off, repeated, and improved over time.",
+        "There's more to it. A complete system includes every layer: which tools to use, how to prompt them, how to chain them, what to do when things fail, and where results go. It's a blueprint anyone can follow."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-scenario-card-1",
+      "type": "scenario_card",
+      "title": "Alex's Week 2 Capstone",
+      "body": "Alex runs a small real estate agency. His Week 2 capstone: an AI system that handles new property inquiries.\n\nSYSTEM DESIGN:\n📥 INPUT: New inquiry form submission\n🔧 TOOL 1 (Gemini): Research property market data, recent sales, neighborhood info\n🔧 TOOL 2 (Claude): Analyze inquiry — buyer readiness, price range fit, timeline\n🔧 TOOL 3 (ChatGPT): Draft personalized response email with relevant listings\n🔀 BRANCH: Ready-to-buy → include showing schedule. Just browsing → share market report\n🛡️ ERROR: If research fails → use cached neighborhood profiles. If draft is generic → flag for Alex review\n📤 OUTPUT: Draft email in Alex's inbox, ready to review and send\n\nResult: Every inquiry gets a researched, personalized response in under 3 minutes instead of Alex spending 20 minutes per lead. He now handles 4x the volume.",
+      "xp": 5
+    },
+    {
+      "id": "d11-tf-1",
+      "type": "tf",
+      "question": "A complete AI operator system should be fully autonomous with zero human involvement.",
+      "correct": false,
+      "feedback": [
+        "Right. The operator doesn't disappear — the operator orchestrates. The best systems have a human reviewing the output before it reaches the customer. AI does the work; you provide the judgment.",
+        "Not quite. Operator systems amplify humans, they don't replace them. The ideal pattern is AI does the heavy lifting, human provides oversight and final approval — especially for anything customer-facing."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-fillblank-1",
+      "type": "fillblank",
+      "question": "The most important question to ask before designing any AI operator system is: 'What ______ am I trying to solve?' If you can't answer this in one sentence, don't start building.",
+      "answer": "problem",
+      "aliases": [
+        "outcome",
+        "result",
+        "goal"
+      ],
+      "feedback": [
+        "Exactly. Start with the problem, not the technology. The best operator systems solve a specific, painful, repetitive problem. If you can't name the problem, the system will be aimless.",
+        "Good answer. Start with the problem — the specific, painful, repetitive task you want to eliminate. Technology serves the problem, not the other way around."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-example-1",
+      "type": "example",
+      "title": "System Design Template",
+      "prompt": "Every operator system follows this structure. Fill it in for your project:\n\n1. PROBLEM: What repetitive, painful task are you solving?\n2. INPUT: What triggers the system? (email, form, schedule, event)\n3. TOOLS: Which AI tools will you use for which steps?\n4. CHAIN: Step 1 → Step 2 → Step 3 → Final Output\n5. BRANCHES: What conditions change the path?\n6. ERRORS: What can go wrong? How do you handle each?\n7. OUTPUT: Where does the result go? Who reviews it?\n8. METRICS: How will you know it's working?\n\nThis is your blueprint. Fill it out, and you've designed a complete system."
+    },
+    {
+      "id": "d11-goodfit-1",
+      "type": "good_fit",
+      "question": "Spending 2 hours every Monday manually compiling a weekly status report from 5 different data sources.",
+      "correct": "good",
+      "feedback": [
+        "This is the PERFECT candidate for an operator system. It's repetitive, rule-based, multi-source, time-consuming, and produces a structured output. Automate this and reclaim 8+ hours a month.",
+        "Absolutely automate this. Multi-source data compilation into a structured report is exactly what AI operator systems excel at. This is low-hanging fruit that will pay back immediately."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-goodfit-2",
+      "type": "good_fit",
+      "question": "Making a one-time decision about whether to accept a job offer.",
+      "correct": "notideal",
+      "feedback": [
+        "Right. One-time, high-stakes personal decisions aren't great for automation. AI can help you think through options (pros/cons, comparison), but the decision is yours. Operator systems shine on REPETITIVE tasks, not one-off judgments.",
+        "Correct — this isn't a good fit. Operator systems are for repeatable processes, not one-time personal decisions. Use AI as a thinking partner here, not as a system to automate."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-builder-1",
+      "type": "builder",
+      "fields": [
+        {
+          "id": "problem",
+          "label": "What problem are you solving?",
+          "placeholder": "e.g., I spend 3 hours weekly manually responding to similar client questions"
+        },
+        {
+          "id": "input",
+          "label": "What triggers your system?",
+          "placeholder": "e.g., New email arrives, form submitted, Monday 9 AM"
+        },
+        {
+          "id": "chain",
+          "label": "What steps does the AI follow?",
+          "placeholder": "e.g., 1. Read input → 2. Research → 3. Analyze → 4. Draft response → 5. Send for review"
+        },
+        {
+          "id": "output",
+          "label": "Where does the result go?",
+          "placeholder": "e.g., Draft email in my inbox for review"
+        }
+      ],
+      "template": "OPERATOR SYSTEM: {problem}\n\nTRIGGER: {input}\n\nWORKFLOW:\n{chain}\n\nOUTPUT: {output}\n\nI review before anything goes to the customer.",
+      "xp": 15
+    },
+    {
+      "id": "d11-quiz-1",
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "What's the FIRST thing you should define when building an operator system?",
+          "options": [
+            "Which AI tools to use",
+            "The specific problem you're solving",
+            "The technical architecture",
+            "The budget"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "question": "What's the right level of human involvement in a production operator system?",
+          "options": [
+            "Zero — fully autonomous is the goal",
+            "Review before customer-facing actions, hands-off for internal tasks",
+            "Human does everything, AI only suggests",
+            "It depends — but never fully autonomous for anything customer-facing"
+          ],
+          "correct": 3
+        },
+        {
+          "id": "q3",
+          "question": "How do you know your operator system is working?",
+          "options": [
+            "It feels impressive",
+            "You defined metrics upfront and track them",
+            "Other people say it's cool",
+            "The AI doesn't crash"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d11-copy-action-1",
+      "type": "copy_action",
+      "body": "WEEK 1 OPERATOR SYSTEM BLUEPRINT\n\nPROBLEM: [One sentence]\nTOOLS: [Which AIs for which steps]\nWORKFLOW: [Chain, branches, error handling]\nOUTPUT: [Where results go]\nMETRICS: [How you measure success]\n\nThis is your first complete system design. Keep it — you'll build on it.",
+      "sourceStepId": "d11-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d11-paste-capture-1",
+      "type": "paste_capture",
+      "body": "Design your complete Week 2 capstone system. Use the blueprint. Include: problem, tools, workflow (chain + branches + errors), output, and metrics. Describe it fully — this is your proof that you can think like an operator.",
+      "minLength": 80,
+      "xp": 20
+    },
+    {
+      "id": "d11-compare-1",
+      "type": "compare",
+      "question": "Compare how you did this task BEFORE this week vs. how you'd do it NOW.\n\nBefore: What was your process? How long did it take? What was the quality?\n\nNow: How would you use AI tools, prompts, and automation patterns to transform this task?\n\nWrite both versions. Notice the difference.",
+      "xp": 10
+    },
+    {
+      "id": "d11-scenario-1",
+      "type": "scenario",
+      "question": "You've built your capstone system and it's been running for a week. The results are good but not great — the AI drafts are sometimes too generic and need significant editing. What's your FIRST move?",
+      "options": [
+        "Scrap the system — AI isn't ready for this task",
+        "Improve your prompts — add more context, examples, and constraints",
+        "Switch to a more expensive AI model",
+        "Accept that AI will always need heavy editing"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. When outputs are generic, the prompts are usually the issue. Review your ROLE, CONTEXT, and EXAMPLES. Are you giving the AI enough to work with? Generic outputs come from generic inputs. Tighten the prompt before you abandon the system.",
+        "Good thought, but before switching models, fix your prompts. Generic outputs almost always trace back to prompts that lack specificity. Add more context, better examples, and tighter constraints before you change anything else."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-reflection-1",
+      "type": "reflection",
+      "prompt": "Week 2 is complete. Take a moment to reflect on your journey:\n\n• What's the most important thing you learned this week?\n• How has your thinking about AI changed since Day 1?\n• What are you most excited to build or improve with your new operator skills?\n\nBe specific. This reflection anchors your learning and sets your direction for Week 2.",
+      "minChars": 50,
+      "xp": 20,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "How would you rate your confidence as an AI Operator now?",
+          "options": [
+            "Beginner — still learning the basics",
+            "Developing — I can use multiple tools and write decent prompts",
+            "Competent — I can design basic automations with error handling",
+            "Confident — I can design complete operator systems"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What do you want to learn or build in Week 2?",
+          "placeholder": "Describe your goals..."
+        }
+      ]
+    },
+    {
+      "id": "d11-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "week1_complete",
+      "xp": 50
+    },
+    {
+      "id": "d11-streak-1",
+      "type": "streak_commitment",
+      "commitOptions": [
+        7,
+        14,
+        30
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d11-info-2",
+      "type": "info",
+      "title": "Week 2: Complete. Here's What You Built.",
+      "body": "In one week, you've gone from 'what is AI?' to designing complete operator systems.\n\nYou learned:\n• What AI actually is — a prediction engine, not magic\n• How to build automations that chain AI actions together\n• The complete operator's toolkit — every interaction type\n• Which AI tool to use for which task (and why it matters)\n• How to write prompts that produce exactly what you need\n• How to design workflows with chaining, branching, and error handling\n\nAnd today, you put it all together into a complete system design.\n\nThis is the foundation. Week 2 builds on it — with real implementation, integration, and scaling.\n\nYou're not just an AI user anymore. You're an operator.",
+      "xp": 5
+    },
+    {
+      "id": "d11-completion-1",
+      "type": "completion",
+      "title": "Week 2 Graduation! 🎉",
+      "body": "You did it. Two weeks. One complete operator system designed. A whole new way of thinking about AI.\n\nYou now know more about practical AI operation than 95% of people who use these tools every day. Not because you're technical — because you learned the right things in the right order.\n\nWeek 3 starts tomorrow: implementation, integration, and real-world deployment. You'll take your system design and learn how to make it real.\n\nWelcome to the operator community. You've earned it.",
+      "xp": 25
+    }
+  ]
+}

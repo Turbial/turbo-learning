@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "unit": "day9",
+  "title": "Day 9: Advanced Prompt Engineering — The Art of Asking AI",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d9-info-1",
+      "type": "info",
+      "title": "Welcome to Day 5",
+      "body": "You know which AI to use. Now you need to know how to talk to it.\n\nPrompt engineering sounds technical, but it's really just one skill: giving the AI enough context, structure, and examples to produce exactly what you want — on the first try.\n\nToday you'll master the five techniques that turn vague requests into precise, useful outputs. By the end, you'll write prompts that work the way you expect them to.\n\nLet's sharpen your questions.",
+      "xp": 5
+    },
+    {
+      "id": "d9-highlight-1",
+      "type": "highlight",
+      "body": "There are five techniques that separate great prompts from mediocre ones:\n\n1. ROLE — Tell the AI who to be ('You are an experienced hiring manager...')\n2. CONTEXT — Give background the AI needs ('I run a 15-person marketing agency...')\n3. FORMAT — Specify the output structure ('Give me a 3-column table with...')\n4. EXAMPLES — Show what good looks like ('Here's an example of the style I want...')\n5. CONSTRAINTS — Set boundaries ('Keep it under 200 words. No jargon.')\n\nUse at least three of these in every prompt, and your results will transform.",
+      "highlights": [
+        "ROLE",
+        "CONTEXT",
+        "FORMAT",
+        "EXAMPLES",
+        "CONSTRAINTS"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d9-mc-1",
+      "type": "mc",
+      "question": "Which of these prompts is likely to produce the BEST result?",
+      "options": [
+        "'Write a blog post about productivity.'",
+        "'You are a productivity coach writing for busy parents. My readers struggle with balancing work and family time. Write a 500-word blog post with 5 practical tips, each with a concrete example. Use a warm, encouraging tone. No corporate jargon.'",
+        "'Can you help me write something?'",
+        "'Write a long, detailed blog post about being productive at work and at home, covering all strategies.'"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly! This prompt uses ROLE (productivity coach), CONTEXT (busy parents, work/family balance), FORMAT (500 words, 5 tips with examples), CONSTRAINT (no jargon), and tone guidance. This is prompt engineering in action.",
+        "Not quite. While any prompt is better than none, adding role, context, format, and constraints transforms vague requests into precise instructions. Look at option 2 again — notice how every element guides the AI."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-scenario-card-1",
+      "type": "scenario_card",
+      "title": "The Prompt That Cost a Deal",
+      "body": "Tom asked an AI: 'Write a proposal for the client.'\n\nThe result was generic, missed the client's industry entirely, and used the wrong tone. The client went with a competitor.\n\nTom's revised prompt: 'You are a cybersecurity consultant. The client is a mid-size hospital that just had a data breach. Write a 2-page proposal covering: (1) immediate remediation steps, (2) 90-day security roadmap, (3) pricing tiers. Use clear, non-technical language suitable for a hospital board. Include specific HIPAA considerations.'\n\nThe difference? The first prompt got a template. The second got a deal.\n\nPrecision wins.",
+      "xp": 5
+    },
+    {
+      "id": "d9-tf-1",
+      "type": "tf",
+      "question": "The longer your prompt, the better the result.",
+      "correct": false,
+      "feedback": [
+        "Right. Length isn't the goal — precision is. A 50-word prompt with clear role, context, and format will outperform a 500-word ramble. Be specific, not verbose. Every word should earn its place.",
+        "Actually, no. A bloated prompt confuses the AI. What matters is specificity, not length. A tight, well-structured prompt with clear instructions beats a long, unfocused one every time."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-fillblank-1",
+      "type": "fillblank",
+      "question": "The technique of providing a sample to show the AI what kind of output you want is called giving an ______. This is often the single most effective way to improve results.",
+      "answer": "example",
+      "aliases": [
+        "sample",
+        "reference",
+        "template"
+      ],
+      "feedback": [
+        "Correct! Examples are powerful because they eliminate ambiguity. Instead of describing what you want, you show it. The AI matches the pattern, and the results become dramatically more consistent.",
+        "Good thinking. The term we use is 'example' — showing the AI a sample of the desired output. This is one of the most reliable ways to get consistent, high-quality results."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-example-1",
+      "type": "example",
+      "title": "Before and After: The Same Task, Different Prompts",
+      "prompt": "WEAK PROMPT:\n'Summarize this meeting.'\n\nSTRONG PROMPT:\n'You are an executive assistant. Below are meeting notes from our weekly product review. Summarize them in this exact format:\n\n🔑 Key Decisions Made (bullet points)\n⚠️ Blockers Identified (bullet points)\n📋 Action Items (table: Owner | Task | Deadline)\n📊 Metrics Update (2-3 sentences)\n\nKeep the total under 300 words. Write in plain English — no technical jargon.'\n\nSame meeting notes. Completely different output quality. The strong prompt took 30 extra seconds to write and saved an hour of clarification."
+    },
+    {
+      "id": "d9-goodfit-1",
+      "type": "good_fit",
+      "question": "'Hey AI, can you help me with something?'",
+      "correct": "notideal",
+      "feedback": [
+        "Right. This is the vaguest possible prompt. The AI has no role, no context, no format, no constraints. It will ask clarifying questions instead of producing value. Always give the AI enough to work with.",
+        "This is a terrible prompt. You haven't told the AI who to be, what you need, or what format you want. You'll spend more time clarifying than doing. Be specific from the start."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-goodfit-2",
+      "type": "good_fit",
+      "question": "'You are a financial advisor. Analyze these three investment options for a client who is 35, risk-averse, and saving for retirement. Compare fees, historical returns, and risk level. Output as a ranking (1=best) with one-paragraph reasoning for each. No recommendations — analysis only.'",
+      "correct": "good",
+      "feedback": [
+        "Excellent prompt. Role ✓ Context ✓ Format ✓ Constraints ✓. The AI knows exactly who it is, who it's helping, what to analyze, and how to present results. This prompt will produce a useful, structured output on the first try.",
+        "This is a textbook strong prompt. Role, context, format, and constraints are all crystal clear. The AI has everything it needs to deliver exactly what's requested."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-match-1",
+      "type": "match",
+      "pairs": [
+        {
+          "left": "ROLE",
+          "right": "Who the AI should pretend to be"
+        },
+        {
+          "left": "CONTEXT",
+          "right": "Background information the AI needs"
+        },
+        {
+          "left": "FORMAT",
+          "right": "How you want the output structured"
+        },
+        {
+          "left": "CONSTRAINTS",
+          "right": "Boundaries — length, tone, what to avoid"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d9-builder-1",
+      "type": "builder",
+      "fields": [
+        {
+          "id": "role",
+          "label": "Who should the AI be? (ROLE)",
+          "placeholder": "e.g., You are an experienced marketing strategist..."
+        },
+        {
+          "id": "context",
+          "label": "What does the AI need to know? (CONTEXT)",
+          "placeholder": "e.g., I'm launching a small online bakery..."
+        },
+        {
+          "id": "need",
+          "label": "What exactly do you need? (TASK)",
+          "placeholder": "e.g., A 5-post social media content calendar..."
+        },
+        {
+          "id": "format",
+          "label": "How should the output look? (FORMAT)",
+          "placeholder": "e.g., Table with: Platform | Post Type | Caption..."
+        }
+      ],
+      "template": "You are {role}.\n\nContext: {context}\n\nTask: {need}\n\nFormat: {format}\n\nKeep it concise and actionable. Avoid generic advice.",
+      "xp": 15
+    },
+    {
+      "id": "d9-quiz-1",
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "What's the most impactful single technique to improve a prompt?",
+          "options": [
+            "Make it longer",
+            "Add an example of the desired output",
+            "Use more complex vocabulary",
+            "Ask multiple questions at once"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "question": "What should you do if the AI's first output isn't what you wanted?",
+          "options": [
+            "Give up — AI can't handle this task",
+            "Refine your prompt with more specific instructions",
+            "Ask the exact same thing again",
+            "Switch to a different AI tool immediately"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "question": "Which prompt element tells the AI HOW to structure its answer?",
+          "options": [
+            "Role",
+            "Context",
+            "Format",
+            "None of the above"
+          ],
+          "correct": 2
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d9-copy-action-1",
+      "type": "copy_action",
+      "body": "MY PROMPT ENGINEERING TEMPLATE\n\nYou are [ROLE].\n\nContext: [2-3 sentences of background]\n\nTask: [Specific request]\n\nFormat: [How output should look]\n\nConstraints: [Tone, length, what to avoid]\n\nExample of desired style: [Paste a sample]",
+      "sourceStepId": "d9-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d9-paste-capture-1",
+      "type": "paste_capture",
+      "body": "Take a real task from your work or life and write a strong prompt for it using the template. Use at least ROLE + CONTEXT + FORMAT. Paste your prompt here.",
+      "minLength": 50,
+      "xp": 10
+    },
+    {
+      "id": "d9-scenario-1",
+      "type": "scenario",
+      "question": "You wrote a prompt asking for 'a marketing plan.' The AI gave you a generic 30-page document that's mostly fluff. What went wrong?",
+      "options": [
+        "AI isn't good at marketing — use a human consultant",
+        "Your prompt was too vague — you didn't specify audience, format, depth, or constraints",
+        "You should have used a different AI tool",
+        "Marketing plans are too complex for AI"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. 'A marketing plan' is infinitely vague. The AI filled the void with generic content. Next time specify: target audience, budget, timeline, channels, format (1-page executive summary?), and what NOT to include. Precision eliminates fluff.",
+        "Good answer, but look closer. The problem wasn't the AI's capability — it was the prompt's specificity. 'A marketing plan' gives the AI nothing to work with. Be specific about audience, scope, format, and constraints."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-reflection-1",
+      "type": "reflection",
+      "prompt": "Think about the last time you asked an AI for something and didn't get what you wanted. Now rewrite that prompt using at least three of the five techniques (ROLE, CONTEXT, FORMAT, EXAMPLES, CONSTRAINTS).\n\nHow is the new prompt different? What would you expect to change in the output?",
+      "minChars": 40,
+      "xp": 15,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "Which technique do you think will improve your prompts the most?",
+          "options": [
+            "Adding ROLE (telling AI who to be)",
+            "Adding CONTEXT (giving background)",
+            "Adding FORMAT (specifying structure)",
+            "Adding EXAMPLES (showing what good looks like)"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What's one task you'll rewrite a prompt for today?",
+          "placeholder": "Describe the task and your new approach..."
+        }
+      ]
+    },
+    {
+      "id": "d9-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "prompt_crafter",
+      "xp": 20
+    },
+    {
+      "id": "d9-info-2",
+      "type": "info",
+      "title": "What You Just Mastered",
+      "body": "You now have a repeatable framework for writing prompts that work: ROLE + CONTEXT + FORMAT + CONSTRAINTS + EXAMPLES.\n\nThis isn't theory — it's a system. Every time you sit down to use AI, run through the five techniques. Which ones does your prompt include? Which ones is it missing?\n\nThe difference between a 30-second prompt and a 90-second prompt isn't 60 seconds — it's often hours of rework you avoid.\n\nNext: you'll put everything together. Tool selection + prompt engineering + workflow thinking. Welcome to your first real operator project.",
+      "xp": 5
+    },
+    {
+      "id": "d9-completion-1",
+      "type": "completion",
+      "title": "Day 5 Complete!",
+      "body": "You know which AI to use (Day 9) and how to ask it (Day 9). These are the two skills that separate operators from everyone else.\n\nNext: you combine everything — tool selection, prompting, and workflow thinking — into a complete operator project. You'll build something that does real work.",
+      "xp": 15
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "unit": "day8",
+  "title": "Day 8: The Tool Landscape — ChatGPT, Claude, Gemini & When to Use Each",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d8-info-1",
+      "type": "info",
+      "title": "Welcome to Day 4",
+      "body": "You've built automations, explored the operator's toolkit, learned to write great prompts, created reusable templates, designed multi-step workflows, and tested your systems for quality.\n\nNow it's time to learn something most operators overlook: which AI tool to reach for — and when.\n\nThere is no 'best' AI. There is only the right AI for the job. By the end of today, you'll be able to look at any task and instantly know which model to use.\n\nLet's meet the landscape.",
+      "xp": 5
+    },
+    {
+      "id": "d8-highlight-1",
+      "type": "highlight",
+      "body": "The three major AI assistants each have distinct personalities and strengths:\n\nChatGPT — the versatile all-rounder. Best at: brainstorming, creative writing, coding, and general-purpose tasks.\n\nClaude — the careful thinker. Best at: deep analysis, long-form writing, nuanced reasoning, and safety-conscious work.\n\nGemini — the connected researcher. Best at: real-time data, Google integration, multimedia analysis, and factual queries.\n\nNone is 'better.' They're different tools for different jobs.",
+      "highlights": [
+        "versatile all-rounder",
+        "careful thinker",
+        "connected researcher",
+        "different tools for different jobs"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d8-mc-1",
+      "type": "mc",
+      "question": "You need to analyze a 50-page legal contract and identify all risk clauses. Which tool is likely best suited?",
+      "options": [
+        "ChatGPT — it's the most popular",
+        "Claude — it excels at long-form, nuanced analysis",
+        "Gemini — it can search the web",
+        "They're all identical — flip a coin"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. Claude's strength is careful, thorough analysis of long documents. Its large context window and methodical reasoning make it ideal for contract review, research papers, and detailed reports.",
+        "Close, but there's a better answer. While popularity matters for community support, Claude is specifically designed for deep document analysis with superior context handling."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-scenario-card-1",
+      "type": "scenario_card",
+      "title": "The Wrong Tool Cost Me 3 Hours",
+      "body": "Marcus runs a consulting firm. Last month he spent 3 hours trying to get ChatGPT to produce a detailed market analysis with current statistics.\n\nThe problem? ChatGPT's training data cuts off at a certain date. It kept generating plausible-sounding but outdated numbers.\n\nWhen he switched to Gemini — which has live Google Search integration — he got the same analysis with verified, current data in 15 minutes.\n\nLesson: The right tool saves hours. The wrong tool wastes them.",
+      "xp": 5
+    },
+    {
+      "id": "d8-tf-1",
+      "type": "tf",
+      "question": "If ChatGPT gives you a bad answer, switching to Claude or Gemini will always give you a better one.",
+      "correct": false,
+      "feedback": [
+        "Right. Switching tools helps when the problem is tool fit — but if your prompt is vague or your task is poorly defined, no tool can save you. The operator's skill matters more than the tool.",
+        "Actually no. The tool is only part of the equation. A poorly written prompt will produce poor results on any platform. Good operators fix the prompt first, then consider switching tools."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-fillblank-1",
+      "type": "fillblank",
+      "question": "When you need your AI to search the internet for live, current information — stock prices, news, or recent events — the tool best equipped for this is ______.",
+      "answer": "Gemini",
+      "aliases": [
+        "google gemini",
+        "bard"
+      ],
+      "feedback": [
+        "Correct! Gemini's native Google Search integration gives it access to real-time web data. While ChatGPT and Claude have search features, Gemini's connection is the deepest and most seamless.",
+        "Close — Gemini (Google's AI) has the deepest real-time search integration. While other tools are adding search features, Gemini was built with this as a core capability."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-example-1",
+      "type": "example",
+      "title": "A Real Multi-Tool Workflow",
+      "prompt": "Here's how an AI Operator might tackle a complex project using multiple tools:\n\nTASK: Create a market entry strategy for a new product.\n\nSTEP 1 — Gemini: Research current market data, competitor pricing, and recent industry news.\n\nSTEP 2 — Claude: Analyze the research, identify patterns and risks, draft the strategic framework.\n\nSTEP 3 — ChatGPT: Brainstorm creative positioning angles, generate tagline options, refine messaging.\n\nResult: Research-backed strategy with creative execution — each tool doing what it does best."
+    },
+    {
+      "id": "d8-goodfit-1",
+      "type": "good_fit",
+      "question": "Writing a 2,000-word thought leadership article with nuanced arguments and careful citations.",
+      "correct": "good",
+      "feedback": [
+        "Perfect call. Claude is purpose-built for this — long-form writing, careful reasoning, and attention to nuance. Its outputs tend to be more structured and well-argued for substantial written pieces.",
+        "This is actually a great fit for Claude. Long-form, nuanced content is exactly where Claude shines. Its outputs are typically more structured and thorough than alternatives."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-goodfit-2",
+      "type": "good_fit",
+      "question": "You need to write a Python script that pulls data from an API, processes it, and generates a CSV report.",
+      "correct": "good",
+      "feedback": [
+        "Correct! ChatGPT (especially with Code Interpreter) excels at coding tasks. Its training data includes massive amounts of programming examples, and its code generation is consistently strong across languages.",
+        "This is a great fit for ChatGPT. Coding and scripting are among its strongest capabilities — it has extensive programming knowledge and generates clean, functional code reliably."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-match-1",
+      "type": "match",
+      "pairs": [
+        {
+          "left": "ChatGPT",
+          "right": "Creative writing, coding, brainstorming"
+        },
+        {
+          "left": "Claude",
+          "right": "Deep analysis, long documents, careful reasoning"
+        },
+        {
+          "left": "Gemini",
+          "right": "Live research, factual queries, multimedia"
+        },
+        {
+          "left": "The Operator",
+          "right": "Chooses the right tool for each task"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d8-builder-1",
+      "type": "builder",
+      "fields": [
+        {
+          "id": "task_type",
+          "label": "What kind of task are you doing?",
+          "placeholder": "e.g., research, writing, coding, analysis"
+        },
+        {
+          "id": "tool_choice",
+          "label": "Which tool did you pick and why?",
+          "placeholder": "e.g., Claude — need deep analysis of long text"
+        },
+        {
+          "id": "backup",
+          "label": "What's your backup tool if the first doesn't work?",
+          "placeholder": "e.g., Switch to ChatGPT for a fresh perspective"
+        }
+      ],
+      "template": "My task: {task_type}\nPrimary tool: {tool_choice}\nBackup plan: {backup}\n\nThis is my tool selection framework.",
+      "xp": 15
+    },
+    {
+      "id": "d8-quiz-1",
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "Which AI tool is best for real-time web research?",
+          "options": [
+            "ChatGPT",
+            "Claude",
+            "Gemini",
+            "All are equally good"
+          ],
+          "correct": 2
+        },
+        {
+          "id": "q2",
+          "question": "What should you do FIRST if an AI gives you a poor answer?",
+          "options": [
+            "Switch to a different AI tool",
+            "Improve your prompt with more detail",
+            "Give up and do it manually",
+            "Ask the same question again"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "question": "True operators use how many AI tools?",
+          "options": [
+            "One — stick with what you know",
+            "Multiple — each tool has different strengths",
+            "Two maximum — any more is confusing",
+            "It doesn't matter — they're all the same"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d8-copy-action-1",
+      "type": "copy_action",
+      "body": "MY AI TOOL SELECTION FRAMEWORK\n\nCREATIVE WORK → ChatGPT\nDEEP ANALYSIS → Claude\nLIVE RESEARCH → Gemini\n\nBefore any task, ask: What kind of thinking does this require?\nThen pick the tool that thinks that way.",
+      "sourceStepId": "d8-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d8-compare-1",
+      "type": "compare",
+      "question": "Take the SAME prompt and run it through two different AI tools. Which gave you a more useful answer? Why?\n\nTry this prompt: 'Explain quantum computing to a 12-year-old in 3 paragraphs.'\n\nCompare the tone, clarity, and usefulness of each response.",
+      "xp": 10
+    },
+    {
+      "id": "d8-scenario-1",
+      "type": "scenario",
+      "question": "Your boss needs a competitive analysis report by end of day. It requires: (1) current pricing data from competitors, (2) SWOT analysis, and (3) executive summary. How do you use AI tools?",
+      "options": [
+        "Use ChatGPT for everything — keep it simple",
+        "Gemini for pricing research, Claude for SWOT analysis, ChatGPT for executive summary writing",
+        "Hire a consultant — AI can't handle business analysis",
+        "Use whichever tool you're most comfortable with"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly! Multi-tool workflows are the operator's superpower. Each tool handles what it does best, and you orchestrate the result. This is how operators deliver pro-level work in a fraction of the time.",
+        "There's a better approach. Smart operators break complex tasks into pieces and assign each piece to the best tool for that specific job."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-reflection-1",
+      "type": "reflection",
+      "prompt": "Think about the work you do regularly. Pick one task and decide which AI tool would be best for it.\n\nConsider: Is it creative? Analytical? Research-heavy? Does it need live data? Does it involve long documents?\n\nNow explain your tool choice.",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "Which tool are you most curious to try next?",
+          "options": [
+            "ChatGPT",
+            "Claude",
+            "Gemini",
+            "All of them"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What's one task you do where switching tools might improve your results?",
+          "placeholder": "Describe the task and your current approach..."
+        }
+      ]
+    },
+    {
+      "id": "d8-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "tool_scout",
+      "xp": 20
+    },
+    {
+      "id": "d8-streak-1",
+      "type": "streak_commitment",
+      "commitOptions": [
+        7,
+        14,
+        30
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d8-info-2",
+      "type": "info",
+      "title": "What You Just Learned",
+      "body": "You now have a mental model for tool selection: match the tool's strength to the task's requirement. Creative work? ChatGPT. Deep analysis? Claude. Live research? Gemini. Multi-step project? Use all three.\n\nThis one skill — knowing which AI to reach for — separates operators from casual users. Most people use one tool for everything and wonder why results are inconsistent. You now know better.\n\nNext: Prompt engineering. You'll learn how to ask questions that get exactly the answers you need — the difference between 'write a report' and getting a report you can actually use.",
+      "xp": 5
+    },
+    {
+      "id": "d8-completion-1",
+      "type": "completion",
+      "title": "Day 4 Complete!",
+      "body": "You can now look at any task and know which AI tool to use. More importantly, you understand that the best operators don't pick one tool — they orchestrate multiple tools to get the best result.\n\nNext: the art of the prompt. You'll learn how to ask questions so precisely that the AI gives you exactly what you need on the first try.",
+      "xp": 15
+    }
+  ]
+}

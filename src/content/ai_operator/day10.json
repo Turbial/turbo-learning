@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "unit": "day10",
+  "title": "Day 10: Automation Patterns — Chaining, Branching & Error Handling",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d10-info-1",
+      "type": "info",
+      "title": "Welcome to Day 6",
+      "body": "A single AI prompt is useful. A chain of AI prompts is powerful.\n\nToday you'll learn the three automation patterns that every operator uses: chaining (connecting steps), branching (handling different situations), and error handling (what to do when things go wrong).\n\nThese patterns turn a collection of prompts into a reliable system. By the end of today, you'll be able to design workflows that handle real-world complexity — not just happy-path scenarios.\n\nLet's build smarter systems.",
+      "xp": 5
+    },
+    {
+      "id": "d10-highlight-1",
+      "type": "highlight",
+      "body": "Three patterns make up every robust AI automation:\n\n🔗 CHAINING — Feed the output of one step into the next. Research → Analyze → Summarize → Deliver. Each step adds value on top of the previous one.\n\n🔀 BRANCHING — Handle different situations differently. 'If the email is a complaint → escalate. If it's a question → answer. If it's spam → delete.'\n\n🛡️ ERROR HANDLING — Plan for failure. What happens if the AI returns nothing? What if the website is down? What if the answer doesn't make sense?\n\nBuild all three into every workflow, and your automations become production-ready.",
+      "highlights": [
+        "CHAINING",
+        "BRANCHING",
+        "ERROR HANDLING",
+        "production-ready"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d10-mc-1",
+      "type": "mc",
+      "question": "What's the key difference between a simple prompt and a true automation workflow?",
+      "options": [
+        "Automations use more expensive AI models",
+        "Automations chain multiple steps together with branching logic and error handling",
+        "Automations always require coding",
+        "There is no real difference"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. A single prompt is a tool. An automation is a system — chained steps, conditional branching, and fallback handling that together form a reliable, repeatable process.",
+        "Not quite. The difference is structural. Prompts are individual actions; automations are systems of connected steps that handle different scenarios and recover from failures."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-scenario_card-1",
+      "type": "scenario_card",
+      "title": "The Automation That Broke",
+      "body": "Lisa built an automation to handle customer support emails:\n\n1. AI reads the email\n2. AI categorizes it (complaint / question / feedback)\n3. AI drafts a response\n4. Response goes to Lisa for approval\n\nIt worked beautifully — until a customer sent an email with a screenshot attachment and no text.\n\nThe automation crashed. No text to categorize. No category to respond to. No response to approve.\n\nLisa added error handling: 'If no text is detected, reply: Thank you for your message. Could you describe your issue in text so I can help you faster?'\n\nNow the automation handles the happy path AND the edge cases. That's the difference between a demo and a production system.",
+      "xp": 5
+    },
+    {
+      "id": "d10-tf-1",
+      "type": "tf",
+      "question": "If an automation works correctly 90% of the time, it's production-ready.",
+      "correct": false,
+      "feedback": [
+        "Right. 90% means 1 in 10 interactions fail. That's unacceptable for anything customer-facing or business-critical. Production-ready means handling the edge cases — what happens when things go wrong, not just when they go right.",
+        "Careful. A 10% failure rate means every tenth user has a broken experience. Production automations need error handling for the edge cases, not just the happy path."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-fillblank-1",
+      "type": "fillblank",
+      "question": "When you take the output of one AI step and use it as the input for the next step, you're building a ______. This is the fundamental structure of all multi-step automations.",
+      "answer": "chain",
+      "aliases": [
+        "pipeline",
+        "sequence",
+        "workflow"
+      ],
+      "feedback": [
+        "Correct! Chains are how you build complexity from simple steps. Each step adds, transforms, or filters information, creating value that no single step could produce alone.",
+        "Good — the term is 'chain.' Like links in a real chain, each step connects to the next, with information flowing through and being transformed at each point."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-example-1",
+      "type": "example",
+      "title": "A Complete Automation Pipeline",
+      "prompt": "Here's a lead-qualification automation built with all three patterns:\n\n🔗 CHAIN:\nStep 1 → AI reads new contact form submission\nStep 2 → AI researches the company (size, industry, recent news)\nStep 3 → AI scores the lead (1-10) based on fit criteria\nStep 4 → AI writes a personalized outreach email\n\n🔀 BRANCHING:\nScore 8-10 → Send personalized email immediately + notify sales team\nScore 5-7 → Add to nurture sequence (weekly educational emails)\nScore 1-4 → Archive, send generic 'thanks for your interest'\n\n🛡️ ERROR HANDLING:\n- If company research fails → skip that section, note 'limited data'\n- If scoring is uncertain → flag for human review\n- If email generation fails → use fallback template\n\nThis automation qualifies leads 24/7, handles edge cases, and never breaks."
+    },
+    {
+      "id": "d10-goodfit-1",
+      "type": "good_fit",
+      "question": "Building an automation that sends an invoice, but with no error handling for cases where the client email is invalid.",
+      "correct": "notideal",
+      "feedback": [
+        "Right. Always plan for what can go wrong. Invalid email → log the error and notify you. Payment terms missing → use defaults. Every automation needs a 'what if' plan for every step.",
+        "This is risky. Without error handling, a single invalid email could silently fail — and you'd never know the invoice wasn't sent. Always build fallbacks."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-goodfit-2",
+      "type": "good_fit",
+      "question": "A content pipeline that: (1) scrapes articles, (2) AI summarizes each, (3) AI picks top 5, (4) AI writes newsletter draft, (5) sends to you for final review. If scraping fails, it uses cached articles from yesterday. If AI times out, it retries once.",
+      "correct": "good",
+      "feedback": [
+        "This is a textbook production-ready automation. Chaining (5 connected steps), branching (top 5 selection), and error handling (cache fallback, retry logic). A human reviews before publishing — the ideal human-in-the-loop pattern.",
+        "This is an excellent automation design. It chains multiple steps, handles failures gracefully (cache fallback, retry), and keeps a human in the loop for final review. This is how operators build reliable systems."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-match-1",
+      "type": "match",
+      "pairs": [
+        {
+          "left": "Chaining",
+          "right": "Output of step A becomes input for step B"
+        },
+        {
+          "left": "Branching",
+          "right": "Different paths based on conditions"
+        },
+        {
+          "left": "Error Handling",
+          "right": "What to do when things go wrong"
+        },
+        {
+          "left": "Human-in-the-loop",
+          "right": "Person reviews before final action"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d10-builder-1",
+      "type": "builder",
+      "fields": [
+        {
+          "id": "trigger",
+          "label": "What starts your workflow? (TRIGGER)",
+          "placeholder": "e.g., New form submission, email received, scheduled time"
+        },
+        {
+          "id": "chain",
+          "label": "What are the step-by-step actions? (CHAIN)",
+          "placeholder": "e.g., 1. Read input → 2. Categorize → 3. Generate response → 4. Deliver"
+        },
+        {
+          "id": "branches",
+          "label": "What conditions change the path? (BRANCHING)",
+          "placeholder": "e.g., If urgent → escalate. If routine → auto-respond."
+        },
+        {
+          "id": "errors",
+          "label": "What if something fails? (ERROR HANDLING)",
+          "placeholder": "e.g., If AI fails → use template. Log error. Notify me."
+        }
+      ],
+      "template": "WORKFLOW DESIGN\n\nTRIGGER: {trigger}\n\nCHAIN:\n{chain}\n\nBRANCHING:\n{branches}\n\nERROR HANDLING:\n{errors}",
+      "xp": 15
+    },
+    {
+      "id": "d10-quiz-1",
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "What's the most common reason automations fail in production?",
+          "options": [
+            "AI models aren't smart enough",
+            "No error handling for edge cases",
+            "The automation is too complex",
+            "Users don't understand AI"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "question": "What's the safest pattern for customer-facing automations?",
+          "options": [
+            "Fully autonomous — no human needed",
+            "Human reviews before any action is taken",
+            "AI handles everything, human only sees errors",
+            "Build it and hope for the best"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "question": "When should you add error handling to your automation?",
+          "options": [
+            "After it breaks the first time",
+            "From the very beginning — build it in",
+            "Only for mission-critical automations",
+            "Error handling is optional — AI rarely fails"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d10-copy-action-1",
+      "type": "copy_action",
+      "body": "AUTOMATION PATTERN CHECKLIST\n\n✅ CHAINING — Each step feeds the next\n✅ BRANCHING — Different paths for different cases\n✅ ERROR HANDLING — Fallbacks for every failure point\n✅ HUMAN REVIEW — Person approves before final action\n\nBefore deploying any automation, verify all four.",
+      "sourceStepId": "d10-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d10-paste-capture-1",
+      "type": "paste_capture",
+      "body": "Design a real automation for a task in your work or life. Include: (1) the trigger, (2) the chain of steps, (3) at least two branches, and (4) error handling for at least one failure scenario. No code — describe it in plain language.",
+      "minLength": 60,
+      "xp": 10
+    },
+    {
+      "id": "d10-scenario-1",
+      "type": "scenario",
+      "question": "Your automation processes 200 customer orders daily. Today it flagged 8 orders as 'uncertain' — the AI wasn't confident in categorizing them. What's the RIGHT thing to do?",
+      "options": [
+        "Let the AI guess — 8 out of 200 is acceptable error",
+        "Route uncertain cases to a human review queue — don't guess",
+        "Delete the uncertain orders — they're probably spam",
+        "Add more AI steps until confidence is 100%"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Perfect. When the AI isn't confident, flag for human review. This is the 'human-in-the-loop' pattern — AI handles the clear cases, humans handle the edge cases. Together, you get speed AND accuracy.",
+        "Not the best approach. When AI isn't confident, never guess. Route to a human for review. This is a core operator principle: automate the routine, escalate the uncertain."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-reflection-1",
+      "type": "reflection",
+      "prompt": "Look at a process you do regularly — at work or in life. It could be handling emails, processing orders, managing schedules, anything with clear steps.\n\nNow design an automation for it. What's the chain? Where does it branch? What could go wrong, and how would you handle it?\n\nDon't worry about the technical implementation — just describe the logic.",
+      "minChars": 40,
+      "xp": 15,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "How ready do you feel to design a production automation?",
+          "options": [
+            "Still learning — need more practice",
+            "I can design one with help",
+            "I'm ready to design independently",
+            "I could teach someone else"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What's the first automation you'd build for your own work?",
+          "placeholder": "Describe the workflow..."
+        }
+      ]
+    },
+    {
+      "id": "d10-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "pattern_architect",
+      "xp": 20
+    },
+    {
+      "id": "d10-info-2",
+      "type": "info",
+      "title": "What You Now Know",
+      "body": "You've learned the three patterns that turn prompts into production systems: chaining, branching, and error handling. More importantly, you now think like a systems designer — not someone who asks AI questions, but someone who builds processes.\n\nEvery automation you design from here should have all three patterns. Chain your steps. Branch your logic. Handle your errors.\n\nNext: your Week 2 capstone. You'll combine tool selection, prompt engineering, and automation patterns into one complete project. Everything you've learned comes together.",
+      "xp": 5
+    },
+    {
+      "id": "d10-completion-1",
+      "type": "completion",
+      "title": "Day 6 Complete!",
+      "body": "You can now design automations that handle real-world complexity — not just happy-path scenarios. Chain. Branch. Handle errors. These three patterns are the foundation of every production AI system.\n\nNext: Week 2 capstone. You'll put everything together into a complete operator project. Time to build something real.",
+      "xp": 15
+    }
+  ]
+}
