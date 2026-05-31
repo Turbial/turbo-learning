@@ -271,15 +271,15 @@
     {
       "id": "d2-info-2",
       "type": "info",
-      "title": "You Just Learned Every Tool in the Box",
-      "body": "Info cards for context. Highlights for emphasis. Multiple choice to check understanding. True/False to catch assumptions. Fill-in-the-blank for precision. Matching to connect concepts. Good-fit analysis to develop judgment. Quizzes to validate learning. Builders to create. Copy actions to capture templates. Paste capture to submit work. Compare to develop analytical thinking. Scenarios to practice decision-making. Reflection to internalize. Badges to celebrate. Streak commitments to build habits.\n\nThat's 16 different ways to learn, practice, and build.\n\nTomorrow: you'll chain these together into a real automation that does actual work.",
+      "title": "What You Just Built",
+      "body": "You didn't just learn about automation — you designed one. You identified a trigger, defined an action, set conditions, and specified an output. That's the same pattern every operator workflow follows, from simple email categorization to complex multi-step pipelines.\n\nYou've also experienced many of the platform's interaction types: scenario cards for context, multiple choice and true/false for knowledge checks, fill-in-the-blank and matching for precision, good-fit analysis for judgment, builder for creation, and copy/paste for real-world use.\n\nTomorrow: the complete operator's toolkit. You'll experience every remaining interaction type the platform offers — a preview of everything you'll use across the program.",
       "xp": 5
     },
     {
       "id": "d2-completion-1",
       "type": "completion",
       "title": "Day 2 Complete!",
-      "body": "You just designed your first AI automation workflow. More importantly, you learned how to think like an operator \u2014 not someone who uses AI, but someone who builds with it.\n\nTomorrow: Chain reactions. You'll connect multiple nodes into a pipeline that handles an entire business process.",
+      "body": "You just designed your first AI automation workflow. More importantly, you learned how to think like an operator \u2014 not someone who uses AI, but someone who builds with it.\n\nTomorrow: your complete toolkit. You'll experience every interaction type the platform offers — the full operator's workshop. After that, you'll start chaining these tools into real pipelines.",
       "xp": 15
     }
   ]

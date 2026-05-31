@@ -2,16 +2,12 @@
 // Drives progression, accumulates XP, persists state.
 // Product-agnostic. Content controls the rhythm; the engine just plays it.
 
-import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import React, { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
+import { View, StyleSheet, ActivityIndicator, Text } from "react-native";
 import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
 import { createNarration } from "./narration/useNarration";
-import { applyCombo, getComboLabel, getComboMultiplier } from "./scoring";
-import { XpBurst } from "../components/feedback/XpBurst";
-import { useLessonStateStore } from "../store/lessonStateStore";
-import { useAddXp } from "../data/queries";
 
 // ─── Props ───
 
@@ -31,9 +27,6 @@ export interface LessonPlayerState {
   responses: Record<string, StepResponse>;
   correctCount: number;
   totalGraded: number;
-  comboStreak: number;
-  comboMultiplier: number;
-  comboLabel: string;
   isLast: boolean;
   progress: number; // 0–1
 }
@@ -46,75 +39,15 @@ export default function LessonPlayer({
   onComplete,
   allowBack = true,
 }: LessonPlayerProps) {
-  const savedState = useLessonStateStore((s) => s.current);
-  const saveState = useLessonStateStore((s) => s.save);
-  const clearSavedState = useLessonStateStore((s) => s.clear);
-  const addXp = useAddXp();
-
   const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
-
-  // Restore saved progress if same lesson — dispatched after Zustand's
-  // AsyncStorage persistence hydrates. Must use dispatch (not initial state)
-  // because useReducer only reads init on first render, but Zustand
-  // hydration arrives asynchronously.
-  const hasRestored = useRef(false);
-  useEffect(() => {
-    if (hasRestored.current) return;
-    const saved = savedState;
-    if (saved && saved.lessonId === lessonId && saved.stepIndex > 0) {
-      hasRestored.current = true;
-      dispatch({
-        type: "RESTORE",
-        payload: {
-          stepIndex: Math.min(saved.stepIndex, steps.length - 1),
-          sessionXp: saved.sessionXp,
-          responses: saved.responses as Record<string, StepResponse>,
-          correctCount: saved.correctCount,
-          totalGraded: saved.totalGraded,
-          comboStreak: saved.comboStreak,
-        },
-      });
-    }
-  }, [lessonId, savedState, steps.length]);
-  const { stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak } = session;
-  const [stepError, setStepError] = React.useState<string | null>(null);
+  const { stepIndex, sessionXp, responses, correctCount, totalGraded } = session;
 
   // Keep a ref of latest state so auto-advance timeouts never read stale closures
   const sessionRef = useRef(session);
   sessionRef.current = session;
 
-  // Persist mid-lesson state so the user can refresh without losing progress
-  useEffect(() => {
-    if (stepIndex > 0 || Object.keys(responses).length > 0) {
-      saveState({
-        lessonId,
-        stepIndex,
-        sessionXp,
-        responses,
-        correctCount,
-        totalGraded,
-        comboStreak,
-        savedAt: 0, // filled by store
-      });
-    }
-  }, [lessonId, stepIndex, sessionXp, JSON.stringify(responses), correctCount, totalGraded, comboStreak]);
-
   // Guard against double-firing onComplete
   const completedRef = useRef(false);
-
-  // XP burst animation state
-  const [xpBursts, setXpBursts] = useState<{ id: number; xp: number }[]>([]);
-  const xpBurstIdRef = useRef(0);
-
-  const spawnXpBurst = useCallback((xp: number) => {
-    if (xp <= 0) return;
-    const id = xpBurstIdRef.current++;
-    setXpBursts((prev) => [...prev, { id, xp }]);
-  }, []);
-
-  const removeXpBurst = useCallback((id: number) => {
-    setXpBursts((prev) => prev.filter((b) => b.id !== id));
-  }, []);
 
   // Current step and handler
   const step: Step | undefined = steps[stepIndex];
@@ -126,15 +59,51 @@ export default function LessonPlayer({
 
   const getNarration = useCallback((): NarrationController => {
     const text = getStepText(step);
-    // Extract audioUrl from step if present (pre-generated MP3)
-    const audioUrl = (step as { audioUrl?: string | null } | undefined)?.audioUrl ?? null;
     if (!narrationRef.current || currentStepIdRef.current !== step?.id) {
       narrationRef.current?.stop();
-      narrationRef.current = createNarration(text, audioUrl);
+      narrationRef.current = createNarration(text);
       currentStepIdRef.current = step?.id ?? null;
     }
     return narrationRef.current;
   }, [step]);
+
+  // Auto-play narration for non-interactive steps, pause for interactive ones
+  const narrationActiveRef = useRef(false);
+
+  useEffect(() => {
+    if (!step || !handler) return;
+
+    const narration = getNarration();
+    const isInteractive = handler.behavior.requiresInteraction;
+
+    if (isInteractive) {
+      // Pause any ongoing narration when entering an interactive step
+      if (narration.isPlaying) {
+        narration.pause();
+        narrationActiveRef.current = false;
+      }
+    } else {
+      // Auto-play for non-interactive / readable steps (info, highlight, completion, etc)
+      const text = getStepText(step);
+      if (text && !narration.isPlaying && !narrationActiveRef.current) {
+        // Small delay to let the step render before speaking
+        const timer = setTimeout(() => {
+          narration.play();
+          narrationActiveRef.current = true;
+        }, 250);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [stepIndex, step?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Pause narration when user interacts (answers a question)
+  const pauseNarrationOnInteract = useCallback(() => {
+    const narration = narrationRef.current;
+    if (narration?.isPlaying) {
+      narration.pause();
+      narrationActiveRef.current = false;
+    }
+  }, []);
 
   // Clean up narration on unmount
   useEffect(() => {
@@ -149,12 +118,11 @@ export default function LessonPlayer({
   useEffect(() => {
     if (stepIndex >= steps.length && !completedRef.current) {
       completedRef.current = true;
-      clearSavedState(); // Lesson done — don't resume here
       const snap = sessionRef.current;
       const score = completionScore(snap);
       onComplete?.(snap.sessionXp, score);
     }
-  }, [stepIndex, steps.length, onComplete, clearSavedState]);
+  }, [stepIndex, steps.length, onComplete]);
 
   // Reset completed guard when lesson id changes
   useEffect(() => {
@@ -165,40 +133,24 @@ export default function LessonPlayer({
 
   const handleContinue = useCallback(() => {
     if (step && isLastStep(stepIndex, steps.length)) {
-      // Advance past the last step — the useEffect below catches stepIndex >= steps.length
-      // and calls onComplete with sessionRef.current (stable, no stale closure)
-      dispatch({ type: "ADVANCE" });
+      const score = completionScore(session);
+      completedRef.current = true;
+      onComplete?.(sessionXp, score);
       return;
     }
     dispatch({ type: "ADVANCE" });
-  }, [step, stepIndex, steps.length]);
+  }, [step, stepIndex, steps.length, session, sessionXp, onComplete]);
 
   const handleAnswer = useCallback(
     (res: StepResponse) => {
       if (!step || !handler) return;
 
-      // Don't reward XP for re-answering the same step
-      const alreadyAnswered = responses[step.id] !== undefined;
+      // Pause narration on user interaction
+      pauseNarrationOnInteract();
 
       const correct = handler.validate?.(step, res);
-
-      // Calculate base XP (only for first answer)
-      const baseXp = alreadyAnswered ? 0 : (handler.score?.(step, res) ?? step.xp ?? 10);
-
-      // Compute combo streak: increment on correct, reset on wrong
-      const newComboStreak = correct ? comboStreak + 1 : 0;
-
-      // Apply combo multiplier to XP
-      const xp = applyCombo(baseXp, newComboStreak);
-
-      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct, comboStreak: newComboStreak });
-
-      // Spawn XP burst animation when user earns XP (only on first answer)
-      if (xp > 0) {
-        spawnXpBurst(xp);
-        // Persist XP incrementally so Journey/Progress/Dashboard reflect it immediately
-        addXp.mutate({ xp });
-      }
+      const xp = handler.score?.(step, res) ?? step.xp ?? 10;
+      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct });
 
       // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
       if (handler.behavior.autoAdvanceMs) {
@@ -207,7 +159,7 @@ export default function LessonPlayer({
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler, comboStreak, addXp, responses],
+    [step, handler, pauseNarrationOnInteract],
   );
 
   const handleBack = useCallback(() => {
@@ -216,9 +168,6 @@ export default function LessonPlayer({
 
   // ─── Derived state ───
 
-  const comboMultiplier = getComboMultiplier(comboStreak);
-  const comboLabel = getComboLabel(comboStreak);
-
   const playerState: LessonPlayerState = useMemo(
     () => ({
       stepIndex,
@@ -226,13 +175,10 @@ export default function LessonPlayer({
       responses,
       correctCount,
       totalGraded,
-      comboStreak,
-      comboMultiplier,
-      comboLabel,
       isLast: isLastStep(stepIndex, steps.length),
       progress: steps.length > 0 ? stepIndex / steps.length : 0,
     }),
-    [stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak, comboMultiplier, comboLabel, steps.length],
+    [stepIndex, sessionXp, responses, correctCount, totalGraded, steps.length],
   );
 
   // ─── Render ───
@@ -262,34 +208,13 @@ export default function LessonPlayer({
 
       {/* Step content */}
       <View style={styles.stepArea}>
-        {stepError ? (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorTitle}>⚠️ Something went wrong</Text>
-            <Text style={styles.errorDetail}>{stepError}</Text>
-            <TouchableOpacity style={styles.errorSkipBtn} onPress={() => { setStepError(null); dispatch({ type: "ADVANCE" }); }}>
-              <Text style={styles.errorSkipText}>Skip this step →</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <StepErrorBoundary stepId={step.id} onError={(msg) => setStepError(msg)}>
-            <StepComponent
-              step={step}
-              onAnswer={handleAnswer}
-              onContinue={handleContinue}
-              narration={getNarration()}
-              state={playerState}
-            />
-          </StepErrorBoundary>
-        )}
-      </View>
-
-      {/* XP burst overlay */}
-      <View style={styles.xpBurstLayer} pointerEvents="none">
-        {xpBursts.map((burst) => (
-          <View key={burst.id} style={styles.xpBurstItem}>
-            <XpBurst xp={burst.xp} onDone={() => removeXpBurst(burst.id)} />
-          </View>
-        ))}
+        <StepComponent
+          step={step}
+          onAnswer={handleAnswer}
+          onContinue={handleContinue}
+          narration={getNarration()}
+          state={playerState}
+        />
       </View>
 
       {/* Navigation */}
@@ -299,8 +224,7 @@ export default function LessonPlayer({
             ← Back
           </Text>
         )}
-        {/* Show Continue for non-interactive steps OR after user has answered an interactive step */}
-        {(!handler.behavior.requiresInteraction || responses[step.id] !== undefined) && (
+        {!handler.behavior.requiresInteraction && (
           <Text style={styles.continueBtn} onPress={handleContinue}>
             {playerState.isLast ? "Complete →" : "Continue →"}
           </Text>
@@ -342,12 +266,10 @@ const styles = StyleSheet.create({
   progressBar: {
     height: 4,
     backgroundColor: "#e0d9cf",
-    overflow: "hidden",
   },
   progressFill: {
-    height: 4,
+    height: "100%",
     backgroundColor: "#059669",
-    borderRadius: 2,
   },
   stepArea: {
     flex: 1,
@@ -372,57 +294,4 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     marginLeft: "auto",
   },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 24,
-  },
-  errorTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#92400e",
-    marginBottom: 8,
-  },
-  errorDetail: {
-    fontSize: 14,
-    color: "#A09484",
-    textAlign: "center",
-    marginBottom: 20,
-    lineHeight: 20,
-  },
-  errorSkipBtn: {
-    backgroundColor: "#059669",
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 14,
-  },
-  errorSkipText: { color: "#fff", fontSize: 16, fontWeight: "700" },
-  xpBurstLayer: {
-    position: "absolute",
-    top: 60,
-    left: 0,
-    right: 0,
-    alignItems: "center",
-    zIndex: 20,
-  },
-  xpBurstItem: {
-    position: "absolute",
-  },
 });
-
-// ─── StepErrorBoundary — catches render errors in individual steps ───
-
-class StepErrorBoundary extends React.Component<{
-  stepId: string;
-  onError: (msg: string) => void;
-  children: React.ReactNode;
-}> {
-  componentDidCatch(error: Error) {
-    this.props.onError(error.message);
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
