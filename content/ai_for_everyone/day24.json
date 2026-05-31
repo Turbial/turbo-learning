@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 24,
+    "unitLabel": "Day 24",
+    "unitTitle": "AI for Learning & Skill Development",
+    "lessonOrder": 1,
+    "lessonTitle": "Accelerate Your Learning",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d24_s1",
+      "type": "info",
+      "title": "Welcome to Day 24 — AI for Learning & Skill Development",
+      "body": "Learning a new skill is one of the most rewarding things you can do. But it takes time, patience, and the right approach. AI can accelerate your learning by acting as a personal tutor, creating practice materials, explaining complex topics, and keeping you on track.",
+      "audioUrl": null,
+      "primaryButton": "Let's learn how to learn",
+      "xp": 3
+    },
+    {
+      "id": "d24_s2",
+      "type": "scenario_card",
+      "title": "The learning challenge — Maria's story",
+      "body": "Maria wants to learn data analysis for her job. She has tried online courses but gets bored halfway through. The pace is either too slow or too fast. She struggles when she gets stuck. She needs a learning partner who adapts to her — not the other way around. AI is that partner.",
+      "audioUrl": null,
+      "primaryButton": "I know how that feels",
+      "xp": 3
+    },
+    {
+      "id": "d24_s3",
+      "type": "info",
+      "title": "AI as your personal tutor",
+      "body": "A good tutor does three things: (1) Explains things at your level. (2) Asks questions to check understanding. (3) Adapts when you are stuck. AI can do all three. Prompt: 'I want to learn [topic]. I am a complete beginner. Explain it step by step. After each section, ask me a question to check I understood. If I get it wrong, explain again in a different way.' This is personalized learning at no extra cost.",
+      "audioUrl": null,
+      "primaryButton": "I want a personal tutor",
+      "xp": 3
+    },
+    {
+      "id": "d24_s4",
+      "type": "builder",
+      "title": "Create your learning plan",
+      "fields": [
+        {
+          "id": "skill",
+          "label": "What skill do you want to learn?",
+          "placeholder": "basic data analysis with spreadsheets"
+        },
+        {
+          "id": "time_available",
+          "label": "How much time can you commit per week?",
+          "placeholder": "3 hours per week"
+        },
+        {
+          "id": "current_level",
+          "label": "Your current level — beginner, intermediate, or advanced?",
+          "placeholder": "complete beginner"
+        }
+      ],
+      "template": "I want to learn {{skill}}. I can spend {{time_available}}. My level: {{current_level}}. Create a 4-week learning plan. For each week, tell me: (1) What to focus on. (2) One specific exercise to do. (3) How to use AI as a tutor for that week. End with a milestone to aim for.",
+      "primaryButton": "Build my plan",
+      "xp": 20
+    },
+    {
+      "id": "d24_s5",
+      "type": "paste_capture",
+      "title": "Save your learning plan",
+      "body": "Paste your AI-generated learning plan. You will follow this over the next weeks.",
+      "minLength": 10,
+      "primaryButton": "Save my plan",
+      "xp": 15
+    },
+    {
+      "id": "d24_s6",
+      "type": "info",
+      "title": "Explaining complex topics simply",
+      "body": "The best way to learn something hard is to have it explained in a way you already understand. AI excels at this. Prompt: 'Explain [complex topic] using an analogy related to [something I know — cooking, sports, driving, etc.]. Then ask me if the analogy worked and offer a different one if it did not.' You can also ask for a '5-year-old,' 'teenager,' or 'adult with no background' explanation on the same topic.",
+      "audioUrl": null,
+      "primaryButton": "Explain it like I am 5",
+      "xp": 3
+    },
+    {
+      "id": "d24_s7",
+      "type": "info",
+      "title": "Practice and quiz generation",
+      "body": "Active recall — testing yourself — is proven to be more effective than re-reading notes. AI can create practice materials instantly. Prompt: 'I am learning [topic]. Create 10 quiz questions for me at different difficulty levels. Multiple choice, true/false, and fill-in-the-blank. After I answer, tell me what I got wrong and explain the correct answer.' You now have unlimited practice tests.",
+      "audioUrl": null,
+      "primaryButton": "Test my knowledge",
+      "xp": 3
+    },
+    {
+      "id": "d24_s8",
+      "type": "mc",
+      "title": "Learning technique check",
+      "question": "What is 'active recall' and why is it effective?",
+      "options": [
+        "Reading your notes over and over until you remember them",
+        "Testing yourself on what you have learned — it strengthens memory better than re-reading",
+        "Asking someone else to teach you the topic"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Re-reading feels productive but is actually one of the weakest study methods.",
+        "Correct. Testing yourself forces your brain to retrieve information, which strengthens the memory.",
+        "Teaching others is also effective, but active recall specifically means testing yourself."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d24_s9",
+      "type": "info",
+      "title": "Tracking your skill progress",
+      "body": "It is easy to feel like you are not making progress when learning. AI can help you track and measure growth. Prompt: 'Here is what I knew about [topic] two weeks ago: [notes]. Here is what I know now: [notes]. Assess my progress. What have I improved on? What should I focus on next?' Even better: keep a learning journal and ask AI to review it weekly.",
+      "audioUrl": null,
+      "primaryButton": "Track my progress",
+      "xp": 3
+    },
+    {
+      "id": "d24_s10",
+      "type": "checklist",
+      "title": "My learning accelerator toolkit",
+      "items": [
+        "I can use AI as a personal tutor that adapts to my level",
+        "I can ask AI to explain hard topics using analogies I understand",
+        "I can generate practice quizzes to test my knowledge",
+        "I can create a structured learning plan with weekly milestones",
+        "I can track my progress by sharing my learning journal with AI"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d24_s11",
+      "type": "reflection",
+      "title": "Your learning goals",
+      "questions": [
+        {
+          "id": "next_skill",
+          "type": "textarea",
+          "label": "What is one skill you will start learning with AI this month?"
+        },
+        {
+          "id": "best_method",
+          "type": "single_choice",
+          "label": "Which AI learning method excites you most?",
+          "options": [
+            "Personal tutor — learning step by step",
+            "Analogies — understanding complex topics simply",
+            "Practice quizzes — testing myself",
+            "Learning plans — staying organized"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d24_s12",
+      "type": "info",
+      "title": "Building a learning schedule",
+      "body": "Consistency beats intensity. Studying 30 minutes daily beats 5 hours once a week. Use AI to build a schedule that fits your life. Prompt: 'I want to learn [topic]. I have [X] minutes free on [mornings/evenings/weekends]. Create a weekly learning schedule that uses active recall, spaced repetition, and practical exercises. Include when to review past material.' Spaced repetition is scientifically proven to help you remember longer.",
+      "audioUrl": null,
+      "primaryButton": "Build my schedule",
+      "xp": 3
+    },
+    {
+      "id": "d24_s13",
+      "type": "info",
+      "title": "Continuous improvement — the growth mindset",
+      "body": "The best learners share one trait: they believe they can improve. When you hit a wall, ask AI: 'I am stuck on [concept]. I have tried [approaches]. What am I missing? Suggest three different ways to approach this.' Sometimes the breakthrough is just a new perspective. AI gives you unlimited perspectives.",
+      "audioUrl": null,
+      "primaryButton": "I can grow",
+      "xp": 3
+    },
+    {
+      "id": "d24_s14",
+      "type": "quiz",
+      "title": "Learning mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What makes AI an effective personal tutor?",
+          "options": [
+            "It knows everything perfectly",
+            "It adapts to your level, checks understanding, and re-explains differently when you are stuck",
+            "It replaces the need for books and courses"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Creating practice quizzes with AI is a form of active recall, which is more effective than re-reading notes.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Reviewing material at increasing intervals over time is called ______ repetition.",
+          "answer": "spaced",
+          "aliases": ["spaced repetition"]
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d24_s15",
+      "type": "completion",
+      "title": "Day 24 complete — Learning Accelerator",
+      "body": "You can now use AI as a personal tutor, create practice materials, understand complex topics through analogies, and build a learning schedule. Tomorrow: AI for creativity and innovation — exploring your creative side with AI.",
+      "primaryButton": "Let's get creative!"
+    }
+  ]
+}

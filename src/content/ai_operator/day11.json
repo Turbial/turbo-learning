@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "unit": "day11",
+  "title": "Day 11: AI Marketing Machine — Campaigns at Scale",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d11-info-1",
+      "type": "info",
+      "title": "Your AI Marketing Department",
+      "body": "A full marketing campaign involves: audience research, messaging strategy, email sequences, social content, ad copy, landing pages, and analytics setup.\n\nTraditionally: 2-3 people, 2 weeks, $3,000-8,000.\n\nWith AI: You define the strategy, AI generates the materials, you review and deploy. Time: 1 day.\n\nToday you'll build an end-to-end marketing campaign — from audience research to final copy — all powered by AI.",
+      "xp": 5
+    },
+    {
+      "id": "d11-highlight-1",
+      "type": "highlight",
+      "body": "The AI marketing workflow:\n\n1. Audience Definition: 'Define our ideal customer profile for [product]. Include demographics, pain points, buying triggers, and preferred channels.'\n2. Message Development: 'Create 3 messaging angles for this audience. Which emotion drives the purchase decision?'\n3. Content Generation: 'Write a 5-email nurture sequence, 10 social posts, 3 ad variants, and a landing page — all using the chosen messaging angle.'\n4. A/B Test Design: 'Propose 3 A/B tests for the email sequence. What variable should we test in each?'\n\nEach step feeds the next. All from one brief.",
+      "highlights": ["Audience Definition", "Message Development", "Content Generation", "A/B Test Design"],
+      "xp": 5
+    },
+    {
+      "id": "d11-mc-1",
+      "type": "mc",
+      "question": "What is the biggest advantage of AI in marketing campaign creation?",
+      "options": [
+        "AI can generate perfect marketing copy that never needs editing",
+        "AI can produce multiple variations and formats from a single brief, enabling rapid testing",
+        "AI replaces the need for any human marketing strategy",
+        "AI automatically knows which audience to target"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. The superpower is scale and variation — one brief produces dozens of assets across formats. You test, measure, and optimize.",
+        "Not quite. AI needs your strategy and brief. But once you provide those, it can produce more variations and formats faster than a team of humans."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-example-1",
+      "type": "example",
+      "title": "Build a Campaign in 10 Prompts",
+      "prompt": "Campaign: Launch an AI tools newsletter for freelancers.\n\nPrompt 1: 'Define the ideal subscriber for an AI productivity newsletter for freelancers. Demographics, pain points, content preferences.'\n\nPrompt 2: 'Create 5 newsletter name options and 3 tagline options. Each should convey: AI tools + freelancer productivity + actionable advice.'\n\nPrompt 3: 'Write a welcome email sequence: email 1 (immediate welcome + value), email 2 (day 2 — best AI tools), email 3 (day 5 — case study), email 4 (day 7 — community invite).' \n\nPrompt 4: 'Create 5 LinkedIn posts promoting the newsletter. Each should have a hook, insight, and CTA to subscribe.'\n\nPrompt 5: 'Write 3 Twitter/X threads — one educational, one controversial, one inspirational — all driving to newsletter signup.'\n\nPrompt 6: 'Design a simple landing page structure: headline, subheadline, benefits, social proof, signup form.'\n\nPrompt 7: 'Create 3 A/B test variations for the welcome email subject line.'\n\nPrompt 8: 'Write a launch announcement post for each platform: LinkedIn, Twitter, Instagram, your website blog.'"
+    },
+    {
+      "id": "d11-builder-1",
+      "type": "builder",
+      "title": "Design Your Marketing Campaign",
+      "instruction": "Choose a product, service, or cause you'd market. Build the campaign brief:\n\nCampaign: [What you're marketing]\nTarget Audience: [Who needs this?]\nKey Message: [What's the one thing they need to hear?]\nChannel Plan: [Which 3 platforms will you use?]\nEmail Sequence: [Outline a 3-email nurture sequence — subject line + goal for each]\nSocial Content: [What 3 post types will you create?]\nSuccess Metric: [How will you measure success?]",
+      "inputLabel": "Your campaign design",
+      "placeholder": "Campaign: AI Business Consulting Package\nTarget Audience: Small business owners (10-50 employees) who feel overwhelmed by AI but know they need it\nKey Message: 'You don't need to understand AI. You need someone who does — and we'll implement it for you.'\nChannels: LinkedIn, email, local business groups\n\nEmail Sequence:\n1. 'Is AI actually useful for your business?' — Education-focused, no pitch\n2. '3 businesses that cut costs by 40% with AI' — Case study with results\n3. 'Let's audit your business for AI opportunities — free' — CTA to consultation\n\nSocial: LinkedIn thought leadership posts, client testimonial graphics, short-form video with quick AI tips\n\nMetric: 10 qualified consultation bookings per month",
+      "minChars": 80,
+      "xp": 20
+    },
+    {
+      "id": "d11-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Think about marketing you've seen recently that made you pay attention. What's one campaign you could recreate with AI for your own audience?",
+          "placeholder": "A campaign you admired and how you'd do it with AI...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d11-completion-1",
+      "type": "completion",
+      "title": "Day 11 Complete!",
+      "body": "You've designed a complete AI-powered marketing campaign: audience, messaging, channels, email sequence, and social content.\n\nTomorrow: Building real apps with AI — even if you've never written a line of code.",
+      "xp": 15
+    }
+  ]
+}

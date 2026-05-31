@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "unit": "day5",
+  "title": "Day 5: Advanced Prompt Engineering & Chain-of-Thought",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d5-info-1",
+      "type": "info",
+      "title": "Beyond Basic Prompts — You're Becoming an Expert",
+      "body": "You've written prompts before. Everyone has. But there's a difference between typing a question and engineering a prompt.\n\nPrompt engineering is the craft of designing inputs that reliably produce the exact output you want — every time, across different models, at scale.\n\nToday you'll learn techniques that separate casual users from AI operators:\n\n• Chain-of-Thought (CoT) prompting\n• Role prompting and persona crafting\n• Few-shot and zero-shot strategies\n• Structured output formatting\n• Prompt chaining for complex tasks\n\nThese aren't tricks. They're engineering patterns.",
+      "xp": 5
+    },
+    {
+      "id": "d5-highlight-1",
+      "type": "highlight",
+      "body": "A good prompt gets an answer. A great prompt makes the AI think better.\n\nChain-of-Thought prompting is the single most powerful technique you can learn. Instead of asking for an answer, you ask the AI to show its reasoning step-by-step before giving the conclusion.\n\nThis doubles accuracy on complex tasks — often more. It also makes outputs auditable: you can see where the reasoning breaks.",
+      "highlights": ["Chain-of-Thought prompting", "show its reasoning step-by-step", "doubles accuracy", "auditable"],
+      "xp": 5
+    },
+    {
+      "id": "d5-mc-1",
+      "type": "mc",
+      "question": "What is Chain-of-Thought prompting?",
+      "options": [
+        "Writing a prompt as a single continuous sentence",
+        "Asking the AI to show its step-by-step reasoning before giving the final answer",
+        "Using multiple AI models in sequence",
+        "Repeating the same prompt until you get the right answer"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Correct. CoT prompting asks the model to 'think out loud' before answering. This forces structured reasoning and dramatically improves accuracy on multi-step problems.",
+        "Not quite. Chain-of-Thought is about reasoning transparency — asking the model to articulate its intermediate steps before arriving at a conclusion."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-example-1",
+      "type": "example",
+      "title": "Before and After: Chain-of-Thought",
+      "prompt": "Basic Prompt: 'A bat and a ball cost $1.10 total. The bat costs $1.00 more than the ball. How much does the ball cost?'\n\nTypical AI Answer: '$0.10' — WRONG (the common intuitive error)\n\nWith Chain-of-Thought:\n'Let's think through this step by step:\n1. Let b = price of ball\n2. Bat costs $1.00 more than ball, so bat = b + 1.00\n3. Total cost: b + (b + 1.00) = $1.10\n4. 2b + 1.00 = 1.10\n5. 2b = 0.10\n6. b = 0.05\nSo the ball costs $0.05.'\n\nResult: Correct. The bat costs $1.05. Total is $1.10.\n\nThis is the CoT effect. Forcing step-by-step reasoning eliminated the intuitive wrong answer."
+    },
+    {
+      "id": "d5-goodfit-1",
+      "type": "good_fit",
+      "question": "You need AI to analyze a quarterly financial report and produce a summary with specific data points, trends, and recommendations. Which approach works best?",
+      "correct": "ideal",
+      "feedback": [
+        "Exactly right. Financial analysis requires multi-step reasoning: extract data → identify trends → cross-reference → form recommendations. Chain-of-Thought with structured output is the correct approach.",
+        "Financial analysis is a textbook case for CoT + structured output. The analysis requires sequential reasoning steps, and the output needs consistent formatting for decision-makers."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-info-2",
+      "type": "info",
+      "title": "The Four Core Prompt Engineering Techniques",
+      "body": "1. Role Prompting — Assign a persona: 'You are a senior software architect with 15 years of experience...'\n\n2. Few-Shot Prompting — Provide examples before asking: 'Here are 3 examples of good email subject lines. Now write one for...'\n\n3. Structured Output — Define the format: 'Respond as a JSON object with fields: summary, analysis, recommendation'\n\n4. Prompt Chaining — Break a complex task into sequential prompts where each output feeds the next input\n\nMaster these four, and you can make AI produce exactly what you need, every time.",
+      "xp": 5
+    },
+    {
+      "id": "d5-tf-1",
+      "type": "tf",
+      "question": "Few-shot prompting means providing examples of the desired output format within the prompt before asking the AI to perform the task.",
+      "correct": true,
+      "feedback": [
+        "Correct. Few-shot prompting gives the model examples (typically 2-5) so it can pattern-match the desired format, tone, and structure before generating its response.",
+        "Actually, that's exactly what few-shot prompting is. You provide examples (the 'shots') to establish the pattern, then ask the model to follow it with new input."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-example-2",
+      "type": "example",
+      "title": "Structured Output: The Operator's Secret Weapon",
+      "prompt": "Structured output is what separates 'neat AI demo' from 'production-ready tool.' Here's why:\n\nWithout structure: 'The product is doing well this quarter but we should focus on customer retention.'\n\nWith structure:\n```\n{\n  \"quarter\": \"Q2 2026\",\n  \"overall_assessment\": \"positive\",\n  \"key_metrics\": {\n    \"revenue_change\": \"+23%\",\n    \"customer_count\": \"1,847\",\n    \"churn_rate\": \"3.2%\"\n  },\n  \"top_concern\": \"Customer retention declining in tier-2 accounts\",\n  \"recommendation\": \"Launch targeted onboarding campaign for tier-2 accounts within 30 days\"\n}\n```\n\nStructured output feeds directly into dashboards, reports, databases, and downstream automations.\n\nYour job as an operator: define the structure, then let AI fill it in reliably."
+    },
+    {
+      "id": "d5-mc-2",
+      "type": "mc",
+      "question": "When should you use prompt chaining instead of a single complex prompt?",
+      "options": [
+        "Always — chaining is always better than a single prompt",
+        "When the task has discrete stages where intermediate results need verification or transformation before moving to the next stage",
+        "Never — a single well-crafted prompt is always more reliable",
+        "Only when using free AI models"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Correct. Prompt chaining shines when a task has clear stages (e.g., analyze → summarize → recommend) where you need to verify or transform intermediate outputs before proceeding.",
+        "Not quite. Prompt chaining is specifically valuable when intermediate outputs need human or automated checking. For linear tasks, a single well-structured prompt may suffice."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5-highlight-2",
+      "type": "highlight",
+      "body": "The advanced prompt engineer's toolkit:\n\n• Delimiters: Use ``` or \"\"\" to clearly separate instructions from input\n• Negative prompting: Explicitly state what NOT to do\n• Temperature control: Lower temp (0-0.3) for precision tasks, higher (0.7-1.0) for creative\n• System prompts: Set persistent behavior instructions that apply to every interaction\n• Recursive refinement: 'Review your previous answer and identify any errors or omissions'",
+      "highlights": ["delimiters", "negative prompting", "temperature control", "System prompts", "recursive refinement"],
+      "xp": 5
+    },
+    {
+      "id": "d5-builder-1",
+      "type": "builder",
+      "title": "Build a Chain-of-Thought Prompt Template",
+      "instruction": "Design a reusable Chain-of-Thought prompt template for a business task you commonly face.\n\nYour template must include:\n• A role/persona definition\n• The task description\n• A step-by-step reasoning instruction (CoT)\n• A defined output structure (JSON or table)\n• An example (few-shot)\n\nWrite the full prompt template below:",
+      "inputLabel": "Your CoT prompt template",
+      "placeholder": "You are a financial analyst with 10 years of experience in SaaS metrics. Analyze the following monthly revenue report.\n\nThink through this step by step:\n1. Calculate month-over-month growth rate\n2. Identify the top 3 revenue drivers\n3. Flag any anomalies or concerning trends\n4. Cross-reference with last quarter's projections\n5. Formulate 3 actionable recommendations\n\nOutput as JSON: { \"growth_rate\": \"...\", \"top_drivers\": [...], \"anomalies\": [...], \"recommendations\": [...] }\n\nExample:\nInput: January: $45K, February: $52K, March: $48K\nOutput: { \"growth_rate\": \"+6.7% overall\", ...}",
+      "minChars": 80,
+      "xp": 20
+    },
+    {
+      "id": "d5-quiz-1",
+      "type": "quiz",
+      "title": "Advanced Prompt Engineering Quiz",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "Which technique is most effective for tasks requiring multi-step logical reasoning?",
+          "options": ["Role prompting", "Chain-of-Thought", "Temperature control", "Negative prompting"],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "A lower temperature setting (closer to 0) makes AI output more deterministic and precise.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "mc",
+          "question": "When providing examples in few-shot prompting, how many examples is typically optimal?",
+          "options": ["1 example", "2-5 examples", "10-20 examples", "As many as possible"],
+          "correct": 1
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d5-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Think about a complex task you regularly do — one that requires multiple steps, judgment calls, or data analysis. How would you break it into a Chain-of-Thought sequence that AI could follow?",
+          "placeholder": "Describe the task and the step-by-step reasoning chain you'd design...",
+          "minChars": 30
+        },
+        {
+          "id": "r2",
+          "prompt": "What outputs in your work would be most valuable if they came in a structured, consistent format (JSON, table, template)? How would that change how you use them?",
+          "placeholder": "The output, the structured format, and the impact...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d5-completion-1",
+      "type": "completion",
+      "title": "Day 5 Complete!",
+      "body": "You now have the four core prompt engineering techniques in your operator toolkit: Role prompting, Few-shot, Structured output, and Prompt chaining. Plus Chain-of-Thought — the single most powerful accuracy booster.\n\nThese techniques transform AI from a chat tool into a reliable production system component.\n\nTomorrow: You build real, shareable AI-powered tools — without writing a single line of code.",
+      "xp": 15
+    }
+  ]
+}

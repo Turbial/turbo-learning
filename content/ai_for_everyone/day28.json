@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 28,
+    "unitLabel": "Day 28",
+    "unitTitle": "Graduation — Your Complete AI Operating System",
+    "lessonOrder": 1,
+    "lessonTitle": "Bringing It All Together",
+    "minutes": 20
+  },
+  "steps": [
+    {
+      "id": "d28_s1",
+      "type": "info",
+      "title": "🎉 Congratulations — 4 Weeks Complete!",
+      "body": "This is it. The final day. Four weeks ago you started as someone curious about AI. Now you leave as someone who can use AI for communication, creation, automation, research, preparation, project management, finance, learning, creativity, productivity, and your career. That is a transformation — and you did it. Take a deep breath. You earned this moment.",
+      "audioUrl": null,
+      "primaryButton": "I did this!",
+      "xp": 3
+    },
+    {
+      "id": "d28_s2",
+      "type": "info",
+      "title": "The journey — four weeks in review",
+      "body": "Week 1 — The Foundation: Asking clear questions, writing specific prompts, drafting and revising, summarizing, learning with analogies, brainstorming, and your first daily workflow.\n\nWeek 2 — Your AI System: Templates, workflows, automation, collaboration, research, preparation, and your personal AI system.\n\nWeek 3 — Real-World Applications: Project management, financial planning, learning and skill development, creativity and innovation, time management and productivity, and career transformation.\n\nWeek 4 — Today: Bringing it all together into your complete AI operating system.",
+      "audioUrl": null,
+      "primaryButton": "What a journey!",
+      "xp": 3
+    },
+    {
+      "id": "d28_s3",
+      "type": "scenario_card",
+      "title": "Your journey — six months from now",
+      "body": "Imagine six months from today. You have been using your AI skills daily. Your emails are drafted in seconds. Your meetings are prepared in minutes. Your budget is on track. You have learned a new skill. Your career is moving forward. People ask you: 'How do you get so much done?' You smile and say: 'I have a system.' That system is what you build today. The best time to start was 28 days ago. The second best time is now.",
+      "audioUrl": null,
+      "primaryButton": "I am building that future",
+      "xp": 3
+    },
+    {
+      "id": "d28_s4",
+      "type": "builder",
+      "title": "Design your ultimate AI operating system",
+      "fields": [
+        {
+          "id": "daily_routine",
+          "label": "What does your ideal AI-powered morning look like?",
+          "placeholder": "AI organizes my day, drafts tricky emails, and I choose the top 3 priorities"
+        },
+        {
+          "id": "biggest_impact",
+          "label": "Which area from this program will have the biggest impact on your life?",
+          "placeholder": "financial planning and learning new skills"
+        },
+        {
+          "id": "commitment",
+          "label": "What is your one-sentence commitment to keep using AI?",
+          "placeholder": "I will use AI for at least one task every day and review my system weekly"
+        }
+      ],
+      "template": "Design my complete AI operating system based on everything I have learned: My morning routine: {{daily_routine}}. Biggest impact area: {{biggest_impact}}. My commitment: {{commitment}}. Create a one-page AI operating system that covers: (1) My daily AI habits. (2) My weekly AI routines (planning, review, learning). (3) My go-to prompts for each area. (4) How I will keep improving. Make it something I can print and keep on my desk.",
+      "primaryButton": "Build my OS",
+      "xp": 20
+    },
+    {
+      "id": "d28_s5",
+      "type": "paste_capture",
+      "title": "Save your AI operating system",
+      "body": "Paste your complete AI operating system. This is the blueprint for how you work from now on.",
+      "minLength": 10,
+      "primaryButton": "Save my OS",
+      "xp": 15
+    },
+    {
+      "id": "d28_s6",
+      "type": "info",
+      "title": "The four layers of your AI operating system",
+      "body": "Layer 1 — Your Prompts: Templates and patterns you use without thinking. Layer 2 — Your Workflows: Chained steps for complex tasks (project plan → timeline → status updates). Layer 3 — Your Tools: The AI platforms and integrations you rely on. Layer 4 — Your Mindset: Staying curious, verifying facts, keeping your judgment in charge. Most people stop at Layer 1. You now have all four. That is the difference between someone who tries AI and someone who lives with AI.",
+      "audioUrl": null,
+      "primaryButton": "Four layers — I have them all",
+      "xp": 3
+    },
+    {
+      "id": "d28_s7",
+      "type": "mc",
+      "title": "Graduation knowledge check",
+      "question": "What is the most important skill you have developed over the past 28 days?",
+      "options": [
+        "Becoming an expert in one AI tool",
+        "Learning how to adapt as AI evolves — the skill is permanent even as tools change",
+        "Being able to automate everything in your life"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Tools come and go. The skill is learning how to learn new tools.",
+        "Exactly. Tools will change every year. Your ability to adapt is forever.",
+        "Not everything should be automated — judgment and values are still yours."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d28_s8",
+      "type": "info",
+      "title": "Future-proofing — what comes next",
+      "body": "AI is evolving fast. Here is how you stay ahead: (1) Stay curious — try new tools when they appear. (2) Keep your human edge — judgment, empathy, creativity, ethics. (3) Stay connected — join communities of AI learners. (4) Keep building — your operating system is version 1.0, not the final version. Every quarter, ask yourself: 'What can AI do now that it could not do before?' and 'How do I need to adapt?'",
+      "audioUrl": null,
+      "primaryButton": "I will stay ahead",
+      "xp": 3
+    },
+    {
+      "id": "d28_s9",
+      "type": "checklist",
+      "title": "My lifelong commitment",
+      "items": [
+        "I will use AI for at least one task every single day",
+        "I will always verify AI's most important facts",
+        "I will stay curious about new AI tools and capabilities",
+        "I will keep my judgment, taste, and values in charge",
+        "I will remember that AI is a tool that amplifies who I already am"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d28_s10",
+      "type": "reflection",
+      "title": "Your graduation reflection",
+      "questions": [
+        {
+          "id": "biggest_change",
+          "type": "textarea",
+          "label": "How has your view of AI changed over the past 28 days?"
+        },
+        {
+          "id": "proudest_moment",
+          "type": "textarea",
+          "label": "What is the single most impactful thing AI helped you do during this program?"
+        },
+        {
+          "id": "final_thought",
+          "type": "textarea",
+          "label": "What message would you give to someone just starting Day 1?"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d28_s11",
+      "type": "info",
+      "title": "The graduate mindset",
+      "body": "You are now part of a small group of people who have invested 28 days to systematically build AI skills. Most people never do that. They try AI once, get mediocre results, and give up. You kept going. You pushed through confusion. You built habits. That mindset — the willingness to learn, adapt, and persist — is worth more than any single AI skill. You have it. Do not lose it.",
+      "audioUrl": null,
+      "primaryButton": "I have the mindset",
+      "xp": 3
+    },
+    {
+      "id": "d28_s12",
+      "type": "badge_unlock",
+      "badgeSlug": "ai_master"
+    },
+    {
+      "id": "d28_s13",
+      "type": "completion",
+      "title": "🎓 AI for Everyone — Graduation Complete!",
+      "body": "Congratulations, graduate! You have completed all 28 days of the AI for Everyone program. You started with curiosity and finish with a complete AI operating system that will serve you for life. Remember: AI is a tool. You are the one with purpose, values, and the power to make a difference. Now go use what you have learned. The world is waiting.",
+      "primaryButton": "Start my future"
+    }
+  ]
+}

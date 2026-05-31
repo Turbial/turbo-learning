@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "unit": "day4",
+  "title": "Day 4: AI Agents & Automation",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d4-info-1",
+      "type": "info",
+      "title": "From Passive Tool to Autonomous Agent",
+      "body": "So far, you've been the one driving — you prompt, AI responds, you act. Today that changes.\n\nAI Agents are systems that make decisions and take actions on their own, within boundaries you set.\n\nAn agent has three things:\n• A goal — what it's trying to accomplish\n• Tools — what it can use (APIs, databases, search, email)\n• Autonomy — permission to decide HOW to achieve the goal\n\nThe operator's job shifts from 'doing the work' to 'defining the mission and boundaries.'",
+      "xp": 5
+    },
+    {
+      "id": "d4-highlight-1",
+      "type": "highlight",
+      "body": "An AI without tools is a thinker. An AI with tools is a worker.\n\nAgents become powerful when they can:\n→ Search the web for current information\n→ Query a database for customer records\n→ Send an email or Slack message\n→ Update a spreadsheet or CRM\n→ Trigger other automations\n\nEach tool is a capability. The agent decides when to use which tool to achieve its goal.",
+      "highlights": ["thinker", "worker", "search", "query", "send", "update", "trigger"],
+      "xp": 5
+    },
+    {
+      "id": "d4-mc-1",
+      "type": "mc",
+      "question": "What distinguishes an AI Agent from a standard chatbot?",
+      "options": [
+        "An agent uses a better AI model",
+        "An agent can take autonomous actions using tools to achieve a goal",
+        "An agent has a more friendly personality",
+        "An agent requires more memory"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. An agent doesn't just respond — it acts. It uses tools, makes decisions, and executes multi-step plans to accomplish its assigned goal.",
+        "Not quite. The key difference is agency — the ability to take independent actions using available tools. A chatbot responds; an agent operates."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-scenario-1",
+      "type": "scenario_card",
+      "title": "Meet Alex's AI Agent Team",
+      "body": "Alex runs a 6-person consulting firm. Instead of hiring 3 more people, he built AI agents:\n\nAgent 1 — Lead Researcher: Scans industry news, identifies potential clients, enriches LinkedIn profiles, outputs a prioritized leads list every Monday morning\n\nAgent 2 — Proposal Writer: Takes lead data from Agent 1, creates personalized outreach proposals using the firm's template library, drafts in the firm's voice\n\nAgent 3 — Follow-up Coordinator: Monitors sent proposals for 7-day no-response, sends personalized follow-ups, flags hot leads to Alex\n\nAlex's role: Review and approve. The agents do everything else.\n\nResult: 3x more proposals sent, 40% higher close rate, Alex works 30 hours/week instead of 55."
+    },
+    {
+      "id": "d4-tf-1",
+      "type": "tf",
+      "question": "AI agents are best used for fully autonomous operations where humans never need to review outputs.",
+      "correct": false,
+      "feedback": [
+        "Correct. The most effective pattern is human-in-the-loop — agents handle the heavy lifting, humans review critical decisions. Full autonomy is dangerous for anything with real consequences.",
+        "Not quite. The current best practice is supervised autonomy — agents execute within guardrails, humans review at decision points. Full autonomy is reserved for low-risk, high-volume tasks."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-example-1",
+      "type": "example",
+      "title": "Agent Architecture: The Three Tiers",
+      "prompt": "Tier 1 — Simple Agent: One goal, one tool. Example: 'Monitor this RSS feed, email me when a new article matches these keywords.'\n\nTier 2 — Composite Agent: One goal, multiple tools. Example: 'Research the top 5 competitors in this space, write a comparison report, and save it to our shared drive.'\n\nTier 3 — Multi-Agent System: Multiple agents collaborating. Example: Researcher agent → Writer agent → Reviewer agent → Publisher agent — each with specific tools and handoff criteria.\n\nMost operators start at Tier 1 and graduate to Tier 2 within weeks. Tier 3 is the destination."
+    },
+    {
+      "id": "d4-highlight-2",
+      "type": "highlight",
+      "body": "The agency spectrum:\n\nManual (you do everything) → Automated (AI does fixed sequences) → Agentic (AI decides sequences) → Autonomous (AI operates independently)\n\nAI operators live between 'Agentic' and 'Autonomous' with guardrails. The key insight: autonomy is a dial, not a switch. You turn it up gradually as reliability improves.",
+      "highlights": ["Manual → Automated → Agentic → Autonomous", "autonomy is a dial, not a switch"],
+      "xp": 5
+    },
+    {
+      "id": "d4-goodfit-1",
+      "type": "good_fit",
+      "question": "A task that requires: (1) searching multiple data sources, (2) comparing results against known patterns, (3) making judgment calls based on partial information, and (4) taking action based on those judgments.",
+      "correct": "ideal",
+      "feedback": [
+        "This is a prime candidate for an AI agent. The multi-source search, pattern comparison, and autonomous decision-making are exactly what agents excel at. Define the boundaries and let the agent work.",
+        "This task has all the hallmarks of an agent-worthy problem: multiple data sources, judgment calls, and autonomous action. Set clear guardrails and let the agent handle the exploration."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-builder-1",
+      "type": "builder",
+      "title": "Design Your First AI Agent",
+      "instruction": "Design an AI agent that would save you real time in your work. Be specific.\n\nInclude in your design:\n• Agent Name and Goal — What's its primary mission?\n• Tools It Needs — What can it access? (search, database, email, Slack, CRM, etc.)\n• Autonomy Level — Fully autonomous or human-in-the-loop? At what decision points?\n• Inputs — What triggers it to start working?\n• Outputs — What does it produce and where does it deliver results?\n• Guardrails — What are the hard boundaries it shouldn't cross?",
+      "inputLabel": "Your AI agent design",
+      "placeholder": "Agent: Support Triage Agent\nGoal: Categorize and route incoming support tickets to the right team member\nTools: Email inbox, knowledge base, team calendar, Slack\nAutonomy: Categorize and route autonomously. Escalate to human for: angry customers, refund requests, anything outside playbook\nInputs: New email to support@\nOutputs: Labeled ticket in our CRM, Slack notification to assigned team member\nGuardrails: Never promise refunds without manager approval. Never share internal documentation with customers. Always include ticket ID in communications.",
+      "minChars": 80,
+      "xp": 20
+    },
+    {
+      "id": "d4-mc-2",
+      "type": "mc",
+      "question": "What is the biggest risk when deploying AI agents with too much autonomy?",
+      "options": [
+        "They might run too slowly",
+        "They might make incorrect decisions at scale before anyone notices",
+        "They might cost too much in API fees",
+        "They might be too helpful and do too much work"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Correct. The compounding risk is the biggest danger — an incorrect decision made 1000 times before anyone catches it. This is why human-in-the-loop review at critical decision points is essential.",
+        "Not quite. While cost and speed are considerations, the primary risk is undetected errors compounding at scale. Start with higher human oversight and reduce it as the agent proves reliable."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4-example-2",
+      "type": "example",
+      "title": "Building an Agent with No-Code Tools",
+      "prompt": "You don't need to code to build agents. Here's a real example built in 2 hours:\n\nPlatform: Relevance AI (no-code agent builder)\n\nAgent: Social Media Content Curator\n\nGoal: 'Find 5 relevant industry articles per day, summarize each in 2 sentences, and post to our company Slack #content channel'\n\nTools:\n• Web search (Bing API) — to find articles\n• Web fetch — to read article content\n• Slack API — to post messages\n\nConfiguration:\nInstructions: 'Search for articles related to [topic]. Select the 5 most relevant published in the last 24 hours. Read each one. Write a 2-sentence summary. Post to Slack with source link.'\nSchedule: Runs every weekday at 8 AM\n\nOutput to Slack:\n📰 Tuesday's Industry Digest\n1. [Title] — Summary... [link]\n2. [Title] — Summary... [link]\n\nTotal setup time: 2 hours. Daily time saved: 30 minutes of manual curation."
+    },
+    {
+      "id": "d4-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "If you could have an AI agent handle one entire area of your work for a week, what would it be and why? What's the biggest concern you'd have about letting it run unsupervised?",
+          "placeholder": "The area, why it matters, what concerns you about autonomy...",
+          "minChars": 30
+        },
+        {
+          "id": "r2",
+          "prompt": "What's the smallest, lowest-risk task you could hand off to an AI agent tomorrow? Define the goal, the tool it needs, and the boundary.",
+          "placeholder": "The small agent, its tools, and its guardrails...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d4-completion-1",
+      "type": "completion",
+      "title": "Day 4 Complete!",
+      "body": "You now understand AI agents — what they are, how they work, and how to design them. You've gone from using AI as a tool to deploying AI as a worker.\n\nThe key takeaways:\n• Agents = Goal + Tools + Autonomy\n• Human-in-the-loop is the safe starting point\n• No-code tools let you build agents today\n\nTomorrow: Advanced prompt engineering. You'll learn how to make AI think better — not just respond faster.",
+      "xp": 15
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "unit": "day3",
+  "title": "Day 3: AI-Assisted Research & Information Mastery",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d3-info-1",
+      "type": "info",
+      "title": "Research at AI Speed — Your New Superpower",
+      "body": "Research is the foundation of good decisions. The problem? Traditional research is slow. You read, tab-hop, take notes, synthesize — hours disappear.\n\nAI-assisted research flips this. Instead of you doing the heavy lifting, AI does the gathering and synthesis. You do what only you can: evaluate, question, and decide.\n\nToday you'll learn:\n• How to use AI as a research accelerator (not a replacement for thinking)\n• Multi-source synthesis — combining information from different places\n• Fact-checking and source verification\n• Building research briefs in minutes instead of hours\n\nAn AI Operator researches faster, but thinks harder.",
+      "xp": 5
+    },
+    {
+      "id": "d3-highlight-1",
+      "type": "highlight",
+      "body": "The biggest mistake in AI research: treating AI answers as final.\n\nAI is a research assistant, not a research oracle. It synthesizes, summarizes, and surfaces connections — but it can also hallucinate, miss nuance, and inherit biases from its training data.\n\nYour job: use AI to go fast, then use your judgment to validate.",
+      "highlights": ["AI is a research assistant, not a research oracle", "go fast, then validate"],
+      "xp": 5
+    },
+    {
+      "id": "d3-mc-1",
+      "type": "mc",
+      "question": "When using AI for research, which approach gives the best results?",
+      "options": [
+        "Ask one broad question and take the answer at face value",
+        "Ask the same question to multiple AI tools and average the answers",
+        "Break your research into specific questions, ask for sources, and verify key claims independently",
+        "Only use AI tools that have web browsing capabilities"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Exactly. The best AI research is iterative and specific. Break your question down, ask for supporting sources, and independently verify the critical claims. AI accelerates research — it doesn't replace due diligence.",
+        "Not quite. Even with web browsing, AI can misinterpret sources. The key is breaking research into specific questions, asking for source references, and verifying what matters most. Multiple AIs don't solve for hallucination."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d3-example-1",
+      "type": "example",
+      "title": "The Research Accelerator Prompt",
+      "prompt": "This prompt structure turns AI into a proper research partner:\n\n\"I'm researching [TOPIC] for [PURPOSE]. I need:\n\n1. A summary of the current state — what's happening, key players, recent developments\n2. The 3-5 most debated questions or controversies in this space\n3. Concrete data points or statistics with their sources\n4. A list of reliable sources I should read for deeper understanding\n5. What I should be skeptical about — areas where common knowledge might be wrong\n\nFor each point, tell me your confidence level (high/medium/low) and why.\n\nStart with a one-paragraph executive summary.\"\n\nThis prompt forces AI to:\n- Structure information (not just dump text)\n- Surface controversies (not just consensus)\n- Self-assess confidence (helps you spot weak claims)\n- Cite sources (gives you something to verify)"
+    },
+    {
+      "id": "d3-scenario-1",
+      "type": "scenario_card",
+      "title": "Research Brief in 5 Minutes",
+      "body": "Priya needs to prepare for a meeting about adopting an AI customer service tool at her company. She has 30 minutes.\n\nShe spends 5 minutes with an AI research assistant:\n\nQuery: 'I'm evaluating AI customer service platforms for a mid-size e-commerce company. Give me: (1) Top 5 platforms and their pricing (2) Key features to compare (3) Implementation timelines (4) Common pitfalls (5) ROI case studies. For each, cite sources and note your confidence.'\n\nAI returns a structured brief with 12 sources cited.\n\nNext 20 minutes: Priya opens the top 3 sources, reads the executive summaries, confirms the key claims match. She adds one question her team has been debating that the AI didn't cover.\n\nLast 5 minutes: She asks the AI to draft a comparison table based on her verified data.\n\nResult: A 30-minute prep becomes a 10-page research brief + decision framework. She walks into the meeting ready to make a call."
+    },
+    {
+      "id": "d3-goodfit-1",
+      "type": "good_fit",
+      "question": "You need to understand how a specific regulation (GDPR's Article 22) applies to your business's use of automated decision-making. The regulation text is available but complex.",
+      "correct": "ideal",
+      "feedback": [
+        "Perfect fit. AI excels at analyzing structured text against specific criteria. Ask it to explain Article 22 in plain language, list your compliance obligations, and identify grey areas. Then verify against the actual regulation text.",
+        "This is ideal. Regulations are text-based, well-defined, and have clear application criteria — exactly where AI research assistance shines. The key is always verifying against the original source afterward."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d3-tf-1",
+      "type": "tf",
+      "question": "AI research tools are best used as the sole source of information for important decisions, as long as they have web browsing capabilities.",
+      "correct": false,
+      "feedback": [
+        "Correct. Even with web browsing, AI can misinterpret, miss context, or surface unreliable sources. AI should be your accelerator and first draft — not your sole source. Always verify critical claims against primary sources.",
+        "False. Web browsing helps but doesn't fix hallucinations or misinterpretation. Treat AI output as a well-informed starting point, not a conclusion. Always triangulate important information from multiple sources."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d3-info-2",
+      "type": "info",
+      "title": "The Three-Stage Research Pipeline",
+      "body": "Professional AI-assisted research follows three stages:\n\n1. EXPAND — Cast a wide net. Ask broad questions. Get the landscape, the players, the debates. Identify what you don't know.\n\n2. FOCUS — Drill into specific questions. Challenge AI's assumptions. Ask for counterarguments. Request source links.\n\n3. VERIFY — This is the critical step. Open the sources. Read the key sections. Confirm the important numbers and claims. Add your own context.\n\nAI handles stages 1 and 2 at speed. Stage 3 is always human.\n\nSkip verification at your own risk.",
+      "xp": 5
+    },
+    {
+      "id": "d3-builder-1",
+      "type": "builder",
+      "title": "Build Your Research Brief",
+      "instruction": "Think of a topic you need to understand better — work-related, a purchase decision, a hobby, anything real.\n\nUse an AI tool to build a research brief following the structure from today's example:\n\n1. Current state summary\n2. Key debates or controversies\n3. Data points with sources\n4. Recommended further reading\n5. What to be skeptical about\n\nCopy the AI response and reflect: What surprised you? What do you want to verify?",
+      "inputLabel": "Your AI-assisted research brief",
+      "placeholder": "Topic: [what you researched]\nAI Response: [paste the structured output]\nSurprises: [what didn't you expect]\nTo Verify: [which claims need checking]",
+      "minChars": 50,
+      "xp": 20
+    },
+    {
+      "id": "d3-example-2",
+      "type": "example",
+      "title": "Synthesis Prompt — Combining Multiple Sources",
+      "prompt": "When you've gathered information from multiple sources (AI searches, articles, docs), use this synthesis prompt:\n\n\"I've gathered information on [TOPIC] from these sources:\n\nSource A: [summary]\nSource B: [summary]\nSource C: [summary]\n\nSynthesize these into:\n1. Points where ALL sources agree (high confidence)\n2. Points where sources disagree or emphasize differently\n3. Gaps — important questions none of these sources address\n4. A recommended next action based on what we know\n\nHighlight any contradictions I should investigate further.\"\n\nThis turns scattered research into a decision-ready brief."
+    },
+    {
+      "id": "d3-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Think about the last time you spent over an hour researching something. How much of that time was gathering information vs. processing it? How would AI-assisted research change that ratio?",
+          "placeholder": "The topic, time spent gathering vs. processing, and how AI would shift the balance...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "What's one topic you'd research right now if you could get a comprehensive brief in 5 minutes instead of 2 hours?",
+          "placeholder": "The topic and what you'd do with the research brief...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d3-highlight-2",
+      "type": "highlight",
+      "body": "Speed without verification is just fast mistakes.\n\nAI-assisted research isn't about AI replacing your thinking. It's about AI handling the grunt work so you can do higher-quality thinking.\n\nYour edge: you verify, you question, you connect dots AI can't see.\n\nTomorrow: AI Agents & Automation — making AI work for you around the clock.",
+      "highlights": ["Speed without verification is just fast mistakes", "higher-quality thinking"],
+      "xp": 5
+    },
+    {
+      "id": "d3-completion-1",
+      "type": "completion",
+      "title": "Day 3 Complete!",
+      "body": "You now know how to use AI as a research accelerator — gathering, synthesizing, and structuring information at 10x speed while keeping critical thinking firmly in your hands.\n\nKey takeaways:\n• Break research into specific, verifiable questions\n• Use structured prompts that force AI to cite sources and assess confidence\n• Always verify critical claims against primary sources\n• Follow the pipeline: Expand → Focus → Verify\n\nTomorrow: AI Agents & Automation. You'll learn to make AI work while you sleep.",
+      "xp": 15
+    }
+  ]
+}

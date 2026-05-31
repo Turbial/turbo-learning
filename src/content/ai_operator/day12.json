@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "unit": "day12",
+  "title": "Day 12: Coding with AI — Build Apps Without Experience",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d12-info-1",
+      "type": "info",
+      "title": "You Don't Need to Code. You Need to Describe.",
+      "body": "The biggest unlock of modern AI: anyone can build working software by describing what they want in plain English.\n\nTools like Claude Code, Cursor, ChatGPT, and Bolt.new can generate complete applications from prompts. You don't need to know Python, JavaScript, or SQL.\n\nWhat you DO need:\n• Clear thinking — know what you want to build\n• Iterative refinement — start simple, add features\n• Testing instinct — verify that it works\n\nThe AI writes the code. You design the system.",
+      "xp": 5
+    },
+    {
+      "id": "d12-highlight-1",
+      "type": "highlight",
+      "body": "The non-coder's app-building formula:\n\n1. 'Build a [type of app] that does [core function]'\n2. 'Add a way for users to [action]'\n3. 'Store the data in [storage type]'\n4. 'Style it like [reference]'\n5. 'Make it [responsive/fast/secure]'\n\nEach prompt adds a feature. Each iteration tests the build. By prompt 5, you have a working application.",
+      "highlights": ["clear thinking", "iterative refinement", "testing instinct", "describe in plain English"],
+      "xp": 5
+    },
+    {
+      "id": "d12-mc-1",
+      "type": "mc",
+      "question": "What is the most important skill for building apps with AI without coding experience?",
+      "options": [
+        "Memorizing programming syntax",
+        "Clear problem description and iterative refinement",
+        "Understanding how compilers work",
+        "Having a computer science degree"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI handles the syntax. Your job is to clearly describe what you want and iteratively refine as you see results.",
+        "Not quite. The key skill is communication and iteration. Describe clearly, review the output, refine. The AI handles the technical details."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-example-1",
+      "type": "example",
+      "title": "Building a Lead Tracker App (From Zero to Deployed)",
+      "prompt": "Session with Claude Code or Cursor:\n\nPrompt 1: 'Build a simple lead tracking web app. Users should be able to add leads with name, company, email, and status. Show all leads in a table.'\n\n→ AI generates an HTML/CSS/JS app with an input form and table. Runs locally.\n\nPrompt 2: 'Add data persistence — save leads to localStorage so they survive page refreshes.'\n\n→ AI adds localStorage save/load logic.\n\nPrompt 3: 'Add status filtering — buttons to filter leads by New, Contacted, Qualified, Closed.'\n\n→ AI adds filter buttons with count badges.\n\nPrompt 4: 'Add a search bar that searches across name, company, and email.'\n\n→ AI adds real-time search.\n\nPrompt 5: 'Style it with a clean, modern design. Use a professional color scheme. Make it mobile-responsive.'\n\n→ AI applies styling with Tailwind or custom CSS.\n\nResult after 15 minutes: A working, styled lead tracker with persistence, filtering, and search. No code written by the user."
+    },
+    {
+      "id": "d12-builder-1",
+      "type": "builder",
+      "title": "Design Your First App",
+      "instruction": "Think of a simple tool you wish existed. Describe it in 5 prompts that an AI coder could build:\n\nApp Idea: [One sentence — what does it do?]\n\nPrompt 1 — Core function: [What's the simplest version?]\nPrompt 2 — Data: [What data does it need to store?]\nPrompt 3 — Features: [What's the first feature to add?]\nPrompt 4 — Polish: [How should it look and feel?]\nPrompt 5 — Deploy: [How should others access it?]",
+      "inputLabel": "Your app design",
+      "placeholder": "App Idea: A daily habit tracker that sends motivational quotes\n\nPrompt 1: 'Build a habit tracker. Users check off 5 daily habits. Show completion streak.'\nPrompt 2: 'Save habits and streaks to localStorage. Add a reset-at-midnight feature.'\nPrompt 3: 'Add a motivational quote that changes daily — pull from a built-in list of 30 quotes.'\nPrompt 4: 'Design it like a minimalist journal. Clean white background, serif font, subtle animations on check.'\nPrompt 5: 'Generate a single HTML file that I can host on any static server.'",
+      "minChars": 60,
+      "xp": 20
+    },
+    {
+      "id": "d12-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's a simple app or tool that would save you 30 minutes a week? Describe it as if you were telling a developer (or an AI) what to build.",
+          "placeholder": "The app, what it does, and the time it saves...",
+          "minChars": 30
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d12-completion-1",
+      "type": "completion",
+      "title": "Day 12 Complete!",
+      "body": "You now know the formula for building apps with AI: start with a clear core function, iterate features one at a time, test as you go. No coding experience required.\n\nTomorrow: AI-powered design and media — creating professional visuals, videos, and brand assets.",
+      "xp": 15
+    }
+  ]
+}

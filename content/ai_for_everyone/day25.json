@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 25,
+    "unitLabel": "Day 25",
+    "unitTitle": "AI for Creativity & Innovation",
+    "lessonOrder": 1,
+    "lessonTitle": "Creative Collaboration",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d25_s1",
+      "type": "info",
+      "title": "Welcome to Day 25 — AI for Creativity & Innovation",
+      "body": "Creativity is not a mysterious gift — it is a skill you can practice. And AI is the best brainstorming partner you will ever have. Today you will learn how to use AI to generate ideas, break through creative blocks, prototype concepts, and refine your creative work.",
+      "audioUrl": null,
+      "primaryButton": "Let's get creative",
+      "xp": 3
+    },
+    {
+      "id": "d25_s2",
+      "type": "info",
+      "title": "AI as your creative partner",
+      "body": "The best ideas often come from combining things that do not normally go together. AI is amazing at this. It has read millions of books, articles, and conversations. When you describe a problem, it can pull ideas from fields you never thought to look at. The key: bring your own taste and judgment. AI generates possibilities; you choose which ones have potential.",
+      "audioUrl": null,
+      "primaryButton": "AI + me = creative team",
+      "xp": 3
+    },
+    {
+      "id": "d25_s3",
+      "type": "builder",
+      "title": "AI brainstorming session",
+      "fields": [
+        {
+          "id": "challenge",
+          "label": "What creative challenge do you face?",
+          "placeholder": "I need ideas for a birthday surprise on a small budget"
+        },
+        {
+          "id": "constraints",
+          "label": "What are your constraints — time, budget, audience?",
+          "placeholder": "under $50, for someone who loves cooking and hiking"
+        },
+        {
+          "id": "style_preference",
+          "label": "Any style or vibe you are going for?",
+          "placeholder": "fun, personal, and unexpected"
+        }
+      ],
+      "template": "Brainstorm creative ideas for: {{challenge}}. Constraints: {{constraints}}. Preferred vibe: {{style_preference}}. Give me 10 different ideas. For each idea, tell me: (1) The concept in one sentence. (2) Why it works given my constraints. (3) How I could execute it in under 2 hours. Be bold — combine things that do not usually go together.",
+      "primaryButton": "Brainstorm with AI",
+      "xp": 20
+    },
+    {
+      "id": "d25_s4",
+      "type": "paste_capture",
+      "title": "Save your best ideas",
+      "body": "Paste the brainstorm results. Highlight your top 2-3 ideas — these are worth pursuing.",
+      "minLength": 10,
+      "primaryButton": "Save my ideas",
+      "xp": 15
+    },
+    {
+      "id": "d25_s5",
+      "type": "scenario_card",
+      "title": "Creative block — Leon's wall",
+      "body": "Leon is a small business owner designing a new product. He has stared at a blank page for three days. Every idea feels reused and boring. He is stuck. AI breaks the block by asking different questions: 'What if your product was designed by a 12-year-old? What problem will this solve in 5 years? What would your competitor never try?' These fresh angles unlock ideas he could not reach alone.",
+      "audioUrl": null,
+      "primaryButton": "Break the block",
+      "xp": 3
+    },
+    {
+      "id": "d25_s6",
+      "type": "info",
+      "title": "Idea expansion — making good ideas great",
+      "body": "You have a decent idea. How do you make it great? Ask AI: 'I have this idea: [describe it]. Help me expand it in three ways: (1) Add more detail. (2) Make it more unique. (3) Solve a hidden problem I have not considered.' AI can also combine your idea with entirely different concepts: 'Combine my idea with [random field — space exploration, ancient history, cooking].' The most innovative ideas often come from unexpected combinations.",
+      "audioUrl": null,
+      "primaryButton": "Expand my idea",
+      "xp": 3
+    },
+    {
+      "id": "d25_s7",
+      "type": "mc",
+      "title": "Creative process check",
+      "question": "What is the best way to use AI for creativity?",
+      "options": [
+        "Let AI make all creative decisions so you do not have to",
+        "Use AI to generate many possibilities, then use your judgment to pick the best ones",
+        "Only use AI for logical tasks, not creative ones"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Creativity needs human taste and judgment — AI is the generator, you are the curator.",
+        "Correct. AI floods you with ideas; your taste picks the winners.",
+        "AI can be highly creative — you just need the right prompts."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d25_s8",
+      "type": "info",
+      "title": "Prototyping with AI",
+      "body": "Before you build something, test it with AI. Describe your idea in detail and ask AI to: (1) Find the weak spots. (2) Suggest improvements. (3) Predict how people will react. (4) Draft a simple version you could test in a day. Prompt: 'I am designing a [product/service/content]. Here is my concept: [details]. Play the role of a skeptical customer. Tear it apart constructively. Then help me design a simple test I can run this week to see if it works.'",
+      "audioUrl": null,
+      "primaryButton": "Prototype with AI",
+      "xp": 3
+    },
+    {
+      "id": "d25_s9",
+      "type": "builder",
+      "title": "Design your creative project",
+      "fields": [
+        {
+          "id": "project_concept",
+          "label": "What creative project do you want to design?",
+          "placeholder": "a personal newsletter about local food spots"
+        },
+        {
+          "id": "audience",
+          "label": "Who is it for?",
+          "placeholder": "friends and colleagues who love food"
+        },
+        {
+          "id": "format",
+          "label": "What format — written, visual, video, event, product?",
+          "placeholder": "weekly email with 3 recommendations"
+        }
+      ],
+      "template": "Help me design my creative project: {{project_concept}}. Audience: {{audience}}. Format: {{format}}. Help me: (1) Define the core concept in one sentence. (2) Outline the first version — keep it simple. (3) Suggest a name or tagline. (4) Tell me how to get feedback from 3 people this week.",
+      "primaryButton": "Design my project",
+      "xp": 20
+    },
+    {
+      "id": "d25_s10",
+      "type": "paste_capture",
+      "title": "Save your project design",
+      "body": "Paste your creative project design. This is your blueprint to build from.",
+      "minLength": 10,
+      "primaryButton": "Save my design",
+      "xp": 15
+    },
+    {
+      "id": "d25_s11",
+      "type": "info",
+      "title": "Feedback and iteration — the creative loop",
+      "body": "Creativity is not a single flash of inspiration. It is a loop: create, get feedback, improve, repeat. AI is a tireless feedback partner. Prompt: 'Here is my [draft/prototype/concept]: [paste it]. Give me specific, actionable feedback. What is the strongest part? What is confusing? What is one thing I could change to make it significantly better?' Then iterate. Each round of feedback improves your work.",
+      "audioUrl": null,
+      "primaryButton": "Iterate with AI",
+      "xp": 3
+    },
+    {
+      "id": "d25_s12",
+      "type": "info",
+      "title": "Combining ideas — the innovation sweet spot",
+      "body": "Most innovations are not entirely new — they combine two existing ideas in a new way. Smartphones = phone + computer. Carpocalypse = car + apocalypse. Use AI to find combinations. Prompt: 'Combine [your field] with [unrelated field]. What new products, services, or approaches emerge? Give me 5 specific ideas.' The more unrelated the fields, the more innovative the results.",
+      "audioUrl": null,
+      "primaryButton": "Combine and innovate",
+      "xp": 3
+    },
+    {
+      "id": "d25_s13",
+      "type": "quiz",
+      "title": "Creativity mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the role of human judgment when using AI for creativity?",
+          "options": [
+            "Human judgment is not needed — AI does the creative work",
+            "You generate ideas with AI, then use your taste and judgment to choose what works",
+            "Judge AI's output for grammar and spelling only"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "How can AI help when you have creative block?",
+          "options": [
+            "It tells you to take a break and come back later",
+            "It asks different questions and provides fresh angles you may not have considered",
+            "It completes your work without your input"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "Innovation usually comes from entirely new ideas, not from combining existing ones.",
+          "correct": false
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d25_s14",
+      "type": "completion",
+      "title": "Day 25 complete — Creative Collaborator",
+      "body": "You can now use AI to brainstorm, break creative blocks, expand ideas, prototype, and iterate. Tomorrow: AI for time management and productivity — mastering your schedule and focus.",
+      "primaryButton": "Let's master time!"
+    }
+  ]
+}

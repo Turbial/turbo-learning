@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "unit": "day10",
+  "title": "Day 10: AI Business Strategy — SWOT, Roadmaps & GTM Plans",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d10-info-1",
+      "type": "info",
+      "title": "AI as Your Strategy Consultant",
+      "body": "Strategy documents are expensive. A good SWOT analysis from a consultant runs $2,000-5,000. A go-to-market plan? $5,000-15,000.\n\nToday you'll learn to produce strategy-grade documents with AI. Not by replacing the strategic thinking — but by accelerating every step of the process.\n\nThe operator's approach: AI generates the full draft. You shape, challenge, and refine. The result is better than either could produce alone.",
+      "xp": 5
+    },
+    {
+      "id": "d10-highlight-1",
+      "type": "highlight",
+      "body": "Strategy with AI follows the broad → narrow → refined pattern:\n\n1. Broad exploration: 'What are all the possible strategic approaches for [situation]?'\n2. Narrow to best options: 'Of those 10, which 3 have the highest probability of success?'\n3. Refine with specifics: 'For option 2, build a detailed 90-day execution plan with milestones, resources, and risks.'\n\nStart wide. Then focus. Then execute.",
+      "highlights": ["broad → narrow → refined", "Broad exploration", "best options", "Refine with specifics"],
+      "xp": 5
+    },
+    {
+      "id": "d10-example-1",
+      "type": "example",
+      "title": "Building a GTM Plan with AI",
+      "prompt": "Prompt sequence for a complete go-to-market plan:\n\nStage 1 — Market Analysis:\n'Analyze the [industry] market. Size it, identify key segments, list major competitors and their market share. Output as a structured market overview.'\n\nStage 2 — Positioning:\n'Based on our product [description], what positioning would differentiate us from competitors? Propose 3 positioning angles with pros and cons for each.'\n\nStage 3 — Tactical Plan:\n'For positioning option 2, build a 90-day GTM plan covering: target accounts, channel strategy, pricing approach, launch timeline, success metrics.'\n\nStage 4 — Risk Assessment:\n'Review the GTM plan. What are the top 5 risks? For each, provide a mitigation strategy.'\n\nStage 5 — Executive Summary:\n'Synthesize everything into a one-page executive summary suitable for presenting to stakeholders.'\n\nOutput: A complete GTM document that would cost $10K from a consultant. Produced in 90 minutes of guided prompting."
+    },
+    {
+      "id": "d10-tf-1",
+      "type": "tf",
+      "question": "The best strategy documents come from asking AI a single comprehensive question.",
+      "correct": false,
+      "feedback": [
+        "Correct. Great strategy emerges from iteration — broad exploration first, then narrowing, then deep refinement. One-shot prompts produce shallow analysis.",
+        "Not quite. Strategy requires multiple rounds. Start broad to explore possibilities, then narrow and refine. Each stage builds on the previous one."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-builder-1",
+      "type": "builder",
+      "title": "Design a Strategic Analysis",
+      "instruction": "Pick a real business challenge you're facing (or one you're interested in). Design a 3-stage AI strategy session:\n\nChallenge: [One sentence — what strategic problem are you solving?]\n\nStage 1 — Explore (Broad): [Ask AI to survey all possible approaches]\nStage 2 — Narrow: [Ask AI to evaluate and select the best options]\nStage 3 — Execute: [Ask AI to build a detailed plan for the chosen approach]",
+      "inputLabel": "Your strategy session design",
+      "placeholder": "Challenge: Launching a paid AI course for real estate agents\n\nStage 1 — 'Survey the market for AI education in real estate. Who offers courses? What's the pricing range? What topics get the most engagement? Identify gaps in current offerings.'\n\nStage 2 — 'Based on the market analysis, evaluate 3 positioning strategies: (a) beginner crash course, (b) advanced agent automation, (c) AI tools bundle membership. Which has the highest revenue potential vs. easiest to build?'\n\nStage 3 — 'For the best option from stage 2, build a complete launch plan: target audience, pricing tiers, content outline, marketing channels, partnership opportunities, 60-day launch timeline.'",
+      "minChars": 80,
+      "xp": 20
+    },
+    {
+      "id": "d10-completion-1",
+      "type": "completion",
+      "title": "Day 10 Complete!",
+      "body": "You can now produce strategy-grade documents with AI: market analysis, competitive positioning, GTM plans, and risk assessments.\n\nTomorrow: Building a complete AI-powered marketing machine — audience research, email sequences, and campaign design.",
+      "xp": 15
+    }
+  ]
+}

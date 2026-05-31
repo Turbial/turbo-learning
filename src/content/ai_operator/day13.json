@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "unit": "day13",
+  "title": "Day 13: AI Design & Media — Professional Visuals Without a Designer",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d13-info-1",
+      "type": "info",
+      "title": "You Are Now a Design Agency",
+      "body": "Professional design used to require: a creative director ($$$), a graphic designer ($$), a video editor ($$), and a copywriter ($).\n\nWith AI tools like Midjourney, DALL-E, Canva AI, and AI video generators — you are all of them.\n\nToday you'll learn:\n• Image prompt engineering: subject + style + mood + composition\n• Brand-consistent visual generation\n• AI video creation\n• Design-to-code with AI\n\nBy the end, you'll produce assets that look like they came from a professional studio.",
+      "xp": 5
+    },
+    {
+      "id": "d13-highlight-1",
+      "type": "highlight",
+      "body": "The AI image prompt formula:\n\n[Subject] + [Action/Setting] + [Style] + [Mood] + [Composition] + [Technical specs]\n\nExample: 'A sleek dashboard interface on a laptop | modern tech office with plants | flat illustration style, warm teal color scheme | clean and productive mood | wide angle, soft lighting | 4K, high detail'\n\nStyle keywords: photorealistic, 3D render, flat illustration, watercolor, vector art, cinematic, retro, minimalist, abstract, pixel art",
+      "highlights": ["Subject + Action/Setting + Style + Mood + Composition + Technical specs"],
+      "xp": 5
+    },
+    {
+      "id": "d13-mc-1",
+      "type": "mc",
+      "question": "For creating consistent brand visuals with AI, which practice is most important?",
+      "options": [
+        "Using a completely different prompt each time for variety",
+        "Creating a reusable prompt template with consistent subject, style, and mood keywords",
+        "Always using the highest resolution setting",
+        "Letting AI choose the style automatically"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. Brand consistency comes from reusable prompt components — fix the style and mood keywords, vary only the subject. This creates a recognizable look.",
+        "Not quite. Consistency comes from templating your prompts. Lock in style, mood, and composition keywords. Only change the subject."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13-example-1",
+      "type": "example",
+      "title": "From Blank Page to Complete Brand Kit",
+      "prompt": "Using Canva AI + Midjourney + AI video tools:\n\nStep 1 — Logo Variations:\n'Generate 10 logo concepts for [brand name], a modern AI consulting firm. Minimalist style, deep blue and gold color palette, technology and human elements combined.'\n\nStep 2 — Brand Color Palette:\n'From these logos, extract a 5-color brand palette with hex codes. Then generate 3 gradient backgrounds using these colors.'\n\nStep 3 — Social Media Templates:\n'Create 5 Instagram post templates for the brand: one quote post, one tip post, one before/after, one announcement, one testimonial. Consistent styling.'\n\nStep 4 — Product Images:\n'Generate 4 product images showing a dashboard interface in different business settings — office, coffee shop, home office, meeting room.'\n\nStep 5 — Video Ad:\n'Create a 15-second promotional video script and storyboard for [brand]. Then use AI video tools to generate the initial cut.'\n\nStep 6 — Design-to-Code:\n'Take the landing page design and write HTML/CSS that implements it exactly. Responsive, optimized, ready to deploy.'\n\nOutput: A complete brand kit — from concept to code — in an afternoon."
+    },
+    {
+      "id": "d13-builder-1",
+      "type": "builder",
+      "title": "Design Your Brand Prompt Library",
+      "instruction": "Create reusable prompt templates for consistent AI-generated visuals:\n\nBrand/Project: [What are you creating visuals for?]\n\nImage Prompt Template (fill in the blank):\n'[Subject], [setting], [style], [color palette], [mood], [composition], 4K, high detail'\n\nStyle Keywords (lock these for consistency):\n• Style:\n• Color Palette:\n• Mood:\n• Composition:\n\n3 Visual Assets You Need (describe each):\n1. [Asset] — [Prompt variation]\n2. [Asset] — [Prompt variation]\n3. [Asset] — [Prompt variation]",
+      "inputLabel": "Your brand prompt templates",
+      "placeholder": "Brand/Project: Turbo Learning — AI Education Platform\n\nImage Template: '[Subject], in a modern workspace with warm lighting, flat illustration style, dark navy and teal color palette, focused and productive mood, medium shot, soft shadows, 4K'\n\nStyle Keywords:\n• Style: Flat illustration with subtle gradients\n• Colors: Dark navy (#0f172a), Teal (#14b8a6), Warm gray (#f8f9fa)\n• Mood: Professional, focused, approachable\n• Composition: Medium shots with clean backgrounds\n\n3 Visual Assets:\n1. Hero image — 'A person with holographic AI interface floating above laptop, warm lighting, flat illustration style, dark navy/teal, productive mood, medium shot'\n2. Feature illustration — 'Dashboard showing progress chart, tablet on desk, flat illustration style, teal accents, clean composition'\n3. Social card — 'Open notebook with AI-generated text floating above, minimalist composition, navy background, teal accents'",
+      "minChars": 80,
+      "xp": 20
+    },
+    {
+      "id": "d13-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What visual assets would make the biggest difference for your current project or business? What would it be worth to have a professional-looking brand kit?",
+          "placeholder": "The assets you need and the value they'd create...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d13-completion-1",
+      "type": "completion",
+      "title": "Day 13 Complete!",
+      "body": "You can now generate professional visual assets with AI — from logos to social media templates to video scripts. The prompt formula (subject + style + mood + composition) gives you consistent, usable results.\n\nTomorrow: The Week 2 capstone. You combine everything into one substantial project worth $100-500.",
+      "xp": 15
+    }
+  ]
+}

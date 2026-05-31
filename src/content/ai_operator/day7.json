@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "unit": "day7",
+  "title": "Day 7: Week 1 Reflection & Integration",
+  "estMinutes": 20,
+  "steps": [
+    {
+      "id": "d7-info-1",
+      "type": "info",
+      "title": "You've Completed Week 1 — Let's Integrate",
+      "body": "Congratulations. You've made it through the first week of your AI Operator journey.\n\nLet's look at what you've accomplished:\n\n• Day 1: Built your AI operator foundation — understanding what AI can and can't do\n• Day 2: Mastered prompt engineering — the core skill of the AI age\n• Day 3: Learned AI-assisted research — how to gather and synthesize information faster\n• Day 4: Deployed AI agents and automations — making AI work for you on a schedule\n• Day 5: Advanced prompt patterns — chain-of-thought, few-shot, structured outputs\n• Day 6: Built no-code AI tools — deployable AI that others can use\n\nToday, you pause, reflect, and integrate. The goal isn't more information. It's consolidation.",
+      "xp": 5
+    },
+    {
+      "id": "d7-highlight-1",
+      "type": "highlight",
+      "body": "Knowledge without integration is just noise.\n\nThe difference between someone who takes a course and someone who transforms their capability: the pause to reflect.\n\nWeek 1 gave you the tools. Now you make them yours.",
+      "highlights": ["Knowledge without integration is just noise", "pause to reflect", "make them yours"],
+      "xp": 5
+    },
+    {
+      "id": "d7-mc-1",
+      "type": "mc",
+      "question": "What is the primary purpose of a reflection and integration day in a learning journey?",
+      "options": [
+        "To add more new material before forgetting the old",
+        "To consolidate learning, identify gaps, and connect concepts into practical workflows",
+        "To take a break and do nothing related to the subject",
+        "To test everything you've learned under exam conditions"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly right. Integration is where learning becomes capability. By connecting concepts (prompts + agents + tools) into practical workflows, you move from knowledge to skill.",
+        "Not quite. Integration is active consolidation — reviewing what you've learned, seeing how pieces connect, and identifying where you need more practice. It's not passive rest or more information."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-scenario-1",
+      "type": "scenario_card",
+      "title": "The Integration Cascade",
+      "body": "Ana finished the same week you did. She didn't skip the reflection day.\n\nDuring her reflection, she noticed something: her Day 2 prompt patterns, her Day 4 automations, and her Day 6 tools were all separate things. She'd been using them independently.\n\nThen she connected the dots:\n• She took her Day 6 custom GPT (content repurposer)\n• Wired it into her Day 4 automation (Make scenario that watches for new blog posts)\n• Used Day 5 chain-of-thought prompting to make the repurposer follow brand voice guidelines\n\nResult: Every time her team published a blog post, the system auto-generated social posts, newsletter blurbs, and Twitter threads — in her brand voice — without anyone touching it.\n\nShe had all the pieces. Reflection is what let her see the picture."
+    },
+    {
+      "id": "d7-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Of the six skills you learned this week (foundations, prompts, research, agents, advanced prompts, no-code tools), which one felt most natural? Which one felt most challenging?",
+          "placeholder": "The skill that felt natural and the one that felt challenging...",
+          "minChars": 20
+        },
+        {
+          "id": "r2",
+          "prompt": "Think of a specific task you did this week (work or personal) where you could have used one of these AI skills. How would using it have changed the outcome?",
+          "placeholder": "The task, the skill that applies, and how the outcome would change...",
+          "minChars": 30
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d7-mc-2",
+      "type": "mc",
+      "question": "You've built a custom GPT (Day 6) that generates social media posts. You've built an automation (Day 4) that watches for new content. What's missing to connect them into an integrated system?",
+      "options": [
+        "Nothing — they're already connected automatically",
+        "You need to write custom code to link them",
+        "A trigger and data flow between the automation and the GPT using a no-code platform like Make or Zapier",
+        "You need a separate AI agent to manage both tools"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Exactly. The integration point is the data flow. Your automation detects new content → sends it to the GPT via API or webhook → the GPT generates the output → the automation posts it. All no-code with Make or similar platforms.",
+        "Not quite. These tools aren't automatically connected. You need to build the bridge — typically a no-code workflow platform (Make, Zapier, n8n) that passes data from the automation trigger to the GPT's API inputs."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-info-2",
+      "type": "info",
+      "title": "Your Week 1 Skill Map — What Connects to What",
+      "body": "Here's how your Week 1 skills connect into an integrated AI operator system:\n\nFoundations (Day 1) → The mental model for everything else\nPrompt Engineering (Day 2) → The interface to all AI tools\nResearch + Information Skills (Day 3) → Fuel for your prompts and tools\nAI Agents & Automations (Day 4) → The engine that runs your systems\nAdvanced Prompt Patterns (Day 5) → Quality control for your outputs\nNo-Code Tools (Day 6) → Shareable, reusable assets anyone can use\n\nEvery day builds on the previous ones. Day 7 is where you see the full map.",
+      "xp": 5
+    },
+    {
+      "id": "d7-builder-1",
+      "type": "builder",
+      "title": "Design Your Week 1 Integrated System",
+      "instruction": "Think of a recurring workflow in your life or work. Using ALL the skills from Week 1, design an integrated AI-powered system for it.\n\nDescribe:\n1. The trigger — what starts the workflow (new email, new data, a schedule, a manual request)\n2. The AI skills involved — which Day 1-6 skills does this use?\n3. The automation — what happens automatically vs. what needs human review\n4. The output — what gets produced and where it goes\n\nExample: 'Every Monday morning, my automation checks our support ticket queue. It uses AI research (Day 3) to cluster similar issues, prompt chaining (Day 5) to draft responses, and a custom GPT (Day 6) to generate summaries. I review and approve before sending.'",
+      "inputLabel": "Your integrated Week 1 system design",
+      "placeholder": "Trigger: [what starts it]\nSkills involved: [which days]\nAutomation: [what's automatic vs. human]\nOutput: [what gets produced]",
+      "minChars": 80,
+      "xp": 20
+    },
+    {
+      "id": "d7-scenario-2",
+      "type": "scenario_card",
+      "title": "The Power of Integration",
+      "body": "Marcus runs a freelance design business. Before Week 1, he used AI for random tasks — writing emails, brainstorming ideas.\n\nAfter Week 1 integration:\n• Automation (Day 4): A Make scenario watches his email for client briefs\n• Research (Day 3): When a brief arrives, AI researches the client's industry and competitors\n• Advanced Prompts (Day 5): A chain-of-thought prompt generates design strategy\n• No-Code Tool (Day 6): A custom GPT takes the strategy and creates mood boards and color palettes\n• Human Review: Marcus reviews everything, adds his creative touch, and delivers\n\nResult: Proposal time went from 3 days to 4 hours. His close rate went up because proposals came back faster and were more researched.\n\nThat's what an integrated AI operator looks like."
+    },
+    {
+      "id": "d7-highlight-2",
+      "type": "highlight",
+      "body": "Week 1 was about building individual skills.\n\nWeek 2 is about connecting them into systems that run without you.\n\nThe operators who integrate win. The ones who just accumulate skills never do.\n\nNext week: The Building Phase. You'll learn to create multi-step automated systems, build custom AI workflows, and deploy tools that work while you sleep.",
+      "highlights": ["connecting them into systems", "operators who integrate win", "Building Phase"],
+      "xp": 5
+    },
+    {
+      "id": "d7-knowledge-check",
+      "type": "mc",
+      "question": "After completing Week 1 and integrating your skills, what's the most important mindset shift a new AI operator should make?",
+      "options": [
+        "AI is a tool you use occasionally when you're stuck",
+        "AI is a full-time assistant you manage — you design systems, not just ask questions",
+        "You should automate everything immediately without human oversight",
+        "The prompts you learned in Week 1 are all you'll ever need"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. The mindset shift from \"user asking for help\" to \"operator designing systems\" is the key transformation. You're not using AI tools — you're managing AI workers that execute your designed workflows.",
+        "Think bigger. An AI operator doesn't just ask for help occasionally. They design automated systems where AI handles recurring workflows, with the operator overseeing and improving the system."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7-completion-1",
+      "type": "completion",
+      "title": "Week 1 Complete!",
+      "body": "You've done more than complete the first week. You've integrated six critical skills into a cohesive AI operator mindset.\n\nYou now have:\n• A solid foundation in what AI can and can't do\n• Prompt engineering skills that work across any AI tool\n• Research methods that save hours daily\n• Automation skills that let AI work while you sleep\n• Advanced prompt patterns for quality control\n• No-code tool-building capability\n\nMost importantly: You understand how these skills connect.\n\nNext week — Building Phase — you'll turn this foundation into automated systems that run entire processes.\n\nSee you on Day 8.",
+      "xp": 20
+    }
+  ]
+}

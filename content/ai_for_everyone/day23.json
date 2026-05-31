@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 23,
+    "unitLabel": "Day 23",
+    "unitTitle": "AI for Financial Planning",
+    "lessonOrder": 1,
+    "lessonTitle": "Money Decisions with AI",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d23_s1",
+      "type": "info",
+      "title": "Welcome to Day 23 — AI for Financial Planning",
+      "body": "Money can be stressful — especially when you are not sure where it goes or whether you are making the right decisions. Today you will learn how AI helps you budget better, analyze spending, set savings goals, and make smarter financial choices.",
+      "audioUrl": null,
+      "primaryButton": "Money decisions — let's go",
+      "xp": 3
+    },
+    {
+      "id": "d23_s2",
+      "type": "info",
+      "title": "AI as your financial assistant",
+      "body": "AI cannot manage your bank account or pay your bills. But it can do three powerful things: (1) Analyze your spending patterns and suggest where to cut. (2) Help you build a realistic budget that fits your life. (3) Explain financial concepts in plain language so you make better decisions. Think of AI as a friendly financial coach who never judges.",
+      "audioUrl": null,
+      "primaryButton": "I need a financial coach",
+      "xp": 3
+    },
+    {
+      "id": "d23_s3",
+      "type": "builder",
+      "title": "Create your budget with AI",
+      "fields": [
+        {
+          "id": "income",
+          "label": "What is your monthly income after tax?",
+          "placeholder": "4500"
+        },
+        {
+          "id": "fixed_costs",
+          "label": "What are your fixed monthly costs (rent, bills, subscriptions)?",
+          "placeholder": "rent 1500, utilities 200, phone 50, subscriptions 40"
+        },
+        {
+          "id": "flexible_spending",
+          "label": "What do you typically spend on groceries, dining, transport, and fun?",
+          "placeholder": "groceries 400, dining out 200, transport 150, fun 100"
+        }
+      ],
+      "template": "I earn {{income}} per month. My fixed costs: {{fixed_costs}}. My flexible spending: {{flexible_spending}}. Help me create a realistic monthly budget. Show me: (1) Where I could save. (2) The 50/30/20 breakdown. (3) How much I could save each month for my goals.",
+      "primaryButton": "Build my budget",
+      "xp": 20
+    },
+    {
+      "id": "d23_s4",
+      "type": "paste_capture",
+      "title": "Save your budget",
+      "body": "Paste the budget AI created for you. You can adjust it later as your situation changes.",
+      "minLength": 10,
+      "primaryButton": "Save my budget",
+      "xp": 15
+    },
+    {
+      "id": "d23_s5",
+      "type": "info",
+      "title": "Spending analysis — where does the money go?",
+      "body": "Most people have no idea where their money actually goes. Take a week's worth of expenses — even rough numbers — and ask AI: 'Here is what I spent in the last 7 days: [list]. Categorize these, tell me what surprises you, and suggest one simple change I could make.' Often the answer is something small: one coffee a day adds up to $1,000+ a year.",
+      "audioUrl": null,
+      "primaryButton": "Show me my spending",
+      "xp": 3
+    },
+    {
+      "id": "d23_s6",
+      "type": "reflection",
+      "title": "Your money mindset",
+      "questions": [
+        {
+          "id": "money_feeling",
+          "type": "single_choice",
+          "label": "How do you feel about your finances right now?",
+          "options": [
+            "In control and confident",
+            "Managing but could improve",
+            "Stressed or unsure",
+            "I prefer not to think about money"
+          ]
+        },
+        {
+          "id": "biggest_question",
+          "type": "textarea",
+          "label": "What is the biggest financial question you would like AI to help you answer?"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d23_s7",
+      "type": "info",
+      "title": "Setting savings goals that stick",
+      "body": "A goal without a plan is just a wish. AI can turn 'I want to save more' into a concrete plan. Prompt: 'I want to save $[amount] by [date]. My monthly income is [X] and expenses are [Y]. Create a savings plan — tell me exactly how much to save each week and suggest specific spending cuts to make it possible.'",
+      "audioUrl": null,
+      "primaryButton": "Set my savings goal",
+      "xp": 3
+    },
+    {
+      "id": "d23_s8",
+      "type": "checklist",
+      "title": "My financial planning toolkit",
+      "items": [
+        "I can create a monthly budget by entering my income and expenses into AI",
+        "I can analyze my spending patterns and spot easy savings",
+        "I can set a savings goal with a realistic timeline",
+        "I understand the 50/30/20 rule for budgeting",
+        "I can use AI to compare financial options like insurance or loans"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d23_s9",
+      "type": "mc",
+      "title": "Financial planning check",
+      "question": "What is the 50/30/20 budgeting rule?",
+      "options": [
+        "50% needs, 30% wants, 20% savings",
+        "50% savings, 30% needs, 20% wants",
+        "50% wants, 30% savings, 20% needs"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Correct. Needs get half, wants get 30%, and 20% goes to savings.",
+        "Close, but needs should come before wants in your budget.",
+        "Not quite — half your income should cover essential needs."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d23_s10",
+      "type": "info",
+      "title": "Investment basics — no jargon",
+      "body": "AI is great at explaining investing without confusing jargon. Ask: 'Explain investing like I am 15 years old. What is a stock? What is compounding? How much would I need to start? And what is the safest way to begin?' The key insight: you do not need to be an expert to start. You just need to start.",
+      "audioUrl": null,
+      "primaryButton": "Investing explained simply",
+      "xp": 3
+    },
+    {
+      "id": "d23_s11",
+      "type": "builder",
+      "title": "Build your financial plan",
+      "fields": [
+        {
+          "id": "short_term",
+          "label": "What is a short-term financial goal (3-6 months)?",
+          "placeholder": "build an emergency fund of $2000"
+        },
+        {
+          "id": "long_term",
+          "label": "What is a long-term financial goal (1-5 years)?",
+          "placeholder": "save for a down payment on a house"
+        },
+        {
+          "id": "biggest_challenge",
+          "label": "What is your biggest financial challenge right now?",
+          "placeholder": "impulse spending on takeout and shopping"
+        }
+      ],
+      "template": "Help me create a financial plan. Short-term goal: {{short_term}}. Long-term goal: {{long_term}}. Biggest challenge: {{biggest_challenge}}. My monthly income and expenses from my budget. Create a step-by-step plan: (1) What to do this month. (2) What to do this quarter. (3) What habits to build. Keep it simple and realistic.",
+      "primaryButton": "Build my financial plan",
+      "xp": 20
+    },
+    {
+      "id": "d23_s12",
+      "type": "paste_capture",
+      "title": "Save your financial plan",
+      "body": "Paste the financial plan AI created. Review it monthly.",
+      "minLength": 10,
+      "primaryButton": "Save my plan",
+      "xp": 15
+    },
+    {
+      "id": "d23_s13",
+      "type": "info",
+      "title": "Bill negotiation — yes, AI can help",
+      "body": "Did you know most bills are negotiable? Internet, phone, insurance, even rent. But most people avoid negotiating because it is awkward. AI can script the conversation for you. Prompt: 'I pay $[amount] for [service]. I have been a customer for [years]. Competitors offer [X]. Write a polite script I can use to ask for a lower rate.' You would be surprised how often it works.",
+      "audioUrl": null,
+      "primaryButton": "AI negotiates for me",
+      "xp": 3
+    },
+    {
+      "id": "d23_s14",
+      "type": "quiz",
+      "title": "Financial planning mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the 50/30/20 rule used for?",
+          "options": [
+            "Dividing your investment portfolio",
+            "Budgeting your income across needs, wants, and savings",
+            "Splitting household chores"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "How can AI help with bill negotiation?",
+          "options": [
+            "AI calls the company for you",
+            "AI writes a polite script you can use to ask for a better rate",
+            "AI pays your bills automatically"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "You need a large amount of money and expertise to start investing.",
+          "correct": false
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d23_s15",
+      "type": "completion",
+      "title": "Day 23 complete — Financial Planner",
+      "body": "You can now use AI to budget, analyze spending, set savings goals, understand investing, and even negotiate bills. Tomorrow: AI for learning and skill development — accelerating how you learn anything.",
+      "primaryButton": "Ready to learn with AI!"
+    }
+  ]
+}

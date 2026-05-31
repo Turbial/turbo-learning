@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "unit": "day8",
+  "title": "Day 8: AI Content Systems — One Idea, Every Format",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d8-info-1",
+      "type": "info",
+      "title": "Welcome to Week 2 — Real Work",
+      "body": "Week 1 was about learning the tools. Week 2 is about producing real value.\n\nToday you'll build a content system — a pipeline that takes one core idea and turns it into a blog post, social media posts, email newsletter, and landing page copy — all with consistent voice and messaging.\n\nThis is what separates an AI dabbler from an AI operator: systems that produce at scale.",
+      "xp": 5
+    },
+    {
+      "id": "d8-highlight-1",
+      "type": "highlight",
+      "body": "The content pipeline:\n\nOne core idea → Blog post (1,500 words) → 5 social posts → 1 email newsletter → Landing page → Schedule & publish\n\nEach step uses AI to adapt, not rewrite. The core message stays consistent — only the format changes.\n\nThe operator's skill: crafting the one core idea that feeds the entire system.",
+      "highlights": ["core idea", "adapt, not rewrite", "consistent", "feeds the entire system"],
+      "xp": 5
+    },
+    {
+      "id": "d8-mc-1",
+      "type": "mc",
+      "question": "What is the key principle of an AI-powered content system?",
+      "options": [
+        "Generate completely different content for each platform",
+        "Start with one core idea, then adapt it for each format while keeping consistent messaging",
+        "Use AI to replace all human writers entirely",
+        "Post the same text everywhere with no changes"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. A content system starts with one strong idea and adapts it for each platform. The message is consistent, the format varies.",
+        "Not quite. The magic is consistency across formats — one idea expressed optimally for each channel, not random content or verbatim copies."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-example-1",
+      "type": "example",
+      "title": "From One Idea to Full Content System",
+      "prompt": "Core Idea: 'Small businesses waste 10 hours/week on admin tasks they could automate with AI.'\n\nPipeline Output:\n\n1. Blog Post (1,500 words): 'The 10-Hour Drain: How Small Businesses Waste Time on Admin (And How AI Fixes It)' — Comprehensive guide with stats, examples, step-by-step solutions\n\n2. LinkedIn Post: 'I asked 50 small business owners where they waste the most time. 90% said admin. The fix? A $20/month AI automation.' — Personal insight, short, engaging\n\n3. Twitter/X Thread (5 tweets): '1/5 Most small business owners don't need to hire more people. They need to use AI better. Here's how.' — Scannable, shareable\n\n4. Email Newsletter: 'This Week's Insight: The Admin Time Trap' — Value-driven with practical tips\n\n5. Landing Page: 'Cut Admin Time by 70% With AI' — Benefit-focused, CTA-driven\n\nOne idea. Five formats. Consistent message."
+    },
+    {
+      "id": "d8-builder-1",
+      "type": "builder",
+      "title": "Build Your Content Pipeline",
+      "instruction": "Pick a topic you know well — your industry, a hobby, a business problem you've solved.\n\nWrite it as a single core idea sentence. Then list 3-5 formats you'd adapt it for:\n\nCore Idea: [One sentence capturing the key insight]\n\nFormats:\n1. [Format] — [What angle you'd take]\n2. [Format] — [What angle you'd take]\n3. [Format] — [What angle you'd take]\n\nBe specific about the angles — the format changes, but the core idea stays.",
+      "inputLabel": "Your content pipeline design",
+      "placeholder": "Core Idea: Real estate agents who use AI for property descriptions save 5 hours/week and close 20% more leads.\n\nFormats:\n1. Blog post — Step-by-step guide with before/after examples\n2. Instagram Reel — 60-second transformation story\n3. Email to agents — Quick wins they can implement today\n4. LinkedIn article — Industry insight with data\n5. Landing page — 'AI for Real Estate Agents' with case study",
+      "minChars": 60,
+      "xp": 20
+    },
+    {
+      "id": "d8-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Look at your current content output (emails, social, documents). What's one topic you've written about multiple times? How could a content pipeline save you time?",
+          "placeholder": "A recurring topic and how a system would help...",
+          "minChars": 30
+        },
+        {
+          "id": "r2",
+          "prompt": "What's the single most valuable piece of content you could create right now — not the biggest, but the one that would create the most leverage?",
+          "placeholder": "The core idea and why it matters...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d8-completion-1",
+      "type": "completion",
+      "title": "Day 8 Complete!",
+      "body": "You've designed your first content pipeline. One idea, multiple formats, consistent message.\n\nTomorrow: You'll become an AI-powered research assistant — producing deep research briefs in minutes instead of hours.",
+      "xp": 15
+    }
+  ]
+}

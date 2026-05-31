@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 22,
+    "unitLabel": "Day 22",
+    "unitTitle": "AI for Project Management",
+    "lessonOrder": 1,
+    "lessonTitle": "Planning with AI",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d22_s1",
+      "type": "info",
+      "title": "Welcome to Day 22 — AI for Project Management",
+      "body": "Welcome to Week 4 — the final week of your AI journey. This week you apply AI to real-world domains: project management, finance, learning, creativity, productivity, and your career. Starting today: how AI turns project chaos into clarity.",
+      "audioUrl": null,
+      "primaryButton": "Let's manage projects with AI",
+      "xp": 3
+    },
+    {
+      "id": "d22_s2",
+      "type": "scenario_card",
+      "title": "Project chaos — the story of Karim",
+      "body": "Karim runs a small marketing team. They have five projects, shifting deadlines, team members who forget updates, and a client who wants a timeline 'by end of week.' Karim spends more time tracking projects than doing the work. He needs AI to bring order to the chaos.",
+      "audioUrl": null,
+      "primaryButton": "I have been there",
+      "xp": 3
+    },
+    {
+      "id": "d22_s3",
+      "type": "info",
+      "title": "What AI can do for your projects",
+      "body": "AI helps with every phase of a project: (1) Planning — break big goals into tasks. (2) Scheduling — estimate timelines realistically. (3) Risk spotting — identify what might go wrong. (4) Communication — draft status updates. (5) Tracking — summarize progress. You do not need expensive project software. A good AI prompt can do most of this.",
+      "audioUrl": null,
+      "primaryButton": "Show me the phases",
+      "xp": 3
+    },
+    {
+      "id": "d22_s4",
+      "type": "builder",
+      "title": "Plan a project with AI",
+      "fields": [
+        {
+          "id": "project_goal",
+          "label": "What project do you need to plan?",
+          "placeholder": "launch a new website by end of month"
+        },
+        {
+          "id": "constraints",
+          "label": "What are your constraints — time, budget, people?",
+          "placeholder": "two weeks, three people, no new budget"
+        },
+        {
+          "id": "key_milestones",
+          "label": "What are two or three key milestones?",
+          "placeholder": "content ready, design approved, final review"
+        }
+      ],
+      "template": "Help me plan this project: Goal: {{project_goal}}. Constraints: {{constraints}}. Milestones: {{key_milestones}}. Break this into weekly tasks with owners and deadlines. Identify dependencies. Suggest how to track progress each week.",
+      "primaryButton": "Build my project plan",
+      "xp": 20
+    },
+    {
+      "id": "d22_s5",
+      "type": "paste_capture",
+      "title": "Save your project plan",
+      "body": "Paste the project plan AI created for you. You will use this to guide your work.",
+      "minLength": 10,
+      "primaryButton": "Save my plan",
+      "xp": 15
+    },
+    {
+      "id": "d22_s6",
+      "type": "info",
+      "title": "Spotting risks before they happen",
+      "body": "Most project failures are predictable — if you stop to think about them. AI is great at asking 'what could go wrong?' Prompt: 'Here is my project plan. List everything that could delay or derail it. For each risk, suggest a backup plan.' You will be amazed at what you missed.",
+      "audioUrl": null,
+      "primaryButton": "I need risk spotting",
+      "xp": 3
+    },
+    {
+      "id": "d22_s7",
+      "type": "mc",
+      "title": "Risk identification check",
+      "question": "What is the best way to use AI for risk identification?",
+      "options": [
+        "Ask AI to make decisions for you",
+        "Show AI your plan and ask it to list possible risks and solutions",
+        "Let AI run the project instead of you"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI should suggest, not decide — you stay in charge.",
+        "Correct. AI reviews your plan and spots risks you might have missed.",
+        "AI is a tool, not a replacement for your judgment."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d22_s8",
+      "type": "info",
+      "title": "Deadline management with AI",
+      "body": "Deadlines slip when estimates are wrong. Ask AI: 'Given these tasks and my availability, create a realistic timeline. Flag any task where my estimate seems too optimistic.' AI can even suggest how to communicate delays professionally — because bad news delivered well is a skill too.",
+      "audioUrl": null,
+      "primaryButton": "Realistic timelines",
+      "xp": 3
+    },
+    {
+      "id": "d22_s9",
+      "type": "builder",
+      "title": "Build your project timeline",
+      "fields": [
+        {
+          "id": "tasks",
+          "label": "List 3-5 key tasks for your project",
+          "placeholder": "design homepage, write content, set up analytics"
+        },
+        {
+          "id": "deadline",
+          "label": "What is your target completion date?",
+          "placeholder": "June 30"
+        },
+        {
+          "id": "capacity",
+          "label": "How many hours per week can you dedicate?",
+          "placeholder": "10 hours per week"
+        }
+      ],
+      "template": "Create a timeline for these tasks: {{tasks}}. Target: {{deadline}}. Capacity: {{capacity}}. Show me week-by-week what to work on. Flag any task that needs more time. Suggest a buffer for unexpected delays.",
+      "primaryButton": "Build my timeline",
+      "xp": 20
+    },
+    {
+      "id": "d22_s10",
+      "type": "paste_capture",
+      "title": "Save your timeline",
+      "body": "Paste your AI-generated project timeline. Refer back when priorities shift.",
+      "minLength": 10,
+      "primaryButton": "Save timeline",
+      "xp": 15
+    },
+    {
+      "id": "d22_s11",
+      "type": "info",
+      "title": "Team coordination made simple",
+      "body": "Coordinating a team? Use AI to: (1) Draft meeting agendas that respect everyone's time. (2) Write clear task assignments so nothing gets lost. (3) Summarize long email threads into action items. (4) Create a RACI chart — who is Responsible, Accountable, Consulted, Informed. Prompt: 'Given these team members and their roles, help me assign these tasks clearly.'",
+      "audioUrl": null,
+      "primaryButton": "Better coordination",
+      "xp": 3
+    },
+    {
+      "id": "d22_s12",
+      "type": "info",
+      "title": "Progress tracking — the weekly pulse",
+      "body": "The best project managers run a weekly pulse: what was done, what is blocked, what is next. AI can help you run this in five minutes. Prompt: 'Here are my tasks from last week. Here is what happened. Help me write a one-paragraph status update for my stakeholders and suggest priorities for next week.'",
+      "audioUrl": null,
+      "primaryButton": "Weekly pulse check",
+      "xp": 3
+    },
+    {
+      "id": "d22_s13",
+      "type": "checklist",
+      "title": "Your project management toolkit",
+      "items": [
+        "I can plan a project by describing the goal and asking AI for tasks and timeline",
+        "I can spot risks by asking AI to review my plan",
+        "I can build a realistic timeline with AI estimating time per task",
+        "I can coordinate my team using AI for agendas and assignments",
+        "I can track progress weekly with an AI-generated status update"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d22_s14",
+      "type": "quiz",
+      "title": "Project management mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the first step in using AI for project planning?",
+          "options": [
+            "Buy expensive project software",
+            "Describe your goal, constraints, and milestones to AI",
+            "Wait until the project is halfway done"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "How should you use AI for risk identification?",
+          "options": [
+            "Ignore risks — AI handles everything",
+            "Show AI your plan and ask what could go wrong and how to prevent it",
+            "Decide risks yourself without AI input"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "AI can replace the need for a project manager entirely.",
+          "correct": false
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d22_s15",
+      "type": "completion",
+      "title": "Day 22 complete — Project Manager",
+      "body": "You can now use AI to plan projects, spot risks, manage deadlines, coordinate teams, and track progress. Tomorrow: AI for financial planning — putting your money decisions on solid ground.",
+      "primaryButton": "Ready for finance!"
+    }
+  ]
+}

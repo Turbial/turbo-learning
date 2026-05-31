@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "unit": "day14",
+  "title": "Day 14: Week 2 Capstone — Your $100-500 Project",
+  "estMinutes": 30,
+  "steps": [
+    {
+      "id": "d14-info-1",
+      "type": "info",
+      "title": "Build Something Real — Something Worth Paying For",
+      "body": "Week 2's destination: one complete, valuable deliverable — something you could charge $100-500 for.\n\nThis isn't an exercise. This is your portfolio piece.\n\nChoose one:\n• A full content package (blog + social + email + landing page)\n• A competitive research brief with strategic recommendations\n• A complete go-to-market plan\n• A working web app or tool\n• A brand kit with visual assets\n• A complete marketing campaign\n\nEverything you've learned Days 8-13 feeds into this. Combine the skills.",
+      "xp": 5
+    },
+    {
+      "id": "d14-highlight-1",
+      "type": "highlight",
+      "body": "What makes a $100-500 deliverable:\n\n• It solves a real problem for a real person or business\n• It's complete — not a draft, not a template, but a finished asset\n• It demonstrates multiple skills (research + writing + design + strategy)\n• It's deliverable as a PDF, URL, or working link\n• The buyer could use it immediately with no further work\n\nIf it doesn't meet these criteria, it's not capstone-ready.",
+      "highlights": ["solves a real problem", "complete", "multiple skills", "immediately usable"],
+      "xp": 5
+    },
+    {
+      "id": "d14-scenario-1",
+      "type": "scenario_card",
+      "title": "Real Capstone Examples From Previous Cohorts",
+      "body": "Example 1 — Content Package ($200):\nA real estate agent got a complete content package: 4 blog posts targeting first-time homebuyers, 20 social media posts, 2 email nurture sequences, and a landing page redesign. The agent used it for 3 months of content marketing.\n\nExample 2 — Research Brief ($350):\nA SaaS founder needed competitive intelligence for a board presentation. They got a 12-page research brief covering 8 competitors, market sizing, feature comparison tables, pricing analysis, and strategic recommendations.\n\nExample 3 — Web App ($500):\nA freelance consultant got a custom client portal app: intake form, project status dashboard, file upload, and automated invoice generation. Built with Cursor AI, deployed on Vercel.\n\nExample 4 — Brand Kit ($150):\nA startup founder got a complete visual identity: logo variations, color palette, typography guide, social media templates, and brand guidelines document.\n\nAll built by non-coders using AI tools."
+    },
+    {
+      "id": "d14-builder-1",
+      "type": "builder",
+      "title": "Plan Your Capstone Project",
+      "instruction": "This is your Week 2 capstone plan. Be specific — this should be executable tomorrow.\n\nCapstone Type: [Content | Research | Strategy | App | Brand | Campaign]\n\nProject Description: [What are you building, and for whom?]\n\nValue: [$100-500 — why is it worth this?]\n\nSkills Used: [Which Days 8-13 skills combine here?]\n\nAI Tools Needed: [Which platforms will you use?]\n\nDelivery Format: [PDF, URL, live app, design files, etc.]\n\nTimeline: [How long will it take?]",
+      "inputLabel": "Your capstone project plan",
+      "placeholder": "Capstone Type: Content Package + Marketing Campaign\n\nProject: Complete launch package for a local coffee shop's new cold brew line. Includes: brand story, product description, 10 social media posts, email announcement to their list, press release, in-store signage copy.\n\nValue: $200 — saves the owner 20+ hours of content creation and produces professional marketing materials\n\nSkills Used: Content system (Day 8), Marketing campaign (Day 11), Design prompts (Day 13)\n\nAI Tools: ChatGPT for copy, Canva AI for visuals, Claude for content strategy\n\nDelivery: One PDF package + Canva link with editable templates\n\nTimeline: 4 hours of focused work",
+      "minChars": 100,
+      "xp": 30
+    },
+    {
+      "id": "d14-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the most marketable skill you've gained in Week 2? If you had to sell one AI-powered service starting tomorrow, what would it be?",
+          "placeholder": "Your most marketable skill and how you'd sell it...",
+          "minChars": 30
+        },
+        {
+          "id": "r2",
+          "prompt": "Week 3 starts automation — make AI work without you. What's one thing you built this week that you'd most like to put on autopilot?",
+          "placeholder": "What you'd automate and how...",
+          "minChars": 20
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d14-completion-1",
+      "type": "completion",
+      "title": "Week 2 Complete!",
+      "body": "You've completed the 'Real Work' week. You're no longer someone who uses AI for occasional help — you're someone who produces real, valuable deliverables with AI.\n\nWeek 2 Summary:\n• Day 8: Content systems — one idea, every format\n• Day 9: Research — deep briefs in minutes\n• Day 10: Strategy — SWOT, roadmaps, GTM plans\n• Day 11: Marketing — campaigns at scale\n• Day 12: Coding — apps without coding\n• Day 13: Design — professional visuals\n• Day 14: Capstone — your $100-500 project\n\nNext week: Automation. Make AI work without you. Pipelines, APIs, triggers, and continuous operation.",
+      "xp": 25
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 27,
+    "unitLabel": "Day 27",
+    "unitTitle": "Building Your AI-Powered Career",
+    "lessonOrder": 1,
+    "lessonTitle": "Career Transformation",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d27_s1",
+      "type": "info",
+      "title": "Welcome to Day 27 — Building Your AI-Powered Career",
+      "body": "AI is changing every industry. Some people worry about this. You are not one of them — because you have spent three weeks learning to use AI effectively. Today you learn how to use AI to accelerate your career: auditing your skills, building your brand, networking smarter, and preparing for a job market that increasingly values AI literacy.",
+      "audioUrl": null,
+      "primaryButton": "Let's build my career",
+      "xp": 3
+    },
+    {
+      "id": "d27_s2",
+      "type": "info",
+      "title": "AI in the workplace — the new reality",
+      "body": "The jobs least affected by AI are those requiring high human judgment, empathy, physical presence, and creativity. The jobs most affected are those with repetitive mental tasks. Here is what this means for you: people who use AI effectively will outpace those who do not. Not because AI replaces them — but because AI makes them faster, smarter, and more capable. You are already ahead by being here.",
+      "audioUrl": null,
+      "primaryButton": "I am already ahead",
+      "xp": 3
+    },
+    {
+      "id": "d27_s3",
+      "type": "builder",
+      "title": "Run your career audit",
+      "fields": [
+        {
+          "id": "role",
+          "label": "What is your current role or desired role?",
+          "placeholder": "marketing coordinator aspiring to be a marketing manager"
+        },
+        {
+          "id": "strengths",
+          "label": "What are your top strengths and skills?",
+          "placeholder": "writing, project management, social media, data analysis basics"
+        },
+        {
+          "id": "gaps",
+          "label": "What skills do you feel you are missing?",
+          "placeholder": "advanced analytics, team leadership, public speaking"
+        }
+      ],
+      "template": "I am a {{role}}. My strengths: {{strengths}}. My skill gaps: {{gaps}}. (1) For each of my skill gaps, suggest specific AI-supercharged ways to learn or fill them in under 30 days. (2) Which of my strengths could AI amplify the most? (3) What new roles or opportunities open up if I combine my strengths with AI skills? (4) Give me a 90-day career development plan using AI as my accelerator.",
+      "primaryButton": "Run my audit",
+      "xp": 20
+    },
+    {
+      "id": "d27_s4",
+      "type": "paste_capture",
+      "title": "Save your career audit",
+      "body": "Paste your career audit. This is your roadmap for the next 90 days.",
+      "minLength": 10,
+      "primaryButton": "Save my audit",
+      "xp": 15
+    },
+    {
+      "id": "d27_s5",
+      "type": "scenario_card",
+      "title": "The career pivot — Anita's move",
+      "body": "Anita has been in customer service for eight years. She wants to move into a product management role but has no direct experience. AI helps her: (1) Map her existing skills (communication, problem-solving, data analysis) to product management requirements. (2) Identify the one skill gap to close first. (3) Draft a compelling story connecting her background to the new role. (4) Generate interview answers that reframe her experience. She lands a product role in 3 months.",
+      "audioUrl": null,
+      "primaryButton": "I can pivot too",
+      "xp": 3
+    },
+    {
+      "id": "d27_s6",
+      "type": "info",
+      "title": "Skill gap analysis — knowing what to learn",
+      "body": "Instead of guessing what skills you need, ask AI. Prompt: 'I want to move from [current role] to [target role]. List the top 5 skills I need that I likely do not have. For each skill: (1) Why it matters. (2) How to learn it with AI in under 30 days. (3) How to prove it to employers (a project, certification, or portfolio piece).' This removes the guesswork from career growth.",
+      "audioUrl": null,
+      "primaryButton": "Find my gaps",
+      "xp": 3
+    },
+    {
+      "id": "d27_s7",
+      "type": "mc",
+      "title": "Career strategy check",
+      "question": "What is the best way to use AI when pivoting to a new career?",
+      "options": [
+        "Ask AI to apply to jobs for you",
+        "Use AI to map your existing skills to the new role, identify gaps, and reframe your experience",
+        "Ignore your past experience and start from scratch"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI cannot apply for jobs yet — and you should still own your applications.",
+        "Correct. AI helps you connect what you already know to where you want to go.",
+        "Your past experience is valuable — you need to reframe it, not discard it."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d27_s8",
+      "type": "info",
+      "title": "Personal branding with AI",
+      "body": "Your personal brand is what people say about you when you are not in the room. AI can help you shape it. Prompt: 'I want to build a personal brand as a [role/field]. My strengths are [list]. My audience is [target audience]. Help me: (1) Define my brand in one sentence. (2) Write a compelling LinkedIn headline and about section. (3) Suggest 5 content ideas that showcase my expertise. (4) Create a 30-day content plan.' Whether you want a new job, clients, or recognition — a strong brand opens doors.",
+      "audioUrl": null,
+      "primaryButton": "Build my brand",
+      "xp": 3
+    },
+    {
+      "id": "d27_s9",
+      "type": "builder",
+      "title": "Build your AI-powered resume and portfolio",
+      "fields": [
+        {
+          "id": "current_role_desc",
+          "label": "Describe your current or most recent role",
+          "placeholder": "managed social media accounts for a mid-size company"
+        },
+        {
+          "id": "achievement",
+          "label": "What is a key achievement you are proud of?",
+          "placeholder": "increased engagement by 150% in 6 months"
+        },
+        {
+          "id": "target_role",
+          "label": "What role are you targeting?",
+          "placeholder": "social media manager or digital marketing specialist"
+        }
+      ],
+      "template": "Help me build my career materials. Current role: {{current_role_desc}}. Key achievement: {{achievement}}. Target role: {{target_role}}. (1) Rewrite my achievement using strong action verbs and measurable results. (2) Write a professional summary for my resume that connects my experience to my target role. (3) Suggest a portfolio project I could build using AI that would impress hiring managers. (4) Give me three talking points for interviews.",
+      "primaryButton": "Build my materials",
+      "xp": 20
+    },
+    {
+      "id": "d27_s10",
+      "type": "paste_capture",
+      "title": "Save your career materials",
+      "body": "Paste your resume summary, portfolio ideas, and interview talking points.",
+      "minLength": 10,
+      "primaryButton": "Save my materials",
+      "xp": 15
+    },
+    {
+      "id": "d27_s11",
+      "type": "info",
+      "title": "Networking with AI — smarter connections",
+      "body": "Networking feels awkward for most people. AI removes the awkwardness. Prompt: 'I want to connect with [type of people — product managers, designers, founders]. Draft a personalized LinkedIn connection request that is respectful, specific, and offers value. Also suggest 3 thoughtful questions I could ask in a conversation with them.' Or: 'I am attending [conference/event]. Help me identify 5 people I should talk to and prepare opening lines for each.'",
+      "audioUrl": null,
+      "primaryButton": "Network smarter",
+      "xp": 3
+    },
+    {
+      "id": "d27_s12",
+      "type": "reflection",
+      "title": "Your career vision",
+      "questions": [
+        {
+          "id": "career_goal",
+          "type": "textarea",
+          "label": "Where do you see your career in one year? How does AI fit into that vision?"
+        },
+        {
+          "id": "ai_skill_level",
+          "type": "single_choice",
+          "label": "How would you rate your AI literacy compared to peers in your field?",
+          "options": [
+            "Way ahead — I can use AI for multiple tasks effectively",
+            "Comfortable — I know the basics and can learn more",
+            "Getting there — I understand the potential",
+            "Just starting — but I am here to learn"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d27_s13",
+      "type": "info",
+      "title": "Interview prep — ace your next interview",
+      "body": "Interviews are nerve-wracking, but AI makes preparation thorough and fast. Prompt: 'I am interviewing for [role] at [company]. Here is my resume: [paste]. Give me: (1) 10 likely questions based on my background. (2) Strong answers using the STAR method. (3) 3 questions I should ask the interviewer. (4) A one-minute pitch about who I am and what I bring.' Practice out loud. Then ask AI for feedback on your recorded practice answers.",
+      "audioUrl": null,
+      "primaryButton": "Ace my interview",
+      "xp": 3
+    },
+    {
+      "id": "d27_s14",
+      "type": "quiz",
+      "title": "Career mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the first step when pivoting to a new career with AI?",
+          "options": [
+            "Update your LinkedIn profile",
+            "Map your existing skills to the new role and identify skill gaps",
+            "Quit your current job immediately"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "How can AI help with networking?",
+          "options": [
+            "AI connects to people automatically on your behalf",
+            "AI drafts personalized messages and suggests conversation starters",
+            "AI replaces the need for human networking"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "People who use AI effectively in the workplace will likely outpace those who do not.",
+          "correct": true
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d27_s15",
+      "type": "completion",
+      "title": "Day 27 complete — Career Builder",
+      "body": "You can now audit your career, identify skill gaps, build your personal brand, network smarter, and prepare for interviews — all with AI. Tomorrow is graduation — your final day of the entire program!",
+      "primaryButton": "Graduation day!"
+    }
+  ]
+}

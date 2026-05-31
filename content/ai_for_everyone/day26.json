@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 26,
+    "unitLabel": "Day 26",
+    "unitTitle": "AI for Time Management & Productivity",
+    "lessonOrder": 1,
+    "lessonTitle": "Master Your Time",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d26_s1",
+      "type": "info",
+      "title": "Welcome to Day 26 — AI for Time Management & Productivity",
+      "body": "Time is your most limited resource. You cannot make more of it. But you can use AI to understand where your time goes, prioritize what matters, automate the repetitive tasks, and protect your focus. Today you build a productivity system that works for your life.",
+      "audioUrl": null,
+      "primaryButton": "Let's master my time",
+      "xp": 3
+    },
+    {
+      "id": "d26_s2",
+      "type": "info",
+      "title": "Auditing your time — the unflattering truth",
+      "body": "Most people have no idea where their time actually goes. Grab a typical day and list what you did in rough chunks: '9-10: emails. 10-11: meeting. 11-12: got distracted on social media.' Then ask AI: 'Here is how I spent yesterday: [list]. Show me patterns. What is productive? What is wasted? What is not urgent but feels urgent? Give me one specific change that would save me the most time.' The truth may sting — but it is the first step to fixing it.",
+      "audioUrl": null,
+      "primaryButton": "Show me the truth",
+      "xp": 3
+    },
+    {
+      "id": "d26_s3",
+      "type": "builder",
+      "title": "Run your time audit",
+      "fields": [
+        {
+          "id": "morning",
+          "label": "How did you spend your morning?",
+          "placeholder": "7-8: breakfast and news, 8-9: emails, 9-11: project work with interruptions"
+        },
+        {
+          "id": "afternoon",
+          "label": "What about your afternoon?",
+          "placeholder": "11-12: meeting, 12-1: lunch, 1-3: deep work, 3-4: more emails"
+        },
+        {
+          "id": "evening",
+          "label": "Evening?",
+          "placeholder": "4-5: wrap up, 5-6: commute, 6-8: dinner and family, 8-10: TV or scrolling"
+        }
+      ],
+      "template": "Analyze my day: Morning: {{morning}}. Afternoon: {{afternoon}}. Evening: {{evening}}. (1) Categorize each block as productive, necessary but not productive, or wasted. (2) Identify my biggest time leak. (3) Suggest three changes that would save me the most time. (4) Recommend a better daily schedule that protects my productive hours.",
+      "primaryButton": "Run my audit",
+      "xp": 20
+    },
+    {
+      "id": "d26_s4",
+      "type": "paste_capture",
+      "title": "Save your time audit results",
+      "body": "Paste the time audit AI generated for you. These insights will guide your productivity system.",
+      "minLength": 10,
+      "primaryButton": "Save my audit",
+      "xp": 15
+    },
+    {
+      "id": "d26_s5",
+      "type": "info",
+      "title": "Task prioritization — the 4-box method",
+      "body": "Not all tasks are equal. The Eisenhower Matrix divides tasks into four boxes: (1) Urgent and important — do now. (2) Important but not urgent — schedule. (3) Urgent but not important — delegate. (4) Not urgent and not important — eliminate. Ask AI: 'Here are my tasks for this week: [list]. Sort them into the four boxes and suggest whether I should do, schedule, delegate, or eliminate each one.' Most people spend 80% of their time on boxes 3 and 4. Flip that.",
+      "audioUrl": null,
+      "primaryButton": "Sort my tasks",
+      "xp": 3
+    },
+    {
+      "id": "d26_s6",
+      "type": "mc",
+      "title": "Prioritization check",
+      "question": "According to the Eisenhower Matrix, what should you do with tasks that are urgent but not important?",
+      "options": [
+        "Do them immediately because they are urgent",
+        "Delegate them if possible",
+        "Ignore them completely"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Urgency alone is not a reason to do something yourself.",
+        "Correct. If a task is urgent but not truly important, see if someone else can handle it.",
+        "Some urgent-but-not-important tasks still need to happen, just not by you."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d26_s7",
+      "type": "info",
+      "title": "Finding automation opportunities",
+      "body": "Every day you do tasks that could be automated. The trick is spotting them. Ask AI: 'Here is everything I do in a typical week: [list]. Which tasks could be fully automated with AI? Which tasks could be partially automated or made faster with AI? Which tasks should only be done by a human?' You will be surprised how much can be handled — email sorting, invoice templates, status updates, meeting summaries, research notes.",
+      "audioUrl": null,
+      "primaryButton": "Find automations",
+      "xp": 3
+    },
+    {
+      "id": "d26_s8",
+      "type": "checklist",
+      "title": "My productivity toolkit",
+      "items": [
+        "I can audit my time to find where it goes and where I am wasting it",
+        "I can prioritize my tasks using the four-box method",
+        "I can identify tasks AI can automate or speed up",
+        "I set aside time for deep, focused work without distractions",
+        "I have a weekly review routine to plan ahead"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26_s9",
+      "type": "info",
+      "title": "Focus and deep work — protecting your attention",
+      "body": "The average person switches tasks every 3 minutes. It takes 23 minutes to refocus after a distraction. AI can help you protect your focus. Prompt: 'I need 2 hours of uninterrupted deep work on [project]. Design a focus session for me: (1) How should I prepare? (2) What environment works best? (3) How should I handle interruptions? (4) What should I do in the last 5 minutes to capture what I accomplished?' Also ask AI to draft an 'away message' or autoresponder that sets boundaries.",
+      "audioUrl": null,
+      "primaryButton": "Protect my focus",
+      "xp": 3
+    },
+    {
+      "id": "d26_s10",
+      "type": "builder",
+      "title": "Design your productivity system",
+      "fields": [
+        {
+          "id": "biggest_waste",
+          "label": "What is your biggest time waster?",
+          "placeholder": "getting lost in email and chat throughout the day"
+        },
+        {
+          "id": "best_focus_time",
+          "label": "When are you most productive and focused?",
+          "placeholder": "early mornings, 6-9am"
+        },
+        {
+          "id": "key_goal",
+          "label": "What is the most important thing you want to accomplish each day?",
+          "placeholder": "finish my main project task before lunch"
+        }
+      ],
+      "template": "Design a productivity system for me. My biggest time waster: {{biggest_waste}}. My best focus time: {{best_focus_time}}. My daily priority: {{key_goal}}. Create a daily routine that: (1) Protects my focus time. (2) Batches email and messages at set times. (3) Uses the two-minute rule (if under 2 minutes, do it now). (4) Includes a 5-minute end-of-day review. Make it realistic — I am not a robot.",
+      "primaryButton": "Design my system",
+      "xp": 20
+    },
+    {
+      "id": "d26_s11",
+      "type": "paste_capture",
+      "title": "Save your productivity system",
+      "body": "Paste your productivity system. Try it for one week and adjust as needed.",
+      "minLength": 10,
+      "primaryButton": "Save my system",
+      "xp": 15
+    },
+    {
+      "id": "d26_s12",
+      "type": "reminder_setup",
+      "title": "Set your productivity reminder",
+      "body": "Set a daily or weekly reminder to review your productivity system and check in on your focus time. Consistency is what makes a system work.",
+      "reminderText": "Review my productivity system — am I protecting my focus time?",
+      "xp": 5
+    },
+    {
+      "id": "d26_s13",
+      "type": "info",
+      "title": "The weekly review — your secret weapon",
+      "body": "The most productive people do a weekly review: 15 minutes to look back and plan ahead. Use AI to make it painless. Prompt: 'Here is what I accomplished this week: [list]. Here is what I did not get to: [list]. Help me run a 15-minute weekly review: (1) Celebrate three wins. (2) Identify one thing to improve. (3) Set three priorities for next week. (4) Clear my mental clutter.'",
+      "audioUrl": null,
+      "primaryButton": "Run my weekly review",
+      "xp": 3
+    },
+    {
+      "id": "d26_s14",
+      "type": "quiz",
+      "title": "Productivity mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the first step to better time management?",
+          "options": [
+            "Buy a fancy productivity app",
+            "Audit where your time actually goes",
+            "Work longer hours"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "mc",
+          "question": "What is the two-minute rule in productivity?",
+          "options": [
+            "Only work for two minutes at a time",
+            "If a task takes less than two minutes, do it immediately",
+            "Take a two-minute break every hour"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q3",
+          "type": "tf",
+          "question": "Multitasking is an effective way to get more done in less time.",
+          "correct": false
+        }
+      ],
+      "xp": 25
+    },
+    {
+      "id": "d26_s15",
+      "type": "completion",
+      "title": "Day 26 complete — Productivity Master",
+      "body": "You can now audit your time, prioritize tasks, find automation opportunities, protect your focus, and run a weekly review. Tomorrow: building your AI-powered career.",
+      "primaryButton": "Let's build my career!"
+    }
+  ]
+}

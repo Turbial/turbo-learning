@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "unit": "day9",
+  "title": "Day 9: AI Research Assistant — Deep Research in Minutes",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d9-info-1",
+      "type": "info",
+      "title": "Research at AI Speed",
+      "body": "Traditional research workflow: search → read 10 articles → take notes → synthesize → write summary. Total: 2-4 hours for one topic.\n\nAI research workflow: Multi-turn investigation where AI searches, summarizes, cross-references, and synthesizes — you guide and verify. Total: 30 minutes for a comprehensive brief.\n\nToday you'll learn the multi-turn research pattern that produces better results than either human or AI alone.",
+      "xp": 5
+    },
+    {
+      "id": "d9-highlight-1",
+      "type": "highlight",
+      "body": "The multi-turn research pattern:\n\nTurn 1: 'Research [topic]. Give me an overview with 5 key areas to explore.'\nTurn 2: 'Dive deeper on area 3. Find specific data points and sources.'\nTurn 3: 'Cross-reference the data from areas 1 and 3. Any contradictions?'\nTurn 4: 'Synthesize everything into a structured brief with key findings and recommendations.'\n\nThe operator doesn't ask for the answer in one shot. They guide the investigation.",
+      "highlights": ["multi-turn", "key areas to explore", "specific data points", "cross-reference", "synthesize"],
+      "xp": 5
+    },
+    {
+      "id": "d9-mc-1",
+      "type": "mc",
+      "question": "What makes AI-powered research superior to traditional search?",
+      "options": [
+        "AI always has the most up-to-date information",
+        "AI can synthesize across multiple sources and adapt to follow-up questions in real time",
+        "AI never makes mistakes",
+        "AI replaces the need for human judgment"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Correct. AI's strength is synthesis and iteration — it can pull from multiple sources and adapt as you refine the research question.",
+        "Not quite. AI's value is in synthesis and speed, not infallibility. You still need to verify facts and exercise judgment on what's relevant."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-scenario-1",
+      "type": "scenario_card",
+      "title": "The Competitive Research Brief",
+      "body": "Priya needs to prepare a competitive analysis for her CEO — due in 2 hours.\n\nTraditional approach: She'd search each competitor's website, read annual reports, find analyst coverage, compile a spreadsheet. Time needed: 6+ hours.\n\nAI-assisted approach:\n\nTurn 1: 'Give me an overview of the top 5 competitors in [market]. Include revenue estimates, market position, key differentiators.' — 2 minutes\n\nTurn 2: 'For competitor 3, find recent product launches, funding rounds, and hiring trends.' — 2 minutes\n\nTurn 3: 'Create a SWOT comparison table for all 5 competitors across these dimensions: pricing, product features, market share, customer satisfaction.' — 2 minutes\n\nTurn 4: 'Based on all this analysis, what's our best competitive positioning strategy? Recommend 3 options with pros and cons.' — 2 minutes\n\nTotal AI time: 8 minutes. Priya spends 30 minutes verifying sources and refining. Final brief delivered in under an hour."
+    },
+    {
+      "id": "d9-builder-1",
+      "type": "builder",
+      "title": "Design a Multi-Turn Research Workflow",
+      "instruction": "Choose a topic you'd genuinely like to research. Design a 4-turn research workflow:\n\nTopic: [What you're researching]\n\nTurn 1 — Overview: [What broad question would you ask first?]\nTurn 2 — Deep Dive: [What specific area would you explore deeper?]\nTurn 3 — Cross-Reference: [What connections or contradictions would you probe?]\nTurn 4 — Synthesis: [What format should the final output take?]",
+      "inputLabel": "Your research workflow",
+      "placeholder": "Topic: AI adoption trends in small law firms (2025-2026)\n\nTurn 1: 'Give me an overview of AI adoption rates in small law firms. What tools are most common? Any adoption stats?'\n\nTurn 2: 'Focus on document automation and contract review tools. Which specific products lead? What's the average ROI cited?'\n\nTurn 3: 'Cross-reference adoption rates with firm size and practice area. Is there a correlation between specialization and AI adoption?'\n\nTurn 4: 'Synthesize into a 1-page executive brief with: key stats, top tools comparison, adoption barriers, and 3 recommendations for a 5-person firm.'",
+      "minChars": 60,
+      "xp": 20
+    },
+    {
+      "id": "d9-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's a research topic you've been putting off because it would take too long? How would the multi-turn pattern change that?",
+          "placeholder": "Topic you've delayed and how AI would help...",
+          "minChars": 30
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d9-completion-1",
+      "type": "completion",
+      "title": "Day 9 Complete!",
+      "body": "You now have a repeatable research workflow: overview → deep dive → cross-reference → synthesize. This turns hours of reading into guided investigation.\n\nTomorrow: AI-powered business strategy. You'll generate SWOT analyses, roadmaps, and go-to-market plans.",
+      "xp": 15
+    }
+  ]
+}

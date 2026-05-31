@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "unit": "day6",
+  "title": "Day 6: Building AI-Powered Tools Without Code",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d6-info-1",
+      "type": "info",
+      "title": "You Can Build Real Tools — No Coding Required",
+      "body": "By now you've written prompts, built automations, and designed workflows. Today you level up: building actual AI-powered tools that people (or teams) can use.\n\nNo code. No developer required. No six-figure budget.\n\nYou'll learn to build custom GPTs, AI chatbots, workflow tools, and internal apps — all with drag-and-drop builders, prompt templates, and configuration.\n\nAn AI Operator doesn't just use AI. They deploy it.",
+      "xp": 5
+    },
+    {
+      "id": "d6-highlight-1",
+      "type": "highlight",
+      "body": "The no-code AI revolution isn't about replacing developers. It's about empowering operators.\n\nTools like Custom GPTs, Poe bots, Relevance AI, Gumloop, and Make let you spin up production AI tools in hours — not weeks. You configure behavior with prompts, connect data sources with clicks, and deploy with a link.\n\nThis is the fastest path from idea to working tool.",
+      "highlights": ["Custom GPTs", "Poe bots", "Relevance AI", "Gumloop", "Make"],
+      "xp": 5
+    },
+    {
+      "id": "d6-mc-1",
+      "type": "mc",
+      "question": "What does building a no-code AI tool primarily require?",
+      "options": [
+        "Expert-level programming skills",
+        "Clear instructions, good prompts, and thoughtful configuration",
+        "A large team of developers",
+        "Enterprise-grade cloud infrastructure"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. No-code tools handle the technical complexity. Your job is to define what the tool should do, how it should behave, and what data it needs — all through configuration.",
+        "Not quite. No-code AI platforms abstract away the programming. What they can't abstract is the operator's thinking — clear instructions, good prompts, and thoughtful configuration."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-scenario-1",
+      "type": "scenario_card",
+      "title": "The No-Code Tool Arc",
+      "body": "Maria runs a customer support team of 5 people. She gets 200+ support tickets a week — many are the same 10 questions repeated.\n\nStep 1: She builds a Custom GPT with her FAQ docs as knowledge base → link goes on her website\nStep 2: It answers 60% of incoming questions instantly (the repetitions)\nStep 3: Complex tickets still go to human team — but now they handle only 40% of the volume\nStep 4: She monitors which questions the AI can't answer → adds more knowledge base content\nStep 5: Within 2 weeks, the AI handles 80% of tickets\n\nNo code written. No developers hired. Just an operator with a plan."
+    },
+    {
+      "id": "d6-goodfit-1",
+      "type": "good_fit",
+      "question": "A startup founder wants to build an AI tool that takes customer survey results and generates a summary report with charts and recommendations — something their whole team can use.",
+      "correct": "ideal",
+      "feedback": [
+        "Perfect fit. Survey analysis follows clear patterns (sentiment analysis, theme extraction, chart generation) — exactly what no-code AI tools excel at. Build with Custom GPT + Make or Relevance AI, deploy as a shared workspace tool.",
+        "This is actually ideal for no-code. The inputs are structured (survey data), the outputs are predictable (summary + charts), and the tool can be shared. Consider: would a manual/automated split make sense here?"
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-example-1",
+      "type": "example",
+      "title": "The Custom GPT Builder: Your First No-Code AI Tool",
+      "prompt": "A Custom GPT is a tailored version of ChatGPT with:\n\n• Custom Instructions — Tell it exactly what role to play, how to respond, what to avoid\n• Knowledge Files — Upload PDFs, manuals, FAQs — it learns from them\n• Capabilities — Toggle web browsing, DALL-E, code interpreter\n• Actions — Connect to external APIs (calendar, email, database)\n\nExample: You build a 'Content Repurposer' GPT:\n\nInstructions: \"You are a content repurposing expert. Take a blog post or video transcript and produce: 3 social media posts, 1 email newsletter, 1 thread summary, and 5 key quotes with visuals. Always ask for the source content first.\"\n\nCapabilities: Web browsing (to check source), DALL-E (to generate visuals)\n\nResult: One link. Anyone on your team can paste any content and get instantly repurposed material."
+    },
+    {
+      "id": "d6-tf-1",
+      "type": "tf",
+      "question": "No-code AI tools can handle complex logic like multi-step approval workflows and conditional branching without any programming.",
+      "correct": true,
+      "feedback": [
+        "Correct. Platforms like Make, Gumloop, and Relevance AI support conditional logic, data transformation, and multi-step branching — all through visual builders, not code.",
+        "Actually, they can. Modern no-code platforms support advanced workflow logic — conditions, loops, data transformations, multi-step approvals — all through visual interfaces."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6-info-2",
+      "type": "info",
+      "title": "The No-Code AI Tool Stack",
+      "body": "Here are the four categories of no-code AI tools you can build today:\n\n1. Custom Chatbots — Custom GPTs, Poe, Botpress → configure with prompts + knowledge base\n2. Workflow Automations — Make, n8n, Gumloop → connect AI to apps in visual pipelines\n3. Agentic Tools — Relevance AI, Taskade AI → AI agents that take independent actions\n4. Internal Apps — Stack AI, Vercel AI SDK (template-based) → deployable AI-powered interfaces\n\nThe operator's skill: knowing which category fits the problem.",
+      "xp": 5
+    },
+    {
+      "id": "d6-builder-1",
+      "type": "builder",
+      "title": "Design Your No-Code AI Tool",
+      "instruction": "Think of a recurring problem in your work or business that could be solved with an AI-powered tool.\n\nDescribe your tool in this format:\n\nTool Name:\nProblem It Solves:\nWhat Inputs Does It Need:\nWhat Outputs Does It Produce:\nWhich No-Code Category (Chatbot/Workflow/Agent/Internal App):\nHow Would Someone Access It (link, embedded, shared workspace):",
+      "inputLabel": "Your no-code AI tool design",
+      "placeholder": "Tool Name: Invoice Analyzer\nProblem: Our team spends 3 hours/week manually extracting data from PDF invoices\nInputs: Uploaded PDF invoices\nOutputs: Structured spreadsheet with vendor, amount, date, line items\nCategory: Workflow Automation\nAccess: Team-shared Make scenario with a webhook endpoint...",
+      "minChars": 50,
+      "xp": 20
+    },
+    {
+      "id": "d6-example-2",
+      "type": "example",
+      "title": "From Builder to Deployed Tool: A Real Stack",
+      "prompt": "Meet James. He runs a real estate agency and needed a 'Property Comparison Tool' for his agents.\n\n• Platform: He used Relevance AI (agent builder — no code)\n• Knowledge Base: Uploaded MLS property data as CSV\n• Instructions: \"Compare up to 5 properties. Output a table with price, sqft, bedrooms, lot size, year built. Then highlight the best value property with reasons.\"\n• Sharing: Generated a public link he added to his team's Slack\n\nResult: Agents paste property addresses and get instant comparison tables. No developer involved. Built in an afternoon.\n\nThe tool is used 30+ times a day across 12 agents. That's 30 hours of manual comparison work saved per week — from one afternoon of configuration."
+    },
+    {
+      "id": "d6-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Think about a manual process at your work or in your life that involves the same steps every time with the same type of input. What would it take to turn this into a shareable AI tool that other people could use too?",
+          "placeholder": "The process, the inputs, the outputs, and who else would benefit...",
+          "minChars": 30
+        },
+        {
+          "id": "r2",
+          "prompt": "What's holding you back from building this tool right now? How would you overcome that barrier with no-code tools?",
+          "placeholder": "Identify the barrier and your solution...",
+          "minChars": 20
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d6-highlight-2",
+      "type": "highlight",
+      "body": "The difference between a prompt user and an AI tool builder:\n\nPrompt user: 'I'll ask AI to do this task right now.'\n\nTool builder: 'I'll build a tool that does this task forever, for anyone I share it with.'\n\nYou're becoming a force multiplier. One afternoon of building = weeks of recurring output.",
+      "highlights": ["force multiplier", "One afternoon of building", "weeks of recurring output"],
+      "xp": 5
+    },
+    {
+      "id": "d6-completion-1",
+      "type": "completion",
+      "title": "Day 6 Complete!",
+      "body": "You now know how to build real AI-powered tools — without writing a single line of code. You understand the four categories of no-code AI tools and you've designed one yourself.\n\nTomorrow: You'll learn how to connect all these tools together into a multi-step automated system that runs entire business processes on its own.\n\nYou're not just using AI anymore. You're deploying it.",
+      "xp": 15
+    }
+  ]
+}
