@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day22",
+  "title": "Day 22: AI for Project Management",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d22-info-1",
+      "type": "info",
+      "title": "Welcome to Week 4 — The Mission Phase",
+      "body": "This is the final week of your AI Operator journey. Everything you've learned — skills, systems, domain applications — now comes together in the Mission Phase.\n\nThis week you'll apply AI to universal professional skills: project management, finance, creativity, productivity, learning, and career development.\n\nToday: AI for Project Management. The skill that makes every other skill more effective.",
+      "xp": 5
+    },
+    {
+      "id": "d22-highlight-1",
+      "type": "highlight",
+      "body": "AI project management wins:\n\n• Status reports: 2 hours → 5 minutes (AI generates from task data)\n• Risk identification: 2x more risks caught before they become problems\n• Timeline estimation: 30% more accurate with historical data analysis\n• Meeting summaries: 1 hour → instant (AI transcription + action items)\n• Resource allocation: AI optimizes team assignments across projects\n\nProject managers using AI don't manage more projects. They manage better projects.",
+      "highlights": ["2 hours → 5 minutes", "2x more risks caught", "30% more accurate", "manage better projects"],
+      "xp": 5
+    },
+    {
+      "id": "d22-mc-1",
+      "type": "mc",
+      "question": "A project manager has 5 weekly status meetings across different teams. What's the best AI automation?",
+      "options": [
+        "Cancel all status meetings — AI can handle everything",
+        "Use AI meeting transcription that generates summaries, action items, and auto-updates the project tracker — PM reviews each summary (15 min total)",
+        "Record all meetings and have the team watch recordings",
+        "AI attends meetings on the PM's behalf"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI meeting tools (Otter, Fireflies, or custom GPT) transcribe, summarize, and extract action items automatically. The PM reviews each 2-minute summary instead of sitting through 5 one-hour meetings. Weekly meeting time: 5 hours → 15 minutes.",
+        "Not quite. The best approach is AI-powered meeting intelligence. AI transcribes and summarizes meetings, extracts action items, and updates project trackers automatically. The PM reviews summaries instead of attending every meeting."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-scenario-1",
+      "type": "scenario_card",
+      "title": "The AI-Augmented PM — Priya's Week",
+      "body": "Priya manages 4 projects for a digital agency. Before AI: 40+ hours/week in meetings, status updates, and reporting. After AI:\n\nMonday: AI generates weekly status reports from project tracker data (auto, 0 min)\nPriya reviews 4 executive summaries (20 min), flags 2 items needing attention\n\nTuesday: 2 project sync meetings. AI records, transcribes, extracts action items, updates tracker. Priya reviews each 2-min summary after.\n\nWednesday: AI analyzes timeline vs. actual progress, flags 1 project at risk of slipping. Priya investigates and adjusts resources.\n\nThursday: Stakeholder update — AI drafts report from tracker data. Priya reviews and adds strategic context (15 min).\n\nFriday: AI processes all week's data → generates next-week priorities + resource plan. Priya reviews and adjusts.\n\nPriya now manages 4 projects in 25 hours/week instead of 50. Quality improved. Burnout dropped."
+    },
+    {
+      "id": "d22-tf-1",
+      "type": "tf",
+      "question": "AI can generate project status reports and identify risks, but it can't make judgment calls about resource trade-offs or stakeholder communication strategy.",
+      "correct": true,
+      "feedback": [
+        "Correct. AI handles the data aggregation, pattern detection, and report generation. But resource trade-offs require understanding team dynamics, stakeholder politics, and organizational context that AI doesn't have.",
+        "True. AI is great at what's measurable and predictable: timelines, budgets, task status. The human PM handles what's nuanced: team morale, stakeholder relationships, strategic pivots."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-example-1",
+      "type": "example",
+      "title": "AI Project Health Prompt",
+      "prompt": "Use this prompt for project health analysis:\n\n\"Analyze this project's health based on the following data:\n\n[PASTE: Task completion %, milestone status, budget spent, team velocity, risks log, recent changes]\n\nProject name: [NAME]\nTimeline: [START → END]\nTeam size: [N]\n\nGenerate:\n\n1. Current Health Score: Green/Yellow/Red with brief justification\n2. Top 3 Risks: What's most likely to go wrong and the impact\n3. Recommended Actions: 3 specific things to do this week\n4. Stakeholder Summary: 3-bullet update for executives\n5. Attention Required: What needs PM judgment today\n\nBe specific. Use the data. Don't hedge.\"\n\nReview the output, apply your contextual knowledge, and forward the stakeholder summary."
+    },
+    {
+      "id": "d22-builder-1",
+      "type": "builder",
+      "title": "Design Your AI-Powered PM Workflow",
+      "instruction": "Map out your ideal AI-augmented project management week:\n\nMonday (Planning):\nTuesday (Execution):\nWednesday (Monitoring):\nThursday (Stakeholders):\nFriday (Review):\n\nFor each day: what does AI do? What do you do?",
+      "inputLabel": "Your AI-PM weekly workflow",
+      "placeholder": "Monday: AI generates weekly plan from remaining tasks (auto). PM reviews and adjusts priorities based on context.\nTuesday: AI automates standup summaries. PM handles blocking issues...",
+      "minChars": 50,
+      "xp": 20
+    },
+    {
+      "id": "d22-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the most time-consuming project management task you deal with? How would AI change it?",
+          "placeholder": "The task and the AI transformation...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "If AI handled all your project reporting and status tracking, what project management skill would you invest in instead?",
+          "placeholder": "The skill you'd develop with reclaimed time...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d22-highlight-2",
+      "type": "highlight",
+      "body": "The best PMs don't manage tasks. They manage outcomes.\n\nAI handles the task management (tracking, reporting, scheduling) so the PM focuses on outcome management (strategy, stakeholder alignment, team health).\n\nTomorrow: AI for Finance & Budgeting — personal and business financial management at AI speed.",
+      "highlights": ["manage outcomes", "task management → outcome management"],
+      "xp": 5
+    },
+    {
+      "id": "d22-completion-1",
+      "type": "completion",
+      "title": "Day 22 Complete!",
+      "body": "You now understand how AI transforms project management: automated status reporting, risk identification, meeting intelligence, timeline forecasting, and resource optimization.\n\nTomorrow: AI for Finance & Budgeting — personal and business financial intelligence.",
+      "xp": 15
+    }
+  ]
+}

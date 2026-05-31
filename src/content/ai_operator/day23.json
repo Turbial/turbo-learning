@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day23",
+  "title": "Day 23: AI for Finance & Budgeting",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d23-info-1",
+      "type": "info",
+      "title": "Financial Intelligence — AI for Your Money",
+      "body": "Whether you're managing a business budget or your personal finances, AI transforms how you understand, plan, and optimize money.\n\nToday you'll learn:\n• AI-powered budget analysis and optimization\n• Personal finance management with AI\n• Investment research and portfolio insights\n• Tax preparation assistance\n• Financial goal tracking and forecasting\n\nMoney decisions are pattern recognition + math. AI handles both. You handle the values and priorities.",
+      "xp": 5
+    },
+    {
+      "id": "d23-highlight-1",
+      "type": "highlight",
+      "body": "AI finance at every level:\n\nPersonal: AI analyzes spending patterns → identifies savings opportunities → suggests budget adjustments\n\nBusiness: AI forecasts cash flow → flags anomalies → generates financial summaries for stakeholders\n\nInvestment: AI researches companies → analyzes market trends → summarizes earnings calls\n\nThe difference between good financial decisions and great ones is usually information speed. AI accelerates information.",
+      "highlights": ["savings opportunities", "cash flow forecasting", "information speed"],
+      "xp": 5
+    },
+    {
+      "id": "d23-mc-1",
+      "type": "mc",
+      "question": "You want to understand where your money is going and find savings. What's the best AI approach?",
+      "options": [
+        "Ask AI to guess your spending habits",
+        "Connect your bank and credit card data to an AI analysis tool that categorizes transactions, identifies patterns, and suggests optimizations",
+        "Manually review every transaction for the past year",
+        "Set a budget and hope for the best"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI spending analysis tools (or a custom GPT fed your transaction exports) can categorize every expense, identify trends (subscriptions you forgot, dining out creep, insurance savings), and suggest specific optimizations. Data-driven, not guesswork.",
+        "Not quite. The best approach is feeding your actual financial data into an AI analysis tool. It categorizes every transaction, spots patterns, identifies savings opportunities, and gives you personalized recommendations based on your actual behavior."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23-scenario-1",
+      "type": "scenario_card",
+      "title": "The AI Finance Audit — What It Found",
+      "body": "Carlos exported his last 12 months of bank and credit card transactions and fed them to an AI analysis tool.\n\nAI found:\n• 4 subscription services he forgot about ($47/month total — $564/year wasted)\n• His coffee habit was $340/month — not the $100 he estimated\n• Insurance could be bundled for 15% savings based on market comparison\n• His spending pattern: impulse buys spike between 10pm-12am on weekends\n• Eating out was 32% of expenses — target for high-income countries is 18-25%\n\nCarlos didn't need a financial advisor. He needed data he could see. AI gave him a complete financial picture in 10 minutes.\n\nSavings identified: $4,200/year. Changes made: subscriptions cancelled, coffee budget set, late-night spending awareness."
+    },
+    {
+      "id": "d23-tf-1",
+      "type": "tf",
+      "question": "AI financial planning tools can replace the need for a human financial advisor entirely.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI excels at data analysis, pattern recognition, and scenario modeling. But major financial decisions (retirement strategy, tax planning, major investments) benefit from human advisors who understand your personal situation, risk tolerance, and life goals in context.",
+        "False. AI is a powerful analysis tool for financial data, but it lacks understanding of your personal circumstances, values, and risk profile. The best approach combines AI analysis with human financial advice for major decisions."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23-example-1",
+      "type": "example",
+      "title": "Personal Finance Analysis Prompt",
+      "prompt": "Run this on your monthly spending data:\n\n\"Here is my transaction data for the last [N] months:\n\n[PASTE CSV or transaction list]\n\nMy monthly income: [AMOUNT]\nMy financial goals: [GOALS — e.g., save $X, pay off debt, invest]\n\nAnalyze this data and tell me:\n\n1. Category Breakdown — what am I spending in each category with percentages?\n2. Trends — what's going up, down, staying flat month over month?\n3. Savings Opportunities — top 5 specific changes with estimated savings\n4. Goal Progress — am I on track for my stated goals?\n5. Anomalies — anything unusual or unexpected?\n6. Recommendations — 3 actionable changes this month\n\nBe specific. Use real numbers. Give me recommendations I can act on today.\"\n\nReview the findings and implement the top 1-2 recommendations."
+    },
+    {
+      "id": "d23-builder-1",
+      "type": "builder",
+      "title": "Build Your Personal Finance AI Dashboard",
+      "instruction": "Design an AI-powered personal finance system:\n\nData sources (what feeds in):\nAI analysis (what it generates):\nAlerts (what it flags):\nRecommendations (what it suggests):\nHuman decisions (what you decide):\nReview cadence (how often you check):",
+      "inputLabel": "Your AI personal finance system",
+      "placeholder": "Data: bank transactions, credit card, investments, subscriptions\nAnalysis: spending categories, trends, savings rate, goal progress\nAlerts: unusual charges, subscription renewals, budget exceeded\nRecommendations: category adjustments, savings opportunities\nHuman: investment decisions, major purchases, goal setting\nCadence: Weekly 15-min review of AI summary",
+      "minChars": 40,
+      "xp": 20
+    },
+    {
+      "id": "d23-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's one financial question you've always wanted answered but never had the time or data to figure out?",
+          "placeholder": "The financial question you'd answer with AI data analysis...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "If you had a complete AI analysis of your spending within 5 minutes, what's the first change you'd make?",
+          "placeholder": "The change you'd make based on data...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d23-highlight-2",
+      "type": "highlight",
+      "body": "Financial literacy is knowing what to do with your money.\nFinancial intelligence is knowing what your money is doing.\n\nAI gives you the second, so you can focus on the first.\n\nTomorrow: AI for Creativity & Design — how AI amplifies creative work without replacing the creator.",
+      "highlights": ["Financial literacy → Financial intelligence", "knowing what your money is doing"],
+      "xp": 5
+    },
+    {
+      "id": "d23-completion-1",
+      "type": "completion",
+      "title": "Day 23 Complete!",
+      "body": "You now understand how AI transforms financial management: spending analysis, budget optimization, goal tracking, and anomaly detection. AI turns financial data into intelligence you can act on.\n\nTomorrow: AI for Creativity & Design — using AI to amplify creative output.",
+      "xp": 15
+    }
+  ]
+}

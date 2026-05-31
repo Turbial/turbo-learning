@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day25",
+  "title": "Day 25: AI for Productivity & Personal Organization",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d25-info-1",
+      "type": "info",
+      "title": "Your Personal Productivity System — AI-Powered",
+      "body": "You've learned to build systems for business. Now build one for yourself.\n\nPersonal productivity is the foundation of everything else. AI can't give you motivation or discipline, but it can eliminate the friction that kills both.\n\nToday you'll learn:\n• AI-powered task management and prioritization\n• Smart calendar and time management\n• Email triage and response automation\n• Note-taking and knowledge management with AI\n• Focus and attention management\n\nThe most productive people don't have more willpower. They have better systems.",
+      "xp": 5
+    },
+    {
+      "id": "d25-highlight-1",
+      "type": "highlight",
+      "body": "Personal productivity AI wins:\n\n• Email processing: 2 hours/day → 20 minutes (AI triages, drafts, schedules)\n• Meeting prep: 30 min → 2 min (AI summarizes context from docs)\n• Task prioritization: AI ranks your to-do list by urgency + energy level\n• Note organization: AI tags, links, and surfaces relevant notes automatically\n• Daily planning: 10 minutes → AI generates and you adjust\n\nThe goal isn't to be busier. It's to spend your limited attention on what matters.",
+      "highlights": ["2 hours/day → 20 minutes", "spend your limited attention on what matters"],
+      "xp": 5
+    },
+    {
+      "id": "d25-mc-1",
+      "type": "mc",
+      "question": "You have 30 unread emails, 5 Slack messages, 3 tasks due today, and a meeting in 20 minutes. What's the best AI productivity approach?",
+      "options": [
+        "Answer everything in order received — it's the fairest approach",
+        "AI triages: flags urgent emails, summarizes Slack, prioritizes tasks, generates meeting prep — you focus on the 20% that needs you",
+        "Ignore everything and attend the meeting unprepared",
+        "Ask AI to do everything while you take the day off"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI triage is the killer productivity app. It scans all your inputs, surfaces what needs your attention, handles what it can, and presents you with a prioritized, summarized view. You handle the decisions, AI handles the scanning.",
+        "Not quite. AI productivity tools shine at triage — scanning all inputs, summarizing, prioritizing, and handling routine responses. This frees you to focus on the few items that genuinely need your judgment."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-scenario-1",
+      "type": "scenario_card",
+      "title": "The AI Productivity Stack — One Day in David's Life",
+      "body": "David runs a consulting practice. Before AI: constant context switching, always behind, felt like he was reacting all day.\n\nAfter AI productivity stack:\n\n6:30 AM — AI reviews calendar + task list → generates prioritized daily plan\n7:00 AM — Email: AI has already drafted responses to 8 routine emails. David reviews + sends (10 min).\n9:00 AM — Client meeting: AI recorded, transcribed, generated summary + action items\n10:30 AM — Deep work block: AI silenced notifications, only interrupts for urgent items\n12:00 PM — AI summarizes morning, adjusts afternoon priorities based on actual progress\n2:00 PM — Proposal drafting: AI generates first draft from notes and past proposals\n4:00 PM — Weekly review: AI aggregates this week's accomplishments, flags overdue items\n5:00 PM — AI generates tomorrow's prep notes from unfinished items + calendar\n\nThe result: David does 50% more billable work, responds to everyone within 4 hours, and finishes his day with a clear head instead of a mental to-do list."
+    },
+    {
+      "id": "d25-tf-1",
+      "type": "tf",
+      "question": "The most effective AI productivity system requires AI to make all decisions about what to work on and when.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI productivity systems work best when AI handles triage, prioritization suggestions, and routine tasks — but the human maintains control over what to work on. Productivity is ultimately about human priorities, not AI optimization.",
+        "False. Effective AI productivity gives you a clear, organized view of everything — but you decide what to focus on. AI reduces noise so you can hear the signal. You still choose which signal to follow."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-example-1",
+      "type": "example",
+      "title": "The Daily Planning Prompt",
+      "prompt": "Start each day with this prompt:\n\n\"Today is [DATE]. Here's my current state:\n\nCalendar: [PASTE TODAY'S EVENTS]\nTasks due: [LIST]\nEmails needing response: [COUNT — AI summarized]\nProjects in progress: [LIST]\nEnergy level: [HIGH/MEDIUM/LOW]\n\nGenerate a prioritized daily plan that:\n1. Blocks time for each task matching task complexity to energy level\n2. Flags what absolutely must get done today\n3. Identifies what can be moved if something slips\n4. Allocates 30 minutes of buffer for surprises\n5. Ends with a 10-minute end-of-day review slot\n\nThe plan should assume I have [N] productive hours today.\"\n\nReview, adjust, and execute. At end of day, run the same prompt with progress updates."
+    },
+    {
+      "id": "d25-builder-1",
+      "type": "builder",
+      "title": "Design Your AI Productivity Stack",
+      "instruction": "Design your personal AI productivity system:\n\nInputs (what feeds in):\nAI processing (what AI handles):\nYour decisions (what you choose):\nDaily rhythm (how it flows):\nTools you'd use:",
+      "inputLabel": "Your AI productivity system",
+      "placeholder": "Inputs: email, Slack, calendar, task list, notes\nAI processing: triage, summarize, draft, prioritize, schedule\nMy decisions: which deep work, response strategy, task sequencing\nDaily rhythm: AM review → execute → PM review → plan tomorrow\nTools: ChatGPT, Motion, Otter, Superhuman",
+      "minChars": 40,
+      "xp": 20
+    },
+    {
+      "id": "d25-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the #1 time waste in your current day? What specific AI automation would reduce or eliminate it?",
+          "placeholder": "The time waste and the AI solution...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "If you reclaimed 2 hours every day through AI productivity systems, what would you do with that time?",
+          "placeholder": "What you'd do with 10 extra hours per week...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d25-highlight-2",
+      "type": "highlight",
+      "body": "Productivity isn't about doing more. It's about doing what matters.\n\nAI removes the noise so you can focus on the signal.\n\nTomorrow: AI for Learning & Development — how to use AI to learn anything faster and retain more.",
+      "highlights": ["doing what matters", "removes the noise"],
+      "xp": 5
+    },
+    {
+      "id": "d25-completion-1",
+      "type": "completion",
+      "title": "Day 25 Complete!",
+      "body": "You now understand how AI transforms personal productivity: smart triage of all inputs, intelligent task prioritization, calendar optimization, and daily planning systems. The goal isn't to be busier — it's to spend your attention on what matters.\n\nTomorrow: AI for Learning & Development — using AI as your personal tutor and knowledge accelerator.",
+      "xp": 15
+    }
+  ]
+}

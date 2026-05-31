@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "unit": "day28",
+  "title": "Day 28: Graduation — Your AI Operator Capstone",
+  "estMinutes": 30,
+  "steps": [
+    {
+      "id": "d28-info-1",
+      "type": "info",
+      "title": "Welcome to Graduation Day",
+      "body": "This is it. Day 28. The final day of your AI Operator journey.\n\nYou've completed:\n\n🧱 WEEK 1 — Foundation: AI basics, prompt engineering, research, agents, no-code tools\n⚙️ WEEK 2 — Building: Content systems, automations, data pipelines, integrations\n🔗 WEEK 3 — Connection: Operations, Marketing, Sales, Product, Finance, HR\n🚀 WEEK 4 — Mission: PM, Finance, Creativity, Productivity, Learning, Career\n\nToday you don't learn anything new. You prove what you know.\n\nYour capstone: design and document a complete AI-powered system that solves a real problem.",
+      "xp": 10
+    },
+    {
+      "id": "d28-highlight-1",
+      "type": "highlight",
+      "body": "You are not the same person who started Day 1.\n\nDay 1 you: curious about AI, maybe using ChatGPT for basic tasks.\n\nDay 28 you: an AI Operator who designs systems, deploys automations, builds no-code tools, and applies AI across business functions.\n\nThe title isn't given. It's earned — through 28 days of showing up and doing the work.",
+      "highlights": ["not the same person who started Day 1", "The title isn't given. It's earned."],
+      "xp": 10
+    },
+    {
+      "id": "d28-scenario-1",
+      "type": "scenario_card",
+      "title": "The Capstone Vision — What an AI Operator Builds",
+      "body": "A capstone isn't a test. It's a demonstration.\n\nPrevious graduates have built:\n\n• Sarah built an AI content engine for her nonprofit — auto-generates donor newsletters, social posts, impact reports from one monthly update\n• Marcus built an AI sales assistant for his real estate team — auto-qualifies leads, schedules showings, drafts listing descriptions\n• Elena built a personal AI productivity system — triages email, manages calendar, generates daily plans, runs weekly reviews\n• James built an AI customer support system for his SaaS — handles 70% of tickets autonomously, surfaces insights from support data\n\nYour capstone should be something YOU need. Something that, after today, will make your work or life better every day."
+    },
+    {
+      "id": "d28-builder-1",
+      "type": "builder",
+      "title": "Your AI Operator Capstone Project",
+      "instruction": "Design and document a complete AI-powered system. Be specific — this is your graduation submission.\n\nStructure your capstone:\n\n1. PROBLEM — What specific problem does this solve? (2-3 sentences)\n2. SYSTEM OVERVIEW — How does it work? What's the flow from input to output?\n3. AI COMPONENTS — Which skills from the course does it use? (prompts, agents, tools, automations, etc.)\n4. TECH STACK — What platforms, tools, and APIs does it use?\n5. USER JOURNEY — Walk through one complete use case step by step\n6. BUSINESS IMPACT — What changes? Time saved, revenue gained, quality improved?\n7. FUTURE VERSION — If you had unlimited resources, how would you evolve this?\n\nWrite this as a specification document someone else could build from.",
+      "inputLabel": "Your AI Operator Capstone",
+      "placeholder": "PROBLEM: As a freelance consultant, I spend 5+ hours/week on client follow-ups, status updates, and invoice reminders — time I should spend on billable work.\n\nSYSTEM OVERVIEW: AI monitors project milestones → sends status updates → generates invoices → follows up on payments → escalates only when exceptions occur...",
+      "minChars": 200,
+      "xp": 50
+    },
+    {
+      "id": "d28-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the single biggest change in how you approach work and problems compared to 28 days ago?",
+          "placeholder": "The biggest mindset shift from this journey...",
+          "minChars": 25
+        },
+        {
+          "id": "r2",
+          "prompt": "What's the first AI system you'll build now that you're a certified AI Operator?",
+          "placeholder": "Your first project as an AI Operator...",
+          "minChars": 25
+        }
+      ],
+      "xp": 20
+    },
+    {
+      "id": "d28-highlight-2",
+      "type": "highlight",
+      "body": "Certification isn't the end. It's the beginning.\n\nYou now have the skills, the systems thinking, and the mindset of an AI Operator.\n\nThe world before Day 1: AI is something that happens to you.\n\nThe world after Day 28: AI is something you build with.\n\nGo build.",
+      "highlights": ["Certification isn't the end. It's the beginning.", "AI is something you build with"],
+      "xp": 10
+    },
+    {
+      "id": "d28-completion-1",
+      "type": "completion",
+      "title": "🎉 You Are Now a Certified AI Operator 🎉",
+      "body": "This is your official graduation. 28 days. 4 phases. One transformation.\n\nYou started wanting to learn about AI.\nYou finish as someone who designs, builds, and deploys AI-powered systems.\n\nHere's what you've earned:\n\n✅ Foundation — You understand what AI can and can't do\n✅ Prompt Engineering — You communicate with AI effectively\n✅ Research Skills — You gather and synthesize information at 10x speed\n✅ Automation — You build systems that run without you\n✅ No-Code Tools — You deploy AI tools others can use\n✅ Business Application — You apply AI across every business function\n✅ Capstone — You've designed a real AI-powered system\n\nThis isn't a certificate. It's a new way of working.\n\nEvery problem you face from now on, you'll ask: 'How would an AI Operator solve this?'\n\nNow go be one.\n\n— The AI Operator Program 🚀",
+      "xp": 100
+    }
+  ]
+}

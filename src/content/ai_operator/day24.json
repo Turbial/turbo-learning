@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day24",
+  "title": "Day 24: AI for Creativity & Design",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d24-info-1",
+      "type": "info",
+      "title": "Amplified Creativity — AI as Creative Partner",
+      "body": "The fear: AI will replace human creativity.\n\nThe reality: AI amplifies human creativity by removing the barriers between idea and output.\n\nToday you'll learn:\n• AI-assisted brainstorming — generating more ideas, faster\n• Visual design with AI — mockups, graphics, brand assets\n• Creative writing with AI — stories, copy, scripts\n• Music and audio creation\n• Design iteration — going from rough to refined in minutes\n\nAI doesn't have ideas. It has variations. The creative human provides the spark. AI provides the fuel.",
+      "xp": 5
+    },
+    {
+      "id": "d24-highlight-1",
+      "type": "highlight",
+      "body": "The creativity amplification cycle:\n\n1. YOU: Have a rough idea or inspiration\n2. AI: Generate 10+ variations, directions, interpretations\n3. YOU: Pick the ones that resonate, combine elements\n4. AI: Refine based on your direction\n5. YOU: Apply taste, judgment, and finishing touch\n6. Repeat until done\n\nThe creative operator doesn't wait for perfect inspiration. They use AI to explore the possibility space and find the signal in the noise.",
+      "highlights": ["amplification cycle", "explore the possibility space", "find the signal in the noise"],
+      "xp": 5
+    },
+    {
+      "id": "d24-mc-1",
+      "type": "mc",
+      "question": "A designer has a concept for a brand identity but is stuck on color palette and typography. What's the best AI approach?",
+      "options": [
+        "Ask AI to pick the final colors and fonts — designers are obsolete",
+        "Give AI the concept brief + brand values → AI generates 10 palette + font combinations → designer selects and refines the best direction",
+        "Randomly pick from a color wheel",
+        "Copy a competitor's brand identity"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI can generate countless variations from a brief, exploring combinations a human might not think of. The designer's skill is curating and refining — picking the direction that aligns with the brand's personality and adjusting with human taste.",
+        "Not quite. AI accelerates the exploration phase by generating many options from a brief. The human creative still makes the final selection and adds the nuanced adjustments that make design feel intentional, not algorithmic."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-scenario-1",
+      "type": "scenario_card",
+      "title": "The Creative Duo — Elena + AI",
+      "body": "Elena is a freelance graphic designer. Before AI:\n• 3-4 drafts per project, each taking 4+ hours\n• Creative blocks when starting new projects\n• Limited by her personal style range\n\nWith AI creative partner:\n• Project brief → AI generates 20 concept directions in 5 minutes\n• Elena selects 3 promising directions → AI generates refined variations\n• Elena picks one → AI suggests complementary elements (colors, fonts, textures)\n• Elena creates the final design with AI-assisted tools (Photoshop AI, Midjourney)\n• AI generates mockups in different contexts (business card, website, signage)\n\nResults: 10+ client projects/month instead of 4. Higher quality. More experimentation. Clients love seeing multiple options in the first round."
+    },
+    {
+      "id": "d24-tf-1",
+      "type": "tf",
+      "question": "AI creative tools always produce better results when given very restrictive, narrow constraints.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI creative tools actually produce more innovative results with a balance of constraints and creative freedom. Too narrow = generic. Too broad = unfocused. The sweet spot is clear direction + room for the AI to surprise you.",
+        "False. The best creative AI results come from clear direction with some room for exploration. Narrow constraints tend to produce predictable, generic output. The operator's skill is finding the balance between guidance and creative freedom."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-example-1",
+      "type": "example",
+      "title": "AI Brainstorming Partner Prompt",
+      "prompt": "Use this prompt structure to generate creative direction:\n\n\"I'm working on [PROJECT TYPE] for [CLIENT/AUDIENCE].\n\nThe core message is: [MESSAGE]\nThe vibe we want: [MOOD/DESCRIPTORS — e.g., warm, professional, bold, minimalist]\nThe constraints: [BUDGET, FORMAT, BRAND GUIDELINES]\n\nGenerate 10 creative directions. For each one:\n1. Core concept (1 sentence)\n2. Visual approach (colors, imagery, typography)\n3. Why it works for this audience\n4. What's risky about this direction\n\nRank them from 'safe bet' to 'bold move.'\n\nAfter you generate, I'll pick my favorites and we'll refine.\"\n\nLet AI explore the edges of the space. You pull the ideas that resonate back into reality."
+    },
+    {
+      "id": "d24-builder-1",
+      "type": "builder",
+      "title": "Design a Creative AI Workflow",
+      "instruction": "Think of a creative project you'd like to work on. Design an AI-assisted workflow:\n\nProject:\nAI exploration (what AI does first):\nYour curation (what you select):\nAI refinement (what AI does next):\nYour finishing (what only you can do):",
+      "inputLabel": "Your creative AI workflow",
+      "placeholder": "Project: Rebrand a local coffee shop\nAI exploration: 20 logo concepts + 10 color palettes + 5 typography combinations\nMy curation: Select 3 logo concepts + 1 palette\nAI refinement: Variations of selected logo with different layouts\nMy finishing: Hand-drawn elements, final polish, brand guidelines doc",
+      "minChars": 40,
+      "xp": 20
+    },
+    {
+      "id": "d24-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "Think of a creative project you've wanted to start but haven't. What would change if you could generate 20 concept variations in 5 minutes?",
+          "placeholder": "The project and how AI exploration changes it...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "What creative skill do you have (writing, design, music, video) that AI could amplify 10x — and what would that unlock for you?",
+          "placeholder": "Your creative skill and the amplification possibilities...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d24-highlight-2",
+      "type": "highlight",
+      "body": "Creativity is not about having the idea. It's about recognizing which idea is worth pursuing.\n\nAI generates hundreds of possibilities. You develop the taste to pick the right one.\n\nTaste, judgment, and creative courage — those are yours. AI just gives you more to choose from.\n\nTomorrow: AI for Productivity & Personal Organization — systems that make your day work better.",
+      "highlights": ["recognizing which idea is worth pursuing", "Taste, judgment, and creative courage"],
+      "xp": 5
+    },
+    {
+      "id": "d24-completion-1",
+      "type": "completion",
+      "title": "Day 24 Complete!",
+      "body": "You now understand how AI amplifies creative work: idea generation, visual exploration, design iteration, and rapid prototyping. AI doesn't replace the creative — it gives them a thousand directions to choose from.\n\nTomorrow: AI for Productivity & Personal Organization — designing your day around AI-powered systems.",
+      "xp": 15
+    }
+  ]
+}

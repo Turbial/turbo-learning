@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day27",
+  "title": "Day 27: AI for Career Development",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d27-info-1",
+      "type": "info",
+      "title": "Your AI Career Coach — Accelerate Your Professional Growth",
+      "body": "You've spent 26 days becoming an AI Operator. Now use AI to advance your career.\n\nToday you'll learn:\n• Resume and cover letter optimization with AI\n• Interview preparation with AI mock interviews\n• Personal branding and LinkedIn strategy\n• Career path exploration — AI maps your options\n• Salary negotiation research and preparation\n• Networking and outreach at scale\n\nThe job market has changed. The people who use AI to navigate it have a massive advantage.",
+      "xp": 5
+    },
+    {
+      "id": "d27-highlight-1",
+      "type": "highlight",
+      "body": "AI career accelerator:\n\n• Resume optimization: 85% of resumes pass ATS screening when AI-optimized (vs. 25% without)\n• Interview prep: 3x more practice questions in less time with AI\n• LinkedIn growth: AI generates content 10x faster, maintains consistent posting\n• Salary research: AI compiles market data for your role + location + experience in minutes\n• Skill gap analysis: AI identifies what skills to develop next based on your target roles\n\nYour career is your most important project. AI helps you manage it like one.",
+      "highlights": ["85% vs 25% ATS pass rate", "3x more practice questions", "your most important project"],
+      "xp": 5
+    },
+    {
+      "id": "d27-mc-1",
+      "type": "mc",
+      "question": "You're applying for a role that requires skills you have but your resume doesn't highlight well. What's the best AI approach?",
+      "options": [
+        "Submit the resume as-is — the recruiter will figure it out",
+        "Upload your resume + the job description to AI → AI rewrites your resume to highlight matching skills using the same language as the job description — you review and customize",
+        "Lie about having the skills",
+        "Apply to different jobs"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI can analyze your resume against any job description and identify where your experience aligns but isn't well-framed. It suggests rewrites that use the employer's language to describe your achievements — making the match obvious to both ATS systems and human recruiters.",
+        "Not quite. The best approach is AI-assisted optimization: feed your resume and the job description to AI, which identifies alignment opportunities and rephrases your experience using relevant industry language. You review and ensure accuracy."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-scenario-1",
+      "type": "scenario_card",
+      "title": "The Career Transformation — Miguel's 90-Day Plan",
+      "body": "Miguel was a mid-level operations manager who wanted to transition into a Product Management role at a tech company. He used AI as his career coach.\n\nWeek 1 — Audit:\n• AI analyzed his resume against 20 PM job descriptions → identified skill gaps (no direct PM title, limited technical vocabulary)\n• AI generated a personalized upskilling plan\n\nWeek 2-4 — Resume & Brand:\n• AI rewrote his operations experience using PM language: 'led cross-functional initiatives' instead of 'managed projects'\n• AI generated a LinkedIn headline, about section, and content strategy positioning him as an aspiring PM\n\nWeek 5-8 — Applications:\n• AI helped customize each application to the specific role\n• AI generated interview prep: researched the company, generated likely questions, conducted mock interviews\n\nWeek 9-12 — Interviews:\n• AI analyzed interview recordings and suggested improvements\n• AI helped research salary bands and prepared negotiation talking points\n\nResult: Miguel landed a PM role at a Series B startup. Salary: 30% above his operations role. Time from decision to offer: 90 days."
+    },
+    {
+      "id": "d27-tf-1",
+      "type": "tf",
+      "question": "AI-generated cover letters are as effective as human-written ones for most job applications.",
+      "correct": true,
+      "feedback": [
+        "Correct. AI can generate well-written, tailored cover letters that effectively communicate your qualifications. The key is providing AI with your specific experiences and achievements — not generic placeholders. A human should review and personalize before submitting.",
+        "True — with an important caveat. AI-generated cover letters are effective when you feed them specific information about your experience and the role. They fail when you use generic templates. Always review and add personal touches that AI can't know."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-example-1",
+      "type": "example",
+      "title": "AI Career Strategy Prompt",
+      "prompt": "Use this prompt for career planning:\n\n\"I'm at a career crossroads. Here's my current situation:\n\nCurrent role: [ROLE]\nYears of experience: [N]\nIndustry: [INDUSTRY]\nSkills: [LIST — both technical and soft]\nWhat I enjoy most: [WHAT LIGHTS YOU UP]\nWhat I want more of: [MONEY / IMPACT / FLEXIBILITY / GROWTH / STATUS]\nWhat I'll tolerate less of: [DEALBREAKERS]\n\nHelp me explore career paths:\n\n1. 3 possible next roles that leverage my skills\n2. For each: typical salary range, required skills to add, predicted growth\n3. A 6-month roadmap for the most promising option\n4. 5 companies that hire for this role type\n5. The biggest gaps between where I am and where I need to be\n\nBe honest. If my target is unrealistic, tell me and suggest alternatives.\"\n\nThis turns AI into a career counselor who has researched every path."
+    },
+    {
+      "id": "d27-builder-1",
+      "type": "builder",
+      "title": "Design Your AI Career Development Plan",
+      "instruction": "Create a 90-day AI-assisted career development plan:\n\nDays 1-7 (Audit):\nDays 8-30 (Brand & Resume):\nDays 31-60 (Applications & Networking):\nDays 61-90 (Interviews & Negotiation):\n\nFor each phase: what does AI do? What do you do?",
+      "inputLabel": "Your AI career development plan",
+      "placeholder": "Days 1-7: AI analyzes resume vs. target roles → identifies gaps. I define my target role and preferences.\nDays 8-30: AI rewrites resume for each target role. I review, verify accuracy, add personal stories.\nDays 31-60: AI generates customized cover letters + LinkedIn content. I apply and network.\nDays 61-90: AI runs mock interviews + researches salary. I interview and negotiate.",
+      "minChars": 50,
+      "xp": 20
+    },
+    {
+      "id": "d27-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What's the next career step you'd take if you had unlimited access to a career coach who could research any company, role, or path?",
+          "placeholder": "The career step and how AI career coaching enables it...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "What skill do you have that others undervalue but AI could help you package and sell more effectively?",
+          "placeholder": "The undervalued skill and how AI helps package it...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d27-highlight-2",
+      "type": "highlight",
+      "body": "You've learned to use AI for every domain.\n\nNow use it for the most important project: your own career.\n\nThe job market rewards people who can demonstrate AI fluency. You've spent 27 days becoming one of them.\n\nTomorrow: Graduation Day — your capstone project and certification as an AI Operator.",
+      "highlights": ["the most important project: your own career", "AI fluency"],
+      "xp": 5
+    },
+    {
+      "id": "d27-completion-1",
+      "type": "completion",
+      "title": "Day 27 Complete!",
+      "body": "You now understand how AI transforms career development: resume optimization, interview preparation, personal branding, career path exploration, and salary negotiation research. AI is the career coach that's always available.\n\nTomorrow: Graduation Day — your capstone project and official AI Operator certification.",
+      "xp": 15
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "unit": "day26",
+  "title": "Day 26: AI for Learning & Development",
+  "estMinutes": 25,
+  "steps": [
+    {
+      "id": "d26-info-1",
+      "type": "info",
+      "title": "Learn Faster — AI as Your Personal Tutor",
+      "body": "The best way to learn anything: have a personal tutor who adapts to your pace, fills your knowledge gaps, and challenges you at the right level.\n\nAI makes this accessible to everyone.\n\nToday you'll learn:\n• AI-powered learning — personalized curriculum on any topic\n• Smarter reading and research with AI summaries\n• Practice and testing with AI-generated quizzes\n• Knowledge retention — spaced repetition with AI\n• Skill gap analysis — AI identifies what you don't know\n\nThe future of learning isn't courses. It's conversations with AI.",
+      "xp": 5
+    },
+    {
+      "id": "d26-highlight-1",
+      "type": "highlight",
+      "body": "AI learning advantages:\n\n• Pace: Go as fast or slow as you need — AI adapts\n• Depth: Ask clarifying questions until you truly understand\n• Context: AI ties new concepts to what you already know\n• Practice: Unlimited AI-generated exercises on any topic\n• Assessment: AI identifies exactly where you're weak\n\nYou've experienced this throughout this course. Every MC, scenario, and reflection was designed to make you think. AI makes that kind of interactive learning available on any topic.",
+      "highlights": ["AI adapts", "ties new concepts to what you already know", "interactive learning on any topic"],
+      "xp": 5
+    },
+    {
+      "id": "d26-mc-1",
+      "type": "mc",
+      "question": "You want to learn a complex new topic (e.g., machine learning basics). What's the most effective AI-assisted approach?",
+      "options": [
+        "Ask AI to explain everything in one session",
+        "AI acts as your tutor: starts with your current knowledge level, teaches in digestible chunks, checks understanding with questions, adapts based on your responses",
+        "Watch a 10-hour video course without pausing",
+        "Read the Wikipedia page"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. The Socratic approach — AI teaches, asks questions, identifies gaps, revisits weak areas — is the most effective learning method. It mirrors the one-on-one tutoring that research shows is 2x more effective than classroom learning.",
+        "Not quite. The most effective learning is interactive and adaptive. AI should assess your starting level, teach in chunks, check understanding, and adapt to your pace. One-shot explanations don't build lasting understanding."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-scenario-1",
+      "type": "scenario_card",
+      "title": "The AI Tutor — Learning Python in 30 Days",
+      "body": "Jade wants to learn Python. No prior coding experience. She uses an AI tutor approach:\n\nWeek 1 — Foundations:\n• AI asks Jade about her background, learning style, goals\n• AI creates a personalized 30-day curriculum\n• Each session: AI teaches a concept → Jade codes → AI reviews → AI adjusts next lesson\n\nWeek 2 — Building:\n• Jade builds a simple calculator with AI guidance\n• AI catches her syntax errors and explains WHY they're wrong (not just corrects them)\n• Jade makes mistakes → AI creates targeted exercises for her weak areas\n\nWeek 3 — Project:\n• Jade builds a real project (analyzing her own spending data)\n• AI provides architecture guidance, code review, debugging help\n• When Jade hits a wall, AI doesn't give the answer — it asks guiding questions\n\nWeek 4 — Independence:\n• Jade starts a portfolio project with AI as reviewer, not guide\n• AI generates practice interview questions\n\nResult: Jade can build a functional Python script in 30 days. No course. No bootcamp. Just conversations with AI and deliberate practice."
+    },
+    {
+      "id": "d26-tf-1",
+      "type": "tf",
+      "question": "AI-generated practice questions and quizzes are just as effective for learning as those created by a human expert.",
+      "correct": true,
+      "feedback": [
+        "Correct. For knowledge-checking and skill practice, AI can generate unlimited high-quality questions that test understanding. The key is that the human learner uses them actively — testing themselves, reviewing mistakes, and focusing on weak areas.",
+        "True — with one caveat. AI-generated questions are excellent for practice and recall. But they should be supplemented with human-expert-designed assessments for high-stakes evaluation (certification, exams with nuance)."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-example-1",
+      "type": "example",
+      "title": "AI Tutor Prompt — Learn Anything",
+      "prompt": "Use this prompt to start learning any topic with AI as your tutor:\n\n\"Act as my personal tutor for [TOPIC].\n\nMy current level: [BEGINNER / INTERMEDIATE / ADVANCED]\nMy learning goal: [WHAT I WANT TO BE ABLE TO DO]\nMy available time: [HOURS PER WEEK]\n\nTeaching method:\n1. Start by assessing what I already know about this topic (ask me 5 questions)\n2. Based on my answers, create a personalized learning plan\n3. Teach each concept in digestible chunks\n4. After each chunk, test my understanding with a question or exercise\n5. If I get it wrong, explain why and try a different approach\n6. If I get it right, move to the next concept or go deeper\n7. Every 3 sessions, do a comprehensive review and identify weak areas\n\nStart with the assessment questions.\"\n\nThis turns any AI into a personalized tutor for any topic."
+    },
+    {
+      "id": "d26-builder-1",
+      "type": "builder",
+      "title": "Design Your AI Learning Plan",
+      "instruction": "Pick a topic you want to learn. Design a 30-day AI-assisted learning plan:\n\nTopic:\nCurrent level:\nGoal (what I want to be able to do in 30 days):\nWeek 1 (Foundation):\nWeek 2 (Building):\nWeek 3 (Project):\nWeek 4 (Independence):\nHow AI supports each week:",
+      "inputLabel": "Your AI learning plan",
+      "placeholder": "Topic: Data analysis with spreadsheets\nCurrent: Basic formula knowledge\nGoal: Build a dashboard with pivot tables and charts\nWeek 1: AI teaches formulas + data cleaning\nWeek 2: AI guides pivot table construction with my data\nWeek 3: Build a real dashboard for my business\nWeek 4: Refine with AI review, add automation",
+      "minChars": 50,
+      "xp": 20
+    },
+    {
+      "id": "d26-reflection-1",
+      "type": "reflection",
+      "questions": [
+        {
+          "id": "r1",
+          "prompt": "What skill have you always wanted to learn but felt you didn't have the time? How would an AI tutor change that equation?",
+          "placeholder": "The skill and the AI tutor difference...",
+          "minChars": 15
+        },
+        {
+          "id": "r2",
+          "prompt": "Think about a topic you know well. If you had to use AI to teach it to someone else, how would you structure the lessons?",
+          "placeholder": "How you'd use AI to teach your expertise...",
+          "minChars": 15
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d26-highlight-2",
+      "type": "highlight",
+      "body": "The best investment you can make isn't financial — it's learning.\n\nWith AI, the cost of learning anything is approaching zero.\n\nThe only scarce resource is your willingness to show up and do the work.\n\nTomorrow: AI for Career Development — using AI to advance your career, find opportunities, and build your professional brand.",
+      "highlights": ["cost of learning anything is approaching zero", "your willingness to show up and do the work"],
+      "xp": 5
+    },
+    {
+      "id": "d26-completion-1",
+      "type": "completion",
+      "title": "Day 26 Complete!",
+      "body": "You now understand how AI transforms learning: personalized tutoring that adapts to your pace, unlimited practice opportunities, skill gap analysis, and a pathway from beginner to independent practitioner on any topic.\n\nTomorrow: AI for Career Development — using AI to accelerate your professional growth.",
+      "xp": 15
+    }
+  ]
+}
