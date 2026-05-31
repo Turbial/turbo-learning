@@ -1,11 +1,13 @@
 // ─── Home / Journey — uses real data from Supabase ───
 
-import React from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
-import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
+import { colors, spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgramSlug } from "../../src/data/queries";
+import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
+import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
 export default function HomeScreen() {
   const { user } = useAuth();
@@ -15,13 +17,26 @@ export default function HomeScreen() {
   const { data: program } = useProgram(programSlug);
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+  const { data: streakRisk } = useStreakAtRisk(user?.id);
+
+  // Merge Supabase progress with local progress (either can work)
+  const allCompletedIds = new Set([
+    ...(completedUnitIds ?? new Set<string>()),
+    ...localCompletedIds,
+  ]);
+
+  // Fall back to local units when Supabase RLS isn't configured for anon reads
+  const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"];
+  const displayUnits = units ?? fallbackUnits;
 
   const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
-    router.push({ pathname: `/lesson/${day}`, params: { program: programSlug } });
+    // Pass unit UUID so Supabase can look up the lesson; day number as fallback
+    router.push({ pathname: `/lesson/${unitId}`, params: { program: programSlug, day: String(day) } });
   };
 
-  if (profileLoading || unitsLoading) {
+  if (profileLoading) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
@@ -58,12 +73,51 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Streak at-risk warning */}
+        {streakRisk?.isAtRisk && (
+          <View
+            style={{
+              backgroundColor: colors.warningBg,
+              borderRadius: radius.lg,
+              padding: spacing.md,
+              margin: spacing.md,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: spacing.sm,
+              borderWidth: 1,
+              borderColor: colors.warningBorder,
+            }}
+          >
+            <Text style={{ fontSize: 24 }}>⚠️</Text>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  fontSize: fontSize.sm,
+                  fontWeight: fontWeight.bold,
+                  color: "#92400e",
+                }}
+              >
+                Your {streakRisk.streakDays}-day streak is at risk!
+              </Text>
+              <Text
+                style={{ fontSize: fontSize.xs, color: "#a16207", marginTop: 2 }}
+              >
+                Complete a lesson in the next {streakRisk.expiresInHours}h to keep
+                it going.
+                {streakRisk.shieldCount > 0
+                  ? ` ${streakRisk.shieldCount} shield${streakRisk.shieldCount !== 1 ? "s" : ""} ready.`
+                  : ""}
+              </Text>
+            </View>
+          </View>
+        )}
+
         {/* Journey Map */}
         <View style={styles.journey}>
           <Text style={styles.sectionTitle}>Your Journey</Text>
 
-          {units ? (
-            <WeeksView units={units} completedUnitIds={completedUnitIds ?? new Set()} onDayPress={handleDayPress} />
+          {displayUnits.length > 0 ? (
+            <WeeksView units={displayUnits as any} completedUnitIds={allCompletedIds} onDayPress={handleDayPress} />
           ) : (
             <Text style={styles.emptyText}>Loading program...</Text>
           )}
@@ -117,10 +171,13 @@ function WeeksView({
       goal: weekGoals[w] ?? "",
       days: weekUnits.map((u, idx) => {
         const isDone = completedUnitIds.has(u.id);
-        // The first non-completed unit is "current"
-        const prevAllDone = weekUnits.slice(0, idx).every((pu) => completedUnitIds.has(pu.id));
-        const isCurrent = !isDone && prevAllDone;
-        const isLocked = !isDone && !isCurrent;
+        // Day 1 is always available. For days 2+: current if previous day (N-1) is completed.
+        // This handles cross-week locking: Day 8 requires Day 7, Day 15 requires Day 14, etc.
+        const prevDayUnit = u.order_num > 1
+          ? units.find((pu) => pu.order_num === u.order_num - 1)
+          : null;
+        const prevDayDone = u.order_num === 1 || (prevDayUnit != null && completedUnitIds.has(prevDayUnit.id));
+        const isCurrent = !isDone && prevDayDone;
         return {
           day: u.order_num,
           unitId: u.id,

@@ -8,11 +8,13 @@ import type { PasteCaptureStep as PasteCaptureStepType } from "../../types";
 export default function PasteCaptureStep({ step, onAnswer }: StepProps) {
   const s = step as PasteCaptureStepType;
   const [text, setText] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const minLength = s.minLength ?? 20;
   const isValid = text.trim().length >= minLength;
 
   const handleSubmit = () => {
-    if (!isValid) return;
+    if (!isValid || submitted) return;
+    setSubmitted(true);
     onAnswer({ pasted: text.trim() });
   };
 
@@ -21,27 +23,38 @@ export default function PasteCaptureStep({ step, onAnswer }: StepProps) {
       <Text style={styles.instruction}>{s.body}</Text>
 
       <TextInput
-        style={styles.textArea}
+        style={[styles.textArea, submitted && styles.textAreaSubmitted]}
         value={text}
         onChangeText={setText}
         placeholder="Paste your output here..."
         placeholderTextColor="#C4BDB6"
         multiline
         textAlignVertical="top"
+        editable={!submitted}
       />
 
-      <Text style={[styles.hint, text.length > 0 && !isValid && styles.hintWarn]}>
-        {text.length}/{minLength} characters minimum
-      </Text>
+      {!submitted ? (
+        <>
+          <Text style={[styles.hint, text.length > 0 && !isValid && styles.hintWarn]}>
+            {text.length}/{minLength} characters minimum
+          </Text>
 
-      <TouchableOpacity
-        style={[styles.btn, !isValid && styles.btnDisabled]}
-        onPress={handleSubmit}
-        disabled={!isValid}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.btnText}>Submit</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.btn, !isValid && styles.btnDisabled]}
+            onPress={handleSubmit}
+            disabled={!isValid}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.btnText}>Submit</Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <View style={styles.submittedCard}>
+          <Text style={styles.submittedEmoji}>✓</Text>
+          <Text style={styles.submittedLabel}>Submitted!</Text>
+          <Text style={styles.submittedHint}>Tap Continue to move on</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -65,6 +78,10 @@ const styles = StyleSheet.create({
     color: "#3D3228",
     minHeight: 120,
   },
+  textAreaSubmitted: {
+    backgroundColor: "#ecfdf5",
+    borderColor: "#a7f3d0",
+  },
   hint: {
     fontSize: 12,
     color: "#A09484",
@@ -80,4 +97,16 @@ const styles = StyleSheet.create({
   },
   btnDisabled: { opacity: 0.5 },
   btnText: { color: "#fff", fontSize: 17, fontWeight: "700" },
+  submittedCard: {
+    marginTop: 20,
+    backgroundColor: "#ecfdf5",
+    borderRadius: 14,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: "#a7f3d0",
+    alignItems: "center",
+  },
+  submittedEmoji: { fontSize: 28, color: "#059669", marginBottom: 8 },
+  submittedLabel: { fontSize: 17, fontWeight: "700", color: "#065f46" },
+  submittedHint: { fontSize: 13, color: "#6B5E50", marginTop: 4 },
 });

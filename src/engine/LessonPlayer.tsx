@@ -67,6 +67,44 @@ export default function LessonPlayer({
     return narrationRef.current;
   }, [step]);
 
+  // Auto-play narration for non-interactive steps, pause for interactive ones
+  const narrationActiveRef = useRef(false);
+
+  useEffect(() => {
+    if (!step || !handler) return;
+
+    const narration = getNarration();
+    const isInteractive = handler.behavior.requiresInteraction;
+
+    if (isInteractive) {
+      // Pause any ongoing narration when entering an interactive step
+      if (narration.isPlaying) {
+        narration.pause();
+        narrationActiveRef.current = false;
+      }
+    } else {
+      // Auto-play for non-interactive / readable steps (info, highlight, completion, etc)
+      const text = getStepText(step);
+      if (text && !narration.isPlaying && !narrationActiveRef.current) {
+        // Small delay to let the step render before speaking
+        const timer = setTimeout(() => {
+          narration.play();
+          narrationActiveRef.current = true;
+        }, 250);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [stepIndex, step?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Pause narration when user interacts (answers a question)
+  const pauseNarrationOnInteract = useCallback(() => {
+    const narration = narrationRef.current;
+    if (narration?.isPlaying) {
+      narration.pause();
+      narrationActiveRef.current = false;
+    }
+  }, []);
+
   // Clean up narration on unmount
   useEffect(() => {
     return () => {
@@ -106,6 +144,10 @@ export default function LessonPlayer({
   const handleAnswer = useCallback(
     (res: StepResponse) => {
       if (!step || !handler) return;
+
+      // Pause narration on user interaction
+      pauseNarrationOnInteract();
+
       const correct = handler.validate?.(step, res);
       const xp = handler.score?.(step, res) ?? step.xp ?? 10;
       dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct });
@@ -117,7 +159,7 @@ export default function LessonPlayer({
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler],
+    [step, handler, pauseNarrationOnInteract],
   );
 
   const handleBack = useCallback(() => {

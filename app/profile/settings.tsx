@@ -1,5 +1,6 @@
 // app/profile/settings.tsx — notifications, reminder time, account.
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { View, Text, Switch, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { supabase } from '../../src/data/supabase';

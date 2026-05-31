@@ -3,7 +3,11 @@
 -- (expanding interval) + the streak-at-risk helper used by the cron edge function.
 
 -- Add unique constraint for upsert: one review entry per user per step
-alter table review_queue add constraint if not exists review_queue_user_step_unique unique (user_id, step_id);
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'review_queue_user_step_unique') THEN
+    ALTER TABLE review_queue ADD CONSTRAINT review_queue_user_step_unique UNIQUE (user_id, step_id);
+  END IF;
+END $$;
 
 create or replace function public.schedule_review(p_step_id text, p_lesson_id uuid, p_correct boolean)
 returns void language plpgsql security definer set search_path = public, pg_temp as $$

@@ -15,6 +15,7 @@ STEP_TYPES = {
     "info","scenario_card","example","mc","scenario","tf","highlight","fillblank",
     "match","good_fit","quiz","builder","copy_action","paste_capture","compare",
     "reflection","badge_unlock","streak_commitment","reminder_setup","completion",
+    "chat",
 }
 
 def is_str(x):  return isinstance(x, str) and x.strip() != ""

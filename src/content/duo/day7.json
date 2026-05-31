@@ -76,7 +76,7 @@
     },
     {
       "id": "d7-badge-1",
-      "type": "badgeUnlock",
+      "type": "badge_unlock",
       "title": "Achievement Unlocked: Week 1 Complete",
       "body": "You completed the Diagnosis phase. You looked at your marriage honestly across all four pillars — and you didn't look away. That takes courage.\n\nBadge earned: The Truth-Teller",
       "badge": "truth_teller",

@@ -1,5 +1,6 @@
 // app/auth/forgot-password.tsx — request reset + confirmation state.
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { View, Text } from 'react-native';
 import { Link } from 'expo-router';
 import { supabase } from '../../src/data/supabase';
@@ -28,7 +29,13 @@ export default function ForgotPassword() {
     }
 
     setBusy(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email.trim());
+    // Point reset link back to our app (same origin the user is on)
+    const redirectTo = typeof window !== "undefined"
+      ? `${window.location.origin}/auth/login`
+      : "turbo-learning://auth/login";
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo,
+    });
     setBusy(false);
 
     if (error) {
@@ -43,6 +50,7 @@ export default function ForgotPassword() {
       style={{
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
         padding: spacing.xl,
         gap: spacing.md,
         backgroundColor: colors.background,
@@ -53,6 +61,7 @@ export default function ForgotPassword() {
           color: colors.text,
           fontSize: fontSize.title,
           fontWeight: fontWeight.bold,
+          textAlign: 'center',
         }}
       >
         Reset your password

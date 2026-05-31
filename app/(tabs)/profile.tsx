@@ -1,0 +1,249 @@
+// ─── Profile Tab — edit name, avatar, goal, shields, settings, sign out ───
+
+import { useState, useEffect } from "react";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
+import { supabase } from "../../src/data/supabase";
+import { Field } from "../../src/components/ui/Field";
+import { Button } from "../../src/components/ui/Button";
+import { Avatar } from "../../src/components/ui/Avatar";
+import { useToast } from "../../src/components/feedback/Toast";
+import { useTheme } from "../../src/theme/ThemeContext";
+import { spacing, fontSize, fontWeight, radius, colors as themeColors } from "../../src/theme/tokens";
+import { useProfile, useBadges } from "../../src/data/queries";
+import { useStreakShield } from "../../src/data/useStreakShield";
+
+const GOAL_LABELS: Record<string, { label: string; emoji: string }> = {
+  automate: { label: "Automate my work", emoji: "⚡" },
+  career: { label: "Advance my career", emoji: "📈" },
+  business: { label: "Start an AI business", emoji: "🚀" },
+  learn: { label: "Understand AI better", emoji: "🧠" },
+  systems: { label: "Build AI systems", emoji: "🏗️" },
+};
+
+export default function Profile() {
+  const { colors } = useTheme();
+  const toast = useToast();
+  const router = useRouter();
+  const { data: profile } = useProfile();
+  const { data: badges } = useBadges(profile?.id);
+  const { data: shields, purchase } = useStreakShield(profile?.id);
+  const [name, setName] = useState("");
+  const [goal, setGoal] = useState("");
+
+  useEffect(() => {
+    if (profile) {
+      if (profile.name) setName(profile.name);
+      if ((profile as any).goal) setGoal((profile as any).goal);
+    }
+  }, [profile]);
+
+  const save = async () => {
+    const { data: u } = await supabase.auth.getUser();
+    const { error } = await supabase
+      .from("profiles")
+      .update({ name, goal })
+      .eq("id", u.user?.id);
+    toast(error ? error.message : "Profile saved", error ? "error" : "success");
+  };
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    router.replace("/auth/login");
+  };
+
+  const handleBuyShield = async () => {
+    try {
+      await purchase.mutateAsync();
+      toast("🛡️ Shield purchased! Your streak is protected.", "success");
+    } catch (err: any) {
+      toast(err?.message ?? "Failed to purchase shield", "error");
+    }
+  };
+
+  const badgeList = badges?.map((b: any) => b.badges) ?? [];
+
+  return (
+    <ScrollView
+      contentContainerStyle={{
+        padding: spacing.xl,
+        gap: spacing.md,
+        backgroundColor: colors.background,
+      }}
+    >
+      {/* Avatar + stats */}
+      <View style={{ alignItems: "center", gap: spacing.sm }}>
+        <Avatar name={name || "You"} size={72} />
+        <Text
+          style={{
+            color: colors.text,
+            fontSize: fontSize.title,
+            fontWeight: fontWeight.bold,
+          }}
+        >
+          {name || "Your profile"}
+        </Text>
+        <Text style={{ color: colors.textMuted, fontSize: fontSize.sm }}>
+          Level {profile?.level ?? 1} · {profile?.xp?.toLocaleString() ?? 0} XP
+        </Text>
+      </View>
+
+      {/* Onboarding selections — read-only */}
+      {(profile?.goal || (profile as any)?.daily_mins || (profile as any)?.learn_time) && (
+        <View
+          style={{
+            backgroundColor: colors.surface,
+            borderRadius: radius.lg,
+            padding: spacing.md,
+            borderWidth: 1,
+            borderColor: colors.border,
+            gap: spacing.sm,
+          }}
+        >
+          {profile?.goal && GOAL_LABELS[profile.goal] && (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
+              <Text style={{ fontSize: fontSize.lg }}>{GOAL_LABELS[profile.goal].emoji}</Text>
+              <View>
+                <Text style={{ color: colors.textMuted, fontSize: fontSize.xs }}>Main goal</Text>
+                <Text style={{ color: colors.text, fontSize: fontSize.body, fontWeight: fontWeight.semibold }}>
+                  {GOAL_LABELS[profile.goal].label}
+                </Text>
+              </View>
+            </View>
+          )}
+          {(profile as any)?.daily_mins && (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
+              <Text style={{ fontSize: fontSize.lg }}>⏱️</Text>
+              <View>
+                <Text style={{ color: colors.textMuted, fontSize: fontSize.xs }}>Daily commitment</Text>
+                <Text style={{ color: colors.text, fontSize: fontSize.body, fontWeight: fontWeight.semibold }}>
+                  {(profile as any).daily_mins} min{(profile as any)?.learn_time ? ` · ${(profile as any).learn_time}` : ""}
+                </Text>
+              </View>
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* Streak & Shield card */}
+      <View
+        style={{
+          backgroundColor: colors.surface,
+          borderRadius: radius.lg,
+          padding: spacing.md,
+          borderWidth: 1,
+          borderColor: colors.border,
+          flexDirection: "row",
+          alignItems: "center",
+          gap: spacing.md,
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <Text
+            style={{
+              color: colors.text,
+              fontSize: fontSize.md,
+              fontWeight: fontWeight.bold,
+            }}
+          >
+            🔥 {profile?.streak ?? 0}-Day Streak
+          </Text>
+          <Text style={{ color: colors.textMuted, fontSize: fontSize.xs, marginTop: 2 }}>
+            Protected by {shields?.count ?? 0} shield{(shields?.count ?? 0) !== 1 ? "s" : ""}
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: themeColors.warningBg,
+            borderRadius: radius.md,
+            paddingVertical: spacing.sm,
+            paddingHorizontal: spacing.md,
+            borderWidth: 1,
+            borderColor: themeColors.warningBorder,
+          }}
+          onPress={handleBuyShield}
+          disabled={purchase.isPending}
+          activeOpacity={0.7}
+        >
+          <Text
+            style={{
+              color: "#92400e",
+              fontSize: fontSize.sm,
+              fontWeight: fontWeight.bold,
+            }}
+          >
+            {purchase.isPending ? "..." : "🛡️ Get Shield"}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Badges earned */}
+      {badgeList.length > 0 && (
+        <View
+          style={{
+            backgroundColor: colors.surface,
+            borderRadius: radius.lg,
+            padding: spacing.md,
+            borderWidth: 1,
+            borderColor: colors.border,
+          }}
+        >
+          <Text
+            style={{
+              color: colors.text,
+              fontSize: fontSize.md,
+              fontWeight: fontWeight.bold,
+              marginBottom: spacing.sm,
+            }}
+          >
+            🏅 Badges ({badgeList.length})
+          </Text>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm }}>
+            {badgeList.map((b: any) => (
+              <View
+                key={b.slug}
+                style={{
+                  backgroundColor: colors.background,
+                  borderRadius: radius.md,
+                  paddingVertical: spacing.xs,
+                  paddingHorizontal: spacing.sm,
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                }}
+              >
+                <Text style={{ fontSize: fontSize.sm }}>
+                  {b.icon ?? "🏅"} {b.name}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      )}
+
+      {/* Edit name */}
+      <Text style={{ color: colors.textMuted, fontSize: fontSize.sm, marginTop: spacing.sm }}>
+        Display name
+      </Text>
+      <Field value={name} onChangeText={setName} placeholder="Your display name" />
+
+      {/* Edit goal */}
+      <Text style={{ color: colors.textMuted, fontSize: fontSize.sm }}>
+        Your learning goal
+      </Text>
+      <Field
+        value={goal}
+        onChangeText={setGoal}
+        placeholder="e.g. Learn something new every day"
+        multiline
+      />
+      <Button title="Save changes" onPress={save} />
+
+      {/* Sign out */}
+      <View style={{ marginTop: spacing.md }}>
+        <Button title="Sign out" variant="secondary" onPress={signOut} />
+      </View>
+
+      <View style={{ height: 40 }} />
+    </ScrollView>
+  );
+}

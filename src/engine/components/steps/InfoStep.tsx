@@ -9,10 +9,8 @@ export default function InfoStep({ step, narration }: StepProps) {
   const s = step as { title?: string; body: string };
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Auto-play on mount
+  // Sync isPlaying with narration state
   useEffect(() => {
-    narration.play();
-    setIsPlaying(true);
     const interval = setInterval(() => {
       setIsPlaying(narration.isPlaying);
     }, 200);

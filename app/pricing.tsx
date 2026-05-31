@@ -1,5 +1,4 @@
 // app/pricing.tsx — fetches plans from Supabase and links to Stripe checkout.
-import React from 'react';
 import { View, Text, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
@@ -15,12 +14,18 @@ import { spacing, fontSize, fontWeight } from '../src/theme/tokens';
 
 interface Plan {
   id: string;
+  slug: string;
   name: string;
   price_cents: number;
+  price_monthly_usd: number;
   interval: string | null;
+  stripe_price_id_monthly: string | null;
+  stripe_price_id_annual: string | null;
+  features: string[];
+  is_popular: boolean;
 }
 
-// ─── Feature lookup by plan id ───
+// ─── Feature lookup by plan slug ───
 
 const PLAN_FEATURES: Record<string, string[]> = {
   free: [
@@ -29,35 +34,30 @@ const PLAN_FEATURES: Record<string, string[]> = {
     'Progress dashboard',
     'Community access',
   ],
-  premium_monthly: [
+  pro: [
     'All programs, all days',
     'Audio narration',
     'Spaced-repetition review',
     'Streak shields',
     'Priority support',
-  ],
-  premium_annual: [
-    'All programs, all days',
-    'Audio narration',
-    'Spaced-repetition review',
-    'Streak shields',
-    'Priority support',
-    '2 months free vs monthly',
+    'PayPal or card payment',
   ],
 };
 
 // ─── Helpers ───
 
-function formatPrice(cents: number, interval: string | null): string {
-  const dollars = (cents / 100).toFixed(cents % 100 === 0 ? 0 : 2);
-  if (!interval) return cents === 0 ? 'Free' : `$${dollars}`;
-  if (interval === 'month') return `$${dollars}/mo`;
-  if (interval === 'year') return `$${dollars}/yr`;
-  return `$${dollars}`;
+function formatPrice(plan: Plan): string {
+  // Use price_monthly_usd in cents, or price_cents if set
+  const cents = plan.price_cents || plan.price_monthly_usd || 0;
+  const interval = plan.interval;
+  if (!interval) return cents === 0 ? 'Free' : `$${(cents / 100).toFixed(cents % 100 === 0 ? 0 : 2)}`;
+  if (interval === 'month') return `$${(cents / 100).toFixed(2)}/mo`;
+  if (interval === 'year') return `$${(cents / 100).toFixed(2)}/yr`;
+  return `$${(cents / 100).toFixed(2)}`;
 }
 
-function getFeatures(planId: string): string[] {
-  return PLAN_FEATURES[planId] ?? [];
+function getFeatures(plan: Plan): string[] {
+  return plan.features ?? PLAN_FEATURES[plan.slug] ?? [];
 }
 
 // ─── Component ───
@@ -77,7 +77,8 @@ export default function Pricing() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('plans')
-        .select('id, name, price_cents, interval')
+        .select('id, slug, name, price_cents, price_monthly_usd, interval, stripe_price_id_monthly, stripe_price_id_annual, features, is_popular')
+        .eq('is_active', true)
         .order('price_cents', { ascending: true });
 
       if (error) throw error;
@@ -140,24 +141,31 @@ export default function Pricing() {
       </Text>
 
       {plans.map((plan) => {
-        const features = getFeatures(plan.id);
-        const isFree = plan.id === 'free';
+        const features = getFeatures(plan);
+        const isFree = plan.slug === 'free';
         const isCurrentPlan =
-          user?.app_metadata?.plan_id === plan.id ||
+          user?.app_metadata?.plan_id === plan.slug ||
           (isFree && !user?.app_metadata?.plan_id);
 
         return (
           <Card key={plan.id} tinted={!isFree}>
             <View style={{ gap: spacing.xs }}>
-              <Text
-                style={{
-                  color: colors.text,
-                  fontSize: fontSize.title,
-                  fontWeight: fontWeight.bold,
-                }}
-              >
-                {plan.name}
-              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Text
+                  style={{
+                    color: colors.text,
+                    fontSize: fontSize.title,
+                    fontWeight: fontWeight.bold,
+                  }}
+                >
+                  {plan.name}
+                </Text>
+                {plan.is_popular && (
+                  <View style={{ backgroundColor: colors.accentSoft, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 8 }}>
+                    <Text style={{ color: colors.accent, fontSize: 11, fontWeight: '700' }}>POPULAR</Text>
+                  </View>
+                )}
+              </View>
               <Text
                 style={{
                   color: isFree ? colors.textMuted : colors.accent,
@@ -165,7 +173,7 @@ export default function Pricing() {
                   fontWeight: fontWeight.bold,
                 }}
               >
-                {formatPrice(plan.price_cents, plan.interval)}
+                {isFree ? 'Free' : `$${(plan.price_monthly_usd || plan.price_cents)?.toLocaleString()}/mo`}
               </Text>
             </View>
 
@@ -204,7 +212,7 @@ export default function Pricing() {
               ) : (
                 <Button
                   title="Upgrade"
-                  onPress={() => router.push(`/checkout/${plan.id}`)}
+                  onPress={() => router.push(`/checkout/${plan.slug}`)}
                 />
               )}
             </View>

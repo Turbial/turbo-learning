@@ -1,17 +1,29 @@
-// ─── Lesson Player Screen — loads lesson from Supabase, drives LessonPlayer ───
+// ─── Lesson Player Screen — loads lesson from Supabase via unit UUID, drives LessonPlayer ───
+//
+// Route params:
+//   id     — unit UUID (preferred) or day number (legacy fallback)
+//   program — program slug (needed for local fallback key: "ai-2", "duo-3", etc.)
+//   day    — day number for local fallback when UUID lookup fails
 
-import React, { useCallback } from "react";
-import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator } from "react-native";
+import { useCallback } from "react";
+import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { LessonPlayer } from "../../src/engine";
 import type { Lesson, Step } from "../../src/engine/types";
 import { colors } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
-import { useLesson, useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
+import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
+import { useLessonStateStore } from "../../src/store/lessonStateStore";
 
-// Local fallbacks when Supabase isn't ready
+// Local fallbacks when Supabase isn't available or lesson not found there
 import aiDay1 from "../../src/content/ai_operator/day1.json";
 import aiDay2 from "../../src/content/ai_operator/day2.json";
+import aiDay3 from "../../src/content/ai_operator/day3.json";
+import aiDay4 from "../../src/content/ai_operator/day4.json";
+import aiDay5 from "../../src/content/ai_operator/day5.json";
+import aiDay6 from "../../src/content/ai_operator/day6.json";
+import aiDay7 from "../../src/content/ai_operator/day7.json";
 import duoDay1 from "../../src/content/duo/day1.json";
 import duoDay2 from "../../src/content/duo/day2.json";
 import duoDay3 from "../../src/content/duo/day3.json";
@@ -21,7 +33,8 @@ import duoDay6 from "../../src/content/duo/day6.json";
 import duoDay7 from "../../src/content/duo/day7.json";
 
 const DAY_CONTENT: Record<string, any> = {
-  "ai-1": aiDay1, "ai-2": aiDay2,
+  "ai-1": aiDay1, "ai-2": aiDay2, "ai-3": aiDay3,
+  "ai-4": aiDay4, "ai-5": aiDay5, "ai-6": aiDay6, "ai-7": aiDay7,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
   "duo-7": duoDay7,
@@ -40,13 +53,23 @@ for (const [key, json] of Object.entries(DAY_CONTENT)) {
 }
 
 export default function LessonScreen() {
-  const { id, program } = useLocalSearchParams<{ id: string; program?: string }>();
+  const { id, program, day } = useLocalSearchParams<{ id: string; program?: string; day?: string }>();
   const { user } = useAuth();
+  const markLocalCompleted = useLocalProgressStore((s) => s.markCompleted);
+  const clearLessonState = useLessonStateStore((s) => s.clear);
 
-  // Try Supabase first, fall back to local JSON
-  const supabaseQuery = useLesson(id);
-  const localKey = program ? `${program}-${id}` : id ?? "1";
-  const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS[id ?? "1"];
+  const handleHome = useCallback(() => {
+    clearLessonState();
+    router.replace("/(tabs)/home");
+  }, [clearLessonState]);
+
+  // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
+  const supabaseQuery = useLessonByUnit(id);
+  const dayNum = day ?? id;
+  // Normalize program slug: "ai-operator" → "ai", "ai_for_everyone" → "ai"
+  const normalizedProgram = program?.startsWith("ai") ? "ai" : (program ?? "ai");
+  const localKey = `${normalizedProgram}-${dayNum}`;
+  const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS["ai-1"];
   const completeMutation = useCompleteLesson();
 
   const lesson: Lesson | undefined = supabaseQuery.data ?? localLesson;
@@ -54,25 +77,52 @@ export default function LessonScreen() {
 
   const handleComplete = useCallback(
     (sessionXp: number, score: number) => {
-      if (user && supabaseQuery.data) {
-        // Persist to Supabase
-        completeMutation.mutate({
-          lessonId: supabaseQuery.data.id,
-          xpEarned: sessionXp,
-          score,
+      const dbLessonId = supabaseQuery.data?.id;
+      if (user && dbLessonId) {
+        completeMutation.mutate(
+          { lessonId: dbLessonId, xpEarned: sessionXp, score },
+          {
+            onSuccess: (result: any) => {
+              markLocalCompleted(id);
+              router.replace({
+                pathname: "/complete/[unitId]",
+                params: {
+                  unitId: lesson?.unitId ?? "day1",
+                  xp: sessionXp,
+                  score: Math.round(score * 100),
+                  totalXp: String(result?.total_xp ?? 0),
+                  newLevel: String(result?.new_level ?? 1),
+                  streak: String(result?.streak ?? 1),
+                },
+              });
+            },
+            onError: (err) => {
+              console.warn("complete_lesson RPC failed:", err);
+              markLocalCompleted(id);
+              router.replace({
+                pathname: "/complete/[unitId]",
+                params: {
+                  unitId: lesson?.unitId ?? "day1",
+                  xp: sessionXp,
+                  score: Math.round(score * 100),
+                },
+              });
+            },
+          },
+        );
+      } else {
+        markLocalCompleted(id);
+        router.replace({
+          pathname: "/complete/[unitId]",
+          params: {
+            unitId: lesson?.unitId ?? "day1",
+            xp: sessionXp,
+            score: Math.round(score * 100),
+          },
         });
       }
-
-      router.replace({
-        pathname: "/complete/[unitId]",
-        params: {
-          unitId: lesson?.unitId ?? "day1",
-          xp: sessionXp,
-          score: Math.round(score * 100),
-        },
-      });
     },
-    [user, supabaseQuery.data, lesson, completeMutation],
+    [user, supabaseQuery.data, lesson, completeMutation, id, markLocalCompleted],
   );
 
   if (isLoading) {
@@ -91,9 +141,9 @@ export default function LessonScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
           <Text style={styles.missingText}>Lesson not found.</Text>
-          <Text style={styles.backLink} onPress={() => router.back()}>
-            ← Go back
-          </Text>
+          <TouchableOpacity onPress={handleHome}>
+            <Text style={styles.homeLink}>🏠 Home</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -101,6 +151,10 @@ export default function LessonScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
+      {/* Home button */}
+      <TouchableOpacity style={styles.homeBtn} onPress={handleHome}>
+        <Text style={styles.homeBtnText}>🏠</Text>
+      </TouchableOpacity>
       <LessonPlayer
         steps={lesson.steps}
         lessonId={lesson.id}
@@ -117,4 +171,13 @@ const styles = StyleSheet.create({
   loadingText: { marginTop: 12, fontSize: 15, color: colors.textMuted },
   missingText: { fontSize: 18, fontWeight: "700", color: colors.textSecondary, marginBottom: 12 },
   backLink: { fontSize: 16, fontWeight: "600", color: colors.primary },
+  homeBtn: {
+    position: "absolute",
+    top: 12,
+    right: 16,
+    zIndex: 10,
+    padding: 8,
+  },
+  homeBtnText: { fontSize: 22 },
+  homeLink: { fontSize: 16, fontWeight: "600", color: colors.primary, marginTop: 12 },
 });

@@ -1,5 +1,6 @@
 // components/feedback/StreakFire.tsx — flame that intensifies with streak length.
-import React, { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+
 import { Animated, View, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { fontWeight } from '../../theme/tokens';

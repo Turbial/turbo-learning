@@ -139,6 +139,13 @@ export type ReminderStep = StepBase & {
   reminderOptions: string[];
 };
 
+export type ChatStep = StepBase & {
+  type: "chat";
+  greeting?: string;
+  placeholder?: string;
+  systemPrompt?: string;
+};
+
 export type CompletionStep = StepBase & {
   type: "completion";
   title?: string;
@@ -247,6 +254,7 @@ export type UserProfile = {
   goal?: string;
   dailyMins?: number;
   learnTime?: string;
+  onboarded?: boolean;
   streak: number;
   shieldCount: number;
   xp: number;
@@ -273,6 +281,7 @@ export type SessionState = {
   responses: Record<string, StepResponse>;
   correctCount: number;
   totalGraded: number;
+  comboStreak: number;
 };
 
 // ─── Narration ───
@@ -280,6 +289,7 @@ export type SessionState = {
 export type NarrationController = {
   play: () => void;
   pause: () => void;
+  resume: () => void;
   stop: () => void;
   isPlaying: boolean;
   speed: number;

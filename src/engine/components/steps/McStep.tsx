@@ -69,9 +69,7 @@ export default function McStep({ step, onAnswer }: StepProps) {
           <Text style={styles.feedbackText}>
             {isCorrect
               ? s.feedback[0]
-              : (selected !== null && s.feedback[selected]
-                  ? s.feedback[selected]
-                  : s.feedback[1]) || "Not quite. The correct answer is highlighted above."}
+              : s.feedback[1] || "Not quite. The correct answer is highlighted above."}
           </Text>
         </View>
       )}

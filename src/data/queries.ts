@@ -212,6 +212,25 @@ export function useSaveStepResponse() {
   });
 }
 
+/**
+ * Incrementally add XP to the user's profile. Called per-answer so XP
+ * is reflected immediately on Journey/Progress/Dashboard even mid-lesson.
+ */
+export function useAddXp() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ xp }: { xp: number }) => {
+      const { error } = await supabase.rpc("add_xp", { p_xp: xp });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      queryClient.invalidateQueries({ queryKey: ["progress"] });
+    },
+  });
+}
+
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
 
@@ -308,7 +327,6 @@ export function useLessonProgressMap(userId: string | undefined) {
 
 // ─── Active program slug (first enrollment) ───
 export function useActiveProgramSlug() {
-  const { data: { user } } = {} as any;
   return useQuery({
     queryKey: ["activeProgramSlug"],
     queryFn: async () => {

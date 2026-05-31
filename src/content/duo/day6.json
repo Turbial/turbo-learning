@@ -78,7 +78,7 @@
     },
     {
       "id": "d6-copy-action-1",
-      "type": "copyAction",
+      "type": "copy_action",
       "title": "Your Repair Script",
       "prompt": "Write a repair script for your next conflict. Fill in the blanks:\n\n'When [situation], I [my part of the problem]. Next time, I'll [what I'll do differently].'\n\nExample: 'When we argue about the kids, I escalate instead of listening. Next time, I'll take a breath and ask what you're really worried about.'\n\nHaving a script ready makes it easier to use when you need it.",
       "xp": 10

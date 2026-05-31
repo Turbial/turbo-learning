@@ -7,6 +7,7 @@ import TrueFalseStep from "./steps/TrueFalseStep";
 import FillBlankStep from "./steps/FillBlankStep";
 import MatchStep from "./steps/MatchStep";
 import PromptGeneratorStep from "./steps/PromptGeneratorStep";
+import PromptGenerator from "../steps/PromptGenerator";
 import PasteCaptureStep from "./steps/PasteCaptureStep";
 import ConfidenceStep from "./steps/ConfidenceStep";
 import ScenarioStep from "./steps/ScenarioStep";
@@ -39,7 +40,8 @@ export type StepType =
   | "good_fit" | "quiz" | "builder"
   | "copy_action" | "paste_capture" | "compare"
   | "reflection" | "badge_unlock" | "streak_commitment"
-  | "reminder_setup" | "completion";
+  | "reminder_setup" | "completion"
+  | "prompt_generator";
 
 export interface StepBase {
   id: string;
@@ -88,6 +90,9 @@ const STEP_MAP: Record<StepType, React.ComponentType<any>> = {
   // Comparison / reflection
   compare: CompareStep,
   reflection: ReflectionStep,
+
+  // Tool / generator
+  prompt_generator: PromptGenerator,
 
   // Gamification / progress
   badge_unlock: BadgeUnlockStep,

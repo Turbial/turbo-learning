@@ -67,7 +67,7 @@
     },
     {
       "id": "d5-copy-action-1",
-      "type": "copyAction",
+      "type": "copy_action",
       "title": "One Household Improvement",
       "prompt": "What's one small change you can make this week to reduce household stress?\n\nIdeas: take one thing off their mental load list, have a no-blame money check-in, acknowledge something they do that you've been taking for granted.\n\nWrite your commitment:",
       "xp": 10

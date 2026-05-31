@@ -1,5 +1,4 @@
 // app/programs/index.tsx — browse + enroll in programs.
-import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { supabase } from '../../src/data/supabase';

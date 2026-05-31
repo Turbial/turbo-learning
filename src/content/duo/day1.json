@@ -74,7 +74,7 @@
     },
     {
       "id": "d1-streak-1",
-      "type": "streakCommit",
+      "type": "streak_commitment",
       "title": "Your Daily Commitment",
       "body": "The hardest part of any 28-day journey is Day 1. You just did it.\n\nCommit to showing up tomorrow. Same time, same place.\n\nYour marriage deserves 28 days of attention. You both do.",
       "xp": 10

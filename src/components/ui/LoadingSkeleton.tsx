@@ -17,5 +17,5 @@ export function Skeleton({ width = '100%', height = 16, rounded = radius.md }:
     loop.start();
     return () => loop.stop();
   }, [o, reduceMotion]);
-  return <Animated.View style={{ width, height, borderRadius: rounded, backgroundColor: colors.surfaceAlt, opacity: o }} />;
+  return <Animated.View style={{ width: width as any, height, borderRadius: rounded, backgroundColor: colors.surfaceAlt, opacity: o }} />;
 }

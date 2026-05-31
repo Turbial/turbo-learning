@@ -31,6 +31,8 @@ export function Button({
         borderWidth: variant === 'secondary' ? 2 : 0,
         borderColor: colors.accent,
         opacity: disabled && !isPrimary ? 0.5 : 1,
+        maxWidth: 420,
+        width: '100%',
       }}
     >
       <Text style={{ color: fg, fontWeight: fontWeight.semibold, fontSize: fontSize.bodyLg }}>

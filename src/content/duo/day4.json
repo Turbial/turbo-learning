@@ -67,7 +67,7 @@
     },
     {
       "id": "d4-copy-action-1",
-      "type": "copyAction",
+      "type": "copy_action",
       "title": "Connect Today",
       "prompt": "One small action today to strengthen connection:\n\n• Ask about their day and actually listen (no phone, no TV)\n• Give a 20-second hug (it releases oxytocin)\n• Tell them something you appreciate — specific, not generic\n\nWrite your commitment:",
       "xp": 10

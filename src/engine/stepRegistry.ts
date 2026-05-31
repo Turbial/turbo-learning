@@ -141,13 +141,13 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     component: McStep as React.ComponentType<StepProps<any>>,
     validate: mcCorrect,
     score: mcRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
+    behavior: { requiresInteraction: true },
   },
   scenario: {
     component: McStep as React.ComponentType<StepProps<any>>,
     validate: mcCorrect,
     score: mcRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 1800 },
+    behavior: { requiresInteraction: true },
   },
   tf: {
     component: EngineTrueFalseStep as React.ComponentType<StepProps<any>>,
@@ -175,7 +175,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     component: GoodFitStep as React.ComponentType<StepProps<any>>,
     validate: goodFitCorrect,
     score: goodFitRescore,
-    behavior: { requiresInteraction: true, autoAdvanceMs: 2000 },
+    behavior: { requiresInteraction: true },
   },
   quiz: {
     component: QuizStepComp as React.ComponentType<StepProps<any>>,
@@ -184,8 +184,8 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
       const r = res as Record<string, number | string>;
       const s = _step as import("./types").QuizStep;
       let correct = 0;
-      s.questions.forEach((q, i) => {
-        const userAnswer = r[`q${i}`];
+      s.questions.forEach((q) => {
+        const userAnswer = r[q.id];
         if (userAnswer !== undefined && String(userAnswer) === String(q.correct)) correct++;
       });
       return correct === s.questions.length;
@@ -195,8 +195,8 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
       const r = res as Record<string, number | string>;
       const s = _step as import("./types").QuizStep;
       let correct = 0;
-      s.questions.forEach((q, i) => {
-        if (String(r[`q${i}`] ?? "") === String(q.correct)) correct++;
+      s.questions.forEach((q) => {
+        if (String(r[q.id] ?? "") === String(q.correct)) correct++;
       });
       return Math.round((s.xp ?? 10) * (correct / s.questions.length));
     },
@@ -259,5 +259,15 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   completion: {
     component: EngineCompletionStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: false },
+  },
+  prompt_generator: {
+    component: PromptGenerator as any,
+    score: defRescore,
+    behavior: { requiresInteraction: true },
+  },
+  chat: {
+    component: FallbackStep as React.ComponentType<StepProps<any>>,
+    score: defRescore,
+    behavior: { requiresInteraction: true },
   },
 };
