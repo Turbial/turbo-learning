@@ -1,20 +1,22 @@
 // ─── LessonPlayer — generic step-progression driver ───
-// Drives progression, accumulates XP, persists state.
+// Drives progression, accumulates XP with combo multiplier, persists state.
 // Product-agnostic. Content controls the rhythm; the engine just plays it.
 
-import React, { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { View, StyleSheet, ActivityIndicator, Text } from "react-native";
 import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
+import { applyCombo, getComboLabel } from "./scoring";
 import { createNarration } from "./narration/useNarration";
+import { XpBurst } from "../../components/feedback/XpBurst";
 
 // ─── Props ───
 
 export interface LessonPlayerProps {
   steps: Step[];
   lessonId: string;
-  onComplete?: (sessionXp: number, score: number) => void;
+  onComplete?: (sessionXp: number, score: number, correctCount: number, totalGraded: number) => void;
   /** If true, renders a "Back" button to the previous step */
   allowBack?: boolean;
 }
@@ -29,6 +31,7 @@ export interface LessonPlayerState {
   totalGraded: number;
   isLast: boolean;
   progress: number; // 0–1
+  comboStreak: number;
 }
 
 // ─── Component ───
@@ -40,7 +43,11 @@ export default function LessonPlayer({
   allowBack = true,
 }: LessonPlayerProps) {
   const [session, dispatch] = useReducer(lessonReducer, createInitialState(lessonId));
-  const { stepIndex, sessionXp, responses, correctCount, totalGraded } = session;
+  const { stepIndex, sessionXp, responses, correctCount, totalGraded, comboStreak } = session;
+
+  // Track XpBursts for floating "+N XP" animations
+  const [xpBursts, setXpBursts] = useState<Array<{ id: number; xp: number; key: number }>>([]);
+  const burstIdRef = useRef(0);
 
   // Keep a ref of latest state so auto-advance timeouts never read stale closures
   const sessionRef = useRef(session);
@@ -77,16 +84,13 @@ export default function LessonPlayer({
     const isInteractive = handler.behavior.requiresInteraction;
 
     if (isInteractive) {
-      // Pause any ongoing narration when entering an interactive step
       if (narration.isPlaying) {
         narration.pause();
         narrationActiveRef.current = false;
       }
     } else {
-      // Auto-play for non-interactive / readable steps (info, highlight, completion, etc)
       const text = getStepText(step);
       if (text && !narration.isPlaying && !narrationActiveRef.current) {
-        // Small delay to let the step render before speaking
         const timer = setTimeout(() => {
           narration.play();
           narrationActiveRef.current = true;
@@ -96,7 +100,6 @@ export default function LessonPlayer({
     }
   }, [stepIndex, step?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Pause narration when user interacts (answers a question)
   const pauseNarrationOnInteract = useCallback(() => {
     const narration = narrationRef.current;
     if (narration?.isPlaying) {
@@ -105,26 +108,22 @@ export default function LessonPlayer({
     }
   }, []);
 
-  // Clean up narration on unmount
   useEffect(() => {
     return () => {
       narrationRef.current?.stop();
     };
   }, []);
 
-  // ─── Completion check — useEffect-based instead of inside setTimeout ───
-  // This avoids the stale-closure race condition when auto-advancing on the last step.
-  // When stepIndex advances past the last step, fire onComplete with sessionRef.current.
+  // ─── Completion check ───
   useEffect(() => {
     if (stepIndex >= steps.length && !completedRef.current) {
       completedRef.current = true;
       const snap = sessionRef.current;
       const score = completionScore(snap);
-      onComplete?.(snap.sessionXp, score);
+      onComplete?.(snap.sessionXp, score, snap.correctCount, snap.totalGraded);
     }
   }, [stepIndex, steps.length, onComplete]);
 
-  // Reset completed guard when lesson id changes
   useEffect(() => {
     completedRef.current = false;
   }, [lessonId]);
@@ -135,31 +134,51 @@ export default function LessonPlayer({
     if (step && isLastStep(stepIndex, steps.length)) {
       const score = completionScore(session);
       completedRef.current = true;
-      onComplete?.(sessionXp, score);
+      onComplete?.(sessionXp, score, correctCount, totalGraded);
       return;
     }
     dispatch({ type: "ADVANCE" });
-  }, [step, stepIndex, steps.length, session, sessionXp, onComplete]);
+  }, [step, stepIndex, steps.length, session, sessionXp, correctCount, totalGraded, onComplete]);
 
   const handleAnswer = useCallback(
     (res: StepResponse) => {
       if (!step || !handler) return;
 
-      // Pause narration on user interaction
       pauseNarrationOnInteract();
 
       const correct = handler.validate?.(step, res);
-      const xp = handler.score?.(step, res) ?? step.xp ?? 10;
-      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct });
+      const baseXp = handler.score?.(step, res) ?? step.xp ?? 10;
 
-      // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
+      // Apply combo multiplier: streaks of correct answers multiply XP
+      const newComboStreak = correct ? comboStreak + 1 : 0;
+      const comboXp = correct ? applyCombo(baseXp, newComboStreak) : baseXp;
+      const comboLabel = correct ? getComboLabel(newComboStreak) : "";
+
+      dispatch({
+        type: "ANSWER",
+        stepId: step.id,
+        response: res,
+        xp: comboXp,
+        correct,
+        comboStreak: newComboStreak,
+      });
+
+      // Show floating XpBurst for positive XP
+      if (comboXp > 0) {
+        const bid = ++burstIdRef.current;
+        setXpBursts((prev) => [...prev, { id: bid, xp: comboXp, key: bid }]);
+        setTimeout(() => {
+          setXpBursts((prev) => prev.filter((b) => b.id !== bid));
+        }, 800);
+      }
+
       if (handler.behavior.autoAdvanceMs) {
         setTimeout(() => {
           dispatch({ type: "ADVANCE" });
         }, handler.behavior.autoAdvanceMs);
       }
     },
-    [step, handler, pauseNarrationOnInteract],
+    [step, handler, comboStreak, pauseNarrationOnInteract],
   );
 
   const handleBack = useCallback(() => {
@@ -177,8 +196,9 @@ export default function LessonPlayer({
       totalGraded,
       isLast: isLastStep(stepIndex, steps.length),
       progress: steps.length > 0 ? stepIndex / steps.length : 0,
+      comboStreak,
     }),
-    [stepIndex, sessionXp, responses, correctCount, totalGraded, steps.length],
+    [stepIndex, sessionXp, responses, correctCount, totalGraded, steps.length, comboStreak],
   );
 
   // ─── Render ───
@@ -206,6 +226,15 @@ export default function LessonPlayer({
         />
       </View>
 
+      {/* Combo indicator */}
+      {comboStreak >= 2 && (
+        <View style={styles.comboBar}>
+          <Text style={styles.comboText}>
+            🔥 {comboStreak}x Combo! {getComboLabel(comboStreak)}
+          </Text>
+        </View>
+      )}
+
       {/* Step content */}
       <View style={styles.stepArea}>
         <StepComponent
@@ -216,6 +245,13 @@ export default function LessonPlayer({
           state={playerState}
         />
       </View>
+
+      {/* Floating XP bursts */}
+      {xpBursts.map((burst) => (
+        <View key={burst.key} style={styles.xpBurstContainer}>
+          <XpBurst xp={burst.xp} />
+        </View>
+      ))}
 
       {/* Navigation */}
       <View style={styles.nav}>
@@ -271,9 +307,27 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#059669",
   },
+  comboBar: {
+    backgroundColor: "#fef3c7",
+    borderBottomWidth: 1,
+    borderBottomColor: "#fde68a",
+    paddingVertical: 6,
+    alignItems: "center",
+  },
+  comboText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#92400e",
+  },
   stepArea: {
     flex: 1,
     padding: 20,
+  },
+  xpBurstContainer: {
+    position: "absolute",
+    top: "45%",
+    alignSelf: "center",
+    zIndex: 100,
   },
   nav: {
     flexDirection: "row",

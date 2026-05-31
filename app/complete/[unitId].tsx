@@ -1,4 +1,4 @@
-// ─── Unit Complete Screen — XP tally, streak fire, level-up celebration, badge reveal ───
+// ─── Unit Complete Screen — XP tally, knowledge meter, streak fire, level-up celebration, badge reveal ───
 
 import { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
@@ -8,6 +8,7 @@ import { useProfile, useBadges } from "../../src/data/queries";
 import { CompletionCelebration } from "../../src/components/feedback/CompletionCelebration";
 import { LevelUpModal } from "../../src/components/feedback/LevelUpModal";
 import { BadgeReveal } from "../../src/components/feedback/BadgeReveal";
+import { KnowledgeMeter } from "../../src/components/gamification/KnowledgeMeter";
 import { xpToLevel } from "../../src/engine/scoring";
 
 const BADGE_INFO: Record<string, { name: string; icon: string }> = {
@@ -17,13 +18,25 @@ const BADGE_INFO: Record<string, { name: string; icon: string }> = {
   month_streak: { name: "30-Day Streak", icon: "👑" },
 };
 
+const levelNames = ["Beginner", "Learner", "Builder", "Operator", "Master"];
+
 export default function CompleteScreen() {
-  const { xp, score, totalXp, newLevel, streak: streakParam } = useLocalSearchParams<{
+  const {
+    xp,
+    score,
+    totalXp,
+    newLevel,
+    streak: streakParam,
+    correct: correctParam,
+    total: totalParam,
+  } = useLocalSearchParams<{
     xp: string;
     score: string;
     totalXp?: string;
     newLevel?: string;
     streak?: string;
+    correct?: string;
+    total?: string;
   }>();
   const { data: profile, isLoading } = useProfile();
   const { data: badges } = useBadges(profile?.id);
@@ -31,17 +44,30 @@ export default function CompleteScreen() {
   const xpNum = parseInt(xp ?? "0", 10);
   const scoreNum = parseInt(score ?? "100", 10);
   const streakDays = profile?.streak ?? parseInt(streakParam ?? "1", 10);
+  const correctCount = parseInt(correctParam ?? "0", 10);
+  const totalGraded = parseInt(totalParam ?? "0", 10);
 
-  // Level-up detection: compare previous level from profile (before update) vs new
+  // Level-up detection
   const prevLevel = profile ? xpToLevel((profile.xp ?? 0) - xpNum) : parseInt(newLevel ?? "1", 10) - 1;
   const currentLevel = parseInt(newLevel ?? String(profile?.level ?? 1), 10);
   const didLevelUp = currentLevel > prevLevel;
 
-  // Badge reveal: show the most recent badge that hasn't been seen
+  // Sequencing state
+  const [phase, setPhase] = useState<"xp" | "meter" | "actions">("xp");
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [badgeQueue, setBadgeQueue] = useState<Array<{ slug: string; name: string; icon: string }>>([]);
   const [activeBadge, setActiveBadge] = useState<{ slug: string; name: string; icon: string } | null>(null);
   const [seenSlugs, setSeenSlugs] = useState<Set<string>>(new Set());
+
+  // Phase transitions
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase("meter"), 1400);
+    const t2 = setTimeout(() => setPhase("actions"), 2800);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
 
   // Detect new badges when badge data loads
   useEffect(() => {
@@ -59,20 +85,21 @@ export default function CompleteScreen() {
     }
   }, [badges, seenSlugs]);
 
-  // Trigger level-up modal after a short delay
+  // Trigger level-up modal after phases complete
   useEffect(() => {
     if (didLevelUp) {
-      const timer = setTimeout(() => setShowLevelUp(true), 600);
+      const timer = setTimeout(() => setShowLevelUp(true), 3200);
       return () => clearTimeout(timer);
     }
   }, [didLevelUp]);
 
-  // Show first badge in queue
+  // Show first badge in queue after level-up or delay
   useEffect(() => {
     if (badgeQueue.length > 0 && !activeBadge) {
+      const delay = didLevelUp ? 5000 : 3500;
       const timer = setTimeout(() => {
         setActiveBadge(badgeQueue[0]);
-      }, didLevelUp ? 2000 : 800);
+      }, delay);
       return () => clearTimeout(timer);
     }
   }, [badgeQueue, activeBadge, didLevelUp]);
@@ -89,20 +116,27 @@ export default function CompleteScreen() {
     setBadgeQueue((prev) => prev.slice(1));
   }, [activeBadge]);
 
-  const levelNames = ["Beginner", "Learner", "Builder", "Operator", "Master"];
+  const levelName = levelNames[Math.min(currentLevel - 1, 4)] ?? `Master +${currentLevel - 5}`;
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
-        {/* Animated XP counter + streak */}
+        {/* Phase 1: Animated XP counter + streak + confetti */}
         <CompletionCelebration xpEarned={xpNum} streak={streakDays} />
 
-        {/* Score ring */}
-        <View style={styles.scorePill}>
+        {/* Score pill */}
+        <View style={[styles.scorePill, phase === "meter" && styles.scorePillVisible]}>
           <Text style={styles.scoreText}>{scoreNum}% Score</Text>
         </View>
 
-        {/* Streak card with dynamic message */}
+        {/* Phase 2: Knowledge Meter */}
+        {totalGraded > 0 && (
+          <View style={[styles.meterWrapper, phase !== "xp" && styles.meterVisible]}>
+            <KnowledgeMeter correct={correctCount} total={totalGraded} animated />
+          </View>
+        )}
+
+        {/* Streak card */}
         <View style={styles.streakCard}>
           <Text style={styles.streakEmoji}>🔥</Text>
           <View>
@@ -125,37 +159,37 @@ export default function CompleteScreen() {
           </View>
         </View>
 
-        {/* Total XP from DB */}
-        {totalXp && (
-          <Text style={styles.totalXpText}>
-            {parseInt(totalXp, 10).toLocaleString()} total XP
-            {currentLevel > 1 ? ` · Level ${currentLevel} ${levelNames[Math.min(currentLevel - 1, 4)] ?? "Master"}` : ""}
-          </Text>
-        )}
+        {/* Total XP + Level */}
+        <Text style={styles.totalXpText}>
+          {totalXp ? parseInt(totalXp, 10).toLocaleString() : "0"} total XP
+          {currentLevel > 1 ? ` · Level ${currentLevel} ${levelName}` : ""}
+        </Text>
 
-        {/* Actions */}
-        <TouchableOpacity
-          style={styles.btnPrimary}
-          onPress={() => router.replace("/(tabs)/home")}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.btnPrimaryText}>Continue Journey</Text>
-        </TouchableOpacity>
+        {/* Phase 3: Actions */}
+        <View style={[styles.actionsRow, phase === "actions" && styles.actionsVisible]}>
+          <TouchableOpacity
+            style={styles.btnPrimary}
+            onPress={() => router.replace("/(tabs)/home")}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.btnPrimaryText}>Continue Journey</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.btnSecondary}
-          onPress={() => router.replace("/(tabs)/progress")}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.btnSecondaryText}>View Progress</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnSecondary}
+            onPress={() => router.replace("/(tabs)/progress")}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.btnSecondaryText}>View Progress</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Level-up modal */}
       <LevelUpModal
         visible={showLevelUp}
         level={currentLevel}
-        levelName={levelNames[Math.min(currentLevel - 1, 4)] ?? `Master +${currentLevel - 5}`}
+        levelName={levelName}
         onClose={handleLevelUpClose}
       />
 
@@ -188,6 +222,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.surfaceBorder,
     marginBottom: spacing.md,
+    opacity: 0.7,
+  },
+  scorePillVisible: {
+    opacity: 1,
+  },
+  meterWrapper: {
+    marginBottom: spacing.md,
+    opacity: 0,
+    transform: [{ scale: 0.9 }],
+  },
+  meterVisible: {
+    opacity: 1,
+    transform: [{ scale: 1 }],
   },
   scoreText: { fontSize: fontSize.md, fontWeight: "700", color: colors.primary },
   streakCard: {
@@ -212,12 +259,22 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: spacing.xl,
   },
+  actionsRow: {
+    width: "100%",
+    maxWidth: 320,
+    alignItems: "center",
+    opacity: 0,
+    transform: [{ translateY: 10 }],
+  },
+  actionsVisible: {
+    opacity: 1,
+    transform: [{ translateY: 0 }],
+  },
   btnPrimary: {
     backgroundColor: colors.primary,
     paddingVertical: 16,
     borderRadius: radius.lg,
     width: "100%",
-    maxWidth: 320,
     alignItems: "center",
     marginBottom: spacing.sm,
   },
@@ -226,7 +283,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: radius.lg,
     width: "100%",
-    maxWidth: 320,
     alignItems: "center",
   },
   btnSecondaryText: {

@@ -76,8 +76,15 @@ export default function LessonScreen() {
   const isLoading = supabaseQuery.isLoading && !localLesson;
 
   const handleComplete = useCallback(
-    (sessionXp: number, score: number) => {
+    (sessionXp: number, score: number, correct: number, total: number) => {
       const dbLessonId = supabaseQuery.data?.id;
+      const baseParams = {
+        unitId: lesson?.unitId ?? "day1",
+        xp: sessionXp,
+        score: Math.round(score * 100),
+        correct: String(correct),
+        total: String(total),
+      };
       if (user && dbLessonId) {
         completeMutation.mutate(
           { lessonId: dbLessonId, xpEarned: sessionXp, score },
@@ -87,9 +94,7 @@ export default function LessonScreen() {
               router.replace({
                 pathname: "/complete/[unitId]",
                 params: {
-                  unitId: lesson?.unitId ?? "day1",
-                  xp: sessionXp,
-                  score: Math.round(score * 100),
+                  ...baseParams,
                   totalXp: String(result?.total_xp ?? 0),
                   newLevel: String(result?.new_level ?? 1),
                   streak: String(result?.streak ?? 1),
@@ -99,27 +104,13 @@ export default function LessonScreen() {
             onError: (err) => {
               console.warn("complete_lesson RPC failed:", err);
               markLocalCompleted(id);
-              router.replace({
-                pathname: "/complete/[unitId]",
-                params: {
-                  unitId: lesson?.unitId ?? "day1",
-                  xp: sessionXp,
-                  score: Math.round(score * 100),
-                },
-              });
+              router.replace({ pathname: "/complete/[unitId]", params: baseParams });
             },
           },
         );
       } else {
         markLocalCompleted(id);
-        router.replace({
-          pathname: "/complete/[unitId]",
-          params: {
-            unitId: lesson?.unitId ?? "day1",
-            xp: sessionXp,
-            score: Math.round(score * 100),
-          },
-        });
+        router.replace({ pathname: "/complete/[unitId]", params: baseParams });
       }
     },
     [user, supabaseQuery.data, lesson, completeMutation, id, markLocalCompleted],
