@@ -167,12 +167,7 @@ export type PromptGeneratorStep = StepBase & {
   subtitle?: string;
 };
 
-export type ChatStep = StepBase & {
-  type: "chat";
-  greeting: string;
-  placeholder: string;
-  systemPrompt: string;
-};
+
 
 // ─── Discriminated union ───
 
