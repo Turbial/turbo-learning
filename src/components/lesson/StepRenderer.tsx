@@ -2,25 +2,20 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-// Import all 20 step components
-import TrueFalseStep from "./steps/TrueFalseStep";
-import FillBlankStep from "./steps/FillBlankStep";
-import MatchStep from "./steps/MatchStep";
-import PromptGeneratorStep from "./steps/PromptGeneratorStep";
+// Import step components from the engine: each lives in src/engine/components/steps/
 import PromptGenerator from "../steps/PromptGenerator";
-import PasteCaptureStep from "./steps/PasteCaptureStep";
-import ConfidenceStep from "./steps/ConfidenceStep";
-import ScenarioStep from "./steps/ScenarioStep";
-import BeforeAfterStep from "./steps/BeforeAfterStep";
-import ToolGridStep from "./steps/ToolGridStep";
-import ReflectionStep from "./steps/ReflectionStep";
-import SafetyStep from "./steps/SafetyStep";
-import CompletionStep from "./steps/CompletionStep";
-import BadgeUnlockStep from "./steps/BadgeUnlockStep";
-import StreakStep from "./steps/StreakStep";
-import CommitStep from "./steps/CommitStep";
 
-// Engine step components for remaining types
+import TrueFalseStep from "../../engine/components/steps/TrueFalseStep";
+import FillBlankStep from "../../engine/components/steps/FillBlankStep";
+import MatchStep from "../../engine/components/steps/MatchStep";
+import PromptGeneratorStep from "../../engine/components/steps/PromptGeneratorStep";
+import PasteCaptureStep from "../../engine/components/steps/PasteCaptureStep";
+import ScenarioCardStep from "../../engine/components/steps/ScenarioCardStep";
+import ReflectionStep from "../../engine/components/steps/ReflectionStep";
+import CompletionStep from "../../engine/components/steps/CompletionStep";
+import BadgeUnlockStep from "../../engine/components/steps/BadgeUnlockStep";
+import StreakCommitStep from "../../engine/components/steps/StreakCommitStep";
+
 import InfoStep from "../../engine/components/steps/InfoStep";
 import McStep from "../../engine/components/steps/McStep";
 import QuizStep from "../../engine/components/steps/QuizStep";
@@ -67,13 +62,13 @@ export interface StepRendererProps {
 const STEP_MAP: Record<StepType, React.ComponentType<any>> = {
   // Reading / content display
   info: InfoStep,
-  scenario_card: ScenarioStep,
+  scenario_card: ScenarioCardStep,
   example: ExampleStep,
   highlight: HighlightStep,
 
   // Interactive quiz
   mc: McStep,
-  scenario: ScenarioStep,
+  scenario: ScenarioCardStep,
   tf: TrueFalseStep,
   fillblank: FillBlankStep,
   match: MatchStep,
@@ -96,7 +91,7 @@ const STEP_MAP: Record<StepType, React.ComponentType<any>> = {
 
   // Gamification / progress
   badge_unlock: BadgeUnlockStep,
-  streak_commitment: StreakStep,
+  streak_commitment: StreakCommitStep,
   reminder_setup: FallbackStep,
 
   // Completion
