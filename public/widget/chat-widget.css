@@ -1,0 +1,32 @@
+/* LLM Chat Widget — Base Styles */
+/* Theme colors are injected dynamically via JS based on light/dark config. */
+/* This file serves as a reference and optional static override. */
+
+.llm-chat-root {
+  --bg: #ffffff;
+  --bg-secondary: #f7f7f8;
+  --text: #1a1a1a;
+  --text-secondary: #666666;
+  --border: #e5e5e5;
+  --bubble-user: #1a1a2e;
+  --bubble-user-text: #ffffff;
+  --bubble-assistant: #f0f0f5;
+  --bubble-assistant-text: #1a1a1a;
+  --accent: #4f46e5;
+  --typing-dot: #999999;
+}
+
+/* Dark theme override — add .llm-chat-dark to root */
+.llm-chat-root.llm-chat-dark {
+  --bg: #1a1a2e;
+  --bg-secondary: #16213e;
+  --text: #e8e8ed;
+  --text-secondary: #9ca3af;
+  --border: #2d2d44;
+  --bubble-user: #4f46e5;
+  --bubble-user-text: #ffffff;
+  --bubble-assistant: #2d2d44;
+  --bubble-assistant-text: #e8e8ed;
+  --accent: #4f46e5;
+  --typing-dot: #9ca3af;
+}

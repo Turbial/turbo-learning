@@ -15,6 +15,7 @@ import { useAuth } from "../../src/data/useAuth";
 import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
 import { useLessonStateStore } from "../../src/store/lessonStateStore";
+import ChatWidget from "../../src/components/chat/ChatWidget";
 
 // Local fallbacks when Supabase isn't available or lesson not found there
 import aiDay1 from "../../src/content/ai_operator/day1.json";
@@ -142,6 +143,8 @@ export default function LessonScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
+      {/* Chat assistant — only on lesson screen */}
+      <ChatWidget />
       {/* Home button */}
       <TouchableOpacity style={styles.homeBtn} onPress={handleHome}>
         <Text style={styles.homeBtnText}>🏠</Text>
