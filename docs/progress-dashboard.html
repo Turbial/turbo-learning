@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Progress Dashboard — AI Turbo Academy</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d28;
+      --surface-hover: #252836;
+      --border: #2a2d3a;
+      --primary: #6c5ce7;
+      --primary-glow: rgba(108, 92, 231, 0.15);
+      --accent: #00d2ff;
+      --success: #00e676;
+      --warn: #ffc107;
+      --danger: #ff5252;
+      --text: #e8eaed;
+      --text-secondary: #9aa0a6;
+      --text-muted: #5f6368;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* Header */
+    header { text-align: center; padding: 3rem 1rem 1.5rem; }
+    header h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    header p { color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.1rem; }
+
+    /* Dashboard nav */
+    .dash-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .dash-nav a {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .dash-nav a:hover, .dash-nav a.active {
+      background: var(--primary-glow);
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    /* Hero stats */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .hero-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+    .hero-card .hero-value {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-card .hero-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+    .hero-card .hero-sub { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; }
+
+    /* Progress bar */
+    .overall-progress {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .overall-progress .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .overall-progress .progress-header h3 { font-size: 1rem; font-weight: 600; }
+    .overall-progress .progress-header .pct {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .progress-track {
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.6s ease;
+    }
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    /* Week sections */
+    .week { margin-bottom: 1.25rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .week-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      cursor: pointer;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .week-header:hover { background: var(--surface-hover); }
+    .week-header h2 { font-size: 1rem; font-weight: 600; flex: 1; }
+    .week-header .days-range { color: var(--text-muted); font-size: 0.8rem; }
+    .week-header .week-progress-text {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+    }
+    .week-header .week-pct { font-size: 0.85rem; font-weight: 600; min-width: 2.5rem; text-align: right; }
+    .week-header .arrow { transition: transform 0.3s; color: var(--text-muted); font-size: 0.8rem; }
+    .week.open .arrow { transform: rotate(90deg); }
+
+    .day-grid { display: none; border-top: 1px solid var(--border); background: var(--bg); }
+    .week.open .day-grid { display: block; }
+
+    .day-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .day-card:last-child { border-bottom: none; }
+    .day-card:hover { background: var(--surface-hover); }
+
+    .day-check {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .day-card.completed .day-check {
+      background: var(--success);
+      border-color: var(--success);
+    }
+    .day-card.completed .day-check::after {
+      content: '✓';
+      color: #000;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .day-number {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .day-number.available { background: var(--primary-glow); color: var(--primary); }
+    .day-number.missing { background: rgba(255, 82, 82, 0.1); color: var(--danger); }
+
+    .day-info { flex: 1; min-width: 0; }
+    .day-info .title { font-weight: 600; font-size: 0.85rem; }
+    .day-info .meta { color: var(--text-muted); font-size: 0.75rem; margin-top: 0.1rem; }
+    .day-info .meta .quiz-score {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .score-good { background: rgba(0, 230, 118, 0.15); color: var(--success); }
+    .score-ok { background: rgba(255, 193, 7, 0.15); color: var(--warn); }
+    .score-low { background: rgba(255, 82, 82, 0.1); color: var(--danger); }
+
+    .day-streak {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    /* Reset button */
+    .reset-area {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .btn-reset {
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--danger);
+      background: transparent;
+      color: var(--danger);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-reset:hover {
+      background: rgba(255, 82, 82, 0.1);
+    }
+
+    /* Footer */
+    footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .day-card { padding: 0.7rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Student Progress Dashboard</h1>
+      <p>Track your journey through the 28-day AI Turbo Academy</p>
+    </header>
+
+    <nav class="dash-nav">
+      <a href="learning-path.html" target="_blank">📚 Learning Path</a>
+      <a href="quiz-widget.html" target="_blank">📝 Quizzes</a>
+      <a href="admin-dashboard.html" target="_blank">⚙️ Admin</a>
+    </nav>
+
+    <!-- Hero Stats -->
+    <div class="hero-stats" id="heroStats">
+      <div class="hero-card"><div class="hero-value" id="daysCompleted">0</div><div class="hero-label">Days Completed</div><div class="hero-sub">of 28 total</div></div>
+      <div class="hero-card"><div class="hero-value" id="completionPct">0%</div><div class="hero-label">Overall Progress</div><div class="hero-sub" id="streakLabel">Start your journey!</div></div>
+      <div class="hero-card"><div class="hero-value" id="quizAvg">—</div><div class="hero-label">Avg Quiz Score</div><div class="hero-sub" id="quizCount">0 quizzes taken</div></div>
+      <div class="hero-card"><div class="hero-value" id="currentWeek">—</div><div class="hero-label">Current Focus</div><div class="hero-sub" id="currentWeekLabel">Start Day 1</div></div>
+    </div>
+
+    <!-- Overall Progress Bar -->
+    <div class="overall-progress">
+      <div class="progress-header">
+        <h3>🎯 Program Progress</h3>
+        <span class="pct" id="overallPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="overallBar" style="width:0%"></div>
+      </div>
+      <div class="progress-labels">
+        <span>🩺 Foundation</span>
+        <span>🧰 Toolkit</span>
+        <span>🔗 Connection</span>
+        <span>🚀 Mission</span>
+      </div>
+    </div>
+
+    <!-- Weeks Loaded by JS -->
+    <div id="weeksContainer"></div>
+
+    <!-- Reset -->
+    <div class="reset-area">
+      <button class="btn-reset" onclick="if(confirm('Reset ALL progress? This cannot be undone.')){resetAllProgress();}">🗑️ Reset All Progress</button>
+    </div>
+
+    <footer>
+      <p>AI Turbo Academy · Built on Turbo Learning Platform · &copy; 2026</p>
+    </footer>
+  </div>
+
+  <script>
+    // ============================================================
+    // Data: 28-Day Curriculum
+    // ============================================================
+    const WEEKS = [
+      {
+        title: '🩺 Foundation',
+        emoji: '🩺',
+        range: 'Days 1\u20137',
+        days: [
+          { day: 1, title: 'What AI Actually Is (And Isn\'t)', minutes: 15, steps: 24 },
+          { day: 2, title: 'Getting Started with AI Tools', minutes: 15, steps: 20 },
+          { day: 3, title: 'Prompting 101 \u2014 Talking to AI', minutes: 15, steps: 22 },
+          { day: 4, title: 'AI Agents & Automation', minutes: 15, steps: 21 },
+          { day: 5, title: 'Advanced Prompt Engineering & CoT', minutes: 15, steps: 22 },
+          { day: 6, title: 'Building AI-Powered Tools Without Code', minutes: 15, steps: 21 },
+          { day: 7, title: 'Week 1 Reflection & Integration', minutes: 15, steps: 21 }
+        ]
+      },
+      {
+        title: '🧰 Toolkit (Building Phase)',
+        emoji: '🧰',
+        range: 'Days 8\u201314',
+        days: [
+          { day: 8, title: 'Building Your AI Toolkit', minutes: 15, steps: 17 },
+          { day: 9, title: 'Chaining Tools Into Workflows', minutes: 15, steps: 16 },
+          { day: 10, title: 'Automating Repetitive Tasks', minutes: 15, steps: 15 },
+          { day: 11, title: 'Collaborating with AI', minutes: 15, steps: 18 },
+          { day: 12, title: 'AI Research \u2014 Find, Verify, Organize', minutes: 15, steps: 16 },
+          { day: 13, title: 'AI-Powered Preparation', minutes: 15, steps: 16 },
+          { day: 14, title: 'Your Personal AI System', minutes: 15, steps: 13 }
+        ]
+      },
+      {
+        title: '🔗 Connection & Integration',
+        emoji: '🔗',
+        range: 'Days 15\u201321',
+        days: [
+          { day: 15, title: 'AI for Business Operations', minutes: 15, steps: 12 },
+          { day: 16, title: 'AI for Marketing & Content', minutes: 15, steps: 11 },
+          { day: 17, title: 'AI for Sales & CRM', minutes: 15, steps: 11 },
+          { day: 18, title: 'AI for Product Development', minutes: 15, steps: 12 },
+          { day: 19, title: 'AI for Support & Operations', minutes: 15, steps: 12 },
+          { day: 20, title: 'AI for Data & Analytics', minutes: 15, steps: 12 },
+          { day: 21, title: 'Week 3 Integration Project', minutes: 15, steps: 12 }
+        ]
+      },
+      {
+        title: '🚀 Mission & System',
+        emoji: '🚀',
+        range: 'Days 22\u201328',
+        days: [
+          { day: 22, title: 'AI for Project Management', minutes: 15, steps: 15 },
+          { day: 23, title: 'AI for Financial Planning', minutes: 15, steps: 15 },
+          { day: 24, title: 'AI for Creativity & Innovation', minutes: 15, steps: 15 },
+          { day: 25, title: 'AI for Productivity & Time Management', minutes: 15, steps: 14 },
+          { day: 26, title: 'AI for Learning & Skill Development', minutes: 15, steps: 15 },
+          { day: 27, title: 'Building Your AI-Powered Career', minutes: 15, steps: 15 },
+          { day: 28, title: 'Graduation \u2014 Your Complete AI OS', minutes: 20, steps: 13 }
+        ]
+      }
+    ];
+
+    const TOTAL_DAYS = 28;
+    const PROGRESS_KEY = 'turbo_student_progress';
+    const SCORES_KEY = 'turbo_quiz_scores';
+
+    // ============================================================
+    // LocalStorage Helpers
+    // ============================================================
+    function getProgress() {
+      try {
+        return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {};
+      } catch { return {}; }
+    }
+
+    function saveProgress(p) {
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(p));
+    }
+
+    function getQuizScores() {
+      try {
+        return JSON.parse(localStorage.getItem(SCORES_KEY)) || {};
+      } catch { return {}; }
+    }
+
+    function toggleDay(day) {
+      const p = getProgress();
+      if (p[day]) {
+        delete p[day];
+      } else {
+        p[day] = { completed: true, completedAt: new Date().toISOString() };
+      }
+      saveProgress(p);
+      renderAll();
+    }
+
+    function resetAllProgress() {
+      localStorage.removeItem(PROGRESS_KEY);
+      renderAll();
+    }
+
+    // ============================================================
+    // Week color helper
+    // ============================================================
+    function getWeekColor(weekIdx) {
+      const colors = ['#6c5ce7', '#00d2ff', '#ffc107', '#00e676'];
+      return colors[weekIdx] || colors[0];
+    }
+
+    // ============================================================
+    // Rendering
+    // ============================================================
+    function renderAll() {
+      const progress = getProgress();
+      const quizScores = getQuizScores();
+      const totalDone = Object.keys(progress).length;
+      const pct = Math.round((totalDone / TOTAL_DAYS) * 100);
+
+      // --- Hero Stats ---
+      document.getElementById('daysCompleted').textContent = totalDone;
+      document.getElementById('completionPct').textContent = pct + '%';
+
+      // Streak / label
+      const sortedDays = Object.keys(progress).map(Number).sort((a, b) => a - b);
+      let streak = 0;
+      for (let i = 1; i <= TOTAL_DAYS; i++) {
+        if (progress[i]) streak++;
+        else break;
+      }
+      const streakLabel = document.getElementById('streakLabel');
+      if (streak === 0) streakLabel.textContent = 'Not started yet';
+      else if (streak === TOTAL_DAYS) streakLabel.textContent = '🎉 All days complete!';
+      else streakLabel.textContent = `🔥 ${streak}-day streak`;
+
+      // Quiz stats
+      const quizValues = Object.values(quizScores).filter(v => typeof v === 'number' || (v && typeof v.score === 'number'));
+      if (quizValues.length > 0) {
+        const avg = quizValues.reduce((s, v) => s + (typeof v === 'number' ? v : v.score), 0) / quizValues.length;
+        document.getElementById('quizAvg').textContent = Math.round(avg) + '%';
+        document.getElementById('quizCount').textContent = quizValues.length + ' quizzes taken';
+      } else {
+        document.getElementById('quizAvg').textContent = '—';
+        document.getElementById('quizCount').textContent = 'No quizzes yet';
+      }
+
+      // Current focus
+      let nextDay = totalDone + 1;
+      if (nextDay > TOTAL_DAYS) {
+        document.getElementById('currentWeek').textContent = '✅';
+        document.getElementById('currentWeekLabel').textContent = 'Graduated!';
+      } else {
+        const weekIdx = WEEKS.findIndex(w => w.days.some(d => d.day === nextDay));
+        document.getElementById('currentWeek').textContent = WEEKS[weekIdx]?.emoji || '—';
+        document.getElementById('currentWeekLabel').textContent = nextDay <= TOTAL_DAYS ? `Day ${nextDay}` : 'Complete!';
+      }
+
+      // --- Overall Bar ---
+      document.getElementById('overallPct').textContent = pct + '%';
+      document.getElementById('overallBar').style.width = pct + '%';
+
+      // --- Render Weeks ---
+      const container = document.getElementById('weeksContainer');
+      container.innerHTML = '';
+
+      WEEKS.forEach((week, wi) => {
+        const weekTotal = week.days.length;
+        const weekDone = week.days.filter(d => progress[d.day]).length;
+        const weekPct = Math.round((weekDone / weekTotal) * 100);
+
+        const weekDiv = document.createElement('div');
+        weekDiv.className = 'week' + (weekDone === weekTotal ? ' open' : '');
+
+        let badgeClass = 'badge-partial';
+        let badgeText = `${weekDone}/${weekTotal}`;
+        if (weekDone === 0) { badgeClass = ''; }
+        else if (weekDone === weekTotal) { badgeClass = ''; }
+
+        const badgeColor = weekDone === 0 ? 'var(--danger)' : weekDone === weekTotal ? 'var(--success)' : 'var(--warn)';
+
+        weekDiv.innerHTML = `
+          <div class="week-header" onclick="this.parentElement.classList.toggle('open')">
+            <h2>${week.title}</h2>
+            <span class="days-range">${week.range}</span>
+            <span class="week-progress-text" style="background:rgba(${weekDone === 0 ? '255,82,82' : weekDone === weekTotal ? '0,230,118' : '255,193,7'},0.15);color:${badgeColor}">${badgeText}</span>
+            <span class="week-pct" style="color:${getWeekColor(wi)}">${weekPct}%</span>
+            <span class="arrow">▶</span>
+          </div>
+          <div class="day-grid">
+            ${week.days.map(d => {
+              const done = !!progress[d.day];
+              const qScore = quizScores[`day${d.day}`];
+              const scoreVal = typeof qScore === 'number' ? qScore : (qScore && typeof qScore.score === 'number' ? qScore.score : null);
+              let scoreHtml = '';
+              if (scoreVal !== null) {
+                const sClass = scoreVal >= 80 ? 'score-good' : scoreVal >= 50 ? 'score-ok' : 'score-low';
+                scoreHtml = `<span class="quiz-score ${sClass}">${scoreVal}%</span>`;
+              }
+              return `
+                <div class="day-card ${done ? 'completed' : ''}" onclick="toggleDay(${d.day})">
+                  <div class="day-check"></div>
+                  <div class="day-number available">${d.day}</div>
+                  <div class="day-info">
+                    <div class="title">${d.title}</div>
+                    <div class="meta"><span>⚡ ${d.minutes} min</span><span> · 📝 ${d.steps} steps</span> ${scoreHtml ? ' · ' + scoreHtml : ''}</div>
+                  </div>
+                  ${done ? '<span class="day-streak">✅</span>' : '<span class="day-streek">⏳</span>'}
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        // Mini progress bar inside week
+        const weekHeader = weekDiv.querySelector('.week-header');
+        const miniBar = document.createElement('div');
+        miniBar.style.cssText = `height:3px;background:var(--border);border-radius:0;overflow:hidden;`;
+        const miniFill = document.createElement('div');
+        miniFill.style.cssText = `height:100%;width:${weekPct}%;background:linear-gradient(90deg,${getWeekColor(wi)},var(--accent));transition:width 0.5s;`;
+        miniBar.appendChild(miniFill);
+        weekDiv.insertBefore(miniBar, weekDiv.querySelector('.day-grid'));
+
+        container.appendChild(weekDiv);
+      });
+    }
+
+    // Auto-open incomplete weeks / last completed week
+    function initOpenState() {
+      const progress = getProgress();
+      WEEKS.forEach((week, wi) => {
+        const weekDone = week.days.filter(d => progress[d.day]).length;
+        // Auto-open if partially done or first unstarted week
+        if (weekDone > 0 && weekDone < week.days.length) {
+          const els = document.querySelectorAll('.week');
+          if (els[wi]) els[wi].classList.add('open');
+        }
+      });
+      // Open the first week if nothing started
+      const totalDone = Object.keys(progress).length;
+      if (totalDone === 0) {
+        const firstWeek = document.querySelector('.week');
+        if (firstWeek) firstWeek.classList.add('open');
+      }
+    }
+
+    // ============================================================
+    // Auto-detect quiz completions (import quiz scores as progress)
+    // ============================================================
+    function importQuizProgress() {
+      const quizScores = getQuizScores();
+      const progress = getProgress();
+      let changed = false;
+
+      // Check for quiz keys matching day patterns
+      Object.keys(quizScores).forEach(key => {
+        // Match keys like "day1", "d1", "day_1"
+        const match = key.match(/day[_\s]?(\d+)/i) || key.match(/^d(\d+)$/i);
+        if (match) {
+          const dayNum = parseInt(match[1]);
+          if (dayNum >= 1 && dayNum <= TOTAL_DAYS && !progress[dayNum]) {
+            progress[dayNum] = { completed: true, completedAt: new Date().toISOString(), source: 'quiz' };
+            changed = true;
+          }
+        }
+      });
+
+      if (changed) saveProgress(progress);
+    }
+
+    // ============================================================
+    // Init
+    // ============================================================
+    importQuizProgress();
+    renderAll();
+    setTimeout(initOpenState, 50);
+  </script>
+</body>
+</html>
