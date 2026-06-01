@@ -29,7 +29,7 @@ const CONFIG = {
   systemPrompt:
     "You are the Turbo Learning assistant for the AI Operator course — a 28-day program teaching people to go from AI user → AI operator. Help students with course concepts, explain AI terminology, and keep them motivated. Be concise, warm, and encouraging.",
   theme: "dark" as const,
-  position: "bottom-right" as const,
+  position: "bottom-left" as const,
 };
 
 let globalInstance: any = null; // singleton — one widget at a time

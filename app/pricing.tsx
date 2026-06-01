@@ -134,7 +134,8 @@ export default function Pricing() {
         style={{
           color: colors.text,
           fontSize: fontSize.display,
-          fontWeight: fontWeight.bold,
+          fontWeight: "800" as const,
+          textAlign: "center" as const,
         }}
       >
         Choose your plan

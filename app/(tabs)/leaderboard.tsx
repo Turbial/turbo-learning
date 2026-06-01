@@ -157,9 +157,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.surfaceBorder,
     backgroundColor: colors.surface,
   },
-  backText: { fontSize: fontSize.sm, color: colors.primary, fontWeight: fontWeight.semibold },
-  title: { fontSize: fontSize.lg, fontWeight: fontWeight.bold, color: colors.textPrimary },
-  headerSpacer: { width: 80 },
+  backText: { fontSize: fontSize.sm, color: colors.primary, fontWeight: "600" as const },
+  title: { fontSize: fontSize.lg, fontWeight: "800" as const, color: colors.textPrimary, textAlign: "center" as const, flex: 1 },
+  headerSpacer: { width: 70 },
   toggleRow: {
     flexDirection: "row",
     padding: spacing.sm,

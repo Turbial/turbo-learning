@@ -55,18 +55,19 @@ export default function Profile() {
         backgroundColor: colors.background,
       }}
     >
-      <View style={{ alignItems: "center", gap: spacing.sm }}>
+      <View style={{ alignItems: "center", gap: spacing.sm, paddingTop: spacing.md }}>
         <Avatar name={name || "You"} size={72} />
         <Text
           style={{
             color: colors.text,
             fontSize: fontSize.title,
-            fontWeight: fontWeight.bold,
+            fontWeight: "800" as const,
+            textAlign: "center" as const,
           }}
         >
           {name || "Your profile"}
         </Text>
-        <Text style={{ color: colors.textMuted, fontSize: fontSize.sm }}>
+        <Text style={{ color: colors.textMuted, fontSize: fontSize.sm, textAlign: "center" as const }}>
           Level {profile?.level ?? 1} · {profile?.xp?.toLocaleString() ?? 0} XP
         </Text>
       </View>
