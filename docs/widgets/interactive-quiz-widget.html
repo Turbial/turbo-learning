@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Quiz Widget</title>
+<style>
+  /* ─── Reset & Base ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    background: #f8f6f1;
+    color: #2D241C;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  /* ─── Widget Container ─── */
+  .quiz-widget {
+    max-width: 720px;
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid #e8e2d9;
+    box-shadow: 0 4px 24px rgba(45, 36, 28, 0.08);
+  }
+
+  .quiz-widget h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2D241C;
+    margin-bottom: 4px;
+  }
+  .quiz-widget .subtitle {
+    color: #8B7D72;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e8e2d9;
+    padding-bottom: 16px;
+  }
+
+  /* ─── Progress Bar ─── */
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: #e8e2d9;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #4E8A5C;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 0.8rem;
+    color: #6B5F54;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 50px;
+    text-align: right;
+  }
+
+  /* ─── Question Area ─── */
+  .question-area {
+    margin-bottom: 24px;
+  }
+
+  .question-type-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #f0ede6;
+    color: #6B5F54;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .question-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #2D241C;
+    line-height: 1.5;
+  }
+
+  /* ─── Options ─── */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* MC / TF option */
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 2px solid #e8e2d9;
+    border-radius: 12px;
+    background: #FDFBF8;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #3D3228;
+    font-weight: 500;
+    width: 100%;
+    font-family: inherit;
+    line-height: 1.4;
+  }
+  .option-btn:hover:not(.disabled) {
+    border-color: #c4b8ab;
+    background: #f8f4ed;
+  }
+  .option-btn.selected {
+    border-color: #4E8A5C;
+    background: #ecfdf5;
+  }
+  .option-btn .indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #d4cec4;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .option-btn.selected .indicator {
+    border-color: #4E8A5C;
+    background: #4E8A5C;
+  }
+  .option-btn.selected .indicator::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .option-btn.correct {
+    border-color: #4E8A5C;
+    background: #ecfdf5;
+  }
+  .option-btn.correct .indicator {
+    border-color: #4E8A5C;
+    background: #4E8A5C;
+  }
+  .option-btn.correct .indicator::after {
+    content: "✓";
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .option-btn.wrong {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+  .option-btn.wrong .indicator {
+    border-color: #ef4444;
+    background: #ef4444;
+  }
+  .option-btn.wrong .indicator::after {
+    content: "✗";
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .option-btn.disabled {
+    cursor: default;
+    opacity: 0.85;
+  }
+
+  /* ─── Matching question layout ─── */
+  .matching-area {
+    margin-bottom: 20px;
+  }
+  .matching-area .match-prompt {
+    font-size: 0.9rem;
+    color: #6B5F54;
+    margin-bottom: 12px;
+  }
+  .matching-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .match-left {
+    font-weight: 600;
+    color: #2D241C;
+    background: #f8f4ed;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #e8e2d9;
+    font-size: 0.9rem;
+  }
+  .match-arrow {
+    color: #8B7D72;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 0 4px;
+  }
+  .match-right select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e8e2d9;
+    border-radius: 10px;
+    background: #FDFBF8;
+    font-size: 0.9rem;
+    color: #3D3228;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B5F54' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+  .match-right select:focus {
+    outline: none;
+    border-color: #4E8A5C;
+  }
+  .match-right select.correct {
+    border-color: #4E8A5C;
+    background-color: #ecfdf5;
+  }
+  .match-right select.wrong {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+  }
+
+  /* ─── Explanation / Feedback ─── */
+  .explanation {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e8e2d9;
+    background: #f8f4ed;
+    display: none;
+  }
+  .explanation.visible {
+    display: block;
+  }
+  .explanation .exp-heading {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #4E8A5C;
+    margin-bottom: 6px;
+  }
+  .explanation .exp-text {
+    font-size: 0.9rem;
+    color: #3D3228;
+    line-height: 1.6;
+  }
+  .explanation.wrong { border-color: #fecaca; }
+  .explanation.wrong .exp-heading { color: #ef4444; }
+
+  /* ─── Buttons ─── */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    line-height: 1.2;
+  }
+  .btn-primary {
+    background: #4E8A5C;
+    color: #fff;
+    flex: 1;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: #3d7250;
+  }
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-secondary {
+    background: #e8e2d9;
+    color: #3D3228;
+  }
+  .btn-secondary:hover {
+    background: #d9d1c5;
+  }
+  .btn-success {
+    background: #4E8A5C;
+    color: #fff;
+  }
+  .btn-success:hover {
+    background: #3d7250;
+  }
+
+  /* ─── Score Summary ─── */
+  .score-summary {
+    margin-top: 24px;
+    padding: 24px;
+    background: #ecfdf5;
+    border-radius: 16px;
+    border: 1px solid #a7f3d0;
+    text-align: center;
+  }
+  .score-summary h2 {
+    font-size: 1.3rem;
+    color: #2D241C;
+    margin-bottom: 8px;
+  }
+  .score-summary .score-big {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4E8A5C;
+  }
+  .score-summary .score-detail {
+    color: #6B5F54;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+  .score-summary .score-emoji {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .score-summary .btn {
+    margin-top: 8px;
+  }
+
+  /* ─── localStorage score history ─── */
+  .score-history {
+    margin-top: 20px;
+    border-top: 1px solid #e8e2d9;
+    padding-top: 16px;
+  }
+  .score-history summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #6B5F54;
+    font-size: 0.85rem;
+    padding: 8px 0;
+  }
+  .score-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.8rem;
+  }
+  .score-history th {
+    text-align: left;
+    padding: 6px 8px;
+    color: #8B7D72;
+    font-weight: 600;
+    border-bottom: 1px solid #e8e2d9;
+  }
+  .score-history td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #f0ede6;
+    color: #3D3228;
+  }
+  .score-history .reset-btn {
+    background: none;
+    border: 1px solid #e8e2d9;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    color: #8B7D72;
+    cursor: pointer;
+    margin-top: 6px;
+    font-family: inherit;
+  }
+  .score-history .reset-btn:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #ef4444;
+  }
+
+  /* ─── Quiz Selector (choose a quiz) ─── */
+  .quiz-selector {
+    margin-bottom: 24px;
+  }
+  .quiz-selector select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e8e2d9;
+    border-radius: 12px;
+    background: #FDFBF8;
+    font-size: 1rem;
+    color: #2D241C;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 12 12'%3E%3Cpath fill='%236B5F54' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+  .quiz-selector select:focus {
+    outline: none;
+    border-color: #4E8A5C;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 600px) {
+    .quiz-widget { padding: 20px; }
+    .matching-row { grid-template-columns: 1fr; gap: 4px; }
+    .match-arrow { display: none; }
+    .btn-row { flex-direction: column; }
+  }
+
+  /* ─── Embed mode (no body padding/background) ─── */
+  .quiz-widget.embed-mode {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 100%;
+    padding: 0;
+  }
+  body.embed { padding: 0; background: transparent; }
+</style>
+</head>
+<body>
+
+<div class="quiz-widget" id="quizWidget">
+  <h1 id="quizTitle">📝 Interactive Quiz</h1>
+  <p class="subtitle" id="quizSubtitle">Test your knowledge with interactive questions</p>
+
+  <!-- Quiz Selector -->
+  <div class="quiz-selector" id="quizSelector">
+    <select id="quizSelect"></select>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-bar">
+    <span style="font-size:0.85rem;color:#6B5F54;font-weight:600;" id="qCounter">Q1/5</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-label" id="scoreDisplay">0/0</span>
+  </div>
+
+  <!-- Question -->
+  <div class="question-area" id="questionArea">
+    <div class="question-type-badge" id="qTypeBadge">MULTIPLE CHOICE</div>
+    <div class="question-text" id="questionText">Loading question…</div>
+  </div>
+
+  <!-- Multiple Choice / True-False Options -->
+  <div class="options" id="optionsContainer"></div>
+
+  <!-- Matching Area -->
+  <div class="matching-area" id="matchingArea" style="display:none;"></div>
+
+  <!-- Explanation -->
+  <div class="explanation" id="explanation">
+    <div class="exp-heading" id="expHeading">Explanation</div>
+    <div class="exp-text" id="expText"></div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btn-row" id="btnRow">
+    <button class="btn btn-primary" id="submitBtn">Submit Answer</button>
+    <button class="btn btn-secondary" id="nextBtn" style="display:none;">Next Question →</button>
+  </div>
+
+  <!-- Score Summary (shown at end) -->
+  <div id="scoreSummary" style="display:none;"></div>
+
+  <!-- Score History -->
+  <div class="score-history" id="scoreHistory">
+    <details>
+      <summary>📊 Quiz History</summary>
+      <table>
+        <thead><tr><th>Date</th><th>Quiz</th><th>Score</th></tr></thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+      <button class="reset-btn" id="resetHistory">Clear History</button>
+    </details>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ═══════════════════════════════════════════════════════════
+  // QUIZ DATA — Define your quizzes here
+  // ═══════════════════════════════════════════════════════════
+  // Types: "mc" (multiple choice), "tf" (true/false), "matching"
+  //
+  // mc: { type:"mc", question, options:[...], correct:0-index, explanation }
+  // tf: { type:"tf", question, correct:true/false, explanation }
+  // matching: { type:"matching", question, pairs:[{left,right}], explanation }
+  //   pairs are presented in shuffled order on the left; right options shuffled
+  //   matching is scored by number of correct pairs
+  
+  const DEFAULT_QUIZZES = [
+    {
+      id: "week1-review",
+      title: "Week 1 Review — Financial Foundations",
+      questions: [
+        {
+          type: "mc",
+          question: "What is the 50/30/20 budgeting rule?",
+          options: [
+            "50% needs, 30% wants, 20% savings",
+            "50% savings, 30% needs, 20% wants",
+            "50% wants, 30% savings, 20% needs",
+            "50% investments, 30% needs, 20% wants"
+          ],
+          correct: 0,
+          explanation: "The 50/30/20 rule allocates 50% of income to needs, 30% to wants, and 20% to savings and debt repayment. It's a simple framework for building financial stability."
+        },
+        {
+          type: "tf",
+          question: "An emergency fund should cover at least 6 months of living expenses.",
+          correct: true,
+          explanation: "Financial experts recommend 3-6 months of expenses saved for emergencies. During uncertain times, 6 months provides better protection against job loss or major unexpected costs."
+        },
+        {
+          type: "mc",
+          question: "Which debt repayment strategy focuses on paying off the smallest balance first?",
+          options: [
+            "The avalanche method",
+            "The snowball method",
+            "The consolidation method",
+            "The blizzard method"
+          ],
+          correct: 1,
+          explanation: "The snowball method focuses on paying off the smallest debts first for psychological wins, while the avalanche method targets highest-interest debts first for maximum savings."
+        },
+        {
+          type: "matching",
+          question: "Match each investment type to its description.",
+          pairs: [
+            { left: "Stocks", right: "Ownership shares in a company" },
+            { left: "Bonds", right: "Loans to a company or government" },
+            { left: "Mutual Funds", right: "Pooled investments in multiple assets" },
+            { left: "Real Estate", right: "Physical property investment" }
+          ],
+          explanation: "Stocks represent company ownership, bonds are debt instruments, mutual funds pool money across investments, and real estate is tangible property you can own and manage."
+        },
+        {
+          type: "mc",
+          question: "What is compound interest?",
+          options: [
+            "Interest paid only on the principal",
+            "Interest earned on both principal and accumulated interest",
+            "A fixed interest rate that never changes",
+            "Interest charged by multiple banks"
+          ],
+          correct: 1,
+          explanation: "Compound interest is interest earned on your original principal PLUS on the interest that has already been added. This 'interest on interest' effect is why starting to save early makes such a big difference."
+        }
+      ]
+    },
+    {
+      id: "debt-management",
+      title: "Debt Management & Credit Scores",
+      questions: [
+        {
+          type: "mc",
+          question: "What is a credit score primarily used for?",
+          options: [
+            "To measure your total net worth",
+            "To assess your creditworthiness for loans",
+            "To track your spending habits",
+            "To calculate your tax bracket"
+          ],
+          correct: 1,
+          explanation: "Credit scores measure creditworthiness — how likely you are to repay borrowed money. Lenders use them to decide loan terms, interest rates, and credit limits."
+        },
+        {
+          type: "mc",
+          question: "What is the ideal credit utilization ratio?",
+          options: [
+            "Below 10%",
+            "Below 30%",
+            "Below 50%",
+            "Below 70%"
+          ],
+          correct: 1,
+          explanation: "Keeping credit utilization below 30% (ideally below 10%) is recommended. This means if you have a $10,000 limit, try to keep your balance under $3,000 max."
+        },
+        {
+          type: "tf",
+          question: "Checking your own credit report hurts your credit score.",
+          correct: false,
+          explanation: "Checking your own credit report is a 'soft inquiry' and does NOT affect your credit score. You can check your credit report for free at AnnualCreditReport.com without any penalty."
+        },
+        {
+          type: "matching",
+          question: "Match each credit factor to its impact on your score.",
+          pairs: [
+            { left: "Payment History", right: "35% of your credit score" },
+            { left: "Credit Utilization", right: "30% of your credit score" },
+            { left: "Length of History", right: "15% of your credit score" },
+            { left: "New Credit", right: "10% of your credit score" }
+          ],
+          explanation: "Payment history (35%) and credit utilization (30%) together make up 65% of your FICO score — so paying on time and keeping balances low are the most important factors."
+        },
+        {
+          type: "mc",
+          question: "What is debt consolidation?",
+          options: [
+            "Ignoring your debts until they go away",
+            "Combining multiple debts into a single loan with one payment",
+            "Asking creditors to forgive all debt",
+            "Transferring debt to a family member"
+          ],
+          correct: 1,
+          explanation: "Debt consolidation combines multiple debts into one loan, ideally with a lower interest rate. It simplifies payments and can save money, but only works if you stop accumulating new debt."
+        }
+      ]
+    },
+    {
+      id: "savings-goals",
+      title: "Smart Saving & Goal Setting",
+      questions: [
+        {
+          type: "mc",
+          question: "What is the most important savings goal to prioritize?",
+          options: [
+            "Vacation fund",
+            "Emergency fund",
+            "New car fund",
+            "Entertainment budget"
+          ],
+          correct: 1,
+          explanation: "An emergency fund is the foundation of financial stability. Before investing or saving for other goals, make sure you have 3-6 months of expenses in an easily accessible account."
+        },
+        {
+          type: "tf",
+          question: "A high-yield savings account typically offers higher interest than a regular savings account.",
+          correct: true,
+          explanation: "High-yield savings accounts (HYSAs) offer significantly higher APY than traditional savings accounts — often 10-20x more. They're FDIC insured and just as safe, with better returns."
+        },
+        {
+          type: "matching",
+          question: "Match each savings strategy to its best use case.",
+          pairs: [
+            { left: "High-Yield Savings", right: "Emergency fund (liquid & safe)" },
+            { left: "CD (Certificate of Deposit)", right: "Fixed-term savings with guaranteed return" },
+            { left: "401(k)", right: "Retirement savings with employer match" },
+            { left: "Roth IRA", right: "Tax-free growth for retirement" }
+          ],
+          explanation: "Each savings vehicle serves a different purpose. Emergency funds need liquidity (HYSA). CDs lock in rates for set terms. 401(k)s and IRAs are for long-term retirement growth with tax advantages."
+        },
+        {
+          type: "mc",
+          question: "What is the SMART goal framework?",
+          options: [
+            "Simple, Manageable, Achievable, Reasonable, Trackable",
+            "Specific, Measurable, Achievable, Relevant, Time-bound",
+            "Strategic, Monetary, Active, Reliable, Targeted",
+            "Structured, Monitored, Assessed, Reviewed, Tested"
+          ],
+          correct: 1,
+          explanation: "SMART stands for Specific, Measurable, Achievable, Relevant, and Time-bound. This framework makes goals clearer and more achievable by forcing you to define exactly what success looks like."
+        },
+        {
+          type: "tf",
+          question: "You should only start investing after you have an emergency fund and no high-interest debt.",
+          correct: true,
+          explanation: "Conventional wisdom says: 1) Build an emergency fund, 2) Pay off high-interest debt (credit cards, payday loans), 3) Then start investing. Skipping steps 1-2 risks financial disaster if an emergency hits."
+        }
+      ]
+    }
+  ];
+
+  // ═══════════════════════════════════════════════════════════
+  // STATE
+  // ═══════════════════════════════════════════════════════════
+  const WIDGET_KEY = 'tq_widget_scores'; // tq = turbo quiz
+  let quizzes = [];
+  let currentQuiz = null;
+  let currentIndex = 0;
+  let score = 0;
+  let answers = [];       // { questionIdx, selected, correct, isCorrect }
+  let submitted = false;
+  let selectedOption = null;
+  let matchSelections = {};
+  let isComplete = false;
+
+  // ─── DOM refs ───
+  const $ = id => document.getElementById(id);
+  const quizSelect     = $('quizSelect');
+  const quizTitle      = $('quizTitle');
+  const quizSubtitle   = $('quizSubtitle');
+  const qCounter       = $('qCounter');
+  const progressFill   = $('progressFill');
+  const scoreDisplay   = $('scoreDisplay');
+  const questionArea   = $('questionArea');
+  const qTypeBadge     = $('qTypeBadge');
+  const questionText   = $('questionText');
+  const optionsCont    = $('optionsContainer');
+  const matchingArea   = $('matchingArea');
+  const explanation    = $('explanation');
+  const expHeading     = $('expHeading');
+  const expText        = $('expText');
+  const submitBtn      = $('submitBtn');
+  const nextBtn        = $('nextBtn');
+  const scoreSummary   = $('scoreSummary');
+  const historyBody    = $('historyBody');
+  const resetHistoryBtn = $('resetHistory');
+
+  // ═══════════════════════════════════════════════════════════
+  // HELPERS
+  // ═══════════════════════════════════════════════════════════
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function saveScores() {
+    try {
+      const raw = localStorage.getItem(WIDGET_KEY);
+      const history = raw ? JSON.parse(raw) : [];
+      const entry = {
+        date: new Date().toISOString(),
+        quizId: currentQuiz.id,
+        quizTitle: currentQuiz.title,
+        score,
+        total: currentQuiz.questions.length,
+        pct: Math.round((score / currentQuiz.questions.length) * 100)
+      };
+      history.push(entry);
+      // Keep last 50 entries
+      if (history.length > 50) history.splice(0, history.length - 50);
+      localStorage.setItem(WIDGET_KEY, JSON.stringify(history));
+    } catch(e) { /* localStorage unavailable or full — silently skip */ }
+  }
+
+  function loadScores() {
+    try {
+      const raw = localStorage.getItem(WIDGET_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e) { return []; }
+  }
+
+  function renderHistory() {
+    const scores = loadScores();
+    if (scores.length === 0) {
+      historyBody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#8B7D72;padding:16px;">No quiz history yet</td></tr>';
+      return;
+    }
+    historyBody.innerHTML = scores.reverse().map(e => {
+      const d = new Date(e.date);
+      const dateStr = d.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      const color = e.pct >= 80 ? '#4E8A5C' : e.pct >= 50 ? '#d4a843' : '#ef4444';
+      return `<tr><td>${dateStr}</td><td>${e.quizTitle}</td><td style="font-weight:700;color:${color};">${e.score}/${e.total} (${e.pct}%)</td></tr>`;
+    }).join('');
+  }
+
+  function getEmoji(pct) {
+    if (pct === 100) return '🏆';
+    if (pct >= 80) return '⭐';
+    if (pct >= 60) return '👍';
+    if (pct >= 40) return '💪';
+    return '📚';
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // RENDER QUESTION
+  // ═══════════════════════════════════════════════════════════
+  function renderQuestion() {
+    if (!currentQuiz || isComplete) return;
+
+    const q = currentQuiz.questions[currentIndex];
+    submitted = false;
+    selectedOption = null;
+    matchSelections = {};
+
+    // Progress
+    qCounter.textContent = `Q${currentIndex+1}/${currentQuiz.questions.length}`;
+    progressFill.style.width = `${((currentIndex) / currentQuiz.questions.length) * 100}%`;
+    scoreDisplay.textContent = `${score}/${currentIndex}`;
+
+    // Badge
+    const typeNames = { mc:'Multiple Choice', tf:'True / False', matching:'Matching' };
+    qTypeBadge.textContent = typeNames[q.type] || 'Question';
+
+    // Question
+    questionText.textContent = q.question;
+
+    // Hide all then conditionally show
+    optionsCont.style.display = 'none';
+    matchingArea.style.display = 'none';
+    explanation.classList.remove('visible', 'wrong');
+    submitBtn.style.display = '';
+    nextBtn.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submit Answer';
+
+    if (q.type === 'mc' || q.type === 'tf') {
+      renderChoiceOptions(q);
+    } else if (q.type === 'matching') {
+      renderMatching(q);
+    }
+  }
+
+  function renderChoiceOptions(q) {
+    optionsCont.style.display = 'flex';
+    optionsCont.innerHTML = '';
+
+    let opts = q.options;
+    if (q.type === 'tf') {
+      opts = ['True', 'False'];
+    }
+
+    opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `<span class="indicator"></span><span>${opt}</span>`;
+      btn.dataset.index = i;
+      btn.addEventListener('click', () => {
+        if (submitted) return;
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedOption = i;
+        submitBtn.disabled = false;
+      });
+      optionsCont.appendChild(btn);
+    });
+  }
+
+  function renderMatching(q) {
+    matchingArea.style.display = 'block';
+
+    const pairs = q.pairs;
+    // Shuffle left items, gather right options
+    const shuffledLeft = shuffle(pairs);
+    const rightOptions = shuffle(pairs.map(p => p.right));
+
+    matchingArea.innerHTML = `
+      <div class="match-prompt">Match each item on the left to its correct pair on the right:</div>
+      <div id="matchRows"></div>
+    `;
+
+    const matchRows = document.getElementById('matchRows');
+    shuffledLeft.forEach((pair, rowIdx) => {
+      const row = document.createElement('div');
+      row.className = 'matching-row';
+      row.innerHTML = `
+        <div class="match-left">${pair.left}</div>
+        <div class="match-arrow">→</div>
+        <div class="match-right">
+          <select data-row="${rowIdx}" data-left="${pair.left}">
+            <option value="">— Select —</option>
+            ${rightOptions.map(r => `<option value="${r}">${r}</option>`).join('')}
+          </select>
+        </div>
+      `;
+      matchRows.appendChild(row);
+
+      const sel = row.querySelector('select');
+      sel.addEventListener('change', function() {
+        if (submitted) return;
+        matchSelections[this.dataset.left] = this.value;
+        // Re-enable submit if all answered
+        const total = pairs.length;
+        const answered = Object.keys(matchSelections).length;
+        submitBtn.disabled = answered !== total;
+      });
+    });
+
+    // Check initial state (all unanswered)
+    submitBtn.disabled = true;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // SUBMIT ANSWER
+  // ═══════════════════════════════════════════════════════════
+  function handleSubmit() {
+    if (submitted || !currentQuiz) return;
+    const q = currentQuiz.questions[currentIndex];
+    let isCorrect = false;
+
+    if (q.type === 'mc') {
+      if (selectedOption === null) return;
+      isCorrect = selectedOption === q.correct;
+
+      // Mark options
+      const btns = optionsCont.querySelectorAll('.option-btn');
+      btns.forEach((btn, i) => {
+        btn.classList.add('disabled');
+        if (i === q.correct) btn.classList.add('correct');
+        if (i === selectedOption && i !== q.correct) btn.classList.add('wrong');
+      });
+
+    } else if (q.type === 'tf') {
+      const correctIdx = q.correct ? 0 : 1;
+      if (selectedOption === null) return;
+      isCorrect = selectedOption === correctIdx;
+
+      const btns = optionsCont.querySelectorAll('.option-btn');
+      btns.forEach((btn, i) => {
+        btn.classList.add('disabled');
+        if (i === correctIdx) btn.classList.add('correct');
+        if (i === selectedOption && i !== correctIdx) btn.classList.add('wrong');
+      });
+
+    } else if (q.type === 'matching') {
+      const pairs = q.pairs;
+      let correctCount = 0;
+      pairs.forEach(p => {
+        const selected = matchSelections[p.left];
+        if (selected === p.right) correctCount++;
+      });
+      isCorrect = correctCount === pairs.length;
+
+      // Mark selects
+      const selects = matchingArea.querySelectorAll('select');
+      selects.forEach(sel => {
+        const left = sel.dataset.left;
+        const pair = pairs.find(p => p.left === left);
+        if (pair && sel.value === pair.right) {
+          sel.classList.add('correct');
+        } else if (sel.value !== '') {
+          sel.classList.add('wrong');
+        }
+        sel.disabled = true;
+      });
+    }
+
+    submitted = true;
+    if (isCorrect) score++;
+    answers.push({ questionIdx: currentIndex, selected: selectedOption, correct: isCorrect ? q.correct : null, isCorrect });
+
+    // Show explanation
+    explanation.classList.add('visible');
+    if (!isCorrect) explanation.classList.add('wrong');
+    expHeading.textContent = isCorrect ? '✓ Correct!' : '✗ Not Quite';
+    expText.textContent = q.explanation;
+
+    // Update button
+    submitBtn.style.display = 'none';
+    nextBtn.style.display = '';
+    nextBtn.textContent = currentIndex < currentQuiz.questions.length - 1 ? 'Next Question →' : 'See Results 🎯';
+
+    // Update score display
+    scoreDisplay.textContent = `${score}/${currentIndex + 1}`;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // NEXT / FINISH
+  // ═══════════════════════════════════════════════════════════
+  function handleNext() {
+    if (!currentQuiz) return;
+
+    if (currentIndex < currentQuiz.questions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+    } else {
+      finishQuiz();
+    }
+  }
+
+  function finishQuiz() {
+    isComplete = true;
+
+    // Save to localStorage
+    saveScores();
+
+    // Hide question stuff
+    questionArea.style.display = 'none';
+    optionsCont.style.display = 'none';
+    matchingArea.style.display = 'none';
+    explanation.style.display = 'none';
+    submitBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    progressFill.style.width = '100%';
+    scoreDisplay.textContent = `${score}/${currentQuiz.questions.length}`;
+
+    const total = currentQuiz.questions.length;
+    const pct = Math.round((score / total) * 100);
+    const emoji = getEmoji(pct);
+
+    scoreSummary.style.display = 'block';
+    scoreSummary.innerHTML = `
+      <div class="score-summary">
+        <div class="score-emoji">${emoji}</div>
+        <h2>Quiz Complete!</h2>
+        <div class="score-big">${score}/${total}</div>
+        <div class="score-detail">${pct}% correct</div>
+        <button class="btn btn-success" id="retakeBtn">🔄 Retake Quiz</button>
+        <button class="btn btn-secondary" id="backBtn" style="margin-top:8px;">← Choose a Different Quiz</button>
+      </div>
+    `;
+
+    document.getElementById('retakeBtn').addEventListener('click', () => {
+      startQuiz(currentQuiz.id);
+    });
+    document.getElementById('backBtn').addEventListener('click', () => {
+      showQuizSelector();
+    });
+
+    renderHistory();
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // QUIZ SELECTOR
+  // ═══════════════════════════════════════════════════════════
+  function showQuizSelector() {
+    isComplete = false;
+    currentQuiz = null;
+    currentIndex = 0;
+    score = 0;
+    answers = [];
+    submitted = false;
+    selectedOption = null;
+    matchSelections = {};
+    scoreSummary.style.display = 'none';
+    scoreSummary.innerHTML = '';
+
+    quizTitle.textContent = '📝 Interactive Quiz';
+    quizSubtitle.textContent = 'Select a quiz to begin';
+
+    quizSelector.style.display = 'block';
+    questionArea.style.display = 'none';
+    optionsCont.style.display = 'none';
+    matchingArea.style.display = 'none';
+    explanation.style.display = 'none';
+    explanation.classList.remove('visible', 'wrong');
+    submitBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    progressFill.style.width = '0%';
+    qCounter.textContent = 'Q1/?';
+    scoreDisplay.textContent = '0/0';
+    btnRow.style.display = 'none';
+    scoreHistory.style.display = 'block';
+
+    // Reset select
+    quizSelect.value = '';
+    renderHistory();
+  }
+
+  function startQuiz(quizId) {
+    const q = quizzes.find(q => q.id === quizId);
+    if (!q) return;
+
+    currentQuiz = q;
+    currentIndex = 0;
+    score = 0;
+    answers = [];
+    isComplete = false;
+
+    quizTitle.textContent = `📝 ${q.title}`;
+    quizSubtitle.textContent = `${q.questions.length} questions • Test your knowledge`;
+
+    quizSelector.style.display = 'none';
+    questionArea.style.display = 'block';
+    optionsCont.style.display = 'none';
+    matchingArea.style.display = 'none';
+    explanation.style.display = 'none';
+    explanation.classList.remove('visible', 'wrong');
+    btnRow.style.display = 'flex';
+    submitBtn.style.display = '';
+    nextBtn.style.display = 'none';
+    submitBtn.disabled = true;
+    scoreHistory.style.display = 'block';
+
+    renderQuestion();
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // LOAD QUIZZES (allow external injection)
+  // ═══════════════════════════════════════════════════════════
+  function loadQuizzes() {
+    // If widget consumer set window.__TURBO_QUIZZES, use those
+    // Otherwise use defaults
+    quizzes = window.__TURBO_QUIZZES || DEFAULT_QUIZZES;
+
+    // Populate selector
+    quizSelect.innerHTML = '<option value="">— Select a Quiz —</option>';
+    quizzes.forEach(q => {
+      const opt = document.createElement('option');
+      opt.value = q.id;
+      opt.textContent = q.title;
+      quizSelect.appendChild(opt);
+    });
+
+    // Auto-select if only one quiz
+    if (quizzes.length === 1) {
+      startQuiz(quizzes[0].id);
+    }
+  }
+
+  quizSelect.addEventListener('change', function() {
+    if (this.value) startQuiz(this.value);
+  });
+
+  // ═══════════════════════════════════════════════════════════
+  // EVENT BINDING
+  // ═══════════════════════════════════════════════════════════
+  submitBtn.addEventListener('click', handleSubmit);
+  nextBtn.addEventListener('click', handleNext);
+  resetHistoryBtn.addEventListener('click', () => {
+    if (confirm('Clear all quiz history?')) {
+      localStorage.removeItem(WIDGET_KEY);
+      renderHistory();
+    }
+  });
+
+  // ═══════════════════════════════════════════════════════════
+  // AUTO-INIT
+  // ═══════════════════════════════════════════════════════════
+  // Check for embed mode (no body styles)
+  if (window.location.search.includes('embed=1') || window.parent !== window) {
+    document.querySelector('.quiz-widget').classList.add('embed-mode');
+    document.body.classList.add('embed');
+  }
+
+  loadQuizzes();
+  renderHistory();
+
+  // ─── Public API for parent page ───
+  window.TurboQuiz = {
+    loadQuizzes: (customQuizzes) => {
+      if (customQuizzes) {
+        window.__TURBO_QUIZZES = customQuizzes;
+        loadQuizzes();
+      }
+    },
+    startQuiz: (quizId) => startQuiz(quizId),
+    getCurrentQuiz: () => currentQuiz,
+    getScore: () => ({ score, total: currentQuiz ? currentQuiz.questions.length : 0 }),
+    getHistory: () => loadScores(),
+    resetHistory: () => { localStorage.removeItem(WIDGET_KEY); renderHistory(); },
+    DEFAULT_QUIZZES: DEFAULT_QUIZZES
+  };
+
+  console.log('📝 Turbo Quiz Widget loaded. Use window.TurboQuiz for the API.');
+  console.log('📚 To load custom quizzes: window.TurboQuiz.loadQuizzes([...yourQuizzes])');
+})();
+</script>
+</body>
+</html>
