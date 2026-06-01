@@ -14,11 +14,22 @@ export type Cue = {
   text: string;
 };
 
+// Question types supported inside a quiz widget
+export type QuizQuestionType = "mc" | "tf" | "fillblank" | "match";
+
 export type MiniQuestion = {
   id: string;
   question: string;
-  options: string[];
-  correct: number;
+  questionType?: QuizQuestionType; // default: "mc"
+  // MC fields
+  options?: string[];
+  correct: number | boolean | string; // MC: number index, TF: boolean, fillblank: string
+  // TF fields
+  feedback?: string[]; // [wrongFeedback, correctFeedback] for TF; per-option for MC
+  // Fill-in-blank fields
+  aliases?: string[]; // acceptable alternative answers
+  // Match fields
+  pairs?: { left: string; right: string }[]; // for match questions
 };
 
 export type ReflectionQuestion = {
@@ -91,9 +102,23 @@ export type GoodFitStep = StepBase & {
   feedback: string[];
 };
 
+export type QuizConfig = {
+  mode?: "all_at_once" | "one_at_a_time"; // default: "one_at_a_time"
+  shuffleQuestions?: boolean;
+  shuffleOptions?: boolean;
+  showResultsAfterEach?: boolean; // show per-question feedback immediately
+  passingThreshold?: number; // 0–100, defaults to 70
+  timerSeconds?: number; // per-question timer, 0 = no timer
+  allowRetry?: boolean; // allow re-taking after submission
+  showProgressBar?: boolean; // show question X of Y
+};
+
 export type QuizStep = StepBase & {
   type: "quiz";
+  title?: string;
+  subtitle?: string;
   questions: MiniQuestion[];
+  config?: QuizConfig;
 };
 
 export type BuilderStep = StepBase & {
