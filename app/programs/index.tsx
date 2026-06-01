@@ -22,12 +22,19 @@ export default function Programs({ userId }: { userId?: string }) {
     <FlatList
       contentContainerStyle={{ padding: spacing.xl, gap: spacing.md }}
       data={data ?? []}
+      ListHeaderComponent={
+        <Text style={{ color: colors.text, fontSize: fontSize.title, fontWeight: fontWeight.bold, textAlign: 'center', marginBottom: spacing.sm }}>
+          Programs
+        </Text>
+      }
       ListEmptyComponent={<EmptyState title="No programs yet" message="Check back soon." />}
       renderItem={({ item }) => (
         <Card>
-          <Text style={{ color: colors.text, fontSize: fontSize.subtitle, fontWeight: fontWeight.bold }}>{item.title}</Text>
-          {item.subtitle ? <Text style={{ color: colors.textMuted }}>{item.subtitle}</Text> : null}
-          <Button title={item.enrolled ? 'Continue' : 'Enroll'} onPress={() => item.enrolled ? router.push('/home') : enroll(item.id)} />
+          <Text style={{ color: colors.text, fontSize: fontSize.subtitle, fontWeight: fontWeight.bold, textAlign: 'center' }}>{item.title}</Text>
+          {item.subtitle ? <Text style={{ color: colors.textMuted, textAlign: 'center', marginTop: 4 }}>{item.subtitle}</Text> : null}
+          <View style={{ marginTop: spacing.md }}>
+            <Button title={item.enrolled ? 'Continue' : 'Enroll'} onPress={() => item.enrolled ? router.push('/home') : enroll(item.id)} />
+          </View>
         </Card>
       )}
       keyExtractor={i => i.id}

@@ -64,21 +64,21 @@ export default function LeaderboardScreen() {
 
       {/* Error */}
       {isError && (
-        <View style={styles.center}>
+        <View style={[styles.center, { paddingHorizontal: spacing.xl }]}>
           <Text style={styles.emptyEmoji}>⚠️</Text>
-          <Text style={styles.emptyTitle}>Couldn't load leaderboard</Text>
-          <Text style={styles.emptyHint}>Check your connection and try again later.</Text>
+          <Text style={[styles.emptyTitle, { textAlign: 'center' }]}>Couldn't load leaderboard</Text>
+          <Text style={[styles.emptyHint, { textAlign: 'center' }]}>Check your connection and try again later.</Text>
         </View>
       )}
 
       {/* Empty */}
       {!isLoading && !isError && (!data || data.length === 0) && (
-        <View style={styles.center}>
+        <View style={[styles.center, { paddingHorizontal: spacing.xl }]}>
           <Text style={styles.emptyEmoji}>🏆</Text>
-          <Text style={styles.emptyTitle}>
+          <Text style={[styles.emptyTitle, { textAlign: 'center' }]}>
             {scope === "global" ? "No rankings yet" : "No friends on the board"}
           </Text>
-          <Text style={styles.emptyHint}>
+          <Text style={[styles.emptyHint, { textAlign: 'center' }]}>
             {scope === "global"
               ? "Complete lessons to earn XP and climb the ranks."
               : "Invite friends and compete together."}

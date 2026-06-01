@@ -6,7 +6,7 @@ import { colors } from "../../../theme/tokens";
 
 export const stepStyles = StyleSheet.create({
   // Container
-  container: { flex: 1, padding: 4 },
+  container: { flex: 1, padding: 4, justifyContent: 'center' },
 
   // Question text
   question: {

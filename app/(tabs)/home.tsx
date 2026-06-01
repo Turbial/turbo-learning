@@ -112,9 +112,9 @@ export default function HomeScreen() {
 
         {/* Journey */}
         <View style={styles.journey}>
-          <View style={styles.journeyHeader}>
+          <View style={[styles.journeyHeader, { justifyContent: 'center' }]}>
             <Text style={styles.sectionTitle}>Your Journey</Text>
-            <Text style={styles.journeyProgress}>{completedCount}/28 days</Text>
+            <Text style={[styles.journeyProgress, { marginLeft: 12 }]}>{completedCount}/28 days</Text>
           </View>
 
           {/* Overall progress bar */}
@@ -321,7 +321,6 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 8,
     alignItems: "center",
-    backdropFilter: 'blur(10px)',
   },
   statIcon: { fontSize: 18, marginBottom: 4 },
   statValue: { fontSize: 20, fontWeight: "800" as const, color: "#fff" },

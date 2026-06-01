@@ -59,11 +59,11 @@ export default function Checkout() {
         backgroundColor: colors.background,
       }}
     >
-      <View>
-        <Text style={{ color: colors.text, fontSize: fontSize.title, fontWeight: fontWeight.bold }}>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={{ color: colors.text, fontSize: fontSize.title, fontWeight: fontWeight.bold, textAlign: 'center' }}>
           Choose payment method
         </Text>
-        <Text style={{ color: colors.textMuted, fontSize: fontSize.body, marginTop: 4 }}>
+        <Text style={{ color: colors.textMuted, fontSize: fontSize.body, marginTop: 4, textAlign: 'center' }}>
           {planLabel} {price ? `· ${price}` : ''}
         </Text>
       </View>

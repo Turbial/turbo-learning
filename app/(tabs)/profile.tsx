@@ -155,7 +155,7 @@ export default function Profile() {
 
       {/* Edit profile */}
       <View style={s.card}>
-        <Text style={s.sectionTitle}>Edit Profile</Text>
+        <Text style={[s.sectionTitle, { textAlign: 'center' }]}>Edit Profile</Text>
         <Field value={name} onChangeText={setName} placeholder="Display name" />
         <View style={{ height: 12 }} />
         <Field value={goal} onChangeText={setGoal} placeholder="Your learning goal" multiline />

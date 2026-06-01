@@ -284,17 +284,16 @@ export default function LessonPlayer({
         </View>
       ))}
 
-      {/* Navigation */}
+      {/* Navigation — Continue on LEFT, Back on RIGHT */}
       <View style={styles.nav}>
-        {allowBack && stepIndex > 0 && (
-          <Text style={styles.backBtn} onPress={handleBack}>
-            ← Back
-          </Text>
-        )}
-        {/* Show Continue for non-interactive steps OR after user has answered an interactive step */}
         {(!handler.behavior.requiresInteraction || responses[step.id] !== undefined) && (
           <Text style={styles.continueBtn} onPress={handleContinue}>
             {playerState.isLast ? "Complete →" : "Continue →"}
+          </Text>
+        )}
+        {allowBack && stepIndex > 0 && (
+          <Text style={styles.backBtn} onPress={handleBack}>
+            ← Back
           </Text>
         )}
       </View>

@@ -90,7 +90,7 @@ export default function ProgressScreen() {
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
-        <Text style={styles.title}>Your Progress</Text>
+        <Text style={[styles.title, { textAlign: 'center' }]}>Your Progress</Text>
 
         {/* Stats overview row */}
         <View style={styles.statsRow}>
@@ -136,7 +136,7 @@ export default function ProgressScreen() {
 
         {/* Streak visualization */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>🔥 Streak Progress</Text>
+          <Text style={[styles.cardTitle, { textAlign: 'center' }]}>🔥 Streak Progress</Text>
           {streak === 0 ? (
             <View style={styles.emptyStreak}>
               <Text style={styles.emptyEmoji}>🎯</Text>
@@ -184,9 +184,9 @@ export default function ProgressScreen() {
 
         {/* Badges */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>🏅 Badges ({badgeList.length})</Text>
+          <Text style={[styles.cardTitle, { textAlign: 'center' }]}>🏅 Badges ({badgeList.length})</Text>
           {badgeList.length > 0 ? (
-            <View style={styles.badgeGrid}>
+            <View style={[styles.badgeGrid, { justifyContent: 'center' }]}>
               {badgeList.map((b: any, idx: number) => (
                 <View key={b.slug ?? idx} style={styles.badgeItem}>
                   <Text style={styles.badgeIcon}>{b.icon ?? "🏅"}</Text>
