@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "unit": "day12",
+  "title": "Day 12: AI for Sales & Outreach",
+  "estMinutes": 22,
+  "steps": [
+    {
+      "id": "d12-info-1",
+      "type": "info",
+      "title": "Welcome to Day 12: AI for Sales & Outreach",
+      "body": "Sales is relationship work — but the research, drafting, and follow-up that support those relationships are repetitive, high-volume tasks. That's where AI shines.\n\nToday you'll learn how to use AI tools to:\n• Prospect smarter — find and research leads at scale\n• Draft outreach emails that feel personal, not templated\n• Build follow-up sequences that convert without being pushy\n• Keep your authentic voice while letting AI do the lifting\n\nBy the end of today, you'll have a complete AI-powered sales outreach system you can use tomorrow.",
+      "xp": 5
+    },
+    {
+      "id": "d12-highlight-1",
+      "type": "highlight",
+      "body": "Here's how AI transforms the sales workflow:\n\n🎯 PROSPECTING — AI researches companies, finds decision-makers, and surfaces news/events that signal buying intent. Hours of manual research become minutes of review.\n\n✍️ DRAFTING — AI writes personalized outreach emails using the prospect's company, role, industry, and recent activity. No more generic templates.\n\n📋 CADENCE — AI structures follow-up sequences — when to reach out, what to say, when to pivot or stop. Systematic follow-up without the mental overhead.\n\n🔍 ANALYSIS — AI scans call notes, emails, and CRM data to flag patterns: who's engaged, who's gone silent, who's ready for a close.\n\nThe operator's job shifts from doing the work to directing the work.",
+      "highlights": [
+        "PROSPECTING — AI researches companies",
+        "DRAFTING — AI writes personalized outreach",
+        "CADENCE — AI structures follow-up sequences",
+        "directing the work"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d12-mc-1",
+      "type": "mc",
+      "question": "What's the biggest advantage of using AI for prospecting compared to manual research?",
+      "options": [
+        "AI can work without any input from you",
+        "AI can research hundreds of prospects in the time it takes to manually research one, surfacing fit signals and personalization hooks",
+        "AI guarantees every lead will convert",
+        "AI replaces the need for knowing your target audience"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. AI excels at scale — it doesn't get tired, distracted, or slow down. The operator provides the targeting criteria and quality filters; AI does the research legwork in parallel across hundreds of prospects.",
+        "Not quite. AI is a force multiplier for research speed, but the operator still defines who to target and what signals matter. Speed without direction wastes time twice as fast."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-scenario_card-1",
+      "type": "scenario_card",
+      "title": "Maya's AI-Powered Prospecting",
+      "body": "Maya sells HR software to mid-size companies. Her old process: manually visit company websites → search for HR leaders on LinkedIn → read recent news → write each email from scratch. She reached 10 prospects a week.\n\nHer new AI-powered process:\n1. AI takes her ideal customer profile (250-1000 employees, Series B+, growing headcount)\n2. AI scans LinkedIn and news sources to find matching companies and the right HR contact\n3. For each, AI researches: recent funding, new hires, expansion announcements, HR-related pain points\n4. AI drafts personalized outreach emails referencing the specific trigger events found\n5. Maya reviews, tweaks the voice, and sends\n\nResult: Maya reaches 60 qualified prospects per week instead of 10. Her reply rate went from 8% to 22%. She spends her time on high-value conversations instead of tab-switching research.",
+      "xp": 5
+    },
+    {
+      "id": "d12-tf-1",
+      "type": "tf",
+      "question": "AI sales emails should be sent exactly as the AI writes them — never edit or personalize them further.",
+      "correct": false,
+      "feedback": [
+        "Right. AI drafts are a starting point, not a finish line. The most effective operators use AI for the research and structure, then add their own voice, specific observations, and conversational tone. The AI handles the heavy lifting; you supply the human touch.",
+        "Not correct. AI-generated sales emails need human review. Generic AI language is easy to spot and undermines trust. Always personalize the draft — add your voice, specific references, and a natural tone."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-example-1",
+      "type": "example",
+      "title": "Before AI vs. With AI: Cold Outreach",
+      "body": "BEFORE — Generic template (sent to everyone):\n\"Hi [Name], I wanted to reach out because our platform helps companies like yours streamline operations. Would you have 15 minutes to chat this week?\"\n\nEveryone sends this. It gets deleted instantly. No research, no hook.\n\nAFTER — AI-researched, human-polished:\n\"Hi Sarah, I saw Acme Corp just closed your Series B and plans to grow engineering from 40 to 120 this year. Scaling like that usually breaks HR processes built for 40 people.\n\nWe help companies navigate this transition. I'd love to share how a similar-stage company handled their 3x scale-up. Up for a 15-minute call next week?\"\n\nWhat changed: specific company research (Series B, headcount target), relevant hook (scaling HR pain), social proof (similar company), and a low-friction ask.\n\nThe AI did the research and drafted the structure. The human added the voice and final polish.",
+      "xp": 5
+    },
+    {
+      "id": "d12-goodfit-1",
+      "type": "good_fit",
+      "question": "Using AI to scan a list of 500 potential leads, research each company's recent news and funding, and draft personalized first-touch emails for each one.",
+      "correct": "good",
+      "feedback": [
+        "This is exactly what AI is built for — high-volume, research-heavy, repetitive work that benefits from personalization at scale. The operator defines the criteria and reviews the output; AI does the hundreds of hours of manual work in minutes.",
+        "Excellent use case. Researching and personalizing at volume is AI's sweet spot. The operator provides the targeting logic and voice guidelines; AI does the grunt work of researching and drafting across hundreds of leads."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-builder-1",
+      "type": "builder",
+      "fields": [
+        {
+          "id": "purpose",
+          "label": "What are you selling or offering?",
+          "placeholder": "e.g., HR software, consulting services, a partnership opportunity"
+        },
+        {
+          "id": "prospect",
+          "label": "Who is your ideal prospect?",
+          "placeholder": "e.g., HR leaders at 200-1000 employee companies that recently raised funding"
+        },
+        {
+          "id": "hook",
+          "label": "What's a specific hook or trigger event you can reference?",
+          "placeholder": "e.g., recent funding round, new leadership hire, expansion announcement"
+        },
+        {
+          "id": "cadence",
+          "label": "What's your follow-up cadence (timing + message focus per touch)?",
+          "placeholder": "e.g., Day 1: intro email, Day 4: value add (case study), Day 10: check-in, Day 20: break-up"
+        }
+      ],
+      "template": "AI-POWERED OUTREACH SYSTEM\n\nOFFERING: {purpose}\n\nIDEAL PROSPECT: {prospect}\n\nHOOK / TRIGGER: {hook}\n\nFOLLOW-UP CADENCE:\n{cadence}\n\nDIRECTIONS FOR AI: \"Research each prospect using the criteria above. Draft a personalized first email referencing their specific trigger event. Use a conversational, helpful tone. No jargon. No hard sell. Follow the cadence and adjust tone if they reply.\"",
+      "xp": 15
+    },
+    {
+      "id": "d12-mc-2",
+      "type": "mc",
+      "question": "What's the most effective follow-up cadence for cold email outreach based on industry benchmarks?",
+      "options": [
+        "Send every day until they reply — persistence wins",
+        "One email, then wait forever — don't be annoying",
+        "A structured sequence: initial email → 3-4 day follow-up with value → 7-10 day check-in → final break-up email, then stop",
+        "Call them immediately — email is too passive"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Right. The best cadences are structured but respectful: an initial outreach, a value-add follow-up (case study, insight, relevant article), a gentle check-in, and a final break-up email. Each email has a different purpose — not just the same message repeated. Most conversions happen on follow-up 2-5.",
+        "Not quite. Effective follow-up is a planned sequence with varied messages that each add value. Same message repeated is spam. One-shot and done leaves money on the table. A structured 4-6 touch sequence over 2-3 weeks outperforms both extremes."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-tf-2",
+      "type": "tf",
+      "question": "Using AI for sales outreach always makes your emails feel robotic and impersonal — authenticity is impossible with AI-generated content.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI can feel robotic if you send its output unedited. But when used as a drafting tool with your voice, specific research, and human polish, AI-generated emails are often MORE personalized than manual templates — because AI actually does the research that most salespeople skip.",
+        "This isn't true. AI itself doesn't make emails robotic — lazy operators who skip editing do. Used properly, AI enables deeper personalization because it can research and reference specifics that a busy salesperson would miss. The key is: AI drafts, human refines."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-copy_action-1",
+      "type": "copy_action",
+      "body": "COLD OUTREACH PROMPT TEMPLATE\n\n\"You are a sales development representative at [COMPANY]. I need you to write a personalized cold outreach email to [PROSPECT NAME], [TITLE] at [TARGET COMPANY].\n\nHere's what I know about them:\n• [Trigger event or recent news]\n• [Company details]\n• [Relevant context]\n\nHere's what I'm offering:\n• [Product/service and the specific value it provides]\n\nInstructions:\n1. Research their company context (size, industry, recent news, growth stage)\n2. Find one specific hook from their activity — funding, hire, expansion, content they published\n3. Write a 3-paragraph email: (a) personalized hook, (b) relevant value proposition tied to their situation, (c) low-friction call to action (reply, call or brief meeting)\n4. Use conversational, human tone — no jargon, no 'synergize,' no 'leverage'\n5. Keep it under 150 words\n6. End with a specific ask, not 'let me know'\n\nOutput only the email draft. Ready to send.\"",
+      "sourceStepId": "d12-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d12-paste-capture-1",
+      "type": "paste_capture",
+      "body": "Now use the prompt template you just copied. Pick a real prospect or company you'd actually want to reach out to. Run the prompt with an AI tool of your choice, paste the AI-generated email draft below, and note one thing you'd change to make it sound more like you.",
+      "minLength": 60,
+      "xp": 15
+    },
+    {
+      "id": "d12-reflection-1",
+      "type": "reflection",
+      "prompt": "You've learned how AI transforms sales and outreach — from prospecting at scale to drafting personalized emails to structuring follow-up sequences. Now think about how this applies to your world.\n\nReflect on these questions and answer honestly.",
+      "minChars": 40,
+      "xp": 15,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "How would you rate your current outreach approach?",
+          "options": [
+            "I don't do outreach at all — this is new territory",
+            "I do manual outreach — it works but takes too long",
+            "I use some templates — good but could be better",
+            "I already use AI — looking to level up my system"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What's one specific sales or outreach task you'll try automating with AI this week?",
+          "placeholder": "Describe the task and how you'll use what you learned today..."
+        }
+      ]
+    },
+    {
+      "id": "d12-completion-1",
+      "type": "completion",
+      "title": "Day 12 Complete! 🎯",
+      "body": "You now know how to use AI as a sales force multiplier — not to replace the human connection, but to remove the grunt work that prevents you from making that connection.\n\nKey takeaways:\n• AI researches and drafts at scale; you provide judgment and voice\n• Personalization based on real research always beats generic templates\n• Follow-up sequences convert — structure your cadence with purpose\n• Authenticity isn't lost with AI; it's enabled by getting the busywork out of the way\n\nTomorrow: AI for customer support and service — handling inquiries, resolving tickets, and keeping customers happy.",
+      "xp": 15
+    }
+  ]
+}
