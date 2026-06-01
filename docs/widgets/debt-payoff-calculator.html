@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Payoff Calculator</title>
+<style>
+  /* ─── Reset & Base ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  /* ─── Container ─── */
+  .widget {
+    max-width: 780px;
+    width: 100%;
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid #334155;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .widget h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 4px;
+  }
+  .widget .subtitle {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+  }
+
+  /* ─── Input grid ─── */
+  .input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 600px) {
+    .input-grid { grid-template-columns: 1fr; }
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .input-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #94a3b8;
+  }
+  .input-group .input-wrap {
+    position: relative;
+  }
+  .input-group .prefix {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+  .input-group .suffix {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 0.8rem;
+    pointer-events: none;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .input-group input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+  .input-balance input { padding-left: 28px; }
+  .input-payment input { padding-left: 28px; }
+  .input-apr input { padding-right: 28px; }
+
+  /* ─── Results ─── */
+  .results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+  }
+  @media (max-width: 600px) {
+    .results { grid-template-columns: 1fr 1fr; }
+  }
+  .result-card {
+    text-align: center;
+  }
+  .result-card .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    font-weight: 600;
+  }
+  .result-card .value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    margin-top: 4px;
+  }
+  .result-card .value.positive { color: #22c55e; }
+  .result-card .value.caution { color: #f59e0b; }
+  .result-card .value.negative { color: #ef4444; }
+
+  /* ─── Chart ─── */
+  .chart-container {
+    position: relative;
+    height: 260px;
+    margin-bottom: 16px;
+  }
+  .chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* ─── Legend ─── */
+  .chart-legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-bottom: 16px;
+  }
+  .chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .legend-dot.principal { background: #3b82f6; }
+  .legend-dot.interest { background: #ef4444; }
+  .legend-dot.balance { background: #8b5cf6; }
+
+  /* ─── Summary ─── */
+  .summary-box {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .summary-box p {
+    font-size: 0.875rem;
+    color: #cbd5e1;
+  }
+  .summary-box strong {
+    color: #f1f5f9;
+  }
+  .summary-box .tip {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-style: italic;
+  }
+
+  /* ─── Extra payment toggle ─── */
+  .extra-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: #0f172a;
+    border-radius: 10px;
+    border: 1px solid #1e293b;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.2s;
+  }
+  .extra-toggle:hover { border-color: #334155; }
+  .extra-toggle input {
+    width: 18px;
+    height: 18px;
+    accent-color: #3b82f6;
+    cursor: pointer;
+  }
+  .extra-toggle label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #e2e8f0;
+    cursor: pointer;
+  }
+
+  #extraPaymentRow {
+    display: none;
+    margin-bottom: 16px;
+  }
+  #extraPaymentRow.visible {
+    display: block;
+  }
+  #extraPaymentRow .input-group {
+    max-width: 220px;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 480px) {
+    .widget { padding: 20px 16px; }
+    .results { grid-template-columns: 1fr 1fr; }
+    .result-card .value { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="widget" role="main" aria-label="Debt Payoff Calculator">
+  <h1>💰 Debt Payoff Calculator</h1>
+  <p class="subtitle">See how long it takes to become debt-free — and how much interest you'll pay.</p>
+
+  <!-- Inputs -->
+  <div class="input-grid">
+    <div class="input-group input-balance">
+      <label for="balance">Balance</label>
+      <div class="input-wrap">
+        <span class="prefix">$</span>
+        <input type="number" id="balance" value="5000" min="1" step="100" aria-label="Debt balance in dollars">
+      </div>
+    </div>
+    <div class="input-group input-apr">
+      <label for="apr">APR</label>
+      <div class="input-wrap">
+        <input type="number" id="apr" value="22.9" min="0" max="100" step="0.1" aria-label="Annual percentage rate">
+        <span class="suffix">%</span>
+      </div>
+    </div>
+    <div class="input-group input-payment">
+      <label for="payment">Monthly Payment</label>
+      <div class="input-wrap">
+        <span class="prefix">$</span>
+        <input type="number" id="payment" value="200" min="1" step="10" aria-label="Monthly payment amount">
+      </div>
+    </div>
+  </div>
+
+  <!-- Extra payment toggle -->
+  <div class="extra-toggle" role="button" tabindex="0" onclick="toggleExtraPayment()" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleExtraPayment()">
+    <input type="checkbox" id="extraToggle" onchange="toggleExtraPayment()" onclick="event.stopPropagation()">
+    <label for="extraToggle">Add extra monthly payment</label>
+  </div>
+  <div id="extraPaymentRow">
+    <div class="input-group">
+      <label for="extraPayment">Extra per month</label>
+      <div class="input-wrap">
+        <span class="prefix">$</span>
+        <input type="number" id="extraPayment" value="50" min="0" step="10" aria-label="Extra monthly payment amount">
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" aria-live="polite">
+    <div class="result-card">
+      <div class="label">Time to Pay Off</div>
+      <div class="value positive" id="resultMonths">—</div>
+    </div>
+    <div class="result-card">
+      <div class="label">Total Interest</div>
+      <div class="value caution" id="resultInterest">—</div>
+    </div>
+    <div class="result-card">
+      <div class="label">Total Paid</div>
+      <div class="value negative" id="resultTotal">—</div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-container">
+    <canvas id="chart" aria-label="Amortization chart showing principal and interest over time"></canvas>
+  </div>
+
+  <div class="chart-legend">
+    <span><span class="legend-dot principal"></span> Remaining Balance</span>
+    <span><span class="legend-dot interest"></span> Interest Paid</span>
+    <span><span class="legend-dot balance"></span> Principal Paid</span>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-box" id="summaryBox">
+    <div>
+      <p>Making minimum payments? <strong id="summaryMonths">—</strong></p>
+      <p class="tip" id="summaryTip">Tip: Pay more each month to save on interest.</p>
+    </div>
+    <p><strong id="summarySaved">—</strong></p>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const balanceInput = document.getElementById('balance');
+  const aprInput = document.getElementById('apr');
+  const paymentInput = document.getElementById('payment');
+  const extraInput = document.getElementById('extraPayment');
+  const extraToggle = document.getElementById('extraToggle');
+  const extraPaymentRow = document.getElementById('extraPaymentRow');
+
+  const resultMonths = document.getElementById('resultMonths');
+  const resultInterest = document.getElementById('resultInterest');
+  const resultTotal = document.getElementById('resultTotal');
+  const summaryMonths = document.getElementById('summaryMonths');
+  const summaryTip = document.getElementById('summaryTip');
+  const summarySaved = document.getElementById('summarySaved');
+
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+
+  let animationId = null;
+
+  // ─── Toggle extra payment row ───
+  window.toggleExtraPayment = function() {
+    extraPaymentRow.classList.toggle('visible', extraToggle.checked);
+    calculate();
+  };
+
+  // ─── Format helpers ───
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function fmtMonths(m) {
+    const years = Math.floor(m / 12);
+    const months = m % 12;
+    if (years === 0) return months + ' month' + (months !== 1 ? 's' : '');
+    if (months === 0) return years + ' year' + (years !== 1 ? 's' : '');
+    return years + ' yr ' + months + ' mo';
+  }
+
+  // ─── Core calculation ───
+  function calculate() {
+    const balance = parseFloat(balanceInput.value) || 0;
+    const apr = parseFloat(aprInput.value) || 0;
+    const monthly = parseFloat(paymentInput.value) || 0;
+    const extra = extraToggle.checked ? (parseFloat(extraInput.value) || 0) : 0;
+    const totalMonthly = monthly + extra;
+
+    // Validate
+    const monthlyRate = (apr / 100) / 12;
+    const minPayment = balance * monthlyRate;
+
+    if (balance <= 0 || monthly <= 0 || apr < 0) {
+      resultMonths.textContent = '—';
+      resultInterest.textContent = '—';
+      resultTotal.textContent = '—';
+      summaryMonths.textContent = '—';
+      summarySaved.textContent = '—';
+      summaryTip.textContent = 'Enter your numbers to see results.';
+      drawChart([]);
+      return;
+    }
+
+    if (totalMonthly <= minPayment && balance > 0 && apr > 0) {
+      resultMonths.textContent = '∞';
+      resultInterest.textContent = '∞';
+      resultTotal.textContent = '∞';
+      summaryMonths.textContent = 'Never — payment too low';
+      summarySaved.textContent = '—';
+      summaryTip.textContent = '⚠️ Your payment doesn't cover the monthly interest. Increase it to make progress.';
+      drawChart([]);
+      return;
+    }
+
+    // Calculate amortization
+    let remaining = balance;
+    let totalInterest = 0;
+    let months = 0;
+    const schedule = [];
+
+    while (remaining > 0.005 && months < 600) { // 50 year max
+      const interestThisMonth = remaining * monthlyRate;
+      let principalThisMonth = totalMonthly - interestThisMonth;
+      if (principalThisMonth > remaining) principalThisMonth = remaining;
+      if (principalThisMonth < 0) principalThisMonth = 0;
+
+      remaining -= principalThisMonth;
+      totalInterest += interestThisMonth;
+      months++;
+      schedule.push({
+        month: months,
+        balance: Math.max(remaining, 0),
+        principalPaid: principalThisMonth,
+        interestPaid: interestThisMonth,
+        cumulativeInterest: totalInterest,
+        cumulativePrincipal: balance - Math.max(remaining, 0),
+      });
+      if (remaining < 0.005) {
+        remaining = 0;
+        // Break on next iteration check
+      }
+    }
+
+    // Display results
+    resultMonths.textContent = fmtMonths(months);
+    resultTotal.textContent = fmt(balance + totalInterest);
+    resultInterest.textContent = fmt(totalInterest);
+
+    // Color coding for interest
+    const interestPct = balance > 0 ? (totalInterest / balance) * 100 : 0;
+    const interestEl = resultInterest.parentElement.querySelector('.value');
+    interestEl.className = 'value ' + (
+      interestPct < 20 ? 'positive' :
+      interestPct < 50 ? 'caution' :
+      'negative'
+    );
+
+    // Summary
+    summaryMonths.textContent = fmtMonths(months) + ' — ' + fmt(balance + totalInterest) + ' total';
+    if (extra > 0) {
+      // Calculate without extra payment for comparison
+      let rem2 = balance;
+      let int2 = 0;
+      let m2 = 0;
+      while (rem2 > 0.005 && m2 < 600) {
+        const intM = rem2 * monthlyRate;
+        let prin = monthly - intM;
+        if (prin > rem2) prin = rem2;
+        if (prin < 0) prin = 0;
+        rem2 -= prin;
+        int2 += intM;
+        m2++;
+        if (rem2 < 0.005) { rem2 = 0; }
+      }
+      const saved = int2 - totalInterest;
+      const savedTime = m2 - months;
+      summarySaved.textContent = fmt(Math.max(saved, 0)) + ' saved';
+      if (savedTime > 0 && saved > 0) {
+        summaryTip.textContent = '🎉 Adding $' + extra + '/month saves ' + fmt(Math.max(saved, 0)) + ' and ' + fmtMonths(savedTime) + '!';
+      } else if (saved <= 0) {
+        summaryTip.textContent = 'Extra payments reduce time & interest — every dollar counts.';
+      }
+    } else {
+      summarySaved.textContent = '—';
+      summaryTip.textContent = '💡 Tip: Even $25 extra per month can save hundreds in interest.';
+    }
+
+    drawChart(schedule);
+  }
+
+  // ─── Chart drawing ───
+  function drawChart(schedule) {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    const w = rect.width || 700;
+    const h = 260;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+
+    if (!schedule || schedule.length === 0) {
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#475569';
+      ctx.font = '14px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Enter your numbers to see the amortization chart', w/2, h/2);
+      return;
+    }
+
+    const pad = { top: 20, bottom: 30, left: 10, right: 10 };
+    const chartW = w - pad.left - pad.right;
+    const chartH = h - pad.top - pad.bottom;
+
+    // Find max for scaling
+    const balance0 = schedule[0]?.balance || 0;
+    const maxVal = Math.max(balance0, schedule[schedule.length-1]?.cumulativeInterest || 0);
+
+    // Background
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(0, 0, w, h);
+
+    // Grid lines
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.top + (chartH * i / 4);
+      ctx.beginPath();
+      ctx.moveTo(pad.left, y);
+      ctx.lineTo(w - pad.right, y);
+      ctx.stroke();
+    }
+
+    if (schedule.length < 2) return;
+
+    // Data series
+    const colors = {
+      balance: '#3b82f6',
+      interest: '#ef4444',
+      principal: '#8b5cf6',
+    };
+
+    function drawLine(data, color, label) {
+      if (data.length < 2) return;
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      for (let i = 0; i < data.length; i++) {
+        const x = pad.left + (i / (data.length - 1)) * chartW;
+        const y = pad.top + chartH - (data[i] / maxVal) * chartH;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Area fill for balance
+      if (color === colors.balance) {
+        ctx.beginPath();
+        const startX = pad.left;
+        const startY = pad.top + chartH;
+        ctx.moveTo(startX, startY);
+        for (let i = 0; i < data.length; i++) {
+          const x = pad.left + (i / (data.length - 1)) * chartW;
+          const y = pad.top + chartH - (data[i] / maxVal) * chartH;
+          ctx.lineTo(x, y);
+        }
+        const endX = pad.left + chartW;
+        ctx.lineTo(endX, startY);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+        ctx.fill();
+      }
+
+      // Label at end
+      const lastX = pad.left + chartW;
+      const lastY = pad.top + chartH - (data[data.length-1] / maxVal) * chartH;
+      ctx.fillStyle = color;
+      ctx.font = '11px system-ui, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(label, lastX + 6, lastY + 4);
+    }
+
+    // Build series
+    const balanceSeries = schedule.map(s => s.balance + s.cumulativeInterest);
+    const interestSeries = schedule.map(s => s.cumulativeInterest);
+
+    drawLine(balanceSeries, colors.balance, 'Total Paid');
+    drawLine(interestSeries, colors.interest, 'Interest');
+
+    // X axis labels
+    ctx.fillStyle = '#475569';
+    ctx.font = '11px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    const totalMonths = schedule.length;
+    const labelSteps = totalMonths <= 12 ? 2 : Math.ceil(totalMonths / 5);
+    for (let i = 0; i <= Math.min(4, totalMonths); i++) {
+      const monthIdx = Math.round((i / 4) * (totalMonths - 1));
+      const x = pad.left + (monthIdx / (totalMonths - 1)) * chartW;
+      const months = schedule[monthIdx]?.month || 0;
+      const years = Math.floor(months / 12);
+      const remMonths = months % 12;
+      const label = years > 0 ? (remMonths > 0 ? `${years}y ${remMonths}m` : `${years}y`) : `${months}m`;
+      ctx.fillText(label, x, h - 6);
+    }
+
+    // Y axis labels
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i <= 4; i++) {
+      const val = (maxVal * (4 - i)) / 4;
+      const y = pad.top + (chartH * i / 4);
+      ctx.fillText('$' + Math.round(val).toLocaleString(), pad.left - 6, y);
+    }
+  }
+
+  // ─── Debounced input handler ───
+  let debounceTimer = null;
+  function onInput() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(calculate, 80);
+  }
+
+  // ─── Handle resize ───
+  let resizeTimer = null;
+  function onResize() {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(calculate, 200);
+  }
+
+  // ─── Wire events ───
+  [balanceInput, aprInput, paymentInput, extraInput].forEach(el => {
+    el.addEventListener('input', onInput);
+  });
+
+  window.addEventListener('resize', onResize);
+
+  // ─── Initial render ───
+  calculate();
+})();
+</script>
+</body>
+</html>
