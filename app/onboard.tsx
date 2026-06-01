@@ -56,18 +56,27 @@ export default function OnboardScreen() {
     );
   }
 
+  const [saving, setSaving] = useState(false);
+
   const handleComplete = async () => {
     if (user) {
-      // Save preferences to Supabase
-      updateProfile.mutate({
-        name: name.trim() || undefined,
-        goal,
-        dailyMins,
-        learnTime,
-        onboarded: true,
-      });
-      // Auto-enroll in AI Operator
-      enroll.mutate({ programSlug: "ai-operator" });
+      setSaving(true);
+      try {
+        // Wait for profile save to complete before redirecting
+        await updateProfile.mutateAsync({
+          name: name.trim() || undefined,
+          goal,
+          dailyMins,
+          learnTime,
+          onboarded: true,
+        });
+        // Auto-enroll in AI Operator (fire-and-forget)
+        enroll.mutate({ programSlug: "ai-operator" });
+      } catch (e) {
+        console.error('Failed to save onboarding:', e);
+        setSaving(false);
+        return;
+      }
     }
     router.replace("/(tabs)/home");
   };
@@ -205,11 +214,12 @@ export default function OnboardScreen() {
             </View>
 
             <TouchableOpacity
-              style={styles.btn}
+              style={[styles.btn, saving && { opacity: 0.6 }]}
               onPress={handleComplete}
               activeOpacity={0.8}
+              disabled={saving}
             >
-              <Text style={styles.btnText}>Start Learning</Text>
+              <Text style={styles.btnText}>{saving ? 'Saving...' : 'Start Learning'}</Text>
             </TouchableOpacity>
           </View>
         )}
