@@ -46,7 +46,7 @@ export default function PromptGeneratorStep({ step, onAnswer }: StepProps) {
       </Text>
 
       <View style={styles.categoryGrid}>
-        {s.categories.map((cat) => (
+        {(s.categories ?? []).map((cat) => (
           <TouchableOpacity
             key={cat}
             style={[

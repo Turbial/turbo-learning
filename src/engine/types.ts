@@ -186,7 +186,8 @@ export type PromptGeneratorField = {
 export type PromptGeneratorStep = StepBase & {
   type: "prompt_generator";
   topic?: string;
-  template: string;
+  promptTemplate: string;
+  categories?: string[];
   fields?: PromptGeneratorField[];
   title?: string;
   subtitle?: string;
