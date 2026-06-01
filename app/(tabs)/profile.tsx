@@ -1,15 +1,14 @@
-// ─── Profile Tab — edit name, avatar, goal, shields, settings, sign out ───
+// ─── Profile Tab — redesigned with card layout, avatar, badges, shield ───
 
 import { useState, useEffect } from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { supabase } from "../../src/data/supabase";
 import { Field } from "../../src/components/ui/Field";
 import { Button } from "../../src/components/ui/Button";
 import { Avatar } from "../../src/components/ui/Avatar";
 import { useToast } from "../../src/components/feedback/Toast";
-import { useTheme } from "../../src/theme/ThemeContext";
-import { spacing, fontSize, fontWeight, radius, colors as themeColors } from "../../src/theme/tokens";
+import { spacing, fontSize, fontWeight, radius } from "../../src/theme/tokens";
 import { useProfile, useBadges } from "../../src/data/queries";
 import { useStreakShield } from "../../src/data/useStreakShield";
 
@@ -21,8 +20,9 @@ const GOAL_LABELS: Record<string, { label: string; emoji: string }> = {
   systems: { label: "Build AI systems", emoji: "🏗️" },
 };
 
+const levelNames = ["Beginner", "Learner", "Builder", "Operator", "Master"];
+
 export default function Profile() {
-  const { colors } = useTheme();
   const toast = useToast();
   const router = useRouter();
   const { data: profile } = useProfile();
@@ -62,188 +62,196 @@ export default function Profile() {
   };
 
   const badgeList = badges?.map((b: any) => b.badges) ?? [];
+  const level = profile?.level ?? 1;
+  const levelName = levelNames[Math.min(level - 1, 4)] ?? `Master +${level - 5}`;
+  const goalInfo = profile?.goal ? GOAL_LABELS[profile.goal] : null;
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        padding: spacing.xl,
-        gap: spacing.md,
-        backgroundColor: colors.background,
-      }}
-    >
-      {/* Avatar + stats */}
-      <View style={{ alignItems: "center", gap: spacing.sm }}>
-        <Avatar name={name || "You"} size={72} />
-        <Text
-          style={{
-            color: colors.text,
-            fontSize: fontSize.title,
-            fontWeight: fontWeight.bold,
-          }}
-        >
-          {name || "Your profile"}
-        </Text>
-        <Text style={{ color: colors.textMuted, fontSize: fontSize.sm }}>
-          Level {profile?.level ?? 1} · {profile?.xp?.toLocaleString() ?? 0} XP
-        </Text>
+    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
+      {/* Hero card */}
+      <View style={s.heroCard}>
+        <Avatar name={name || "You"} size={80} />
+        <Text style={s.name}>{name || "AI Operator"}</Text>
+        <View style={s.levelBadge}>
+          <Text style={s.levelBadgeText}>Level {level} · {levelName}</Text>
+        </View>
+        <View style={s.heroStats}>
+          <View style={s.heroStat}>
+            <Text style={s.heroStatVal}>{profile?.xp?.toLocaleString() ?? 0}</Text>
+            <Text style={s.heroStatLabel}>XP</Text>
+          </View>
+          <View style={s.heroDivider} />
+          <View style={s.heroStat}>
+            <Text style={s.heroStatVal}>🔥 {profile?.streak ?? 0}</Text>
+            <Text style={s.heroStatLabel}>Streak</Text>
+          </View>
+          <View style={s.heroDivider} />
+          <View style={s.heroStat}>
+            <Text style={s.heroStatVal}>{badgeList.length}</Text>
+            <Text style={s.heroStatLabel}>Badges</Text>
+          </View>
+        </View>
       </View>
 
-      {/* Onboarding selections — read-only */}
-      {(profile?.goal || (profile as any)?.daily_mins || (profile as any)?.learn_time) && (
-        <View
-          style={{
-            backgroundColor: colors.surface,
-            borderRadius: radius.lg,
-            padding: spacing.md,
-            borderWidth: 1,
-            borderColor: colors.border,
-            gap: spacing.sm,
-          }}
-        >
-          {profile?.goal && GOAL_LABELS[profile.goal] && (
-            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
-              <Text style={{ fontSize: fontSize.lg }}>{GOAL_LABELS[profile.goal].emoji}</Text>
-              <View>
-                <Text style={{ color: colors.textMuted, fontSize: fontSize.xs }}>Main goal</Text>
-                <Text style={{ color: colors.text, fontSize: fontSize.body, fontWeight: fontWeight.semibold }}>
-                  {GOAL_LABELS[profile.goal].label}
-                </Text>
-              </View>
+      {/* Goal card */}
+      {goalInfo && (
+        <View style={s.card}>
+          <View style={s.cardRow}>
+            <Text style={s.cardIcon}>{goalInfo.emoji}</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={s.cardLabel}>Learning Goal</Text>
+              <Text style={s.cardValue}>{goalInfo.label}</Text>
             </View>
-          )}
-          {(profile as any)?.daily_mins && (
-            <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
-              <Text style={{ fontSize: fontSize.lg }}>⏱️</Text>
-              <View>
-                <Text style={{ color: colors.textMuted, fontSize: fontSize.xs }}>Daily commitment</Text>
-                <Text style={{ color: colors.text, fontSize: fontSize.body, fontWeight: fontWeight.semibold }}>
+          </View>
+          {(profile as any)?.daily_mins ? (
+            <View style={[s.cardRow, { marginTop: 12 }]}>
+              <Text style={s.cardIcon}>⏱️</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={s.cardLabel}>Daily Commitment</Text>
+                <Text style={s.cardValue}>
                   {(profile as any).daily_mins} min{(profile as any)?.learn_time ? ` · ${(profile as any).learn_time}` : ""}
                 </Text>
               </View>
             </View>
-          )}
+          ) : null}
         </View>
       )}
 
-      {/* Streak & Shield card */}
-      <View
-        style={{
-          backgroundColor: colors.surface,
-          borderRadius: radius.lg,
-          padding: spacing.md,
-          borderWidth: 1,
-          borderColor: colors.border,
-          flexDirection: "row",
-          alignItems: "center",
-          gap: spacing.md,
-        }}
-      >
-        <View style={{ flex: 1 }}>
-          <Text
-            style={{
-              color: colors.text,
-              fontSize: fontSize.md,
-              fontWeight: fontWeight.bold,
-            }}
+      {/* Shield card */}
+      <View style={s.card}>
+        <View style={s.cardRow}>
+          <Text style={s.cardIcon}>🛡️</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={s.cardLabel}>Streak Protection</Text>
+            <Text style={s.cardValue}>{shields?.count ?? 0} shield{(shields?.count ?? 0) !== 1 ? "s" : ""} available</Text>
+          </View>
+          <TouchableOpacity
+            style={s.shieldBtn}
+            onPress={handleBuyShield}
+            disabled={purchase.isPending}
+            activeOpacity={0.7}
           >
-            🔥 {profile?.streak ?? 0}-Day Streak
-          </Text>
-          <Text style={{ color: colors.textMuted, fontSize: fontSize.xs, marginTop: 2 }}>
-            Protected by {shields?.count ?? 0} shield{(shields?.count ?? 0) !== 1 ? "s" : ""}
-          </Text>
+            <Text style={s.shieldBtnText}>
+              {purchase.isPending ? "..." : "Buy Shield"}
+            </Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={{
-            backgroundColor: themeColors.warningBg,
-            borderRadius: radius.md,
-            paddingVertical: spacing.sm,
-            paddingHorizontal: spacing.md,
-            borderWidth: 1,
-            borderColor: themeColors.warningBorder,
-          }}
-          onPress={handleBuyShield}
-          disabled={purchase.isPending}
-          activeOpacity={0.7}
-        >
-          <Text
-            style={{
-              color: "#92400e",
-              fontSize: fontSize.sm,
-              fontWeight: fontWeight.bold,
-            }}
-          >
-            {purchase.isPending ? "..." : "🛡️ Get Shield"}
-          </Text>
-        </TouchableOpacity>
       </View>
 
-      {/* Badges earned */}
+      {/* Badges */}
       {badgeList.length > 0 && (
-        <View
-          style={{
-            backgroundColor: colors.surface,
-            borderRadius: radius.lg,
-            padding: spacing.md,
-            borderWidth: 1,
-            borderColor: colors.border,
-          }}
-        >
-          <Text
-            style={{
-              color: colors.text,
-              fontSize: fontSize.md,
-              fontWeight: fontWeight.bold,
-              marginBottom: spacing.sm,
-            }}
-          >
-            🏅 Badges ({badgeList.length})
-          </Text>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: spacing.sm }}>
+        <View style={s.card}>
+          <Text style={s.sectionTitle}>🏅 Badges Earned</Text>
+          <View style={s.badgeGrid}>
             {badgeList.map((b: any) => (
-              <View
-                key={b.slug}
-                style={{
-                  backgroundColor: colors.background,
-                  borderRadius: radius.md,
-                  paddingVertical: spacing.xs,
-                  paddingHorizontal: spacing.sm,
-                  borderWidth: 1,
-                  borderColor: colors.border,
-                }}
-              >
-                <Text style={{ fontSize: fontSize.sm }}>
-                  {b.icon ?? "🏅"} {b.name}
-                </Text>
+              <View key={b.slug} style={s.badgeChip}>
+                <Text style={s.badgeIcon}>{b.icon ?? "🏅"}</Text>
+                <Text style={s.badgeName}>{b.name}</Text>
               </View>
             ))}
           </View>
         </View>
       )}
 
-      {/* Edit name */}
-      <Text style={{ color: colors.textMuted, fontSize: fontSize.sm, marginTop: spacing.sm }}>
-        Display name
-      </Text>
-      <Field value={name} onChangeText={setName} placeholder="Your display name" />
-
-      {/* Edit goal */}
-      <Text style={{ color: colors.textMuted, fontSize: fontSize.sm }}>
-        Your learning goal
-      </Text>
-      <Field
-        value={goal}
-        onChangeText={setGoal}
-        placeholder="e.g. Learn something new every day"
-        multiline
-      />
-      <Button title="Save changes" onPress={save} />
+      {/* Edit profile */}
+      <View style={s.card}>
+        <Text style={s.sectionTitle}>Edit Profile</Text>
+        <Field value={name} onChangeText={setName} placeholder="Display name" />
+        <View style={{ height: 12 }} />
+        <Field value={goal} onChangeText={setGoal} placeholder="Your learning goal" multiline />
+        <View style={{ height: 16 }} />
+        <Button title="Save changes" onPress={save} />
+      </View>
 
       {/* Sign out */}
-      <View style={{ marginTop: spacing.md }}>
-        <Button title="Sign out" variant="secondary" onPress={signOut} />
-      </View>
+      <TouchableOpacity style={s.signOutBtn} onPress={signOut} activeOpacity={0.7}>
+        <Text style={s.signOutText}>Sign out</Text>
+      </TouchableOpacity>
 
       <View style={{ height: 40 }} />
     </ScrollView>
   );
 }
+
+const s = StyleSheet.create({
+  scroll: { flex: 1, backgroundColor: '#f9fafb' },
+  content: { padding: 20, gap: 16 },
+
+  // Hero
+  heroCard: {
+    backgroundColor: '#059669',
+    borderRadius: 24,
+    padding: 24,
+    alignItems: 'center',
+    gap: 8,
+  },
+  name: { fontSize: 22, fontWeight: '800' as const, color: '#fff', marginTop: 4 },
+  levelBadge: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    paddingHorizontal: 14,
+    paddingVertical: 4,
+    borderRadius: 20,
+  },
+  levelBadgeText: { fontSize: 13, fontWeight: '700' as const, color: '#fff' },
+  heroStats: {
+    flexDirection: 'row',
+    marginTop: 8,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    borderRadius: 16,
+    padding: 14,
+    alignSelf: 'stretch',
+  },
+  heroStat: { flex: 1, alignItems: 'center' },
+  heroStatVal: { fontSize: 17, fontWeight: '800' as const, color: '#fff' },
+  heroStatLabel: { fontSize: 11, color: 'rgba(255,255,255,0.65)', marginTop: 2, fontWeight: '600' as const, textTransform: 'uppercase' as const, letterSpacing: 0.5 },
+  heroDivider: { width: 1, backgroundColor: 'rgba(255,255,255,0.15)' },
+
+  // Cards
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 18,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  cardRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  cardIcon: { fontSize: 28 },
+  cardLabel: { fontSize: 11, fontWeight: '700' as const, color: '#9ca3af', textTransform: 'uppercase' as const, letterSpacing: 0.5 },
+  cardValue: { fontSize: 16, fontWeight: '700' as const, color: '#1a1a2e', marginTop: 2 },
+  sectionTitle: { fontSize: 17, fontWeight: '700' as const, color: '#1a1a2e', marginBottom: 14 },
+
+  // Shield
+  shieldBtn: {
+    backgroundColor: '#fef3c7',
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#fde68a',
+  },
+  shieldBtnText: { fontSize: 13, fontWeight: '700' as const, color: '#92400e' },
+
+  // Badges
+  badgeGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  badgeChip: {
+    flexDirection: 'row', alignItems: 'center', gap: 6,
+    backgroundColor: '#f9fafb', borderRadius: 12, paddingVertical: 8, paddingHorizontal: 12,
+    borderWidth: 1, borderColor: '#f3f4f6',
+  },
+  badgeIcon: { fontSize: 18 },
+  badgeName: { fontSize: 13, fontWeight: '600' as const, color: '#374151' },
+
+  // Sign out
+  signOutBtn: {
+    alignItems: 'center',
+    paddingVertical: 14,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    borderColor: '#fee2e2',
+    backgroundColor: '#fef2f2',
+  },
+  signOutText: { fontSize: 15, fontWeight: '700' as const, color: '#ef4444' },
+});

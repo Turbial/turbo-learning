@@ -1,12 +1,13 @@
-// ─── TrueFalseStep — true/false choice ───
+// ─── TrueFalseStep — true/false choice (uses shared stepStyles) ───
 
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { StepProps } from "../../stepRegistry";
 import type { TrueFalseStep as TrueFalseStepType } from "../../types";
+import { stepStyles as s } from "./stepStyles";
 
 export default function TrueFalseStep({ step, onAnswer }: StepProps) {
-  const s = step as TrueFalseStepType;
+  const tf = step as TrueFalseStepType;
   const [selected, setSelected] = useState<boolean | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -17,79 +18,46 @@ export default function TrueFalseStep({ step, onAnswer }: StepProps) {
     onAnswer(val);
   };
 
-  const isCorrect = submitted && selected === s.correct;
+  const isCorrect = submitted && selected === tf.correct;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.question}>{s.question}</Text>
+    <View style={s.container}>
+      <Text style={s.question}>{tf.question}</Text>
 
-      <View style={styles.buttons}>
+      <View style={{ flexDirection: "row", gap: 12 }}>
         {[true, false].map((val) => {
           const isSelected = selected === val;
-          let bg = "#FDFBF8";
-          let border = "#e8e2d9";
-          if (submitted && val === s.correct) { bg = "#ecfdf5"; border = "#4E8A5C"; }
-          else if (submitted && isSelected && val !== s.correct) { bg = "#fef2f2"; border = "#ef4444"; }
-          else if (isSelected && !submitted) { bg = "#ecfdf5"; border = "#059669"; }
+          let style = s.optionDefault;
+          if (submitted && val === tf.correct) style = s.optionCorrect;
+          else if (submitted && isSelected && val !== tf.correct) style = s.optionWrong;
+          else if (isSelected && !submitted) style = s.optionSelected;
 
           return (
             <TouchableOpacity
               key={String(val)}
-              style={[styles.button, { backgroundColor: bg, borderColor: border }]}
+              style={[s.option, style, { justifyContent: "center", flex: 1, paddingVertical: 20 }]}
               onPress={() => handleSelect(val)}
               activeOpacity={0.7}
             >
-              <Text style={[styles.buttonText, submitted && val === s.correct && { color: "#065f46" }]}>
+              <Text style={[s.optionText, submitted && val === tf.correct && s.optionTextCorrect, { fontSize: 20 }]}>
                 {val ? "True" : "False"}
               </Text>
-              {submitted && val === s.correct && <Text style={styles.check}>✓</Text>}
+              {submitted && val === tf.correct && (
+                <Text style={[s.feedbackEmoji, { color: "#059669" }]}>✓</Text>
+              )}
             </TouchableOpacity>
           );
         })}
       </View>
 
       {submitted && (
-        <View style={[styles.feedback, isCorrect ? styles.feedbackCorrect : styles.feedbackWrong]}>
-          <Text style={styles.feedbackEmoji}>{isCorrect ? "✓" : "✗"}</Text>
-          <Text style={styles.feedbackText}>
-            {isCorrect ? s.feedback[0] : s.feedback[1]}
+        <View style={[s.feedback, isCorrect ? s.feedbackCorrect : s.feedbackWrong]}>
+          <Text style={s.feedbackEmoji}>{isCorrect ? "✓" : "✗"}</Text>
+          <Text style={s.feedbackText}>
+            {isCorrect ? tf.feedback[0] : tf.feedback[1]}
           </Text>
         </View>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 4 },
-  question: {
-    fontSize: 19,
-    fontWeight: "700",
-    color: "#2D241C",
-    marginBottom: 24,
-    lineHeight: 28,
-  },
-  buttons: { flexDirection: "row", gap: 12 },
-  button: {
-    flex: 1,
-    paddingVertical: 20,
-    borderRadius: 16,
-    borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: { fontSize: 20, fontWeight: "700", color: "#2D241C" },
-  check: { fontSize: 18, fontWeight: "700", color: "#065f46", marginTop: 4 },
-  feedback: {
-    marginTop: 24,
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-    padding: 16,
-    borderRadius: 14,
-  },
-  feedbackCorrect: { backgroundColor: "#ecfdf5", borderWidth: 1, borderColor: "#a7f3d0" },
-  feedbackWrong: { backgroundColor: "#fef2f2", borderWidth: 1, borderColor: "#fecaca" },
-  feedbackEmoji: { fontSize: 20, fontWeight: "700", marginTop: 1 },
-  feedbackText: { fontSize: 15, color: "#3D3228", flex: 1, lineHeight: 22 },
-});

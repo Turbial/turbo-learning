@@ -246,11 +246,11 @@
         --text: ${isDark ? '#e8e8ed' : '#1a1a1a'};
         --text-secondary: ${isDark ? '#9ca3af' : '#666'};
         --border: ${isDark ? '#2d2d44' : '#e5e5e5'};
-        --bubble-user: ${isDark ? '#4f46e5' : '#1a1a2e'};
+        --bubble-user: ${isDark ? '#059669' : '#047857'};
         --bubble-user-text: #ffffff;
-        --bubble-assistant: ${isDark ? '#2d2d44' : '#f0f0f5'};
-        --bubble-assistant-text: ${isDark ? '#e8e8ed' : '#1a1a1a'};
-        --accent: #4f46e5;
+        --bubble-assistant: ${isDark ? '#1e3a2f' : '#ecfdf5'};
+        --bubble-assistant-text: ${isDark ? '#d1fae5' : '#1a1a1a'};
+        --accent: #059669;
         --typing-dot: ${isDark ? '#9ca3af' : '#999'};
       }
       .llm-chat-root .llm-chat-launcher { background: var(--accent); color: #fff; }

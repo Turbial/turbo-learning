@@ -1,8 +1,9 @@
-// ─── Home / Journey — uses real data from Supabase ───
+// ─── Home / Journey — redesigned with gradient header, cleaner stats, week cards ───
 
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
-import { colors, spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
+import { colors } from "../../src/theme/tokens";
+import { Skeleton } from "../../src/components/ui/LoadingSkeleton";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgramSlug } from "../../src/data/queries";
 import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
@@ -20,27 +21,34 @@ export default function HomeScreen() {
   const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
   const { data: streakRisk } = useStreakAtRisk(user?.id);
 
-  // Merge Supabase progress with local progress (either can work)
   const allCompletedIds = new Set([
     ...(completedUnitIds ?? new Set<string>()),
     ...localCompletedIds,
   ]);
 
-  // Fall back to local units when Supabase RLS isn't configured for anon reads
   const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"];
   const displayUnits = units ?? fallbackUnits;
+  const completedCount = allCompletedIds.size;
 
   const handleDayPress = (day: number, unitId: string, status: string) => {
     if (status === "locked") return;
-    // Pass unit UUID so Supabase can look up the lesson; day number as fallback
     router.push({ pathname: `/lesson/${unitId}`, params: { program: programSlug, day: String(day) } });
   };
 
   if (profileLoading) {
     return (
       <SafeAreaView style={styles.safe}>
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color={colors.primary} />
+        <View style={styles.skeletonHeader}>
+          <Skeleton width={180} height={20} rounded={10} />
+          <Skeleton width={120} height={14} rounded={8} />
+          <View style={{ flexDirection: "row", gap: 8, marginTop: 20 }}>
+            {[1,2,3,4].map(i => <View key={i} style={{flex:1}}><Skeleton height={56} rounded={16} /></View>)}
+          </View>
+        </View>
+        <View style={{ padding: 20, gap: 16 }}>
+          <Skeleton width={140} height={18} rounded={10} />
+          <Skeleton height={6} rounded={3} />
+          {[1,2,3,4].map(i => <Skeleton key={i} height={120} rounded={20} />)}
         </View>
       </SafeAreaView>
     );
@@ -49,72 +57,70 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
-        {/* Header */}
+        {/* Gradient-like header */}
         <View style={styles.header}>
-          <View>
-            <Text style={styles.greeting}>{program?.title ?? "AI Operator"}</Text>
-            <Text style={styles.subtitle}>28-Day Program</Text>
-          </View>
-          <View style={styles.statsRow}>
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>{profile?.level ?? 1}</Text>
-              <Text style={styles.statLabel}>Level</Text>
+          <View style={styles.headerTop}>
+            <View>
+              <Text style={styles.programBadge}>AI OPERATOR</Text>
+              <Text style={styles.greeting}>{program?.title ?? "AI Operator"}</Text>
+              <Text style={styles.subtitle}>28 days to go from user → operator</Text>
             </View>
-            <View style={styles.statDivider} />
-            <View style={styles.stat}>
+            <View style={styles.headerEmoji}>
+              <Text style={{ fontSize: 48 }}>🤖</Text>
+            </View>
+          </View>
+
+          {/* Stats row */}
+          <View style={styles.statsRow}>
+            <View style={styles.statCard}>
+              <Text style={styles.statIcon}>⚡</Text>
               <Text style={styles.statValue}>{profile?.xp ?? 0}</Text>
               <Text style={styles.statLabel}>XP</Text>
             </View>
-            <View style={styles.statDivider} />
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>{profile?.streak ?? 0}🔥</Text>
+            <View style={styles.statCard}>
+              <Text style={styles.statIcon}>🔥</Text>
+              <Text style={styles.statValue}>{profile?.streak ?? 0}</Text>
               <Text style={styles.statLabel}>Streak</Text>
+            </View>
+            <View style={styles.statCard}>
+              <Text style={styles.statIcon}>✅</Text>
+              <Text style={styles.statValue}>{completedCount}</Text>
+              <Text style={styles.statLabel}>Completed</Text>
+            </View>
+            <View style={styles.statCard}>
+              <Text style={[styles.statValue, { color: '#8b5cf6' }]}>{profile?.level ?? 1}</Text>
+              <Text style={styles.statLabel}>Level</Text>
             </View>
           </View>
         </View>
 
-        {/* Streak at-risk warning */}
+        {/* Streak at-risk */}
         {streakRisk?.isAtRisk && (
-          <View
-            style={{
-              backgroundColor: colors.warningBg,
-              borderRadius: radius.lg,
-              padding: spacing.md,
-              margin: spacing.md,
-              flexDirection: "row",
-              alignItems: "center",
-              gap: spacing.sm,
-              borderWidth: 1,
-              borderColor: colors.warningBorder,
-            }}
-          >
-            <Text style={{ fontSize: 24 }}>⚠️</Text>
+          <View style={styles.streakRisk}>
+            <Text style={{ fontSize: 20 }}>⚠️</Text>
             <View style={{ flex: 1 }}>
-              <Text
-                style={{
-                  fontSize: fontSize.sm,
-                  fontWeight: fontWeight.bold,
-                  color: "#92400e",
-                }}
-              >
+              <Text style={styles.streakRiskTitle}>
                 Your {streakRisk.streakDays}-day streak is at risk!
               </Text>
-              <Text
-                style={{ fontSize: fontSize.xs, color: "#a16207", marginTop: 2 }}
-              >
-                Complete a lesson in the next {streakRisk.expiresInHours}h to keep
-                it going.
-                {streakRisk.shieldCount > 0
-                  ? ` ${streakRisk.shieldCount} shield${streakRisk.shieldCount !== 1 ? "s" : ""} ready.`
-                  : ""}
+              <Text style={styles.streakRiskHint}>
+                Complete a lesson in the next {streakRisk.expiresInHours}h.
+                {streakRisk.shieldCount > 0 ? ` ${streakRisk.shieldCount} shield${streakRisk.shieldCount !== 1 ? "s" : ""} ready.` : ""}
               </Text>
             </View>
           </View>
         )}
 
-        {/* Journey Map */}
+        {/* Journey */}
         <View style={styles.journey}>
-          <Text style={styles.sectionTitle}>Your Journey</Text>
+          <View style={styles.journeyHeader}>
+            <Text style={styles.sectionTitle}>Your Journey</Text>
+            <Text style={styles.journeyProgress}>{completedCount}/28 days</Text>
+          </View>
+
+          {/* Overall progress bar */}
+          <View style={styles.overallBar}>
+            <View style={[styles.overallFill, { width: `${Math.max((completedCount / 28) * 100, 2)}%` }]} />
+          </View>
 
           {displayUnits.length > 0 ? (
             <WeeksView units={displayUnits as any} completedUnitIds={allCompletedIds} onDayPress={handleDayPress} />
@@ -136,19 +142,6 @@ function WeeksView({
   completedUnitIds: Set<string>;
   onDayPress: (day: number, unitId: string, status: string) => void;
 }) {
-  // Group units into weeks (7 days each)
-  const weeks: Array<{
-    weekNum: number;
-    title: string;
-    goal: string;
-    days: Array<{
-      day: number;
-      unitId: string;
-      title: string;
-      status: "current" | "locked" | "done";
-    }>;
-  }> = [];
-
   const weekTitles = ["Foundation", "Automation", "Systems", "Launch"];
   const weekGoals = [
     "Understand AI and build your first workflows",
@@ -156,26 +149,28 @@ function WeeksView({
     "Create multi-tool AI systems",
     "Ship your AI workforce",
   ];
+  const weekEmojis = ["🧱", "⚙️", "🔗", "🚀"];
+  const weekColors = ["#059669", "#0284c7", "#7c3aed", "#f59e0b"];
+
+  const weeks: Array<{
+    weekNum: number; title: string; goal: string; emoji: string; color: string;
+    days: Array<{ day: number; unitId: string; title: string; status: "current" | "locked" | "done" }>;
+  }> = [];
 
   for (let w = 0; w < 4; w++) {
     const startDay = w * 7 + 1;
     const endDay = Math.min(startDay + 6, 28);
-    const weekUnits = units.filter(
-      (u) => u.order_num >= startDay && u.order_num <= endDay
-    );
+    const weekUnits = units.filter((u) => u.order_num >= startDay && u.order_num <= endDay);
 
-    // Real progress: completed units → next is current, rest locked
     weeks.push({
       weekNum: w + 1,
       title: weekTitles[w] ?? `Week ${w + 1}`,
       goal: weekGoals[w] ?? "",
-      days: weekUnits.map((u, idx) => {
+      emoji: weekEmojis[w] ?? "📅",
+      color: weekColors[w] ?? "#059669",
+      days: weekUnits.map((u) => {
         const isDone = completedUnitIds.has(u.id);
-        // Day 1 is always available. For days 2+: current if previous day (N-1) is completed.
-        // This handles cross-week locking: Day 8 requires Day 7, Day 15 requires Day 14, etc.
-        const prevDayUnit = u.order_num > 1
-          ? units.find((pu) => pu.order_num === u.order_num - 1)
-          : null;
+        const prevDayUnit = u.order_num > 1 ? units.find((pu) => pu.order_num === u.order_num - 1) : null;
         const prevDayDone = u.order_num === 1 || (prevDayUnit != null && completedUnitIds.has(prevDayUnit.id));
         const isCurrent = !isDone && prevDayDone;
         return {
@@ -190,190 +185,272 @@ function WeeksView({
 
   return (
     <>
-      {weeks.map((week) => (
-        <View key={week.weekNum} style={styles.weekCard}>
-          <View style={styles.weekHeader}>
-            <View>
-              <Text style={styles.weekLabel}>WEEK {week.weekNum}</Text>
-              <Text style={styles.weekTitle}>{week.title}</Text>
+      {weeks.map((week) => {
+        const doneCount = week.days.filter(d => d.status === "done").length;
+        const weekProgress = week.days.length > 0 ? doneCount / week.days.length : 0;
+
+        return (
+          <View key={week.weekNum} style={styles.weekCard}>
+            {/* Week header with accent bar */}
+            <View style={[styles.weekAccent, { backgroundColor: week.color }]} />
+            <View style={styles.weekHeader}>
+              <View style={styles.weekHeaderRow}>
+                <Text style={styles.weekEmoji}>{week.emoji}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.weekLabel}>WEEK {week.weekNum}</Text>
+                  <Text style={styles.weekTitle}>{week.title}</Text>
+                </View>
+                <Text style={[styles.weekCount, { color: week.color }]}>{doneCount}/{week.days.length}</Text>
+              </View>
+              <Text style={styles.weekGoal}>{week.goal}</Text>
+              {/* Mini progress bar */}
+              <View style={styles.weekMiniBar}>
+                <View style={[styles.weekMiniFill, { width: `${Math.max(weekProgress * 100, 2)}%`, backgroundColor: week.color }]} />
+              </View>
             </View>
-            <Text style={styles.weekGoal}>{week.goal}</Text>
-          </View>
 
-          <View style={styles.daysList}>
-            {week.days.map((d) => {
-              const isCurrent = d.status === "current";
-              const isDone = d.status === "done";
-              const isLocked = d.status === "locked";
+            <View style={styles.daysList}>
+              {week.days.map((d) => {
+                const isCurrent = d.status === "current";
+                const isDone = d.status === "done";
+                const isLocked = d.status === "locked";
 
-              return (
-                <TouchableOpacity
-                  key={d.day}
-                  style={[
-                    styles.dayRow,
-                    isCurrent && styles.dayRowCurrent,
-                    isLocked && styles.dayRowLocked,
-                  ]}
-                  onPress={() => onDayPress(d.day, d.unitId, d.status)}
-                  activeOpacity={isLocked ? 1 : 0.7}
-                  disabled={isLocked}
-                >
-                  <View
+                return (
+                  <TouchableOpacity
+                    key={d.day}
                     style={[
-                      styles.dayCircle,
-                      isDone && styles.dayCircleDone,
-                      isCurrent && styles.dayCircleCurrent,
-                      isLocked && styles.dayCircleLocked,
+                      styles.dayRow,
+                      isCurrent && styles.dayRowCurrent,
                     ]}
+                    onPress={() => onDayPress(d.day, d.unitId, d.status)}
+                    activeOpacity={isLocked ? 1 : 0.7}
+                    disabled={isLocked}
                   >
-                    {isDone ? (
-                      <Text style={styles.dayCheck}>✓</Text>
-                    ) : (
-                      <Text
-                        style={[
-                          styles.dayNum,
-                          isCurrent && styles.dayNumCurrent,
-                          isLocked && styles.dayNumLocked,
-                        ]}
-                      >
-                        {d.day}
-                      </Text>
-                    )}
-                  </View>
-                  <View style={styles.dayInfo}>
-                    <Text
+                    <View
                       style={[
-                        styles.dayTitle,
-                        isLocked && styles.dayTitleLocked,
+                        styles.dayCircle,
+                        isDone && [styles.dayCircleDone, { backgroundColor: week.color }],
+                        isCurrent && styles.dayCircleCurrent,
+                        isLocked && styles.dayCircleLocked,
                       ]}
                     >
-                      {d.title}
-                    </Text>
-                    {isCurrent && (
-                      <View style={styles.currentBadge}>
-                        <Text style={styles.currentBadgeText}>▶ Continue</Text>
-                      </View>
-                    )}
-                  </View>
-                  {isLocked && <Text style={styles.lockIcon}>🔒</Text>}
-                </TouchableOpacity>
-              );
-            })}
+                      {isDone ? (
+                        <Text style={styles.dayCheck}>✓</Text>
+                      ) : (
+                        <Text style={[styles.dayNum, isCurrent && styles.dayNumCurrent, isLocked && styles.dayNumLocked]}>
+                          {d.day}
+                        </Text>
+                      )}
+                    </View>
+                    <View style={styles.dayInfo}>
+                      <Text style={[styles.dayTitle, isLocked && styles.dayTitleLocked]}>{d.title}</Text>
+                      {isCurrent && (
+                        <Text style={[styles.currentPill, { color: week.color }]}>Now</Text>
+                      )}
+                    </View>
+                    {isLocked && <Text style={styles.lockIcon}>🔒</Text>}
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
-        </View>
-      ))}
+        );
+      })}
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.bg },
+  safe: { flex: 1, backgroundColor: '#f9fafb' },
   scroll: { flex: 1 },
-  center: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.bg },
+  center: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: '#f9fafb' },
+
+  // Header
   header: {
-    backgroundColor: colors.primary,
-    padding: spacing.lg,
-    paddingTop: spacing.xl,
-    paddingBottom: spacing.xl,
+    backgroundColor: '#059669',
+    paddingBottom: 24,
+    paddingTop: 8,
   },
-  greeting: {
-    fontSize: fontSize.xxl,
-    fontWeight: "800",
-    color: "#fff",
+  headerTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    paddingBottom: 4,
+  },
+  headerEmoji: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  programBadge: {
+    fontSize: 11,
+    fontWeight: '800' as const,
+    letterSpacing: 2,
+    color: 'rgba(255,255,255,0.7)',
     marginBottom: 4,
   },
-  subtitle: {
-    fontSize: fontSize.sm,
-    color: "#a7f3d0",
-    fontWeight: "600",
+  greeting: {
+    fontSize: 26,
+    fontWeight: "800" as const,
+    color: "#fff",
+    marginBottom: 2,
+    letterSpacing: -0.3,
   },
+  subtitle: {
+    fontSize: 14,
+    color: "rgba(255,255,255,0.75)",
+    fontWeight: "600" as const,
+  },
+
+  // Stats
   statsRow: {
     flexDirection: "row",
-    marginTop: spacing.lg,
+    marginTop: 20,
+    marginHorizontal: 24,
+    gap: 8,
+  },
+  statCard: {
+    flex: 1,
     backgroundColor: "rgba(255,255,255,0.15)",
-    borderRadius: radius.lg,
-    padding: spacing.md,
-    justifyContent: "space-around",
+    borderRadius: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 8,
+    alignItems: "center",
+    backdropFilter: 'blur(10px)',
   },
-  stat: { alignItems: "center", flex: 1 },
-  statValue: { fontSize: fontSize.xl, fontWeight: "800", color: "#fff" },
-  statLabel: { fontSize: fontSize.xs, color: "#a7f3d0", marginTop: 2, fontWeight: "600" },
-  statDivider: { width: 1, backgroundColor: "rgba(255,255,255,0.2)" },
-  journey: { padding: spacing.lg },
-  sectionTitle: {
-    fontSize: fontSize.lg,
-    fontWeight: "700",
-    color: colors.textPrimary,
-    marginBottom: spacing.md,
-  },
-  emptyText: { fontSize: fontSize.sm, color: colors.textMuted, textAlign: "center", marginTop: 40 },
-  weekCard: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.lg,
-    marginBottom: spacing.md,
+  statIcon: { fontSize: 18, marginBottom: 4 },
+  statValue: { fontSize: 20, fontWeight: "800" as const, color: "#fff" },
+  statLabel: { fontSize: 10, color: "rgba(255,255,255,0.65)", marginTop: 2, fontWeight: "700" as const, textTransform: 'uppercase' as const, letterSpacing: 0.8 },
+
+  // Streak risk
+  streakRisk: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: '#fef3c7',
+    marginHorizontal: 20,
+    marginTop: -12,
+    borderRadius: 16,
+    padding: 14,
     borderWidth: 1,
-    borderColor: colors.surfaceBorder,
-    overflow: "hidden",
+    borderColor: '#fde68a',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  streakRiskTitle: { fontSize: 13, fontWeight: '800' as const, color: '#92400e' },
+  streakRiskHint: { fontSize: 12, color: '#a16207', marginTop: 2 },
+
+  // Journey
+  journey: { padding: 20, paddingTop: 24 },
+  journeyHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    marginBottom: 12,
+  },
+  sectionTitle: { fontSize: 20, fontWeight: "800" as const, color: '#1a1a2e' },
+  journeyProgress: { fontSize: 14, fontWeight: '700' as const, color: '#059669' },
+  overallBar: {
+    height: 6,
+    backgroundColor: '#e5e7eb',
+    borderRadius: 3,
+    marginBottom: 20,
+    overflow: 'hidden',
+  },
+  overallFill: {
+    height: '100%',
+    backgroundColor: '#059669',
+    borderRadius: 3,
+  },
+  emptyText: { fontSize: 14, color: '#9ca3af', textAlign: "center", marginTop: 40 },
+  skeletonHeader: {
+    backgroundColor: '#059669',
+    padding: 24,
+    paddingTop: 52,
+    gap: 8,
+  },
+
+  // Week cards
+  weekCard: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    marginBottom: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  weekAccent: {
+    height: 4,
   },
   weekHeader: {
-    padding: spacing.md,
-    backgroundColor: colors.surfaceHover,
+    padding: 18,
     borderBottomWidth: 1,
-    borderBottomColor: colors.surfaceBorder,
+    borderBottomColor: '#f3f4f6',
   },
+  weekHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  weekEmoji: { fontSize: 24 },
   weekLabel: {
-    fontSize: fontSize.xs,
-    fontWeight: "700",
-    letterSpacing: 1.5,
-    color: colors.primary,
+    fontSize: 11,
+    fontWeight: "800" as const,
+    letterSpacing: 2,
+    color: '#9ca3af',
     marginBottom: 2,
   },
-  weekTitle: {
-    fontSize: fontSize.lg,
-    fontWeight: "700",
-    color: colors.textPrimary,
+  weekTitle: { fontSize: 17, fontWeight: "700" as const, color: '#1a1a2e' },
+  weekCount: { fontSize: 15, fontWeight: '800' as const },
+  weekGoal: { fontSize: 12, color: '#6b7280', marginTop: 6 },
+  weekMiniBar: {
+    height: 4,
+    backgroundColor: '#f3f4f6',
+    borderRadius: 2,
+    marginTop: 10,
+    overflow: 'hidden',
   },
-  weekGoal: {
-    fontSize: fontSize.xs,
-    color: colors.textMuted,
-    marginTop: 4,
+  weekMiniFill: {
+    height: '100%',
+    borderRadius: 2,
   },
-  daysList: { padding: spacing.sm },
+
+  // Day items
+  daysList: { padding: 8 },
   dayRow: {
     flexDirection: "row",
     alignItems: "center",
     padding: 12,
-    borderRadius: radius.md,
+    borderRadius: 14,
     gap: 12,
   },
-  dayRowCurrent: { backgroundColor: colors.primaryDim },
-  dayRowLocked: { opacity: 0.5 },
+  dayRowCurrent: { backgroundColor: '#f9fafb' },
   dayCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: colors.surfaceBorder,
-    justifyContent: "center",
-    alignItems: "center",
+    width: 36, height: 36, borderRadius: 18,
+    backgroundColor: '#f3f4f6',
+    justifyContent: "center", alignItems: "center",
   },
-  dayCircleDone: { backgroundColor: colors.success },
-  dayCircleCurrent: { backgroundColor: colors.primary },
-  dayCircleLocked: { backgroundColor: colors.surfaceBorder },
+  dayCircleDone: {},
+  dayCircleCurrent: { backgroundColor: '#fff', borderWidth: 2, borderColor: '#059669' },
+  dayCircleLocked: { backgroundColor: '#f9fafb' },
   dayCheck: { color: "#fff", fontSize: 16, fontWeight: "700" },
-  dayNum: { fontSize: 14, fontWeight: "700", color: colors.textMuted },
-  dayNumCurrent: { color: "#fff" },
-  dayNumLocked: { color: colors.textDim },
+  dayNum: { fontSize: 14, fontWeight: "700" as const, color: '#6b7280' },
+  dayNumCurrent: { color: '#059669' },
+  dayNumLocked: { color: '#d1d5db' },
   dayInfo: { flex: 1 },
-  dayTitle: { fontSize: fontSize.sm, fontWeight: "600", color: colors.textPrimary },
-  dayTitleLocked: { color: colors.textDim },
-  currentBadge: {
-    marginTop: 4,
-    alignSelf: "flex-start",
-    backgroundColor: colors.primaryDim,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: radius.sm,
-  },
-  currentBadgeText: { fontSize: 11, fontWeight: "700", color: colors.primary },
-  lockIcon: { fontSize: 14, marginLeft: 4 },
+  dayTitle: { fontSize: 14, fontWeight: "600" as const, color: '#1a1a2e' },
+  dayTitleLocked: { color: '#d1d5db' },
+  currentPill: { fontSize: 12, fontWeight: '700' as const, marginTop: 2 },
+  lockIcon: { fontSize: 14 },
 });

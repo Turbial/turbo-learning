@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
+import { Skeleton } from "../../src/components/ui/LoadingSkeleton";
 import { useAuth } from "../../src/data/useAuth";
 import { useProfile, useBadges, useProgress } from "../../src/data/queries";
 import { xpToNextLevel, xpToLevel } from "../../src/engine/scoring";
@@ -56,8 +57,14 @@ export default function ProgressScreen() {
   if (profileLoading) {
     return (
       <SafeAreaView style={styles.safe}>
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color={colors.primary} />
+        <View style={{ padding: spacing.lg, gap: 16 }}>
+          <Skeleton width={180} height={24} rounded={10} />
+          <View style={{ flexDirection: "row", gap: 8 }}>
+            {[1,2,3,4].map(i => <View key={i} style={{flex:1}}><Skeleton height={72} rounded={16} /></View>)}
+          </View>
+          <Skeleton height={88} rounded={20} />
+          <Skeleton height={140} rounded={20} />
+          <Skeleton height={100} rounded={20} />
         </View>
       </SafeAreaView>
     );
