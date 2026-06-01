@@ -146,6 +146,15 @@ export type ChatStep = StepBase & {
   systemPrompt?: string;
 };
 
+// ─── PromptGenerator ───
+
+export type PromptGeneratorStep = StepBase & {
+  type: "prompt_generator";
+  categories: string[];
+  promptTemplate: string;
+  primaryButton?: string;
+};
+
 export type CompletionStep = StepBase & {
   type: "completion";
   title?: string;
@@ -211,7 +220,9 @@ export type Step =
   | CompletionStep
   | ConfidenceRatingStep
   | BeforeAfterStep
-  | ToolGridStep;
+  | ToolGridStep
+  | ChatStep
+  | PromptGeneratorStep;
 
 // ─── Content types ───
 

@@ -50,6 +50,7 @@ import EngineCompletionStep from "./components/steps/CompletionStep";
 import ConfidenceRating from "./components/steps/ConfidenceRating";
 import BeforeAfterStepComp from "./components/steps/BeforeAfterStep";
 import ToolGridStepComp from "./components/steps/ToolGridStep";
+import EnginePromptGeneratorStep from "./components/steps/PromptGeneratorStep";
 
 // ─── Scoring helpers ───
 
@@ -261,7 +262,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: false },
   },
   prompt_generator: {
-    component: PromptGenerator as any,
+    component: EnginePromptGeneratorStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: true },
   },

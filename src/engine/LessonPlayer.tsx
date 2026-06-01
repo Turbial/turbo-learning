@@ -150,7 +150,8 @@ export default function LessonPlayer({
 
       const correct = handler.validate?.(step, res);
       const xp = handler.score?.(step, res) ?? step.xp ?? 10;
-      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct });
+      const nextComboStreak = correct ? (session.comboStreak ?? 0) + 1 : 0;
+      dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct, comboStreak: nextComboStreak });
 
       // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect
       if (handler.behavior.autoAdvanceMs) {
