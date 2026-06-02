@@ -1,67 +1,145 @@
-// supabase/edge-functions/create-checkout.ts — Deno edge function.
-// Creates a Stripe Checkout Session for the authenticated user.
-// Client POSTs { plan_id } → returns { url }.
-// Env: STRIPE_SECRET_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+/**
+ * @turbial/payments/deno — Create Checkout Edge Function
+ * Drop-in Supabase Edge Function for Stripe Checkout sessions.
+ *
+ * Deploy to: supabase/functions/create-checkout/index.ts
+ *
+ * Required env vars:
+ *   STRIPE_SECRET_KEY — your Stripe secret key
+ *   SUPABASE_URL — your Supabase project URL
+ *   SUPABASE_SERVICE_ROLE_KEY — service_role key for admin operations
+ *
+ * Client POSTs { plan_id: string, test_mode?: boolean }
+ * Returns { url: string }
+ */
 
-import Stripe from 'https://esm.sh/stripe@14?target=deno';
+import Stripe from 'https://esm.sh/stripe@17?target=deno';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
+// ── Configuration ───────────────────────────────────────────
+
+const STRIPE_API_VERSION = '2024-06-20';
+
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, {
-  apiVersion: '2024-06-20',
+  apiVersion: STRIPE_API_VERSION,
   httpClient: Stripe.createFetchHttpClient(),
 });
 
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 
+// ── Plan Definitions ────────────────────────────────────────
+// Customize these for your product! These define what's for sale.
+// You can also load them from a Supabase `plans` table (see below).
+
+interface PlanDefinition {
+  slug: string;
+  name: string;
+  /** One-time price in cents. Omit for subscription-only plans. */
+  price_cents?: number;
+  /** Stripe Price ID from the Dashboard (preferred for subscriptions) */
+  stripe_price_id?: string;
+  stripe_price_id_monthly?: string;
+  stripe_price_id_annual?: string;
+  /** 'month' | 'year' for subscriptions; omit for one-time */
+  interval?: 'month' | 'year';
+}
+
+// ── Plan Loader ─────────────────────────────────────────────
+// Option A: Load plans from Supabase `plans` table
+// Option B: Hard-code plan definitions below
+
+async function getPlans(
+  admin: ReturnType<typeof createClient>,
+): Promise<PlanDefinition[]> {
+  // Option A: Load from database (recommended — single source of truth)
+  const { data, error } = await admin
+    .from('plans')
+    .select('slug, name, price_cents, stripe_price_id, stripe_price_id_monthly, stripe_price_id_annual, interval');
+
+  if (!error && data?.length) {
+    return data as PlanDefinition[];
+  }
+
+  // Option B: Fallback hard-coded plans — customize these!
+  // Remove this if you always load from DB.
+  console.warn('No plans table found. Using hard-coded fallback plans.');
+  return [
+    {
+      slug: 'premium_monthly',
+      name: 'Premium Monthly',
+      price_cents: 999,
+      interval: 'month',
+    },
+    {
+      slug: 'premium_annual',
+      name: 'Premium Annual',
+      price_cents: 9990,
+      interval: 'year',
+    },
+  ];
+}
+
+// ── CORS Helper ─────────────────────────────────────────────
+
+function corsHeaders(): HeadersInit {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Authorization, Content-Type, apikey, x-client-info',
+  };
+}
+
+function json(data: unknown, status: number): Response {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+  });
+}
+
+// ── Main Handler ────────────────────────────────────────────
+
 Deno.serve(async (req: Request) => {
   // CORS preflight
   if (req.method === 'OPTIONS') {
-    return new Response(null, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
-      },
-    });
+    return new Response(null, { headers: corsHeaders() });
   }
 
   try {
-    // Parse request body
     const body = await req.json();
-    const { plan_id } = body;
+    const { plan_id, test_mode } = body;
 
     if (!plan_id) {
       return json({ error: 'plan_id is required' }, 400);
     }
 
-    // Authenticate user via Supabase auth header
+    // Authenticate via Supabase auth (optional: remove if checkout is public)
     const authHeader = req.headers.get('Authorization');
-    if (!authHeader) {
-      return json({ error: 'Missing Authorization header' }, 401);
+    let userId: string | undefined;
+
+    if (authHeader) {
+      const admin = createClient(supabaseUrl, supabaseServiceKey, {
+        auth: { persistSession: false },
+      });
+      const token = authHeader.replace('Bearer ', '');
+      const { data: authData, error: authError } = await admin.auth.getUser(token);
+
+      if (authError || !authData?.user) {
+        return json({ error: 'Invalid or expired token' }, 401);
+      }
+
+      userId = authData.user.id;
     }
 
     const admin = createClient(supabaseUrl, supabaseServiceKey, {
       auth: { persistSession: false },
     });
 
-    const token = authHeader.replace('Bearer ', '');
-    const { data: authData, error: authError } = await admin.auth.getUser(token);
+    // Look up plan
+    const plans = await getPlans(admin);
+    const plan = plans.find((p) => p.slug === plan_id);
 
-    if (authError || !authData?.user) {
-      return json({ error: 'Invalid or expired token' }, 401);
-    }
-
-    const userId = authData.user.id;
-
-    // Look up plan in the plans table by slug
-    const { data: plan, error: planError } = await admin
-      .from('plans')
-      .select('id, slug, name, price_cents, price_monthly_usd, interval, stripe_price_id, stripe_price_id_monthly')
-      .eq('slug', plan_id)
-      .single();
-
-    if (planError || !plan) {
+    if (!plan) {
       return json({ error: `Plan not found: ${plan_id}` }, 404);
     }
 
@@ -69,65 +147,60 @@ Deno.serve(async (req: Request) => {
       return json({ error: 'Cannot purchase the free plan' }, 400);
     }
 
-    // Determine the Stripe price ID to use
+    // Build line items
+    const lineItems: Array<Record<string, unknown>> = [];
     const stripePriceId = plan.stripe_price_id || plan.stripe_price_id_monthly;
-    const unitAmount = plan.price_cents || plan.price_monthly_usd || 999; // in cents
 
-    // Build line_items — prefer stripe_price_id if configured
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
-
-    if (stripePriceId) {
-      lineItems.push({
-        price: stripePriceId,
-        quantity: 1,
-      });
+    if (stripePriceId && !test_mode) {
+      // Use pre-configured Stripe Price ID (handles recurring logic correctly)
+      lineItems.push({ price: stripePriceId, quantity: 1 });
     } else {
-      // Fallback: build a one-time or recurring price from plan metadata
-      const priceData: Stripe.Checkout.SessionCreateParams.LineItem.PriceData = {
+      // Build ad-hoc price
+      const unitAmount = test_mode ? 100 : (plan.price_cents || 999);
+      const priceData: Record<string, unknown> = {
         currency: 'usd',
-        product_data: { name: plan.name },
+        product_data: {
+          name: test_mode ? `${plan.name} [TEST — $1]` : plan.name,
+        },
         unit_amount: unitAmount,
       };
 
       if (plan.interval === 'month') {
-        priceData.recurring = { interval: 'month' };
+        (priceData as any).recurring = { interval: 'month' };
       } else if (plan.interval === 'year') {
-        priceData.recurring = { interval: 'year' };
+        (priceData as any).recurring = { interval: 'year' };
       }
 
       lineItems.push({ price_data: priceData, quantity: 1 });
     }
 
-    // Determine the success/cancel URLs
-    const origin = req.headers.get('origin') || 'https://turbo-learning.app';
+    // Determine mode
+    const mode = plan.interval ? 'subscription' : 'payment';
 
-    // Create Stripe Checkout Session
+    // Origin for success/cancel URLs
+    const origin = req.headers.get('origin') || 'http://localhost:8081';
+
+    // Create session
     const session = await stripe.checkout.sessions.create({
-      mode: plan.interval ? 'subscription' : 'payment',
-      line_items: lineItems,
-      client_reference_id: userId,
+      mode,
+      line_items: lineItems as any,
+      client_reference_id: userId || undefined,
       metadata: {
-        user_id: userId,
+        user_id: userId || '',
+        plan_id: plan.slug,
         plan_slug: plan.slug,
+        test_mode: test_mode ? 'true' : 'false',
       },
       success_url: `${origin}/dashboard?checkout=success`,
       cancel_url: `${origin}/pricing?checkout=cancelled`,
-      ...(plan.interval ? {} : {}), // subscription mode handles recurring automatically
     });
 
-    return json({ url: session.url }, 200);
+    return json({ url: session.url, sessionId: session.id }, 200);
   } catch (err) {
     console.error('create-checkout error:', err);
-    return json({ error: err instanceof Error ? err.message : 'Internal server error' }, 500);
+    return json(
+      { error: err instanceof Error ? err.message : 'Internal server error' },
+      500,
+    );
   }
 });
-
-function json(data: unknown, status: number) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
-}
