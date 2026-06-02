@@ -1,23 +1,17 @@
-// ─── Lesson Player Screen — loads lesson from Supabase via unit UUID, drives LessonPlayer ───
-//
-// Route params:
-//   id     — unit UUID (preferred) or day number (legacy fallback)
-//   program — program slug (needed for local fallback key: "ai-2", "duo-3", etc.)
-//   day    — day number for local fallback when UUID lookup fails
+// ─── Lesson Player Screen ─────────────────────────────────────────────────────
 
 import { useCallback } from "react";
 import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { LessonPlayer } from "../../src/engine";
 import type { Lesson, Step } from "../../src/engine/types";
-import { colors } from "../../src/theme/tokens";
+import { appTheme as t } from "../../src/theme/appTheme";
 import { useAuth } from "../../src/data/useAuth";
 import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
 import { useLessonStateStore } from "../../src/store/lessonStateStore";
 import ChatWidget from "../../src/components/chat/ChatWidget";
 
-// Local fallbacks when Supabase isn't available or lesson not found there
 import aiDay1 from "../../src/content/ai_operator/day1.json";
 import aiDay2 from "../../src/content/ai_operator/day2.json";
 import aiDay3 from "../../src/content/ai_operator/day3.json";
@@ -37,8 +31,7 @@ const DAY_CONTENT: Record<string, any> = {
   "ai-1": aiDay1, "ai-2": aiDay2, "ai-3": aiDay3,
   "ai-4": aiDay4, "ai-5": aiDay5, "ai-6": aiDay6, "ai-7": aiDay7,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
-  "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
-  "duo-7": duoDay7,
+  "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6, "duo-7": duoDay7,
 };
 
 const LOCAL_LESSONS: Record<string, Lesson> = {};
@@ -46,7 +39,7 @@ for (const [key, json] of Object.entries(DAY_CONTENT)) {
   LOCAL_LESSONS[key] = {
     id: `${key}-local`,
     unitId: `day${key.split("-")[1]}`,
-    orderNum: parseInt(key.split("-")[1]),
+    orderNum: parseInt(key.split("-")[1]!),
     title: json.title,
     estMinutes: json.estMinutes,
     steps: json.steps as Step[],
@@ -55,24 +48,21 @@ for (const [key, json] of Object.entries(DAY_CONTENT)) {
 
 export default function LessonScreen() {
   const { id, program, day } = useLocalSearchParams<{ id: string; program?: string; day?: string }>();
-  const { user } = useAuth();
-  const markLocalCompleted = useLocalProgressStore((s) => s.markCompleted);
-  const clearLessonState = useLessonStateStore((s) => s.clear);
+  const { user }              = useAuth();
+  const markLocalCompleted    = useLocalProgressStore((s) => s.markCompleted);
+  const clearLessonState      = useLessonStateStore((s) => s.clear);
 
   const handleHome = useCallback(() => {
     clearLessonState();
     router.replace("/(tabs)/home");
   }, [clearLessonState]);
 
-  // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
-  const supabaseQuery = useLessonByUnit(id);
-  const dayNum = day ?? id;
-  // Normalize program slug: "ai-operator" → "ai", "ai_for_everyone" → "ai"
+  const supabaseQuery     = useLessonByUnit(id);
+  const dayNum            = day ?? id;
   const normalizedProgram = program?.startsWith("ai") ? "ai" : (program ?? "ai");
-  const localKey = `${normalizedProgram}-${dayNum}`;
-  const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS["ai-1"];
-  const completeMutation = useCompleteLesson();
-
+  const localKey          = `${normalizedProgram}-${dayNum}`;
+  const localLesson       = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS["ai-1"];
+  const completeMutation  = useCompleteLesson();
   const lesson: Lesson | undefined = supabaseQuery.data ?? localLesson;
   const isLoading = supabaseQuery.isLoading && !localLesson;
 
@@ -92,15 +82,7 @@ export default function LessonScreen() {
           {
             onSuccess: (result: any) => {
               markLocalCompleted(id);
-              router.replace({
-                pathname: "/complete/[unitId]",
-                params: {
-                  ...baseParams,
-                  totalXp: String(result?.total_xp ?? 0),
-                  newLevel: String(result?.new_level ?? 1),
-                  streak: String(result?.streak ?? 1),
-                },
-              });
+              router.replace({ pathname: "/complete/[unitId]", params: { ...baseParams, totalXp: String(result?.total_xp ?? 0), newLevel: String(result?.new_level ?? 1), streak: String(result?.streak ?? 1) } });
             },
             onError: (err) => {
               console.warn("complete_lesson RPC failed:", err);
@@ -119,10 +101,10 @@ export default function LessonScreen() {
 
   if (isLoading) {
     return (
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color={colors.primary} />
-          <Text style={styles.loadingText}>Loading lesson...</Text>
+      <SafeAreaView style={s.safe}>
+        <View style={s.center}>
+          <ActivityIndicator size="large" color={t.colors.accent} />
+          <Text style={s.loadingText}>Loading lesson...</Text>
         </View>
       </SafeAreaView>
     );
@@ -130,11 +112,11 @@ export default function LessonScreen() {
 
   if (!lesson) {
     return (
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.center}>
-          <Text style={styles.missingText}>Lesson not found.</Text>
+      <SafeAreaView style={s.safe}>
+        <View style={s.center}>
+          <Text style={s.missingText}>Lesson not found.</Text>
           <TouchableOpacity onPress={handleHome}>
-            <Text style={styles.homeLink}>🏠 Home</Text>
+            <Text style={s.homeLink}>🏠 Home</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -142,36 +124,22 @@ export default function LessonScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.safe}>
-      {/* Chat assistant — only on lesson screen */}
+    <SafeAreaView style={s.safe}>
       <ChatWidget />
-      {/* Home button */}
-      <TouchableOpacity style={styles.homeBtn} onPress={handleHome}>
-        <Text style={styles.homeBtnText}>🏠</Text>
+      <TouchableOpacity style={s.homeBtn} onPress={handleHome}>
+        <Text style={s.homeBtnText}>🏠</Text>
       </TouchableOpacity>
-      <LessonPlayer
-        steps={lesson.steps}
-        lessonId={lesson.id}
-        onComplete={handleComplete}
-        allowBack
-      />
+      <LessonPlayer steps={lesson.steps} lessonId={lesson.id} onComplete={handleComplete} allowBack />
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.bg },
-  center: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
-  loadingText: { marginTop: 12, fontSize: 15, color: colors.textMuted },
-  missingText: { fontSize: 18, fontWeight: "700", color: colors.textSecondary, marginBottom: 12 },
-  backLink: { fontSize: 16, fontWeight: "600", color: colors.primary },
-  homeBtn: {
-    position: "absolute",
-    top: 12,
-    right: 16,
-    zIndex: 10,
-    padding: 8,
-  },
+const s = StyleSheet.create({
+  safe:        { flex: 1, backgroundColor: t.colors.screenBg },
+  center:      { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  loadingText: { marginTop: 12, fontSize: t.text.bodyMd, color: t.colors.textMuted },
+  missingText: { fontSize: t.text.h2, fontWeight: t.text.weightBold, color: t.colors.textBody, marginBottom: 12 },
+  homeBtn:     { position: "absolute", top: 12, right: 16, zIndex: 10, padding: 8 },
   homeBtnText: { fontSize: 22 },
-  homeLink: { fontSize: 16, fontWeight: "600", color: colors.primary, marginTop: 12 },
+  homeLink:    { fontSize: t.text.body, fontWeight: t.text.weightSemibold, color: t.colors.accent, marginTop: 12 },
 });

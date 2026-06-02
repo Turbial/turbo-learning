@@ -1,9 +1,9 @@
-// ─── Leaderboard Screen — global / friends rankings ───
+// ─── Leaderboard Screen ───────────────────────────────────────────────────────
 
 import { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-import { colors, spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
+import { appTheme as t } from "../../src/theme/appTheme";
 import { useLeaderboard, LeaderRow } from "../../src/data/useLeaderboard";
 import { useAuth } from "../../src/data/useAuth";
 
@@ -14,13 +14,6 @@ function rankEmoji(rank: number): string {
   return `#${rank}`;
 }
 
-function rankStyle(rank: number) {
-  if (rank === 1) return { color: "#b45309", fontWeight: fontWeight.extrabold } as const;
-  if (rank === 2) return { color: "#6b7280", fontWeight: fontWeight.extrabold } as const;
-  if (rank === 3) return { color: "#b45309", fontWeight: fontWeight.extrabold } as const;
-  return undefined;
-}
-
 export default function LeaderboardScreen() {
   const router = useRouter();
   const { user } = useAuth();
@@ -28,57 +21,56 @@ export default function LeaderboardScreen() {
   const { data, isLoading, isError } = useLeaderboard(scope, 50);
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.header}>
+    <SafeAreaView style={s.safe}>
+      {/* Header */}
+      <View style={s.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.backText}>← Progress</Text>
+          <Text style={s.backText}>← Progress</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Leaderboard</Text>
-        <View style={styles.headerSpacer} />
+        <Text style={s.title}>Leaderboard</Text>
+        <View style={{ width: 70 }} />
       </View>
 
       {/* Scope toggle */}
-      <View style={styles.toggleRow}>
-        <TouchableOpacity
-          style={[styles.toggleBtn, scope === "global" && styles.toggleActive]}
-          onPress={() => setScope("global")}
-          activeOpacity={0.7}
-        >
-          <Text style={[styles.toggleText, scope === "global" && styles.toggleTextActive]}>🌍 Global</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.toggleBtn, scope === "friends" && styles.toggleActive]}
-          onPress={() => setScope("friends")}
-          activeOpacity={0.7}
-        >
-          <Text style={[styles.toggleText, scope === "friends" && styles.toggleTextActive]}>👥 Friends</Text>
-        </TouchableOpacity>
+      <View style={s.toggleRow}>
+        {(["global", "friends"] as const).map((sc) => (
+          <TouchableOpacity
+            key={sc}
+            style={[s.toggleBtn, scope === sc && s.toggleActive]}
+            onPress={() => setScope(sc)}
+            activeOpacity={0.7}
+          >
+            <Text style={[s.toggleText, scope === sc && s.toggleTextActive]}>
+              {sc === "global" ? "🌍 Global" : "👥 Friends"}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
 
       {/* Loading */}
       {isLoading && (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color={colors.primary} />
+        <View style={s.center}>
+          <ActivityIndicator size="large" color={t.colors.accent} />
         </View>
       )}
 
       {/* Error */}
       {isError && (
-        <View style={[styles.center, { paddingHorizontal: spacing.xl }]}>
-          <Text style={styles.emptyEmoji}>⚠️</Text>
-          <Text style={[styles.emptyTitle, { textAlign: 'center' }]}>Couldn't load leaderboard</Text>
-          <Text style={[styles.emptyHint, { textAlign: 'center' }]}>Check your connection and try again later.</Text>
+        <View style={[s.center, { paddingHorizontal: t.spacing.xl }]}>
+          <Text style={s.emptyEmoji}>⚠️</Text>
+          <Text style={[s.emptyTitle, { textAlign: "center" }]}>Couldn't load leaderboard</Text>
+          <Text style={[s.emptyHint, { textAlign: "center" }]}>Check your connection and try again.</Text>
         </View>
       )}
 
       {/* Empty */}
       {!isLoading && !isError && (!data || data.length === 0) && (
-        <View style={[styles.center, { paddingHorizontal: spacing.xl }]}>
-          <Text style={styles.emptyEmoji}>🏆</Text>
-          <Text style={[styles.emptyTitle, { textAlign: 'center' }]}>
+        <View style={[s.center, { paddingHorizontal: t.spacing.xl }]}>
+          <Text style={s.emptyEmoji}>🏆</Text>
+          <Text style={[s.emptyTitle, { textAlign: "center" }]}>
             {scope === "global" ? "No rankings yet" : "No friends on the board"}
           </Text>
-          <Text style={[styles.emptyHint, { textAlign: 'center' }]}>
+          <Text style={[s.emptyHint, { textAlign: "center" }]}>
             {scope === "global"
               ? "Complete lessons to earn XP and climb the ranks."
               : "Invite friends and compete together."}
@@ -86,39 +78,26 @@ export default function LeaderboardScreen() {
         </View>
       )}
 
-      {/* Leaderboard list */}
+      {/* List */}
       {data && data.length > 0 && (
-        <ScrollView style={styles.scroll} contentContainerStyle={styles.listContent}>
-          {/* Top 3 podium */}
+        <ScrollView style={s.scroll} contentContainerStyle={s.listContent}>
+          {/* Podium */}
           {data.length >= 3 && (
-            <View style={styles.podium}>
-              {data[1] && (
-                <View style={styles.podiumCol}>
-                  <Text style={styles.podiumRank}>🥈</Text>
-                  <View style={[styles.podiumBlock, styles.podiumSecond]}>
-                    <Text style={styles.podiumName} numberOfLines={1}>{data[1].display_name || "Player"}</Text>
-                    <Text style={styles.podiumXp}>{data[1].xp.toLocaleString()} XP</Text>
+            <View style={s.podium}>
+              {[data[1], data[0], data[2]].map((row, idx) => {
+                if (!row) return null;
+                const medals = ["🥈", "🥇", "🥉"];
+                const heights = [s.podiumSecond, s.podiumFirst, s.podiumThird];
+                return (
+                  <View key={row.user_id} style={s.podiumCol}>
+                    <Text style={s.podiumRank}>{medals[idx]}</Text>
+                    <View style={[s.podiumBlock, heights[idx]]}>
+                      <Text style={s.podiumName} numberOfLines={1}>{row.display_name || "Player"}</Text>
+                      <Text style={s.podiumXp}>{row.xp.toLocaleString()} XP</Text>
+                    </View>
                   </View>
-                </View>
-              )}
-              {data[0] && (
-                <View style={styles.podiumCol}>
-                  <Text style={styles.podiumRank}>🥇</Text>
-                  <View style={[styles.podiumBlock, styles.podiumFirst]}>
-                    <Text style={styles.podiumName} numberOfLines={1}>{data[0].display_name || "Player"}</Text>
-                    <Text style={styles.podiumXp}>{data[0].xp.toLocaleString()} XP</Text>
-                  </View>
-                </View>
-              )}
-              {data[2] && (
-                <View style={styles.podiumCol}>
-                  <Text style={styles.podiumRank}>🥉</Text>
-                  <View style={[styles.podiumBlock, styles.podiumThird]}>
-                    <Text style={styles.podiumName} numberOfLines={1}>{data[2].display_name || "Player"}</Text>
-                    <Text style={styles.podiumXp}>{data[2].xp.toLocaleString()} XP</Text>
-                  </View>
-                </View>
-              )}
+                );
+              })}
             </View>
           )}
 
@@ -126,14 +105,16 @@ export default function LeaderboardScreen() {
           {data.map((row: LeaderRow) => {
             const isMe = user?.id === row.user_id;
             return (
-              <View key={row.user_id} style={[styles.row, isMe && styles.rowMe]}>
-                <Text style={[styles.rowRank, rankStyle(row.rank)]}>{rankEmoji(row.rank)}</Text>
-                <View style={styles.rowInfo}>
-                  <Text style={[styles.rowName, isMe && styles.rowNameMe]} numberOfLines={1}>
+              <View key={row.user_id} style={[s.row, isMe && s.rowMe]}>
+                <Text style={[s.rowRank, row.rank <= 3 && { fontWeight: t.text.weightExtrabold, color: t.colors.warning }]}>
+                  {rankEmoji(row.rank)}
+                </Text>
+                <View style={s.rowInfo}>
+                  <Text style={[s.rowName, isMe && s.rowNameMe]} numberOfLines={1}>
                     {row.display_name || "Anonymous"}{isMe ? " (you)" : ""}
                   </Text>
                 </View>
-                <Text style={[styles.rowXp, isMe && styles.rowXpMe]}>
+                <Text style={[s.rowXp, isMe && { color: t.colors.accentDark }]}>
                   {row.xp.toLocaleString()} XP
                 </Text>
               </View>
@@ -145,119 +126,46 @@ export default function LeaderboardScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.bg },
+const s = StyleSheet.create({
+  safe:   { flex: 1, backgroundColor: t.colors.screenBg },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.surfaceBorder,
-    backgroundColor: colors.surface,
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    paddingHorizontal: t.spacing.md, paddingVertical: t.spacing.sm,
+    borderBottomWidth: 1, borderBottomColor: t.colors.border,
+    backgroundColor: t.colors.cardBg,
   },
-  backText: { fontSize: fontSize.sm, color: colors.primary, fontWeight: "600" as const },
-  title: { fontSize: fontSize.lg, fontWeight: "800" as const, color: colors.textPrimary, textAlign: "center" as const, flex: 1 },
-  headerSpacer: { width: 70 },
-  toggleRow: {
-    flexDirection: "row",
-    padding: spacing.sm,
-    gap: spacing.sm,
-    backgroundColor: colors.surface,
-  },
-  toggleBtn: {
-    flex: 1,
-    paddingVertical: spacing.sm + 2,
-    borderRadius: radius.md,
-    alignItems: "center",
-    backgroundColor: colors.surfaceHover,
-  },
-  toggleActive: { backgroundColor: colors.primary },
-  toggleText: { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: colors.textMuted },
+  backText: { fontSize: t.text.bodyMd, color: t.colors.accent, fontWeight: t.text.weightSemibold },
+  title:    { fontSize: t.text.h2, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, textAlign: "center", flex: 1 },
+
+  toggleRow: { flexDirection: "row", padding: t.spacing.sm, gap: t.spacing.sm, backgroundColor: t.colors.cardBg },
+  toggleBtn:        { flex: 1, paddingVertical: t.spacing.sm + 2, borderRadius: t.radius.md, alignItems: "center", backgroundColor: t.colors.accentTint },
+  toggleActive:     { backgroundColor: t.colors.accent },
+  toggleText:       { fontSize: t.text.bodyMd, fontWeight: t.text.weightSemibold, color: t.colors.textMuted },
   toggleTextActive: { color: "#fff" },
-  center: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: spacing.xl,
-  },
-  emptyEmoji: { fontSize: 48, marginBottom: spacing.md },
-  emptyTitle: { fontSize: fontSize.lg, fontWeight: fontWeight.bold, color: colors.textPrimary, marginBottom: spacing.sm },
-  emptyText: { fontSize: fontSize.md, color: colors.textMuted, textAlign: "center" },
-  emptyHint: { fontSize: fontSize.sm, color: colors.textDim, textAlign: "center", marginTop: spacing.xs, lineHeight: 20 },
-  scroll: { flex: 1 },
-  listContent: { padding: spacing.md },
-  // Podium
-  podium: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    gap: spacing.sm,
-    marginBottom: spacing.lg,
-    paddingTop: spacing.md,
-  },
-  podiumCol: { alignItems: "center", flex: 1, maxWidth: 110 },
-  podiumRank: { fontSize: fontSize.xxl, marginBottom: spacing.xs },
-  podiumBlock: {
-    width: "100%",
-    borderRadius: radius.lg,
-    padding: spacing.sm,
-    alignItems: "center",
-    borderWidth: 2,
-  },
-  podiumFirst: {
-    backgroundColor: "#fef3c7",
-    borderColor: "#f59e0b",
-    paddingVertical: spacing.md,
-  },
-  podiumSecond: {
-    backgroundColor: colors.surfaceHover,
-    borderColor: colors.surfaceBorder,
-    paddingVertical: spacing.sm + 2,
-  },
-  podiumThird: {
-    backgroundColor: "#fef9f3",
-    borderColor: "#fdba74",
-    paddingVertical: spacing.sm,
-  },
-  podiumName: {
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
-    color: colors.textSecondary,
-    maxWidth: 90,
-  },
-  podiumXp: {
-    fontSize: fontSize.xs,
-    color: colors.textMuted,
-    marginTop: 2,
-  },
-  // Rows
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: spacing.sm + 4,
-    paddingHorizontal: spacing.md,
-    backgroundColor: colors.surface,
-    borderRadius: radius.md,
-    marginBottom: spacing.xs,
-    borderWidth: 1,
-    borderColor: "transparent",
-  },
-  rowMe: {
-    backgroundColor: colors.primaryDim,
-    borderColor: colors.primaryBorder,
-  },
-  rowRank: {
-    width: 36,
-    fontSize: fontSize.md,
-    fontWeight: fontWeight.semibold,
-    color: colors.textMuted,
-    textAlign: "center",
-  },
-  rowInfo: { flex: 1, marginLeft: spacing.sm },
-  rowName: { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: colors.textPrimary },
-  rowNameMe: { color: colors.primary },
-  rowXp: { fontSize: fontSize.sm, fontWeight: fontWeight.bold, color: colors.primary },
-  rowXpMe: { color: colors.primaryDark },
+
+  center:     { flex: 1, justifyContent: "center", alignItems: "center", padding: t.spacing.xl },
+  emptyEmoji: { fontSize: 48, marginBottom: t.spacing.md },
+  emptyTitle: { fontSize: t.text.h2, fontWeight: t.text.weightBold, color: t.colors.textPrimary, marginBottom: t.spacing.sm },
+  emptyHint:  { fontSize: t.text.bodyMd, color: t.colors.textDisabled, textAlign: "center", marginTop: t.spacing.xs, lineHeight: 20 },
+
+  scroll:      { flex: 1 },
+  listContent: { padding: t.spacing.md },
+
+  podium:       { flexDirection: "row", justifyContent: "center", alignItems: "flex-end", gap: t.spacing.sm, marginBottom: t.spacing.lg, paddingTop: t.spacing.md },
+  podiumCol:    { alignItems: "center", flex: 1, maxWidth: 110 },
+  podiumRank:   { fontSize: t.text.display, marginBottom: t.spacing.xs },
+  podiumBlock:  { width: "100%", borderRadius: t.radius.lg, padding: t.spacing.sm, alignItems: "center", borderWidth: 2 },
+  podiumFirst:  { backgroundColor: "#fef3c7", borderColor: "#f59e0b", paddingVertical: t.spacing.md },
+  podiumSecond: { backgroundColor: t.colors.accentTint, borderColor: t.colors.border, paddingVertical: t.spacing.sm + 2 },
+  podiumThird:  { backgroundColor: "#fef9f3", borderColor: "#fdba74", paddingVertical: t.spacing.sm },
+  podiumName:   { fontSize: t.text.caption, fontWeight: t.text.weightSemibold, color: t.colors.textBody, maxWidth: 90 },
+  podiumXp:     { fontSize: t.text.caption, color: t.colors.textMuted, marginTop: 2 },
+
+  row:    { flexDirection: "row", alignItems: "center", paddingVertical: t.spacing.sm + 4, paddingHorizontal: t.spacing.md, backgroundColor: t.colors.cardBg, borderRadius: t.radius.md, marginBottom: t.spacing.xs, borderWidth: 1, borderColor: "transparent" },
+  rowMe:  { backgroundColor: t.colors.accentTint, borderColor: t.colors.border },
+  rowRank:{ width: 36, fontSize: t.text.body, fontWeight: t.text.weightSemibold, color: t.colors.textMuted, textAlign: "center" },
+  rowInfo:{ flex: 1, marginLeft: t.spacing.sm },
+  rowName:{ fontSize: t.text.bodyMd, fontWeight: t.text.weightSemibold, color: t.colors.textPrimary },
+  rowNameMe: { color: t.colors.accent },
+  rowXp:     { fontSize: t.text.bodyMd, fontWeight: t.text.weightBold, color: t.colors.accent },
 });
