@@ -514,13 +514,13 @@ const s = StyleSheet.create({
     ...t.cardShadow,
   },
   xpLeft:   { gap: 3 },
-  xpLevel:  { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: t.colors.accent },
+  xpLevel:  { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: t.colors.accent, fontFamily: t.fonts.display },
   xpSub:    { fontSize: t.text.bodyMd, color: t.colors.textMuted },
   xpRight:  { flex: 1, gap: 4 },
   xpTrack:  { height: 10, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", position: "relative" },
   xpFill:   { height: "100%", backgroundColor: t.colors.accent, borderRadius: t.radius.pill },
   xpShimmer:{ position: "absolute", width: 6, height: "100%", backgroundColor: "rgba(255,255,255,0.55)", borderRadius: 3 },
-  xpPct:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, fontWeight: t.text.weightSemibold, textAlign: "right" },
+  xpPct:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, fontWeight: t.text.weightSemibold, textAlign: "right", fontFamily: t.fonts.display },
 
   // Streak-at-risk
   riskBanner: { flexDirection: "row", alignItems: "center", gap: 12, backgroundColor: t.colors.warningBg, borderWidth: 1.5, borderColor: t.colors.warningBorder, borderRadius: t.radius.lg, padding: 14, marginBottom: t.spacing.md },
@@ -549,14 +549,14 @@ const s = StyleSheet.create({
   heroPRow:   { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: t.spacing.md },
   heroPTrack: { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: t.radius.pill, overflow: "hidden" },
   heroPFill:  { height: "100%", backgroundColor: t.hero.progressFill, borderRadius: t.radius.pill },
-  heroPct:    { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: "#FFF" },
+  heroPct:    { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: "#FFF", fontFamily: t.fonts.display },
   heroCta:    { backgroundColor: t.hero.ctaBg, borderRadius: t.radius.lg, paddingVertical: 13, alignItems: "center" },
   heroCtaTxt: { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: t.hero.ctaText, letterSpacing: 0.3 },
 
   // Section header
   secHdr:      { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: t.spacing.sm },
   secTitle:    { fontSize: t.text.h1, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.3, fontFamily: t.fonts.display },
-  journeyCount:{ fontSize: t.text.h3, fontWeight: t.text.weightSemibold, color: t.colors.accent },
+  journeyCount:{ fontSize: t.text.h3, fontWeight: t.text.weightSemibold, color: t.colors.accent, fontFamily: t.fonts.display },
 
   // Overall bar
   overallBar:  { height: 6, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", marginBottom: t.spacing.md },
@@ -570,7 +570,7 @@ const s = StyleSheet.create({
   weekEmoji:   { fontSize: 22 },
   weekLabel:   { fontSize: 11, fontWeight: t.text.weightBold, color: t.colors.textDisabled, letterSpacing: 1.5, textTransform: "uppercase" as any },
   weekTitle:   { fontSize: t.text.h2, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.2, fontFamily: t.fonts.display },
-  weekCount:   { fontSize: t.text.h3, fontWeight: t.text.weightBold },
+  weekCount:   { fontSize: t.text.h3, fontWeight: t.text.weightBold, fontFamily: t.fonts.display },
   weekGoal:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, marginBottom: 8 },
   weekMiniBar: { height: 4, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", marginBottom: 12 },
   weekMiniFill:{ height: "100%", borderRadius: t.radius.pill },
@@ -584,7 +584,7 @@ const s = StyleSheet.create({
   dayCircleCurrent:{ borderWidth: 2 },
   dayCircleLocked:{ borderColor: t.colors.accentTint, backgroundColor: t.colors.accentTint },
   dayCheck:       { fontSize: 15, color: "#FFF", fontWeight: t.text.weightBlack },
-  dayNum:         { fontSize: 13, fontWeight: t.text.weightBold, color: t.colors.textMuted },
+  dayNum:         { fontSize: 13, fontWeight: t.text.weightBold, color: t.colors.textMuted, fontFamily: t.fonts.display },
   dayNumCurrent:  { fontWeight: t.text.weightExtrabold },
   dayNumLocked:   { color: t.colors.textDisabled },
   dayInfo:        { flex: 1 },

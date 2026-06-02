@@ -27,11 +27,17 @@ export default function Root({ children }: PropsWithChildren) {
           rel="stylesheet"
         />
 
-        {/* ── Global font defaults ── */}
+        {/* ── Global font defaults + rendering ── */}
         <style>{`
           *, *::before, *::after { box-sizing: border-box; }
           html, body, #root { height: 100%; margin: 0; padding: 0; }
-          body { overflow: hidden; font-family: 'Manrope', system-ui, sans-serif; }
+          body {
+            overflow: hidden;
+            font-family: 'Manrope', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+          }
         `}</style>
 
         <ScrollViewStyleReset />

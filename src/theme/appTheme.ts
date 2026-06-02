@@ -184,7 +184,7 @@ type PaletteColors = Pick<AppTheme["colors"],
 
 // Shared neutral text + border across every palette (clean, cool-gray system).
 const NEUTRALS = {
-  textPrimary: "#14132B",
+  textPrimary: "#1E1C3A",   // softened from #14132B — less harsh, still dark
   textBody:    "#3A394F",
   border:      "#ECEBF4",
   borderLight: "#F3F3FA",

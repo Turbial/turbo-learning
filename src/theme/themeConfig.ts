@@ -25,7 +25,7 @@ const themeConfig = {
    * Global font-size multiplier.
    *   1.0 = default  |  1.1 = 10 % larger  |  0.9 = 10 % smaller
    */
-  fontScale: 1.0,
+  fontScale: 1.1,
 
   /**
    * Corner-radius style.
