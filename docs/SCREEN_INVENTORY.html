@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turbo Academy — Screen Inventory for Redesign</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #1a1a2e; color: #e2e8f0; padding: 2rem; }
+  h1 { text-align: center; color: #059669; font-size: 2rem; margin-bottom: 0.5rem; }
+  .subtitle { text-align: center; color: #64748b; margin-bottom: 3rem; font-size: 0.95rem; }
+  .section { margin-bottom: 3rem; }
+  .section-title { color: #059669; font-size: 1.3rem; border-bottom: 2px solid #1e293b; padding-bottom: 0.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-badge { background: #059669; color: white; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 6px; font-weight: 700; }
+  .screens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 1.25rem; }
+  .screen-card { background: #0f172a; border-radius: 14px; border: 1px solid #1e293b; overflow: hidden; }
+  .screen-card.wide { grid-column: 1 / -1; }
+  .screen-card-header { padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; background: #1a1f30; }
+  .screen-card-title { font-weight: 700; font-size: 0.95rem; }
+  .screen-card-route { font-size: 0.7rem; color: #64748b; font-family: monospace; background: #1e293b; padding: 0.12rem 0.4rem; border-radius: 4px; }
+  .screen-preview { padding: 1rem; }
+  .field-list { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+  .field-item { display: flex; align-items: baseline; gap: 0.4rem; font-size: 0.78rem; padding: 0.25rem 0; border-bottom: 1px solid #1e293b33; }
+  .field-badge { font-size: 0.6rem; font-weight: 700; padding: 0.08rem 0.35rem; border-radius: 3px; white-space: nowrap; min-width: 46px; text-align: center; }
+  .badge-input { background: #1e40af33; color: #60a5fa; }
+  .badge-text { background: #064e3b33; color: #34d399; }
+  .badge-button { background: #7c3aed33; color: #a78bfa; }
+  .badge-state { background: #92400e33; color: #fbbf24; }
+  .badge-icon { background: #83184333; color: #f472b6; }
+  .badge-link { background: #1e3a5f33; color: #7dd3fc; }
+  .field-name { color: #cbd5e1; min-width: 90px; font-weight: 500; }
+  .field-note { color: #64748b; font-size: 0.72rem; }
+  .layout-note { margin-top: 0.6rem; padding: 0.5rem 0.65rem; background: #1e293b; border-radius: 8px; font-size: 0.72rem; color: #94a3b8; line-height: 1.5; }
+  .layout-note strong { color: #e2e8f0; }
+  .states-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem; }
+  .state-box { background: #1e293b; border-radius: 10px; padding: 0.6rem; }
+  .state-box-label { font-weight: 700; font-size: 0.65rem; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .sb-green { color: #34d399; } .sb-purple { color: #a78bfa; } .sb-yellow { color: #fbbf24; } .sb-pink { color: #f472b6; } .sb-blue { color: #60a5fa; }
+</style>
+</head>
+<body>
+
+<h1>📱 Turbo Academy — Screen Inventory for Redesign</h1>
+<p class="subtitle">15 complete screens · Every field catalogued · All states documented · Ready for your designs</p>
+
+<!-- ═══ AUTH ═══ -->
+<div class="section">
+  <div class="section-title">🔐 <span>Auth Flow</span> <span class="section-badge">3 screens</span></div>
+  <div class="screens-grid">
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">1. Login</span><span class="screen-card-route">/auth/login</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-icon">LOGO</span><span class="field-name">Brand logo</span><span class="field-note">🚀 Rocket emoji in 72px circle, white bg 20%</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Brand name</span><span class="field-note">"Turbo Academy" — 28px bold white</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Tagline</span><span class="field-note">"AI Operator · 28-Day Program" — 14px white 75%</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Card title</span><span class="field-note">"Welcome back" — 24px bold #1a1a2e</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Card subtitle</span><span class="field-note">"Sign in to continue your journey" — 15px #6b7280</span></li>
+          <li class="field-item"><span class="field-badge badge-input">INPUT</span><span class="field-name">Email field</span><span class="field-note">"Email address" placeholder, keyboard email, autoComplete</span></li>
+          <li class="field-item"><span class="field-badge badge-input">INPUT</span><span class="field-name">Password field</span><span class="field-note">"Password" placeholder, secure, autoComplete password</span></li>
+          <li class="field-item"><span class="field-badge badge-state">ERROR</span><span class="field-name">Error pill</span><span class="field-note">Red #fef2f2 bg, #dc2626 text. Conditional validation errors</span></li>
+          <li class="field-item"><span class="field-badge badge-button">BTN</span><span class="field-name">Sign in</span><span class="field-note">Green #059669, "Signing in…" when busy, disabled while loading</span></li>
+          <li class="field-item"><span class="field-badge badge-link">LINK</span><span class="field-name">Forgot password</span><span class="field-note">Centered, gray #6b7280, → /auth/forgot-password</span></li>
+          <li class="field-item"><span class="field-badge badge-state">DIVIDER</span><span class="field-name">"or" divider</span><span class="field-note">Line + "or" text + line, gray</span></li>
+          <li class="field-item"><span class="field-badge badge-link">LINK</span><span class="field-name">Create account</span><span class="field-note">"Create a free account →" — full-width pill, light gray bg, green text → /auth/register</span></li>
+        </ul>
+        <div class="layout-note"><strong>Layout:</strong> Full green #059669 background. Brand section centered at top (paddingTop 80). White card at bottom with rounded top corners (28px), shadow, padding 24px, gap 12px between elements.</div>
+      </div>
+    </div>
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">2. Register</span><span class="screen-card-route">/auth/register</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-icon">LOGO</span><span class="field-name">Brand logo</span><span class="field-note">🚀 Same 72px circle as Login</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Brand name</span><span class="field-note">"Turbo Academy" — 28px bold white</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Tagline</span><span class="field-note">"Start your 28-day AI journey" — 14px white 75%</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Card title</span><span class="field-note">"Create your account" — 24px bold #1a1a2e</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Card subtitle</span><span class="field-note">"Free to start, no credit card required" — 15px #6b7280</span></li>
+          <li class="field-item"><span class="field-badge badge-input">INPUT</span><span class="field-name">Full name</span><span class="field-note">"Your full name" placeholder, auto-cap words</span></li>
+          <li class="field-item"><span class="field-badge badge-input">INPUT</span><span class="field-name">Email</span><span class="field-note">"Email address" placeholder, keyboard email</span></li>
+          <li class="field-item"><span class="field-badge badge-input">INPUT</span><span class="field-name">Password</span><span class="field-note">"Password (6+ characters)" placeholder, secure</span></li>
+          <li class="field-item"><span class="field-badge badge-state">ERROR</span><span class="field-name">Error pill</span><span class="field-note">Red, conditional validation</span></li>
+          <li class="field-item"><span class="field-badge badge-button">BTN</span><span class="field-name">Create account</span><span class="field-note">Green, "Creating account…" when busy</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Terms text</span><span class="field-note">"By signing up you agree to our Terms and Privacy Policy" — 12px gray, centered</span></li>
+          <li class="field-item"><span class="field-badge badge-state">DIVIDER</span><span class="field-name">"or" divider</span><span class="field-note">Same pattern as Login</span></li>
+          <li class="field-item"><span class="field-badge badge-link">LINK</span><span class="field-name">Sign in link</span><span class="field-note">"Already have an account? Sign in →" — pill button, light gray bg, green text. → /auth/login</span></li>
+          <li class="field-item"><span class="field-badge badge-state">2ND VIEW</span><span class="field-name">Confirmation email</span><span class="field-note">📧 + "Check your email" title + message with email + "← Back to sign in" link. Shown after successful signup</span></li>
+        </ul>
+        <div class="layout-note"><strong>Two views:</strong> Registration form → Email confirmation. Same green bg + white card layout as Login.</div>
+      </div>
+    </div>
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">3. Forgot Password</span><span class="screen-card-route">/auth/forgot-password</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-icon">LOGO</span><span class="field-name">Brand logo</span><span class="field-note">🔑 Key emoji in 72px circle (different from auth)</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Title</span><span class="field-note">"Reset Password" — 28px bold white</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Tagline</span><span class="field-note">"We'll send you a reset link" — 14px white 75%</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Card title</span><span class="field-note">"Forgot your password?" — 24px bold</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Card subtitle</span><span class="field-note">"Enter your email and we'll send you a link to reset it." — 15px gray</span></li>
+          <li class="field-item"><span class="field-badge badge-input">INPUT</span><span class="field-name">Email</span><span class="field-note">"Email address" placeholder</span></li>
+          <li class="field-item"><span class="field-badge badge-state">ERROR</span><span class="field-name">Error pill</span><span class="field-note">Red, conditional</span></li>
+          <li class="field-item"><span class="field-badge badge-button">BTN</span><span class="field-name">Send reset link</span><span class="field-note">Green, "Sending…" when busy</span></li>
+          <li class="field-item"><span class="field-badge badge-state">2ND VIEW</span><span class="field-name">Sent confirmation</span><span class="field-note">Green success box #ecfdf5: 📧 40px + "Check your email" + message with email + back link</span></li>
+          <li class="field-item"><span class="field-badge badge-link">LINK</span><span class="field-name">Back link</span><span class="field-note">"← Back to sign in" — green text link → /auth/login</span></li>
+        </ul>
+        <div class="layout-note"><strong>Two views:</strong> Email form → Sent confirmation. Same green bg + white card pattern.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ ONBOARDING ═══ -->
+<div class="section">
+  <div class="section-title">🎯 <span>Onboarding</span> <span class="section-badge">1 screen / 4 steps</span></div>
+  <div class="screens-grid">
+    <div class="screen-card wide">
+      <div class="screen-card-header"><span class="screen-card-title">4. Onboarding Wizard</span><span class="screen-card-route">/onboard</span></div>
+      <div class="screen-preview">
+        <div class="states-grid">
+          <div class="state-box"><div class="state-box-label sb-green">Step 0 — Name</div><span style="font-size:0.75rem;color:#e2e8f0;">👋 56px emoji + "Welcome!" 26px bold + "Let's set up your learning journey" subtitle. TextInput "Your name", 18px, centered, autoFocus. "Continue" green btn (disabled if empty). Back hidden.</span></div>
+          <div class="state-box"><div class="state-box-label sb-purple">Step 1 — Goal</div><span style="font-size:0.75rem;color:#e2e8f0;">🎯 56px emoji + "Your Goal" + subtitle. 5 selectable cards: ⚡Automate · 📈Career · 🚀Business · 🧠Understand · 🏗️Systems. Each: emoji+label+description. Selected: green border, light green bg, ✓ checkmark. Continue disabled until one selected.</span></div>
+          <div class="state-box"><div class="state-box-label sb-yellow">Step 2 — Rhythm</div><span style="font-size:0.75rem;color:#e2e8f0;">⏱️ emoji + "Your Rhythm" + subtitle. "Minutes per day" label + 5 pills (5/10/15/20/30). "Best time to learn" label + 4 cards: 🌅Morning·☀️Afternoon·🌆Evening·🌙Night. Selected = green bg + border.</span></div>
+          <div class="state-box"><div class="state-box-label sb-pink">Step 3 — Review</div><span style="font-size:0.75rem;color:#e2e8f0;">👋 emoji + "Your Name" + subtitle. Summary card: 👤Name·🎯Goal·⏱️Daily mins+time in 3 rows with dividers. "Start My Journey 🚀" green btn. Toast on save error.</span></div>
+        </div>
+        <div class="layout-note"><strong>Layout:</strong> White bg. Top: 4 progress dots (32px circles) connected by lines — completed: green fill ✓, active: white fill green border, future: gray fill. Centered content. Bottom bar: "← Back" outlined btn (hidden on step 0, flex:1) + "Continue"/"Start" green btn (flex:2, disabled until valid).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN TABS ═══ -->
+<div class="section">
+  <div class="section-title">📑 <span>Main Tab Screens</span> <span class="section-badge">5 screens</span></div>
+  <div class="screens-grid">
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">5. Journey / Home</span><span class="screen-card-route">/(tabs)/home</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-text">BADGE</span><span class="field-name">"AI OPERATOR"</span><span class="field-note">11px bold, white 70%, letter-spaced 2px, uppercase</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TITLE</span><span class="field-name">Program name</span><span class="field-note">26px bold white e.g., "AI Operator"</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TEXT</span><span class="field-name">Subtitle</span><span class="field-note">14px white 75%, e.g., "28 days to go from user → operator"</span></li>
+          <li class="field-item"><span class="field-badge badge-icon">ICON</span><span class="field-name">Program icon</span><span class="field-note">🤖 Robot in 64px circle, white bg 15%</span></li>
+          <li class="field-item"><span class="field-badge badge-state">STATS</span><span class="field-name">4 stat cards</span><span class="field-note">⚡ XP · 🔥 Streak · ✅ Completed · Level. White bg 15%, 16px radius. Row in green header</span></li>
+          <li class="field-item"><span class="field-badge badge-state">BANNER</span><span class="field-name">Streak at-risk</span><span class="field-note">Yellow #fef3c7: ⚠️ + "Your N-day streak is at risk!" + hours + shields. Conditional. Overlaps header</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TITLE</span><span class="field-name">"Your Journey"</span><span class="field-note">20px bold #1a1a2e centered + "N/28 days" green counter</span></li>
+          <li class="field-item"><span class="field-badge badge-state">BAR</span><span class="field-name">Progress bar</span><span class="field-note">6px, green fill, gray #e5e7eb bg, 3px radius</span></li>
+          <li class="field-item"><span class="field-badge badge-state">CARDS</span><span class="field-name">4 week cards</span><span class="field-note">Accent bar: 🧱green/⚙️blue/🔗purple/🚀amber. Emoji + WEEK N + title + goal + mini bar + 7 day rows. White bg, 20px radius, shadow</span></li>
+          <li class="field-item"><span class="field-badge badge-state">ROWS</span><span class="field-name">Day rows</span><span class="field-note">36px circle: green ✓=done, outlined=current, gray=locked. "Now" pill on current. 🔒 on locked. 12px padding, 14px radius</span></li>
+          <li class="field-item"><span class="field-badge badge-state">SKELETON</span><span class="field-name">Loading</span><span class="field-note">Gray skeleton: 4 stat blocks + 4 week card placeholders</span></li>
+        </ul>
+        <div class="layout-note"><strong>Layout:</strong> Green #059669 header (paddingBottom 24). Stats row mH 24, mt 20. Scrolling white #f9fafb body. Week cards: 16px gap. Day rows: 8px padding inside card.</div>
+      </div>
+    </div>
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">6. Progress</span><span class="screen-card-route">/(tabs)/progress</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-text">TITLE</span><span class="field-name">"Your Progress"</span><span class="field-note">28px bold #1a1a2e, centered, marginBottom 24px</span></li>
+          <li class="field-item"><span class="field-badge badge-state">STATS</span><span class="field-name">4 stat cards</span><span class="field-note">⚡XP · 🔥Streak · ✅Completed · 🏅Badges. Animated count-up numbers. White cards with 1px border, 16px radius</span></li>
+          <li class="field-item"><span class="field-badge badge-state">CARD</span><span class="field-name">Level card</span><span class="field-note">Row: 64px green circle (level N) + "Level N · [Title]" + 8px XP bar + "N XP · N to next" text. White bg card</span></li>
+          <li class="field-item"><span class="field-badge badge-state">CARD</span><span class="field-name">Streak card</span><span class="field-note">"🔥 Streak Progress" centered heading. 7-day row: M-S in 40px circles, filled=🔥 bg + fire border, today=scaled 1.15. If 0: 🎯 empty state. Motivation italic text center</span></li>
+          <li class="field-item"><span class="field-badge badge-state">CARD</span><span class="field-name">Badges card</span><span class="field-note">"🏅 Badges (N)" centered. Grid of badge chips (icon+name, white block, border). Or: 🎯 + "Complete Day 1 to earn your first badge!"</span></li>
+          <li class="field-item"><span class="field-badge badge-link">LINK</span><span class="field-name">Leaderboard btn</span><span class="field-note">"🏆 View Leaderboard" — white card btn, 16px padding, green text, 16px radius → /(tabs)/leaderboard</span></li>
+          <li class="field-item"><span class="field-badge badge-state">SKELETON</span><span class="field-name">Loading</span><span class="field-note">Skeleton blocks: title width 180, stats row (4 blocks), 3 card placeholders</span></li>
+        </ul>
+        <div class="layout-note"><strong>Layout:</strong> Scrollable #f9fafb bg. Padding 24px, gap 16px. Cards: white bg, 16px radius, 1px #e8e2d9 border, 16px gap. No header bar — just content.</div>
+      </div>
+    </div>
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">7. Leaderboard</span><span class="screen-card-route">/(tabs)/leaderboard</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-link">LINK</span><span class="field-name">Back arrow</span><span class="field-note">"← Progress" green text. Header bar with bottom border</span></li>
+          <li class="field-item"><span class="field-badge badge-text">TITLE</span><span class="field-name">"Leaderboard"</span><span class="field-note">18px bold, centered in header, flex 1</span></li>
+          <li class="field-item"><span class="field-badge badge-button">TOGGLE</span><span class="field-name">Scope pills</span><span class="field-note">🌍 Global / 👥 Friends. Active: green bg white text. Inactive: gray bg, muted text. 12px radius, flex 1 each</span></li>
+          <li class="field-item"><span class="field-badge badge-state">PODIUM</span><span class="field-name">Top 3 podium</span><span class="field-note">3 columns centered: 🥈2nd(small, gray bg)→🥇1st(tall, yellow #fef3c7 bg, #f59e0b border)→🥉3rd(small, cream bg). Name + XP below each. 110px max each</span></li>
+          <li class="field-item"><span class="field-badge badge-state">LIST</span><span class="field-name">Rank rows</span><span class="field-note">Rank emoji/number (36px wide) + name (flex) + XP. Current user: green #ecfdf5 bg, green border, green text, "(you)" label. White cards, 1px border, 12px radius, 4px gap</span></li>
+          <li class="field-item"><span class="field-badge badge-state">EMPTY</span><span class="field-name">Empty state</span><span class="field-note">🏆 48px emoji + contextual title + hint text. Centered, flex 1, padding</span></li>
+          <li class="field-item"><span class="field-badge badge-state">ERROR</span><span class="field-name">Error state</span><span class="field-note">⚠️ 48px + "Couldn't load leaderboard" + "Check your connection" hint</span></li>
+          <li class="field-item"><span class="field-badge badge-state">LOADING</span><span class="field-name">Spinner</span><span class="field-note">ActivityIndicator large, green, centered flex 1</span></li>
+        </ul>
+        <div class="layout-note"><strong>Layout:</strong> White bg. Header bar (back + title + spacer). Toggle in gray strip. Podium or empty/error/loading state. Scrollable rank list. 16px padding.</div>
+      </div>
+    </div>
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">8. Dashboard</span><span class="screen-card-route">/(tabs)/dashboard</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-state">CARD</span><span class="field-name">Header card</span><span class="field-note">Tinted green. "LEVEL N" label (12px, gray) + XP (22px bold). 🔥 StreakFire component right. Row layout</span></li>
+          <li class="field-item"><span class="field-badge badge-text">LABEL</span><span class="field-name">"TODAY"</span><span class="field-note">12px bold #9ca3af, letter-spaced 1.5px, centered</span></li>
+          <li class="field-item"><span class="field-badge badge-text">VALUE</span><span class="field-name">"Day N"</span><span class="field-note">24px bold #1a1a2e, centered</span></li>
+          <li class="field-item"><span class="field-badge badge-text">HINT</span><span class="field-name">"N/28 days completed"</span><span class="field-note">14px #6b7280, centered, marginBottom 8px</span></li>
+          <li class="field-item"><span class="field-badge badge-button">BTN</span><span class="field-name">Start lesson</span><span class="field-note">Green. "Start today's lesson". → /(tabs)/home</span></li>
+          <li class="field-item"><span class="field-badge badge-state">GAUGE</span><span class="field-name">Progress ring</span><span class="field-note">Circular gauge: current-1 / 28 completion. Green arc. Below: "Complete" label</span></li>
+          <li class="field-item"><span class="field-badge badge-text">STAT</span><span class="field-name">Streak value</span><span class="field-note">"N🔥" — 28px bold. Below: "Day streak" label</span></li>
+          <li class="field-item"><span class="field-badge badge-state">GRID</span><span class="field-name">28-Day grid</span><span class="field-note">4 rows, 7 columns, 38px cells. Green #059669=done, outlined green #ecfdf5=current, gray #f3f4f6=future. "Your 28 Days" heading. Centered grid (justifyContent center)</span></li>
+          <li class="field-item"><span class="field-badge badge-state">SKELETON</span><span class="field-name">Loading</span><span class="field-note">Skeleton: header card 120px + content block 200px</span></li>
+        </ul>
+        <div class="layout-note"><strong>Layout:</strong> Scrollable #f9fafb. Padding 32px, gap 24px. Today card: white, centered content, gap 8px. Stats: 2 cards in row. Grid card: white bg, 20px radius.</div>
+      </div>
+    </div>
+
+    <div class="screen-card">
+      <div class="screen-card-header"><span class="screen-card-title">9. Profile Tab</span><span class="screen-card-route">/(tabs)/profile</span></div>
+      <div class="screen-preview">
+        <ul class="field-list">
+          <li class="field-item"><span class="field-badge badge-icon">AVATAR</span><span class="field-name">Avatar circle</span><span class="field-note">80px, initials or default. In green #059669 hero card, centered</span></li>
+          <li class="field-item"><span class="field-badge badge-text">NAME</span><span class="field-name">Display name</span><span class="field-note">22px bold white. Or "AI Operator" default</span></li>
+          <li class="field-item"><span class="field-badge badge-state">PILL</span><span class="field-name">Level badge</span><span class="field-note">"Level N · [Title]" — pill, white bg 20%, 13px bold, 20px radius</span></li>
+          <li class="field-item"><span class="field-badge badge-state">STATS</span><span class="field-name">Hero stats row</span><span class="field-note">XP / 🔥 Streak / Badges. White bg 12%, 16px radius, horizontal dividers between</span></li>
+          <li class="field-item"><span class="field-badge badge-state">CARD</span><span class="field-name">Goal card</span><span class="field-note">Conditional. Emoji + label + value. If daily_mins set: + ⏱️ commitment row. White card, 20px radius, shadow</span></li>
+          <li class="field-item"><span class="field-badge badge-state">CARD</span><span class="field-name">Shield card</span><span class="field-note">🛡️ 28px + "Streak Protection" label + "N shields available" + "Buy Shield" yellow #fef3c7 pill btn, #92400e text, 14px radius</span></
