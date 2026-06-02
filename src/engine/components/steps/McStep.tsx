@@ -6,8 +6,8 @@ import { StepProps } from "../../stepRegistry";
 import type { McStep as McStepType } from "../../types";
 import { stepStyles as s } from "./stepStyles";
 
-export default function McStep({ step, onAnswer }: StepProps) {
-  const mc = step as McStepType;
+export default function McStep({ step, onAnswer }: StepProps<McStepType>) {
+  const mc = step;
   const [selected, setSelected] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -67,7 +67,9 @@ export default function McStep({ step, onAnswer }: StepProps) {
         <View style={[s.feedback, isCorrect ? s.feedbackCorrect : s.feedbackWrong]}>
           <Text style={s.feedbackEmoji}>{isCorrect ? "✓" : "✗"}</Text>
           <Text style={s.feedbackText}>
-            {isCorrect ? mc.feedback[0] : mc.feedback[1] || "Not quite. The correct answer is highlighted above."}
+            {isCorrect
+              ? mc.feedback[mc.correct]
+              : mc.feedback[selected!] || "Not quite. The correct answer is highlighted above."}
           </Text>
         </View>
       )}

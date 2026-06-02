@@ -6,8 +6,8 @@ import { StepProps } from "../../stepRegistry";
 import type { FillBlankStep as FillBlankStepType } from "../../types";
 import { stepStyles as s } from "./stepStyles";
 
-export default function FillBlankStep({ step, onAnswer }: StepProps) {
-  const fb = step as FillBlankStepType;
+export default function FillBlankStep({ step, onAnswer }: StepProps<FillBlankStepType>) {
+  const fb = step;
   const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
 

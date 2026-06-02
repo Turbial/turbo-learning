@@ -1,10 +1,5 @@
-// âââ Home Screen â Desktop / Web layout âââ
-// Renders when Platform.OS === 'web' (Expo web via React Native Web).
-// Layout: macOS-style title bar + fixed left sidebar + scrollable main area.
-//
-// Usage: In app/(tabs)/_layout.tsx (web), swap home.tsx for this file,
-// or use a responsive wrapper that mounts one or the other based on
-// useWindowDimensions().width >= 768.
+// ─── Home Screen — Desktop / Web — Ocean / Aqua theme, real Supabase data ─────
+// Layout: white sidebar + scrollable main on a soft aqua background.
 
 import React, { useState } from "react";
 import {
@@ -14,121 +9,133 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Platform,
+  ActivityIndicator,
 } from "react-native";
 import { router } from "expo-router";
+import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
+import { appPalette as o } from "../../src/theme/palette";
+
+// ─── Real data hooks ──────────────────────────────────────────────────────────
+import { useAuth } from "../../src/data/useAuth";
 import {
-  colors,
-  spacing,
-  radius,
-  fontSize,
-  fontWeight,
-  shadow,
-} from "../../src/theme/tokens";
+  useProfile,
+  useUnits,
+  useProgram,
+  useLessonProgressMap,
+  useActiveProgramSlug,
+} from "../../src/data/queries";
+import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
+import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
-// âââ Mock data (same shapes as mobile â replace with Supabase queries in M3) ââ
+// ─── Helpers (same as mobile) ─────────────────────────────────────────────────
 
-const MOCK_USER = {
-  initials: "AJ",
-  name: "Alexandra J.",
-  handle: "@alex_learns",
-  coins: 4892,
-  level: 24,
-  xp: 3692,
-  xpToNextLevel: 308,
-  xpForNextLevel: 4000,
-  streak: 7,
-  rank: 42,
-  notifications: 2,
-};
+function getInitials(name?: string | null, email?: string | null): string {
+  if (name) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2)
+      return (parts[0][0]! + parts[parts.length - 1]![0]!).toUpperCase();
+    return (parts[0]![0] ?? "?").toUpperCase();
+  }
+  if (email) return email[0]!.toUpperCase();
+  return "?";
+}
 
-const MOCK_HERO = {
-  tag: "Continue Learning",
-  title: "Quadratic Equations",
-  subtitle: "Mathematics Â· Chapter 4 of 8",
-  timeLabel: "5â7 min",
-  difficulty: "HARD",
-  xpReward: "250 XP",
-  progress: 0.78,
-  lessonId: "lesson-quadratic-1",
-};
+function getFirstName(name?: string | null, email?: string | null): string {
+  if (name) return name.trim().split(/\s+/)[0]!;
+  if (email) return email.split("@")[0]!;
+  return "Learner";
+}
 
-type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logic" | "Art";
-const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
+const XP_PER_LEVEL = 1000;
 
-const SUBJECTS = [
-  { id: "math", name: "Mathematics", emoji: "ð", count: "150+ Questions", progress: 0.79, color: "#4A8ED4", category: "Math" as SubjectFilter, locked: false },
-  { id: "science", name: "Science Lab", emoji: "ð¬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science" as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts", emoji: "ð", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
-  { id: "history", name: "World History", emoji: "ðï¸", count: "90+ Questions", progress: 0.12, color: "#F59E0B", category: "History" as SubjectFilter, locked: false },
-  { id: "logic", name: "Logic & Puzzles", emoji: "ð§©", count: "Coming soon", progress: 0, color: "#9090B8", category: "Logic" as SubjectFilter, locked: true },
-  { id: "art", name: "Creative Arts", emoji: "ð¨", count: "Coming soon", progress: 0, color: "#B0B0D0", category: "Art" as SubjectFilter, locked: true },
-];
+// ─── Week palette ─────────────────────────────────────────────────────────────
+const WEEK_COLORS = [o.mid, o.teal, o.sky, o.deep] as const;
+const WEEK_TITLES = ["Foundation", "Automation", "Systems", "Launch"] as const;
+const WEEK_GOALS = [
+  "Understand AI and build your first workflows",
+  "Build automations that run without you",
+  "Create multi-tool AI systems",
+  "Ship your AI workforce",
+] as const;
+const WEEK_EMOJIS = ["🧱", "⚙️", "🌐", "🚀"] as const;
 
-const ACTIVITY = [
-  { id: "a1", emoji: "ð", name: "Calculus Integration", chapter: "Chapter 3", subject: "Mathematics", time: "2 hours ago", status: "done" },
-  { id: "a2", emoji: "âï¸", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics", time: "5 hours ago", status: "in-progress" },
-  { id: "a3", emoji: "ð", name: "Essay Structure Basics", chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday", status: "new" },
-];
-
+// ─── Nav ──────────────────────────────────────────────────────────────────────
 const NAV_ITEMS = [
-  { id: "home", label: "Home", emoji: "ð " },
-  { id: "explore", label: "Explore", emoji: "ð" },
-  { id: "progress", label: "Progress", emoji: "ð" },
-  { id: "profile", label: "Profile", emoji: "ð¤" },
+  { id: "home",     label: "Home",     emoji: "🏠" },
+  { id: "explore",  label: "Explore",  emoji: "🔍" },
+  { id: "progress", label: "Progress", emoji: "📈" },
+  { id: "profile",  label: "Profile",  emoji: "👤" },
 ];
 const NAV_MORE = [
-  { id: "leaderboard", label: "Leaderboard", emoji: "ð" },
-  { id: "settings", label: "Settings", emoji: "âï¸" },
+  { id: "leaderboard", label: "Leaderboard", emoji: "🏆" },
+  { id: "settings",    label: "Settings",    emoji: "⚙️" },
 ];
 
-// âââ Sidebar âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
 
-function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) => void }) {
-  const u = MOCK_USER;
-  const xpPct = Math.round(Math.min(u.xp / u.xpForNextLevel, 1) * 100);
+function Sidebar({
+  activeNav,
+  onNav,
+  initials,
+  name,
+  handle,
+  level,
+  xp,
+  streak,
+}: {
+  activeNav: string;
+  onNav: (id: string) => void;
+  initials: string;
+  name: string;
+  handle: string;
+  level: number;
+  xp: number;
+  streak: number;
+}) {
+  const xpInLevel = xp % XP_PER_LEVEL;
+  const xpPct = Math.round(Math.min((xpInLevel / XP_PER_LEVEL) * 100, 100));
+  const xpToNext = XP_PER_LEVEL - xpInLevel;
 
   return (
     <View style={s.sidebar}>
       {/* Brand */}
       <View style={s.brand}>
-        <View style={s.brandIco}><Text style={s.brandIcoTxt}>â¦</Text></View>
-        <Text style={s.brandName}>EduApp</Text>
+        <View style={s.brandIco}>
+          <Text style={s.brandIcoTxt}>◈</Text>
+        </View>
+        <Text style={s.brandName}>Turbo Learning</Text>
       </View>
 
       {/* User card */}
       <View style={s.userCard}>
         <View style={s.userRow}>
           <View style={s.sbAvatar}>
-            <Text style={s.sbAvatarTxt}>{u.initials}</Text>
+            <Text style={s.sbAvatarTxt}>{initials}</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={s.sbName}>{u.name}</Text>
-            <Text style={s.sbHandle}>{u.handle}</Text>
+            <Text style={s.sbName}>{name}</Text>
+            <Text style={s.sbHandle}>{handle}</Text>
           </View>
         </View>
 
         <View style={s.lvlPill}>
-          <Text style={s.lvlTxt}>â­ Level {u.level}</Text>
+          <Text style={s.lvlTxt}>⭐ Level {level}</Text>
         </View>
 
         <View style={s.xpRow}>
-          <Text style={s.xpRowLbl}>Experience</Text>
+          <Text style={s.xpRowLbl}>XP Progress</Text>
           <Text style={s.xpRowPct}>{xpPct}%</Text>
         </View>
         <View style={s.xpTrack}>
           <View style={[s.xpFill, { width: `${xpPct}%` as any }]} />
+          <View style={[s.xpShimmer, { left: `${Math.max(xpPct - 3, 0)}%` as any }]} />
         </View>
-
-        <View style={s.coinRow}>
-          <View style={s.coinDot} />
-          <Text style={s.coinVal}>{u.coins.toLocaleString()} XP</Text>
-          <Text style={s.coinSub}>{u.xpToNextLevel} to Lvl {u.level + 1}</Text>
-        </View>
+        <Text style={s.xpHint}>{xpToNext} XP to level {level + 1}</Text>
       </View>
 
       {/* Nav */}
-      <Text style={s.navSec}>Menu</Text>
+      <Text style={s.navSec}>MENU</Text>
       {NAV_ITEMS.map((item) => (
         <TouchableOpacity
           key={item.id}
@@ -137,10 +144,12 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
           activeOpacity={0.75}
         >
           <Text style={s.navIco}>{item.emoji}</Text>
-          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
+          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>
+            {item.label}
+          </Text>
         </TouchableOpacity>
       ))}
-      <Text style={s.navSec}>More</Text>
+      <Text style={s.navSec}>MORE</Text>
       {NAV_MORE.map((item) => (
         <TouchableOpacity
           key={item.id}
@@ -149,565 +158,787 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
           activeOpacity={0.75}
         >
           <Text style={s.navIco}>{item.emoji}</Text>
-          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
+          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>
+            {item.label}
+          </Text>
         </TouchableOpacity>
       ))}
 
-      {/* Quick stats */}
+      {/* Stat cards */}
       <View style={s.statsArea}>
         <View style={s.statCard}>
-          <View>
-            <Text style={s.statLbl}>Current Streak</Text>
-            <Text style={s.statSub}>Keep it up!</Text>
-          </View>
-          <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>ð¥ {MOCK_USER.streak}</Text>
-            <Text style={s.statUnit}>days</Text>
-          </View>
+          <Text style={s.statVal}>🔥 {streak}</Text>
+          <Text style={s.statLbl}>day streak</Text>
         </View>
         <View style={s.statCard}>
-          <View>
-            <Text style={s.statLbl}>Global Rank</Text>
-            <Text style={s.statSub}>Top 5%</Text>
-          </View>
-          <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>#{MOCK_USER.rank}</Text>
-            <Text style={s.statUnit}>worldwide</Text>
-          </View>
+          <Text style={s.statVal}>{xp}</Text>
+          <Text style={s.statLbl}>total XP</Text>
         </View>
       </View>
     </View>
   );
 }
 
-// âââ Hero Banner âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Hero banner ──────────────────────────────────────────────────────────────
 
-function HeroBanner() {
-  const h = MOCK_HERO;
+function HeroBanner({
+  title,
+  subtitle,
+  unitId,
+  programSlug,
+  dayNum,
+  overallPct,
+}: {
+  title: string;
+  subtitle: string;
+  unitId: string;
+  programSlug: string;
+  dayNum: number;
+  overallPct: number;
+}) {
   return (
     <TouchableOpacity
       style={s.hero}
       activeOpacity={0.9}
-      onPress={() => router.push(`/lesson/${h.lessonId}` as any)}
+      onPress={() =>
+        router.push({
+          pathname: `/lesson/${unitId}` as any,
+          params: { program: programSlug, day: String(dayNum) },
+        })
+      }
     >
+      {/* Caustic light rings */}
+      <View style={[s.caustic, s.cA]} />
+      <View style={[s.caustic, s.cB]} />
+      <View style={[s.caustic, s.cC]} />
+      <View style={[s.caustic, s.cD]} />
+
       {/* Left content */}
       <View style={s.heroLeft}>
         <View>
-          <Text style={s.heroTag}>ð {h.tag.toUpperCase()}</Text>
-          <Text style={s.heroTitle}>{h.title}</Text>
-          <Text style={s.heroSub}>{h.subtitle}</Text>
-          <View style={s.heroChips}>
-            {[`â± ${h.timeLabel}`, `â ${h.difficulty}`, `â¦ ${h.xpReward}`].map((c) => (
-              <View key={c} style={[s.heroChip, c.includes("HARD") && s.heroChipHard]}>
-                <Text style={s.heroChipTxt}>{c}</Text>
-              </View>
-            ))}
+          <View style={s.heroTag}>
+            <Text style={s.heroTagTxt}>🌊  CONTINUE LEARNING</Text>
           </View>
+          <Text style={s.heroTitle}>{title}</Text>
+          <Text style={s.heroSub}>{subtitle}</Text>
         </View>
         <View style={s.heroBottom}>
           <View style={s.heroPTrack}>
-            <View style={[s.heroPFill, { width: `${Math.round(h.progress * 100)}%` as any }]} />
+            <View style={[s.heroPFill, { width: `${overallPct}%` as any }]} />
           </View>
-          <Text style={s.heroPct}>{Math.round(h.progress * 100)}%</Text>
+          <Text style={s.heroPct}>{overallPct}%</Text>
           <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
-            <Text style={s.heroCtaTxt}>Continue â</Text>
+            <Text style={s.heroCtaTxt}>Continue →</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* Right decorative area */}
-      <View style={s.heroRight}>
-        <View style={[s.hrc, s.hrc1]} />
-        <View style={[s.hrc, s.hrc2]} />
-        <View style={[s.hrc, s.hrc3]} />
-        <View style={s.hrd} />
-      </View>
+      <View style={s.heroRight} />
     </TouchableOpacity>
   );
 }
 
-// âââ Subject grid (3-col) ââââââââââââââââââââââââââââââââââââââââ
-
-function SubjectGrid({ filter }: { filter: SubjectFilter }) {
-  const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
+function AllDoneBanner({ total }: { total: number }) {
   return (
-    <View style={s.subGrid}>
-      {visible.map((item) => (
-        <TouchableOpacity
-          key={item.id}
-          style={[s.subCard, item.locked && s.subCardLocked]}
-          activeOpacity={item.locked ? 1 : 0.85}
-          disabled={item.locked}
-        >
-          <View style={[s.subTop, { backgroundColor: item.color }]}>
-            <View style={[s.subC1, { backgroundColor: item.color + "55" }]} />
-            <View style={[s.subC2, { backgroundColor: item.color + "33" }]} />
-            <Text style={s.subEmoji}>{item.emoji}</Text>
+    <View style={s.hero}>
+      <View style={[s.caustic, s.cA]} />
+      <View style={[s.caustic, s.cB]} />
+      <View style={[s.caustic, s.cC]} />
+      <View style={[s.caustic, s.cD]} />
+      <View style={s.heroLeft}>
+        <View>
+          <View style={s.heroTag}>
+            <Text style={s.heroTagTxt}>🎉  PROGRAM COMPLETE</Text>
           </View>
-          <View style={s.subBody}>
-            <Text style={[s.subName, item.locked && { color: colors.textMuted }]} numberOfLines={1}>
-              {item.name}
-            </Text>
-            <Text style={s.subCount}>{item.count}</Text>
-            {!item.locked ? (
-              <View style={s.subPTrack}>
-                <View style={[s.subPFill, { width: `${Math.round(item.progress * 100)}%` as any, backgroundColor: item.color }]} />
-              </View>
+          <Text style={s.heroTitle}>You finished all {total} days!</Text>
+          <Text style={s.heroSub}>Incredible work. Check back for new programs.</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+// ─── WeeksView — desktop (same logic, slightly wider cards) ───────────────────
+
+type DayStatus = "done" | "current" | "locked";
+type DayEntry = { day: number; unitId: string; title: string; status: DayStatus };
+type WeekEntry = {
+  weekNum: number;
+  title: string;
+  goal: string;
+  emoji: string;
+  color: string;
+  days: DayEntry[];
+};
+
+function WeeksGrid({
+  units,
+  completedUnitIds,
+  programSlug,
+  onDayPress,
+}: {
+  units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
+  completedUnitIds: Set<string>;
+  programSlug: string;
+  onDayPress: (day: number, unitId: string, status: DayStatus) => void;
+}) {
+  const weeks: WeekEntry[] = [];
+
+  for (let w = 0; w < 4; w++) {
+    const startDay = w * 7 + 1;
+    const endDay = Math.min(startDay + 6, 28);
+    const weekUnits = units.filter(
+      (u) => u.order_num >= startDay && u.order_num <= endDay
+    );
+
+    weeks.push({
+      weekNum: w + 1,
+      title: WEEK_TITLES[w] ?? `Week ${w + 1}`,
+      goal: WEEK_GOALS[w] ?? "",
+      emoji: WEEK_EMOJIS[w] ?? "📅",
+      color: WEEK_COLORS[w] ?? o.mid,
+      days: weekUnits.map((u) => {
+        const isDone = completedUnitIds.has(u.id);
+        const prevUnit =
+          u.order_num > 1
+            ? units.find((pu) => pu.order_num === u.order_num - 1)
+            : null;
+        const prevDone =
+          u.order_num === 1 ||
+          (prevUnit != null && completedUnitIds.has(prevUnit.id));
+        const isCurrent = !isDone && prevDone;
+        return {
+          day: u.order_num,
+          unitId: u.id,
+          title: u.title,
+          status: (isDone ? "done" : isCurrent ? "current" : "locked") as DayStatus,
+        };
+      }),
+    });
+  }
+
+  // 2-column grid of week cards
+  const rows: [WeekEntry, WeekEntry | null][] = [
+    [weeks[0]!, weeks[1] ?? null],
+    [weeks[2]!, weeks[3] ?? null],
+  ];
+
+  return (
+    <View style={s.weeksGrid}>
+      {rows.map((row, ri) => (
+        <View key={ri} style={s.weeksRow}>
+          {row.map((week, ci) =>
+            week ? (
+              <WeekCard
+                key={week.weekNum}
+                week={week}
+                onDayPress={onDayPress}
+              />
             ) : (
-              <Text style={s.lockLbl}>ð LOCKED</Text>
-            )}
-          </View>
-        </TouchableOpacity>
+              <View key={`empty-${ci}`} style={s.weekCardEmpty} />
+            )
+          )}
+        </View>
       ))}
     </View>
   );
 }
 
-// âââ Activity table âââââââââââââââââââââââââââââââââââââââââââââââ
+function WeekCard({
+  week,
+  onDayPress,
+}: {
+  week: WeekEntry;
+  onDayPress: (day: number, unitId: string, status: DayStatus) => void;
+}) {
+  const doneCount = week.days.filter((d) => d.status === "done").length;
+  const weekPct =
+    week.days.length > 0
+      ? Math.round((doneCount / week.days.length) * 100)
+      : 0;
 
-const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }> = {
-  done: { bg: "#D1FAE5", color: "#065F46", label: "Answered" },
-  "in-progress": { bg: "#FEF3C7", color: "#92400E", label: "Pending" },
-  new: { bg: "#EDE9FE", color: "#4C1D95", label: "New" },
-};
-
-const ICON_BG: Record<string, string> = {
-  "ð": "#F0E8FF",
-  "âï¸": "#DFF7F4",
-  "ð": "#FFE8EC",
-};
-
-function ActivityTable() {
   return (
-    <View style={s.actBox}>
-      {/* Header */}
-      <View style={s.actHead}>
-        {["LESSON", "SUBJECT", "TIME", "STATUS"].map((h) => (
-          <Text key={h} style={s.actHeadTxt}>{h}</Text>
-        ))}
+    <View style={s.weekCard}>
+      <View style={[s.weekAccent, { backgroundColor: week.color }]} />
+      <View style={s.weekInner}>
+        <View style={s.weekHeaderRow}>
+          <Text style={s.weekEmoji}>{week.emoji}</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={s.weekLabel}>WEEK {week.weekNum}</Text>
+            <Text style={s.weekTitle}>{week.title}</Text>
+          </View>
+          <Text style={[s.weekCount, { color: week.color }]}>
+            {doneCount}/{week.days.length}
+          </Text>
+        </View>
+        <Text style={s.weekGoal}>{week.goal}</Text>
+        <View style={s.weekMiniBar}>
+          <View
+            style={[
+              s.weekMiniFill,
+              {
+                width: `${Math.max(weekPct, weekPct > 0 ? 4 : 0)}%` as any,
+                backgroundColor: week.color,
+              },
+            ]}
+          />
+        </View>
+        <View style={s.daysList}>
+          {week.days.map((d) => {
+            const isCurrent = d.status === "current";
+            const isDone = d.status === "done";
+            const isLocked = d.status === "locked";
+            return (
+              <TouchableOpacity
+                key={d.day}
+                style={[s.dayRow, isCurrent && s.dayRowCurrent]}
+                onPress={() => onDayPress(d.day, d.unitId, d.status)}
+                activeOpacity={isLocked ? 1 : 0.7}
+                disabled={isLocked}
+              >
+                <View
+                  style={[
+                    s.dayCircle,
+                    isDone && [s.dayCircleDone, { backgroundColor: week.color }],
+                    isCurrent && [s.dayCircleCurrent, { borderColor: week.color }],
+                    isLocked && s.dayCircleLocked,
+                  ]}
+                >
+                  {isDone ? (
+                    <Text style={s.dayCheck}>✓</Text>
+                  ) : (
+                    <Text
+                      style={[
+                        s.dayNum,
+                        isCurrent && [s.dayNumCurrent, { color: week.color }],
+                        isLocked && s.dayNumLocked,
+                      ]}
+                    >
+                      {d.day}
+                    </Text>
+                  )}
+                </View>
+                <Text
+                  style={[s.dayTitle, isLocked && s.dayTitleLocked]}
+                  numberOfLines={1}
+                >
+                  {d.title}
+                </Text>
+                {isCurrent && (
+                  <Text style={[s.currentPill, { color: week.color }]}>Now</Text>
+                )}
+                {isLocked && <Text style={s.lockIcon}>🔒</Text>}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
-      {/* Rows */}
-      {ACTIVITY.map((item, i) => {
-        const st = STATUS_STYLE[item.status];
-        return (
-          <TouchableOpacity key={item.id} style={[s.actRow, i === ACTIVITY.length - 1 && { borderBottomWidth: 0 }]} activeOpacity={0.75}>
-            <View style={s.actCell}>
-              <View style={[s.actIco, { backgroundColor: ICON_BG[item.emoji] ?? "#F0E8FF" }]}>
-                <Text style={{ fontSize: 16 }}>{item.emoji}</Text>
-              </View>
-              <View>
-                <Text style={s.actName}>{item.name}</Text>
-                <Text style={s.actChapter}>{item.chapter}</Text>
-              </View>
-            </View>
-            <Text style={s.actSubject}>{item.subject}</Text>
-            <Text style={s.actTime}>{item.time}</Text>
-            <View>
-              <View style={[s.actBadge, { backgroundColor: st.bg }]}>
-                <Text style={[s.actBadgeTxt, { color: st.color }]}>{st.label}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        );
-      })}
     </View>
   );
 }
 
-// âââ Main Screen âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Streak-at-risk banner ────────────────────────────────────────────────────
+
+function StreakRiskBanner({
+  streakDays,
+  expiresInHours,
+  shieldCount,
+}: {
+  streakDays: number;
+  expiresInHours: number;
+  shieldCount: number;
+}) {
+  return (
+    <View style={s.riskBanner}>
+      <Text>⚠️</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={s.riskTitle}>
+          Your {streakDays}-day streak is at risk!
+        </Text>
+        <Text style={s.riskHint}>
+          Complete a lesson in the next {expiresInHours}h.
+          {shieldCount > 0
+            ? ` ${shieldCount} shield${shieldCount !== 1 ? "s" : ""} ready.`
+            : ""}
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+// ─── Main screen ──────────────────────────────────────────────────────────────
 
 export default function HomeDesktopScreen() {
   const [activeNav, setActiveNav] = useState("home");
-  const [filter, setFilter] = useState<SubjectFilter>("All");
   const [search, setSearch] = useState("");
 
+  const { user } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: activeSlug } = useActiveProgramSlug();
+  const programSlug = activeSlug ?? "ai-operator";
+  const { data: program } = useProgram(programSlug);
+  const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
+  const { data: completedUnitIds } = useLessonProgressMap(user?.id);
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+  const { data: streakRisk } = useStreakAtRisk(user?.id);
+
+  const allCompletedIds = new Set<string>([
+    ...(completedUnitIds ?? new Set<string>()),
+    ...localCompletedIds,
+  ]);
+
+  const fallbackUnits =
+    LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"] ?? [];
+  const displayUnits = units ?? fallbackUnits;
+  const completedCount = allCompletedIds.size;
+  const totalUnits = displayUnits.length || 28;
+  const overallPct = Math.round((completedCount / totalUnits) * 100);
+
+  const currentUnit = displayUnits.find((u, i) => {
+    if (allCompletedIds.has(u.id)) return false;
+    if (i === 0) return true;
+    const prev = displayUnits[i - 1];
+    return prev != null && allCompletedIds.has(prev.id);
+  });
+
+  const handleDayPress = (day: number, unitId: string, status: DayStatus) => {
+    if (status === "locked") return;
+    router.push({
+      pathname: `/lesson/${unitId}` as any,
+      params: { program: programSlug, day: String(day) },
+    });
+  };
+
+  const initials = getInitials(profile?.name, profile?.email ?? user?.email);
+  const firstName = getFirstName(profile?.name, profile?.email ?? user?.email);
+  const fullName = profile?.name ?? firstName;
+  const handle = profile?.email ? `@${profile.email.split("@")[0]}` : "";
+  const xp = profile?.xp ?? 0;
+  const level = profile?.level ?? 1;
+  const streak = profile?.streak ?? 0;
+
   const hour = new Date().getHours();
-  const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
   return (
     <View style={s.root}>
-      {/* ââ macOS title bar ââ */}
-      <View style={s.titleBar}>
-        <View style={s.trafficLights}>
-          <View style={[s.tl, { backgroundColor: "#FF5F57" }]} />
-          <View style={[s.tl, { backgroundColor: "#FFBD2E" }]} />
-          <View style={[s.tl, { backgroundColor: "#28C840" }]} />
+      {/* ── Top bar ── */}
+      <View style={s.topBar}>
+        <View style={s.topLeft}>
+          <View style={s.tbIco}>
+            <Text style={s.tbIcoTxt}>◈</Text>
+          </View>
+          <Text style={s.tbBrand}>Turbo Learning</Text>
         </View>
-        <View style={s.titleMid}>
-          <View style={s.titleIco}><Text style={s.titleIcoTxt}>â¦</Text></View>
-          <Text style={s.titleName}>EduApp Â· Home</Text>
+        <View style={s.searchBox}>
+          <Text style={{ fontSize: 14, opacity: 0.35 }}>🔍</Text>
+          <TextInput
+            style={s.searchInput}
+            placeholder="Search lessons, topics…"
+            placeholderTextColor={o.dim}
+            value={search}
+            onChangeText={setSearch}
+          />
         </View>
-        <View style={s.titleRight}>
-          <Text style={s.titleTime}>9:41 AM</Text>
-          <TouchableOpacity style={s.titleBell}>
-            <Text style={{ fontSize: 13 }}>ð</Text>
-            {MOCK_USER.notifications > 0 && <View style={s.titleBellDot} />}
-          </TouchableOpacity>
+        <View style={s.topRight}>
+          {streak > 0 && (
+            <Text style={s.topStreak}>🔥 {streak}-day streak</Text>
+          )}
         </View>
       </View>
 
-      {/* ââ App shell ââ */}
+      {/* ── Shell ── */}
       <View style={s.shell}>
-        <Sidebar activeNav={activeNav} onNav={setActiveNav} />
-
-        {/* Main content */}
-        <ScrollView style={s.main} contentContainerStyle={s.mainContent} showsVerticalScrollIndicator={false}>
-          {/* Greeting + search */}
-          <View style={s.topBar}>
-            <View>
-              <Text style={s.greetTitle}>{greeting}, Alexandra! ð</Text>
-              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak â keep going!</Text>
-            </View>
-            <View style={s.searchBox}>
-              <Text style={{ fontSize: 14, opacity: 0.4 }}>ð</Text>
-              <TextInput
-                style={s.searchInput}
-                placeholder="Search subjects, topicsâ¦"
-                placeholderTextColor={colors.textMuted}
-                value={search}
-                onChangeText={setSearch}
-              />
-            </View>
+        {/* Sidebar */}
+        {profileLoading ? (
+          <View style={[s.sidebar, { justifyContent: "center", alignItems: "center" }]}>
+            <ActivityIndicator color={o.mid} />
           </View>
+        ) : (
+          <Sidebar
+            activeNav={activeNav}
+            onNav={setActiveNav}
+            initials={initials}
+            name={fullName}
+            handle={handle}
+            level={level}
+            xp={xp}
+            streak={streak}
+          />
+        )}
+
+        {/* Main */}
+        <ScrollView
+          style={s.main}
+          contentContainerStyle={s.mainContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Greeting */}
+          <View style={s.greetRow}>
+            <Text style={s.greetTitle}>{greeting}, {firstName}! 👋</Text>
+            <Text style={s.greetSub}>
+              {program?.title ?? "AI Operator"} · {completedCount}/{totalUnits} days complete
+            </Text>
+          </View>
+
+          {/* Streak-at-risk */}
+          {streakRisk?.isAtRisk && (
+            <StreakRiskBanner
+              streakDays={streakRisk.streakDays}
+              expiresInHours={streakRisk.expiresInHours}
+              shieldCount={streakRisk.shieldCount}
+            />
+          )}
 
           {/* Hero */}
-          <HeroBanner />
+          {currentUnit ? (
+            <HeroBanner
+              title={currentUnit.title}
+              subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.order_num}`}
+              unitId={currentUnit.id}
+              programSlug={programSlug}
+              dayNum={currentUnit.order_num}
+              overallPct={overallPct}
+            />
+          ) : displayUnits.length > 0 ? (
+            <AllDoneBanner total={totalUnits} />
+          ) : null}
 
-          {/* Explore */}
+          {/* Journey */}
           <View style={s.secHdr}>
-            <Text style={s.secTitle}>Explore Subjects</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
+            <Text style={s.secTitle}>Your Journey</Text>
+            <Text style={s.journeyCount}>{completedCount}/{totalUnits} days</Text>
           </View>
 
-          {/* Filter pills */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.filterRow}>
-            {FILTERS.map((f) => (
-              <TouchableOpacity key={f} style={[s.pill, filter === f && s.pillActive]} onPress={() => setFilter(f)} activeOpacity={0.75}>
-                <Text style={[s.pillTxt, filter === f && s.pillTxtActive]}>{f}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-
-          <SubjectGrid filter={filter} />
-
-          {/* Activity */}
-          <View style={[s.secHdr, { marginTop: spacing.lg }]}>
-            <Text style={s.secTitle}>Recent Activity</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
+          {/* Overall progress bar */}
+          <View style={s.overallBar}>
+            <View
+              style={[
+                s.overallFill,
+                { width: `${Math.max(overallPct, overallPct > 0 ? 2 : 0)}%` as any },
+              ]}
+            />
           </View>
 
-          <ActivityTable />
+          {displayUnits.length > 0 ? (
+            <WeeksGrid
+              units={displayUnits as any}
+              completedUnitIds={allCompletedIds}
+              programSlug={programSlug}
+              onDayPress={handleDayPress}
+            />
+          ) : (
+            <View style={{ alignItems: "center", paddingVertical: 40, gap: 10 }}>
+              <ActivityIndicator color={o.mid} />
+              <Text style={{ fontSize: 13, color: o.muted }}>Loading program…</Text>
+            </View>
+          )}
 
-          <View style={{ height: 32 }} />
+          <View style={{ height: 40 }} />
         </ScrollView>
       </View>
     </View>
   );
 }
 
-// âââ Styles âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Styles ───────────────────────────────────────────────────────────────────
 
-const SIDEBAR_W = 210;
+const SIDEBAR_W = 230;
+
+const AQUA_SHADOW = {
+  shadowColor: o.bright,
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.14,
+  shadowRadius: 14,
+  elevation: 4,
+};
 
 const s = StyleSheet.create({
-  root: { flex: 1, backgroundColor: "#160D38", minHeight: "100%" as any },
+  root: { flex: 1, backgroundColor: o.bg, minHeight: "100%" as any },
 
-  // Title bar
-  titleBar: {
-    height: 46,
-    backgroundColor: "#1C1040",
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.07)",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 18,
-  },
-  trafficLights: { flexDirection: "row", gap: 8 },
-  tl: { width: 13, height: 13, borderRadius: 7 },
-  titleMid: {
-    position: "absolute" as any,
-    left: "50%" as any,
-    transform: [{ translateX: -60 }],
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-  },
-  titleIco: {
-    width: 22, height: 22, borderRadius: 7,
-    backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
-  },
-  titleIcoTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
-  titleName: { fontSize: 13, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)" },
-  titleRight: { marginLeft: "auto" as any, flexDirection: "row", alignItems: "center", gap: 14 },
-  titleTime: { fontSize: 12, color: "rgba(255,255,255,0.38)", fontWeight: fontWeight.semibold },
-  titleBell: {
-    width: 28, height: 28, borderRadius: 9,
-    backgroundColor: "rgba(255,255,255,0.07)",
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.10)",
-    justifyContent: "center", alignItems: "center",
-  },
-  titleBellDot: {
-    position: "absolute", top: 5, right: 5,
-    width: 6, height: 6, borderRadius: 3,
-    backgroundColor: colors.coral,
-    borderWidth: 1.5, borderColor: "#160D38",
-  },
-
-  // Shell
-  shell: { flex: 1, flexDirection: "row", overflow: "hidden" },
-
-  // Sidebar
-  sidebar: {
-    width: SIDEBAR_W,
-    backgroundColor: "#FEFEFE",
-    borderRightWidth: 1,
-    borderRightColor: "rgba(0,0,0,0.07)",
-    padding: 16,
-    overflow: "hidden" as any,
-  },
-  brand: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 18 },
-  brandIco: {
-    width: 30, height: 30, borderRadius: 9,
-    backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
-  },
-  brandIcoTxt: { fontSize: 14, fontWeight: fontWeight.black, color: "#FFF" },
-  brandName: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary },
-
-  // User card
-  userCard: {
-    backgroundColor: "#EBF4FF",
-    borderRadius: radius.lg,
-    padding: 13,
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "rgba(108,60,225,0.12)",
-  },
-  userRow: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
-  sbAvatar: {
-    width: 38, height: 38, borderRadius: 11,
-    backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
-  },
-  sbAvatarTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
-  sbName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, lineHeight: 18 },
-  sbHandle: { fontSize: 10, color: colors.textMuted },
-  lvlPill: {
-    alignSelf: "flex-start",
-    backgroundColor: colors.violet,
-    borderRadius: radius.pill,
-    paddingHorizontal: 10, paddingVertical: 3,
-    marginBottom: 9,
-  },
-  lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
-  xpRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 5 },
-  xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: colors.violet },
-  xpRowPct: { fontSize: 10, color: colors.textMuted },
-  xpTrack: { height: 7, backgroundColor: "#BDD4FF", borderRadius: radius.pill, overflow: "hidden" },
-  xpFill: { height: "100%", backgroundColor: colors.violet, borderRadius: radius.pill },
-  coinRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.goldBg,
-    borderRadius: 9,
-    padding: 7,
-    marginTop: 9,
-    borderWidth: 1,
-    borderColor: colors.goldBorder,
-    gap: 6,
-  },
-  coinDot: { width: 13, height: 13, borderRadius: 7, backgroundColor: colors.gold },
-  coinVal: { fontSize: 11, fontWeight: fontWeight.extrabold, color: "#A05A00" },
-  coinSub: { fontSize: 9, color: "#B07800", marginLeft: "auto" as any },
-
-  // Nav
-  navSec: {
-    fontSize: 9, fontWeight: fontWeight.bold,
-    color: colors.textDim, letterSpacing: 1.5,
-    textTransform: "uppercase" as any,
-    paddingVertical: 10, paddingHorizontal: 8,
-  },
-  navItem: {
-    flexDirection: "row", alignItems: "center", gap: 9,
-    paddingVertical: 8, paddingHorizontal: 10,
-    borderRadius: 11, marginBottom: 1,
-  },
-  navItemActive: {
-    backgroundColor: colors.violet,
-  },
-  navIco: { fontSize: 16 },
-  navLbl: { fontSize: 13, fontWeight: fontWeight.semibold, color: "#6060A0" },
-  navLblActive: { color: "#FFF" },
-
-  // Stats
-  statsArea: { marginTop: "auto" as any, gap: 7, paddingTop: 14 },
-  statCard: {
-    backgroundColor: "#F8F8FF",
-    borderRadius: 11,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#EEEEFF",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  statLbl: { fontSize: 10, color: colors.textMuted, fontWeight: fontWeight.medium },
-  statSub: { fontSize: 9, color: colors.textDim },
-  statVal: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary, textAlign: "right" as any },
-  statUnit: { fontSize: 9, color: colors.textDim, textAlign: "right" as any },
-
-  // Main
-  main: { flex: 1 },
-  mainContent: {
-    padding: spacing.lg,
-    backgroundColor: "#EBF4FF",
-    minHeight: "100%" as any,
-    gap: 20,
-  },
-
-  // Top bar
+  // ── Top bar
   topBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  greetTitle: { fontSize: 22, fontWeight: fontWeight.black, color: colors.textPrimary, letterSpacing: -0.5 },
-  greetSub: { fontSize: 13, color: colors.textMuted, marginTop: 2 },
-  searchBox: {
+    height: 52,
+    backgroundColor: o.card,
+    borderBottomWidth: 1,
+    borderBottomColor: o.border,
     flexDirection: "row",
     alignItems: "center",
-    gap: 9,
-    backgroundColor: "#FFF",
+    paddingHorizontal: 20,
+    gap: 16,
+  },
+  topLeft: { flexDirection: "row", alignItems: "center", gap: 8, width: SIDEBAR_W - 20 },
+  tbIco: {
+    width: 26, height: 26, borderRadius: 8,
+    backgroundColor: o.mid,
+    justifyContent: "center", alignItems: "center",
+  },
+  tbIcoTxt:  { fontSize: 14, fontWeight: fontWeight.black, color: "#FFF" },
+  tbBrand:   { fontSize: 15, fontWeight: fontWeight.black, color: o.text },
+  searchBox: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: o.bg,
     borderWidth: 1.5,
-    borderColor: "#BDD4FF",
-    borderRadius: 13,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    minWidth: 220,
-    ...shadow.sm,
+    borderColor: o.border,
+    borderRadius: 11,
+    paddingHorizontal: 13,
+    paddingVertical: 8,
   },
   searchInput: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: fontWeight.medium,
-    color: colors.textMuted,
+    color: o.muted,
     flex: 1,
     outlineStyle: "none" as any,
   },
+  topRight:  { flexDirection: "row", alignItems: "center", gap: 12 },
+  topStreak: { fontSize: 12, fontWeight: fontWeight.bold, color: o.streakText },
 
-  // Hero
-  hero: {
-    backgroundColor: "#2B6CB0",
-    borderRadius: 24,
-    flexDirection: "row",
-    overflow: "hidden",
-    minHeight: 188,
-    ...shadow.hero,
+  // ── Shell
+  shell: { flex: 1, flexDirection: "row" },
+
+  // ── Sidebar
+  sidebar: {
+    width: SIDEBAR_W,
+    backgroundColor: o.card,
+    borderRightWidth: 1,
+    borderRightColor: o.border,
+    padding: 16,
+    overflow: "hidden" as any,
   },
-  heroLeft: {
-    flex: 1,
-    padding: 28,
-    justifyContent: "space-between",
+  brand:    { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 16 },
+  brandIco: {
+    width: 28, height: 28, borderRadius: 8,
+    backgroundColor: o.mid,
+    justifyContent: "center", alignItems: "center",
   },
-  heroTag: { fontSize: 10, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)", letterSpacing: 2, marginBottom: 7 },
-  heroTitle: { fontSize: 26, fontWeight: fontWeight.black, color: "#FFF", lineHeight: 30, marginBottom: 5, letterSpacing: -0.5 },
-  heroSub: { fontSize: 12, color: "rgba(255,255,255,0.55)", fontWeight: fontWeight.medium, marginBottom: 12 },
-  heroChips: { flexDirection: "row", gap: 7, flexWrap: "wrap" as any },
-  heroChip: {
-    backgroundColor: "rgba(255,255,255,0.13)",
+  brandIcoTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
+  brandName:   { fontSize: 14, fontWeight: fontWeight.black, color: o.text },
+
+  userCard: {
+    backgroundColor: o.bg,
+    borderRadius: radius.lg,
+    padding: 12,
+    marginBottom: 14,
+    borderWidth: 1.5,
+    borderColor: o.border,
+  },
+  userRow:    { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
+  sbAvatar: {
+    width: 36, height: 36, borderRadius: 11,
+    backgroundColor: o.mid,
+    justifyContent: "center", alignItems: "center",
+  },
+  sbAvatarTxt: { fontSize: 12, fontWeight: fontWeight.black, color: "#FFF" },
+  sbName:      { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.text, lineHeight: 17 },
+  sbHandle:    { fontSize: 10, color: o.muted },
+
+  lvlPill: {
+    alignSelf: "flex-start",
+    backgroundColor: o.mid,
     borderRadius: radius.pill,
-    paddingHorizontal: 10, paddingVertical: 4,
+    paddingHorizontal: 10, paddingVertical: 3,
+    marginBottom: 8,
   },
-  heroChipHard: { backgroundColor: "rgba(255,90,70,0.30)" },
-  heroChipTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)" },
-  heroBottom: { flexDirection: "row", alignItems: "center", gap: 14 },
-  heroPTrack: { flex: 1, height: 8, backgroundColor: "rgba(255,255,255,0.16)", borderRadius: radius.pill, overflow: "hidden" },
-  heroPFill: { height: "100%", backgroundColor: "#FFF", borderRadius: radius.pill },
-  heroPct: { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
-  heroCta: {
-    backgroundColor: "#FFF",
-    borderRadius: 12,
-    paddingVertical: 10, paddingHorizontal: 20,
-  },
-  heroCtaTxt: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.violet },
-  heroRight: { width: 180, position: "relative" as any, overflow: "hidden" },
-  hrc: { position: "absolute", borderRadius: 9999 },
-  hrc1: { width: 220, height: 220, top: -70, right: -60, backgroundColor: "rgba(255,255,255,0.08)" },
-  hrc2: { width: 120, height: 120, bottom: -40, right: 10, backgroundColor: "rgba(255,255,255,0.07)" },
-  hrc3: { width: 65, height: 65, top: 28, right: 80, backgroundColor: "rgba(255,255,255,0.09)" },
-  hrd: {
-    position: "absolute", width: 72, height: 72,
-    top: "50%" as any, left: "50%" as any,
-    marginTop: -36, marginLeft: -36,
-    backgroundColor: "rgba(255,255,255,0.10)",
-    transform: [{ rotate: "45deg" }], borderRadius: 12,
-  },
+  lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
 
-  // Section headers
-  secHdr: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  secTitle: { fontSize: 16, fontWeight: fontWeight.extrabold, color: colors.textPrimary, letterSpacing: -0.3 },
-  seeAll: { fontSize: 12, fontWeight: fontWeight.semibold, color: colors.violet },
-
-  // Filter pills
-  filterRow: { gap: 7, paddingBottom: 14 },
-  pill: {
-    borderRadius: radius.pill, paddingHorizontal: 15, paddingVertical: 7,
-    backgroundColor: "#FFF", borderWidth: 2, borderColor: "#BDD4FF",
-  },
-  pillActive: { backgroundColor: colors.violet, borderColor: colors.violet },
-  pillTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: colors.textMuted },
-  pillTxtActive: { color: "#FFF" },
-
-  // Subject grid (3-col)
-  subGrid: { flexDirection: "row", flexWrap: "wrap" as any, gap: 12 },
-  subCard: {
-    width: "31%" as any,
-    backgroundColor: "#FFF",
-    borderRadius: 18,
+  xpRow:    { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
+  xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: o.mid },
+  xpRowPct: { fontSize: 10, color: o.muted },
+  xpTrack: {
+    height: 8,
+    backgroundColor: o.bgTint,
+    borderRadius: radius.pill,
     overflow: "hidden",
-    ...shadow.sm,
+    position: "relative",
   },
-  subCardLocked: { opacity: 0.6 },
-  subTop: { height: 80, justifyContent: "center", alignItems: "center", position: "relative" },
-  subC1: { position: "absolute", width: 78, height: 78, borderRadius: 39, top: -22, right: -18 },
-  subC2: { position: "absolute", width: 42, height: 42, borderRadius: 21, bottom: -12, left: 10 },
-  subEmoji: { fontSize: 30, zIndex: 1 },
-  subBody: { padding: 12 },
-  subName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, marginBottom: 2 },
-  subCount: { fontSize: 10, color: colors.textMuted, marginBottom: 8 },
-  subPTrack: { height: 5, backgroundColor: "#F0EAFF", borderRadius: radius.pill, overflow: "hidden" },
-  subPFill: { height: "100%", borderRadius: radius.pill },
-  lockLbl: { fontSize: 10, fontWeight: fontWeight.bold, color: colors.textDim, marginTop: 4 },
+  xpFill:   { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
+  xpShimmer: {
+    position: "absolute",
+    width: 5, height: "100%",
+    backgroundColor: "rgba(255,255,255,0.50)",
+    borderRadius: 3,
+  },
+  xpHint: { fontSize: 9, color: o.dim, marginTop: 5 },
 
-  // Activity table
-  actBox: {
-    backgroundColor: "#FFF",
-    borderRadius: 18,
-    overflow: "hidden",
-    ...shadow.sm,
-  },
-  actHead: {
-    flexDirection: "row",
-    paddingVertical: 11, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: "#F0F0FA",
-  },
-  actHeadTxt: {
-    flex: 1, fontSize: 9, fontWeight: fontWeight.bold,
-    color: "#B8B8D0", letterSpacing: 1.2,
+  navSec: {
+    fontSize: 9, fontWeight: fontWeight.bold, color: o.dim,
+    letterSpacing: 1.5,
     textTransform: "uppercase" as any,
+    paddingVertical: 9, paddingHorizontal: 8,
   },
-  actRow: {
+  navItem: {
+    flexDirection: "row", alignItems: "center", gap: 9,
+    paddingVertical: 7, paddingHorizontal: 10,
+    borderRadius: 10, marginBottom: 1,
+  },
+  navItemActive: { backgroundColor: o.bgTint },
+  navIco:        { fontSize: 16 },
+  navLbl:        { fontSize: 13, fontWeight: fontWeight.semibold, color: o.muted },
+  navLblActive:  { color: o.mid, fontWeight: fontWeight.extrabold },
+
+  statsArea: { marginTop: "auto" as any, flexDirection: "row", gap: 7, paddingTop: 14 },
+  statCard: {
+    flex: 1,
+    backgroundColor: o.bg,
+    borderRadius: 11, padding: 10,
+    borderWidth: 1, borderColor: o.border,
+    alignItems: "center",
+  },
+  statVal: { fontSize: 14, fontWeight: fontWeight.black, color: o.text },
+  statLbl: { fontSize: 9, color: o.muted, marginTop: 2 },
+
+  // ── Main
+  main:        { flex: 1 },
+  mainContent: { padding: spacing.lg, gap: 18 },
+
+  greetRow:   { gap: 3 },
+  greetTitle: { fontSize: 22, fontWeight: fontWeight.black, color: o.text, letterSpacing: -0.5 },
+  greetSub:   { fontSize: 13, color: o.muted },
+
+  // ── Streak-at-risk
+  riskBanner: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 13, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: "#F8F8FF",
+    gap: 12,
+    backgroundColor: "#FFF7ED",
+    borderWidth: 1.5,
+    borderColor: "#FED7AA",
+    borderRadius: radius.lg,
+    padding: 14,
   },
-  actCell: { flex: 1, flexDirection: "row", alignItems: "center", gap: 11 },
-  actIco: { width: 36, height: 36, borderRadius: 11, justifyContent: "center", alignItems: "center" },
-  actName: { fontSize: 13, fontWeight: fontWeight.bold, color: colors.textPrimary },
-  actChapter: { fontSize: 10, color: colors.textMuted, marginTop: 1 },
-  actSubject: { flex: 1, fontSize: 12, color: "#6060A0", fontWeight: fontWeight.medium },
-  actTime: { flex: 1, fontSize: 11, color: colors.textDim },
-  actBadge: { borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4 },
-  actBadgeTxt: { fontSize: 10, fontWeight: fontWeight.bold },
+  riskTitle: { fontSize: 13, fontWeight: fontWeight.bold, color: "#92400E", marginBottom: 2 },
+  riskHint:  { fontSize: 11, color: "#B45309" },
+
+  // ── Hero banner
+  hero: {
+    backgroundColor: o.deep,
+    borderRadius: 22,
+    flexDirection: "row",
+    overflow: "hidden",
+    minHeight: 170,
+    shadowColor: o.deep,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.28,
+    shadowRadius: 20,
+    elevation: 8,
+  },
+  caustic: { position: "absolute", borderRadius: 9999 },
+  cA: { width: 280, height: 280, top: -100, right: -80,  backgroundColor: "rgba(255,255,255,0.05)" },
+  cB: { width: 160, height: 160, bottom: -60, left: -20, backgroundColor: "rgba(255,255,255,0.06)" },
+  cC: { width: 90,  height: 90,  top: 20, right: 100,    backgroundColor: "rgba(255,255,255,0.08)" },
+  cD: { width: 55,  height: 55,  top: 65, right: 55,     backgroundColor: "rgba(255,255,255,0.10)" },
+
+  heroLeft:  { flex: 1, padding: 28, justifyContent: "space-between" },
+  heroRight: { width: 100 },
+
+  heroTag: {
+    alignSelf: "flex-start",
+    backgroundColor: "rgba(255,255,255,0.15)",
+    borderRadius: radius.pill,
+    paddingHorizontal: 12, paddingVertical: 4,
+    marginBottom: 8,
+  },
+  heroTagTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)", letterSpacing: 0.8 },
+  heroTitle:  {
+    fontSize: 24, fontWeight: fontWeight.black, color: "#FFF",
+    lineHeight: 29, marginBottom: 5, letterSpacing: -0.5,
+  },
+  heroSub:    { fontSize: 12, color: "rgba(255,255,255,0.62)", fontWeight: fontWeight.medium, marginBottom: 12 },
+  heroBottom: { flexDirection: "row", alignItems: "center", gap: 12 },
+  heroPTrack: { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: radius.pill, overflow: "hidden" },
+  heroPFill:  { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
+  heroPct:    { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
+  heroCta: {
+    backgroundColor: "#FFF",
+    borderRadius: 11,
+    paddingVertical: 9, paddingHorizontal: 18,
+  },
+  heroCtaTxt: { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.heroCtaText },
+
+  // ── Section header
+  secHdr:       { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  secTitle:     { fontSize: 16, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
+  journeyCount: { fontSize: 13, fontWeight: fontWeight.semibold, color: o.mid },
+
+  // Overall progress bar
+  overallBar:  { height: 6, backgroundColor: o.bgTint, borderRadius: radius.pill, overflow: "hidden" },
+  overallFill: { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
+
+  // ── Weeks grid (2-col)
+  weeksGrid: { gap: 14 },
+  weeksRow:  { flexDirection: "row", gap: 14 },
+  weekCardEmpty: { flex: 1 },
+
+  weekCard: {
+    flex: 1,
+    backgroundColor: o.card,
+    borderRadius: radius.xl,
+    overflow: "hidden",
+    flexDirection: "row",
+    ...AQUA_SHADOW,
+  },
+  weekAccent: { width: 4 },
+  weekInner:  { flex: 1, padding: 14 },
+
+  weekHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 9,
+    marginBottom: 4,
+  },
+  weekEmoji: { fontSize: 20 },
+  weekLabel: {
+    fontSize: 8, fontWeight: fontWeight.bold, color: o.dim,
+    letterSpacing: 1.5,
+    textTransform: "uppercase" as any,
+  },
+  weekTitle: { fontSize: 13, fontWeight: fontWeight.extrabold, color: o.text },
+  weekCount: { fontSize: 12, fontWeight: fontWeight.bold },
+
+  weekGoal: { fontSize: 11, color: o.muted, marginBottom: 8 },
+
+  weekMiniBar: {
+    height: 4,
+    backgroundColor: o.bgTint,
+    borderRadius: radius.pill,
+    overflow: "hidden",
+    marginBottom: 10,
+  },
+  weekMiniFill: { height: "100%", borderRadius: radius.pill },
+
+  // ── Day rows
+  daysList: { gap: 1 },
+  dayRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+    borderRadius: 9,
+  },
+  dayRowCurrent: { backgroundColor: o.bgTint },
+
+  dayCircle: {
+    width: 28, height: 28, borderRadius: 14,
+    borderWidth: 2, borderColor: o.border,
+    justifyContent: "center", alignItems: "center",
+  },
+  dayCircleDone:    { borderWidth: 0 },
+  dayCircleCurrent: { borderWidth: 2 },
+  dayCircleLocked:  { borderColor: o.bgTint, backgroundColor: o.bgTint },
+
+  dayCheck:       { fontSize: 12, color: "#FFF", fontWeight: fontWeight.black },
+  dayNum:         { fontSize: 10, fontWeight: fontWeight.bold, color: o.muted },
+  dayNumCurrent:  { fontWeight: fontWeight.extrabold },
+  dayNumLocked:   { color: o.dim },
+
+  dayTitle:       { flex: 1, fontSize: 11, fontWeight: fontWeight.semibold, color: o.text },
+  dayTitleLocked: { color: o.dim },
+  currentPill:    { fontSize: 9, fontWeight: fontWeight.bold },
+  lockIcon:       { fontSize: 12, opacity: 0.4 },
 });

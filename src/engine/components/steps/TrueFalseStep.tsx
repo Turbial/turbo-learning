@@ -6,8 +6,8 @@ import { StepProps } from "../../stepRegistry";
 import type { TrueFalseStep as TrueFalseStepType } from "../../types";
 import { stepStyles as s } from "./stepStyles";
 
-export default function TrueFalseStep({ step, onAnswer }: StepProps) {
-  const tf = step as TrueFalseStepType;
+export default function TrueFalseStep({ step, onAnswer }: StepProps<TrueFalseStepType>) {
+  const tf = step;
   const [selected, setSelected] = useState<boolean | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -54,7 +54,8 @@ export default function TrueFalseStep({ step, onAnswer }: StepProps) {
         <View style={[s.feedback, isCorrect ? s.feedbackCorrect : s.feedbackWrong]}>
           <Text style={s.feedbackEmoji}>{isCorrect ? "✓" : "✗"}</Text>
           <Text style={s.feedbackText}>
-            {isCorrect ? tf.feedback[0] : tf.feedback[1]}
+            {/* feedback[0] = wrong, feedback[1] = correct (per types.ts convention) */}
+            {isCorrect ? tf.feedback[1] : tf.feedback[0]}
           </Text>
         </View>
       )}
