@@ -7,16 +7,17 @@
 //
 // After changing any value here, Metro will hot-reload the app automatically.
 
-export type PaletteName = "ocean" | "violet" | "sunrise";
+export type PaletteName = "ocean" | "violet" | "sunrise" | "rose";
 export type RadiusMode  = "sharp" | "rounded" | "soft";
 export type DensityMode = "compact" | "comfortable";
 
 const themeConfig = {
   /**
    * Color palette.
-   *   "ocean"   — light aqua/teal, fluid and modern  ← current
-   *   "violet"  — deep purple, bold and premium
-   *   "sunrise" — warm amber/coral, energetic
+   *   "ocean"   — refined aqua/teal, fluid and modern        ← current / default
+   *   "violet"  — soft muted lavender (toned down from bold purple)
+   *   "sunrise" — warm muted caramel (toned down from fiery amber)
+   *   "rose"    — soft warm mauve, human and calm            ← NEW
    */
   palette: "ocean" as PaletteName,
 

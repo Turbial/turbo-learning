@@ -13,6 +13,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import { appTheme as t } from "../../src/theme/appTheme";
 
 // ─── Real data hooks ──────────────────────────────────────────────────────────
@@ -153,6 +154,7 @@ function HeroBanner({
   return (
     <TouchableOpacity style={s.hero} activeOpacity={0.9}
       onPress={() => router.push({ pathname: `/lesson/${unitId}` as any, params: { program: programSlug, day: String(dayNum) } })}>
+      <LinearGradient colors={t.hero.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       <View style={[s.caustic, s.cA]} />
       <View style={[s.caustic, s.cB]} />
       <View style={[s.caustic, s.cC]} />
@@ -181,6 +183,7 @@ function HeroBanner({
 function AllDoneBanner({ total }: { total: number }) {
   return (
     <View style={s.hero}>
+      <LinearGradient colors={t.hero.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       <View style={[s.caustic, s.cA]} /><View style={[s.caustic, s.cB]} />
       <View style={s.heroLeft}>
         <View>
@@ -448,7 +451,7 @@ const s = StyleSheet.create({
   brandIco:{ width: 28, height: 28, borderRadius: t.radius.sm, backgroundColor: t.colors.accent, justifyContent: "center", alignItems: "center" },
   brandIcoTxt: { fontSize: 13, fontWeight: t.text.weightBlack, color: "#FFF" },
   brandName:   { fontSize: 14, fontWeight: t.text.weightBlack, color: t.colors.textPrimary },
-  userCard:    { backgroundColor: t.colors.screenBg, borderRadius: t.radius.lg, padding: 12, marginBottom: 14, borderWidth: 1.5, borderColor: t.colors.border },
+  userCard:    { backgroundColor: t.colors.cardBg, borderRadius: t.radius.lg, padding: 12, marginBottom: 14, borderWidth: 1, borderColor: t.colors.border },
   userRow:     { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
   sbAvatar:    { width: 36, height: 36, borderRadius: t.radius.md, backgroundColor: t.colors.accent, justifyContent: "center", alignItems: "center" },
   sbAvatarTxt: { fontSize: 12, fontWeight: t.text.weightBlack, color: "#FFF" },
@@ -487,7 +490,7 @@ const s = StyleSheet.create({
   riskHint:   { fontSize: 11, color: t.colors.warning },
 
   // Hero
-  hero: { backgroundColor: t.hero.bg, borderRadius: t.radius.xxl, flexDirection: "row", overflow: "hidden", minHeight: 170, shadowColor: t.hero.bg, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.28, shadowRadius: 20, elevation: 8 },
+  hero: { backgroundColor: t.hero.bg, borderRadius: t.radius.xxl, flexDirection: "row", overflow: "hidden", minHeight: 170, ...t.heroShadow },
   caustic: { position: "absolute", borderRadius: 9999 },
   cA: { width: 280, height: 280, top: -100, right: -80,  backgroundColor: "rgba(255,255,255,0.05)" },
   cB: { width: 160, height: 160, bottom: -60, left: -20, backgroundColor: "rgba(255,255,255,0.06)" },

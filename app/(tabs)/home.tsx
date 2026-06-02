@@ -16,6 +16,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import { appTheme as t } from "../../src/theme/appTheme";
 import { Skeleton } from "../../src/components/ui/LoadingSkeleton";
 
@@ -136,6 +137,7 @@ function HeroCard({
         })
       }
     >
+      <LinearGradient colors={t.hero.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       <View style={[s.caustic, s.cA]} />
       <View style={[s.caustic, s.cB]} />
       <View style={[s.caustic, s.cC]} />
@@ -164,6 +166,7 @@ function HeroCard({
 function AllDoneCard({ total }: { total: number }) {
   return (
     <View style={s.hero}>
+      <LinearGradient colors={t.hero.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       <View style={[s.caustic, s.cA]} />
       <View style={[s.caustic, s.cB]} />
       <View style={[s.caustic, s.cC]} />
@@ -532,11 +535,7 @@ const s = StyleSheet.create({
     padding: t.spacing.lg,
     marginBottom: t.spacing.lg,
     overflow: "hidden",
-    shadowColor: t.hero.bg,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.30,
-    shadowRadius: 20,
-    elevation: 8,
+    ...t.heroShadow,
   },
   caustic: { position: "absolute", borderRadius: 9999 },
   cA: { width: 260, height: 260, top: -90,  right: -80, backgroundColor: "rgba(255,255,255,0.06)" },

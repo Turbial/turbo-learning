@@ -5,6 +5,14 @@
 //
 // This file builds the full AppTheme object from the four config knobs.
 // All screens import { appTheme } from here (or use the useAppTheme hook).
+//
+// ─── 2026 REFRESH (Journey screen polish) ─────────────────────────────────────
+//  • Palettes softened: ocean refined, violet → muted lavender,
+//    sunrise → muted caramel, NEW rose added.
+//  • cardShadow is now NEUTRAL + TIGHT (reads as a crisp edge, not a colored glow).
+//  • Added hero.gradient (4-stop) + heroShadow (contained) tokens.
+//  • Neutral cool-gray screenBg so white cards separate cleanly.
+//  See design_handoff_journey_refresh/README.md for the matching component edits.
 
 import themeConfig, { type PaletteName, type RadiusMode, type DensityMode } from "./themeConfig";
 import { fontWeight } from "./tokens";
@@ -97,13 +105,23 @@ export type AppTheme = {
 
   /** Hero / continue-learning card. */
   hero: {
-    bg:            string;
+    bg:            string;                              // solid fallback bg
+    gradient:      [string, string, string, string];   // 4-stop diagonal gradient (use expo-linear-gradient)
     progressFill:  string;
     ctaBg:         string;
     ctaText:       string;
   };
 
-  /** Default card shadow (accent-colored, subtle). */
+  /** Hero card shadow — contained / tight (not a wide glow). */
+  heroShadow: {
+    shadowColor:   string;
+    shadowOffset:  { width: number; height: number };
+    shadowOpacity: number;
+    shadowRadius:  number;
+    elevation:     number;
+  };
+
+  /** Default card shadow — NEUTRAL + TIGHT (crisp edge, not colored glow). */
   cardShadow: {
     shadowColor:   string;
     shadowOffset:  { width: number; height: number };
@@ -151,59 +169,80 @@ type PaletteColors = Pick<AppTheme["colors"],
   | "border" | "borderLight"
 > & {
   heroBg:           string;
+  heroGradient:     [string, string, string, string];
   heroProgressFill: string;
   heroCtaText:      string;
   weekColors:       [string, string, string, string];
   tabActive:        string;
 };
 
+// Shared neutral text + border across every palette (clean, cool-gray system).
+const NEUTRALS = {
+  textPrimary: "#14132B",
+  textBody:    "#3A394F",
+  border:      "#ECEBF4",
+  borderLight: "#F3F3FA",
+};
+
 const PALETTES: Record<PaletteName, PaletteColors> = {
+  // Refined teal — the default, fluid and modern.
   ocean: {
-    accent:      "#0891B2",
-    accentDark:  "#0E7490",
-    accentLight: "#06B6D4",
-    accentTint:  "#EBF7FA",
-    textPrimary: "#0F172A",
-    textBody:    "#334155",
-    border:      "#D8EEF4",
-    borderLight: "#EBF7FA",
-    heroBg:           "#0E7490",
-    heroProgressFill: "#A5F3FC",
-    heroCtaText:      "#0E7490",
-    weekColors:  ["#0891B2", "#14B8A6", "#0EA5E9", "#0E7490"],
-    tabActive:   "#0891B2",
+    accent:      "#0E9BB8",
+    accentDark:  "#0C6F86",
+    accentLight: "#2BC4D8",
+    accentTint:  "#E4F6FA",
+    ...NEUTRALS,
+    heroBg:           "#0C6F86",
+    heroGradient:     ["#08596B", "#0C7E96", "#119EBC", "#23B6CE"],
+    heroProgressFill: "#A9EEF8",
+    heroCtaText:      "#0C6F86",
+    weekColors:  ["#10B981", "#14B8C4", "#3B9EF0", "#0C7E96"],
+    tabActive:   "#0E9BB8",
   },
 
+  // Softened lavender (was the bold deep purple).
   violet: {
-    accent:      "#6C3CE1",
-    accentDark:  "#4C1D95",
-    accentLight: "#8B5CF6",
-    accentTint:  "#EDE9FE",
-    textPrimary: "#1E1B4B",
-    textBody:    "#374151",
-    border:      "#DDD6FE",
-    borderLight: "#EDE9FE",
-    heroBg:           "#4C1D95",
-    heroProgressFill: "#C4B5FD",
-    heroCtaText:      "#4C1D95",
-    weekColors:  ["#6C3CE1", "#8B5CF6", "#0D9488", "#4C1D95"],
-    tabActive:   "#6C3CE1",
+    accent:      "#7E6AD6",
+    accentDark:  "#574796",
+    accentLight: "#A294E4",
+    accentTint:  "#EFECFA",
+    ...NEUTRALS,
+    heroBg:           "#574796",
+    heroGradient:     ["#564796", "#6B5BBE", "#8473D6", "#9C8DE4"],
+    heroProgressFill: "#DCD3F4",
+    heroCtaText:      "#574796",
+    weekColors:  ["#4FAE8E", "#5E9BDC", "#9486DD", "#E0A357"],
+    tabActive:   "#7E6AD6",
   },
 
+  // Softened caramel (was the fiery amber).
   sunrise: {
-    accent:      "#D97706",
-    accentDark:  "#92400E",
-    accentLight: "#F59E0B",
-    accentTint:  "#FEF3C7",
-    textPrimary: "#1C1917",
-    textBody:    "#44403C",
-    border:      "#FDE68A",
-    borderLight: "#FEF3C7",
-    heroBg:           "#92400E",
-    heroProgressFill: "#FDE68A",
-    heroCtaText:      "#92400E",
-    weekColors:  ["#D97706", "#0D9488", "#0EA5E9", "#92400E"],
-    tabActive:   "#D97706",
+    accent:      "#D2873F",
+    accentDark:  "#9A5E2C",
+    accentLight: "#E6A767",
+    accentTint:  "#FBEFE0",
+    ...NEUTRALS,
+    heroBg:           "#9A5E2C",
+    heroGradient:     ["#945A2C", "#B57339", "#D08F4F", "#E3AC6C"],
+    heroProgressFill: "#F4DCB8",
+    heroCtaText:      "#9A5E2C",
+    weekColors:  ["#D2873F", "#4FAE8E", "#5E9BDC", "#C0633F"],
+    tabActive:   "#D2873F",
+  },
+
+  // NEW — soft warm mauve, human and calm.
+  rose: {
+    accent:      "#C2647F",
+    accentDark:  "#8E4660",
+    accentLight: "#D98DA4",
+    accentTint:  "#FBECF1",
+    ...NEUTRALS,
+    heroBg:           "#8E4660",
+    heroGradient:     ["#7C3D55", "#9C5470", "#BE7088", "#D38EA3"],
+    heroProgressFill: "#F2D2DE",
+    heroCtaText:      "#8E4660",
+    weekColors:  ["#C2647F", "#5BAE9A", "#6F8AD6", "#E0A357"],
+    tabActive:   "#C2647F",
   },
 };
 
@@ -265,9 +304,10 @@ function buildTheme(config: typeof themeConfig): AppTheme {
 
   return {
     colors: {
-      screenBg:   "#FFFFFF",
+      // Subtle cool-gray app background so white cards separate cleanly.
+      screenBg:   "#F4F4FA",
       cardBg:     "#FFFFFF",
-      inputBg:    "#F8FAFC",
+      inputBg:    "#F6F6FC",
       modalBg:    "#FFFFFF",
 
       accent:      p.accent,
@@ -277,8 +317,8 @@ function buildTheme(config: typeof themeConfig): AppTheme {
 
       textPrimary:  p.textPrimary,
       textBody:     p.textBody,
-      textMuted:    "#64748B",
-      textDisabled: "#94A3B8",
+      textMuted:    "#6B6A85",
+      textDisabled: "#A9A8BE",
 
       border:      p.border,
       borderLight: p.borderLight,
@@ -307,17 +347,28 @@ function buildTheme(config: typeof themeConfig): AppTheme {
 
     hero: {
       bg:           p.heroBg,
+      gradient:     p.heroGradient,
       progressFill: p.heroProgressFill,
       ctaBg:        "#FFFFFF",
       ctaText:      p.heroCtaText,
     },
 
+    // Contained hero shadow (tight, not a wide spread).
+    heroShadow: {
+      shadowColor:   p.accentDark,
+      shadowOffset:  { width: 0, height: 10 },
+      shadowOpacity: 0.22,
+      shadowRadius:  18,
+      elevation:     6,
+    },
+
+    // Neutral + tight — behaves like a crisp edge rather than a colored glow.
     cardShadow: {
-      shadowColor:   p.accentLight,
+      shadowColor:   "#141327",
       shadowOffset:  { width: 0, height: 4 },
-      shadowOpacity: 0.14,
-      shadowRadius:  14,
-      elevation:     4,
+      shadowOpacity: 0.10,
+      shadowRadius:  10,
+      elevation:     2,
     },
 
     weekColors: p.weekColors,
@@ -325,15 +376,15 @@ function buildTheme(config: typeof themeConfig): AppTheme {
     tabBar: {
       bg:       "#FFFFFF",
       active:   p.tabActive,
-      inactive: "#94A3B8",
+      inactive: "#A9A8BE",
       border:   p.border,
     },
 
     input: {
-      bg:          "#F8FAFC",
+      bg:          "#F6F6FC",
       borderColor: p.border,
       text:        p.textPrimary,
-      placeholder: "#94A3B8",
+      placeholder: "#A9A8BE",
       radius:      r.lg,
     },
 
