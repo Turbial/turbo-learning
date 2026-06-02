@@ -1,4 +1,4 @@
-// ─── Home / Journey — redesigned with gradient header, cleaner stats, week cards ───
+// âââ Home / Journey â redesigned with gradient header, cleaner stats, week cards âââ
 
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
@@ -63,32 +63,32 @@ function HomeScreenMobile() {
             <View>
               <Text style={styles.programBadge}>AI OPERATOR</Text>
               <Text style={styles.greeting}>{program?.title ?? "AI Operator"}</Text>
-              <Text style={styles.subtitle}>28 days to go from user → operator</Text>
+              <Text style={styles.subtitle}>28 days to go from user â operator</Text>
             </View>
             <View style={styles.headerEmoji}>
-              <Text style={{ fontSize: 48 }}>🤖</Text>
+              <Text style={{ fontSize: 48 }}>ð¤</Text>
             </View>
           </View>
 
           {/* Stats row */}
           <View style={styles.statsRow}>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>⚡</Text>
+              <Text style={styles.statIcon}>â¡</Text>
               <Text style={styles.statValue}>{profile?.xp ?? 0}</Text>
               <Text style={styles.statLabel}>XP</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>🔥</Text>
+              <Text style={styles.statIcon}>ð¥</Text>
               <Text style={styles.statValue}>{profile?.streak ?? 0}</Text>
               <Text style={styles.statLabel}>Streak</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>✅</Text>
+              <Text style={styles.statIcon}>â</Text>
               <Text style={styles.statValue}>{completedCount}</Text>
               <Text style={styles.statLabel}>Completed</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={[styles.statValue, { color: '#8b5cf6' }]}>{profile?.level ?? 1}</Text>
+              <Text style={[styles.statValue, { color: '#4A8ED4' }]}>{profile?.level ?? 1}</Text>
               <Text style={styles.statLabel}>Level</Text>
             </View>
           </View>
@@ -97,7 +97,7 @@ function HomeScreenMobile() {
         {/* Streak at-risk */}
         {streakRisk?.isAtRisk && (
           <View style={styles.streakRisk}>
-            <Text style={{ fontSize: 20 }}>⚠️</Text>
+            <Text style={{ fontSize: 20 }}>â ï¸</Text>
             <View style={{ flex: 1 }}>
               <Text style={styles.streakRiskTitle}>
                 Your {streakRisk.streakDays}-day streak is at risk!
@@ -149,8 +149,8 @@ function WeeksView({
     "Create multi-tool AI systems",
     "Ship your AI workforce",
   ];
-  const weekEmojis = ["🧱", "⚙️", "🔗", "🚀"];
-  const weekColors = ["#059669", "#0284c7", "#7c3aed", "#f59e0b"];
+  const weekEmojis = ["ð§±", "âï¸", "ð", "ð"];
+  const weekColors = ["#059669", "#0284c7", "#2B6CB0", "#f59e0b"];
 
   const weeks: Array<{
     weekNum: number; title: string; goal: string; emoji: string; color: string;
@@ -166,7 +166,7 @@ function WeeksView({
       weekNum: w + 1,
       title: weekTitles[w] ?? `Week ${w + 1}`,
       goal: weekGoals[w] ?? "",
-      emoji: weekEmojis[w] ?? "📅",
+      emoji: weekEmojis[w] ?? "ð",
       color: weekColors[w] ?? "#059669",
       days: weekUnits.map((u) => {
         const isDone = completedUnitIds.has(u.id);
@@ -235,7 +235,7 @@ function WeeksView({
                       ]}
                     >
                       {isDone ? (
-                        <Text style={styles.dayCheck}>✓</Text>
+                        <Text style={styles.dayCheck}>â</Text>
                       ) : (
                         <Text style={[styles.dayNum, isCurrent && styles.dayNumCurrent, isLocked && styles.dayNumLocked]}>
                           {d.day}
@@ -248,7 +248,7 @@ function WeeksView({
                         <Text style={[styles.currentPill, { color: week.color }]}>Now</Text>
                       )}
                     </View>
-                    {isLocked && <Text style={styles.lockIcon}>🔒</Text>}
+                    {isLocked && <Text style={styles.lockIcon}>ð</Text>}
                   </TouchableOpacity>
                 );
               })}
@@ -260,7 +260,7 @@ function WeeksView({
   );
 }
 
-// ─── Platform switch ───────────────────────────────────────────
+// âââ Platform switch âââââââââââââââââââââââââââââââââââââââââââ
 
 import { Platform } from "react-native";
 import HomeDesktop from "./HomeDesktop";
