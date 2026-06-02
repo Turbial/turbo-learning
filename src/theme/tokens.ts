@@ -1,4 +1,4 @@
-// ─── Theme tokens — single source of truth for design system ───
+// âââ Theme tokens â single source of truth for design system âââ
 
 // Per-product themed color scale (used by Claude's ThemeContext + UI primitives)
 export type ColorScale = {
@@ -78,8 +78,8 @@ export const colors = {
   // Gamification
   xp: "#059669",
   streak: "#f59e0b",
-  badge: "#8b5cf6",
-  level: "#3b82f6",
+  badge: "#4A8ED4",
+  level: "#4A8ED4",
 };
 
 export const spacing = {
@@ -109,7 +109,7 @@ export const fontSize = {
   xl: 22,
   xxl: 28,
   hero: 34,
-  // Semantic aliases — used by auth screens, pricing, etc.
+  // Semantic aliases â used by auth screens, pricing, etc.
   body: 14,
   bodyLg: 16,
   caption: 12,
