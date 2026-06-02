@@ -1,19 +1,18 @@
-// components/ui/Button.tsx — token-driven primitive. NO hardcoded colors.
-// variants: primary (filled accent) | secondary (outline) | ghost (text).
-import React from 'react';
-import { Pressable, Text } from 'react-native';
-import { useTheme } from '../../theme/ThemeContext';
-import { radius, sizing, fontWeight, fontSize } from '../../theme/tokens';
+// components/ui/Button.tsx — driven by appTheme
+import React from "react";
+import { Pressable, Text } from "react-native";
+import { appTheme as t } from "../../theme/appTheme";
+import { fontWeight, fontSize } from "../../theme/tokens";
 
-type Variant = 'primary' | 'secondary' | 'ghost';
+type Variant = "primary" | "secondary" | "ghost";
 
 export function Button({
-  title, onPress, variant = 'primary', disabled = false,
+  title, onPress, variant = "primary", disabled = false,
 }: { title: string; onPress: () => void; variant?: Variant; disabled?: boolean }) {
-  const { colors } = useTheme();
-  const isPrimary = variant === 'primary';
-  const bg = isPrimary ? (disabled ? colors.border : colors.accent) : 'transparent';
-  const fg = isPrimary ? colors.accentText : colors.accent;
+  const isPrimary   = variant === "primary";
+  const isSecondary = variant === "secondary";
+  const bg  = isPrimary ? (disabled ? t.colors.border : t.colors.accent) : "transparent";
+  const fg  = isPrimary ? "#fff" : t.colors.accent;
 
   return (
     <Pressable
@@ -22,17 +21,17 @@ export function Button({
       accessibilityRole="button"
       accessibilityState={{ disabled }}
       style={{
-        minHeight: sizing.buttonHeight,
-        borderRadius: radius.lg,
-        alignItems: 'center',
-        justifyContent: 'center',
+        minHeight: 48,
+        borderRadius: t.radius.lg,
+        alignItems: "center",
+        justifyContent: "center",
         paddingHorizontal: 16,
         backgroundColor: bg,
-        borderWidth: variant === 'secondary' ? 2 : 0,
-        borderColor: colors.accent,
+        borderWidth: isSecondary ? 2 : 0,
+        borderColor: t.colors.accent,
         opacity: disabled && !isPrimary ? 0.5 : 1,
         maxWidth: 420,
-        width: '100%',
+        width: "100%",
       }}
     >
       <Text style={{ color: fg, fontWeight: fontWeight.semibold, fontSize: fontSize.bodyLg }}>

@@ -1,4 +1,4 @@
-// ─── Progress — XP, streaks, badges with animated counters ───────────────────
+// ─── Progress tab ─────────────────────────────────────────────────────────────
 
 import { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
@@ -15,12 +15,12 @@ function useCountUp(target: number, duration = 800, enabled = true): number {
   useEffect(() => {
     if (!enabled) { setVal(target); return; }
     if (target <= 0) { setVal(0); return; }
-    let current = 0;
+    let cur = 0;
     const step = Math.max(1, Math.ceil(target / (duration / 30)));
     ref.current = setInterval(() => {
-      current = Math.min(current + step, target);
-      setVal(current);
-      if (current >= target && ref.current) clearInterval(ref.current);
+      cur = Math.min(cur + step, target);
+      setVal(cur);
+      if (cur >= target && ref.current) clearInterval(ref.current);
     }, 30);
     return () => { if (ref.current) clearInterval(ref.current); };
   }, [target, duration, enabled]);
@@ -29,8 +29,7 @@ function useCountUp(target: number, duration = 800, enabled = true): number {
 
 function levelName(level: number): string {
   const names = ["Beginner", "Learner", "Builder", "Operator", "Master"];
-  if (level <= 5) return names[level - 1] ?? "Master";
-  return `Master +${level - 5}`;
+  return level <= 5 ? (names[level - 1] ?? "Master") : `Master +${level - 5}`;
 }
 
 export default function ProgressScreen() {
@@ -42,136 +41,149 @@ export default function ProgressScreen() {
   const [ready, setReady]  = useState(false);
 
   useEffect(() => {
-    if (!isLoading) { const t2 = setTimeout(() => setReady(true), 200); return () => clearTimeout(t2); }
+    if (!isLoading) { const id = setTimeout(() => setReady(true), 200); return () => clearTimeout(id); }
   }, [isLoading]);
 
   if (isLoading) return (
     <SafeAreaView style={s.safe}>
-      <View style={{ padding: t.spacing.lg, gap: 16 }}>
-        <Skeleton width={180} height={24} rounded={10} />
-        <View style={{ flexDirection: "row", gap: 8 }}>
-          {[1,2,3,4].map(i => <View key={i} style={{flex:1}}><Skeleton height={72} rounded={t.radius.lg} /></View>)}
+      <View style={{ padding: t.spacing.lg, gap: 14 }}>
+        <Skeleton height={160} rounded={t.radius.xxl} />
+        <View style={{ flexDirection: "row", gap: 10 }}>
+          {[1,2,3].map(i => <View key={i} style={{flex:1}}><Skeleton height={80} rounded={t.radius.lg} /></View>)}
         </View>
-        <Skeleton height={88} rounded={t.radius.lg} />
-        <Skeleton height={140} rounded={t.radius.lg} />
-        <Skeleton height={100} rounded={t.radius.lg} />
+        <Skeleton height={130} rounded={t.radius.xl} />
+        <Skeleton height={110} rounded={t.radius.xl} />
       </View>
     </SafeAreaView>
   );
 
-  const totalXp      = profile?.xp ?? 0;
-  const level        = profile?.level ?? 1;
-  const streak       = profile?.streak ?? 0;
-  const nextLevelXp  = xpToNextLevel(totalXp);
-  const xpInLevel    = totalXp - (Math.pow(level - 1, 2) * 100);
-  const xpNeeded     = Math.pow(level, 2) * 100 - Math.pow(level - 1, 2) * 100;
-  const xpProgress   = Math.min(xpInLevel / Math.max(xpNeeded, 1), 1);
-  const completed    = progress?.filter((p: any) => p.completed_at) ?? [];
-  const badgeList    = badges?.map((b: any) => b.badges) ?? [];
+  const xp        = profile?.xp ?? 0;
+  const level     = profile?.level ?? 1;
+  const streak    = profile?.streak ?? 0;
+  const nextXp    = xpToNextLevel(xp);
+  const xpInLv    = xp - (Math.pow(level - 1, 2) * 100);
+  const xpNeeded  = Math.pow(level, 2) * 100 - Math.pow(level - 1, 2) * 100;
+  const xpPct     = Math.min(xpInLv / Math.max(xpNeeded, 1), 1);
+  const completed = progress?.filter((p: any) => p.completed_at) ?? [];
+  const badgeList = badges?.map((b: any) => b.badges) ?? [];
 
-  const animXp        = useCountUp(totalXp, 1000, ready);
-  const animStreak    = useCountUp(streak, 600, ready);
-  const animCompleted = useCountUp(completed.length, 600, ready);
-  const animBadges    = useCountUp(badgeList.length, 400, ready);
+  const animXp    = useCountUp(xp,             1000, ready);
+  const animStr   = useCountUp(streak,          600, ready);
+  const animComp  = useCountUp(completed.length, 600, ready);
+  const animBadge = useCountUp(badgeList.length, 400, ready);
 
   return (
     <SafeAreaView style={s.safe}>
-      <ScrollView style={s.scroll} contentContainerStyle={s.content}>
-        <Text style={[s.title, { textAlign: "center" }]}>Your Progress</Text>
+      <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
 
-        {/* Stats */}
+        {/* ── Hero card: level + XP ── */}
+        <View style={s.hero}>
+          <View style={[s.ring, s.rA]} /><View style={[s.ring, s.rB]} />
+          <View style={[s.ring, s.rC]} /><View style={[s.ring, s.rD]} />
+
+          {/* Left: level circle + xp bar */}
+          <View style={s.heroLeft}>
+            <View style={s.lvCircle}>
+              <Text style={s.lvNum}>{level}</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={s.lvLabel}>Level {level} · {levelName(level)}</Text>
+              <View style={s.xpBar}>
+                <View style={[s.xpFill, { width: `${Math.max(xpPct * 100, 2)}%` as any }]} />
+              </View>
+              <Text style={s.xpHint}>{nextXp} XP to Level {level + 1}</Text>
+            </View>
+          </View>
+
+          {/* Right: XP + streak */}
+          <View style={s.heroRight}>
+            <View style={s.heroStat}>
+              <Text style={s.heroStatVal}>⚡ {animXp.toLocaleString()}</Text>
+              <Text style={s.heroStatLbl}>Total XP</Text>
+            </View>
+            <View style={s.heroDivider} />
+            <View style={s.heroStat}>
+              <Text style={s.heroStatVal}>🔥 {animStr}</Text>
+              <Text style={s.heroStatLbl}>Streak</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* ── Stat chips row ── */}
         <View style={s.statsRow}>
           {[
-            { icon: "⚡", val: animXp.toLocaleString(), label: "XP", color: t.colors.accent },
-            { icon: "🔥", val: String(animStreak),      label: "Day Streak", color: t.colors.streakText },
-            { icon: "✅", val: String(animCompleted),   label: "Completed",  color: t.colors.success },
-            { icon: "🏅", val: String(animBadges),      label: "Badges",     color: t.colors.accentLight },
+            { icon: "✅", val: String(animComp),  label: "Completed", color: t.colors.success },
+            { icon: "🏅", val: String(animBadge), label: "Badges",    color: t.colors.accentLight },
+            { icon: "📅", val: "28",              label: "Day Program",color: t.colors.accent },
           ].map((st) => (
             <View key={st.label} style={s.statCard}>
               <Text style={s.statIcon}>{st.icon}</Text>
-              <Text style={[s.statNum, { color: st.color }]}>{st.val}</Text>
-              <Text style={s.statLabel}>{st.label}</Text>
+              <Text style={[s.statVal, { color: st.color }]}>{st.val}</Text>
+              <Text style={s.statLbl}>{st.label}</Text>
             </View>
           ))}
         </View>
 
-        {/* Level card */}
-        <View style={s.levelCard}>
-          <View style={s.levelCircle}>
-            <Text style={s.levelNum}>{level}</Text>
-          </View>
-          <View style={s.levelInfo}>
-            <Text style={s.levelLabel}>Level {level} · {levelName(level)}</Text>
-            <View style={s.xpBar}>
-              <View style={[s.xpFill, { width: `${Math.max(xpProgress * 100, 2)}%` as any }]} />
-            </View>
-            <Text style={s.xpText}>
-              {totalXp.toLocaleString()} XP · {nextLevelXp} XP to Level {level + 1}
-            </Text>
-          </View>
-        </View>
-
-        {/* Streak visualization */}
+        {/* ── Streak week view ── */}
         <View style={s.card}>
-          <Text style={[s.cardTitle, { textAlign: "center" }]}>🔥 Streak Progress</Text>
+          <Text style={s.cardTitle}>🔥 This Week's Streak</Text>
           {streak === 0 ? (
-            <View style={s.emptyState}>
+            <View style={s.empty}>
               <Text style={s.emptyEmoji}>🎯</Text>
-              <Text style={s.emptyText}>Complete a lesson to start your streak!</Text>
+              <Text style={s.emptyTxt}>Complete a lesson to start your streak!</Text>
             </View>
           ) : (
-            <View style={s.streakRow}>
-              {Array.from({ length: 7 }, (_, i) => {
-                const dayIdx  = i + 1;
-                const filled  = dayIdx <= (streak % 7 || 7);
-                const isToday = dayIdx === (streak % 7 || 7) && streak > 0;
-                return (
-                  <View key={i} style={s.streakDay}>
-                    <View style={[s.streakDot, filled && s.streakDotFilled, isToday && s.streakDotToday]}>
-                      <Text style={s.streakDotEmoji}>{filled ? "🔥" : "·"}</Text>
+            <>
+              <View style={s.streakRow}>
+                {["M","T","W","T","F","S","S"].map((day, i) => {
+                  const filled  = (i + 1) <= (streak % 7 || 7);
+                  const isToday = (i + 1) === (streak % 7 || 7) && streak > 0;
+                  return (
+                    <View key={i} style={s.streakDay}>
+                      <View style={[s.streakDot, filled && s.streakDotFilled, isToday && s.streakDotToday]}>
+                        <Text style={[s.streakDotTxt, filled && s.streakDotTxtFilled]}>{filled ? "🔥" : "·"}</Text>
+                      </View>
+                      <Text style={[s.streakDayLbl, isToday && s.streakDayLblToday]}>{day}</Text>
                     </View>
-                    <Text style={[s.streakDayLabel, isToday && s.streakDayLabelToday]}>
-                      {["M","T","W","T","F","S","S"][i]}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
-          )}
-          {streak > 0 && (
-            <Text style={s.streakMotivation}>
-              {streak < 3 ? "You're building momentum! Keep it going."
-               : streak < 7 ? "Strong consistency! Almost a full week."
-               : streak < 14 ? "Incredible dedication! Two weeks strong."
-               : "Legendary! You're unstoppable. 🔥"}
-            </Text>
+                  );
+                })}
+              </View>
+              <Text style={s.streakMotiv}>
+                {streak < 3 ? "You're building momentum!"
+                 : streak < 7 ? "Strong consistency — almost a full week."
+                 : streak < 14 ? "Incredible — two weeks strong."
+                 : "Legendary! You're unstoppable. 🔥"}
+              </Text>
+            </>
           )}
         </View>
 
-        {/* Badges */}
+        {/* ── Badges ── */}
         <View style={s.card}>
-          <Text style={[s.cardTitle, { textAlign: "center" }]}>🏅 Badges ({badgeList.length})</Text>
+          <Text style={s.cardTitle}>🏅 Badges ({badgeList.length})</Text>
           {badgeList.length > 0 ? (
-            <View style={[s.badgeGrid, { justifyContent: "center" }]}>
-              {badgeList.map((b: any, idx: number) => (
-                <View key={b.slug ?? idx} style={s.badgeItem}>
+            <View style={s.badgeGrid}>
+              {badgeList.map((b: any, i: number) => (
+                <View key={b.slug ?? i} style={s.badgeItem}>
                   <Text style={s.badgeIcon}>{b.icon ?? "🏅"}</Text>
                   <Text style={s.badgeName}>{b.name}</Text>
                 </View>
               ))}
             </View>
           ) : (
-            <View style={s.emptyState}>
+            <View style={s.empty}>
               <Text style={s.emptyEmoji}>🎯</Text>
-              <Text style={s.emptyText}>Complete Day 1 to earn your first badge!</Text>
+              <Text style={s.emptyTxt}>Complete Day 1 to earn your first badge!</Text>
             </View>
           )}
         </View>
 
-        {/* Leaderboard link */}
-        <TouchableOpacity style={s.leaderboardLink} onPress={() => router.push("/(tabs)/leaderboard")} activeOpacity={0.8}>
-          <Text style={s.leaderboardLinkText}>🏆 View Leaderboard</Text>
+        {/* ── Leaderboard link ── */}
+        <TouchableOpacity style={s.leaderBtn} onPress={() => router.push("/(tabs)/leaderboard")} activeOpacity={0.85}>
+          <Text style={s.leaderBtnTxt}>🏆 View Leaderboard →</Text>
         </TouchableOpacity>
+
+        <View style={{ height: t.spacing.xxl }} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -179,51 +191,69 @@ export default function ProgressScreen() {
 
 const s = StyleSheet.create({
   safe:    { flex: 1, backgroundColor: t.colors.screenBg },
-  scroll:  { flex: 1 },
-  content: { padding: t.spacing.lg, paddingBottom: t.spacing.xxl },
-  title:   { fontSize: t.text.display, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, marginBottom: t.spacing.lg },
+  content: { padding: t.spacing.md, gap: 14 },
 
-  statsRow: { flexDirection: "row", gap: t.spacing.sm, marginBottom: t.spacing.md },
+  // Hero
+  hero: {
+    backgroundColor: t.hero.bg, borderRadius: t.radius.xxl, overflow: "hidden",
+    padding: t.spacing.lg, shadowColor: t.hero.bg, shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.30, shadowRadius: 20, elevation: 8,
+  },
+  ring: { position: "absolute", borderRadius: 9999 },
+  rA: { width: 220, height: 220, top: -70, right: -60, backgroundColor: "rgba(255,255,255,0.07)" },
+  rB: { width: 130, height: 130, bottom: -40, left: -20, backgroundColor: "rgba(255,255,255,0.06)" },
+  rC: { width: 80,  height: 80,  top: 20, right: 80, backgroundColor: "rgba(255,255,255,0.09)" },
+  rD: { width: 45,  height: 45,  top: 60, right: 40, backgroundColor: "rgba(255,255,255,0.11)" },
+
+  heroLeft:    { flexDirection: "row", alignItems: "center", gap: 14, marginBottom: 18 },
+  lvCircle:    { width: 60, height: 60, borderRadius: 30, backgroundColor: "rgba(255,255,255,0.20)", justifyContent: "center", alignItems: "center" },
+  lvNum:       { fontSize: 26, fontWeight: t.text.weightExtrabold, color: "#fff" },
+  lvLabel:     { fontSize: t.text.bodyMd, fontWeight: t.text.weightBold, color: "rgba(255,255,255,0.85)", marginBottom: 6 },
+  xpBar:       { height: 7, backgroundColor: "rgba(255,255,255,0.20)", borderRadius: t.radius.pill, overflow: "hidden", marginBottom: 5 },
+  xpFill:      { height: "100%", backgroundColor: t.hero.progressFill, borderRadius: t.radius.pill },
+  xpHint:      { fontSize: t.text.caption, color: "rgba(255,255,255,0.60)", fontWeight: t.text.weightMedium },
+
+  heroRight:   { flexDirection: "row", gap: 0 },
+  heroStat:    { flex: 1, alignItems: "center", paddingVertical: 10, backgroundColor: "rgba(255,255,255,0.12)", borderRadius: t.radius.lg },
+  heroStatVal: { fontSize: t.text.h2, fontWeight: t.text.weightExtrabold, color: "#fff" },
+  heroStatLbl: { fontSize: 11, color: "rgba(255,255,255,0.65)", marginTop: 2, fontWeight: t.text.weightSemibold, textTransform: "uppercase" as any, letterSpacing: 0.5 },
+  heroDivider: { width: 10 },
+
+  // Stat chips
+  statsRow: { flexDirection: "row", gap: 10 },
   statCard: { flex: 1, backgroundColor: t.colors.cardBg, borderRadius: t.radius.lg, padding: t.spacing.md, alignItems: "center", borderWidth: 1, borderColor: t.colors.border },
   statIcon: { fontSize: 18, marginBottom: 4 },
-  statNum:  { fontSize: 20, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary },
-  statLabel:{ fontSize: 10, fontWeight: t.text.weightSemibold, color: t.colors.textDisabled, textTransform: "uppercase" as any, letterSpacing: 0.5, marginTop: 2 },
+  statVal:  { fontSize: 20, fontWeight: t.text.weightExtrabold },
+  statLbl:  { fontSize: 10, fontWeight: t.text.weightSemibold, color: t.colors.textDisabled, textTransform: "uppercase" as any, letterSpacing: 0.5, marginTop: 2 },
 
-  levelCard: {
-    flexDirection: "row", alignItems: "center", gap: t.spacing.md,
-    backgroundColor: t.colors.cardBg, borderRadius: t.radius.lg,
-    padding: t.spacing.lg, borderWidth: 1, borderColor: t.colors.border, marginBottom: t.spacing.md,
-  },
-  levelCircle: { width: 64, height: 64, borderRadius: 32, backgroundColor: t.colors.accent, justifyContent: "center", alignItems: "center" },
-  levelNum:    { fontSize: 28, fontWeight: t.text.weightExtrabold, color: "#fff" },
-  levelInfo:   { flex: 1 },
-  levelLabel:  { fontSize: t.text.h2, fontWeight: t.text.weightBold, color: t.colors.textPrimary, marginBottom: 8 },
-  xpBar:       { height: 8, backgroundColor: t.colors.accentTint, borderRadius: 4, marginBottom: 6, overflow: "hidden" },
-  xpFill:      { height: "100%", backgroundColor: t.colors.accent, borderRadius: 4 },
-  xpText:      { fontSize: t.text.caption, color: t.colors.textMuted },
+  // Card
+  card:      { backgroundColor: t.colors.cardBg, borderRadius: t.radius.xl, padding: t.spacing.lg, borderWidth: 1, borderColor: t.colors.border, ...t.cardShadow },
+  cardTitle: { fontSize: t.text.h3, fontWeight: t.text.weightBold, color: t.colors.textPrimary, marginBottom: t.spacing.md },
 
-  card:      { backgroundColor: t.colors.cardBg, borderRadius: t.radius.lg, padding: t.spacing.lg, borderWidth: 1, borderColor: t.colors.border, marginBottom: t.spacing.md },
-  cardTitle: { fontSize: t.text.body, fontWeight: t.text.weightBold, color: t.colors.textPrimary, marginBottom: t.spacing.md },
+  // Streak
+  streakRow:       { flexDirection: "row", justifyContent: "space-between", marginBottom: t.spacing.sm },
+  streakDay:       { alignItems: "center", flex: 1 },
+  streakDot:       { width: 40, height: 40, borderRadius: 20, backgroundColor: t.colors.accentTint, justifyContent: "center", alignItems: "center", marginBottom: 4 },
+  streakDotFilled: { backgroundColor: t.colors.warningBg, borderWidth: 2, borderColor: t.colors.warning },
+  streakDotToday:  { backgroundColor: t.colors.warning, transform: [{ scale: 1.15 }] },
+  streakDotTxt:    { fontSize: 12, color: t.colors.textDisabled },
+  streakDotTxtFilled: { fontSize: 16 },
+  streakDayLbl:    { fontSize: 11, fontWeight: t.text.weightSemibold, color: t.colors.textMuted },
+  streakDayLblToday:{ color: t.colors.warning, fontWeight: t.text.weightExtrabold },
+  streakMotiv:     { fontSize: t.text.bodyMd, color: t.colors.textMuted, textAlign: "center", fontStyle: "italic" },
 
-  streakRow:        { flexDirection: "row", justifyContent: "space-between", marginBottom: t.spacing.sm },
-  streakDay:        { alignItems: "center", flex: 1 },
-  streakDot:        { width: 40, height: 40, borderRadius: 20, backgroundColor: t.colors.border, justifyContent: "center", alignItems: "center", marginBottom: 4 },
-  streakDotFilled:  { backgroundColor: t.colors.warningBg, borderWidth: 2, borderColor: t.colors.warning },
-  streakDotToday:   { backgroundColor: t.colors.warning, transform: [{ scale: 1.15 }] },
-  streakDotEmoji:   { fontSize: 16, color: t.colors.warning },
-  streakDayLabel:      { fontSize: 11, fontWeight: t.text.weightSemibold, color: t.colors.textMuted },
-  streakDayLabelToday: { color: t.colors.warning, fontWeight: t.text.weightExtrabold },
-  streakMotivation:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, textAlign: "center", fontStyle: "italic" },
-
+  // Badges
   badgeGrid: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
   badgeItem: { alignItems: "center", backgroundColor: t.colors.accentTint, padding: t.spacing.sm + 4, borderRadius: t.radius.md, borderWidth: 1, borderColor: t.colors.border, minWidth: 72 },
   badgeIcon: { fontSize: 24, marginBottom: 4 },
   badgeName: { fontSize: 11, fontWeight: t.text.weightSemibold, color: t.colors.textBody, textAlign: "center" },
 
-  emptyState: { alignItems: "center", padding: t.spacing.lg },
-  emptyEmoji: { fontSize: 40, marginBottom: t.spacing.sm },
-  emptyText:  { fontSize: t.text.bodyMd, color: t.colors.textMuted, textAlign: "center", lineHeight: 20 },
+  // Empty
+  empty:     { alignItems: "center", paddingVertical: t.spacing.lg },
+  emptyEmoji:{ fontSize: 36, marginBottom: t.spacing.sm },
+  emptyTxt:  { fontSize: t.text.bodyMd, color: t.colors.textMuted, textAlign: "center" },
 
-  leaderboardLink:     { backgroundColor: t.colors.cardBg, borderRadius: t.radius.lg, padding: t.spacing.md + 4, borderWidth: 1, borderColor: t.colors.border, alignItems: "center", marginTop: t.spacing.sm },
-  leaderboardLinkText: { fontSize: t.text.body, fontWeight: t.text.weightBold, color: t.colors.accent },
+  // Leaderboard link — styled like heroCta
+  leaderBtn:    { backgroundColor: t.colors.accent, borderRadius: t.radius.lg, paddingVertical: 16, alignItems: "center" },
+  leaderBtnTxt: { fontSize: t.text.body, fontWeight: t.text.weightExtrabold, color: "#fff", letterSpacing: 0.2 },
 });
