@@ -53,8 +53,8 @@ export type AppPalette = {
 
 // ─── Ocean theme — light, fluid, "looking through water" ─────────────────────
 export const oceanTheme: AppPalette = {
-  bg:     "#F0FDFF",
-  bgTint: "#CFFAFE",
+  bg:     "#FFFFFF",      // pure white — no blue wash on the screen
+  bgTint: "#EBF7FA",      // very subtle tint — used for progress tracks, row highlights
   card:   "#FFFFFF",
 
   deep:   "#0E7490",
@@ -62,7 +62,7 @@ export const oceanTheme: AppPalette = {
   bright: "#06B6D4",
   teal:   "#14B8A6",
   sky:    "#0EA5E9",
-  border: "#BAE6FD",
+  border: "#D8EEF4",      // softer, less saturated blue border
 
   text:   "#0F172A",
   muted:  "#64748B",

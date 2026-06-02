@@ -562,9 +562,9 @@ const s = StyleSheet.create({
   hdrLeft:  { flexDirection: "row", alignItems: "center", gap: 12 },
   hdrRight: { flexDirection: "row", alignItems: "center", gap: 8 },
 
-  greeting: { fontSize: fontSize.xs, color: o.muted, fontWeight: fontWeight.medium },
+  greeting: { fontSize: fontSize.sm, color: o.muted, fontWeight: fontWeight.medium },
   userName: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.xl,
     color: o.text,
     fontWeight: fontWeight.extrabold,
     letterSpacing: -0.3,
@@ -615,9 +615,9 @@ const s = StyleSheet.create({
     borderColor: o.border,
     ...AQUA_SHADOW,
   },
-  xpLeft:  { gap: 2 },
-  xpLevel: { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: o.mid },
-  xpSub:   { fontSize: fontSize.xs, color: o.muted },
+  xpLeft:  { gap: 3 },
+  xpLevel: { fontSize: fontSize.md, fontWeight: fontWeight.extrabold, color: o.mid },
+  xpSub:   { fontSize: fontSize.sm, color: o.muted },
   xpRight: { flex: 1, gap: 4 },
   xpTrack: {
     height: 10,
@@ -635,7 +635,7 @@ const s = StyleSheet.create({
     borderRadius: 3,
   },
   xpPct: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.sm,
     color: o.muted,
     fontWeight: fontWeight.semibold,
     textAlign: "right",
@@ -691,15 +691,15 @@ const s = StyleSheet.create({
     letterSpacing: 0.8,
   },
   heroTitle: {
-    fontSize: 26,
+    fontSize: 30,
     fontWeight: fontWeight.black,
     color: "#FFF",
-    lineHeight: 32,
+    lineHeight: 36,
     marginBottom: 6,
     letterSpacing: -0.5,
   },
   heroSub: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.md,
     color: "rgba(255,255,255,0.65)",
     fontWeight: fontWeight.medium,
     marginBottom: spacing.md,
@@ -718,7 +718,7 @@ const s = StyleSheet.create({
     overflow: "hidden",
   },
   heroPFill: { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
-  heroPct:   { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: "#FFF" },
+  heroPct:   { fontSize: fontSize.md, fontWeight: fontWeight.extrabold, color: "#FFF" },
   heroCta: {
     backgroundColor: "#FFF",
     borderRadius: radius.lg,
@@ -726,7 +726,7 @@ const s = StyleSheet.create({
     alignItems: "center",
   },
   heroCtaTxt: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.md,
     fontWeight: fontWeight.extrabold,
     color: o.heroCtaText,
     letterSpacing: 0.3,
@@ -739,8 +739,8 @@ const s = StyleSheet.create({
     alignItems: "center",
     marginBottom: spacing.sm,
   },
-  secTitle:     { fontSize: fontSize.lg, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
-  journeyCount: { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: o.mid },
+  secTitle:     { fontSize: fontSize.xl, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
+  journeyCount: { fontSize: fontSize.md, fontWeight: fontWeight.semibold, color: o.mid },
 
   // Overall progress bar
   overallBar: {
@@ -766,7 +766,7 @@ const s = StyleSheet.create({
     ...AQUA_SHADOW,
   },
   weekAccent: { width: 4, borderRadius: 0 },
-  weekInner:  { flex: 1, padding: 14 },
+  weekInner:  { flex: 1, padding: 16 },
 
   weekHeaderRow: {
     flexDirection: "row",
@@ -776,16 +776,16 @@ const s = StyleSheet.create({
   },
   weekEmoji: { fontSize: 22 },
   weekLabel: {
-    fontSize: 9,
+    fontSize: 11,
     fontWeight: fontWeight.bold,
     color: o.dim,
     letterSpacing: 1.5,
     textTransform: "uppercase" as any,
   },
-  weekTitle: { fontSize: fontSize.md, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.2 },
-  weekCount: { fontSize: fontSize.sm, fontWeight: fontWeight.bold },
+  weekTitle: { fontSize: fontSize.lg, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.2 },
+  weekCount: { fontSize: fontSize.md, fontWeight: fontWeight.bold },
 
-  weekGoal: { fontSize: fontSize.xs, color: o.muted, marginBottom: 8 },
+  weekGoal: { fontSize: fontSize.sm, color: o.muted, marginBottom: 8 },
 
   weekMiniBar: {
     height: 4,
@@ -802,16 +802,16 @@ const s = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    paddingVertical: 8,
-    paddingHorizontal: 4,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
     borderRadius: 10,
   },
   dayRowCurrent: { backgroundColor: o.bgTint },
 
   dayCircle: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
+    width: 38,
+    height: 38,
+    borderRadius: 19,
     borderWidth: 2,
     borderColor: o.border,
     justifyContent: "center",
@@ -821,16 +821,16 @@ const s = StyleSheet.create({
   dayCircleCurrent: { borderWidth: 2 },
   dayCircleLocked:  { borderColor: o.bgTint, backgroundColor: o.bgTint },
 
-  dayCheck:       { fontSize: 14, color: "#FFF", fontWeight: fontWeight.black },
-  dayNum:         { fontSize: 12, fontWeight: fontWeight.bold, color: o.muted },
+  dayCheck:       { fontSize: 15, color: "#FFF", fontWeight: fontWeight.black },
+  dayNum:         { fontSize: 13, fontWeight: fontWeight.bold, color: o.muted },
   dayNumCurrent:  { fontWeight: fontWeight.extrabold },
   dayNumLocked:   { color: o.dim },
 
   dayInfo:        { flex: 1 },
-  dayTitle:       { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: o.text },
+  dayTitle:       { fontSize: fontSize.md, fontWeight: fontWeight.semibold, color: o.text },
   dayTitleLocked: { color: o.dim },
-  currentPill:    { fontSize: 10, fontWeight: fontWeight.bold, marginTop: 2 },
-  lockIcon:       { fontSize: 14, opacity: 0.4 },
+  currentPill:    { fontSize: 12, fontWeight: fontWeight.bold, marginTop: 2 },
+  lockIcon:       { fontSize: 15, opacity: 0.4 },
 
   // ── Empty / loading
   emptyWrap: { alignItems: "center", gap: 10, paddingVertical: spacing.xl },
