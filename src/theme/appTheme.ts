@@ -159,6 +159,12 @@ export type AppTheme = {
     text:   string;
     radius: number;
   };
+
+  /** Font families — web uses Google Fonts loaded in app/+html.tsx */
+  fonts: {
+    display: string;  // Space Grotesk — headings, numbers, hero text
+    body:    string;  // Manrope — body copy, labels, UI text
+  };
 };
 
 // ─── Palette definitions ──────────────────────────────────────────────────────
@@ -304,8 +310,7 @@ function buildTheme(config: typeof themeConfig): AppTheme {
 
   return {
     colors: {
-      // Subtle cool-gray app background so white cards separate cleanly.
-      screenBg:   "#F4F4FA",
+      screenBg:   "#FFFFFF",    // pure white background
       cardBg:     "#FFFFFF",
       inputBg:    "#F6F6FC",
       modalBg:    "#FFFFFF",
@@ -392,6 +397,11 @@ function buildTheme(config: typeof themeConfig): AppTheme {
       bg:     p.accent,
       text:   "#FFFFFF",
       radius: r.lg,
+    },
+
+    fonts: {
+      display: "'Space Grotesk', system-ui, sans-serif",
+      body:    "'Manrope', system-ui, sans-serif",
     },
   };
 }

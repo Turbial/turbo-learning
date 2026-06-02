@@ -489,7 +489,7 @@ const s = StyleSheet.create({
   hdrLeft: { flexDirection: "row", alignItems: "center", gap: 12 },
   hdrRight:{ flexDirection: "row", alignItems: "center", gap: 8 },
   greeting:{ fontSize: t.text.bodyMd, color: t.colors.textMuted, fontWeight: t.text.weightMedium },
-  userName:{ fontSize: t.text.h1, color: t.colors.textPrimary, fontWeight: t.text.weightExtrabold, letterSpacing: -0.3 },
+  userName:{ fontSize: t.text.h1, color: t.colors.textPrimary, fontWeight: t.text.weightExtrabold, letterSpacing: -0.3, fontFamily: t.fonts.display },
 
   // Avatar
   avatar:     { width: 48, height: 48, borderRadius: t.radius.lg, backgroundColor: t.colors.accent, justifyContent: "center", alignItems: "center", overflow: "hidden" },
@@ -544,7 +544,7 @@ const s = StyleSheet.create({
   cD: { width: 50,  height: 50,  top: 70,   right: 24,  backgroundColor: "rgba(255,255,255,0.10)" },
   heroTag:    { alignSelf: "flex-start", backgroundColor: "rgba(255,255,255,0.16)", borderRadius: t.radius.pill, paddingHorizontal: 12, paddingVertical: 4, marginBottom: t.spacing.sm },
   heroTagTxt: { fontSize: t.text.caption, fontWeight: t.text.weightBold, color: "rgba(255,255,255,0.92)", letterSpacing: 0.8 },
-  heroTitle:  { fontSize: t.text.display, fontWeight: t.text.weightBlack, color: "#FFF", lineHeight: t.text.display * 1.18, marginBottom: 6, letterSpacing: -0.5 },
+  heroTitle:  { fontSize: t.text.display, fontWeight: t.text.weightBlack, color: "#FFF", lineHeight: t.text.display * 1.18, marginBottom: 6, letterSpacing: -0.5, fontFamily: t.fonts.display },
   heroSub:    { fontSize: t.text.h3, color: "rgba(255,255,255,0.65)", fontWeight: t.text.weightMedium, marginBottom: t.spacing.md },
   heroPRow:   { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: t.spacing.md },
   heroPTrack: { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: t.radius.pill, overflow: "hidden" },
@@ -555,7 +555,7 @@ const s = StyleSheet.create({
 
   // Section header
   secHdr:      { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: t.spacing.sm },
-  secTitle:    { fontSize: t.text.h1, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.3 },
+  secTitle:    { fontSize: t.text.h1, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.3, fontFamily: t.fonts.display },
   journeyCount:{ fontSize: t.text.h3, fontWeight: t.text.weightSemibold, color: t.colors.accent },
 
   // Overall bar
@@ -569,7 +569,7 @@ const s = StyleSheet.create({
   weekHeaderRow:{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 4 },
   weekEmoji:   { fontSize: 22 },
   weekLabel:   { fontSize: 11, fontWeight: t.text.weightBold, color: t.colors.textDisabled, letterSpacing: 1.5, textTransform: "uppercase" as any },
-  weekTitle:   { fontSize: t.text.h2, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.2 },
+  weekTitle:   { fontSize: t.text.h2, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.2, fontFamily: t.fonts.display },
   weekCount:   { fontSize: t.text.h3, fontWeight: t.text.weightBold },
   weekGoal:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, marginBottom: 8 },
   weekMiniBar: { height: 4, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", marginBottom: 12 },

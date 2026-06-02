@@ -481,7 +481,7 @@ const s = StyleSheet.create({
   main:        { flex: 1 },
   mainContent: { padding: t.spacing.lg, gap: 18 },
   greetRow:    { gap: 3 },
-  greetTitle:  { fontSize: t.text.h1, fontWeight: t.text.weightBlack, color: t.colors.textPrimary, letterSpacing: -0.5 },
+  greetTitle:  { fontSize: t.text.h1, fontWeight: t.text.weightBlack, color: t.colors.textPrimary, letterSpacing: -0.5, fontFamily: t.fonts.display },
   greetSub:    { fontSize: 13, color: t.colors.textMuted },
 
   // Streak-at-risk
@@ -500,7 +500,7 @@ const s = StyleSheet.create({
   heroRight: { width: 100 },
   heroTag:    { alignSelf: "flex-start", backgroundColor: "rgba(255,255,255,0.15)", borderRadius: t.radius.pill, paddingHorizontal: 12, paddingVertical: 4, marginBottom: 8 },
   heroTagTxt: { fontSize: 10, fontWeight: t.text.weightBold, color: "rgba(255,255,255,0.9)", letterSpacing: 0.8 },
-  heroTitle:  { fontSize: t.text.h1, fontWeight: t.text.weightBlack, color: "#FFF", lineHeight: t.text.h1 * 1.25, marginBottom: 5, letterSpacing: -0.5 },
+  heroTitle:  { fontSize: t.text.h1, fontWeight: t.text.weightBlack, color: "#FFF", lineHeight: t.text.h1 * 1.25, marginBottom: 5, letterSpacing: -0.5, fontFamily: t.fonts.display },
   heroSub:    { fontSize: 12, color: "rgba(255,255,255,0.62)", fontWeight: t.text.weightMedium, marginBottom: 12 },
   heroBottom: { flexDirection: "row", alignItems: "center", gap: 12 },
   heroPTrack: { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: t.radius.pill, overflow: "hidden" },
