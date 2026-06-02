@@ -1,10 +1,6 @@
-// ─── Home Screen — Desktop / Web layout ───
-// Renders when Platform.OS === 'web' (Expo web via React Native Web).
-// Layout: macOS-style title bar + fixed left sidebar + scrollable main area.
-//
-// Usage: In app/(tabs)/_layout.tsx (web), swap home.tsx for this file,
-//        or use a responsive wrapper that mounts one or the other based on
-//        useWindowDimensions().width >= 768.
+// ─── Home Screen — Desktop / Web — Ocean / Aqua theme ────────────────────────
+// Light, "looking through water" aesthetic.
+// Layout: white sidebar + scrollable main on a soft aqua background.
 
 import React, { useState } from "react";
 import {
@@ -14,25 +10,33 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Platform,
 } from "react-native";
 import { router } from "expo-router";
-import {
-  colors,
-  spacing,
-  radius,
-  fontSize,
-  fontWeight,
-  shadow,
-} from "../../src/theme/tokens";
+import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
 
-// ─── Mock data (same shapes as mobile — replace with Supabase queries in M3) ──
+// ─── Local ocean palette ──────────────────────────────────────────────────────
+const o = {
+  bg:      "#F0FDFF",   // screen bg — barely-there cyan
+  bgTint:  "#CFFAFE",   // cyan-100 — for tracks, icon bgs
+  card:    "#FFFFFF",
+  deep:    "#0E7490",   // hero bg / dark accent
+  mid:     "#0891B2",   // primary — cyan-600
+  bright:  "#06B6D4",   // cyan-500
+  teal:    "#14B8A6",
+  sky:     "#0EA5E9",
+  border:  "#BAE6FD",   // sky-200
+  sideBar: "#FFFFFF",
+  text:    "#0F172A",
+  muted:   "#64748B",
+  dim:     "#94A3B8",
+};
+
+// ─── Mock data ────────────────────────────────────────────────────────────────
 
 const MOCK_USER = {
   initials: "AJ",
   name: "Alexandra J.",
   handle: "@alex_learns",
-  coins: 4892,
   level: 24,
   xp: 3692,
   xpToNextLevel: 308,
@@ -47,7 +51,7 @@ const MOCK_HERO = {
   title: "Quadratic Equations",
   subtitle: "Mathematics · Chapter 4 of 8",
   timeLabel: "5–7 min",
-  difficulty: "HARD",
+  difficulty: "MEDIUM",
   xpReward: "250 XP",
   progress: 0.78,
   lessonId: "lesson-quadratic-1",
@@ -57,17 +61,17 @@ type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logi
 const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
 
 const SUBJECTS = [
-  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.79, color: "#6C3CE1", category: "Math"     as SubjectFilter, locked: false },
-  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science"  as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
-  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, color: "#F59E0B", category: "History"  as SubjectFilter, locked: false },
-  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    color: "#9090B8", category: "Logic"    as SubjectFilter, locked: true  },
-  { id: "art",      name: "Creative Arts",  emoji: "🎨", count: "Coming soon",    progress: 0,    color: "#B0B0D0", category: "Art"      as SubjectFilter, locked: true  },
+  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.79, bg: "#0891B2", glow: "#38BDF8", category: "Math"     as SubjectFilter, locked: false },
+  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.45, bg: "#0D9488", glow: "#2DD4BF", category: "Science"  as SubjectFilter, locked: false },
+  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.30, bg: "#0284C7", glow: "#38BDF8", category: "Language" as SubjectFilter, locked: false },
+  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, bg: "#0369A1", glow: "#67E8F9", category: "History"  as SubjectFilter, locked: false },
+  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    bg: "#94A3B8", glow: "#CBD5E1", category: "Logic"    as SubjectFilter, locked: true  },
+  { id: "art",      name: "Creative Arts",  emoji: "🎨", count: "Coming soon",    progress: 0,    bg: "#A8A29E", glow: "#D6D3D1", category: "Art"      as SubjectFilter, locked: true  },
 ];
 
 const ACTIVITY = [
   { id: "a1", emoji: "📐", name: "Calculus Integration",    chapter: "Chapter 3", subject: "Mathematics",   time: "2 hours ago", status: "done"        },
-  { id: "a2", emoji: "⚗️", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics",       time: "5 hours ago", status: "in-progress" },
+  { id: "a2", emoji: "🔬", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics",       time: "5 hours ago", status: "in-progress" },
   { id: "a3", emoji: "📝", name: "Essay Structure Basics",   chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday",   status: "new"         },
 ];
 
@@ -79,10 +83,10 @@ const NAV_ITEMS = [
 ];
 const NAV_MORE = [
   { id: "leaderboard", label: "Leaderboard", emoji: "🏆" },
-  { id: "settings",    label: "Settings",    emoji: "⚙️" },
+  { id: "settings",    label: "Settings",    emoji: "⚙️"  },
 ];
 
-// ─── Sidebar ─────────────────────────────────────────────────────
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
 
 function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) => void }) {
   const u = MOCK_USER;
@@ -92,7 +96,9 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
     <View style={s.sidebar}>
       {/* Brand */}
       <View style={s.brand}>
-        <View style={s.brandIco}><Text style={s.brandIcoTxt}>✦</Text></View>
+        <View style={s.brandIco}>
+          <Text style={s.brandIcoTxt}>◈</Text>
+        </View>
         <Text style={s.brandName}>EduApp</Text>
       </View>
 
@@ -113,22 +119,18 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
         </View>
 
         <View style={s.xpRow}>
-          <Text style={s.xpRowLbl}>Experience</Text>
+          <Text style={s.xpRowLbl}>XP Progress</Text>
           <Text style={s.xpRowPct}>{xpPct}%</Text>
         </View>
         <View style={s.xpTrack}>
           <View style={[s.xpFill, { width: `${xpPct}%` as any }]} />
+          <View style={[s.xpShimmer, { left: `${Math.max(xpPct - 3, 0)}%` as any }]} />
         </View>
-
-        <View style={s.coinRow}>
-          <View style={s.coinDot} />
-          <Text style={s.coinVal}>{u.coins.toLocaleString()} XP</Text>
-          <Text style={s.coinSub}>{u.xpToNextLevel} to Lvl {u.level + 1}</Text>
-        </View>
+        <Text style={s.xpHint}>{u.xpToNextLevel} XP to level {u.level + 1}</Text>
       </View>
 
       {/* Nav */}
-      <Text style={s.navSec}>Menu</Text>
+      <Text style={s.navSec}>MENU</Text>
       {NAV_ITEMS.map((item) => (
         <TouchableOpacity
           key={item.id}
@@ -140,7 +142,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
           <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
         </TouchableOpacity>
       ))}
-      <Text style={s.navSec}>More</Text>
+      <Text style={s.navSec}>MORE</Text>
       {NAV_MORE.map((item) => (
         <TouchableOpacity
           key={item.id}
@@ -153,52 +155,49 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
         </TouchableOpacity>
       ))}
 
-      {/* Quick stats */}
+      {/* Stat cards */}
       <View style={s.statsArea}>
         <View style={s.statCard}>
-          <View>
-            <Text style={s.statLbl}>Current Streak</Text>
-            <Text style={s.statSub}>Keep it up!</Text>
-          </View>
-          <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>🔥 {MOCK_USER.streak}</Text>
-            <Text style={s.statUnit}>days</Text>
-          </View>
+          <Text style={s.statVal}>🔥 {u.streak}</Text>
+          <Text style={s.statLbl}>day streak</Text>
         </View>
         <View style={s.statCard}>
-          <View>
-            <Text style={s.statLbl}>Global Rank</Text>
-            <Text style={s.statSub}>Top 5%</Text>
-          </View>
-          <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>#{MOCK_USER.rank}</Text>
-            <Text style={s.statUnit}>worldwide</Text>
-          </View>
+          <Text style={s.statVal}>#{u.rank}</Text>
+          <Text style={s.statLbl}>global rank</Text>
         </View>
       </View>
     </View>
   );
 }
 
-// ─── Hero Banner ─────────────────────────────────────────────────
+// ─── Hero Banner ──────────────────────────────────────────────────────────────
 
 function HeroBanner() {
   const h = MOCK_HERO;
+  const pct = Math.round(h.progress * 100);
   return (
     <TouchableOpacity
       style={s.hero}
       activeOpacity={0.9}
       onPress={() => router.push(`/lesson/${h.lessonId}` as any)}
     >
+      {/* Caustic light rings */}
+      <View style={[s.caustic, s.cA]} />
+      <View style={[s.caustic, s.cB]} />
+      <View style={[s.caustic, s.cC]} />
+      <View style={[s.caustic, s.cD]} />
+
       {/* Left content */}
       <View style={s.heroLeft}>
         <View>
-          <Text style={s.heroTag}>📚 {h.tag.toUpperCase()}</Text>
+          <View style={s.heroTag}>
+            <Text style={s.heroTagTxt}>🌊  {h.tag.toUpperCase()}</Text>
+          </View>
           <Text style={s.heroTitle}>{h.title}</Text>
           <Text style={s.heroSub}>{h.subtitle}</Text>
           <View style={s.heroChips}>
             {[`⏱ ${h.timeLabel}`, `● ${h.difficulty}`, `✦ ${h.xpReward}`].map((c) => (
-              <View key={c} style={[s.heroChip, c.includes("HARD") && s.heroChipHard]}>
+              <View key={c} style={s.heroChip}>
                 <Text style={s.heroChipTxt}>{c}</Text>
               </View>
             ))}
@@ -206,27 +205,22 @@ function HeroBanner() {
         </View>
         <View style={s.heroBottom}>
           <View style={s.heroPTrack}>
-            <View style={[s.heroPFill, { width: `${Math.round(h.progress * 100)}%` as any }]} />
+            <View style={[s.heroPFill, { width: `${pct}%` as any }]} />
           </View>
-          <Text style={s.heroPct}>{Math.round(h.progress * 100)}%</Text>
+          <Text style={s.heroPct}>{pct}%</Text>
           <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
             <Text style={s.heroCtaTxt}>Continue →</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* Right decorative area */}
-      <View style={s.heroRight}>
-        <View style={[s.hrc, s.hrc1]} />
-        <View style={[s.hrc, s.hrc2]} />
-        <View style={[s.hrc, s.hrc3]} />
-        <View style={s.hrd} />
-      </View>
+      {/* Right: decorative caustic rings only (no extra elements needed) */}
+      <View style={s.heroRight} />
     </TouchableOpacity>
   );
 }
 
-// ─── Subject grid (3-col) ────────────────────────────────────────
+// ─── Subject grid (3-col) ─────────────────────────────────────────────────────
 
 function SubjectGrid({ filter }: { filter: SubjectFilter }) {
   const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
@@ -235,31 +229,30 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
       {visible.map((item) => (
         <TouchableOpacity
           key={item.id}
-          style={[s.subCard, item.locked && s.subCardLocked]}
+          style={[s.subCard, item.locked && { opacity: 0.55 }]}
           activeOpacity={item.locked ? 1 : 0.85}
           disabled={item.locked}
         >
-          <View style={[s.subTop, { backgroundColor: item.color }]}>
-            <View style={[s.subC1, { backgroundColor: item.color + "55" }]} />
-            <View style={[s.subC2, { backgroundColor: item.color + "33" }]} />
+          <View style={[s.subTop, { backgroundColor: item.bg }]}>
+            <View style={[s.sc1, { backgroundColor: item.glow + "45" }]} />
+            <View style={[s.sc2, { backgroundColor: item.glow + "28" }]} />
+            <View style={s.sc3} />
             <Text style={s.subEmoji}>{item.emoji}</Text>
           </View>
           <View style={s.subBody}>
-            <Text style={[s.subName, item.locked && { color: colors.textMuted }]} numberOfLines={1}>
-              {item.name}
-            </Text>
+            <Text style={s.subName} numberOfLines={1}>{item.name}</Text>
             <Text style={s.subCount}>{item.count}</Text>
             {!item.locked ? (
               <View style={s.subPTrack}>
                 <View
-                  style={[
-                    s.subPFill,
-                    { width: `${Math.round(item.progress * 100)}%` as any, backgroundColor: item.color },
-                  ]}
+                  style={[s.subPFill, {
+                    width: `${Math.round(item.progress * 100)}%` as any,
+                    backgroundColor: item.bg,
+                  }]}
                 />
               </View>
             ) : (
-              <Text style={s.lockLbl}>🔒 LOCKED</Text>
+              <Text style={s.subLock}>🔒 LOCKED</Text>
             )}
           </View>
         </TouchableOpacity>
@@ -268,32 +261,24 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
   );
 }
 
-// ─── Activity table ───────────────────────────────────────────────
+// ─── Activity table ───────────────────────────────────────────────────────────
 
-const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }> = {
-  done:          { bg: "#D1FAE5", color: "#065F46", label: "Answered"    },
-  "in-progress": { bg: "#FEF3C7", color: "#92400E", label: "Pending"     },
-  new:           { bg: "#EDE9FE", color: "#4C1D95", label: "New"         },
-};
-
-const ICON_BG: Record<string, string> = {
-  "📐": "#F0E8FF",
-  "⚗️": "#DFF7F4",
-  "📝": "#FFE8EC",
+const STATUS: Record<string, { bg: string; color: string; label: string }> = {
+  done:          { bg: "#D1FAE5", color: "#065F46", label: "Done"        },
+  "in-progress": { bg: "#CFFAFE", color: "#0E7490", label: "In Progress" },
+  new:           { bg: "#E0F2FE", color: "#0369A1", label: "New"         },
 };
 
 function ActivityTable() {
   return (
     <View style={s.actBox}>
-      {/* Header */}
       <View style={s.actHead}>
         {["LESSON", "SUBJECT", "TIME", "STATUS"].map((h) => (
           <Text key={h} style={s.actHeadTxt}>{h}</Text>
         ))}
       </View>
-      {/* Rows */}
       {ACTIVITY.map((item, i) => {
-        const st = STATUS_STYLE[item.status];
+        const st = STATUS[item.status];
         return (
           <TouchableOpacity
             key={item.id}
@@ -301,7 +286,7 @@ function ActivityTable() {
             activeOpacity={0.75}
           >
             <View style={s.actCell}>
-              <View style={[s.actIco, { backgroundColor: ICON_BG[item.emoji] ?? "#F0E8FF" }]}>
+              <View style={s.actIco}>
                 <Text style={{ fontSize: 16 }}>{item.emoji}</Text>
               </View>
               <View>
@@ -311,10 +296,8 @@ function ActivityTable() {
             </View>
             <Text style={s.actSubject}>{item.subject}</Text>
             <Text style={s.actTime}>{item.time}</Text>
-            <View>
-              <View style={[s.actBadge, { backgroundColor: st.bg }]}>
-                <Text style={[s.actBadgeTxt, { color: st.color }]}>{st.label}</Text>
-              </View>
+            <View style={[s.actBadge, { backgroundColor: st.bg }]}>
+              <Text style={[s.actBadgeTxt, { color: st.color }]}>{st.label}</Text>
             </View>
           </TouchableOpacity>
         );
@@ -323,7 +306,7 @@ function ActivityTable() {
   );
 }
 
-// ─── Main Screen ─────────────────────────────────────────────────
+// ─── Main screen ──────────────────────────────────────────────────────────────
 
 export default function HomeDesktopScreen() {
   const [activeNav, setActiveNav] = useState("home");
@@ -335,52 +318,45 @@ export default function HomeDesktopScreen() {
 
   return (
     <View style={s.root}>
-      {/* ── macOS title bar ── */}
-      <View style={s.titleBar}>
-        <View style={s.trafficLights}>
-          <View style={[s.tl, { backgroundColor: "#FF5F57" }]} />
-          <View style={[s.tl, { backgroundColor: "#FFBD2E" }]} />
-          <View style={[s.tl, { backgroundColor: "#28C840" }]} />
+      {/* ── Top bar ── */}
+      <View style={s.topBar}>
+        <View style={s.topLeft}>
+          <View style={s.tbIco}><Text style={s.tbIcoTxt}>◈</Text></View>
+          <Text style={s.tbBrand}>EduApp</Text>
         </View>
-        <View style={s.titleMid}>
-          <View style={s.titleIco}><Text style={s.titleIcoTxt}>✦</Text></View>
-          <Text style={s.titleName}>EduApp · Home</Text>
+        <View style={s.searchBox}>
+          <Text style={{ fontSize: 14, opacity: 0.35 }}>🔍</Text>
+          <TextInput
+            style={s.searchInput}
+            placeholder="Search subjects, topics…"
+            placeholderTextColor={o.dim}
+            value={search}
+            onChangeText={setSearch}
+          />
         </View>
-        <View style={s.titleRight}>
-          <Text style={s.titleTime}>9:41 AM</Text>
-          <TouchableOpacity style={s.titleBell}>
-            <Text style={{ fontSize: 13 }}>🔔</Text>
-            {MOCK_USER.notifications > 0 && <View style={s.titleBellDot} />}
+        <View style={s.topRight}>
+          <Text style={s.topStreak}>🔥 {MOCK_USER.streak}-day streak</Text>
+          <TouchableOpacity style={s.topBell}>
+            <Text style={{ fontSize: 14 }}>🔔</Text>
+            {MOCK_USER.notifications > 0 && <View style={s.topBellDot} />}
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* ── App shell ── */}
+      {/* ── Shell ── */}
       <View style={s.shell}>
         <Sidebar activeNav={activeNav} onNav={setActiveNav} />
 
-        {/* Main content */}
+        {/* Main */}
         <ScrollView
           style={s.main}
           contentContainerStyle={s.mainContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* Greeting + search */}
-          <View style={s.topBar}>
-            <View>
-              <Text style={s.greetTitle}>{greeting}, Alexandra! 👋</Text>
-              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak — keep going!</Text>
-            </View>
-            <View style={s.searchBox}>
-              <Text style={{ fontSize: 14, opacity: 0.4 }}>🔍</Text>
-              <TextInput
-                style={s.searchInput}
-                placeholder="Search subjects, topics…"
-                placeholderTextColor={colors.textMuted}
-                value={search}
-                onChangeText={setSearch}
-              />
-            </View>
+          {/* Greeting */}
+          <View style={s.greetRow}>
+            <Text style={s.greetTitle}>{greeting}, Alexandra! 👋</Text>
+            <Text style={s.greetSub}>Ready to make waves today?</Text>
           </View>
 
           {/* Hero */}
@@ -394,7 +370,6 @@ export default function HomeDesktopScreen() {
             </TouchableOpacity>
           </View>
 
-          {/* Filter pills */}
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -423,7 +398,6 @@ export default function HomeDesktopScreen() {
           </View>
 
           <ActivityTable />
-
           <View style={{ height: 32 }} />
         </ScrollView>
       </View>
@@ -431,385 +405,279 @@ export default function HomeDesktopScreen() {
   );
 }
 
-// ─── Styles ─────────────────────────────────────────────────────
+// ─── Styles ───────────────────────────────────────────────────────────────────
 
-const SIDEBAR_W = 210;
+const SIDEBAR_W = 218;
+
+const AQUA_SHADOW = {
+  shadowColor: "#06B6D4",
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.14,
+  shadowRadius: 14,
+  elevation: 4,
+};
 
 const s = StyleSheet.create({
-  root: { flex: 1, backgroundColor: "#160D38", minHeight: "100%" as any },
+  root: { flex: 1, backgroundColor: o.bg, minHeight: "100%" as any },
 
-  // Title bar
-  titleBar: {
-    height: 46,
-    backgroundColor: "#1C1040",
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.07)",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 18,
-  },
-  trafficLights: { flexDirection: "row", gap: 8 },
-  tl: { width: 13, height: 13, borderRadius: 7 },
-  titleMid: {
-    position: "absolute" as any,
-    left: "50%" as any,
-    transform: [{ translateX: -60 }],
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-  },
-  titleIco: {
-    width: 22,
-    height: 22,
-    borderRadius: 7,
-    backgroundColor: colors.violet,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  titleIcoTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
-  titleName: { fontSize: 13, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)" },
-  titleRight: { marginLeft: "auto" as any, flexDirection: "row", alignItems: "center", gap: 14 },
-  titleTime: { fontSize: 12, color: "rgba(255,255,255,0.38)", fontWeight: fontWeight.semibold },
-  titleBell: {
-    width: 28,
-    height: 28,
-    borderRadius: 9,
-    backgroundColor: "rgba(255,255,255,0.07)",
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.10)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  titleBellDot: {
-    position: "absolute",
-    top: 5,
-    right: 5,
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.coral,
-    borderWidth: 1.5,
-    borderColor: "#160D38",
-  },
-
-  // Shell
-  shell: { flex: 1, flexDirection: "row", overflow: "hidden" },
-
-  // Sidebar
-  sidebar: {
-    width: SIDEBAR_W,
-    backgroundColor: "#FEFEFE",
-    borderRightWidth: 1,
-    borderRightColor: "rgba(0,0,0,0.07)",
-    padding: 16,
-    overflow: "hidden" as any,
-  },
-  brand: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 18 },
-  brandIco: {
-    width: 30,
-    height: 30,
-    borderRadius: 9,
-    backgroundColor: colors.violet,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  brandIcoTxt: { fontSize: 14, fontWeight: fontWeight.black, color: "#FFF" },
-  brandName: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary },
-
-  // User card
-  userCard: {
-    backgroundColor: "#F3E8FF",
-    borderRadius: radius.lg,
-    padding: 13,
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "rgba(108,60,225,0.12)",
-  },
-  userRow: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
-  sbAvatar: {
-    width: 38,
-    height: 38,
-    borderRadius: 11,
-    backgroundColor: colors.violet,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  sbAvatarTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
-  sbName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, lineHeight: 18 },
-  sbHandle: { fontSize: 10, color: colors.textMuted },
-  lvlPill: {
-    alignSelf: "flex-start",
-    backgroundColor: colors.violet,
-    borderRadius: radius.pill,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    marginBottom: 9,
-  },
-  lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
-  xpRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 5 },
-  xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: colors.violet },
-  xpRowPct: { fontSize: 10, color: colors.textMuted },
-  xpTrack: { height: 7, backgroundColor: "#DDD0FF", borderRadius: radius.pill, overflow: "hidden" },
-  xpFill: { height: "100%", backgroundColor: colors.violet, borderRadius: radius.pill },
-  coinRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.goldBg,
-    borderRadius: 9,
-    padding: 7,
-    marginTop: 9,
-    borderWidth: 1,
-    borderColor: colors.goldBorder,
-    gap: 6,
-  },
-  coinDot: { width: 13, height: 13, borderRadius: 7, backgroundColor: colors.gold },
-  coinVal: { fontSize: 11, fontWeight: fontWeight.extrabold, color: "#A05A00" },
-  coinSub: { fontSize: 9, color: "#B07800", marginLeft: "auto" as any },
-
-  // Nav
-  navSec: {
-    fontSize: 9,
-    fontWeight: fontWeight.bold,
-    color: colors.textDim,
-    letterSpacing: 1.5,
-    textTransform: "uppercase" as any,
-    paddingVertical: 10,
-    paddingHorizontal: 8,
-  },
-  navItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 11,
-    marginBottom: 1,
-  },
-  navItemActive: { backgroundColor: colors.violet },
-  navIco: { fontSize: 16 },
-  navLbl: { fontSize: 13, fontWeight: fontWeight.semibold, color: "#6060A0" },
-  navLblActive: { color: "#FFF" },
-
-  // Stats
-  statsArea: { marginTop: "auto" as any, gap: 7, paddingTop: 14 },
-  statCard: {
-    backgroundColor: "#F8F8FF",
-    borderRadius: 11,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#EEEEFF",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  statLbl: { fontSize: 10, color: colors.textMuted, fontWeight: fontWeight.medium },
-  statSub: { fontSize: 9, color: colors.textDim },
-  statVal: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary, textAlign: "right" as any },
-  statUnit: { fontSize: 9, color: colors.textDim, textAlign: "right" as any },
-
-  // Main area
-  main: { flex: 1 },
-  mainContent: {
-    padding: spacing.lg,
-    backgroundColor: "#F3E8FF",
-    minHeight: "100%" as any,
-    gap: 20,
-  },
-
-  // Top bar
+  // ── Top bar
   topBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  greetTitle: {
-    fontSize: 22,
-    fontWeight: fontWeight.black,
-    color: colors.textPrimary,
-    letterSpacing: -0.5,
-  },
-  greetSub: { fontSize: 13, color: colors.textMuted, marginTop: 2 },
-  searchBox: {
+    height: 52,
+    backgroundColor: o.card,
+    borderBottomWidth: 1,
+    borderBottomColor: o.border,
     flexDirection: "row",
     alignItems: "center",
-    gap: 9,
-    backgroundColor: "#FFF",
+    paddingHorizontal: 20,
+    gap: 16,
+  },
+  topLeft:  { flexDirection: "row", alignItems: "center", gap: 8, width: SIDEBAR_W - 20 },
+  tbIco: {
+    width: 26, height: 26, borderRadius: 8,
+    backgroundColor: o.mid,
+    justifyContent: "center", alignItems: "center",
+  },
+  tbIcoTxt:  { fontSize: 14, fontWeight: fontWeight.black, color: "#FFF" },
+  tbBrand:   { fontSize: 15, fontWeight: fontWeight.black, color: o.text },
+  searchBox: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: o.bg,
     borderWidth: 1.5,
-    borderColor: "#DDD0FF",
-    borderRadius: 13,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    minWidth: 220,
-    ...shadow.sm,
+    borderColor: o.border,
+    borderRadius: 11,
+    paddingHorizontal: 13,
+    paddingVertical: 8,
   },
   searchInput: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: fontWeight.medium,
-    color: colors.textMuted,
+    color: o.muted,
     flex: 1,
     outlineStyle: "none" as any,
   },
+  topRight:  { flexDirection: "row", alignItems: "center", gap: 12 },
+  topStreak: { fontSize: 12, fontWeight: fontWeight.bold, color: "#EA580C" },
+  topBell: {
+    width: 30, height: 30, borderRadius: 9,
+    backgroundColor: o.bg,
+    borderWidth: 1.5, borderColor: o.border,
+    justifyContent: "center", alignItems: "center",
+  },
+  topBellDot: {
+    position: "absolute", top: 5, right: 5,
+    width: 7, height: 7, borderRadius: 4,
+    backgroundColor: "#F87171",
+    borderWidth: 1.5, borderColor: o.card,
+  },
 
-  // Hero banner
+  // ── Shell
+  shell: { flex: 1, flexDirection: "row" },
+
+  // ── Sidebar
+  sidebar: {
+    width: SIDEBAR_W,
+    backgroundColor: o.sideBar,
+    borderRightWidth: 1,
+    borderRightColor: o.border,
+    padding: 16,
+    overflow: "hidden" as any,
+  },
+  brand:    { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 16 },
+  brandIco: {
+    width: 28, height: 28, borderRadius: 8,
+    backgroundColor: o.mid,
+    justifyContent: "center", alignItems: "center",
+  },
+  brandIcoTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
+  brandName:   { fontSize: 14, fontWeight: fontWeight.black, color: o.text },
+
+  userCard: {
+    backgroundColor: o.bg,
+    borderRadius: radius.lg,
+    padding: 12,
+    marginBottom: 14,
+    borderWidth: 1.5,
+    borderColor: o.border,
+  },
+  userRow:    { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
+  sbAvatar: {
+    width: 36, height: 36, borderRadius: 11,
+    backgroundColor: o.mid,
+    justifyContent: "center", alignItems: "center",
+  },
+  sbAvatarTxt: { fontSize: 12, fontWeight: fontWeight.black, color: "#FFF" },
+  sbName:      { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.text, lineHeight: 17 },
+  sbHandle:    { fontSize: 10, color: o.muted },
+
+  lvlPill: {
+    alignSelf: "flex-start",
+    backgroundColor: o.mid,
+    borderRadius: radius.pill,
+    paddingHorizontal: 10, paddingVertical: 3,
+    marginBottom: 8,
+  },
+  lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
+
+  xpRow:   { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
+  xpRowLbl:{ fontSize: 10, fontWeight: fontWeight.semibold, color: o.mid },
+  xpRowPct:{ fontSize: 10, color: o.muted },
+  xpTrack: { height: 8, backgroundColor: o.bgTint, borderRadius: radius.pill, overflow: "hidden", position: "relative" },
+  xpFill:  { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
+  xpShimmer: {
+    position: "absolute",
+    width: 5, height: "100%",
+    backgroundColor: "rgba(255,255,255,0.50)",
+    borderRadius: 3,
+  },
+  xpHint: { fontSize: 9, color: o.dim, marginTop: 5 },
+
+  navSec: {
+    fontSize: 9, fontWeight: fontWeight.bold, color: o.dim,
+    letterSpacing: 1.5,
+    textTransform: "uppercase" as any,
+    paddingVertical: 9, paddingHorizontal: 8,
+  },
+  navItem: {
+    flexDirection: "row", alignItems: "center", gap: 9,
+    paddingVertical: 7, paddingHorizontal: 10,
+    borderRadius: 10, marginBottom: 1,
+  },
+  navItemActive: { backgroundColor: o.bgTint },
+  navIco:        { fontSize: 16 },
+  navLbl:        { fontSize: 13, fontWeight: fontWeight.semibold, color: o.muted },
+  navLblActive:  { color: o.mid, fontWeight: fontWeight.extrabold },
+
+  statsArea: { marginTop: "auto" as any, flexDirection: "row", gap: 7, paddingTop: 14 },
+  statCard: {
+    flex: 1,
+    backgroundColor: o.bg,
+    borderRadius: 11, padding: 10,
+    borderWidth: 1, borderColor: o.border,
+    alignItems: "center",
+  },
+  statVal: { fontSize: 15, fontWeight: fontWeight.black, color: o.text },
+  statLbl: { fontSize: 9, color: o.muted, marginTop: 2 },
+
+  // ── Main
+  main:        { flex: 1 },
+  mainContent: { padding: spacing.lg, gap: 20 },
+
+  greetRow:   { gap: 3 },
+  greetTitle: { fontSize: 22, fontWeight: fontWeight.black, color: o.text, letterSpacing: -0.5 },
+  greetSub:   { fontSize: 13, color: o.muted },
+
+  // ── Hero banner
   hero: {
-    backgroundColor: "#4A12CE",
-    borderRadius: 24,
+    backgroundColor: o.deep,
+    borderRadius: 22,
     flexDirection: "row",
     overflow: "hidden",
-    minHeight: 188,
-    ...shadow.hero,
+    minHeight: 180,
+    shadowColor: o.deep,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.28,
+    shadowRadius: 20,
+    elevation: 8,
   },
-  heroLeft: {
-    flex: 1,
-    padding: 28,
-    justifyContent: "space-between",
-  },
+  caustic: { position: "absolute", borderRadius: 9999 },
+  cA: { width: 280, height: 280, top: -100, right: -80,  backgroundColor: "rgba(255,255,255,0.05)" },
+  cB: { width: 160, height: 160, bottom: -60, left: -20, backgroundColor: "rgba(255,255,255,0.06)" },
+  cC: { width: 90,  height: 90,  top: 20,  right: 100,   backgroundColor: "rgba(255,255,255,0.08)" },
+  cD: { width: 55,  height: 55,  top: 65,  right: 55,    backgroundColor: "rgba(255,255,255,0.10)" },
+
+  heroLeft:  { flex: 1, padding: 28, justifyContent: "space-between" },
+  heroRight: { width: 120 },
+
   heroTag: {
-    fontSize: 10,
-    fontWeight: fontWeight.bold,
-    color: "rgba(255,255,255,0.55)",
-    letterSpacing: 2,
-    marginBottom: 7,
+    alignSelf: "flex-start",
+    backgroundColor: "rgba(255,255,255,0.15)",
+    borderRadius: radius.pill,
+    paddingHorizontal: 12, paddingVertical: 4,
+    marginBottom: 8,
   },
-  heroTitle: {
-    fontSize: 26,
-    fontWeight: fontWeight.black,
-    color: "#FFF",
-    lineHeight: 30,
-    marginBottom: 5,
-    letterSpacing: -0.5,
+  heroTagTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)", letterSpacing: 0.8 },
+  heroTitle:  {
+    fontSize: 26, fontWeight: fontWeight.black, color: "#FFF",
+    lineHeight: 31, marginBottom: 5, letterSpacing: -0.5,
   },
-  heroSub: {
-    fontSize: 12,
-    color: "rgba(255,255,255,0.55)",
-    fontWeight: fontWeight.medium,
-    marginBottom: 12,
-  },
-  heroChips: { flexDirection: "row", gap: 7, flexWrap: "wrap" as any },
-  heroChip: {
+  heroSub:    { fontSize: 12, color: "rgba(255,255,255,0.62)", fontWeight: fontWeight.medium, marginBottom: 12 },
+  heroChips:  { flexDirection: "row", gap: 7, flexWrap: "wrap" as any },
+  heroChip:   {
     backgroundColor: "rgba(255,255,255,0.13)",
     borderRadius: radius.pill,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: 10, paddingVertical: 4,
   },
-  heroChipHard: { backgroundColor: "rgba(255,90,70,0.30)" },
   heroChipTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)" },
-  heroBottom: { flexDirection: "row", alignItems: "center", gap: 14 },
-  heroPTrack: {
-    flex: 1,
-    height: 8,
-    backgroundColor: "rgba(255,255,255,0.16)",
-    borderRadius: radius.pill,
-    overflow: "hidden",
-  },
-  heroPFill: { height: "100%", backgroundColor: "#FFF", borderRadius: radius.pill },
-  heroPct: { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
+  heroBottom:  { flexDirection: "row", alignItems: "center", gap: 12 },
+  heroPTrack:  { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: radius.pill, overflow: "hidden" },
+  heroPFill:   { height: "100%", backgroundColor: "#A5F3FC", borderRadius: radius.pill },
+  heroPct:     { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
   heroCta: {
     backgroundColor: "#FFF",
-    borderRadius: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    borderRadius: 11,
+    paddingVertical: 9, paddingHorizontal: 18,
   },
-  heroCtaTxt: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.violet },
-  heroRight: { width: 180, position: "relative" as any, overflow: "hidden" },
-  hrc: { position: "absolute", borderRadius: 9999 },
-  hrc1: { width: 220, height: 220, top: -70,  right: -60, backgroundColor: "rgba(255,255,255,0.08)" },
-  hrc2: { width: 120, height: 120, bottom: -40, right: 10,  backgroundColor: "rgba(255,255,255,0.07)" },
-  hrc3: { width: 65,  height: 65,  top: 28,   right: 80,  backgroundColor: "rgba(255,255,255,0.09)" },
-  hrd: {
-    position: "absolute",
-    width: 72,
-    height: 72,
-    top: "50%" as any,
-    left: "50%" as any,
-    marginTop: -36,
-    marginLeft: -36,
-    backgroundColor: "rgba(255,255,255,0.10)",
-    transform: [{ rotate: "45deg" }],
-    borderRadius: 12,
-  },
+  heroCtaTxt: { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.deep },
 
-  // Section headers
-  secHdr: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  secTitle: {
-    fontSize: 16,
-    fontWeight: fontWeight.extrabold,
-    color: colors.textPrimary,
-    letterSpacing: -0.3,
-  },
-  seeAll: { fontSize: 12, fontWeight: fontWeight.semibold, color: colors.violet },
+  // ── Section headers
+  secHdr:   { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  secTitle: { fontSize: 16, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
+  seeAll:   { fontSize: 12, fontWeight: fontWeight.semibold, color: o.mid },
 
-  // Filter pills
-  filterRow: { gap: 7, paddingBottom: 14 },
-  pill: {
-    borderRadius: radius.pill,
-    paddingHorizontal: 15,
-    paddingVertical: 7,
-    backgroundColor: "#FFF",
-    borderWidth: 2,
-    borderColor: "#DDD0FF",
-  },
-  pillActive: { backgroundColor: colors.violet, borderColor: colors.violet },
-  pillTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: colors.textMuted },
+  // ── Filter pills
+  filterRow:     { gap: 7, paddingBottom: 14 },
+  pill:          { borderRadius: radius.pill, paddingHorizontal: 15, paddingVertical: 7, backgroundColor: o.card, borderWidth: 1.5, borderColor: o.border },
+  pillActive:    { backgroundColor: o.mid, borderColor: o.mid },
+  pillTxt:       { fontSize: 11, fontWeight: fontWeight.bold, color: o.muted },
   pillTxtActive: { color: "#FFF" },
 
-  // Subject grid (3-col)
+  // ── Subject grid (3-col)
   subGrid: { flexDirection: "row", flexWrap: "wrap" as any, gap: 12 },
   subCard: {
     width: "31%" as any,
-    backgroundColor: "#FFF",
-    borderRadius: 18,
+    backgroundColor: o.card,
+    borderRadius: 16,
     overflow: "hidden",
-    ...shadow.sm,
+    ...AQUA_SHADOW,
   },
-  subCardLocked: { opacity: 0.6 },
-  subTop: { height: 80, justifyContent: "center", alignItems: "center", position: "relative" },
-  subC1: { position: "absolute", width: 78, height: 78, borderRadius: 39, top: -22, right: -18 },
-  subC2: { position: "absolute", width: 42, height: 42, borderRadius: 21, bottom: -12, left: 10 },
-  subEmoji: { fontSize: 30, zIndex: 1 },
-  subBody: { padding: 12 },
-  subName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, marginBottom: 2 },
-  subCount: { fontSize: 10, color: colors.textMuted, marginBottom: 8 },
-  subPTrack: { height: 5, backgroundColor: "#F0EAFF", borderRadius: radius.pill, overflow: "hidden" },
-  subPFill: { height: "100%", borderRadius: radius.pill },
-  lockLbl: { fontSize: 10, fontWeight: fontWeight.bold, color: colors.textDim, marginTop: 4 },
+  subTop:  { height: 80, justifyContent: "center", alignItems: "center", position: "relative", overflow: "hidden" },
+  sc1: { position: "absolute", width: 80, height: 80, borderRadius: 40, top: -24, right: -20 },
+  sc2: { position: "absolute", width: 46, height: 46, borderRadius: 23, bottom: -14, left: 8  },
+  sc3: { position: "absolute", width: 32, height: 32, borderRadius: 16, top: 8, right: 32, backgroundColor: "rgba(255,255,255,0.10)" },
+  subEmoji:  { fontSize: 30, zIndex: 1 },
+  subBody:   { padding: 10 },
+  subName:   { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.text, marginBottom: 2 },
+  subCount:  { fontSize: 10, color: o.muted, marginBottom: 7 },
+  subPTrack: { height: 4, backgroundColor: o.bgTint, borderRadius: radius.pill, overflow: "hidden" },
+  subPFill:  { height: "100%", borderRadius: radius.pill },
+  subLock:   { fontSize: 9, fontWeight: fontWeight.bold, color: o.dim, marginTop: 4 },
 
-  // Activity table
-  actBox: {
-    backgroundColor: "#FFF",
-    borderRadius: 18,
-    overflow: "hidden",
-    ...shadow.sm,
-  },
+  // ── Activity table
+  actBox: { backgroundColor: o.card, borderRadius: 16, overflow: "hidden", ...AQUA_SHADOW },
   actHead: {
     flexDirection: "row",
-    paddingVertical: 11,
-    paddingHorizontal: 18,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F0F0FA",
+    paddingVertical: 10, paddingHorizontal: 18,
+    borderBottomWidth: 1, borderBottomColor: o.bg,
   },
   actHeadTxt: {
-    flex: 1,
-    fontSize: 9,
-    fontWeight: fontWeight.bold,
-    color: "#B8B8D0",
-    letterSpacing: 1.2,
+    flex: 1, fontSize: 9, fontWeight: fontWeight.bold,
+    color: o.dim, letterSpacing: 1.2,
     textTransform: "uppercase" as any,
   },
   actRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 13,
-    paddingHorizontal: 18,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F8F8FF",
+    flexDirection: "row", alignItems: "center",
+    paddingVertical: 12, paddingHorizontal: 18,
+    borderBottomWidth: 1, borderBottomColor: o.bg,
   },
-  actCell: { flex: 1, flexDirection: "row", alignItems: "center", gap: 11 },
-  actIco: { width: 36, height: 36, borderRadius: 11, justifyContent: "center", alignItems: "center" },
-  actName: { fontSize: 13, fontWeight: fontWeight.bold, color: colors.textPrimary },
-  actChapter: { fontSize: 10, color: colors.textMuted, marginTop: 1 },
-  actSubject: { flex: 1, fontSize: 12, color: "#6060A0", fontWeight: fontWeight.medium },
-  actTime: { flex: 1, fontSize: 11, color: colors.textDim },
-  actBadge: { borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4 },
-  actBadgeTxt: { fontSize: 10, fontWeight: fontWeight.bold },
+  actCell:    { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 },
+  actIco:     { width: 34, height: 34, borderRadius: 10, backgroundColor: o.bgTint, justifyContent: "center", alignItems: "center" },
+  actName:    { fontSize: 13, fontWeight: fontWeight.bold, color: o.text },
+  actChapter: { fontSize: 10, color: o.muted, marginTop: 1 },
+  actSubject: { flex: 1, fontSize: 12, color: o.muted, fontWeight: fontWeight.medium },
+  actTime:    { flex: 1, fontSize: 11, color: o.dim },
+  actBadge:   { borderRadius: 7, paddingHorizontal: 10, paddingVertical: 4 },
+  actBadgeTxt:{ fontSize: 10, fontWeight: fontWeight.bold },
 });

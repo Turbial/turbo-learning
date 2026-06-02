@@ -89,6 +89,16 @@ export const colors = {
   goldBg: "#FFFBEB",
   goldBorder: "#FDE68A",
   screenBg: "#FAF8F5",
+
+  // Ocean / aqua palette
+  aqua: "#06B6D4",
+  aquaDark: "#0891B2",
+  aquaDeep: "#0E7490",
+  aquaBg: "#F0FDFF",
+  aquaBgTint: "#CFFAFE",
+  aquaBorder: "#BAE6FD",
+  skyBlue: "#0EA5E9",
+  tealAqua: "#14B8A6",
 };
 
 export const spacing = {
@@ -159,5 +169,12 @@ export const shadow = {
     shadowOpacity: 0.25,
     shadowRadius: 16,
     elevation: 8,
+  },
+  aqua: {
+    shadowColor: "#06B6D4",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.16,
+    shadowRadius: 14,
+    elevation: 4,
   },
 };
