@@ -1,4 +1,4 @@
-// ─── Home Screen — Desktop / Web layout ───
+// âââ Home Screen â Desktop / Web layout âââ
 // Renders when Platform.OS === 'web' (Expo web via React Native Web).
 // Layout: macOS-style title bar + fixed left sidebar + scrollable main area.
 //
@@ -26,7 +26,7 @@ import {
   shadow,
 } from "../../src/theme/tokens";
 
-// ─── Mock data (same shapes as mobile — replace with Supabase queries in M3) ──
+// âââ Mock data (same shapes as mobile â replace with Supabase queries in M3) ââ
 
 const MOCK_USER = {
   initials: "AJ",
@@ -45,8 +45,8 @@ const MOCK_USER = {
 const MOCK_HERO = {
   tag: "Continue Learning",
   title: "Quadratic Equations",
-  subtitle: "Mathematics · Chapter 4 of 8",
-  timeLabel: "5–7 min",
+  subtitle: "Mathematics Â· Chapter 4 of 8",
+  timeLabel: "5â7 min",
   difficulty: "HARD",
   xpReward: "250 XP",
   progress: 0.78,
@@ -57,32 +57,32 @@ type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logi
 const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
 
 const SUBJECTS = [
-  { id: "math", name: "Mathematics", emoji: "📐", count: "150+ Questions", progress: 0.79, color: "#6C3CE1", category: "Math" as SubjectFilter, locked: false },
-  { id: "science", name: "Science Lab", emoji: "🔬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science" as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts", emoji: "📖", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
-  { id: "history", name: "World History", emoji: "🏛️", count: "90+ Questions", progress: 0.12, color: "#F59E0B", category: "History" as SubjectFilter, locked: false },
-  { id: "logic", name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon", progress: 0, color: "#9090B8", category: "Logic" as SubjectFilter, locked: true },
-  { id: "art", name: "Creative Arts", emoji: "🎨", count: "Coming soon", progress: 0, color: "#B0B0D0", category: "Art" as SubjectFilter, locked: true },
+  { id: "math", name: "Mathematics", emoji: "ð", count: "150+ Questions", progress: 0.79, color: "#4A8ED4", category: "Math" as SubjectFilter, locked: false },
+  { id: "science", name: "Science Lab", emoji: "ð¬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science" as SubjectFilter, locked: false },
+  { id: "language", name: "Language Arts", emoji: "ð", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
+  { id: "history", name: "World History", emoji: "ðï¸", count: "90+ Questions", progress: 0.12, color: "#F59E0B", category: "History" as SubjectFilter, locked: false },
+  { id: "logic", name: "Logic & Puzzles", emoji: "ð§©", count: "Coming soon", progress: 0, color: "#9090B8", category: "Logic" as SubjectFilter, locked: true },
+  { id: "art", name: "Creative Arts", emoji: "ð¨", count: "Coming soon", progress: 0, color: "#B0B0D0", category: "Art" as SubjectFilter, locked: true },
 ];
 
 const ACTIVITY = [
-  { id: "a1", emoji: "📐", name: "Calculus Integration", chapter: "Chapter 3", subject: "Mathematics", time: "2 hours ago", status: "done" },
-  { id: "a2", emoji: "⚗️", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics", time: "5 hours ago", status: "in-progress" },
-  { id: "a3", emoji: "📝", name: "Essay Structure Basics", chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday", status: "new" },
+  { id: "a1", emoji: "ð", name: "Calculus Integration", chapter: "Chapter 3", subject: "Mathematics", time: "2 hours ago", status: "done" },
+  { id: "a2", emoji: "âï¸", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics", time: "5 hours ago", status: "in-progress" },
+  { id: "a3", emoji: "ð", name: "Essay Structure Basics", chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday", status: "new" },
 ];
 
 const NAV_ITEMS = [
-  { id: "home", label: "Home", emoji: "🏠" },
-  { id: "explore", label: "Explore", emoji: "🔍" },
-  { id: "progress", label: "Progress", emoji: "📈" },
-  { id: "profile", label: "Profile", emoji: "👤" },
+  { id: "home", label: "Home", emoji: "ð " },
+  { id: "explore", label: "Explore", emoji: "ð" },
+  { id: "progress", label: "Progress", emoji: "ð" },
+  { id: "profile", label: "Profile", emoji: "ð¤" },
 ];
 const NAV_MORE = [
-  { id: "leaderboard", label: "Leaderboard", emoji: "🏆" },
-  { id: "settings", label: "Settings", emoji: "⚙️" },
+  { id: "leaderboard", label: "Leaderboard", emoji: "ð" },
+  { id: "settings", label: "Settings", emoji: "âï¸" },
 ];
 
-// ─── Sidebar ─────────────────────────────────────────────────────
+// âââ Sidebar âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) => void }) {
   const u = MOCK_USER;
@@ -92,7 +92,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
     <View style={s.sidebar}>
       {/* Brand */}
       <View style={s.brand}>
-        <View style={s.brandIco}><Text style={s.brandIcoTxt}>✦</Text></View>
+        <View style={s.brandIco}><Text style={s.brandIcoTxt}>â¦</Text></View>
         <Text style={s.brandName}>EduApp</Text>
       </View>
 
@@ -109,7 +109,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
         </View>
 
         <View style={s.lvlPill}>
-          <Text style={s.lvlTxt}>⭐ Level {u.level}</Text>
+          <Text style={s.lvlTxt}>â­ Level {u.level}</Text>
         </View>
 
         <View style={s.xpRow}>
@@ -161,7 +161,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
             <Text style={s.statSub}>Keep it up!</Text>
           </View>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>🔥 {MOCK_USER.streak}</Text>
+            <Text style={s.statVal}>ð¥ {MOCK_USER.streak}</Text>
             <Text style={s.statUnit}>days</Text>
           </View>
         </View>
@@ -180,7 +180,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
   );
 }
 
-// ─── Hero Banner ─────────────────────────────────────────────────
+// âââ Hero Banner âââââââââââââââââââââââââââââââââââââââââââââââââ
 
 function HeroBanner() {
   const h = MOCK_HERO;
@@ -193,11 +193,11 @@ function HeroBanner() {
       {/* Left content */}
       <View style={s.heroLeft}>
         <View>
-          <Text style={s.heroTag}>📚 {h.tag.toUpperCase()}</Text>
+          <Text style={s.heroTag}>ð {h.tag.toUpperCase()}</Text>
           <Text style={s.heroTitle}>{h.title}</Text>
           <Text style={s.heroSub}>{h.subtitle}</Text>
           <View style={s.heroChips}>
-            {[`⏱ ${h.timeLabel}`, `● ${h.difficulty}`, `✦ ${h.xpReward}`].map((c) => (
+            {[`â± ${h.timeLabel}`, `â ${h.difficulty}`, `â¦ ${h.xpReward}`].map((c) => (
               <View key={c} style={[s.heroChip, c.includes("HARD") && s.heroChipHard]}>
                 <Text style={s.heroChipTxt}>{c}</Text>
               </View>
@@ -210,7 +210,7 @@ function HeroBanner() {
           </View>
           <Text style={s.heroPct}>{Math.round(h.progress * 100)}%</Text>
           <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
-            <Text style={s.heroCtaTxt}>Continue →</Text>
+            <Text style={s.heroCtaTxt}>Continue â</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -226,7 +226,7 @@ function HeroBanner() {
   );
 }
 
-// ─── Subject grid (3-col) ────────────────────────────────────────
+// âââ Subject grid (3-col) ââââââââââââââââââââââââââââââââââââââââ
 
 function SubjectGrid({ filter }: { filter: SubjectFilter }) {
   const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
@@ -254,7 +254,7 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
                 <View style={[s.subPFill, { width: `${Math.round(item.progress * 100)}%` as any, backgroundColor: item.color }]} />
               </View>
             ) : (
-              <Text style={s.lockLbl}>🔒 LOCKED</Text>
+              <Text style={s.lockLbl}>ð LOCKED</Text>
             )}
           </View>
         </TouchableOpacity>
@@ -263,7 +263,7 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
   );
 }
 
-// ─── Activity table ───────────────────────────────────────────────
+// âââ Activity table âââââââââââââââââââââââââââââââââââââââââââââââ
 
 const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }> = {
   done: { bg: "#D1FAE5", color: "#065F46", label: "Answered" },
@@ -272,9 +272,9 @@ const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }>
 };
 
 const ICON_BG: Record<string, string> = {
-  "📐": "#F0E8FF",
-  "⚗️": "#DFF7F4",
-  "📝": "#FFE8EC",
+  "ð": "#F0E8FF",
+  "âï¸": "#DFF7F4",
+  "ð": "#FFE8EC",
 };
 
 function ActivityTable() {
@@ -314,7 +314,7 @@ function ActivityTable() {
   );
 }
 
-// ─── Main Screen ─────────────────────────────────────────────────
+// âââ Main Screen âââââââââââââââââââââââââââââââââââââââââââââââââ
 
 export default function HomeDesktopScreen() {
   const [activeNav, setActiveNav] = useState("home");
@@ -326,7 +326,7 @@ export default function HomeDesktopScreen() {
 
   return (
     <View style={s.root}>
-      {/* ── macOS title bar ── */}
+      {/* ââ macOS title bar ââ */}
       <View style={s.titleBar}>
         <View style={s.trafficLights}>
           <View style={[s.tl, { backgroundColor: "#FF5F57" }]} />
@@ -334,19 +334,19 @@ export default function HomeDesktopScreen() {
           <View style={[s.tl, { backgroundColor: "#28C840" }]} />
         </View>
         <View style={s.titleMid}>
-          <View style={s.titleIco}><Text style={s.titleIcoTxt}>✦</Text></View>
-          <Text style={s.titleName}>EduApp · Home</Text>
+          <View style={s.titleIco}><Text style={s.titleIcoTxt}>â¦</Text></View>
+          <Text style={s.titleName}>EduApp Â· Home</Text>
         </View>
         <View style={s.titleRight}>
           <Text style={s.titleTime}>9:41 AM</Text>
           <TouchableOpacity style={s.titleBell}>
-            <Text style={{ fontSize: 13 }}>🔔</Text>
+            <Text style={{ fontSize: 13 }}>ð</Text>
             {MOCK_USER.notifications > 0 && <View style={s.titleBellDot} />}
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* ── App shell ── */}
+      {/* ââ App shell ââ */}
       <View style={s.shell}>
         <Sidebar activeNav={activeNav} onNav={setActiveNav} />
 
@@ -355,14 +355,14 @@ export default function HomeDesktopScreen() {
           {/* Greeting + search */}
           <View style={s.topBar}>
             <View>
-              <Text style={s.greetTitle}>{greeting}, Alexandra! 👋</Text>
-              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak — keep going!</Text>
+              <Text style={s.greetTitle}>{greeting}, Alexandra! ð</Text>
+              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak â keep going!</Text>
             </View>
             <View style={s.searchBox}>
-              <Text style={{ fontSize: 14, opacity: 0.4 }}>🔍</Text>
+              <Text style={{ fontSize: 14, opacity: 0.4 }}>ð</Text>
               <TextInput
                 style={s.searchInput}
-                placeholder="Search subjects, topics…"
+                placeholder="Search subjects, topicsâ¦"
                 placeholderTextColor={colors.textMuted}
                 value={search}
                 onChangeText={setSearch}
@@ -376,7 +376,7 @@ export default function HomeDesktopScreen() {
           {/* Explore */}
           <View style={s.secHdr}>
             <Text style={s.secTitle}>Explore Subjects</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all →</Text></TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
           </View>
 
           {/* Filter pills */}
@@ -393,7 +393,7 @@ export default function HomeDesktopScreen() {
           {/* Activity */}
           <View style={[s.secHdr, { marginTop: spacing.lg }]}>
             <Text style={s.secTitle}>Recent Activity</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all →</Text></TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
           </View>
 
           <ActivityTable />
@@ -405,7 +405,7 @@ export default function HomeDesktopScreen() {
   );
 }
 
-// ─── Styles ─────────────────────────────────────────────────────
+// âââ Styles âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 const SIDEBAR_W = 210;
 
@@ -477,7 +477,7 @@ const s = StyleSheet.create({
 
   // User card
   userCard: {
-    backgroundColor: "#F3E8FF",
+    backgroundColor: "#EBF4FF",
     borderRadius: radius.lg,
     padding: 13,
     marginBottom: 14,
@@ -504,7 +504,7 @@ const s = StyleSheet.create({
   xpRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 5 },
   xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: colors.violet },
   xpRowPct: { fontSize: 10, color: colors.textMuted },
-  xpTrack: { height: 7, backgroundColor: "#DDD0FF", borderRadius: radius.pill, overflow: "hidden" },
+  xpTrack: { height: 7, backgroundColor: "#BDD4FF", borderRadius: radius.pill, overflow: "hidden" },
   xpFill: { height: "100%", backgroundColor: colors.violet, borderRadius: radius.pill },
   coinRow: {
     flexDirection: "row",
@@ -561,7 +561,7 @@ const s = StyleSheet.create({
   main: { flex: 1 },
   mainContent: {
     padding: spacing.lg,
-    backgroundColor: "#F3E8FF",
+    backgroundColor: "#EBF4FF",
     minHeight: "100%" as any,
     gap: 20,
   },
@@ -580,7 +580,7 @@ const s = StyleSheet.create({
     gap: 9,
     backgroundColor: "#FFF",
     borderWidth: 1.5,
-    borderColor: "#DDD0FF",
+    borderColor: "#BDD4FF",
     borderRadius: 13,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -597,7 +597,7 @@ const s = StyleSheet.create({
 
   // Hero
   hero: {
-    backgroundColor: "#4A12CE",
+    backgroundColor: "#2B6CB0",
     borderRadius: 24,
     flexDirection: "row",
     overflow: "hidden",
@@ -652,7 +652,7 @@ const s = StyleSheet.create({
   filterRow: { gap: 7, paddingBottom: 14 },
   pill: {
     borderRadius: radius.pill, paddingHorizontal: 15, paddingVertical: 7,
-    backgroundColor: "#FFF", borderWidth: 2, borderColor: "#DDD0FF",
+    backgroundColor: "#FFF", borderWidth: 2, borderColor: "#BDD4FF",
   },
   pillActive: { backgroundColor: colors.violet, borderColor: colors.violet },
   pillTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: colors.textMuted },
