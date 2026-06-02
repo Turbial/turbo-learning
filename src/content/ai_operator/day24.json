@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "unit": "day24",
+  "title": "Day 24: Creativity & Innovation with AI",
+  "estMinutes": 30,
+  "steps": [
+    {
+      "id": "d24-info-1",
+      "type": "info",
+      "title": "Creativity & Innovation with AI",
+      "body": "The biggest myth about AI: it kills creativity.\n\nReality: AI is the most powerful creativity amplifier ever built. It doesn't replace your imagination \u2014 it feeds it.\n\nToday you'll learn how to use AI for brainstorming, breaking through creative blocks, design thinking, and generating content ideas at scale.\n\nLet's make AI your creative collaborator.",
+      "xp": 5
+    },
+    {
+      "id": "d24-highlight-1",
+      "type": "highlight",
+      "body": "Creativity isn't about having the first idea \u2014 it's about having the best idea after exploring many.\n\nAI can generate 50 ideas in seconds. Your job isn't to come up with all of them \u2014 it's to recognize the great ones and refine them. The operator's creative advantage: quantity enables quality.",
+      "highlights": [
+        "having the best idea after exploring many",
+        "generate 50 ideas in seconds",
+        "quantity enables quality"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d24-scenario-1",
+      "type": "scenario_card",
+      "title": "Scenario: The Empty Page Problem",
+      "body": "You're a content creator. You need to produce a 12-piece content calendar for next month. You've been staring at a blank page for 45 minutes.\n\nThe usual ideas feel stale. Client wants 'fresh.' Your brain is empty.\n\nWhat's your AI move?",
+      "xp": 5
+    },
+    {
+      "id": "d24-mc-1",
+      "type": "mc",
+      "question": "What's the best way to use AI when you have creative block?",
+      "options": [
+        "Ask AI to write everything for you and submit it as-is",
+        "Give AI your context (audience, goals, constraints) and ask for 20 rough ideas \u2014 then cherry-pick and refine",
+        "Wait for inspiration to strike naturally",
+        "Ask AI for one perfect idea and use it without changes"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That's outsourcing, not collaborating. The value is in the refinement, not the generation.",
+        "Yes! This is the operator approach: generate broadly, curate ruthlessly, refine brilliantly.",
+        "Inspiration is unreliable. AI can spark it on demand.",
+        "Perfect doesn't exist in the first draft. The magic is in iteration."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-example-1",
+      "type": "example",
+      "title": "The Creative Sprint Prompt",
+      "body": "Use this prompt to break out of any creative block:\n\n\"I need creative ideas for [project/topic]. Target audience: [description]. Constraints: [budget, tone, format, deadline, brand guidelines].\n\nGenerate 20 ideas. Group them into:\n- Safe bets (low risk, reliable)\n- Stretch goals (ambitious, high reward)\n- Wild cards (risky, potentially game-changing)\n\nFor each idea, give me:\n- One-line summary\n- Effort estimate (Low/Medium/High)\n- Potential impact (1-10)\n- Why it might work\"",
+      "xp": 5
+    },
+    {
+      "id": "d24-tf-1",
+      "type": "tf",
+      "question": "Using AI for brainstorming makes you less creative over time because you rely on it too much.",
+      "correct": false,
+      "feedback": [
+        "Correct. Research shows that AI-assisted brainstormers generate MORE original ideas on their own afterward \u2014 because they've practiced the pattern of divergent thinking.",
+        "Actually, studies suggest the opposite. Using AI as a brainstorming partner trains your brain to think more divergently. You learn the pattern of idea generation and apply it even without AI."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-fillblank-1",
+      "type": "fillblank",
+      "question": "In AI-powered creativity, the operator provides _____, and AI provides quantity.",
+      "answer": "direction",
+      "aliases": [
+        "context",
+        "constraints",
+        "strategy"
+      ],
+      "feedback": [
+        "Perfect. You steer, AI explores. Direction + quantity = creative partnership.",
+        "Close \u2014 think about what you provide that AI can't. Strategy, taste, direction."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-mc-2",
+      "type": "mc",
+      "question": "When using AI for design thinking, which step benefits most from AI assistance?",
+      "options": [
+        "Empathize \u2014 AI can't understand human emotions",
+        "Ideate \u2014 AI excels at generating a wide range of possibilities quickly",
+        "Prototype \u2014 AI can't build physical things",
+        "Test \u2014 only real users can test"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI can actually help with empathy too \u2014 by analyzing user feedback at scale. But you're right that deep emotional understanding is human.",
+        "Exactly. The ideation phase is where AI shines brightest. It can generate hundreds of possibilities across different angles, forcing you to think beyond your usual patterns.",
+        "AI can help with prototypes too \u2014 wireframes, copy, code snippets, data visualizations.",
+        "AI can help analyze test results and identify patterns in user behavior."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-chat-1",
+      "type": "chat",
+      "title": "Creative Sprint: 20 Ideas in 5 Minutes",
+      "body": "You need a content calendar for a fitness brand targeting busy professionals (25-45). The theme is 'Micro-workouts for macro results.'\n\nAsk AI to generate 10 content ideas across different formats (video, blog, social post, email). Then ask it to pick the top 3 and explain why.",
+      "prompt": "I need a content calendar for a fitness brand targeting busy professionals aged 25-45. Theme: 'Micro-workouts for macro results.' Generate 10 content ideas spread across formats (short video, blog post, social post, email). Then pick the top 3 and explain the strategic rationale for each.",
+      "xp": 20
+    },
+    {
+      "id": "d24-builder-1",
+      "type": "builder",
+      "title": "Build Your Creative Workflow",
+      "body": "Create a repeatable creative workflow using AI:\n\n1. Start with a constraint-setting prompt (problem, audience, boundaries)\n2. Ask for quantity (15-30 raw ideas)\n3. Curate with another prompt (rate each, categorize)\n4. Refine select ideas with targeted prompts\n5. Final polish\n\nBuild this as a reusable sequence and test it with a real creative problem.",
+      "deliverable": "A 5-step creative workflow template using AI as your creative partner.",
+      "xp": 25,
+      "fields": [
+        {
+          "id": "output",
+          "label": "Your work",
+          "type": "textarea",
+          "placeholder": "Write your response here..."
+        }
+      ],
+      "template": "Create a repeatable creative workflow using AI:\n\n1. Start with a constraint-setting prompt (problem, audience, boundaries)\n2. Ask for quantity (15-30 raw ideas)\n3. Curate with another prompt (rate each, categorize)\n4. Refine select ideas with targeted prompts\n5. Final polish\n\nBuild this as a reusable sequence and test it with a real creative problem."
+    },
+    {
+      "id": "d24-paste-capture-1",
+      "type": "paste_capture",
+      "title": "Paste Your Creative Workflow",
+      "body": "Paste your 5-step creative workflow. This becomes your go-to process when faced with creative block.",
+      "prompt": "Paste your AI creative workflow template. You'll use this whenever you need fresh ideas on demand.",
+      "xp": 10
+    },
+    {
+      "id": "d24-reflection-1",
+      "type": "reflection",
+      "title": "Creative Partnership, Not Replacement",
+      "body": "Think about a time you had creative block. How would having AI as a brainstorming partner have changed the outcome?\n\nWhat's one creative project you can tackle this week using your new AI workflow?",
+      "xp": 15
+    },
+    {
+      "id": "d24-quiz-1",
+      "type": "quiz",
+      "xp": 15,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple_choice",
+          "question": "What distinguishes an AI operator from an AI user in creative work?",
+          "options": [
+            "Operators use paid AI tools, users use free ones",
+            "Operators build repeatable creative workflows, users have one-off conversations",
+            "Operators don't need to be creative themselves",
+            "Users generate more ideas than operators"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": "d24-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "creative_innovation_operator"
+    },
+    {
+      "id": "d24-completion-1",
+      "type": "completion",
+      "title": "Day 24 Complete: Creativity & Innovation",
+      "body": "You've learned that AI doesn't replace creativity \u2014 it amplifies it. The operator's creative advantage: generate quantity, curate ruthlessly, refine brilliantly.\n\nKey takeaway: When you face a blank page, don't stare at it. Open AI, set your constraints, and ask for 20 ideas. Your best idea is probably in there.\n\nTomorrow: Productivity Systems with AI. Let's build systems that save you hours every day."
+    }
+  ]
+}

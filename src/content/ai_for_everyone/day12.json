@@ -3,7 +3,7 @@
     "program": "ai_for_everyone",
     "unitOrder": 12,
     "unitLabel": "Day 12",
-    "unitTitle": "AI Research — Find, Verify, Organize",
+    "unitTitle": "AI Research \u2014 Find, Verify, Organize",
     "lessonOrder": 1,
     "lessonTitle": "Research with AI",
     "minutes": 15
@@ -13,7 +13,7 @@
       "id": "d12_s1",
       "type": "info",
       "title": "Welcome to Day 12",
-      "body": "AI is incredible at research — if you use it right. Today you learn the research workflow: find information, cross-check it, and organize it into something useful.",
+      "body": "AI is incredible at research \u2014 if you use it right. Today you learn the research workflow: find information, cross-check it, and organize it into something useful.",
       "audioUrl": null,
       "primaryButton": "Let's research",
       "xp": 3
@@ -32,7 +32,7 @@
       "title": "The research workflow",
       "body": "Step 1: Ask AI for a broad overview. Step 2: Ask follow-up questions on specific areas. Step 3: Ask AI for sources and counterpoints. Step 4: Cross-check critical facts yourself. Step 5: Ask AI to organize everything into a summary.",
       "audioUrl": null,
-      "primaryButton": "Five steps — got it",
+      "primaryButton": "Five steps \u2014 got it",
       "xp": 3
     },
     {
@@ -49,7 +49,7 @@
       "correct": 1,
       "feedback": [
         "AI is not always wrong, but it is not always right either.",
-        "Exactly. AI hallucinates — it sounds convincing even when it invents facts.",
+        "Exactly. AI hallucinates \u2014 it sounds convincing even when it invents facts.",
         "Cross-checking is essential for any important research.",
         "Modern AI tools can search the internet, but the hallucination risk remains."
       ],
@@ -136,7 +136,7 @@
       "title": "Organizing research",
       "body": "After you have the information, ask AI: 'Organize this into a short briefing document. Include: key findings, what I should verify, what questions are still open, and my recommended next steps.' This turns research into action.",
       "audioUrl": null,
-      "primaryButton": "Research → action",
+      "primaryButton": "Research \u2192 action",
       "xp": 3
     },
     {
@@ -214,7 +214,11 @@
           "type": "fillblank",
           "question": "The process of verifying AI's claims against other sources is called ______.",
           "answer": "cross-checking",
-          "aliases": ["verification", "fact checking", "fact-checking"]
+          "aliases": [
+            "verification",
+            "fact checking",
+            "fact-checking"
+          ]
         }
       ],
       "xp": 15
@@ -222,9 +226,13 @@
     {
       "id": "d12_s16",
       "type": "completion",
-      "title": "Day 12 complete — Research Pro",
+      "title": "Day 12 complete \u2014 Research Pro",
       "body": "You now know how to research with AI, verify critical claims, and organize findings. Tomorrow: using AI to prepare for meetings, calls, and interviews.",
       "primaryButton": "See you tomorrow"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "research",
+  "title": "Day 12: Research with AI",
+  "estMinutes": 25
 }

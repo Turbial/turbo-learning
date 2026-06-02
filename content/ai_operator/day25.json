@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "unit": "day25",
+  "title": "Day 25: Productivity Systems with AI",
+  "estMinutes": 30,
+  "steps": [
+    {
+      "id": "d25-info-1",
+      "type": "info",
+      "title": "Productivity Systems with AI",
+      "body": "Today is about reclaiming your time.\n\nYou've learned individual AI skills. Now you build systems \u2014 connected workflows that save you hours every single day.\n\nWe'll cover: AI task management, smart scheduling, email automation, meeting optimization, and workflow design. By the end of today, you'll have a productivity system that runs on AI.",
+      "xp": 5
+    },
+    {
+      "id": "d25-highlight-1",
+      "type": "highlight",
+      "body": "Productivity isn't about doing more \u2014 it's about doing what matters faster.\n\nThe average knowledge worker spends 28% of their week on email, 12% on scheduling, and 15% on status meetings. That's 55% of the week on overhead. AI can cut that in half.",
+      "highlights": [
+        "doing what matters faster",
+        "cut that in half",
+        "overhead"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d25-scenario-1",
+      "type": "scenario_card",
+      "title": "Scenario: The Overloaded Operator",
+      "body": "Alex gets 80 emails a day. Has 5 recurring meetings that could be emails. Spends 30 minutes every morning organizing a task list. Misses 2 deadlines per month because things fall through the cracks.\n\nAlex has access to AI but isn't using it systematically. What three things should Alex automate first for the biggest time savings?",
+      "xp": 5
+    },
+    {
+      "id": "d25-mc-1",
+      "type": "mc",
+      "question": "What's the highest-impact AI automation Alex should set up first?",
+      "options": [
+        "Automate all meeting scheduling \u2014 let AI negotiate calendar slots",
+        "Build an email triage system \u2014 AI categorizes, prioritizes, and drafts replies",
+        "Build a full CRM from scratch",
+        "Ask AI to write a novel in Alex's free time"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Scheduling is good, but email consumes more time for most knowledge workers.",
+        "Yes! Email triage is the single highest-ROI automation for knowledge workers. 80 emails -> AI filters, prioritizes, drafts. You review 10-15 and send.",
+        "Over-engineering. Start with the biggest time drain first.",
+        "Let's save the novel for creative hour."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-example-1",
+      "type": "example",
+      "title": "Email Triage System Prompt",
+      "body": "Here's a system for AI-powered email management:\n\n\"I have [number] unread emails. Categories: Client (urgent), Internal (review), Newsletter (read later), Spam (delete).\n\nFor each email, extract:\n1. Sender and subject\n2. Category\n3. Urgency (High/Medium/Low)\n4. Required action (Reply / Delegate / Archive / Act)\n5. Draft a 2-sentence reply if action is 'Reply'\n6. Flag anything that needs my attention today\"\n\nRun this every morning. Review in 10 minutes instead of 60.",
+      "xp": 5
+    },
+    {
+      "id": "d25-tf-1",
+      "type": "tf",
+      "question": "The best AI productivity systems run autonomously without any human review.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI productivity is about reducing overhead, not removing yourself. Human review catches context, nuance, and judgment calls.",
+        "Think about it: AI can categorize and draft, but who decides what actually matters? Human judgment is the final filter in any productivity system."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-fillblank-1",
+      "type": "fillblank",
+      "question": "The operator approach to productivity: 'Don't automate everything. Automate the _____ 80%.'",
+      "answer": "repetitive",
+      "aliases": [
+        "routine",
+        "predictable",
+        "boring"
+      ],
+      "feedback": [
+        "Perfect. Focus automation on the predictable, repetitive work. Save your energy for the decisions only you can make.",
+        "Close \u2014 think about what type of work is safest to automate and gives the biggest time savings."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-mc-2",
+      "type": "mc",
+      "question": "When designing AI-optimized meetings, which approach saves the most time?",
+      "options": [
+        "Cancel all meetings permanently",
+        "Use AI to generate agendas, take real-time notes, and produce action item summaries \u2014 making meetings shorter and more effective",
+        "Record everything and never attend live",
+        "Only have standup meetings"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Meetings serve a purpose. Canceling everything isn't practical.",
+        "Exactly. AI-enhanced meetings are shorter and more productive. Pre-read agenda -> focused meeting -> AI-generated action items. No more 'what did we decide?'",
+        "Asynchronous has its place, but some collaboration needs live discussion.",
+        "Different meetings need different formats. AI can optimize all of them."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-chat-1",
+      "type": "chat",
+      "title": "Design Your Productivity System",
+      "body": "You have 5 hours of daily deep work, 2 hours of meetings, 1 hour of email, 30 min of planning, 30 min of misc.\n\nAsk AI to design an optimal daily schedule that maximizes deep work time while keeping stakeholders happy. Ask it where AI can save you the most time.",
+      "prompt": "Design an optimal daily work schedule given: deep work 5h (needs 2h uninterrupted blocks), meetings 2h, email 1h, planning 30m, misc 30m. Total workday is 9h. Maximize deep work output. Identify tasks AI can handle. Propose 3 schedule options.",
+      "xp": 20
+    },
+    {
+      "id": "d25-builder-1",
+      "type": "builder",
+      "title": "Build Your AI Productivity System",
+      "body": "Design a personal productivity system with these AI-powered routines:\n\n1. Morning triage \u2014 AI reviews email, calendar, and priorities (10 min)\n2. Deep work blocks \u2014 AI protects your focus time (no interruptions)\n3. Meeting optimization \u2014 AI agendas and action items\n4. End-of-day \u2014 AI summarizes progress, preps tomorrow\n5. Weekly review \u2014 AI analyzes what worked, suggests improvements\n\nBuild each as a prompt template. Chain them into a daily workflow.",
+      "deliverable": "A complete daily AI productivity workflow with 5 reusable prompt templates.",
+      "xp": 25,
+      "fields": [
+        {
+          "id": "output",
+          "label": "Your work",
+          "type": "textarea",
+          "placeholder": "Write your response here..."
+        }
+      ],
+      "template": "Design a personal productivity system with these AI-powered routines:\n\n1. Morning triage \u2014 AI reviews email, calendar, and priorities (10 min)\n2. Deep work blocks \u2014 AI protects your focus time (no interruptions)\n3. Meeting optimization \u2014 AI agendas and action items\n4. End-of-day \u2014 AI summarizes progress, preps tomorrow\n5. Weekly review \u2014 AI analyzes what worked, suggests improvements\n\nBuild each as a prompt template. Chain them into a daily workflow."
+    },
+    {
+      "id": "d25-paste-capture-1",
+      "type": "paste_capture",
+      "title": "Paste Your Morning Triage Prompt",
+      "body": "Paste your morning triage prompt \u2014 the one that sets up your entire productive day.",
+      "prompt": "Paste your morning triage prompt. This is the key that unlocks your daily productivity system.",
+      "xp": 10
+    },
+    {
+      "id": "d25-reflection-1",
+      "type": "reflection",
+      "title": "Hours Saved, Life Gained",
+      "body": "Calculate how many hours per week AI productivity systems could save you.\n\nEmail: ___ hours\nScheduling: ___ hours\nMeeting prep/follow-up: ___ hours\nTask management: ___ hours\nOther: ___ hours\n\nWhat would you do with those reclaimed hours?",
+      "xp": 15
+    },
+    {
+      "id": "d25-quiz-1",
+      "type": "quiz",
+      "xp": 15,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple_choice",
+          "question": "What's the correct mindset for AI-powered productivity systems?",
+          "options": [
+            "Automate everything, trust AI completely, remove yourself from the loop",
+            "Identify the most repetitive 80% of overhead tasks, automate those with AI, keep human judgment on the critical 20%",
+            "Only use AI for creative work, never for admin",
+            "Build one massive automation that does everything at once"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": "d25-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "productivity_systems_operator"
+    },
+    {
+      "id": "d25-completion-1",
+      "type": "completion",
+      "title": "Day 25 Complete: Productivity Systems",
+      "body": "You've built a productivity system powered by AI. Email triage, smart scheduling, meeting optimization \u2014 these systems will save you hours every week.\n\nThe key insight: productivity isn't about doing more. It's about automating the repetitive 80% so you can focus on the decisions that matter.\n\nTomorrow: Learning & Development with AI. Time to make AI your personal tutor and career accelerator."
+    }
+  ]
+}

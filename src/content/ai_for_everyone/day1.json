@@ -40,9 +40,9 @@
       ],
       "correct": 1,
       "feedback": [
-        "Not quite — AI can sound sure of itself and still be wrong.",
+        "Not quite \u2014 AI can sound sure of itself and still be wrong.",
         "Exactly. It is most useful when you give it clear instructions.",
-        "Anyone can use AI today — no coding required.",
+        "Anyone can use AI today \u2014 no coding required.",
         "AI can help you decide, but the decision should stay yours."
       ],
       "xp": 10
@@ -54,7 +54,7 @@
       "question": "AI answers are always correct, so you never need to double-check them.",
       "correct": false,
       "feedback": [
-        "Careful — that is the trap. AI can be wrong even when it sounds confident.",
+        "Careful \u2014 that is the trap. AI can be wrong even when it sounds confident.",
         "Right. Useful, but always worth a sanity check."
       ],
       "xp": 5
@@ -63,7 +63,7 @@
       "id": "d1_s5",
       "type": "scenario_card",
       "title": "Imagine this",
-      "body": "It is Monday and your week feels like a lot — work, errands, family, and a pile of messages. Instead of carrying it all in your head, you decide to ask AI to turn the chaos into a simple plan.",
+      "body": "It is Monday and your week feels like a lot \u2014 work, errands, family, and a pile of messages. Instead of carrying it all in your head, you decide to ask AI to turn the chaos into a simple plan.",
       "audioUrl": null,
       "primaryButton": "Continue",
       "xp": 3
@@ -168,7 +168,7 @@
       "id": "d1_s13",
       "type": "info",
       "title": "Why that matters",
-      "body": "If the answer felt generic, the problem usually was not the tool — your prompt needed more detail. Noticing that is the whole skill.",
+      "body": "If the answer felt generic, the problem usually was not the tool \u2014 your prompt needed more detail. Noticing that is the whole skill.",
       "audioUrl": null,
       "primaryButton": "Continue",
       "xp": 3
@@ -209,7 +209,7 @@
       "question": "Tell me for certain whether I have a serious medical condition.",
       "correct": "notideal",
       "feedback": [
-        "Be careful here — this one needs a professional.",
+        "Be careful here \u2014 this one needs a professional.",
         "Right. For a real diagnosis, see a doctor; AI can only give general information."
       ],
       "xp": 5
@@ -227,7 +227,7 @@
         "doctor"
       ],
       "feedback": [
-        "Exactly — verify important things with a professional.",
+        "Exactly \u2014 verify important things with a professional.",
         "Close. The key idea: check with a professional for important decisions."
       ],
       "xp": 5
@@ -315,8 +315,12 @@
       "id": "d1_s24",
       "type": "completion",
       "title": "Day 1 complete",
-      "body": "You now know what AI is, where it helps, where it has limits, and how to ask a genuinely useful question — and you built and tested one for real. See you tomorrow.",
+      "body": "You now know what AI is, where it helps, where it has limits, and how to ask a genuinely useful question \u2014 and you built and tested one for real. See you tomorrow.",
       "primaryButton": "Go to my journey"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "awakening",
+  "title": "Day 1: Your AI Awakening",
+  "estMinutes": 30
 }

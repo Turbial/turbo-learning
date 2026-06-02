@@ -5,7 +5,7 @@
     "unitLabel": "Day 8",
     "unitTitle": "Building Your AI Toolkit",
     "lessonOrder": 1,
-    "lessonTitle": "Week Two — Building Phase",
+    "lessonTitle": "Week Two \u2014 Building Phase",
     "minutes": 15
   },
   "steps": [
@@ -49,7 +49,7 @@
       "correct": 1,
       "feedback": [
         "Even good templates need tweaking, but they save you the hard part.",
-        "Exactly. The thinking is done — you just fill in the blanks.",
+        "Exactly. The thinking is done \u2014 you just fill in the blanks.",
         "Templates can and should be adjusted as you learn.",
         "AI works fine without one, but templates make you faster."
       ],
@@ -101,8 +101,8 @@
     {
       "id": "d8_s8",
       "type": "info",
-      "title": "Beyond text — your AI console",
-      "body": "Chat interfaces are fine, but the real unlock is building your own console of AI tools. A 'console' just means having your go-to AI apps and sites ready in one place — like bookmarks for different problems.",
+      "title": "Beyond text \u2014 your AI console",
+      "body": "Chat interfaces are fine, but the real unlock is building your own console of AI tools. A 'console' just means having your go-to AI apps and sites ready in one place \u2014 like bookmarks for different problems.",
       "audioUrl": null,
       "primaryButton": "Show me",
       "xp": 3
@@ -191,7 +191,10 @@
           "type": "fillblank",
           "question": "A set of go-to AI tools arranged by use case is called an AI ______.",
           "answer": "console",
-          "aliases": ["toolkit", "dashboard"]
+          "aliases": [
+            "toolkit",
+            "dashboard"
+          ]
         }
       ],
       "xp": 15
@@ -199,12 +202,20 @@
     {
       "id": "d8_s14",
       "type": "streak_commitment",
-      "commitOptions": [14, 21, 28]
+      "commitOptions": [
+        14,
+        21,
+        28
+      ]
     },
     {
       "id": "d8_s15",
       "type": "reminder_setup",
-      "reminderOptions": ["Morning", "Afternoon", "Evening"]
+      "reminderOptions": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ]
     },
     {
       "id": "d8_s16",
@@ -214,9 +225,13 @@
     {
       "id": "d8_s17",
       "type": "completion",
-      "title": "Day 8 complete — Template Builder",
+      "title": "Day 8 complete \u2014 Template Builder",
       "body": "You built your first reusable template and designed your AI console. Tomorrow you will learn how to chain tools together into real workflows.",
       "primaryButton": "See you tomorrow"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "console",
+  "title": "Day 8: Your AI Console",
+  "estMinutes": 25
 }

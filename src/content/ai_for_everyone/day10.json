@@ -13,7 +13,7 @@
       "id": "d10_s1",
       "type": "info",
       "title": "Welcome to Day 10",
-      "body": "You have templates. You have workflows. Today you learn automation — setting things up so AI does the routine work without you having to think about it.",
+      "body": "You have templates. You have workflows. Today you learn automation \u2014 setting things up so AI does the routine work without you having to think about it.",
       "audioUrl": null,
       "primaryButton": "Automate me",
       "xp": 3
@@ -31,7 +31,7 @@
       "id": "d10_s3",
       "type": "info",
       "title": "The automation mindset",
-      "body": "Ask yourself: 'Am I doing the same thing more than 3 times?' If yes, automate it. Not with code — with AI prompts you have already designed. The template from Day 8? That is automation.",
+      "body": "Ask yourself: 'Am I doing the same thing more than 3 times?' If yes, automate it. Not with code \u2014 with AI prompts you have already designed. The template from Day 8? That is automation.",
       "audioUrl": null,
       "primaryButton": "I have been automating without knowing it",
       "xp": 3
@@ -57,7 +57,7 @@
       ],
       "correct": 1,
       "feedback": [
-        "Strategy needs your human judgment — use AI for research, but not the plan itself.",
+        "Strategy needs your human judgment \u2014 use AI for research, but not the plan itself.",
         "Exactly. Repetitive tasks are what automation is made for.",
         "Some conversations are best kept entirely human.",
         "Moral decisions should stay with you."
@@ -104,7 +104,7 @@
       "title": "The 80/20 rule of automation",
       "body": "Do not aim for 100% automation. Aim for 80%. Let AI handle the bulk, review the output, and make adjustments. 80% automated, 20% you is the sweet spot.",
       "audioUrl": null,
-      "primaryButton": "80/20 — got it",
+      "primaryButton": "80/20 \u2014 got it",
       "xp": 3
     },
     {
@@ -207,7 +207,10 @@
           "type": "fillblank",
           "question": "Tasks you do repeatedly are called ______ tasks.",
           "answer": "repetitive",
-          "aliases": ["routine", "recurring"]
+          "aliases": [
+            "routine",
+            "recurring"
+          ]
         }
       ],
       "xp": 15
@@ -215,9 +218,13 @@
     {
       "id": "d10_s15",
       "type": "completion",
-      "title": "Day 10 complete — Automation Pro",
+      "title": "Day 10 complete \u2014 Automation Pro",
       "body": "You now know how to spot automation opportunities and build hands-free AI workflows. Tomorrow: using AI to collaborate with others.",
       "primaryButton": "See you tomorrow"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "automate",
+  "title": "Day 10: Automate Everything",
+  "estMinutes": 25
 }

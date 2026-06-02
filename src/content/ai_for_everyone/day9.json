@@ -13,7 +13,7 @@
       "id": "d9_s1",
       "type": "info",
       "title": "Welcome to Day 9",
-      "body": "Yesterday you built a template. Today you learn how to chain tools together. One AI to summarize a document, another to draft a reply, another to check the tone — that is a workflow.",
+      "body": "Yesterday you built a template. Today you learn how to chain tools together. One AI to summarize a document, another to draft a reply, another to check the tone \u2014 that is a workflow.",
       "audioUrl": null,
       "primaryButton": "Let's chain it up",
       "xp": 3
@@ -22,7 +22,7 @@
       "id": "d9_s2",
       "type": "example",
       "title": "A workflow example",
-      "prompt": "Here is a long article about [topic]. First, summarize it in 5 bullet points. Then, based on that summary, draft an email to my team explaining the key takeaways. Finally, check the email tone — is it clear and professional?",
+      "prompt": "Here is a long article about [topic]. First, summarize it in 5 bullet points. Then, based on that summary, draft an email to my team explaining the key takeaways. Finally, check the email tone \u2014 is it clear and professional?",
       "primaryButton": "That is three steps in one",
       "xp": 5
     },
@@ -127,7 +127,7 @@
       "id": "d9_s10",
       "type": "info",
       "title": "Pro tip: Copy-paste between AIs",
-      "body": "Sometimes one AI is better at step 1, another is better at step 3. Do not feel locked in. Take the output from one tool and paste it into another. Mixing tools is not cheating — it is strategy.",
+      "body": "Sometimes one AI is better at step 1, another is better at step 3. Do not feel locked in. Take the output from one tool and paste it into another. Mixing tools is not cheating \u2014 it is strategy.",
       "audioUrl": null,
       "primaryButton": "Good to know",
       "xp": 3
@@ -174,7 +174,7 @@
       "question": "Summarize a client email, draft a response, and check the tone.",
       "correct": "good",
       "feedback": [
-        "Yes — this is a textbook multi-step workflow.",
+        "Yes \u2014 this is a textbook multi-step workflow.",
         "Exactly. Each output feeds the next step."
       ],
       "xp": 5
@@ -218,7 +218,10 @@
           "type": "fillblank",
           "question": "Breaking a complex task into smaller AI steps is called building a ______.",
           "answer": "workflow",
-          "aliases": ["chain", "pipeline"]
+          "aliases": [
+            "chain",
+            "pipeline"
+          ]
         }
       ],
       "xp": 15
@@ -226,9 +229,13 @@
     {
       "id": "d9_s16",
       "type": "completion",
-      "title": "Day 9 complete — Workflow Builder",
+      "title": "Day 9 complete \u2014 Workflow Builder",
       "body": "You now know how to chain AI tools into real workflows. Tomorrow you will learn how to use AI to automate repetitive tasks.",
       "primaryButton": "See you tomorrow"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "workflow",
+  "title": "Day 9: Your First AI Workflow",
+  "estMinutes": 25
 }

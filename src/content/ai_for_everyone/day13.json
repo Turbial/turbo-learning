@@ -3,7 +3,7 @@
     "program": "ai_for_everyone",
     "unitOrder": 13,
     "unitLabel": "Day 13",
-    "unitTitle": "AI-Powered Preparation — Meetings, Calls, Interviews",
+    "unitTitle": "AI-Powered Preparation \u2014 Meetings, Calls, Interviews",
     "lessonOrder": 1,
     "lessonTitle": "Preparation with AI",
     "minutes": 15
@@ -13,7 +13,7 @@
       "id": "d13_s1",
       "type": "info",
       "title": "Welcome to Day 13",
-      "body": "One of the most practical uses of AI: preparation. Meetings, calls, interviews, difficult conversations — AI can help you prepare in minutes instead of hours.",
+      "body": "One of the most practical uses of AI: preparation. Meetings, calls, interviews, difficult conversations \u2014 AI can help you prepare in minutes instead of hours.",
       "audioUrl": null,
       "primaryButton": "I need this",
       "xp": 3
@@ -39,7 +39,7 @@
       ],
       "correct": 1,
       "feedback": [
-        "AI cannot attend for you — but it can make you much more effective.",
+        "AI cannot attend for you \u2014 but it can make you much more effective.",
         "Exactly. Preparation separates a good meeting from a wasted one.",
         "AI can help organize, but your calendar is yours.",
         "AI can help you stay focused, which can make meetings more efficient."
@@ -134,7 +134,7 @@
       "question": "You should only use AI for formal business meetings, not for personal conversations.",
       "correct": false,
       "feedback": [
-        "AI works for any important conversation — personal or professional.",
+        "AI works for any important conversation \u2014 personal or professional.",
         "Right. Whether it is a difficult chat with a friend or a client meeting, prep helps."
       ],
       "xp": 5
@@ -214,7 +214,11 @@
           "type": "fillblank",
           "question": "Practicing a conversation with AI playing the other person is called ______.",
           "answer": "role-play",
-          "aliases": ["role play", "roleplaying", "role-playing"]
+          "aliases": [
+            "role play",
+            "roleplaying",
+            "role-playing"
+          ]
         }
       ],
       "xp": 15
@@ -222,9 +226,13 @@
     {
       "id": "d13_s16",
       "type": "completion",
-      "title": "Day 13 complete — Preparation Pro",
-      "body": "You can now use AI to prepare for any important conversation. Tomorrow: your final day of Week 2 — building your personal AI system.",
+      "title": "Day 13 complete \u2014 Preparation Pro",
+      "body": "You can now use AI to prepare for any important conversation. Tomorrow: your final day of Week 2 \u2014 building your personal AI system.",
       "primaryButton": "One more day!"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "prepare",
+  "title": "Day 13: Prepare with AI",
+  "estMinutes": 25
 }

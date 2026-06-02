@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "unit": "day15",
+  "title": "Day 15: AI for Business Operations",
+  "estMinutes": 24,
+  "steps": [
+    {
+      "id": "d15-info-1",
+      "type": "info",
+      "title": "Welcome to Day 15: AI for Business Operations",
+      "body": "Week 3 starts here — and this is where the operator mindset becomes a business multiplier.\n\nBusiness operations is the engine room of any organization: workflows, data, reporting, customer support, monitoring. It's also where AI delivers the fastest, most measurable ROI.\n\nToday you'll learn how to:\n• Automate repetitive workflows with AI\n• Build data analysis pipelines that run on schedule\n• Create customer support bots that actually help\n• Set up monitoring and alerting systems\n• Design operations dashboards that give you real-time visibility\n\nBy the end of today, you'll see every operational bottleneck as an automation opportunity.",
+      "xp": 5
+    },
+    {
+      "id": "d15-highlight-1",
+      "type": "highlight",
+      "body": "Five operations domains where AI delivers immediate value:\n\n⚙️ WORKFLOW AUTOMATION — Chain AI actions to process orders, approve requests, route tickets, generate reports. Rules you follow manually become automated sequences.\n\n📊 DATA ANALYSIS PIPELINES — AI reads raw data, identifies trends, flags anomalies, and produces summaries. Set it up once; it runs on every new batch.\n\n💬 CUSTOMER SUPPORT BOTS — AI handles tier-1 inquiries (password resets, order status, FAQs), escalates complex issues to humans, and learns from every interaction.\n\n🔔 MONITORING & ALERTING — AI watches your systems and metrics, detects patterns humans miss, and alerts you before small problems become big ones.\n\n📈 OPERATIONS DASHBOARDS — AI aggregates data from multiple sources into a single view: KPIs, trends, bottlenecks, recommendations. Your business health at a glance.",
+      "highlights": [
+        "WORKFLOW AUTOMATION",
+        "DATA ANALYSIS PIPELINES",
+        "CUSTOMER SUPPORT BOTS",
+        "MONITORING & ALERTING",
+        "OPERATIONS DASHBOARDS"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d15-mc-1",
+      "type": "mc",
+      "question": "What's the key difference between using AI for business operations vs. using it for personal productivity?",
+      "options": [
+        "There's no difference — AI works the same way everywhere",
+        "Business operations needs reliability, repeatability, and integration with existing systems — not just one-off outputs",
+        "Personal productivity is harder to automate than business operations",
+        "Business operations requires more expensive AI tools"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Exactly. Personal AI use is about helping you do your work. Operations AI is about building SYSTEMS that do work reliably, on schedule, at scale, without you babysitting. It's the difference between asking AI to write an email and having AI process every incoming support ticket.",
+        "Not quite. The key difference is reliability and repeatability. Business operations AI must work consistently, integrate with other tools, and produce trusted outputs on a schedule. It's a system, not a one-off helper."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-tf-1",
+      "type": "tf",
+      "question": "If a workflow involves human judgment calls, it can never be automated with AI.",
+      "correct": false,
+      "feedback": [
+        "Correct. Many human judgment calls follow patterns that AI can learn. The right approach is often partial automation: AI handles the data gathering, pattern recognition, and draft recommendations; the human makes the final call with better information.",
+        "Not true. Even judgment-heavy workflows can be partially automated. AI can surface relevant data, flag patterns, and recommend actions — leaving the final decision to the human operator who now has better context."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-scenario_card-1",
+      "type": "scenario_card",
+      "title": "Priya's Operations Transformation",
+      "body": "Priya runs operations at a 50-person e-commerce company. Her week was consumed by manual processes:\n\nBEFORE:\n⏰ Mon 9 AM: Export sales data from 3 platforms, combine in Excel, build weekly report (4 hours)\n⏰ Tue-Wed: Process 200+ customer support emails manually (16 hours over 2 days)\n⏰ Thu: Monitor server logs for errors — check manually every 2 hours (8 hours total)\n⏰ Fri: Chase approvals for orders over $500 via email (3 hours)\n\nAFTER AI:\n🚀 Monday report: AI pipeline extracts, transforms, and summarizes data in 10 minutes\n🚀 Support: AI bot handles 75% of inquiries (order status, returns, shipping). Priya handles the remaining 25% — complex issues that need human judgment\n🚀 Monitoring: AI watches logs 24/7 and alerts Priya only when something needs attention\n🚀 Approvals: AI routes $500+ orders to Priya with a summary and recommendation\n\nResult: Priya's 35-hour operations week became 12 hours. She used the reclaimed time to optimize processes that grew revenue by 22%.",
+      "xp": 5
+    },
+    {
+      "id": "d15-fillblank-1",
+      "type": "fillblank",
+      "question": "In operations, the practice of using AI to continuously watch systems for problems and notify humans only when something needs attention is called intelligent ___.",
+      "answer": "monitoring",
+      "aliases": ["alerting", "surveillance", "observability"],
+      "feedback": [
+        "Correct. Intelligent monitoring means AI handles the constant watching — detecting anomalies, predicting failures, filtering noise — and alerts humans only when something requires their judgment.",
+        "Good answer. The term is intelligent monitoring — using AI to watch systems 24/7 and only escalate real signals, not noise."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-example-1",
+      "type": "example",
+      "title": "AI-Powered Customer Support Flow",
+      "body": "HERE'S HOW A CUSTOMER SUPPORT AI HANDLES AN INCOMING TICKET:\n\nStep 1 — CLASSIFY: AI reads the message. Category: 'Order Issue.' Sentiment: 'Frustrated.' Priority: 'High.'\n\nStep 2 — SEARCH: AI checks the knowledge base for relevant answers. Finds: 'Late delivery policy,' 'Refund process for delayed orders.'\n\nStep 3 — DRAFT RESPONSE: AI drafts a personalized reply referencing the customer's specific order, the delay, and the available options (wait, refund, or store credit).\n\nStep 4 — BRANCH:\n  • If issue is simple (password reset, tracking number): AI sends the answer directly\n  • If issue needs human judgment (refund decision, account issue): AI creates a ticket summary for the human team\n  • If customer is angry (sentiment < threshold): AI escalates with full context to a senior agent\n\nStep 5 — LEARN: After resolution, AI logs what worked. Next time a similar issue comes in, the response gets better.\n\nThis runs 24/7. Customers get instant responses. Humans only see the complex cases. Everyone wins.",
+      "xp": 5
+    },
+    {
+      "id": "d15-goodfit-1",
+      "type": "good_fit",
+      "question": "Building an AI system that watches your company's social media mentions, categorizes sentiment, and alerts you when negative sentiment spikes above your threshold.",
+      "correct": "good",
+      "feedback": [
+        "This is a perfect operations automation candidate. The pattern is clear: ingest data → analyze → filter → alert. AI does the continuous scanning; you get notified only when action is required. This runs without you watching it.",
+        "Excellent use case. Social media monitoring is high-volume, continuous, and pattern-based — exactly where AI operations shines. The AI handles the constant firehose of data; you only see the signals that matter."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-goodfit-2",
+      "type": "good_fit",
+      "question": "Deciding which of two qualified candidates to hire for a senior leadership role.",
+      "correct": "notideal",
+      "feedback": [
+        "Right. This is a high-stakes human judgment call that involves culture fit, team dynamics, and long-term strategic considerations. AI can help by comparing qualifications and surfacing blind spots, but the decision belongs to humans.",
+        "Not ideal. High-stakes, nuanced decisions with human factors are not where operations automation should start. Use AI as an information gatherer and analysis tool here, but the final call is human."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-match-1",
+      "type": "match",
+      "pairs": [
+        {
+          "left": "Workflow Automation",
+          "right": "Chaining AI actions to process orders, approvals, and routing"
+        },
+        {
+          "left": "Data Analysis Pipeline",
+          "right": "Extracting, transforming, and summarizing data on a schedule"
+        },
+        {
+          "left": "Support Bot",
+          "right": "Handling tier-1 customer inquiries with automatic escalation"
+        },
+        {
+          "left": "Monitoring & Alerting",
+          "right": "Watching systems 24/7 and notifying humans only when needed"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d15-builder-1",
+      "type": "builder",
+      "fields": [
+        {
+          "id": "domain",
+          "label": "What area of operations do you want to automate?",
+          "placeholder": "e.g., Customer support, data reporting, approval workflows"
+        },
+        {
+          "id": "inputs",
+          "label": "What data or triggers does this system need?",
+          "placeholder": "e.g., Incoming emails, spreadsheet uploads, form submissions"
+        },
+        {
+          "id": "steps",
+          "label": "What steps should the AI follow? (Chain + branching)",
+          "placeholder": "e.g., 1. Read input → 2. Classify → 3. Look up info → 4. Draft response → 5. Route to human if high priority"
+        },
+        {
+          "id": "human_override",
+          "label": "When should a human step in?",
+          "placeholder": "e.g., When sentiment is negative, when value exceeds $500, when AI confidence is below 80%"
+        }
+      ],
+      "template": "OPERATIONS AUTOMATION DESIGN\n\nDOMAIN: {domain}\n\nTRIGGERS/INPUTS:\n{inputs}\n\nAI WORKFLOW:\n{steps}\n\nHUMAN OVERRIDE CONDITIONS:\n{human_override}\n\nThis system runs continuously. Humans handle exceptions.",
+      "xp": 15
+    },
+    {
+      "id": "d15-copy_action-1",
+      "type": "copy_action",
+      "body": "MY BUSINESS OPERATIONS PROMPT\n\n\"You are an operations automation consultant reviewing my workflow.\n\nWorkflow description: [Describe the repetitive operations task you want to automate]\n\nCurrent time spent per week: [X hours]\n\nFrequency: [Daily / Weekly / Continuous]\n\nAnalyze this workflow and tell me:\n1. Can AI automate any part of this? Which parts?\n2. What data does the automation need to access?\n3. What's the ideal split: AI handles X, human handles Y?\n4. What could go wrong and how would we handle it?\n5. What's the simplest version that still saves time?\n\nBe practical, not theoretical. I need to implement this today.\"",
+      "sourceStepId": "d15-builder-1",
+      "xp": 5
+    },
+    {
+      "id": "d15-paste_capture-1",
+      "type": "paste_capture",
+      "body": "Describe a real operations workflow from your work or business — even a small one. Then explain how you'd redesign it with AI: what the AI handles, when a human steps in, and what the result would look like. Be specific about the steps.",
+      "minLength": 60,
+      "xp": 15
+    },
+    {
+      "id": "d15-reflection-1",
+      "type": "reflection",
+      "prompt": "You've seen how AI transforms business operations. Now think about what this means for your world.\n\n• What's one operation in your work that you currently spend the most time on? Is it automatable?\n• What would you do with the time you'd save?\n• What's stopping you from automating it — knowledge, tools, or permission?",
+      "minChars": 40,
+      "xp": 15,
+      "questions": [
+        {
+          "id": "r1",
+          "type": "single_choice",
+          "label": "What's the biggest barrier to automating operations in your work?",
+          "options": [
+            "I don't know where to start",
+            "My tools don't integrate with AI easily",
+            "My organization doesn't trust AI for operations yet",
+            "I haven't prioritized it"
+          ]
+        },
+        {
+          "id": "r2",
+          "type": "textarea",
+          "label": "What operation will you try to automate first?",
+          "placeholder": "Describe the specific task and your plan..."
+        }
+      ]
+    },
+    {
+      "id": "d15-completion-1",
+      "type": "completion",
+      "title": "Day 15 Complete! ⚙️",
+      "body": "You now understand the five key domains where AI transforms business operations — workflow automation, data pipelines, customer support, monitoring, and dashboards.\n\nThe core insight: operations AI isn't about replacing people. It's about replacing the repetitive, high-volume tasks that consume people's time, so they can focus on judgment, strategy, and growth.\n\nKey takeaways:\n• Start with the most repetitive, rule-based task in your operations\n• Design for partial automation — AI handles the bulk, human handles exceptions\n• Monitoring and alerting is often the highest-ROI starting point\n• Every operation has an automation opportunity hiding in plain sight\n\nTomorrow: AI for marketing and content — building a content engine that scales.",
+      "xp": 15
+    }
+  ]
+}

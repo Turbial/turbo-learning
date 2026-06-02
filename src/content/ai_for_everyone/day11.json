@@ -3,7 +3,7 @@
     "program": "ai_for_everyone",
     "unitOrder": 11,
     "unitLabel": "Day 11",
-    "unitTitle": "Collaborating with AI — Your Co-Worker",
+    "unitTitle": "Collaborating with AI \u2014 Your Co-Worker",
     "lessonOrder": 1,
     "lessonTitle": "AI as Teammate",
     "minutes": 15
@@ -13,7 +13,7 @@
       "id": "d11_s1",
       "type": "info",
       "title": "Welcome to Day 11",
-      "body": "So far you have treated AI like a tool you use. Today you shift your mindset: AI is not a tool — it is a co-worker. The best results come when you and AI work together, each doing what you do best.",
+      "body": "So far you have treated AI like a tool you use. Today you shift your mindset: AI is not a tool \u2014 it is a co-worker. The best results come when you and AI work together, each doing what you do best.",
       "audioUrl": null,
       "primaryButton": "Team up with AI",
       "xp": 3
@@ -41,7 +41,7 @@
       "title": "Roles for AI",
       "body": "You can ask AI to play different roles: 'Act as my editor and improve this text.' 'Act as my devil's advocate and find flaws in this plan.' 'Act as my research assistant and find supporting data.' Each role gives you a different kind of help.",
       "audioUrl": null,
-      "primaryButton": "Role play — I get it",
+      "primaryButton": "Role play \u2014 I get it",
       "xp": 3
     },
     {
@@ -102,7 +102,7 @@
       "id": "d11_s8",
       "type": "scenario_card",
       "title": "The review loop",
-      "body": "You send AI your work. AI improves it. You review. You refine. You send it back. This back-and-forth — the review loop — is how professionals work with AI. It is not one-and-done.",
+      "body": "You send AI your work. AI improves it. You review. You refine. You send it back. This back-and-forth \u2014 the review loop \u2014 is how professionals work with AI. It is not one-and-done.",
       "audioUrl": null,
       "primaryButton": "Iteration, not perfection",
       "xp": 3
@@ -113,7 +113,7 @@
       "title": "How to disagree with AI",
       "body": "AI gets things wrong. When it does, do not give up. Say: 'That is not quite right because...' or 'Can you try again but focus more on...' or 'I disagree because...' Correcting AI is part of the collaboration.",
       "audioUrl": null,
-      "primaryButton": "Good — I should push back",
+      "primaryButton": "Good \u2014 I should push back",
       "xp": 3
     },
     {
@@ -132,7 +132,7 @@
       "id": "d11_s11",
       "type": "example",
       "title": "Pushing back effectively",
-      "prompt": "That draft is too formal. The client is a long-time friend. Can you rewrite it in a warmer, more personal tone — like I am writing to someone I have known for years? Keep the same key points.",
+      "prompt": "That draft is too formal. The client is a long-time friend. Can you rewrite it in a warmer, more personal tone \u2014 like I am writing to someone I have known for years? Keep the same key points.",
       "primaryButton": "Specific feedback works better",
       "xp": 5
     },
@@ -235,7 +235,10 @@
           "type": "fillblank",
           "question": "Asking AI to act as an editor or researcher is called giving it a ______.",
           "answer": "role",
-          "aliases": ["persona", "job"]
+          "aliases": [
+            "persona",
+            "job"
+          ]
         }
       ],
       "xp": 15
@@ -248,9 +251,13 @@
     {
       "id": "d11_s18",
       "type": "completion",
-      "title": "Day 11 complete — Collaborator",
-      "body": "You now see AI as a teammate, not just a tool. Tomorrow you learn how to use AI for research — finding, verifying, and organizing information.",
+      "title": "Day 11 complete \u2014 Collaborator",
+      "body": "You now see AI as a teammate, not just a tool. Tomorrow you learn how to use AI for research \u2014 finding, verifying, and organizing information.",
       "primaryButton": "See you tomorrow"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "collaborate",
+  "title": "Day 11: Collaborate with AI",
+  "estMinutes": 30
 }

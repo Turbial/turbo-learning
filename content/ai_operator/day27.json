@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "unit": "day27",
+  "title": "Day 27: Career Development with AI",
+  "estMinutes": 30,
+  "steps": [
+    {
+      "id": "d27-info-1",
+      "type": "info",
+      "title": "Career Development with AI",
+      "body": "Your career is your most valuable asset. Time to optimize it with AI.\n\nToday: Resume optimization, interview preparation, career path mapping, networking, and personal branding \u2014 all supercharged by AI.\n\nMost people treat their career like an afterthought. Operators treat it like a system. And AI is the ultimate career acceleration tool.",
+      "xp": 5
+    },
+    {
+      "id": "d27-highlight-1",
+      "type": "highlight",
+      "body": "Your resume doesn't describe your career \u2014 it sells your next opportunity.\n\nAI can analyze your resume against target roles, identify gaps, optimize for ATS systems, and rewrite bullet points to emphasize impact over activity. The operator who masters AI career tools interviews on their terms.",
+      "highlights": [
+        "sells your next opportunity",
+        "optimize for ATS systems",
+        "impact over activity"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d27-scenario-1",
+      "type": "scenario_card",
+      "title": "Scenario: The Career Reset",
+      "body": "You've been in operations for 6 years. You want to move into AI strategy. Your resume is 3 pages long, written in passive voice, and full of responsibilities instead of achievements.\n\nYou've applied to 20 jobs. Zero responses. You know your resume isn't the problem \u2014 your resume's presentation is.\n\nHow does AI help you completely reimagine your career presence?",
+      "xp": 5
+    },
+    {
+      "id": "d27-mc-1",
+      "type": "mc",
+      "question": "What's the most effective way to use AI for resume optimization?",
+      "options": [
+        "Ask AI to write your entire resume from scratch",
+        "Give AI your resume + 3 target job descriptions and ask it to rewrite your bullets for each role using STAR format and impact metrics",
+        "Use AI to make your resume look prettier with formatting",
+        "Ask AI to apply to jobs for you"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI doesn't know your career story. You provide the raw material; it provides the polish.",
+        "Yes! This is the power: feed AI the job descriptions, let it align your experience to each role's language and requirements. ATS-optimized, human-readable, impact-focused.",
+        "Formatting is surface-level. The content \u2014 achievements, metrics, impact \u2014 is what matters.",
+        "Let's not have AI impersonate you. Yet."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-example-1",
+      "type": "example",
+      "title": "AI Resume Optimization Prompt",
+      "body": "Use this prompt to turn AI into your career coach:\n\n\"I'm applying for [target role] at [company]. Here's my current resume bullet point: [paste bullet].\n\nHere's the job description for context: [paste JD].\n\nPlease:\n1. Rewrite this bullet using STAR format (Situation, Task, Action, Result)\n2. Add a measurable impact metric where possible\n3. Use active voice\n4. Include keywords from the job description\n5. Keep it to one line (not a paragraph)\n6. Explain why your version is stronger\"",
+      "xp": 5
+    },
+    {
+      "id": "d27-tf-1",
+      "type": "tf",
+      "question": "AI can simulate a realistic job interview by asking relevant questions and giving feedback on your answers.",
+      "correct": true,
+      "feedback": [
+        "Correct. AI can roleplay as an interviewer for any role, ask behavioral and technical questions, and provide constructive feedback on your answers.",
+        "It's true. AI interview prep is one of the most powerful career uses. Give AI the job description and ask it to interview you. Practice until your answers are tight."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-fillblank-1",
+      "type": "fillblank",
+      "question": "AI for career development is about ?????????? your career brand, not just writing a resume.",
+      "answer": "engineering",
+      "aliases": [
+        "building",
+        "crafting",
+        "optimizing"
+      ],
+      "feedback": [
+        "Perfect. Career development with AI is a system \u2014 you engineer your brand, path, and opportunities.",
+        "Close \u2014 think about the deliberate, systematic approach of building something intentionally."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-mc-2",
+      "type": "mc",
+      "question": "What's the best use of AI for networking?",
+      "options": [
+        "Ask AI to DM people on LinkedIn for you",
+        "Use AI to research target connections, draft personalized outreach messages, and suggest conversation topics based on their interests",
+        "Have AI attend networking events virtually",
+        "Skip networking \u2014 AI will get you hired"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Let's not automate relationships. But preparing for them? Absolutely.",
+        "Exactly. AI researches, drafts, and prepares you \u2014 but you build the actual human connection. Research + personalization = networking that works.",
+        "Networking is personal. AI can prepare you, but you need to show up.",
+        "Networking is still how careers accelerate. AI makes you better at it."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-chat-1",
+      "type": "chat",
+      "title": "Mock Interview Session",
+      "body": "You're interviewing for an 'AI Product Manager' role. Ask AI to conduct a mock interview with 5 behavioral questions and 3 technical questions. After each answer, ask for feedback. Then get a summary of your strengths and areas to improve.",
+      "prompt": "I'm interviewing for an AI Product Manager role. Conduct a mock interview: ask 5 behavioral questions (STAR format) and 3 technical questions about AI product strategy. After each of my answers, give brief feedback. End with a summary of my strengths and areas to improve.",
+      "xp": 20
+    },
+    {
+      "id": "d27-builder-1",
+      "type": "builder",
+      "title": "Build Your Career Acceleration System",
+      "body": "Create a career development system with these AI-powered tools:\n\n1. Resume optimizer \u2014 one prompt for any target role\n2. Interview simulator \u2014 roleplay any interview\n3. Career path mapper \u2014 where you are -> where you want to be\n4. Networking prep \u2014 research + draft personalized outreach\n5. Personal brand builder \u2014 LinkedIn summary, thought leadership topics\n\nSet up a career review session \u2014 run this system once per quarter to track progress.",
+      "deliverable": "A career acceleration system with 5 reusable AI prompts for different career stages.",
+      "xp": 25,
+      "fields": [
+        {
+          "id": "output",
+          "label": "Your work",
+          "type": "textarea",
+          "placeholder": "Write your response here..."
+        }
+      ],
+      "template": "Create a career development system with these AI-powered tools:\n\n1. Resume optimizer \u2014 one prompt for any target role\n2. Interview simulator \u2014 roleplay any interview\n3. Career path mapper \u2014 where you are -> where you want to be\n4. Networking prep \u2014 research + draft personalized outreach\n5. Personal brand builder \u2014 LinkedIn summary, thought leadership topics\n\nSet up a career review session \u2014 run this system once per quarter to track progress."
+    },
+    {
+      "id": "d27-paste-capture-1",
+      "type": "paste_capture",
+      "title": "Paste Your Best Career Prompt",
+      "body": "Paste the career prompt that you found most valuable. This becomes your go-to career acceleration tool.",
+      "prompt": "Paste your best career development prompt. This is your personal career acceleration lever.",
+      "xp": 10
+    },
+    {
+      "id": "d27-reflection-1",
+      "type": "reflection",
+      "title": "Your 10-Year Career Vision",
+      "body": "Where do you want to be in 10 years? Not just job title \u2014 what impact do you want to make?\n\nNow work backward: what roles get you there? What skills do you need at each step? Who do you need to know?\n\nAI can help map this path, but the vision has to come from you. What's your 10-year career vision?",
+      "xp": 15
+    },
+    {
+      "id": "d27-quiz-1",
+      "type": "quiz",
+      "xp": 15,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple_choice",
+          "question": "What is the most powerful career advantage an AI operator has over a non-operator?",
+          "options": [
+            "Operators can apply to 10x more jobs using automation",
+            "Operators systematically optimize every career touchpoint \u2014 resume, interviews, networking, and branding \u2014 creating compounding career acceleration",
+            "Operators don't need to network because AI does it for them",
+            "Operators get hired by AI companies by default"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": "d27-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "career_development_operator"
+    },
+    {
+      "id": "d27-completion-1",
+      "type": "completion",
+      "title": "Day 27 Complete: Career Development",
+      "body": "You've built a complete AI-powered career acceleration system. Resume optimization, interview preparation, career path mapping, networking, and personal branding.\n\nThe key insight: Your career is a system, not a series of lucky breaks. AI helps you optimize every touchpoint systematically.\n\nTomorrow is the big one: Graduation & Next Steps. Let's bring it all together."
+    }
+  ]
+}

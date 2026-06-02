@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "unit": "day26",
+  "title": "Day 26: Learning & Development with AI",
+  "estMinutes": 30,
+  "steps": [
+    {
+      "id": "d26-info-1",
+      "type": "info",
+      "title": "Learning & Development with AI",
+      "body": "The best investment you can make: investing in yourself.\n\nToday you'll discover how AI transforms learning and development. AI-powered learning paths, skill gap analysis, personalized tutoring, and microlearning systems.\n\nYou don't need expensive courses or bootcamps. With the right prompts, AI becomes your personal tutor, curriculum designer, and skill tracker.",
+      "xp": 5
+    },
+    {
+      "id": "d26-highlight-1",
+      "type": "highlight",
+      "body": "The half-life of skills is shrinking. What you knew 3 years ago may be obsolete.\n\nAI doesn't just help you learn faster \u2014 it helps you learn what matters. It identifies your skill gaps, designs personalized curricula, and adapts to your pace. Your personal tutor, available 24/7.",
+      "highlights": [
+        "half-life of skills is shrinking",
+        "learn what matters",
+        "personalized curricula",
+        "personal tutor, available 24/7"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26-scenario-1",
+      "type": "scenario_card",
+      "title": "Scenario: The Career Pivot",
+      "body": "You've been in marketing for 8 years. You want to transition into AI product management. You have 3 months to build the skills.\n\nYou don't know where to start. There are 47 courses, 12 certifications, and 200+ books on the topic. You're paralyzed by choice.\n\nWhat's the AI-powered approach to building a learning plan that actually works?",
+      "xp": 5
+    },
+    {
+      "id": "d26-mc-1",
+      "type": "mc",
+      "question": "What's the best first step with AI for skill gap analysis?",
+      "options": [
+        "Ask AI for a list of all skills in AI product management",
+        "Tell AI your current role, target role, and timeline \u2014 ask it to identify gaps and prioritize them",
+        "Sign up for every course you can find",
+        "Ask AI to write your resume first"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Too broad. You need context \u2014 where you are vs where you want to be.",
+        "Exactly. The power is in the comparison: current state vs target state. AI identifies the gaps and helps you prioritize.",
+        "That's the old way. Let AI design a path; then pick the courses that fit.",
+        "Resume comes after you have the skills, not before."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-example-1",
+      "type": "example",
+      "title": "AI Learning Path Designer Prompt",
+      "body": "Use this prompt to design a personalized learning curriculum:\n\n\"I want to transition from [current role] to [target role]. My current skills include: [list]. I have [X hours per week] to study. My timeline is [X months]. My learning style is [visual/reading/hands-on/etc.].\n\nPlease:\n1. Identify the top 10 skills I need for [target role]\n2. Rate my current proficiency in each (from 'none' to 'strong')\n3. Prioritize which skills to learn first (based on demand and prerequisites)\n4. Suggest a week-by-week 12-week learning plan\n5. Recommend free resources for each skill\n6. Include practical projects to build a portfolio\"",
+      "xp": 5
+    },
+    {
+      "id": "d26-tf-1",
+      "type": "tf",
+      "question": "AI can design a personalized learning path, but it cannot quiz you or assess your understanding of a topic.",
+      "correct": false,
+      "feedback": [
+        "Actually, AI can quiz you. You can ask AI to generate practice questions, test your knowledge, give feedback on your answers, and adapt difficulty based on your performance.",
+        "AI is an excellent quizmaster. It can generate custom practice questions, evaluate your answers, and adapt difficulty in real-time. You can have a full tutoring session with AI."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-fillblank-1",
+      "type": "fillblank",
+      "question": "In AI-powered learning, the operator's role is to set the _____, and AI's role is to design the path.",
+      "answer": "destination",
+      "aliases": [
+        "goal",
+        "target",
+        "direction"
+      ],
+      "feedback": [
+        "Perfect. You decide where you're going. AI figures out the best route.",
+        "Close \u2014 think about what you provide that AI can't: your personal goals and aspirations."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-mc-2",
+      "type": "mc",
+      "question": "What makes microlearning with AI most effective?",
+      "options": [
+        "AI generates 5-minute lessons tailored to your current knowledge level and tests you immediately",
+        "AI sends you to YouTube randomly",
+        "You spend 4 hours on one topic every weekend",
+        "AI picks one book and summarizes it"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Yes! Microlearning works because it's bite-sized, personalized, and immediate. AI can generate a lesson, quiz you, and adapt \u2014 in 5 minutes.",
+        "Random content doesn't build skills systematically.",
+        "Cramming isn't learning. Regular micro-sessions beat marathon study sessions.",
+        "One book doesn't build a skill. You need variety and practice."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-chat-1",
+      "type": "chat",
+      "title": "Design Your Learning Path",
+      "body": "You want to become proficient in AI prompt engineering. Current level: beginner. Available: 5 hours/week. Timeline: 8 weeks. Learning style: hands-on projects.\n\nAsk AI to design a week-by-week learning path with specific exercises, resources, and milestones.",
+      "prompt": "I want to become proficient in AI prompt engineering. Current level: beginner. Available study time: 5 hours per week. Timeline: 8 weeks. Learning style: hands-on projects. Design a week-by-week learning path with specific exercises, recommended free resources, and weekly milestones to track progress.",
+      "xp": 20
+    },
+    {
+      "id": "d26-builder-1",
+      "type": "builder",
+      "title": "Build Your AI Tutoring System",
+      "body": "Create a reusable AI tutoring system with these components:\n\n1. Skill audit prompt \u2014 identify what you know and don't know\n2. Curriculum builder \u2014 design the learning path\n3. Micro lesson generator \u2014 create 5-minute daily lessons\n4. Quiz master \u2014 test and reinforce knowledge\n5. Progress tracker \u2014 review what you've learned and what's next\n\nChain these into a weekly learning routine you can run every Sunday.",
+      "deliverable": "A complete AI-powered learning system with 5 reusable prompts.",
+      "xp": 25,
+      "fields": [
+        {
+          "id": "output",
+          "label": "Your work",
+          "type": "textarea",
+          "placeholder": "Write your response here..."
+        }
+      ],
+      "template": "Create a reusable AI tutoring system with these components:\n\n1. Skill audit prompt \u2014 identify what you know and don't know\n2. Curriculum builder \u2014 design the learning path\n3. Micro lesson generator \u2014 create 5-minute daily lessons\n4. Quiz master \u2014 test and reinforce knowledge\n5. Progress tracker \u2014 review what you've learned and what's next\n\nChain these into a weekly learning routine you can run every Sunday."
+    },
+    {
+      "id": "d26-paste-capture-1",
+      "type": "paste_capture",
+      "title": "Paste Your AI Tutoring Prompt",
+      "body": "Paste your favorite prompt from the learning system \u2014 the one you'll use most often.",
+      "prompt": "Paste your best AI tutoring prompt. You'll use this every time you want to learn something new.",
+      "xp": 10
+    },
+    {
+      "id": "d26-reflection-1",
+      "type": "reflection",
+      "title": "Your Learning Acceleration",
+      "body": "Think about a skill you've wanted to learn but haven't started. What was holding you back?\n\nHow could AI change that? What would your first AI-powered learning session look like?\n\nCommit to one skill you'll start learning with AI this week.",
+      "xp": 15
+    },
+    {
+      "id": "d26-quiz-1",
+      "type": "quiz",
+      "xp": 15,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple_choice",
+          "question": "What is the most powerful advantage AI offers for learning and development?",
+          "options": [
+            "AI can replace teachers entirely",
+            "AI provides personalized, adaptive learning at scale \u2014 a personal tutor available anytime",
+            "AI can make you learn without effort",
+            "AI only works for technical subjects like coding"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": "d26-badge-unlock-1",
+      "type": "badge_unlock",
+      "badgeSlug": "learning_development_operator"
+    },
+    {
+      "id": "d26-completion-1",
+      "type": "completion",
+      "title": "Day 26 Complete: Learning & Development",
+      "body": "You've turned AI into your personal tutor and curriculum designer. Skill gap analysis, personalized learning paths, microlearning \u2014 you now have a system for accelerated learning.\n\nKey insight: The fastest way to learn anything is to tell AI where you want to go and let it design the path. You're in the driver's seat; AI is the GPS.\n\nTomorrow: Career Development with AI. Let's use AI to accelerate your entire career."
+    }
+  ]
+}

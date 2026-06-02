@@ -3,7 +3,7 @@
     "program": "ai_for_everyone",
     "unitOrder": 14,
     "unitLabel": "Day 14",
-    "unitTitle": "Your Personal AI System — Week 2 Wrap",
+    "unitTitle": "Your Personal AI System \u2014 Week 2 Wrap",
     "lessonOrder": 1,
     "lessonTitle": "Building Your System",
     "minutes": 15
@@ -12,7 +12,7 @@
     {
       "id": "d14_s1",
       "type": "info",
-      "title": "Welcome to Day 14 — Final Day of Week 2",
+      "title": "Welcome to Day 14 \u2014 Final Day of Week 2",
       "body": "Two weeks ago you learned how to ask AI a clear question. Now you have templates, workflows, automation, collaboration skills, research methods, and preparation systems. Today you bring it all together into one personal AI system.",
       "audioUrl": null,
       "primaryButton": "Build my system",
@@ -31,9 +31,9 @@
       "id": "d14_s3",
       "type": "info",
       "title": "Your AI system blueprint",
-      "body": "A personal AI system has four layers: (1) Your console — the tools you use daily. (2) Your templates — reusable prompts for common tasks. (3) Your workflows — chained steps for complex tasks. (4) Your automations — set-and-forget routines.",
+      "body": "A personal AI system has four layers: (1) Your console \u2014 the tools you use daily. (2) Your templates \u2014 reusable prompts for common tasks. (3) Your workflows \u2014 chained steps for complex tasks. (4) Your automations \u2014 set-and-forget routines.",
       "audioUrl": null,
-      "primaryButton": "Four layers — I see the structure",
+      "primaryButton": "Four layers \u2014 I see the structure",
       "xp": 3
     },
     {
@@ -74,7 +74,7 @@
       "id": "d14_s6",
       "type": "info",
       "title": "The one-sentence test",
-      "body": "If someone asks you 'How do you use AI?', can you answer in one sentence? Try it: 'I use AI to draft my emails, prepare for meetings, and research decisions — and I always check the most important facts myself.' If you can say that, you have a system.",
+      "body": "If someone asks you 'How do you use AI?', can you answer in one sentence? Try it: 'I use AI to draft my emails, prepare for meetings, and research decisions \u2014 and I always check the most important facts myself.' If you can say that, you have a system.",
       "audioUrl": null,
       "primaryButton": "I can say that",
       "xp": 3
@@ -83,7 +83,7 @@
       "id": "d14_s7",
       "type": "info",
       "title": "What comes next",
-      "body": "You do not stop here. Your system will evolve. New AI tools appear every month. Your life changes. The skill you have now — knowing how to integrate AI into your life — is permanent. The tools will change; your ability to use them will not.",
+      "body": "You do not stop here. Your system will evolve. New AI tools appear every month. Your life changes. The skill you have now \u2014 knowing how to integrate AI into your life \u2014 is permanent. The tools will change; your ability to use them will not.",
       "audioUrl": null,
       "primaryButton": "Skills over tools",
       "xp": 3
@@ -130,7 +130,7 @@
       "id": "d14_s10",
       "type": "info",
       "title": "Final thoughts",
-      "body": "AI is not going away. Every year it gets better, faster, and more integrated into daily life. You have a head start that most people will never have. Not because you are technical — because you showed up for 14 days and built the habit.",
+      "body": "AI is not going away. Every year it gets better, faster, and more integrated into daily life. You have a head start that most people will never have. Not because you are technical \u2014 because you showed up for 14 days and built the habit.",
       "audioUrl": null,
       "primaryButton": "Thank you",
       "xp": 3
@@ -158,7 +158,7 @@
           "options": [
             "As a tool that replaces your thinking",
             "As a collaborator that handles routine tasks while you focus on judgment and decisions",
-            "As something to avoid — it is unreliable"
+            "As something to avoid \u2014 it is unreliable"
           ],
           "correct": 1
         },
@@ -173,14 +173,19 @@
           "type": "fillblank",
           "question": "A reusable prompt you use without starting from scratch is called a ______.",
           "answer": "template",
-          "aliases": ["prompt template"]
+          "aliases": [
+            "prompt template"
+          ]
         },
         {
           "id": "q5",
           "type": "fillblank",
           "question": "The iterative back-and-forth refinement with AI is called the ______ loop.",
           "answer": "review",
-          "aliases": ["feedback", "iteration"]
+          "aliases": [
+            "feedback",
+            "iteration"
+          ]
         }
       ],
       "xp": 25
@@ -193,9 +198,13 @@
     {
       "id": "d14_s13",
       "type": "completion",
-      "title": "🏆 AI for Everyone — Complete!",
-      "body": "Congratulations. You completed the full 14-day program. You started knowing nothing about AI. You finish with templates, workflows, automations, research skills, and a personal AI system that works for your life. This is not the end — it is the beginning of how you work from now on.",
+      "title": "\ud83c\udfc6 AI for Everyone \u2014 Complete!",
+      "body": "Congratulations. You completed the full 14-day program. You started knowing nothing about AI. You finish with templates, workflows, automations, research skills, and a personal AI system that works for your life. This is not the end \u2014 it is the beginning of how you work from now on.",
       "primaryButton": "Start my journey"
     }
-  ]
+  ],
+  "version": "1.0",
+  "unit": "future",
+  "title": "Day 14: Your AI Future",
+  "estMinutes": 25
 }
