@@ -1,5 +1,4 @@
-// ─── Home Screen — Desktop / Web — Ocean / Aqua theme ────────────────────────
-// Light, "looking through water" aesthetic.
+// ─── Home Screen — Desktop / Web — Ocean / Aqua theme, real Supabase data ─────
 // Layout: white sidebar + scrollable main on a soft aqua background.
 
 import React, { useState } from "react";
@@ -10,55 +9,58 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import { router } from "expo-router";
 import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
 import { appPalette as o } from "../../src/theme/palette";
 
-// ─── Mock data ────────────────────────────────────────────────────────────────
+// ─── Real data hooks ──────────────────────────────────────────────────────────
+import { useAuth } from "../../src/data/useAuth";
+import {
+  useProfile,
+  useUnits,
+  useProgram,
+  useLessonProgressMap,
+  useActiveProgramSlug,
+} from "../../src/data/queries";
+import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
+import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
-const MOCK_USER = {
-  initials: "AJ",
-  name: "Alexandra J.",
-  handle: "@alex_learns",
-  level: 24,
-  xp: 3692,
-  xpToNextLevel: 308,
-  xpForNextLevel: 4000,
-  streak: 7,
-  rank: 42,
-  notifications: 2,
-};
+// ─── Helpers (same as mobile) ─────────────────────────────────────────────────
 
-const MOCK_HERO = {
-  tag: "Continue Learning",
-  title: "Quadratic Equations",
-  subtitle: "Mathematics · Chapter 4 of 8",
-  timeLabel: "5–7 min",
-  difficulty: "MEDIUM",
-  xpReward: "250 XP",
-  progress: 0.78,
-  lessonId: "lesson-quadratic-1",
-};
+function getInitials(name?: string | null, email?: string | null): string {
+  if (name) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2)
+      return (parts[0][0]! + parts[parts.length - 1]![0]!).toUpperCase();
+    return (parts[0]![0] ?? "?").toUpperCase();
+  }
+  if (email) return email[0]!.toUpperCase();
+  return "?";
+}
 
-type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logic" | "Art";
-const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
+function getFirstName(name?: string | null, email?: string | null): string {
+  if (name) return name.trim().split(/\s+/)[0]!;
+  if (email) return email.split("@")[0]!;
+  return "Learner";
+}
 
-const SUBJECTS = [
-  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.79, ...o.subjects[0], category: "Math"     as SubjectFilter, locked: false },
-  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.45, ...o.subjects[1], category: "Science"  as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.30, ...o.subjects[2], category: "Language" as SubjectFilter, locked: false },
-  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, ...o.subjects[3], category: "History"  as SubjectFilter, locked: false },
-  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    ...o.subjects[4], category: "Logic"    as SubjectFilter, locked: true  },
-  { id: "art",      name: "Creative Arts",  emoji: "🎨", count: "Coming soon",    progress: 0,    ...o.subjects[5], category: "Art"      as SubjectFilter, locked: true  },
-];
+const XP_PER_LEVEL = 1000;
 
-const ACTIVITY = [
-  { id: "a1", emoji: "📐", name: "Calculus Integration",    chapter: "Chapter 3", subject: "Mathematics",   time: "2 hours ago", status: "done"        },
-  { id: "a2", emoji: "🔬", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics",       time: "5 hours ago", status: "in-progress" },
-  { id: "a3", emoji: "📝", name: "Essay Structure Basics",   chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday",   status: "new"         },
-];
+// ─── Week palette ─────────────────────────────────────────────────────────────
+const WEEK_COLORS = [o.mid, o.teal, o.sky, o.deep] as const;
+const WEEK_TITLES = ["Foundation", "Automation", "Systems", "Launch"] as const;
+const WEEK_GOALS = [
+  "Understand AI and build your first workflows",
+  "Build automations that run without you",
+  "Create multi-tool AI systems",
+  "Ship your AI workforce",
+] as const;
+const WEEK_EMOJIS = ["🧱", "⚙️", "🌐", "🚀"] as const;
 
+// ─── Nav ──────────────────────────────────────────────────────────────────────
 const NAV_ITEMS = [
   { id: "home",     label: "Home",     emoji: "🏠" },
   { id: "explore",  label: "Explore",  emoji: "🔍" },
@@ -67,14 +69,33 @@ const NAV_ITEMS = [
 ];
 const NAV_MORE = [
   { id: "leaderboard", label: "Leaderboard", emoji: "🏆" },
-  { id: "settings",    label: "Settings",    emoji: "⚙️"  },
+  { id: "settings",    label: "Settings",    emoji: "⚙️" },
 ];
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 
-function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) => void }) {
-  const u = MOCK_USER;
-  const xpPct = Math.round(Math.min(u.xp / u.xpForNextLevel, 1) * 100);
+function Sidebar({
+  activeNav,
+  onNav,
+  initials,
+  name,
+  handle,
+  level,
+  xp,
+  streak,
+}: {
+  activeNav: string;
+  onNav: (id: string) => void;
+  initials: string;
+  name: string;
+  handle: string;
+  level: number;
+  xp: number;
+  streak: number;
+}) {
+  const xpInLevel = xp % XP_PER_LEVEL;
+  const xpPct = Math.round(Math.min((xpInLevel / XP_PER_LEVEL) * 100, 100));
+  const xpToNext = XP_PER_LEVEL - xpInLevel;
 
   return (
     <View style={s.sidebar}>
@@ -83,23 +104,23 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
         <View style={s.brandIco}>
           <Text style={s.brandIcoTxt}>◈</Text>
         </View>
-        <Text style={s.brandName}>EduApp</Text>
+        <Text style={s.brandName}>Turbo Learning</Text>
       </View>
 
       {/* User card */}
       <View style={s.userCard}>
         <View style={s.userRow}>
           <View style={s.sbAvatar}>
-            <Text style={s.sbAvatarTxt}>{u.initials}</Text>
+            <Text style={s.sbAvatarTxt}>{initials}</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={s.sbName}>{u.name}</Text>
-            <Text style={s.sbHandle}>{u.handle}</Text>
+            <Text style={s.sbName}>{name}</Text>
+            <Text style={s.sbHandle}>{handle}</Text>
           </View>
         </View>
 
         <View style={s.lvlPill}>
-          <Text style={s.lvlTxt}>⭐ Level {u.level}</Text>
+          <Text style={s.lvlTxt}>⭐ Level {level}</Text>
         </View>
 
         <View style={s.xpRow}>
@@ -110,7 +131,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
           <View style={[s.xpFill, { width: `${xpPct}%` as any }]} />
           <View style={[s.xpShimmer, { left: `${Math.max(xpPct - 3, 0)}%` as any }]} />
         </View>
-        <Text style={s.xpHint}>{u.xpToNextLevel} XP to level {u.level + 1}</Text>
+        <Text style={s.xpHint}>{xpToNext} XP to level {level + 1}</Text>
       </View>
 
       {/* Nav */}
@@ -123,7 +144,9 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
           activeOpacity={0.75}
         >
           <Text style={s.navIco}>{item.emoji}</Text>
-          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
+          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>
+            {item.label}
+          </Text>
         </TouchableOpacity>
       ))}
       <Text style={s.navSec}>MORE</Text>
@@ -135,35 +158,54 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
           activeOpacity={0.75}
         >
           <Text style={s.navIco}>{item.emoji}</Text>
-          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
+          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>
+            {item.label}
+          </Text>
         </TouchableOpacity>
       ))}
 
       {/* Stat cards */}
       <View style={s.statsArea}>
         <View style={s.statCard}>
-          <Text style={s.statVal}>🔥 {u.streak}</Text>
+          <Text style={s.statVal}>🔥 {streak}</Text>
           <Text style={s.statLbl}>day streak</Text>
         </View>
         <View style={s.statCard}>
-          <Text style={s.statVal}>#{u.rank}</Text>
-          <Text style={s.statLbl}>global rank</Text>
+          <Text style={s.statVal}>{xp}</Text>
+          <Text style={s.statLbl}>total XP</Text>
         </View>
       </View>
     </View>
   );
 }
 
-// ─── Hero Banner ──────────────────────────────────────────────────────────────
+// ─── Hero banner ──────────────────────────────────────────────────────────────
 
-function HeroBanner() {
-  const h = MOCK_HERO;
-  const pct = Math.round(h.progress * 100);
+function HeroBanner({
+  title,
+  subtitle,
+  unitId,
+  programSlug,
+  dayNum,
+  overallPct,
+}: {
+  title: string;
+  subtitle: string;
+  unitId: string;
+  programSlug: string;
+  dayNum: number;
+  overallPct: number;
+}) {
   return (
     <TouchableOpacity
       style={s.hero}
       activeOpacity={0.9}
-      onPress={() => router.push(`/lesson/${h.lessonId}` as any)}
+      onPress={() =>
+        router.push({
+          pathname: `/lesson/${unitId}` as any,
+          params: { program: programSlug, day: String(dayNum) },
+        })
+      }
     >
       {/* Caustic light rings */}
       <View style={[s.caustic, s.cA]} />
@@ -175,117 +217,251 @@ function HeroBanner() {
       <View style={s.heroLeft}>
         <View>
           <View style={s.heroTag}>
-            <Text style={s.heroTagTxt}>🌊  {h.tag.toUpperCase()}</Text>
+            <Text style={s.heroTagTxt}>🌊  CONTINUE LEARNING</Text>
           </View>
-          <Text style={s.heroTitle}>{h.title}</Text>
-          <Text style={s.heroSub}>{h.subtitle}</Text>
-          <View style={s.heroChips}>
-            {[`⏱ ${h.timeLabel}`, `● ${h.difficulty}`, `✦ ${h.xpReward}`].map((c) => (
-              <View key={c} style={s.heroChip}>
-                <Text style={s.heroChipTxt}>{c}</Text>
-              </View>
-            ))}
-          </View>
+          <Text style={s.heroTitle}>{title}</Text>
+          <Text style={s.heroSub}>{subtitle}</Text>
         </View>
         <View style={s.heroBottom}>
           <View style={s.heroPTrack}>
-            <View style={[s.heroPFill, { width: `${pct}%` as any }]} />
+            <View style={[s.heroPFill, { width: `${overallPct}%` as any }]} />
           </View>
-          <Text style={s.heroPct}>{pct}%</Text>
+          <Text style={s.heroPct}>{overallPct}%</Text>
           <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
             <Text style={s.heroCtaTxt}>Continue →</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* Right: decorative caustic rings only (no extra elements needed) */}
       <View style={s.heroRight} />
     </TouchableOpacity>
   );
 }
 
-// ─── Subject grid (3-col) ─────────────────────────────────────────────────────
-
-function SubjectGrid({ filter }: { filter: SubjectFilter }) {
-  const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
+function AllDoneBanner({ total }: { total: number }) {
   return (
-    <View style={s.subGrid}>
-      {visible.map((item) => (
-        <TouchableOpacity
-          key={item.id}
-          style={[s.subCard, item.locked && { opacity: 0.55 }]}
-          activeOpacity={item.locked ? 1 : 0.85}
-          disabled={item.locked}
-        >
-          <View style={[s.subTop, { backgroundColor: item.bg }]}>
-            <View style={[s.sc1, { backgroundColor: item.glow + "45" }]} />
-            <View style={[s.sc2, { backgroundColor: item.glow + "28" }]} />
-            <View style={s.sc3} />
-            <Text style={s.subEmoji}>{item.emoji}</Text>
+    <View style={s.hero}>
+      <View style={[s.caustic, s.cA]} />
+      <View style={[s.caustic, s.cB]} />
+      <View style={[s.caustic, s.cC]} />
+      <View style={[s.caustic, s.cD]} />
+      <View style={s.heroLeft}>
+        <View>
+          <View style={s.heroTag}>
+            <Text style={s.heroTagTxt}>🎉  PROGRAM COMPLETE</Text>
           </View>
-          <View style={s.subBody}>
-            <Text style={s.subName} numberOfLines={1}>{item.name}</Text>
-            <Text style={s.subCount}>{item.count}</Text>
-            {!item.locked ? (
-              <View style={s.subPTrack}>
-                <View
-                  style={[s.subPFill, {
-                    width: `${Math.round(item.progress * 100)}%` as any,
-                    backgroundColor: item.bg,
-                  }]}
-                />
-              </View>
+          <Text style={s.heroTitle}>You finished all {total} days!</Text>
+          <Text style={s.heroSub}>Incredible work. Check back for new programs.</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+// ─── WeeksView — desktop (same logic, slightly wider cards) ───────────────────
+
+type DayStatus = "done" | "current" | "locked";
+type DayEntry = { day: number; unitId: string; title: string; status: DayStatus };
+type WeekEntry = {
+  weekNum: number;
+  title: string;
+  goal: string;
+  emoji: string;
+  color: string;
+  days: DayEntry[];
+};
+
+function WeeksGrid({
+  units,
+  completedUnitIds,
+  programSlug,
+  onDayPress,
+}: {
+  units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
+  completedUnitIds: Set<string>;
+  programSlug: string;
+  onDayPress: (day: number, unitId: string, status: DayStatus) => void;
+}) {
+  const weeks: WeekEntry[] = [];
+
+  for (let w = 0; w < 4; w++) {
+    const startDay = w * 7 + 1;
+    const endDay = Math.min(startDay + 6, 28);
+    const weekUnits = units.filter(
+      (u) => u.order_num >= startDay && u.order_num <= endDay
+    );
+
+    weeks.push({
+      weekNum: w + 1,
+      title: WEEK_TITLES[w] ?? `Week ${w + 1}`,
+      goal: WEEK_GOALS[w] ?? "",
+      emoji: WEEK_EMOJIS[w] ?? "📅",
+      color: WEEK_COLORS[w] ?? o.mid,
+      days: weekUnits.map((u) => {
+        const isDone = completedUnitIds.has(u.id);
+        const prevUnit =
+          u.order_num > 1
+            ? units.find((pu) => pu.order_num === u.order_num - 1)
+            : null;
+        const prevDone =
+          u.order_num === 1 ||
+          (prevUnit != null && completedUnitIds.has(prevUnit.id));
+        const isCurrent = !isDone && prevDone;
+        return {
+          day: u.order_num,
+          unitId: u.id,
+          title: u.title,
+          status: (isDone ? "done" : isCurrent ? "current" : "locked") as DayStatus,
+        };
+      }),
+    });
+  }
+
+  // 2-column grid of week cards
+  const rows: [WeekEntry, WeekEntry | null][] = [
+    [weeks[0]!, weeks[1] ?? null],
+    [weeks[2]!, weeks[3] ?? null],
+  ];
+
+  return (
+    <View style={s.weeksGrid}>
+      {rows.map((row, ri) => (
+        <View key={ri} style={s.weeksRow}>
+          {row.map((week, ci) =>
+            week ? (
+              <WeekCard
+                key={week.weekNum}
+                week={week}
+                onDayPress={onDayPress}
+              />
             ) : (
-              <Text style={s.subLock}>🔒 LOCKED</Text>
-            )}
-          </View>
-        </TouchableOpacity>
+              <View key={`empty-${ci}`} style={s.weekCardEmpty} />
+            )
+          )}
+        </View>
       ))}
     </View>
   );
 }
 
-// ─── Activity table ───────────────────────────────────────────────────────────
+function WeekCard({
+  week,
+  onDayPress,
+}: {
+  week: WeekEntry;
+  onDayPress: (day: number, unitId: string, status: DayStatus) => void;
+}) {
+  const doneCount = week.days.filter((d) => d.status === "done").length;
+  const weekPct =
+    week.days.length > 0
+      ? Math.round((doneCount / week.days.length) * 100)
+      : 0;
 
-const STATUS: Record<string, { bg: string; color: string; label: string }> = {
-  done:          { bg: "#D1FAE5", color: "#065F46", label: "Done"        },
-  "in-progress": { bg: o.bgTint,  color: o.deep,    label: "In Progress" },
-  new:           { bg: "#E0F2FE", color: "#0369A1", label: "New"         },
-};
-
-function ActivityTable() {
   return (
-    <View style={s.actBox}>
-      <View style={s.actHead}>
-        {["LESSON", "SUBJECT", "TIME", "STATUS"].map((h) => (
-          <Text key={h} style={s.actHeadTxt}>{h}</Text>
-        ))}
+    <View style={s.weekCard}>
+      <View style={[s.weekAccent, { backgroundColor: week.color }]} />
+      <View style={s.weekInner}>
+        <View style={s.weekHeaderRow}>
+          <Text style={s.weekEmoji}>{week.emoji}</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={s.weekLabel}>WEEK {week.weekNum}</Text>
+            <Text style={s.weekTitle}>{week.title}</Text>
+          </View>
+          <Text style={[s.weekCount, { color: week.color }]}>
+            {doneCount}/{week.days.length}
+          </Text>
+        </View>
+        <Text style={s.weekGoal}>{week.goal}</Text>
+        <View style={s.weekMiniBar}>
+          <View
+            style={[
+              s.weekMiniFill,
+              {
+                width: `${Math.max(weekPct, weekPct > 0 ? 4 : 0)}%` as any,
+                backgroundColor: week.color,
+              },
+            ]}
+          />
+        </View>
+        <View style={s.daysList}>
+          {week.days.map((d) => {
+            const isCurrent = d.status === "current";
+            const isDone = d.status === "done";
+            const isLocked = d.status === "locked";
+            return (
+              <TouchableOpacity
+                key={d.day}
+                style={[s.dayRow, isCurrent && s.dayRowCurrent]}
+                onPress={() => onDayPress(d.day, d.unitId, d.status)}
+                activeOpacity={isLocked ? 1 : 0.7}
+                disabled={isLocked}
+              >
+                <View
+                  style={[
+                    s.dayCircle,
+                    isDone && [s.dayCircleDone, { backgroundColor: week.color }],
+                    isCurrent && [s.dayCircleCurrent, { borderColor: week.color }],
+                    isLocked && s.dayCircleLocked,
+                  ]}
+                >
+                  {isDone ? (
+                    <Text style={s.dayCheck}>✓</Text>
+                  ) : (
+                    <Text
+                      style={[
+                        s.dayNum,
+                        isCurrent && [s.dayNumCurrent, { color: week.color }],
+                        isLocked && s.dayNumLocked,
+                      ]}
+                    >
+                      {d.day}
+                    </Text>
+                  )}
+                </View>
+                <Text
+                  style={[s.dayTitle, isLocked && s.dayTitleLocked]}
+                  numberOfLines={1}
+                >
+                  {d.title}
+                </Text>
+                {isCurrent && (
+                  <Text style={[s.currentPill, { color: week.color }]}>Now</Text>
+                )}
+                {isLocked && <Text style={s.lockIcon}>🔒</Text>}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
-      {ACTIVITY.map((item, i) => {
-        const st = STATUS[item.status];
-        return (
-          <TouchableOpacity
-            key={item.id}
-            style={[s.actRow, i === ACTIVITY.length - 1 && { borderBottomWidth: 0 }]}
-            activeOpacity={0.75}
-          >
-            <View style={s.actCell}>
-              <View style={s.actIco}>
-                <Text style={{ fontSize: 16 }}>{item.emoji}</Text>
-              </View>
-              <View>
-                <Text style={s.actName}>{item.name}</Text>
-                <Text style={s.actChapter}>{item.chapter}</Text>
-              </View>
-            </View>
-            <Text style={s.actSubject}>{item.subject}</Text>
-            <Text style={s.actTime}>{item.time}</Text>
-            <View style={[s.actBadge, { backgroundColor: st.bg }]}>
-              <Text style={[s.actBadgeTxt, { color: st.color }]}>{st.label}</Text>
-            </View>
-          </TouchableOpacity>
-        );
-      })}
+    </View>
+  );
+}
+
+// ─── Streak-at-risk banner ────────────────────────────────────────────────────
+
+function StreakRiskBanner({
+  streakDays,
+  expiresInHours,
+  shieldCount,
+}: {
+  streakDays: number;
+  expiresInHours: number;
+  shieldCount: number;
+}) {
+  return (
+    <View style={s.riskBanner}>
+      <Text>⚠️</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={s.riskTitle}>
+          Your {streakDays}-day streak is at risk!
+        </Text>
+        <Text style={s.riskHint}>
+          Complete a lesson in the next {expiresInHours}h.
+          {shieldCount > 0
+            ? ` ${shieldCount} shield${shieldCount !== 1 ? "s" : ""} ready.`
+            : ""}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -294,42 +470,103 @@ function ActivityTable() {
 
 export default function HomeDesktopScreen() {
   const [activeNav, setActiveNav] = useState("home");
-  const [filter, setFilter] = useState<SubjectFilter>("All");
   const [search, setSearch] = useState("");
 
+  const { user } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: activeSlug } = useActiveProgramSlug();
+  const programSlug = activeSlug ?? "ai-operator";
+  const { data: program } = useProgram(programSlug);
+  const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
+  const { data: completedUnitIds } = useLessonProgressMap(user?.id);
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+  const { data: streakRisk } = useStreakAtRisk(user?.id);
+
+  const allCompletedIds = new Set<string>([
+    ...(completedUnitIds ?? new Set<string>()),
+    ...localCompletedIds,
+  ]);
+
+  const fallbackUnits =
+    LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"] ?? [];
+  const displayUnits = units ?? fallbackUnits;
+  const completedCount = allCompletedIds.size;
+  const totalUnits = displayUnits.length || 28;
+  const overallPct = Math.round((completedCount / totalUnits) * 100);
+
+  const currentUnit = displayUnits.find((u, i) => {
+    if (allCompletedIds.has(u.id)) return false;
+    if (i === 0) return true;
+    const prev = displayUnits[i - 1];
+    return prev != null && allCompletedIds.has(prev.id);
+  });
+
+  const handleDayPress = (day: number, unitId: string, status: DayStatus) => {
+    if (status === "locked") return;
+    router.push({
+      pathname: `/lesson/${unitId}` as any,
+      params: { program: programSlug, day: String(day) },
+    });
+  };
+
+  const initials = getInitials(profile?.name, profile?.email ?? user?.email);
+  const firstName = getFirstName(profile?.name, profile?.email ?? user?.email);
+  const fullName = profile?.name ?? firstName;
+  const handle = profile?.email ? `@${profile.email.split("@")[0]}` : "";
+  const xp = profile?.xp ?? 0;
+  const level = profile?.level ?? 1;
+  const streak = profile?.streak ?? 0;
+
   const hour = new Date().getHours();
-  const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
   return (
     <View style={s.root}>
       {/* ── Top bar ── */}
       <View style={s.topBar}>
         <View style={s.topLeft}>
-          <View style={s.tbIco}><Text style={s.tbIcoTxt}>◈</Text></View>
-          <Text style={s.tbBrand}>EduApp</Text>
+          <View style={s.tbIco}>
+            <Text style={s.tbIcoTxt}>◈</Text>
+          </View>
+          <Text style={s.tbBrand}>Turbo Learning</Text>
         </View>
         <View style={s.searchBox}>
           <Text style={{ fontSize: 14, opacity: 0.35 }}>🔍</Text>
           <TextInput
             style={s.searchInput}
-            placeholder="Search subjects, topics…"
+            placeholder="Search lessons, topics…"
             placeholderTextColor={o.dim}
             value={search}
             onChangeText={setSearch}
           />
         </View>
         <View style={s.topRight}>
-          <Text style={s.topStreak}>🔥 {MOCK_USER.streak}-day streak</Text>
-          <TouchableOpacity style={s.topBell}>
-            <Text style={{ fontSize: 14 }}>🔔</Text>
-            {MOCK_USER.notifications > 0 && <View style={s.topBellDot} />}
-          </TouchableOpacity>
+          {streak > 0 && (
+            <Text style={s.topStreak}>🔥 {streak}-day streak</Text>
+          )}
         </View>
       </View>
 
       {/* ── Shell ── */}
       <View style={s.shell}>
-        <Sidebar activeNav={activeNav} onNav={setActiveNav} />
+        {/* Sidebar */}
+        {profileLoading ? (
+          <View style={[s.sidebar, { justifyContent: "center", alignItems: "center" }]}>
+            <ActivityIndicator color={o.mid} />
+          </View>
+        ) : (
+          <Sidebar
+            activeNav={activeNav}
+            onNav={setActiveNav}
+            initials={initials}
+            name={fullName}
+            handle={handle}
+            level={level}
+            xp={xp}
+            streak={streak}
+          />
+        )}
 
         {/* Main */}
         <ScrollView
@@ -339,50 +576,66 @@ export default function HomeDesktopScreen() {
         >
           {/* Greeting */}
           <View style={s.greetRow}>
-            <Text style={s.greetTitle}>{greeting}, Alexandra! 👋</Text>
-            <Text style={s.greetSub}>Ready to make waves today?</Text>
+            <Text style={s.greetTitle}>{greeting}, {firstName}! 👋</Text>
+            <Text style={s.greetSub}>
+              {program?.title ?? "AI Operator"} · {completedCount}/{totalUnits} days complete
+            </Text>
           </View>
+
+          {/* Streak-at-risk */}
+          {streakRisk?.isAtRisk && (
+            <StreakRiskBanner
+              streakDays={streakRisk.streakDays}
+              expiresInHours={streakRisk.expiresInHours}
+              shieldCount={streakRisk.shieldCount}
+            />
+          )}
 
           {/* Hero */}
-          <HeroBanner />
+          {currentUnit ? (
+            <HeroBanner
+              title={currentUnit.title}
+              subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.order_num}`}
+              unitId={currentUnit.id}
+              programSlug={programSlug}
+              dayNum={currentUnit.order_num}
+              overallPct={overallPct}
+            />
+          ) : displayUnits.length > 0 ? (
+            <AllDoneBanner total={totalUnits} />
+          ) : null}
 
-          {/* Explore */}
+          {/* Journey */}
           <View style={s.secHdr}>
-            <Text style={s.secTitle}>Explore Subjects</Text>
-            <TouchableOpacity activeOpacity={0.7}>
-              <Text style={s.seeAll}>See all →</Text>
-            </TouchableOpacity>
+            <Text style={s.secTitle}>Your Journey</Text>
+            <Text style={s.journeyCount}>{completedCount}/{totalUnits} days</Text>
           </View>
 
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={s.filterRow}
-          >
-            {FILTERS.map((f) => (
-              <TouchableOpacity
-                key={f}
-                style={[s.pill, filter === f && s.pillActive]}
-                onPress={() => setFilter(f)}
-                activeOpacity={0.75}
-              >
-                <Text style={[s.pillTxt, filter === f && s.pillTxtActive]}>{f}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-
-          <SubjectGrid filter={filter} />
-
-          {/* Activity */}
-          <View style={[s.secHdr, { marginTop: spacing.lg }]}>
-            <Text style={s.secTitle}>Recent Activity</Text>
-            <TouchableOpacity activeOpacity={0.7}>
-              <Text style={s.seeAll}>See all →</Text>
-            </TouchableOpacity>
+          {/* Overall progress bar */}
+          <View style={s.overallBar}>
+            <View
+              style={[
+                s.overallFill,
+                { width: `${Math.max(overallPct, overallPct > 0 ? 2 : 0)}%` as any },
+              ]}
+            />
           </View>
 
-          <ActivityTable />
-          <View style={{ height: 32 }} />
+          {displayUnits.length > 0 ? (
+            <WeeksGrid
+              units={displayUnits as any}
+              completedUnitIds={allCompletedIds}
+              programSlug={programSlug}
+              onDayPress={handleDayPress}
+            />
+          ) : (
+            <View style={{ alignItems: "center", paddingVertical: 40, gap: 10 }}>
+              <ActivityIndicator color={o.mid} />
+              <Text style={{ fontSize: 13, color: o.muted }}>Loading program…</Text>
+            </View>
+          )}
+
+          <View style={{ height: 40 }} />
         </ScrollView>
       </View>
     </View>
@@ -391,7 +644,7 @@ export default function HomeDesktopScreen() {
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
-const SIDEBAR_W = 218;
+const SIDEBAR_W = 230;
 
 const AQUA_SHADOW = {
   shadowColor: o.bright,
@@ -415,7 +668,7 @@ const s = StyleSheet.create({
     paddingHorizontal: 20,
     gap: 16,
   },
-  topLeft:  { flexDirection: "row", alignItems: "center", gap: 8, width: SIDEBAR_W - 20 },
+  topLeft: { flexDirection: "row", alignItems: "center", gap: 8, width: SIDEBAR_W - 20 },
   tbIco: {
     width: 26, height: 26, borderRadius: 8,
     backgroundColor: o.mid,
@@ -444,18 +697,6 @@ const s = StyleSheet.create({
   },
   topRight:  { flexDirection: "row", alignItems: "center", gap: 12 },
   topStreak: { fontSize: 12, fontWeight: fontWeight.bold, color: o.streakText },
-  topBell: {
-    width: 30, height: 30, borderRadius: 9,
-    backgroundColor: o.bg,
-    borderWidth: 1.5, borderColor: o.border,
-    justifyContent: "center", alignItems: "center",
-  },
-  topBellDot: {
-    position: "absolute", top: 5, right: 5,
-    width: 7, height: 7, borderRadius: 4,
-    backgroundColor: "#F87171",
-    borderWidth: 1.5, borderColor: o.card,
-  },
 
   // ── Shell
   shell: { flex: 1, flexDirection: "row" },
@@ -463,7 +704,7 @@ const s = StyleSheet.create({
   // ── Sidebar
   sidebar: {
     width: SIDEBAR_W,
-    backgroundColor: o.sideBar,
+    backgroundColor: o.card,
     borderRightWidth: 1,
     borderRightColor: o.border,
     padding: 16,
@@ -505,11 +746,17 @@ const s = StyleSheet.create({
   },
   lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
 
-  xpRow:   { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
-  xpRowLbl:{ fontSize: 10, fontWeight: fontWeight.semibold, color: o.mid },
-  xpRowPct:{ fontSize: 10, color: o.muted },
-  xpTrack: { height: 8, backgroundColor: o.bgTint, borderRadius: radius.pill, overflow: "hidden", position: "relative" },
-  xpFill:  { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
+  xpRow:    { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
+  xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: o.mid },
+  xpRowPct: { fontSize: 10, color: o.muted },
+  xpTrack: {
+    height: 8,
+    backgroundColor: o.bgTint,
+    borderRadius: radius.pill,
+    overflow: "hidden",
+    position: "relative",
+  },
+  xpFill:   { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
   xpShimmer: {
     position: "absolute",
     width: 5, height: "100%",
@@ -542,16 +789,30 @@ const s = StyleSheet.create({
     borderWidth: 1, borderColor: o.border,
     alignItems: "center",
   },
-  statVal: { fontSize: 15, fontWeight: fontWeight.black, color: o.text },
+  statVal: { fontSize: 14, fontWeight: fontWeight.black, color: o.text },
   statLbl: { fontSize: 9, color: o.muted, marginTop: 2 },
 
   // ── Main
   main:        { flex: 1 },
-  mainContent: { padding: spacing.lg, gap: 20 },
+  mainContent: { padding: spacing.lg, gap: 18 },
 
   greetRow:   { gap: 3 },
   greetTitle: { fontSize: 22, fontWeight: fontWeight.black, color: o.text, letterSpacing: -0.5 },
   greetSub:   { fontSize: 13, color: o.muted },
+
+  // ── Streak-at-risk
+  riskBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: "#FFF7ED",
+    borderWidth: 1.5,
+    borderColor: "#FED7AA",
+    borderRadius: radius.lg,
+    padding: 14,
+  },
+  riskTitle: { fontSize: 13, fontWeight: fontWeight.bold, color: "#92400E", marginBottom: 2 },
+  riskHint:  { fontSize: 11, color: "#B45309" },
 
   // ── Hero banner
   hero: {
@@ -559,7 +820,7 @@ const s = StyleSheet.create({
     borderRadius: 22,
     flexDirection: "row",
     overflow: "hidden",
-    minHeight: 180,
+    minHeight: 170,
     shadowColor: o.deep,
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.28,
@@ -569,11 +830,11 @@ const s = StyleSheet.create({
   caustic: { position: "absolute", borderRadius: 9999 },
   cA: { width: 280, height: 280, top: -100, right: -80,  backgroundColor: "rgba(255,255,255,0.05)" },
   cB: { width: 160, height: 160, bottom: -60, left: -20, backgroundColor: "rgba(255,255,255,0.06)" },
-  cC: { width: 90,  height: 90,  top: 20,  right: 100,   backgroundColor: "rgba(255,255,255,0.08)" },
-  cD: { width: 55,  height: 55,  top: 65,  right: 55,    backgroundColor: "rgba(255,255,255,0.10)" },
+  cC: { width: 90,  height: 90,  top: 20, right: 100,    backgroundColor: "rgba(255,255,255,0.08)" },
+  cD: { width: 55,  height: 55,  top: 65, right: 55,     backgroundColor: "rgba(255,255,255,0.10)" },
 
   heroLeft:  { flex: 1, padding: 28, justifyContent: "space-between" },
-  heroRight: { width: 120 },
+  heroRight: { width: 100 },
 
   heroTag: {
     alignSelf: "flex-start",
@@ -584,21 +845,14 @@ const s = StyleSheet.create({
   },
   heroTagTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)", letterSpacing: 0.8 },
   heroTitle:  {
-    fontSize: 26, fontWeight: fontWeight.black, color: "#FFF",
-    lineHeight: 31, marginBottom: 5, letterSpacing: -0.5,
+    fontSize: 24, fontWeight: fontWeight.black, color: "#FFF",
+    lineHeight: 29, marginBottom: 5, letterSpacing: -0.5,
   },
   heroSub:    { fontSize: 12, color: "rgba(255,255,255,0.62)", fontWeight: fontWeight.medium, marginBottom: 12 },
-  heroChips:  { flexDirection: "row", gap: 7, flexWrap: "wrap" as any },
-  heroChip:   {
-    backgroundColor: "rgba(255,255,255,0.13)",
-    borderRadius: radius.pill,
-    paddingHorizontal: 10, paddingVertical: 4,
-  },
-  heroChipTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)" },
-  heroBottom:  { flexDirection: "row", alignItems: "center", gap: 12 },
-  heroPTrack:  { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: radius.pill, overflow: "hidden" },
-  heroPFill:   { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
-  heroPct:     { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
+  heroBottom: { flexDirection: "row", alignItems: "center", gap: 12 },
+  heroPTrack: { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: radius.pill, overflow: "hidden" },
+  heroPFill:  { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
+  heroPct:    { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
   heroCta: {
     backgroundColor: "#FFF",
     borderRadius: 11,
@@ -606,62 +860,85 @@ const s = StyleSheet.create({
   },
   heroCtaTxt: { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.heroCtaText },
 
-  // ── Section headers
-  secHdr:   { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  secTitle: { fontSize: 16, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
-  seeAll:   { fontSize: 12, fontWeight: fontWeight.semibold, color: o.mid },
+  // ── Section header
+  secHdr:       { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  secTitle:     { fontSize: 16, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
+  journeyCount: { fontSize: 13, fontWeight: fontWeight.semibold, color: o.mid },
 
-  // ── Filter pills
-  filterRow:     { gap: 7, paddingBottom: 14 },
-  pill:          { borderRadius: radius.pill, paddingHorizontal: 15, paddingVertical: 7, backgroundColor: o.card, borderWidth: 1.5, borderColor: o.border },
-  pillActive:    { backgroundColor: o.mid, borderColor: o.mid },
-  pillTxt:       { fontSize: 11, fontWeight: fontWeight.bold, color: o.muted },
-  pillTxtActive: { color: "#FFF" },
+  // Overall progress bar
+  overallBar:  { height: 6, backgroundColor: o.bgTint, borderRadius: radius.pill, overflow: "hidden" },
+  overallFill: { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
 
-  // ── Subject grid (3-col)
-  subGrid: { flexDirection: "row", flexWrap: "wrap" as any, gap: 12 },
-  subCard: {
-    width: "31%" as any,
+  // ── Weeks grid (2-col)
+  weeksGrid: { gap: 14 },
+  weeksRow:  { flexDirection: "row", gap: 14 },
+  weekCardEmpty: { flex: 1 },
+
+  weekCard: {
+    flex: 1,
     backgroundColor: o.card,
-    borderRadius: 16,
+    borderRadius: radius.xl,
     overflow: "hidden",
+    flexDirection: "row",
     ...AQUA_SHADOW,
   },
-  subTop:  { height: 80, justifyContent: "center", alignItems: "center", position: "relative", overflow: "hidden" },
-  sc1: { position: "absolute", width: 80, height: 80, borderRadius: 40, top: -24, right: -20 },
-  sc2: { position: "absolute", width: 46, height: 46, borderRadius: 23, bottom: -14, left: 8  },
-  sc3: { position: "absolute", width: 32, height: 32, borderRadius: 16, top: 8, right: 32, backgroundColor: "rgba(255,255,255,0.10)" },
-  subEmoji:  { fontSize: 30, zIndex: 1 },
-  subBody:   { padding: 10 },
-  subName:   { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.text, marginBottom: 2 },
-  subCount:  { fontSize: 10, color: o.muted, marginBottom: 7 },
-  subPTrack: { height: 4, backgroundColor: o.bgTint, borderRadius: radius.pill, overflow: "hidden" },
-  subPFill:  { height: "100%", borderRadius: radius.pill },
-  subLock:   { fontSize: 9, fontWeight: fontWeight.bold, color: o.dim, marginTop: 4 },
+  weekAccent: { width: 4 },
+  weekInner:  { flex: 1, padding: 14 },
 
-  // ── Activity table
-  actBox: { backgroundColor: o.card, borderRadius: 16, overflow: "hidden", ...AQUA_SHADOW },
-  actHead: {
+  weekHeaderRow: {
     flexDirection: "row",
-    paddingVertical: 10, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: o.bg,
+    alignItems: "center",
+    gap: 9,
+    marginBottom: 4,
   },
-  actHeadTxt: {
-    flex: 1, fontSize: 9, fontWeight: fontWeight.bold,
-    color: o.dim, letterSpacing: 1.2,
+  weekEmoji: { fontSize: 20 },
+  weekLabel: {
+    fontSize: 8, fontWeight: fontWeight.bold, color: o.dim,
+    letterSpacing: 1.5,
     textTransform: "uppercase" as any,
   },
-  actRow: {
-    flexDirection: "row", alignItems: "center",
-    paddingVertical: 12, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: o.bg,
+  weekTitle: { fontSize: 13, fontWeight: fontWeight.extrabold, color: o.text },
+  weekCount: { fontSize: 12, fontWeight: fontWeight.bold },
+
+  weekGoal: { fontSize: 11, color: o.muted, marginBottom: 8 },
+
+  weekMiniBar: {
+    height: 4,
+    backgroundColor: o.bgTint,
+    borderRadius: radius.pill,
+    overflow: "hidden",
+    marginBottom: 10,
   },
-  actCell:    { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 },
-  actIco:     { width: 34, height: 34, borderRadius: 10, backgroundColor: o.bgTint, justifyContent: "center", alignItems: "center" },
-  actName:    { fontSize: 13, fontWeight: fontWeight.bold, color: o.text },
-  actChapter: { fontSize: 10, color: o.muted, marginTop: 1 },
-  actSubject: { flex: 1, fontSize: 12, color: o.muted, fontWeight: fontWeight.medium },
-  actTime:    { flex: 1, fontSize: 11, color: o.dim },
-  actBadge:   { borderRadius: 7, paddingHorizontal: 10, paddingVertical: 4 },
-  actBadgeTxt:{ fontSize: 10, fontWeight: fontWeight.bold },
+  weekMiniFill: { height: "100%", borderRadius: radius.pill },
+
+  // ── Day rows
+  daysList: { gap: 1 },
+  dayRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+    borderRadius: 9,
+  },
+  dayRowCurrent: { backgroundColor: o.bgTint },
+
+  dayCircle: {
+    width: 28, height: 28, borderRadius: 14,
+    borderWidth: 2, borderColor: o.border,
+    justifyContent: "center", alignItems: "center",
+  },
+  dayCircleDone:    { borderWidth: 0 },
+  dayCircleCurrent: { borderWidth: 2 },
+  dayCircleLocked:  { borderColor: o.bgTint, backgroundColor: o.bgTint },
+
+  dayCheck:       { fontSize: 12, color: "#FFF", fontWeight: fontWeight.black },
+  dayNum:         { fontSize: 10, fontWeight: fontWeight.bold, color: o.muted },
+  dayNumCurrent:  { fontWeight: fontWeight.extrabold },
+  dayNumLocked:   { color: o.dim },
+
+  dayTitle:       { flex: 1, fontSize: 11, fontWeight: fontWeight.semibold, color: o.text },
+  dayTitleLocked: { color: o.dim },
+  currentPill:    { fontSize: 9, fontWeight: fontWeight.bold },
+  lockIcon:       { fontSize: 12, opacity: 0.4 },
 });

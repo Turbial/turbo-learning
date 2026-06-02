@@ -1,9 +1,8 @@
-// ─── Home Screen — Ocean / Aqua theme, feed layout ───────────────────────
-// Light, fluid, "looking through water" aesthetic.
-// Mobile: full-width stacked subject cards (feed), caustic-light overlays.
+// ─── Home Screen — Ocean / Aqua theme, real Supabase data ────────────────────
+// Mobile: full-width feed (header → XP bar → hero → 28-day journey).
 // Switches to HomeDesktopScreen on web ≥ 768 px.
 
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -14,77 +13,83 @@ import {
   StatusBar,
   Platform,
   useWindowDimensions,
+  ActivityIndicator,
 } from "react-native";
 import { router } from "expo-router";
 import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
 import { appPalette as o } from "../../src/theme/palette";
+import { Skeleton } from "../../src/components/ui/LoadingSkeleton";
 
-// ─── Mock data ────────────────────────────────────────────────────────────────
+// ─── Real data hooks ──────────────────────────────────────────────────────────
+import { useAuth } from "../../src/data/useAuth";
+import {
+  useProfile,
+  useUnits,
+  useProgram,
+  useLessonProgressMap,
+  useActiveProgramSlug,
+} from "../../src/data/queries";
+import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
+import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
 
-const MOCK_USER = {
-  initials: "JD",
-  name: "Jordan",
-  level: 24,
-  xp: 3692,
-  xpToNextLevel: 308,
-  xpForNextLevel: 4000,
-  streak: 7,
-  notifications: 2,
-};
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
-const MOCK_HERO = {
-  tag: "Continue Learning",
-  title: "Quadratic\nEquations",
-  subtitle: "Mathematics · Chapter 4 of 8",
-  timeLabel: "5–7 min",
-  difficulty: "Medium",
-  xpReward: "+250 XP",
-  progress: 0.78,
-  lessonId: "lesson-quadratic-1",
-};
+function getInitials(name?: string | null, email?: string | null): string {
+  if (name) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2)
+      return (parts[0][0]! + parts[parts.length - 1]![0]!).toUpperCase();
+    return (parts[0]![0] ?? "?").toUpperCase();
+  }
+  if (email) return email[0]!.toUpperCase();
+  return "?";
+}
 
-type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logic";
-const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic"];
+function getFirstName(name?: string | null, email?: string | null): string {
+  if (name) return name.trim().split(/\s+/)[0]!;
+  if (email) return email.split("@")[0]!;
+  return "Learner";
+}
 
-const SUBJECTS = [
-  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.62, ...o.subjects[0], category: "Math"     as SubjectFilter, locked: false },
-  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.35, ...o.subjects[1], category: "Science"  as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.48, ...o.subjects[2], category: "Language" as SubjectFilter, locked: false },
-  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, ...o.subjects[3], category: "History"  as SubjectFilter, locked: false },
-  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    ...o.subjects[4], category: "Logic"    as SubjectFilter, locked: true  },
-];
+// XP per level is linear — 1000 XP each.
+const XP_PER_LEVEL = 1000;
 
-const ACTIVITY = [
-  { id: "a1", emoji: "📐", name: "Linear Equations",  subject: "Mathematics",   time: "2h ago",    status: "done"        },
-  { id: "a2", emoji: "🔬", name: "Cell Biology",       subject: "Science Lab",   time: "5h ago",    status: "in-progress" },
-  { id: "a3", emoji: "📖", name: "Essay Structure",    subject: "Language Arts", time: "Yesterday", status: "done"        },
-];
+// ─── Week color palette (aqua variants for ocean theme) ───────────────────────
+const WEEK_COLORS = [o.mid, o.teal, o.sky, o.deep] as const;
+const WEEK_TITLES = ["Foundation", "Automation", "Systems", "Launch"] as const;
+const WEEK_GOALS = [
+  "Understand AI and build your first workflows",
+  "Build automations that run without you",
+  "Create multi-tool AI systems",
+  "Ship your AI workforce",
+] as const;
+const WEEK_EMOJIS = ["🧱", "⚙️", "🌐", "🚀"] as const;
 
 // ─── Components ───────────────────────────────────────────────────────────────
 
 function Avatar({ initials }: { initials: string }) {
   return (
     <View style={s.avatar}>
-      {/* glint circle — simulates light catching water surface */}
       <View style={s.avatarGlint} />
       <Text style={s.avatarTxt}>{initials}</Text>
     </View>
   );
 }
 
-function XPBar() {
-  const u = MOCK_USER;
-  const pct = Math.round(Math.min(u.xp / u.xpForNextLevel, 1) * 100);
+function XPBar({ xp, level }: { xp: number; level: number }) {
+  const xpInLevel = xp % XP_PER_LEVEL;
+  const pct = Math.round(Math.min((xpInLevel / XP_PER_LEVEL) * 100, 100));
+  const xpToNext = XP_PER_LEVEL - xpInLevel;
   return (
     <View style={s.xpCard}>
       <View style={s.xpLeft}>
-        <Text style={s.xpLevel}>⭐ Level {u.level}</Text>
-        <Text style={s.xpSub}>{u.xpToNextLevel} XP to next level</Text>
+        <Text style={s.xpLevel}>⭐ Level {level}</Text>
+        <Text style={s.xpSub}>{xpToNext} XP to next level</Text>
       </View>
       <View style={s.xpRight}>
         <View style={s.xpTrack}>
           <View style={[s.xpFill, { width: `${pct}%` as any }]} />
-          {/* water-surface shimmer at fill edge */}
           <View style={[s.xpShimmer, { left: `${Math.max(pct - 3, 0)}%` as any }]} />
         </View>
         <Text style={s.xpPct}>{pct}%</Text>
@@ -93,42 +98,75 @@ function XPBar() {
   );
 }
 
-function HeroCard() {
-  const h = MOCK_HERO;
-  const pct = Math.round(h.progress * 100);
+function StreakRiskBanner({
+  streakDays,
+  expiresInHours,
+  shieldCount,
+}: {
+  streakDays: number;
+  expiresInHours: number;
+  shieldCount: number;
+}) {
+  return (
+    <View style={s.riskBanner}>
+      <Text style={s.riskIcon}>⚠️</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={s.riskTitle}>Your {streakDays}-day streak is at risk!</Text>
+        <Text style={s.riskHint}>
+          Complete a lesson in the next {expiresInHours}h.
+          {shieldCount > 0
+            ? ` ${shieldCount} shield${shieldCount !== 1 ? "s" : ""} ready.`
+            : ""}
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+function HeroCard({
+  title,
+  subtitle,
+  unitId,
+  programSlug,
+  dayNum,
+  overallPct,
+}: {
+  title: string;
+  subtitle: string;
+  unitId: string;
+  programSlug: string;
+  dayNum: number;
+  overallPct: number;
+}) {
   return (
     <TouchableOpacity
       style={s.hero}
       activeOpacity={0.92}
-      onPress={() => router.push(`/lesson/${h.lessonId}` as any)}
+      onPress={() =>
+        router.push({
+          pathname: `/lesson/${unitId}` as any,
+          params: { program: programSlug, day: String(dayNum) },
+        })
+      }
     >
-      {/* Caustic light rings — the underwater refraction effect */}
+      {/* Caustic light rings */}
       <View style={[s.caustic, s.cA]} />
       <View style={[s.caustic, s.cB]} />
       <View style={[s.caustic, s.cC]} />
       <View style={[s.caustic, s.cD]} />
 
-      {/* Content */}
       <View style={s.heroTag}>
-        <Text style={s.heroTagTxt}>🌊  {h.tag.toUpperCase()}</Text>
+        <Text style={s.heroTagTxt}>🌊  CONTINUE LEARNING</Text>
       </View>
 
-      <Text style={s.heroTitle}>{h.title}</Text>
-      <Text style={s.heroSub}>{h.subtitle}</Text>
-
-      <View style={s.heroChips}>
-        {[`⏱ ${h.timeLabel}`, `📊 ${h.difficulty}`, `⭐ ${h.xpReward}`].map((c) => (
-          <View key={c} style={s.heroChip}>
-            <Text style={s.heroChipTxt}>{c}</Text>
-          </View>
-        ))}
-      </View>
+      <Text style={s.heroTitle}>{title}</Text>
+      <Text style={s.heroSub}>{subtitle}</Text>
 
       <View style={s.heroPRow}>
         <View style={s.heroPTrack}>
-          <View style={[s.heroPFill, { width: `${pct}%` as any }]} />
+          <View style={[s.heroPFill, { width: `${overallPct}%` as any }]} />
         </View>
-        <Text style={s.heroPct}>{pct}%</Text>
+        <Text style={s.heroPct}>{overallPct}%</Text>
       </View>
 
       <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
@@ -138,97 +176,263 @@ function HeroCard() {
   );
 }
 
-function SubjectCard({ item }: { item: (typeof SUBJECTS)[0] }) {
+function AllDoneCard({ total }: { total: number }) {
   return (
-    <TouchableOpacity
-      style={[s.subCard, item.locked && s.subCardLocked]}
-      activeOpacity={item.locked ? 1 : 0.88}
-      disabled={item.locked}
-    >
-      {/* Coloured top panel with caustics */}
-      <View style={[s.subTop, { backgroundColor: item.bg }]}>
-        <View style={[s.sc1, { backgroundColor: item.glow + "45" }]} />
-        <View style={[s.sc2, { backgroundColor: item.glow + "28" }]} />
-        <View style={s.sc3} />
-        <Text style={s.subEmoji}>{item.emoji}</Text>
-        {!item.locked && (
-          <View style={s.subXpChip}>
-            <Text style={s.subXpTxt}>+XP</Text>
-          </View>
-        )}
-        {item.locked && (
-          <View style={s.subLockOverlay}>
-            <Text style={{ fontSize: 20 }}>🔒</Text>
-            <Text style={s.subLockedTxt}>LOCKED</Text>
-          </View>
-        )}
+    <View style={s.hero}>
+      <View style={[s.caustic, s.cA]} />
+      <View style={[s.caustic, s.cB]} />
+      <View style={[s.caustic, s.cC]} />
+      <View style={[s.caustic, s.cD]} />
+      <View style={s.heroTag}>
+        <Text style={s.heroTagTxt}>🎉  PROGRAM COMPLETE</Text>
       </View>
-
-      {/* Card body */}
-      <View style={s.subBody}>
-        <View style={{ flex: 1 }}>
-          <Text style={s.subName}>{item.name}</Text>
-          <Text style={s.subCount}>{item.count}</Text>
-        </View>
-        {!item.locked ? (
-          <View style={s.subMeta}>
-            <View style={s.subPTrack}>
-              <View
-                style={[s.subPFill, {
-                  width: `${Math.round(item.progress * 100)}%` as any,
-                  backgroundColor: item.bg,
-                }]}
-              />
-            </View>
-            <Text style={[s.subPct, { color: item.bg }]}>
-              {Math.round(item.progress * 100)}%
-            </Text>
-            <Text style={[s.subArrow, { color: item.bg }]}>→</Text>
-          </View>
-        ) : (
-          <Text style={s.subLockLabel}>COMING SOON</Text>
-        )}
-      </View>
-    </TouchableOpacity>
-  );
-}
-
-function ActivityRow({ item }: { item: (typeof ACTIVITY)[0] }) {
-  const done = item.status === "done";
-  return (
-    <View style={s.actCard}>
-      <View style={s.actIcon}>
-        <Text style={{ fontSize: 20 }}>{item.emoji}</Text>
-      </View>
-      <View style={s.actInfo}>
-        <Text style={s.actName}>{item.name}</Text>
-        <Text style={s.actSub}>{item.subject} · {item.time}</Text>
-      </View>
-      <View style={[s.actBadge, done ? s.badgeDone : s.badgeProg]}>
-        <Text style={[s.actBadgeTxt, done ? s.badgeDoneTxt : s.badgeProgTxt]}>
-          {done ? "✓ Done" : "In Progress"}
-        </Text>
-      </View>
+      <Text style={s.heroTitle}>You finished all {total} days!</Text>
+      <Text style={s.heroSub}>Incredible work. Check back for new programs.</Text>
     </View>
   );
 }
 
-// ─── Screen ───────────────────────────────────────────────────────────────────
+// ─── WeeksView — 4×7 days journey ─────────────────────────────────────────────
 
-export default function HomeScreen() {
-  const { width } = useWindowDimensions();
-  const [filter, setFilter] = useState<SubjectFilter>("All");
+type DayStatus = "done" | "current" | "locked";
+type DayEntry = { day: number; unitId: string; title: string; status: DayStatus };
+type WeekEntry = {
+  weekNum: number;
+  title: string;
+  goal: string;
+  emoji: string;
+  color: string;
+  days: DayEntry[];
+};
 
-  // Swap to desktop layout on web
-  if (Platform.OS === "web" && width >= 768) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const Desktop = require("./HomeDesktop").default;
-    return <Desktop />;
+function WeeksView({
+  units,
+  completedUnitIds,
+  programSlug,
+  onDayPress,
+}: {
+  units: Array<{ id: string; order_num: number; label: string; title: string; program_id: string }>;
+  completedUnitIds: Set<string>;
+  programSlug: string;
+  onDayPress: (day: number, unitId: string, status: DayStatus) => void;
+}) {
+  const weeks: WeekEntry[] = [];
+
+  for (let w = 0; w < 4; w++) {
+    const startDay = w * 7 + 1;
+    const endDay = Math.min(startDay + 6, 28);
+    const weekUnits = units.filter(
+      (u) => u.order_num >= startDay && u.order_num <= endDay
+    );
+
+    weeks.push({
+      weekNum: w + 1,
+      title: WEEK_TITLES[w] ?? `Week ${w + 1}`,
+      goal: WEEK_GOALS[w] ?? "",
+      emoji: WEEK_EMOJIS[w] ?? "📅",
+      color: WEEK_COLORS[w] ?? o.mid,
+      days: weekUnits.map((u) => {
+        const isDone = completedUnitIds.has(u.id);
+        const prevUnit =
+          u.order_num > 1
+            ? units.find((pu) => pu.order_num === u.order_num - 1)
+            : null;
+        const prevDone =
+          u.order_num === 1 ||
+          (prevUnit != null && completedUnitIds.has(prevUnit.id));
+        const isCurrent = !isDone && prevDone;
+        return {
+          day: u.order_num,
+          unitId: u.id,
+          title: u.title,
+          status: (isDone ? "done" : isCurrent ? "current" : "locked") as DayStatus,
+        };
+      }),
+    });
   }
 
+  return (
+    <>
+      {weeks.map((week) => {
+        const doneCount = week.days.filter((d) => d.status === "done").length;
+        const weekPct =
+          week.days.length > 0
+            ? Math.round((doneCount / week.days.length) * 100)
+            : 0;
+
+        return (
+          <View key={week.weekNum} style={s.weekCard}>
+            {/* Left accent stripe */}
+            <View style={[s.weekAccent, { backgroundColor: week.color }]} />
+
+            <View style={s.weekInner}>
+              {/* Week header */}
+              <View style={s.weekHeaderRow}>
+                <Text style={s.weekEmoji}>{week.emoji}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={s.weekLabel}>WEEK {week.weekNum}</Text>
+                  <Text style={s.weekTitle}>{week.title}</Text>
+                </View>
+                <Text style={[s.weekCount, { color: week.color }]}>
+                  {doneCount}/{week.days.length}
+                </Text>
+              </View>
+              <Text style={s.weekGoal}>{week.goal}</Text>
+
+              {/* Mini progress bar */}
+              <View style={s.weekMiniBar}>
+                <View
+                  style={[
+                    s.weekMiniFill,
+                    {
+                      width: `${Math.max(weekPct, weekPct > 0 ? 4 : 0)}%` as any,
+                      backgroundColor: week.color,
+                    },
+                  ]}
+                />
+              </View>
+
+              {/* Day rows */}
+              <View style={s.daysList}>
+                {week.days.map((d) => {
+                  const isCurrent = d.status === "current";
+                  const isDone = d.status === "done";
+                  const isLocked = d.status === "locked";
+                  return (
+                    <TouchableOpacity
+                      key={d.day}
+                      style={[s.dayRow, isCurrent && s.dayRowCurrent]}
+                      onPress={() => onDayPress(d.day, d.unitId, d.status)}
+                      activeOpacity={isLocked ? 1 : 0.7}
+                      disabled={isLocked}
+                    >
+                      <View
+                        style={[
+                          s.dayCircle,
+                          isDone && [s.dayCircleDone, { backgroundColor: week.color }],
+                          isCurrent && [s.dayCircleCurrent, { borderColor: week.color }],
+                          isLocked && s.dayCircleLocked,
+                        ]}
+                      >
+                        {isDone ? (
+                          <Text style={s.dayCheck}>✓</Text>
+                        ) : (
+                          <Text
+                            style={[
+                              s.dayNum,
+                              isCurrent && [s.dayNumCurrent, { color: week.color }],
+                              isLocked && s.dayNumLocked,
+                            ]}
+                          >
+                            {d.day}
+                          </Text>
+                        )}
+                      </View>
+                      <View style={s.dayInfo}>
+                        <Text
+                          style={[s.dayTitle, isLocked && s.dayTitleLocked]}
+                          numberOfLines={1}
+                        >
+                          {d.title}
+                        </Text>
+                        {isCurrent && (
+                          <Text style={[s.currentPill, { color: week.color }]}>
+                            Now
+                          </Text>
+                        )}
+                      </View>
+                      {isLocked && <Text style={s.lockIcon}>🔒</Text>}
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </View>
+          </View>
+        );
+      })}
+    </>
+  );
+}
+
+// ─── Loading skeleton ─────────────────────────────────────────────────────────
+
+function LoadingSkeleton() {
+  return (
+    <SafeAreaView style={s.safe}>
+      <View style={{ padding: spacing.md, gap: 14 }}>
+        <View style={{ flexDirection: "row", gap: 12, alignItems: "center" }}>
+          <Skeleton width={48} height={48} rounded={14} />
+          <View style={{ gap: 6 }}>
+            <Skeleton width={120} height={14} rounded={8} />
+            <Skeleton width={80} height={12} rounded={6} />
+          </View>
+        </View>
+        <Skeleton height={64} rounded={16} />
+        <Skeleton height={180} rounded={22} />
+        <Skeleton width={140} height={16} rounded={8} />
+        <Skeleton height={6} rounded={3} />
+        {[1, 2].map((i) => (
+          <Skeleton key={i} height={160} rounded={18} />
+        ))}
+      </View>
+    </SafeAreaView>
+  );
+}
+
+// ─── Mobile screen ────────────────────────────────────────────────────────────
+
+function HomeScreenMobile() {
+  const { user } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: activeSlug } = useActiveProgramSlug();
+  const programSlug = activeSlug ?? "ai-operator";
+  const { data: program } = useProgram(programSlug);
+  const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
+  const { data: completedUnitIds } = useLessonProgressMap(user?.id);
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+  const { data: streakRisk } = useStreakAtRisk(user?.id);
+
+  const allCompletedIds = new Set<string>([
+    ...(completedUnitIds ?? new Set<string>()),
+    ...localCompletedIds,
+  ]);
+
+  const fallbackUnits =
+    LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"] ?? [];
+  const displayUnits = units ?? fallbackUnits;
+  const completedCount = allCompletedIds.size;
+  const totalUnits = displayUnits.length || 28;
+  const overallPct = Math.round((completedCount / totalUnits) * 100);
+
+  // Find the first "current" unit (next up to complete)
+  const currentUnit = displayUnits.find((u, i) => {
+    if (allCompletedIds.has(u.id)) return false;
+    if (i === 0) return true;
+    const prev = displayUnits[i - 1];
+    return prev != null && allCompletedIds.has(prev.id);
+  });
+
+  const handleDayPress = (day: number, unitId: string, status: DayStatus) => {
+    if (status === "locked") return;
+    router.push({
+      pathname: `/lesson/${unitId}` as any,
+      params: { program: programSlug, day: String(day) },
+    });
+  };
+
+  if (profileLoading || (unitsLoading && !units)) {
+    return <LoadingSkeleton />;
+  }
+
+  const initials = getInitials(profile?.name, profile?.email ?? user?.email);
+  const firstName = getFirstName(profile?.name, profile?.email ?? user?.email);
+  const xp = profile?.xp ?? 0;
+  const level = profile?.level ?? 1;
+  const streak = profile?.streak ?? 0;
+
   const hour = new Date().getHours();
-  const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
-  const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
   return (
     <SafeAreaView style={s.safe}>
@@ -241,76 +445,93 @@ export default function HomeScreen() {
         {/* ── Header ── */}
         <View style={s.hdr}>
           <View style={s.hdrLeft}>
-            <Avatar initials={MOCK_USER.initials} />
+            <Avatar initials={initials} />
             <View>
               <Text style={s.greeting}>{greeting} 🌊</Text>
-              <Text style={s.userName}>{MOCK_USER.name}</Text>
+              <Text style={s.userName}>{firstName}</Text>
             </View>
           </View>
           <View style={s.hdrRight}>
             <View style={s.streakBadge}>
-              <Text style={s.streakTxt}>🔥 {MOCK_USER.streak}</Text>
+              <Text style={s.streakTxt}>🔥 {streak}</Text>
             </View>
-            <TouchableOpacity style={s.bell} activeOpacity={0.75}>
-              <Text style={{ fontSize: 16 }}>🔔</Text>
-              {MOCK_USER.notifications > 0 && <View style={s.bellDot} />}
-            </TouchableOpacity>
           </View>
         </View>
 
         {/* ── XP bar ── */}
-        <XPBar />
+        <XPBar xp={xp} level={level} />
 
-        {/* ── Hero card ── */}
-        <HeroCard />
+        {/* ── Streak-at-risk banner ── */}
+        {streakRisk?.isAtRisk && (
+          <StreakRiskBanner
+            streakDays={streakRisk.streakDays}
+            expiresInHours={streakRisk.expiresInHours}
+            shieldCount={streakRisk.shieldCount}
+          />
+        )}
 
-        {/* ── Explore ── */}
+        {/* ── Hero: current lesson ── */}
+        {currentUnit ? (
+          <HeroCard
+            title={currentUnit.title}
+            subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.order_num}`}
+            unitId={currentUnit.id}
+            programSlug={programSlug}
+            dayNum={currentUnit.order_num}
+            overallPct={overallPct}
+          />
+        ) : displayUnits.length > 0 ? (
+          <AllDoneCard total={totalUnits} />
+        ) : null}
+
+        {/* ── Journey ── */}
         <View style={s.secHdr}>
-          <Text style={s.secTitle}>Explore Subjects</Text>
-          <TouchableOpacity activeOpacity={0.7}>
-            <Text style={s.seeAll}>See all</Text>
-          </TouchableOpacity>
+          <Text style={s.secTitle}>Your Journey</Text>
+          <Text style={s.journeyCount}>
+            {completedCount}/{totalUnits} days
+          </Text>
         </View>
 
-        {/* Filter pills */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={s.filterRow}
-        >
-          {FILTERS.map((f) => (
-            <TouchableOpacity
-              key={f}
-              style={[s.pill, filter === f && s.pillActive]}
-              onPress={() => setFilter(f)}
-              activeOpacity={0.75}
-            >
-              <Text style={[s.pillTxt, filter === f && s.pillTxtActive]}>{f}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        {/* Subject feed */}
-        <View style={s.feedList}>
-          {visible.map((item) => (
-            <SubjectCard key={item.id} item={item} />
-          ))}
+        {/* Overall progress bar */}
+        <View style={s.overallBar}>
+          <View
+            style={[
+              s.overallFill,
+              { width: `${Math.max(overallPct, overallPct > 0 ? 2 : 0)}%` as any },
+            ]}
+          />
         </View>
 
-        {/* ── Activity ── */}
-        <View style={[s.secHdr, { marginTop: spacing.lg }]}>
-          <Text style={s.secTitle}>Recent Activity</Text>
-        </View>
-        <View style={s.actList}>
-          {ACTIVITY.map((item) => (
-            <ActivityRow key={item.id} item={item} />
-          ))}
-        </View>
+        {displayUnits.length > 0 ? (
+          <WeeksView
+            units={displayUnits as any}
+            completedUnitIds={allCompletedIds}
+            programSlug={programSlug}
+            onDayPress={handleDayPress}
+          />
+        ) : (
+          <View style={s.emptyWrap}>
+            <ActivityIndicator color={o.mid} />
+            <Text style={s.emptyTxt}>Loading program…</Text>
+          </View>
+        )}
 
-        <View style={{ height: 32 }} />
+        <View style={{ height: 40 }} />
       </ScrollView>
     </SafeAreaView>
   );
+}
+
+// ─── Platform switch ──────────────────────────────────────────────────────────
+
+export default function HomeScreen() {
+  const { width } = useWindowDimensions();
+  if (Platform.OS === "web" && width >= 768) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const Desktop = require("./HomeDesktop").default;
+    return <Desktop />;
+  }
+  return <HomeScreenMobile />;
 }
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
@@ -370,7 +591,7 @@ const s = StyleSheet.create({
   },
   avatarTxt: { fontSize: fontSize.md, fontWeight: fontWeight.black, color: "#FFF" },
 
-  // Streak + bell
+  // Streak badge
   streakBadge: {
     backgroundColor: o.streakBg,
     borderWidth: 1.5,
@@ -380,27 +601,6 @@ const s = StyleSheet.create({
     paddingVertical: 5,
   },
   streakTxt: { fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: o.streakText },
-
-  bell: {
-    width: 38,
-    height: 38,
-    borderRadius: 11,
-    backgroundColor: o.card,
-    justifyContent: "center",
-    alignItems: "center",
-    ...AQUA_SHADOW,
-  },
-  bellDot: {
-    position: "absolute",
-    top: 7,
-    right: 7,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#F87171",
-    borderWidth: 1.5,
-    borderColor: o.card,
-  },
 
   // ── XP bar card
   xpCard: {
@@ -426,11 +626,7 @@ const s = StyleSheet.create({
     overflow: "hidden",
     position: "relative",
   },
-  xpFill: {
-    height: "100%",
-    backgroundColor: o.mid,
-    borderRadius: radius.pill,
-  },
+  xpFill: { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
   xpShimmer: {
     position: "absolute",
     width: 6,
@@ -445,6 +641,22 @@ const s = StyleSheet.create({
     textAlign: "right",
   },
 
+  // ── Streak-at-risk banner
+  riskBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: "#FFF7ED",
+    borderWidth: 1.5,
+    borderColor: "#FED7AA",
+    borderRadius: radius.lg,
+    padding: 14,
+    marginBottom: spacing.md,
+  },
+  riskIcon:  { fontSize: 20 },
+  riskTitle: { fontSize: fontSize.sm, fontWeight: fontWeight.bold, color: "#92400E", marginBottom: 2 },
+  riskHint:  { fontSize: fontSize.xs, color: "#B45309" },
+
   // ── Hero card
   hero: {
     backgroundColor: o.deep,
@@ -458,10 +670,9 @@ const s = StyleSheet.create({
     shadowRadius: 20,
     elevation: 8,
   },
-  // Caustic light rings (the "underwater" refraction effect)
   caustic: { position: "absolute", borderRadius: 9999 },
   cA: { width: 260, height: 260, top: -90,  right: -80, backgroundColor: "rgba(255,255,255,0.06)" },
-  cB: { width: 150, height: 150, bottom: -55, left: -30,  backgroundColor: "rgba(255,255,255,0.07)" },
+  cB: { width: 150, height: 150, bottom: -55, left: -30, backgroundColor: "rgba(255,255,255,0.07)" },
   cC: { width: 90,  height: 90,  top: 20,   right: 60,  backgroundColor: "rgba(255,255,255,0.08)" },
   cD: { width: 50,  height: 50,  top: 70,   right: 24,  backgroundColor: "rgba(255,255,255,0.10)" },
 
@@ -473,13 +684,17 @@ const s = StyleSheet.create({
     paddingVertical: 4,
     marginBottom: spacing.sm,
   },
-  heroTagTxt: { fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.92)", letterSpacing: 0.8 },
-
+  heroTagTxt: {
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.bold,
+    color: "rgba(255,255,255,0.92)",
+    letterSpacing: 0.8,
+  },
   heroTitle: {
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: fontWeight.black,
     color: "#FFF",
-    lineHeight: 36,
+    lineHeight: 32,
     marginBottom: 6,
     letterSpacing: -0.5,
   },
@@ -489,16 +704,6 @@ const s = StyleSheet.create({
     fontWeight: fontWeight.medium,
     marginBottom: spacing.md,
   },
-
-  heroChips: { flexDirection: "row", gap: 8, marginBottom: spacing.md, flexWrap: "wrap" },
-  heroChip: {
-    backgroundColor: "rgba(255,255,255,0.14)",
-    borderRadius: radius.pill,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  heroChipTxt: { fontSize: fontSize.xs, color: "rgba(255,255,255,0.9)", fontWeight: fontWeight.semibold },
-
   heroPRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -513,142 +718,121 @@ const s = StyleSheet.create({
     overflow: "hidden",
   },
   heroPFill: { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
-  heroPct: { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: "#FFF" },
-
+  heroPct:   { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: "#FFF" },
   heroCta: {
     backgroundColor: "#FFF",
     borderRadius: radius.lg,
     paddingVertical: 13,
     alignItems: "center",
   },
-  heroCtaTxt: { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: o.heroCtaText, letterSpacing: 0.3 },
+  heroCtaTxt: {
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.extrabold,
+    color: o.heroCtaText,
+    letterSpacing: 0.3,
+  },
 
-  // ── Section headers
+  // ── Section header + journey progress
   secHdr: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: spacing.sm,
   },
-  secTitle: { fontSize: fontSize.lg, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
-  seeAll:   { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: o.mid },
+  secTitle:     { fontSize: fontSize.lg, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
+  journeyCount: { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: o.mid },
 
-  // ── Filter pills
-  filterRow: { gap: 8, paddingBottom: spacing.md },
-  pill: {
-    borderRadius: radius.pill,
-    paddingHorizontal: 16,
-    paddingVertical: 7,
-    backgroundColor: o.card,
-    borderWidth: 1.5,
-    borderColor: o.border,
-  },
-  pillActive:    { backgroundColor: o.mid, borderColor: o.mid },
-  pillTxt:       { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: o.muted },
-  pillTxtActive: { color: "#FFF" },
-
-  // ── Subject feed
-  feedList: { gap: 12, marginBottom: spacing.sm },
-
-  subCard: {
-    backgroundColor: o.card,
-    borderRadius: radius.xl,
-    overflow: "hidden",
-    ...AQUA_SHADOW,
-  },
-  subCardLocked: { opacity: 0.60 },
-
-  // Gradient panel (top portion of card)
-  subTop: {
-    height: 130,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    overflow: "hidden",
-  },
-  // Caustic decorations inside subject card
-  sc1: { position: "absolute", width: 160, height: 160, borderRadius: 80,  top: -50, right: -40 },
-  sc2: { position: "absolute", width: 90,  height: 90,  borderRadius: 45,  bottom: -30, left: 8  },
-  sc3: {
-    position: "absolute",
-    width: 55,
-    height: 55,
-    borderRadius: 28,
-    top: 12,
-    right: 56,
-    backgroundColor: "rgba(255,255,255,0.09)",
-  },
-
-  subEmoji:  { fontSize: 48, zIndex: 1 },
-  subXpChip: {
-    position: "absolute",
-    top: 10,
-    right: 12,
-    backgroundColor: "rgba(255,255,255,0.22)",
-    borderRadius: radius.pill,
-    paddingHorizontal: 9,
-    paddingVertical: 3,
-  },
-  subXpTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
-
-  subLockOverlay: {
-    position: "absolute",
-    inset: 0,
-    backgroundColor: "rgba(0,0,0,0.22)",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 4,
-  } as any,
-  subLockedTxt: { fontSize: 10, fontWeight: fontWeight.black, color: "rgba(255,255,255,0.8)", letterSpacing: 1.5 },
-
-  subBody: {
-    padding: 14,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  subName:  { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: o.text, marginBottom: 2 },
-  subCount: { fontSize: fontSize.xs, color: o.muted },
-  subMeta:  { alignItems: "flex-end", gap: 4 },
-  subPTrack: {
-    width: 72,
-    height: 5,
+  // Overall progress bar
+  overallBar: {
+    height: 6,
     backgroundColor: o.bgTint,
     borderRadius: radius.pill,
     overflow: "hidden",
+    marginBottom: spacing.md,
   },
-  subPFill: { height: "100%", borderRadius: radius.pill },
-  subPct:   { fontSize: 10, fontWeight: fontWeight.bold },
-  subArrow: { fontSize: 16, fontWeight: fontWeight.black, marginTop: -2 },
-  subLockLabel: { fontSize: 10, fontWeight: fontWeight.bold, color: o.dim, letterSpacing: 1 },
+  overallFill: {
+    height: "100%",
+    backgroundColor: o.mid,
+    borderRadius: radius.pill,
+  },
 
-  // ── Activity
-  actList: { gap: 10 },
-  actCard: {
+  // ── Week card
+  weekCard: {
     backgroundColor: o.card,
-    borderRadius: radius.lg,
-    padding: 14,
+    borderRadius: radius.xl,
+    marginBottom: 14,
+    overflow: "hidden",
+    flexDirection: "row",
+    ...AQUA_SHADOW,
+  },
+  weekAccent: { width: 4, borderRadius: 0 },
+  weekInner:  { flex: 1, padding: 14 },
+
+  weekHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 4,
+  },
+  weekEmoji: { fontSize: 22 },
+  weekLabel: {
+    fontSize: 9,
+    fontWeight: fontWeight.bold,
+    color: o.dim,
+    letterSpacing: 1.5,
+    textTransform: "uppercase" as any,
+  },
+  weekTitle: { fontSize: fontSize.md, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.2 },
+  weekCount: { fontSize: fontSize.sm, fontWeight: fontWeight.bold },
+
+  weekGoal: { fontSize: fontSize.xs, color: o.muted, marginBottom: 8 },
+
+  weekMiniBar: {
+    height: 4,
+    backgroundColor: o.bgTint,
+    borderRadius: radius.pill,
+    overflow: "hidden",
+    marginBottom: 12,
+  },
+  weekMiniFill: { height: "100%", borderRadius: radius.pill },
+
+  // ── Day rows
+  daysList: { gap: 2 },
+  dayRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    borderWidth: 1,
-    borderColor: o.border,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+    borderRadius: 10,
   },
-  actIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 13,
-    backgroundColor: o.bgTint,
+  dayRowCurrent: { backgroundColor: o.bgTint },
+
+  dayCircle: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 2,
+    borderColor: o.border,
     justifyContent: "center",
     alignItems: "center",
   },
-  actInfo:    { flex: 1 },
-  actName:    { fontSize: fontSize.sm, fontWeight: fontWeight.bold, color: o.text, marginBottom: 2 },
-  actSub:     { fontSize: fontSize.xs, color: o.muted },
-  actBadge:   { borderRadius: radius.pill, paddingHorizontal: 10, paddingVertical: 5 },
-  actBadgeTxt:{ fontSize: 11, fontWeight: fontWeight.bold },
-  badgeDone:    { backgroundColor: "#D1FAE5" },
-  badgeDoneTxt: { color: "#065F46" },
-  badgeProg:    { backgroundColor: o.bgTint },
-  badgeProgTxt: { color: o.mid },
+  dayCircleDone:    { borderWidth: 0 },
+  dayCircleCurrent: { borderWidth: 2 },
+  dayCircleLocked:  { borderColor: o.bgTint, backgroundColor: o.bgTint },
+
+  dayCheck:       { fontSize: 14, color: "#FFF", fontWeight: fontWeight.black },
+  dayNum:         { fontSize: 12, fontWeight: fontWeight.bold, color: o.muted },
+  dayNumCurrent:  { fontWeight: fontWeight.extrabold },
+  dayNumLocked:   { color: o.dim },
+
+  dayInfo:        { flex: 1 },
+  dayTitle:       { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: o.text },
+  dayTitleLocked: { color: o.dim },
+  currentPill:    { fontSize: 10, fontWeight: fontWeight.bold, marginTop: 2 },
+  lockIcon:       { fontSize: 14, opacity: 0.4 },
+
+  // ── Empty / loading
+  emptyWrap: { alignItems: "center", gap: 10, paddingVertical: spacing.xl },
+  emptyTxt:  { fontSize: fontSize.sm, color: o.muted },
 });
