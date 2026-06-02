@@ -4,6 +4,7 @@
 
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import { appTheme as t } from "../theme/appTheme";
 import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
@@ -225,7 +226,7 @@ export default function LessonPlayer({
   if (!step || !handler) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#059669" />
+        <ActivityIndicator size="large" color={t.colors.accent} />
         <Text style={styles.loadingText}>Loading lesson...</Text>
       </View>
     );
@@ -316,39 +317,38 @@ function getStepText(step?: Step): string {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FAF8F5",
+    backgroundColor: t.colors.screenBg,
   },
   center: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FAF8F5",
+    backgroundColor: t.colors.screenBg,
   },
   loadingText: {
     marginTop: 12,
     fontSize: 15,
-    color: "#A09484",
-    fontFamily: "NunitoSans_400Regular",
+    color: t.colors.textMuted,
   },
   progressBar: {
-    height: 4,
-    backgroundColor: "#e0d9cf",
+    height: 5,
+    backgroundColor: t.colors.accentTint,
   },
   progressFill: {
     height: "100%",
-    backgroundColor: "#059669",
+    backgroundColor: t.colors.accent,
   },
   comboBar: {
-    backgroundColor: "#fef3c7",
+    backgroundColor: t.colors.warningBg,
     borderBottomWidth: 1,
-    borderBottomColor: "#fde68a",
+    borderBottomColor: t.colors.warningBorder,
     paddingVertical: 6,
     alignItems: "center",
   },
   comboText: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#92400e",
+    color: t.colors.warningText,
   },
   stepArea: {
     flex: 1,
@@ -365,17 +365,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: "#e8e2d9",
-    backgroundColor: "#FAF8F5",
+    borderTopColor: t.colors.border,
+    backgroundColor: t.colors.cardBg,
   },
   backBtn: {
     fontSize: 15,
-    color: "#6B5E50",
+    color: t.colors.textMuted,
     fontWeight: "600",
   },
   continueBtn: {
     fontSize: 15,
-    color: "#059669",
+    color: t.colors.accent,
     fontWeight: "700",
     marginLeft: "auto",
   },
@@ -388,21 +388,21 @@ const styles = StyleSheet.create({
   errorTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#92400e",
+    color: t.colors.warningText,
     marginBottom: 8,
   },
   errorDetail: {
     fontSize: 14,
-    color: "#A09484",
+    color: t.colors.textDisabled,
     textAlign: "center",
     marginBottom: 20,
     lineHeight: 20,
   },
   errorSkipBtn: {
-    backgroundColor: "#059669",
+    backgroundColor: t.colors.accent,
     paddingVertical: 12,
     paddingHorizontal: 24,
-    borderRadius: 14,
+    borderRadius: t.radius.lg,
   },
   errorSkipText: { color: "#fff", fontSize: 16, fontWeight: "700" },
 });
