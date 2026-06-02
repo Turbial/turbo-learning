@@ -1,4 +1,4 @@
-// âââ Tab Layout â custom bottom tabs with branded active indicator âââ
+// ─── Tab Layout — custom bottom tabs with branded active indicator ───
 
 import { Tabs } from "expo-router";
 import { View, Text, StyleSheet } from "react-native";
@@ -41,40 +41,38 @@ export default function TabLayout() {
         name="home"
         options={{
           tabBarLabel: "Journey",
-          tabBarIcon: ({ focused }) => <TabIcon emoji="ðºï¸" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon emoji="🗺️" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="progress"
         options={{
           tabBarLabel: "Progress",
-          tabBarIcon: ({ focused }) => <TabIcon emoji="ð" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon emoji="📊" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="leaderboard"
         options={{
           tabBarLabel: "Ranks",
-          tabBarIcon: ({ focused }) => <TabIcon emoji="ð" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon emoji="🏆" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="dashboard"
         options={{
           tabBarLabel: "Dashboard",
-          tabBarIcon: ({ focused }) => <TabIcon emoji="ð" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon emoji="📋" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           tabBarLabel: "Profile",
-          tabBarIcon: ({ focused }) => <TabIcon emoji="ð¤" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon emoji="👤" focused={focused} />,
         }}
       />
-        {/* Hidden — desktop layout, rendered by home.tsx on web */}
-    <Tabs.Screen name="HomeDesktop" options={{ href: null }} />
-  </Tabs>
+    </Tabs>
   );
 }
 
