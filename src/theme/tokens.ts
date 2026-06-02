@@ -1,6 +1,6 @@
 // ─── Theme tokens — single source of truth for design system ───
+// Updated to include the Turbo Learning design spec color tokens.
 
-// Per-product themed color scale (used by Claude's ThemeContext + UI primitives)
 export type ColorScale = {
   background: string;
   surface: string;
@@ -20,7 +20,6 @@ export type Theme = {
   colors: { light: ColorScale; dark: ColorScale };
 };
 
-// Structural tokens used by Claude's UI system
 export const motion = {
   duration: { fast: 150, base: 250, slow: 400, xpBurst: 600 },
 } as const;
@@ -29,58 +28,102 @@ export const sizing = { tapTargetMin: 44, buttonHeight: 48, fieldMinHeight: 96 }
 
 export const lineHeight = { tight: 1.2, normal: 1.4, relaxed: 1.6 } as const;
 
-// Default light color scale for the AI Operator theme (used by ThemeContext)
+// ─── Turbo Learning brand palette ───
+export const brand = {
+  violet: "#6C3CE1",
+  violetDark: "#4A12CE",
+  violetLight: "#7B44FF",
+  violetSoft: "#EDE0FF",
+  violetBorder: "#E0D6FF",
+
+  teal: "#00C4A7",
+  tealLight: "#08B09A",
+
+  coral: "#FF6B6B",
+
+  gold: "#F59E0B",
+  goldLight: "#FFCD5E",
+  goldBg: "#FFF3D0",
+  goldBorder: "#F59E0B",
+
+  // Screen background gradient stops
+  bgStart: "#F3E8FF",
+  bgMid: "#E8F3FF",
+  bgEnd: "#FFF0E8",
+} as const;
+
+// Default color scale (used by ThemeContext)
 export const defaultColorScale: ColorScale = {
-  background: "#FAF8F5",
+  background: "#F3E8FF",
   surface: "#FFFFFF",
   surfaceAlt: "#F5F0EB",
-  border: "#e8e2d9",
-  text: "#2D241C",
-  textMuted: "#A09484",
-  accent: "#059669",
+  border: "#E0D6FF",
+  text: "#1A1535",
+  textMuted: "#9090B8",
+  accent: "#6C3CE1",
   accentText: "#FFFFFF",
-  accentSoft: "#ecfdf5",
-  success: "#4E8A5C",
-  error: "#ef4444",
+  accentSoft: "#EDE0FF",
+  success: "#00C4A7",
+  error: "#FF6B6B",
 };
 
-// Legacy flat colors object (used by our existing components)
+// ─── Legacy flat colors object (used by existing components) ───
 export const colors = {
-  // Brand
-  primary: "#059669",
-  primaryDark: "#047857",
-  primaryDim: "#ecfdf5",
-  primaryBorder: "#a7f3d0",
+  // ── Brand ──
+  primary: "#6C3CE1", // ← updated from legacy green to Violet
+  primaryDark: "#4A12CE",
+  primaryDim: "#EDE0FF",
+  primaryBorder: "#E0D6FF",
 
-  // Neutrals
-  bg: "#FAF8F5",
+  violet: "#6C3CE1",
+  violetDark: "#4A12CE",
+
+  teal: "#00C4A7",
+  tealDark: "#08B09A",
+
+  coral: "#FF6B6B",
+
+  gold: "#F59E0B",
+  goldLight: "#FFCD5E",
+  goldBg: "#FFF3D0",
+  goldBorder: "#F59E0B",
+
+  // ── Screen background ──
+  screenBg: "#F3E8FF",
+  bg: "#F3E8FF",
+
+  // ── Surfaces ──
   surface: "#FFFFFF",
   surfaceHover: "#F5F0EB",
-  surfaceBorder: "#e8e2d9",
+  surfaceBorder: "#E0D6FF",
 
-  // Text
-  textPrimary: "#2D241C",
+  // ── Text ──
+  textPrimary: "#1A1535",
   textSecondary: "#5A4E40",
-  textMuted: "#A09484",
-  textDim: "#C4BDB6",
+  textMuted: "#9090B8",
+  textDim: "#B0B0D0",
 
-  // Feedback
-  success: "#4E8A5C",
-  successBg: "#ecfdf5",
-  successBorder: "#a7f3d0",
-  error: "#ef4444",
-  errorBg: "#fef2f2",
-  errorBorder: "#fecaca",
-  warning: "#f59e0b",
-  warningBg: "#fef3c7",
-  warningBorder: "#fde68a",
+  // ── Borders ──
+  borderLight: "#E0D6FF",
+  borderMuted: "#DDD0FF",
 
-  // Gamification
-  xp: "#059669",
-  streak: "#f59e0b",
-  badge: "#8b5cf6",
-  level: "#3b82f6",
-};
+  // ── Feedback ──
+  success: "#00C4A7",
+  successBg: "#CCFAF4",
+  successBorder: "#00C4A7",
+  error: "#FF6B6B",
+  errorBg: "#FFF0F0",
+  errorBorder: "#FF6B6B",
+  warning: "#F59E0B",
+  warningBg: "#FFF3D0",
+  warningBorder: "#FFCD5E",
+
+  // ── Gamification ──
+  xp: "#6C3CE1",
+  streak: "#F59E0B",
+  badge: "#6C3CE1",
+  level: "#6C3CE1",
+} as const;
 
 export const spacing = {
   xs: 4,
@@ -90,33 +133,37 @@ export const spacing = {
   xl: 32,
   xxl: 48,
   xxxl: 64,
-};
+} as const;
 
 export const radius = {
   sm: 8,
   md: 12,
   lg: 16,
   xl: 20,
+  xxl: 28,
   full: 9999,
   pill: 9999,
-};
+  avatar: 17,
+} as const;
 
 export const fontSize = {
-  xs: 12,
-  sm: 14,
-  md: 16,
+  xs: 11,
+  sm: 13,
+  md: 15,
+  base: 16,
   lg: 18,
   xl: 22,
   xxl: 28,
   hero: 34,
-  // Semantic aliases — used by auth screens, pricing, etc.
+
+  // Semantic aliases
   body: 14,
   bodyLg: 16,
-  caption: 12,
+  caption: 11,
   subtitle: 18,
   title: 22,
   display: 28,
-};
+} as const;
 
 export const fontWeight = {
   regular: "400",
@@ -124,21 +171,46 @@ export const fontWeight = {
   semibold: "600",
   bold: "700",
   extrabold: "800",
+  black: "900",
 } as const;
 
 export const shadow = {
   sm: {
-    shadowColor: "#000",
+    shadowColor: "#6C3CE1",
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
+    shadowOpacity: 0.06,
     shadowRadius: 4,
     elevation: 1,
   },
   md: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowColor: "#6C3CE1",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.10,
+    shadowRadius: 12,
+    elevation: 4,
   },
-};
+  lg: {
+    shadowColor: "#4A12CE",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.18,
+    shadowRadius: 24,
+    elevation: 8,
+  },
+  hero: {
+    shadowColor: "#4A12CE",
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.28,
+    shadowRadius: 32,
+    elevation: 12,
+  },
+} as const;
+
+// ─── Subject card gradient configs ───
+export const subjectGradients = {
+  mathematics: ["#6C3CE1", "#7B44FF"] as [string, string],
+  science: ["#00C4A7", "#08B09A"] as [string, string],
+  language: ["#FF6B6B", "#FF4F4F"] as [string, string],
+  history: ["#F59E0B", "#FFCD5E"] as [string, string],
+  logic: ["#9090B8", "#B0B0D0"] as [string, string],
+  creative: ["#B0B0D0", "#9090B8"] as [string, string],
+} as const;
