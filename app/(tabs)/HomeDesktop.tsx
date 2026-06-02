@@ -13,23 +13,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
-
-// ─── Local ocean palette ──────────────────────────────────────────────────────
-const o = {
-  bg:      "#F0FDFF",   // screen bg — barely-there cyan
-  bgTint:  "#CFFAFE",   // cyan-100 — for tracks, icon bgs
-  card:    "#FFFFFF",
-  deep:    "#0E7490",   // hero bg / dark accent
-  mid:     "#0891B2",   // primary — cyan-600
-  bright:  "#06B6D4",   // cyan-500
-  teal:    "#14B8A6",
-  sky:     "#0EA5E9",
-  border:  "#BAE6FD",   // sky-200
-  sideBar: "#FFFFFF",
-  text:    "#0F172A",
-  muted:   "#64748B",
-  dim:     "#94A3B8",
-};
+import { appPalette as o } from "../../src/theme/palette";
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
@@ -61,12 +45,12 @@ type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logi
 const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
 
 const SUBJECTS = [
-  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.79, bg: "#0891B2", glow: "#38BDF8", category: "Math"     as SubjectFilter, locked: false },
-  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.45, bg: "#0D9488", glow: "#2DD4BF", category: "Science"  as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.30, bg: "#0284C7", glow: "#38BDF8", category: "Language" as SubjectFilter, locked: false },
-  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, bg: "#0369A1", glow: "#67E8F9", category: "History"  as SubjectFilter, locked: false },
-  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    bg: "#94A3B8", glow: "#CBD5E1", category: "Logic"    as SubjectFilter, locked: true  },
-  { id: "art",      name: "Creative Arts",  emoji: "🎨", count: "Coming soon",    progress: 0,    bg: "#A8A29E", glow: "#D6D3D1", category: "Art"      as SubjectFilter, locked: true  },
+  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.79, ...o.subjects[0], category: "Math"     as SubjectFilter, locked: false },
+  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.45, ...o.subjects[1], category: "Science"  as SubjectFilter, locked: false },
+  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.30, ...o.subjects[2], category: "Language" as SubjectFilter, locked: false },
+  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, ...o.subjects[3], category: "History"  as SubjectFilter, locked: false },
+  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    ...o.subjects[4], category: "Logic"    as SubjectFilter, locked: true  },
+  { id: "art",      name: "Creative Arts",  emoji: "🎨", count: "Coming soon",    progress: 0,    ...o.subjects[5], category: "Art"      as SubjectFilter, locked: true  },
 ];
 
 const ACTIVITY = [
@@ -265,7 +249,7 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
 
 const STATUS: Record<string, { bg: string; color: string; label: string }> = {
   done:          { bg: "#D1FAE5", color: "#065F46", label: "Done"        },
-  "in-progress": { bg: "#CFFAFE", color: "#0E7490", label: "In Progress" },
+  "in-progress": { bg: o.bgTint,  color: o.deep,    label: "In Progress" },
   new:           { bg: "#E0F2FE", color: "#0369A1", label: "New"         },
 };
 
@@ -410,7 +394,7 @@ export default function HomeDesktopScreen() {
 const SIDEBAR_W = 218;
 
 const AQUA_SHADOW = {
-  shadowColor: "#06B6D4",
+  shadowColor: o.bright,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.14,
   shadowRadius: 14,
@@ -459,7 +443,7 @@ const s = StyleSheet.create({
     outlineStyle: "none" as any,
   },
   topRight:  { flexDirection: "row", alignItems: "center", gap: 12 },
-  topStreak: { fontSize: 12, fontWeight: fontWeight.bold, color: "#EA580C" },
+  topStreak: { fontSize: 12, fontWeight: fontWeight.bold, color: o.streakText },
   topBell: {
     width: 30, height: 30, borderRadius: 9,
     backgroundColor: o.bg,
@@ -613,14 +597,14 @@ const s = StyleSheet.create({
   heroChipTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)" },
   heroBottom:  { flexDirection: "row", alignItems: "center", gap: 12 },
   heroPTrack:  { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: radius.pill, overflow: "hidden" },
-  heroPFill:   { height: "100%", backgroundColor: "#A5F3FC", borderRadius: radius.pill },
+  heroPFill:   { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
   heroPct:     { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
   heroCta: {
     backgroundColor: "#FFF",
     borderRadius: 11,
     paddingVertical: 9, paddingHorizontal: 18,
   },
-  heroCtaTxt: { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.deep },
+  heroCtaTxt: { fontSize: 12, fontWeight: fontWeight.extrabold, color: o.heroCtaText },
 
   // ── Section headers
   secHdr:   { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },

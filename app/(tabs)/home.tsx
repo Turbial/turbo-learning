@@ -16,29 +16,8 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { router } from "expo-router";
-import { spacing, radius, fontSize, fontWeight, shadow } from "../../src/theme/tokens";
-
-// ─── Local ocean palette ──────────────────────────────────────────────────────
-const o = {
-  bg:       "#F0FDFF",
-  bgTint:   "#CFFAFE",
-  card:     "#FFFFFF",
-  deep:     "#0E7490",   // hero bg
-  mid:      "#0891B2",   // primary accent
-  bright:   "#06B6D4",   // highlight
-  teal:     "#14B8A6",
-  sky:      "#0EA5E9",
-  border:   "#BAE6FD",
-  text:     "#0F172A",
-  muted:    "#64748B",
-  dim:      "#94A3B8",
-  // subject card colours
-  mathBg:   "#0891B2",
-  scienceBg:"#0D9488",
-  langBg:   "#0284C7",
-  histBg:   "#0369A1",
-  lockBg:   "#94A3B8",
-};
+import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
+import { appPalette as o } from "../../src/theme/palette";
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
@@ -68,11 +47,11 @@ type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logi
 const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic"];
 
 const SUBJECTS = [
-  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.62, bg: o.mathBg,    glow: "#38BDF8", category: "Math"     as SubjectFilter, locked: false },
-  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.35, bg: o.scienceBg, glow: "#2DD4BF", category: "Science"  as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.48, bg: o.langBg,    glow: "#38BDF8", category: "Language" as SubjectFilter, locked: false },
-  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, bg: o.histBg,    glow: "#67E8F9", category: "History"  as SubjectFilter, locked: false },
-  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    bg: o.lockBg,    glow: "#CBD5E1", category: "Logic"    as SubjectFilter, locked: true  },
+  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.62, ...o.subjects[0], category: "Math"     as SubjectFilter, locked: false },
+  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.35, ...o.subjects[1], category: "Science"  as SubjectFilter, locked: false },
+  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.48, ...o.subjects[2], category: "Language" as SubjectFilter, locked: false },
+  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, ...o.subjects[3], category: "History"  as SubjectFilter, locked: false },
+  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    ...o.subjects[4], category: "Logic"    as SubjectFilter, locked: true  },
 ];
 
 const ACTIVITY = [
@@ -337,7 +316,7 @@ export default function HomeScreen() {
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const AQUA_SHADOW = {
-  shadowColor: "#06B6D4",
+  shadowColor: o.bright,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.14,
   shadowRadius: 14,
@@ -393,14 +372,14 @@ const s = StyleSheet.create({
 
   // Streak + bell
   streakBadge: {
-    backgroundColor: "#FFF7ED",
+    backgroundColor: o.streakBg,
     borderWidth: 1.5,
-    borderColor: "#FED7AA",
+    borderColor: o.streakBorder,
     borderRadius: radius.pill,
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
-  streakTxt: { fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: "#EA580C" },
+  streakTxt: { fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: o.streakText },
 
   bell: {
     width: 38,
@@ -533,7 +512,7 @@ const s = StyleSheet.create({
     borderRadius: radius.pill,
     overflow: "hidden",
   },
-  heroPFill: { height: "100%", backgroundColor: "#A5F3FC", borderRadius: radius.pill },
+  heroPFill: { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
   heroPct: { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: "#FFF" },
 
   heroCta: {
@@ -542,7 +521,7 @@ const s = StyleSheet.create({
     paddingVertical: 13,
     alignItems: "center",
   },
-  heroCtaTxt: { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: o.deep, letterSpacing: 0.3 },
+  heroCtaTxt: { fontSize: fontSize.sm, fontWeight: fontWeight.extrabold, color: o.heroCtaText, letterSpacing: 0.3 },
 
   // ── Section headers
   secHdr: {
