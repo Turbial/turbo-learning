@@ -80,6 +80,15 @@ export const colors = {
   streak: "#f59e0b",
   badge: "#4A8ED4",
   level: "#4A8ED4",
+
+  // New design system
+  violet: "#6C3CE1",
+  violetDark: "#4A12CE",
+  coral: "#FF6B6B",
+  gold: "#F59E0B",
+  goldBg: "#FFFBEB",
+  goldBorder: "#FDE68A",
+  screenBg: "#FAF8F5",
 };
 
 export const spacing = {
@@ -97,8 +106,10 @@ export const radius = {
   md: 12,
   lg: 16,
   xl: 20,
+  xxl: 28,
   full: 9999,
   pill: 9999,
+  avatar: 9999,
 };
 
 export const fontSize = {
@@ -124,6 +135,7 @@ export const fontWeight = {
   semibold: "600",
   bold: "700",
   extrabold: "800",
+  black: "900",
 } as const;
 
 export const shadow = {
@@ -140,5 +152,12 @@ export const shadow = {
     shadowOpacity: 0.06,
     shadowRadius: 8,
     elevation: 3,
+  },
+  hero: {
+    shadowColor: "#4A12CE",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+    elevation: 8,
   },
 };

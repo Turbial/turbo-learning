@@ -1,10 +1,10 @@
-// âââ Home Screen â Desktop / Web layout âââ
+// ─── Home Screen — Desktop / Web layout ───
 // Renders when Platform.OS === 'web' (Expo web via React Native Web).
 // Layout: macOS-style title bar + fixed left sidebar + scrollable main area.
 //
 // Usage: In app/(tabs)/_layout.tsx (web), swap home.tsx for this file,
-// or use a responsive wrapper that mounts one or the other based on
-// useWindowDimensions().width >= 768.
+//        or use a responsive wrapper that mounts one or the other based on
+//        useWindowDimensions().width >= 768.
 
 import React, { useState } from "react";
 import {
@@ -26,7 +26,7 @@ import {
   shadow,
 } from "../../src/theme/tokens";
 
-// âââ Mock data (same shapes as mobile â replace with Supabase queries in M3) ââ
+// ─── Mock data (same shapes as mobile — replace with Supabase queries in M3) ──
 
 const MOCK_USER = {
   initials: "AJ",
@@ -45,8 +45,8 @@ const MOCK_USER = {
 const MOCK_HERO = {
   tag: "Continue Learning",
   title: "Quadratic Equations",
-  subtitle: "Mathematics Â· Chapter 4 of 8",
-  timeLabel: "5â7 min",
+  subtitle: "Mathematics · Chapter 4 of 8",
+  timeLabel: "5–7 min",
   difficulty: "HARD",
   xpReward: "250 XP",
   progress: 0.78,
@@ -57,32 +57,32 @@ type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logi
 const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
 
 const SUBJECTS = [
-  { id: "math", name: "Mathematics", emoji: "ð", count: "150+ Questions", progress: 0.79, color: "#4A8ED4", category: "Math" as SubjectFilter, locked: false },
-  { id: "science", name: "Science Lab", emoji: "ð¬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science" as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts", emoji: "ð", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
-  { id: "history", name: "World History", emoji: "ðï¸", count: "90+ Questions", progress: 0.12, color: "#F59E0B", category: "History" as SubjectFilter, locked: false },
-  { id: "logic", name: "Logic & Puzzles", emoji: "ð§©", count: "Coming soon", progress: 0, color: "#9090B8", category: "Logic" as SubjectFilter, locked: true },
-  { id: "art", name: "Creative Arts", emoji: "ð¨", count: "Coming soon", progress: 0, color: "#B0B0D0", category: "Art" as SubjectFilter, locked: true },
+  { id: "math",     name: "Mathematics",    emoji: "📐", count: "150+ Questions", progress: 0.79, color: "#6C3CE1", category: "Math"     as SubjectFilter, locked: false },
+  { id: "science",  name: "Science Lab",    emoji: "🔬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science"  as SubjectFilter, locked: false },
+  { id: "language", name: "Language Arts",  emoji: "📖", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
+  { id: "history",  name: "World History",  emoji: "🏛️", count: "90+ Questions",  progress: 0.12, color: "#F59E0B", category: "History"  as SubjectFilter, locked: false },
+  { id: "logic",    name: "Logic & Puzzles", emoji: "🧩", count: "Coming soon",   progress: 0,    color: "#9090B8", category: "Logic"    as SubjectFilter, locked: true  },
+  { id: "art",      name: "Creative Arts",  emoji: "🎨", count: "Coming soon",    progress: 0,    color: "#B0B0D0", category: "Art"      as SubjectFilter, locked: true  },
 ];
 
 const ACTIVITY = [
-  { id: "a1", emoji: "ð", name: "Calculus Integration", chapter: "Chapter 3", subject: "Mathematics", time: "2 hours ago", status: "done" },
-  { id: "a2", emoji: "âï¸", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics", time: "5 hours ago", status: "in-progress" },
-  { id: "a3", emoji: "ð", name: "Essay Structure Basics", chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday", status: "new" },
+  { id: "a1", emoji: "📐", name: "Calculus Integration",    chapter: "Chapter 3", subject: "Mathematics",   time: "2 hours ago", status: "done"        },
+  { id: "a2", emoji: "⚗️", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics",       time: "5 hours ago", status: "in-progress" },
+  { id: "a3", emoji: "📝", name: "Essay Structure Basics",   chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday",   status: "new"         },
 ];
 
 const NAV_ITEMS = [
-  { id: "home", label: "Home", emoji: "ð " },
-  { id: "explore", label: "Explore", emoji: "ð" },
-  { id: "progress", label: "Progress", emoji: "ð" },
-  { id: "profile", label: "Profile", emoji: "ð¤" },
+  { id: "home",     label: "Home",     emoji: "🏠" },
+  { id: "explore",  label: "Explore",  emoji: "🔍" },
+  { id: "progress", label: "Progress", emoji: "📈" },
+  { id: "profile",  label: "Profile",  emoji: "👤" },
 ];
 const NAV_MORE = [
-  { id: "leaderboard", label: "Leaderboard", emoji: "ð" },
-  { id: "settings", label: "Settings", emoji: "âï¸" },
+  { id: "leaderboard", label: "Leaderboard", emoji: "🏆" },
+  { id: "settings",    label: "Settings",    emoji: "⚙️" },
 ];
 
-// âââ Sidebar âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Sidebar ─────────────────────────────────────────────────────
 
 function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) => void }) {
   const u = MOCK_USER;
@@ -92,7 +92,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
     <View style={s.sidebar}>
       {/* Brand */}
       <View style={s.brand}>
-        <View style={s.brandIco}><Text style={s.brandIcoTxt}>â¦</Text></View>
+        <View style={s.brandIco}><Text style={s.brandIcoTxt}>✦</Text></View>
         <Text style={s.brandName}>EduApp</Text>
       </View>
 
@@ -109,7 +109,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
         </View>
 
         <View style={s.lvlPill}>
-          <Text style={s.lvlTxt}>â­ Level {u.level}</Text>
+          <Text style={s.lvlTxt}>⭐ Level {u.level}</Text>
         </View>
 
         <View style={s.xpRow}>
@@ -161,7 +161,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
             <Text style={s.statSub}>Keep it up!</Text>
           </View>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>ð¥ {MOCK_USER.streak}</Text>
+            <Text style={s.statVal}>🔥 {MOCK_USER.streak}</Text>
             <Text style={s.statUnit}>days</Text>
           </View>
         </View>
@@ -180,7 +180,7 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
   );
 }
 
-// âââ Hero Banner âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Hero Banner ─────────────────────────────────────────────────
 
 function HeroBanner() {
   const h = MOCK_HERO;
@@ -193,11 +193,11 @@ function HeroBanner() {
       {/* Left content */}
       <View style={s.heroLeft}>
         <View>
-          <Text style={s.heroTag}>ð {h.tag.toUpperCase()}</Text>
+          <Text style={s.heroTag}>📚 {h.tag.toUpperCase()}</Text>
           <Text style={s.heroTitle}>{h.title}</Text>
           <Text style={s.heroSub}>{h.subtitle}</Text>
           <View style={s.heroChips}>
-            {[`â± ${h.timeLabel}`, `â ${h.difficulty}`, `â¦ ${h.xpReward}`].map((c) => (
+            {[`⏱ ${h.timeLabel}`, `● ${h.difficulty}`, `✦ ${h.xpReward}`].map((c) => (
               <View key={c} style={[s.heroChip, c.includes("HARD") && s.heroChipHard]}>
                 <Text style={s.heroChipTxt}>{c}</Text>
               </View>
@@ -210,7 +210,7 @@ function HeroBanner() {
           </View>
           <Text style={s.heroPct}>{Math.round(h.progress * 100)}%</Text>
           <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
-            <Text style={s.heroCtaTxt}>Continue â</Text>
+            <Text style={s.heroCtaTxt}>Continue →</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -226,7 +226,7 @@ function HeroBanner() {
   );
 }
 
-// âââ Subject grid (3-col) ââââââââââââââââââââââââââââââââââââââââ
+// ─── Subject grid (3-col) ────────────────────────────────────────
 
 function SubjectGrid({ filter }: { filter: SubjectFilter }) {
   const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
@@ -251,10 +251,15 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
             <Text style={s.subCount}>{item.count}</Text>
             {!item.locked ? (
               <View style={s.subPTrack}>
-                <View style={[s.subPFill, { width: `${Math.round(item.progress * 100)}%` as any, backgroundColor: item.color }]} />
+                <View
+                  style={[
+                    s.subPFill,
+                    { width: `${Math.round(item.progress * 100)}%` as any, backgroundColor: item.color },
+                  ]}
+                />
               </View>
             ) : (
-              <Text style={s.lockLbl}>ð LOCKED</Text>
+              <Text style={s.lockLbl}>🔒 LOCKED</Text>
             )}
           </View>
         </TouchableOpacity>
@@ -263,18 +268,18 @@ function SubjectGrid({ filter }: { filter: SubjectFilter }) {
   );
 }
 
-// âââ Activity table âââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Activity table ───────────────────────────────────────────────
 
 const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }> = {
-  done: { bg: "#D1FAE5", color: "#065F46", label: "Answered" },
-  "in-progress": { bg: "#FEF3C7", color: "#92400E", label: "Pending" },
-  new: { bg: "#EDE9FE", color: "#4C1D95", label: "New" },
+  done:          { bg: "#D1FAE5", color: "#065F46", label: "Answered"    },
+  "in-progress": { bg: "#FEF3C7", color: "#92400E", label: "Pending"     },
+  new:           { bg: "#EDE9FE", color: "#4C1D95", label: "New"         },
 };
 
 const ICON_BG: Record<string, string> = {
-  "ð": "#F0E8FF",
-  "âï¸": "#DFF7F4",
-  "ð": "#FFE8EC",
+  "📐": "#F0E8FF",
+  "⚗️": "#DFF7F4",
+  "📝": "#FFE8EC",
 };
 
 function ActivityTable() {
@@ -290,7 +295,11 @@ function ActivityTable() {
       {ACTIVITY.map((item, i) => {
         const st = STATUS_STYLE[item.status];
         return (
-          <TouchableOpacity key={item.id} style={[s.actRow, i === ACTIVITY.length - 1 && { borderBottomWidth: 0 }]} activeOpacity={0.75}>
+          <TouchableOpacity
+            key={item.id}
+            style={[s.actRow, i === ACTIVITY.length - 1 && { borderBottomWidth: 0 }]}
+            activeOpacity={0.75}
+          >
             <View style={s.actCell}>
               <View style={[s.actIco, { backgroundColor: ICON_BG[item.emoji] ?? "#F0E8FF" }]}>
                 <Text style={{ fontSize: 16 }}>{item.emoji}</Text>
@@ -314,7 +323,7 @@ function ActivityTable() {
   );
 }
 
-// âââ Main Screen âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Main Screen ─────────────────────────────────────────────────
 
 export default function HomeDesktopScreen() {
   const [activeNav, setActiveNav] = useState("home");
@@ -326,7 +335,7 @@ export default function HomeDesktopScreen() {
 
   return (
     <View style={s.root}>
-      {/* ââ macOS title bar ââ */}
+      {/* ── macOS title bar ── */}
       <View style={s.titleBar}>
         <View style={s.trafficLights}>
           <View style={[s.tl, { backgroundColor: "#FF5F57" }]} />
@@ -334,35 +343,39 @@ export default function HomeDesktopScreen() {
           <View style={[s.tl, { backgroundColor: "#28C840" }]} />
         </View>
         <View style={s.titleMid}>
-          <View style={s.titleIco}><Text style={s.titleIcoTxt}>â¦</Text></View>
-          <Text style={s.titleName}>EduApp Â· Home</Text>
+          <View style={s.titleIco}><Text style={s.titleIcoTxt}>✦</Text></View>
+          <Text style={s.titleName}>EduApp · Home</Text>
         </View>
         <View style={s.titleRight}>
           <Text style={s.titleTime}>9:41 AM</Text>
           <TouchableOpacity style={s.titleBell}>
-            <Text style={{ fontSize: 13 }}>ð</Text>
+            <Text style={{ fontSize: 13 }}>🔔</Text>
             {MOCK_USER.notifications > 0 && <View style={s.titleBellDot} />}
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* ââ App shell ââ */}
+      {/* ── App shell ── */}
       <View style={s.shell}>
         <Sidebar activeNav={activeNav} onNav={setActiveNav} />
 
         {/* Main content */}
-        <ScrollView style={s.main} contentContainerStyle={s.mainContent} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          style={s.main}
+          contentContainerStyle={s.mainContent}
+          showsVerticalScrollIndicator={false}
+        >
           {/* Greeting + search */}
           <View style={s.topBar}>
             <View>
-              <Text style={s.greetTitle}>{greeting}, Alexandra! ð</Text>
-              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak â keep going!</Text>
+              <Text style={s.greetTitle}>{greeting}, Alexandra! 👋</Text>
+              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak — keep going!</Text>
             </View>
             <View style={s.searchBox}>
-              <Text style={{ fontSize: 14, opacity: 0.4 }}>ð</Text>
+              <Text style={{ fontSize: 14, opacity: 0.4 }}>🔍</Text>
               <TextInput
                 style={s.searchInput}
-                placeholder="Search subjects, topicsâ¦"
+                placeholder="Search subjects, topics…"
                 placeholderTextColor={colors.textMuted}
                 value={search}
                 onChangeText={setSearch}
@@ -376,13 +389,24 @@ export default function HomeDesktopScreen() {
           {/* Explore */}
           <View style={s.secHdr}>
             <Text style={s.secTitle}>Explore Subjects</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7}>
+              <Text style={s.seeAll}>See all →</Text>
+            </TouchableOpacity>
           </View>
 
           {/* Filter pills */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.filterRow}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={s.filterRow}
+          >
             {FILTERS.map((f) => (
-              <TouchableOpacity key={f} style={[s.pill, filter === f && s.pillActive]} onPress={() => setFilter(f)} activeOpacity={0.75}>
+              <TouchableOpacity
+                key={f}
+                style={[s.pill, filter === f && s.pillActive]}
+                onPress={() => setFilter(f)}
+                activeOpacity={0.75}
+              >
                 <Text style={[s.pillTxt, filter === f && s.pillTxtActive]}>{f}</Text>
               </TouchableOpacity>
             ))}
@@ -393,7 +417,9 @@ export default function HomeDesktopScreen() {
           {/* Activity */}
           <View style={[s.secHdr, { marginTop: spacing.lg }]}>
             <Text style={s.secTitle}>Recent Activity</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7}>
+              <Text style={s.seeAll}>See all →</Text>
+            </TouchableOpacity>
           </View>
 
           <ActivityTable />
@@ -405,7 +431,7 @@ export default function HomeDesktopScreen() {
   );
 }
 
-// âââ Styles âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Styles ─────────────────────────────────────────────────────
 
 const SIDEBAR_W = 210;
 
@@ -433,25 +459,37 @@ const s = StyleSheet.create({
     gap: 9,
   },
   titleIco: {
-    width: 22, height: 22, borderRadius: 7,
+    width: 22,
+    height: 22,
+    borderRadius: 7,
     backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   titleIcoTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
   titleName: { fontSize: 13, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)" },
   titleRight: { marginLeft: "auto" as any, flexDirection: "row", alignItems: "center", gap: 14 },
   titleTime: { fontSize: 12, color: "rgba(255,255,255,0.38)", fontWeight: fontWeight.semibold },
   titleBell: {
-    width: 28, height: 28, borderRadius: 9,
+    width: 28,
+    height: 28,
+    borderRadius: 9,
     backgroundColor: "rgba(255,255,255,0.07)",
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.10)",
-    justifyContent: "center", alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    justifyContent: "center",
+    alignItems: "center",
   },
   titleBellDot: {
-    position: "absolute", top: 5, right: 5,
-    width: 6, height: 6, borderRadius: 3,
+    position: "absolute",
+    top: 5,
+    right: 5,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
     backgroundColor: colors.coral,
-    borderWidth: 1.5, borderColor: "#160D38",
+    borderWidth: 1.5,
+    borderColor: "#160D38",
   },
 
   // Shell
@@ -468,16 +506,19 @@ const s = StyleSheet.create({
   },
   brand: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 18 },
   brandIco: {
-    width: 30, height: 30, borderRadius: 9,
+    width: 30,
+    height: 30,
+    borderRadius: 9,
     backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   brandIcoTxt: { fontSize: 14, fontWeight: fontWeight.black, color: "#FFF" },
   brandName: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary },
 
   // User card
   userCard: {
-    backgroundColor: "#EBF4FF",
+    backgroundColor: "#F3E8FF",
     borderRadius: radius.lg,
     padding: 13,
     marginBottom: 14,
@@ -486,9 +527,12 @@ const s = StyleSheet.create({
   },
   userRow: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
   sbAvatar: {
-    width: 38, height: 38, borderRadius: 11,
+    width: 38,
+    height: 38,
+    borderRadius: 11,
     backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   sbAvatarTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
   sbName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, lineHeight: 18 },
@@ -497,14 +541,15 @@ const s = StyleSheet.create({
     alignSelf: "flex-start",
     backgroundColor: colors.violet,
     borderRadius: radius.pill,
-    paddingHorizontal: 10, paddingVertical: 3,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
     marginBottom: 9,
   },
   lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
   xpRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 5 },
   xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: colors.violet },
   xpRowPct: { fontSize: 10, color: colors.textMuted },
-  xpTrack: { height: 7, backgroundColor: "#BDD4FF", borderRadius: radius.pill, overflow: "hidden" },
+  xpTrack: { height: 7, backgroundColor: "#DDD0FF", borderRadius: radius.pill, overflow: "hidden" },
   xpFill: { height: "100%", backgroundColor: colors.violet, borderRadius: radius.pill },
   coinRow: {
     flexDirection: "row",
@@ -523,19 +568,24 @@ const s = StyleSheet.create({
 
   // Nav
   navSec: {
-    fontSize: 9, fontWeight: fontWeight.bold,
-    color: colors.textDim, letterSpacing: 1.5,
+    fontSize: 9,
+    fontWeight: fontWeight.bold,
+    color: colors.textDim,
+    letterSpacing: 1.5,
     textTransform: "uppercase" as any,
-    paddingVertical: 10, paddingHorizontal: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
   },
   navItem: {
-    flexDirection: "row", alignItems: "center", gap: 9,
-    paddingVertical: 8, paddingHorizontal: 10,
-    borderRadius: 11, marginBottom: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 9,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 11,
+    marginBottom: 1,
   },
-  navItemActive: {
-    backgroundColor: colors.violet,
-  },
+  navItemActive: { backgroundColor: colors.violet },
   navIco: { fontSize: 16 },
   navLbl: { fontSize: 13, fontWeight: fontWeight.semibold, color: "#6060A0" },
   navLblActive: { color: "#FFF" },
@@ -557,11 +607,11 @@ const s = StyleSheet.create({
   statVal: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary, textAlign: "right" as any },
   statUnit: { fontSize: 9, color: colors.textDim, textAlign: "right" as any },
 
-  // Main
+  // Main area
   main: { flex: 1 },
   mainContent: {
     padding: spacing.lg,
-    backgroundColor: "#EBF4FF",
+    backgroundColor: "#F3E8FF",
     minHeight: "100%" as any,
     gap: 20,
   },
@@ -572,7 +622,12 @@ const s = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
   },
-  greetTitle: { fontSize: 22, fontWeight: fontWeight.black, color: colors.textPrimary, letterSpacing: -0.5 },
+  greetTitle: {
+    fontSize: 22,
+    fontWeight: fontWeight.black,
+    color: colors.textPrimary,
+    letterSpacing: -0.5,
+  },
   greetSub: { fontSize: 13, color: colors.textMuted, marginTop: 2 },
   searchBox: {
     flexDirection: "row",
@@ -580,7 +635,7 @@ const s = StyleSheet.create({
     gap: 9,
     backgroundColor: "#FFF",
     borderWidth: 1.5,
-    borderColor: "#BDD4FF",
+    borderColor: "#DDD0FF",
     borderRadius: 13,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -595,9 +650,9 @@ const s = StyleSheet.create({
     outlineStyle: "none" as any,
   },
 
-  // Hero
+  // Hero banner
   hero: {
-    backgroundColor: "#2B6CB0",
+    backgroundColor: "#4A12CE",
     borderRadius: 24,
     flexDirection: "row",
     overflow: "hidden",
@@ -609,50 +664,90 @@ const s = StyleSheet.create({
     padding: 28,
     justifyContent: "space-between",
   },
-  heroTag: { fontSize: 10, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)", letterSpacing: 2, marginBottom: 7 },
-  heroTitle: { fontSize: 26, fontWeight: fontWeight.black, color: "#FFF", lineHeight: 30, marginBottom: 5, letterSpacing: -0.5 },
-  heroSub: { fontSize: 12, color: "rgba(255,255,255,0.55)", fontWeight: fontWeight.medium, marginBottom: 12 },
+  heroTag: {
+    fontSize: 10,
+    fontWeight: fontWeight.bold,
+    color: "rgba(255,255,255,0.55)",
+    letterSpacing: 2,
+    marginBottom: 7,
+  },
+  heroTitle: {
+    fontSize: 26,
+    fontWeight: fontWeight.black,
+    color: "#FFF",
+    lineHeight: 30,
+    marginBottom: 5,
+    letterSpacing: -0.5,
+  },
+  heroSub: {
+    fontSize: 12,
+    color: "rgba(255,255,255,0.55)",
+    fontWeight: fontWeight.medium,
+    marginBottom: 12,
+  },
   heroChips: { flexDirection: "row", gap: 7, flexWrap: "wrap" as any },
   heroChip: {
     backgroundColor: "rgba(255,255,255,0.13)",
     borderRadius: radius.pill,
-    paddingHorizontal: 10, paddingVertical: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
   },
   heroChipHard: { backgroundColor: "rgba(255,90,70,0.30)" },
   heroChipTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)" },
   heroBottom: { flexDirection: "row", alignItems: "center", gap: 14 },
-  heroPTrack: { flex: 1, height: 8, backgroundColor: "rgba(255,255,255,0.16)", borderRadius: radius.pill, overflow: "hidden" },
+  heroPTrack: {
+    flex: 1,
+    height: 8,
+    backgroundColor: "rgba(255,255,255,0.16)",
+    borderRadius: radius.pill,
+    overflow: "hidden",
+  },
   heroPFill: { height: "100%", backgroundColor: "#FFF", borderRadius: radius.pill },
   heroPct: { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
   heroCta: {
     backgroundColor: "#FFF",
     borderRadius: 12,
-    paddingVertical: 10, paddingHorizontal: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   heroCtaTxt: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.violet },
   heroRight: { width: 180, position: "relative" as any, overflow: "hidden" },
   hrc: { position: "absolute", borderRadius: 9999 },
-  hrc1: { width: 220, height: 220, top: -70, right: -60, backgroundColor: "rgba(255,255,255,0.08)" },
-  hrc2: { width: 120, height: 120, bottom: -40, right: 10, backgroundColor: "rgba(255,255,255,0.07)" },
-  hrc3: { width: 65, height: 65, top: 28, right: 80, backgroundColor: "rgba(255,255,255,0.09)" },
+  hrc1: { width: 220, height: 220, top: -70,  right: -60, backgroundColor: "rgba(255,255,255,0.08)" },
+  hrc2: { width: 120, height: 120, bottom: -40, right: 10,  backgroundColor: "rgba(255,255,255,0.07)" },
+  hrc3: { width: 65,  height: 65,  top: 28,   right: 80,  backgroundColor: "rgba(255,255,255,0.09)" },
   hrd: {
-    position: "absolute", width: 72, height: 72,
-    top: "50%" as any, left: "50%" as any,
-    marginTop: -36, marginLeft: -36,
+    position: "absolute",
+    width: 72,
+    height: 72,
+    top: "50%" as any,
+    left: "50%" as any,
+    marginTop: -36,
+    marginLeft: -36,
     backgroundColor: "rgba(255,255,255,0.10)",
-    transform: [{ rotate: "45deg" }], borderRadius: 12,
+    transform: [{ rotate: "45deg" }],
+    borderRadius: 12,
   },
 
   // Section headers
   secHdr: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  secTitle: { fontSize: 16, fontWeight: fontWeight.extrabold, color: colors.textPrimary, letterSpacing: -0.3 },
+  secTitle: {
+    fontSize: 16,
+    fontWeight: fontWeight.extrabold,
+    color: colors.textPrimary,
+    letterSpacing: -0.3,
+  },
   seeAll: { fontSize: 12, fontWeight: fontWeight.semibold, color: colors.violet },
 
   // Filter pills
   filterRow: { gap: 7, paddingBottom: 14 },
   pill: {
-    borderRadius: radius.pill, paddingHorizontal: 15, paddingVertical: 7,
-    backgroundColor: "#FFF", borderWidth: 2, borderColor: "#BDD4FF",
+    borderRadius: radius.pill,
+    paddingHorizontal: 15,
+    paddingVertical: 7,
+    backgroundColor: "#FFF",
+    borderWidth: 2,
+    borderColor: "#DDD0FF",
   },
   pillActive: { backgroundColor: colors.violet, borderColor: colors.violet },
   pillTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: colors.textMuted },
@@ -688,19 +783,26 @@ const s = StyleSheet.create({
   },
   actHead: {
     flexDirection: "row",
-    paddingVertical: 11, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: "#F0F0FA",
+    paddingVertical: 11,
+    paddingHorizontal: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0FA",
   },
   actHeadTxt: {
-    flex: 1, fontSize: 9, fontWeight: fontWeight.bold,
-    color: "#B8B8D0", letterSpacing: 1.2,
+    flex: 1,
+    fontSize: 9,
+    fontWeight: fontWeight.bold,
+    color: "#B8B8D0",
+    letterSpacing: 1.2,
     textTransform: "uppercase" as any,
   },
   actRow: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 13, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: "#F8F8FF",
+    paddingVertical: 13,
+    paddingHorizontal: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F8F8FF",
   },
   actCell: { flex: 1, flexDirection: "row", alignItems: "center", gap: 11 },
   actIco: { width: 36, height: 36, borderRadius: 11, justifyContent: "center", alignItems: "center" },
