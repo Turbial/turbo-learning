@@ -1,6 +1,6 @@
-// ─── Home Screen — Ocean / Aqua theme, real Supabase data ────────────────────
-// Mobile: full-width feed (header → XP bar → hero → 28-day journey).
-// Switches to HomeDesktopScreen on web ≥ 768 px.
+// ─── Home Screen — mobile + platform switch ───────────────────────────────────
+// All visual tokens come from src/theme/themeConfig.ts → appTheme.
+// To change the look: edit themeConfig, this file never needs touching.
 
 import React from "react";
 import {
@@ -16,8 +16,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { router } from "expo-router";
-import { spacing, radius, fontSize, fontWeight } from "../../src/theme/tokens";
-import { appPalette as o } from "../../src/theme/palette";
+import { appTheme as t } from "../../src/theme/appTheme";
 import { Skeleton } from "../../src/components/ui/LoadingSkeleton";
 
 // ─── Real data hooks ──────────────────────────────────────────────────────────
@@ -52,19 +51,7 @@ function getFirstName(name?: string | null, email?: string | null): string {
   return "Learner";
 }
 
-// XP per level is linear — 1000 XP each.
 const XP_PER_LEVEL = 1000;
-
-// ─── Week color palette (aqua variants for ocean theme) ───────────────────────
-const WEEK_COLORS = [o.mid, o.teal, o.sky, o.deep] as const;
-const WEEK_TITLES = ["Foundation", "Automation", "Systems", "Launch"] as const;
-const WEEK_GOALS = [
-  "Understand AI and build your first workflows",
-  "Build automations that run without you",
-  "Create multi-tool AI systems",
-  "Ship your AI workforce",
-] as const;
-const WEEK_EMOJIS = ["🧱", "⚙️", "🌐", "🚀"] as const;
 
 // ─── Components ───────────────────────────────────────────────────────────────
 
@@ -149,7 +136,6 @@ function HeroCard({
         })
       }
     >
-      {/* Caustic light rings */}
       <View style={[s.caustic, s.cA]} />
       <View style={[s.caustic, s.cB]} />
       <View style={[s.caustic, s.cC]} />
@@ -158,7 +144,6 @@ function HeroCard({
       <View style={s.heroTag}>
         <Text style={s.heroTagTxt}>🌊  CONTINUE LEARNING</Text>
       </View>
-
       <Text style={s.heroTitle}>{title}</Text>
       <Text style={s.heroSub}>{subtitle}</Text>
 
@@ -169,9 +154,9 @@ function HeroCard({
         <Text style={s.heroPct}>{overallPct}%</Text>
       </View>
 
-      <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
+      <View style={s.heroCta}>
         <Text style={s.heroCtaTxt}>Continue →</Text>
-      </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -192,18 +177,20 @@ function AllDoneCard({ total }: { total: number }) {
   );
 }
 
-// ─── WeeksView — 4×7 days journey ─────────────────────────────────────────────
+// ─── WeeksView ────────────────────────────────────────────────────────────────
 
 type DayStatus = "done" | "current" | "locked";
-type DayEntry = { day: number; unitId: string; title: string; status: DayStatus };
-type WeekEntry = {
-  weekNum: number;
-  title: string;
-  goal: string;
-  emoji: string;
-  color: string;
-  days: DayEntry[];
-};
+type DayEntry  = { day: number; unitId: string; title: string; status: DayStatus };
+type WeekEntry = { weekNum: number; title: string; goal: string; emoji: string; color: string; days: DayEntry[] };
+
+const WEEK_TITLES = ["Foundation", "Automation", "Systems", "Launch"] as const;
+const WEEK_GOALS  = [
+  "Understand AI and build your first workflows",
+  "Build automations that run without you",
+  "Create multi-tool AI systems",
+  "Ship your AI workforce",
+] as const;
+const WEEK_EMOJIS = ["🧱", "⚙️", "🌐", "🚀"] as const;
 
 function WeeksView({
   units,
@@ -220,31 +207,24 @@ function WeeksView({
 
   for (let w = 0; w < 4; w++) {
     const startDay = w * 7 + 1;
-    const endDay = Math.min(startDay + 6, 28);
-    const weekUnits = units.filter(
-      (u) => u.order_num >= startDay && u.order_num <= endDay
-    );
+    const endDay   = Math.min(startDay + 6, 28);
+    const weekUnits = units.filter((u) => u.order_num >= startDay && u.order_num <= endDay);
 
     weeks.push({
       weekNum: w + 1,
-      title: WEEK_TITLES[w] ?? `Week ${w + 1}`,
-      goal: WEEK_GOALS[w] ?? "",
-      emoji: WEEK_EMOJIS[w] ?? "📅",
-      color: WEEK_COLORS[w] ?? o.mid,
+      title:   WEEK_TITLES[w] ?? `Week ${w + 1}`,
+      goal:    WEEK_GOALS[w]  ?? "",
+      emoji:   WEEK_EMOJIS[w] ?? "📅",
+      color:   t.weekColors[w] ?? t.colors.accent,
       days: weekUnits.map((u) => {
-        const isDone = completedUnitIds.has(u.id);
-        const prevUnit =
-          u.order_num > 1
-            ? units.find((pu) => pu.order_num === u.order_num - 1)
-            : null;
-        const prevDone =
-          u.order_num === 1 ||
-          (prevUnit != null && completedUnitIds.has(prevUnit.id));
+        const isDone    = completedUnitIds.has(u.id);
+        const prevUnit  = u.order_num > 1 ? units.find((p) => p.order_num === u.order_num - 1) : null;
+        const prevDone  = u.order_num === 1 || (prevUnit != null && completedUnitIds.has(prevUnit.id));
         const isCurrent = !isDone && prevDone;
         return {
-          day: u.order_num,
+          day:    u.order_num,
           unitId: u.id,
-          title: u.title,
+          title:  u.title,
           status: (isDone ? "done" : isCurrent ? "current" : "locked") as DayStatus,
         };
       }),
@@ -255,18 +235,12 @@ function WeeksView({
     <>
       {weeks.map((week) => {
         const doneCount = week.days.filter((d) => d.status === "done").length;
-        const weekPct =
-          week.days.length > 0
-            ? Math.round((doneCount / week.days.length) * 100)
-            : 0;
+        const weekPct   = week.days.length > 0 ? Math.round((doneCount / week.days.length) * 100) : 0;
 
         return (
           <View key={week.weekNum} style={s.weekCard}>
-            {/* Left accent stripe */}
             <View style={[s.weekAccent, { backgroundColor: week.color }]} />
-
             <View style={s.weekInner}>
-              {/* Week header */}
               <View style={s.weekHeaderRow}>
                 <Text style={s.weekEmoji}>{week.emoji}</Text>
                 <View style={{ flex: 1 }}>
@@ -279,25 +253,18 @@ function WeeksView({
               </View>
               <Text style={s.weekGoal}>{week.goal}</Text>
 
-              {/* Mini progress bar */}
               <View style={s.weekMiniBar}>
-                <View
-                  style={[
-                    s.weekMiniFill,
-                    {
-                      width: `${Math.max(weekPct, weekPct > 0 ? 4 : 0)}%` as any,
-                      backgroundColor: week.color,
-                    },
-                  ]}
-                />
+                <View style={[s.weekMiniFill, {
+                  width: `${Math.max(weekPct, weekPct > 0 ? 4 : 0)}%` as any,
+                  backgroundColor: week.color,
+                }]} />
               </View>
 
-              {/* Day rows */}
               <View style={s.daysList}>
                 {week.days.map((d) => {
                   const isCurrent = d.status === "current";
-                  const isDone = d.status === "done";
-                  const isLocked = d.status === "locked";
+                  const isDone    = d.status === "done";
+                  const isLocked  = d.status === "locked";
                   return (
                     <TouchableOpacity
                       key={d.day}
@@ -306,39 +273,30 @@ function WeeksView({
                       activeOpacity={isLocked ? 1 : 0.7}
                       disabled={isLocked}
                     >
-                      <View
-                        style={[
-                          s.dayCircle,
-                          isDone && [s.dayCircleDone, { backgroundColor: week.color }],
-                          isCurrent && [s.dayCircleCurrent, { borderColor: week.color }],
-                          isLocked && s.dayCircleLocked,
-                        ]}
-                      >
+                      <View style={[
+                        s.dayCircle,
+                        isDone    && [s.dayCircleDone,    { backgroundColor: week.color }],
+                        isCurrent && [s.dayCircleCurrent, { borderColor: week.color }],
+                        isLocked  && s.dayCircleLocked,
+                      ]}>
                         {isDone ? (
                           <Text style={s.dayCheck}>✓</Text>
                         ) : (
-                          <Text
-                            style={[
-                              s.dayNum,
-                              isCurrent && [s.dayNumCurrent, { color: week.color }],
-                              isLocked && s.dayNumLocked,
-                            ]}
-                          >
+                          <Text style={[
+                            s.dayNum,
+                            isCurrent && [s.dayNumCurrent, { color: week.color }],
+                            isLocked  && s.dayNumLocked,
+                          ]}>
                             {d.day}
                           </Text>
                         )}
                       </View>
                       <View style={s.dayInfo}>
-                        <Text
-                          style={[s.dayTitle, isLocked && s.dayTitleLocked]}
-                          numberOfLines={1}
-                        >
+                        <Text style={[s.dayTitle, isLocked && s.dayTitleLocked]} numberOfLines={1}>
                           {d.title}
                         </Text>
                         {isCurrent && (
-                          <Text style={[s.currentPill, { color: week.color }]}>
-                            Now
-                          </Text>
+                          <Text style={[s.currentPill, { color: week.color }]}>Now</Text>
                         )}
                       </View>
                       {isLocked && <Text style={s.lockIcon}>🔒</Text>}
@@ -359,21 +317,19 @@ function WeeksView({
 function LoadingSkeleton() {
   return (
     <SafeAreaView style={s.safe}>
-      <View style={{ padding: spacing.md, gap: 14 }}>
+      <View style={{ padding: t.spacing.md, gap: 14 }}>
         <View style={{ flexDirection: "row", gap: 12, alignItems: "center" }}>
-          <Skeleton width={48} height={48} rounded={14} />
+          <Skeleton width={48} height={48} rounded={t.radius.lg} />
           <View style={{ gap: 6 }}>
             <Skeleton width={120} height={14} rounded={8} />
-            <Skeleton width={80} height={12} rounded={6} />
+            <Skeleton width={80}  height={12} rounded={6} />
           </View>
         </View>
-        <Skeleton height={64} rounded={16} />
-        <Skeleton height={180} rounded={22} />
-        <Skeleton width={140} height={16} rounded={8} />
-        <Skeleton height={6} rounded={3} />
-        {[1, 2].map((i) => (
-          <Skeleton key={i} height={160} rounded={18} />
-        ))}
+        <Skeleton height={64}  rounded={t.radius.xl}  />
+        <Skeleton height={180} rounded={t.radius.xxl} />
+        <Skeleton width={140}  height={16} rounded={8} />
+        <Skeleton height={6}   rounded={3} />
+        {[1, 2].map((i) => <Skeleton key={i} height={160} rounded={t.radius.xl} />)}
       </View>
     </SafeAreaView>
   );
@@ -384,27 +340,24 @@ function LoadingSkeleton() {
 function HomeScreenMobile() {
   const { user } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
-  const { data: activeSlug } = useActiveProgramSlug();
-  const programSlug = activeSlug ?? "ai-operator";
-  const { data: program } = useProgram(programSlug);
+  const { data: activeSlug }  = useActiveProgramSlug();
+  const programSlug           = activeSlug ?? "ai-operator";
+  const { data: program }     = useProgram(programSlug);
   const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
-  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
-  const { data: streakRisk } = useStreakAtRisk(user?.id);
+  const localCompletedIds          = useLocalProgressStore((s) => s.completedUnitIds);
+  const { data: streakRisk }  = useStreakAtRisk(user?.id);
 
   const allCompletedIds = new Set<string>([
     ...(completedUnitIds ?? new Set<string>()),
     ...localCompletedIds,
   ]);
-
-  const fallbackUnits =
-    LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"] ?? [];
-  const displayUnits = units ?? fallbackUnits;
+  const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"] ?? [];
+  const displayUnits  = units ?? fallbackUnits;
+  const totalUnits    = displayUnits.length || 28;
   const completedCount = allCompletedIds.size;
-  const totalUnits = displayUnits.length || 28;
-  const overallPct = Math.round((completedCount / totalUnits) * 100);
+  const overallPct    = Math.round((completedCount / totalUnits) * 100);
 
-  // Find the first "current" unit (next up to complete)
   const currentUnit = displayUnits.find((u, i) => {
     if (allCompletedIds.has(u.id)) return false;
     if (i === 0) return true;
@@ -414,35 +367,25 @@ function HomeScreenMobile() {
 
   const handleDayPress = (day: number, unitId: string, status: DayStatus) => {
     if (status === "locked") return;
-    router.push({
-      pathname: `/lesson/${unitId}` as any,
-      params: { program: programSlug, day: String(day) },
-    });
+    router.push({ pathname: `/lesson/${unitId}` as any, params: { program: programSlug, day: String(day) } });
   };
 
-  if (profileLoading || (unitsLoading && !units)) {
-    return <LoadingSkeleton />;
-  }
+  if (profileLoading || (unitsLoading && !units)) return <LoadingSkeleton />;
 
-  const initials = getInitials(profile?.name, profile?.email ?? user?.email);
+  const initials  = getInitials(profile?.name, profile?.email ?? user?.email);
   const firstName = getFirstName(profile?.name, profile?.email ?? user?.email);
-  const xp = profile?.xp ?? 0;
-  const level = profile?.level ?? 1;
-  const streak = profile?.streak ?? 0;
-
-  const hour = new Date().getHours();
-  const greeting =
-    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const xp        = profile?.xp ?? 0;
+  const level     = profile?.level ?? 1;
+  const streak    = profile?.streak ?? 0;
+  const hour      = new Date().getHours();
+  const greeting  = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
   return (
     <SafeAreaView style={s.safe}>
-      <StatusBar barStyle="dark-content" backgroundColor={o.bg} />
-      <ScrollView
-        style={s.scroll}
-        contentContainerStyle={s.content}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* ── Header ── */}
+      <StatusBar barStyle="dark-content" backgroundColor={t.colors.screenBg} />
+      <ScrollView style={s.scroll} contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
+
+        {/* Header */}
         <View style={s.hdr}>
           <View style={s.hdrLeft}>
             <Avatar initials={initials} />
@@ -458,10 +401,10 @@ function HomeScreenMobile() {
           </View>
         </View>
 
-        {/* ── XP bar ── */}
+        {/* XP bar */}
         <XPBar xp={xp} level={level} />
 
-        {/* ── Streak-at-risk banner ── */}
+        {/* Streak-at-risk */}
         {streakRisk?.isAtRisk && (
           <StreakRiskBanner
             streakDays={streakRisk.streakDays}
@@ -470,7 +413,7 @@ function HomeScreenMobile() {
           />
         )}
 
-        {/* ── Hero: current lesson ── */}
+        {/* Hero */}
         {currentUnit ? (
           <HeroCard
             title={currentUnit.title}
@@ -484,22 +427,16 @@ function HomeScreenMobile() {
           <AllDoneCard total={totalUnits} />
         ) : null}
 
-        {/* ── Journey ── */}
+        {/* Journey section */}
         <View style={s.secHdr}>
           <Text style={s.secTitle}>Your Journey</Text>
-          <Text style={s.journeyCount}>
-            {completedCount}/{totalUnits} days
-          </Text>
+          <Text style={s.journeyCount}>{completedCount}/{totalUnits} days</Text>
         </View>
 
-        {/* Overall progress bar */}
         <View style={s.overallBar}>
-          <View
-            style={[
-              s.overallFill,
-              { width: `${Math.max(overallPct, overallPct > 0 ? 2 : 0)}%` as any },
-            ]}
-          />
+          <View style={[s.overallFill, {
+            width: `${Math.max(overallPct, overallPct > 0 ? 2 : 0)}%` as any,
+          }]} />
         </View>
 
         {displayUnits.length > 0 ? (
@@ -511,7 +448,7 @@ function HomeScreenMobile() {
           />
         ) : (
           <View style={s.emptyWrap}>
-            <ActivityIndicator color={o.mid} />
+            <ActivityIndicator color={t.colors.accent} />
             <Text style={s.emptyTxt}>Loading program…</Text>
           </View>
         )}
@@ -534,137 +471,68 @@ export default function HomeScreen() {
   return <HomeScreenMobile />;
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
-
-const AQUA_SHADOW = {
-  shadowColor: o.bright,
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.14,
-  shadowRadius: 14,
-  elevation: 4,
-};
+// ─── Styles ── all values from appTheme (t) ───────────────────────────────────
 
 const s = StyleSheet.create({
-  safe:    { flex: 1, backgroundColor: o.bg },
+  safe:    { flex: 1, backgroundColor: t.colors.screenBg },
   scroll:  { flex: 1 },
   content: {
-    paddingHorizontal: spacing.md,
-    paddingTop: Platform.OS === "android" ? spacing.lg : spacing.sm,
+    paddingHorizontal: t.spacing.md,
+    paddingTop: Platform.OS === "android" ? t.spacing.lg : t.spacing.sm,
   },
 
-  // ── Header
-  hdr: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: spacing.md,
-  },
-  hdrLeft:  { flexDirection: "row", alignItems: "center", gap: 12 },
-  hdrRight: { flexDirection: "row", alignItems: "center", gap: 8 },
-
-  greeting: { fontSize: fontSize.sm, color: o.muted, fontWeight: fontWeight.medium },
-  userName: {
-    fontSize: fontSize.xl,
-    color: o.text,
-    fontWeight: fontWeight.extrabold,
-    letterSpacing: -0.3,
-  },
+  // Header
+  hdr:     { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: t.spacing.md },
+  hdrLeft: { flexDirection: "row", alignItems: "center", gap: 12 },
+  hdrRight:{ flexDirection: "row", alignItems: "center", gap: 8 },
+  greeting:{ fontSize: t.text.bodyMd, color: t.colors.textMuted, fontWeight: t.text.weightMedium },
+  userName:{ fontSize: t.text.h1, color: t.colors.textPrimary, fontWeight: t.text.weightExtrabold, letterSpacing: -0.3 },
 
   // Avatar
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 14,
-    backgroundColor: o.mid,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  avatarGlint: {
-    position: "absolute",
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: "rgba(255,255,255,0.18)",
-    top: -6,
-    right: -6,
-  },
-  avatarTxt: { fontSize: fontSize.md, fontWeight: fontWeight.black, color: "#FFF" },
+  avatar:     { width: 48, height: 48, borderRadius: t.radius.lg, backgroundColor: t.colors.accent, justifyContent: "center", alignItems: "center", overflow: "hidden" },
+  avatarGlint:{ position: "absolute", width: 28, height: 28, borderRadius: 14, backgroundColor: "rgba(255,255,255,0.18)", top: -6, right: -6 },
+  avatarTxt:  { fontSize: t.text.h3, fontWeight: t.text.weightBlack, color: "#FFF" },
 
   // Streak badge
-  streakBadge: {
-    backgroundColor: o.streakBg,
-    borderWidth: 1.5,
-    borderColor: o.streakBorder,
-    borderRadius: radius.pill,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  streakTxt: { fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: o.streakText },
+  streakBadge:{ backgroundColor: t.colors.streakBg, borderWidth: 1.5, borderColor: t.colors.streakBorder, borderRadius: t.radius.pill, paddingHorizontal: 10, paddingVertical: 5 },
+  streakTxt:  { fontSize: t.text.bodyMd, fontWeight: t.text.weightBold, color: t.colors.streakText },
 
-  // ── XP bar card
+  // XP card
   xpCard: {
-    backgroundColor: o.card,
-    borderRadius: radius.xl,
-    padding: spacing.md,
-    marginBottom: spacing.md,
+    backgroundColor: t.colors.cardBg,
+    borderRadius: t.radius.xl,
+    padding: t.spacing.md,
+    marginBottom: t.spacing.md,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
     borderWidth: 1,
-    borderColor: o.border,
-    ...AQUA_SHADOW,
+    borderColor: t.colors.border,
+    ...t.cardShadow,
   },
-  xpLeft:  { gap: 3 },
-  xpLevel: { fontSize: fontSize.md, fontWeight: fontWeight.extrabold, color: o.mid },
-  xpSub:   { fontSize: fontSize.sm, color: o.muted },
-  xpRight: { flex: 1, gap: 4 },
-  xpTrack: {
-    height: 10,
-    backgroundColor: o.bgTint,
-    borderRadius: radius.pill,
-    overflow: "hidden",
-    position: "relative",
-  },
-  xpFill: { height: "100%", backgroundColor: o.mid, borderRadius: radius.pill },
-  xpShimmer: {
-    position: "absolute",
-    width: 6,
-    height: "100%",
-    backgroundColor: "rgba(255,255,255,0.55)",
-    borderRadius: 3,
-  },
-  xpPct: {
-    fontSize: fontSize.sm,
-    color: o.muted,
-    fontWeight: fontWeight.semibold,
-    textAlign: "right",
-  },
+  xpLeft:   { gap: 3 },
+  xpLevel:  { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: t.colors.accent },
+  xpSub:    { fontSize: t.text.bodyMd, color: t.colors.textMuted },
+  xpRight:  { flex: 1, gap: 4 },
+  xpTrack:  { height: 10, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", position: "relative" },
+  xpFill:   { height: "100%", backgroundColor: t.colors.accent, borderRadius: t.radius.pill },
+  xpShimmer:{ position: "absolute", width: 6, height: "100%", backgroundColor: "rgba(255,255,255,0.55)", borderRadius: 3 },
+  xpPct:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, fontWeight: t.text.weightSemibold, textAlign: "right" },
 
-  // ── Streak-at-risk banner
-  riskBanner: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    backgroundColor: "#FFF7ED",
-    borderWidth: 1.5,
-    borderColor: "#FED7AA",
-    borderRadius: radius.lg,
-    padding: 14,
-    marginBottom: spacing.md,
-  },
-  riskIcon:  { fontSize: 20 },
-  riskTitle: { fontSize: fontSize.sm, fontWeight: fontWeight.bold, color: "#92400E", marginBottom: 2 },
-  riskHint:  { fontSize: fontSize.xs, color: "#B45309" },
+  // Streak-at-risk
+  riskBanner: { flexDirection: "row", alignItems: "center", gap: 12, backgroundColor: t.colors.warningBg, borderWidth: 1.5, borderColor: t.colors.warningBorder, borderRadius: t.radius.lg, padding: 14, marginBottom: t.spacing.md },
+  riskIcon:   { fontSize: 20 },
+  riskTitle:  { fontSize: t.text.bodyMd, fontWeight: t.text.weightBold, color: t.colors.warningText, marginBottom: 2 },
+  riskHint:   { fontSize: t.text.caption, color: t.colors.warning },
 
-  // ── Hero card
+  // Hero card
   hero: {
-    backgroundColor: o.deep,
-    borderRadius: radius.xxl,
-    padding: spacing.lg,
-    marginBottom: spacing.lg,
+    backgroundColor: t.hero.bg,
+    borderRadius: t.radius.xxl,
+    padding: t.spacing.lg,
+    marginBottom: t.spacing.lg,
     overflow: "hidden",
-    shadowColor: o.deep,
+    shadowColor: t.hero.bg,
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.30,
     shadowRadius: 20,
@@ -675,164 +543,58 @@ const s = StyleSheet.create({
   cB: { width: 150, height: 150, bottom: -55, left: -30, backgroundColor: "rgba(255,255,255,0.07)" },
   cC: { width: 90,  height: 90,  top: 20,   right: 60,  backgroundColor: "rgba(255,255,255,0.08)" },
   cD: { width: 50,  height: 50,  top: 70,   right: 24,  backgroundColor: "rgba(255,255,255,0.10)" },
+  heroTag:    { alignSelf: "flex-start", backgroundColor: "rgba(255,255,255,0.16)", borderRadius: t.radius.pill, paddingHorizontal: 12, paddingVertical: 4, marginBottom: t.spacing.sm },
+  heroTagTxt: { fontSize: t.text.caption, fontWeight: t.text.weightBold, color: "rgba(255,255,255,0.92)", letterSpacing: 0.8 },
+  heroTitle:  { fontSize: t.text.display, fontWeight: t.text.weightBlack, color: "#FFF", lineHeight: t.text.display * 1.18, marginBottom: 6, letterSpacing: -0.5 },
+  heroSub:    { fontSize: t.text.h3, color: "rgba(255,255,255,0.65)", fontWeight: t.text.weightMedium, marginBottom: t.spacing.md },
+  heroPRow:   { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: t.spacing.md },
+  heroPTrack: { flex: 1, height: 7, backgroundColor: "rgba(255,255,255,0.18)", borderRadius: t.radius.pill, overflow: "hidden" },
+  heroPFill:  { height: "100%", backgroundColor: t.hero.progressFill, borderRadius: t.radius.pill },
+  heroPct:    { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: "#FFF" },
+  heroCta:    { backgroundColor: t.hero.ctaBg, borderRadius: t.radius.lg, paddingVertical: 13, alignItems: "center" },
+  heroCtaTxt: { fontSize: t.text.h3, fontWeight: t.text.weightExtrabold, color: t.hero.ctaText, letterSpacing: 0.3 },
 
-  heroTag: {
-    alignSelf: "flex-start",
-    backgroundColor: "rgba(255,255,255,0.16)",
-    borderRadius: radius.pill,
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    marginBottom: spacing.sm,
-  },
-  heroTagTxt: {
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.bold,
-    color: "rgba(255,255,255,0.92)",
-    letterSpacing: 0.8,
-  },
-  heroTitle: {
-    fontSize: 30,
-    fontWeight: fontWeight.black,
-    color: "#FFF",
-    lineHeight: 36,
-    marginBottom: 6,
-    letterSpacing: -0.5,
-  },
-  heroSub: {
-    fontSize: fontSize.md,
-    color: "rgba(255,255,255,0.65)",
-    fontWeight: fontWeight.medium,
-    marginBottom: spacing.md,
-  },
-  heroPRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    marginBottom: spacing.md,
-  },
-  heroPTrack: {
-    flex: 1,
-    height: 7,
-    backgroundColor: "rgba(255,255,255,0.18)",
-    borderRadius: radius.pill,
-    overflow: "hidden",
-  },
-  heroPFill: { height: "100%", backgroundColor: o.heroProgressFill, borderRadius: radius.pill },
-  heroPct:   { fontSize: fontSize.md, fontWeight: fontWeight.extrabold, color: "#FFF" },
-  heroCta: {
-    backgroundColor: "#FFF",
-    borderRadius: radius.lg,
-    paddingVertical: 13,
-    alignItems: "center",
-  },
-  heroCtaTxt: {
-    fontSize: fontSize.md,
-    fontWeight: fontWeight.extrabold,
-    color: o.heroCtaText,
-    letterSpacing: 0.3,
-  },
+  // Section header
+  secHdr:      { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: t.spacing.sm },
+  secTitle:    { fontSize: t.text.h1, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.3 },
+  journeyCount:{ fontSize: t.text.h3, fontWeight: t.text.weightSemibold, color: t.colors.accent },
 
-  // ── Section header + journey progress
-  secHdr: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: spacing.sm,
-  },
-  secTitle:     { fontSize: fontSize.xl, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.3 },
-  journeyCount: { fontSize: fontSize.md, fontWeight: fontWeight.semibold, color: o.mid },
+  // Overall bar
+  overallBar:  { height: 6, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", marginBottom: t.spacing.md },
+  overallFill: { height: "100%", backgroundColor: t.colors.accent, borderRadius: t.radius.pill },
 
-  // Overall progress bar
-  overallBar: {
-    height: 6,
-    backgroundColor: o.bgTint,
-    borderRadius: radius.pill,
-    overflow: "hidden",
-    marginBottom: spacing.md,
-  },
-  overallFill: {
-    height: "100%",
-    backgroundColor: o.mid,
-    borderRadius: radius.pill,
-  },
+  // Week card
+  weekCard:    { backgroundColor: t.colors.cardBg, borderRadius: t.radius.xl, marginBottom: 14, overflow: "hidden", flexDirection: "row", ...t.cardShadow },
+  weekAccent:  { width: 4 },
+  weekInner:   { flex: 1, padding: 16 },
+  weekHeaderRow:{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 4 },
+  weekEmoji:   { fontSize: 22 },
+  weekLabel:   { fontSize: 11, fontWeight: t.text.weightBold, color: t.colors.textDisabled, letterSpacing: 1.5, textTransform: "uppercase" as any },
+  weekTitle:   { fontSize: t.text.h2, fontWeight: t.text.weightExtrabold, color: t.colors.textPrimary, letterSpacing: -0.2 },
+  weekCount:   { fontSize: t.text.h3, fontWeight: t.text.weightBold },
+  weekGoal:    { fontSize: t.text.bodyMd, color: t.colors.textMuted, marginBottom: 8 },
+  weekMiniBar: { height: 4, backgroundColor: t.colors.accentTint, borderRadius: t.radius.pill, overflow: "hidden", marginBottom: 12 },
+  weekMiniFill:{ height: "100%", borderRadius: t.radius.pill },
 
-  // ── Week card
-  weekCard: {
-    backgroundColor: o.card,
-    borderRadius: radius.xl,
-    marginBottom: 14,
-    overflow: "hidden",
-    flexDirection: "row",
-    ...AQUA_SHADOW,
-  },
-  weekAccent: { width: 4, borderRadius: 0 },
-  weekInner:  { flex: 1, padding: 16 },
-
-  weekHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    marginBottom: 4,
-  },
-  weekEmoji: { fontSize: 22 },
-  weekLabel: {
-    fontSize: 11,
-    fontWeight: fontWeight.bold,
-    color: o.dim,
-    letterSpacing: 1.5,
-    textTransform: "uppercase" as any,
-  },
-  weekTitle: { fontSize: fontSize.lg, fontWeight: fontWeight.extrabold, color: o.text, letterSpacing: -0.2 },
-  weekCount: { fontSize: fontSize.md, fontWeight: fontWeight.bold },
-
-  weekGoal: { fontSize: fontSize.sm, color: o.muted, marginBottom: 8 },
-
-  weekMiniBar: {
-    height: 4,
-    backgroundColor: o.bgTint,
-    borderRadius: radius.pill,
-    overflow: "hidden",
-    marginBottom: 12,
-  },
-  weekMiniFill: { height: "100%", borderRadius: radius.pill },
-
-  // ── Day rows
-  daysList: { gap: 2 },
-  dayRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 6,
-    borderRadius: 10,
-  },
-  dayRowCurrent: { backgroundColor: o.bgTint },
-
-  dayCircle: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    borderWidth: 2,
-    borderColor: o.border,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  dayCircleDone:    { borderWidth: 0 },
-  dayCircleCurrent: { borderWidth: 2 },
-  dayCircleLocked:  { borderColor: o.bgTint, backgroundColor: o.bgTint },
-
-  dayCheck:       { fontSize: 15, color: "#FFF", fontWeight: fontWeight.black },
-  dayNum:         { fontSize: 13, fontWeight: fontWeight.bold, color: o.muted },
-  dayNumCurrent:  { fontWeight: fontWeight.extrabold },
-  dayNumLocked:   { color: o.dim },
-
+  // Day rows
+  daysList:       { gap: 2 },
+  dayRow:         { flexDirection: "row", alignItems: "center", gap: 12, paddingVertical: 10, paddingHorizontal: 6, borderRadius: t.radius.md },
+  dayRowCurrent:  { backgroundColor: t.colors.accentTint },
+  dayCircle:      { width: 38, height: 38, borderRadius: 19, borderWidth: 2, borderColor: t.colors.border, justifyContent: "center", alignItems: "center" },
+  dayCircleDone:  { borderWidth: 0 },
+  dayCircleCurrent:{ borderWidth: 2 },
+  dayCircleLocked:{ borderColor: t.colors.accentTint, backgroundColor: t.colors.accentTint },
+  dayCheck:       { fontSize: 15, color: "#FFF", fontWeight: t.text.weightBlack },
+  dayNum:         { fontSize: 13, fontWeight: t.text.weightBold, color: t.colors.textMuted },
+  dayNumCurrent:  { fontWeight: t.text.weightExtrabold },
+  dayNumLocked:   { color: t.colors.textDisabled },
   dayInfo:        { flex: 1 },
-  dayTitle:       { fontSize: fontSize.md, fontWeight: fontWeight.semibold, color: o.text },
-  dayTitleLocked: { color: o.dim },
-  currentPill:    { fontSize: 12, fontWeight: fontWeight.bold, marginTop: 2 },
+  dayTitle:       { fontSize: t.text.body, fontWeight: t.text.weightSemibold, color: t.colors.textPrimary },
+  dayTitleLocked: { color: t.colors.textDisabled },
+  currentPill:    { fontSize: 12, fontWeight: t.text.weightBold, marginTop: 2 },
   lockIcon:       { fontSize: 15, opacity: 0.4 },
 
-  // ── Empty / loading
-  emptyWrap: { alignItems: "center", gap: 10, paddingVertical: spacing.xl },
-  emptyTxt:  { fontSize: fontSize.sm, color: o.muted },
+  // Empty / loading
+  emptyWrap: { alignItems: "center", gap: 10, paddingVertical: t.spacing.xl },
+  emptyTxt:  { fontSize: t.text.bodyMd, color: t.colors.textMuted },
 });
