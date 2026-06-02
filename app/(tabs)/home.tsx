@@ -1,12 +1,12 @@
-// ─── Home Screen — Turbo Learning design spec ───
+// âââ Home Screen â Turbo Learning design spec âââ
 // Implements the mobile home dashboard:
-// • Header (avatar / greeting / coins / level / bell)
-// • XP progress strip
-// • Hero "Continue Learning" card
-// • Explore Subjects (filter pills + 2-col grid)
-// • Recent Activity list
+// â¢ Header (avatar / greeting / coins / level / bell)
+// â¢ XP progress strip
+// â¢ Hero "Continue Learning" card
+// â¢ Explore Subjects (filter pills + 2-col grid)
+// â¢ Recent Activity list
 //
-// Data is hardcoded (mock shapes). Supabase integration → M3+.
+// Data is hardcoded (mock shapes). Supabase integration â M3+.
 
 import React, { useState } from "react";
 import {
@@ -20,6 +20,7 @@ import {
   Platform,
 } from "react-native";
 import { router } from "expo-router";
+import HomeDesktop from "./HomeDesktop";
 import {
   colors,
   spacing,
@@ -29,7 +30,7 @@ import {
   shadow,
 } from "../../src/theme/tokens";
 
-// ─── Mock data ──────────────────────────────────────────────────
+// âââ Mock data ââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 const MOCK_USER = {
   initials: "JD",
@@ -45,7 +46,7 @@ const MOCK_USER = {
 const MOCK_HERO = {
   tag: "Continue Learning",
   title: "Quadratic\nEquations",
-  subtitle: "Mathematics · Chapter 4 of 8",
+  subtitle: "Mathematics Â· Chapter 4 of 8",
   timeLabel: "12 min",
   difficulty: "Medium",
   xpReward: "+45 XP",
@@ -60,7 +61,7 @@ const SUBJECTS = [
   {
     id: "math",
     name: "Mathematics",
-    emoji: "📐",
+    emoji: "ð",
     count: "24 lessons",
     progress: 0.62,
     color: "#6C3CE1",
@@ -70,7 +71,7 @@ const SUBJECTS = [
   {
     id: "science",
     name: "Science Lab",
-    emoji: "🔬",
+    emoji: "ð¬",
     count: "18 lessons",
     progress: 0.35,
     color: "#00C4A7",
@@ -80,7 +81,7 @@ const SUBJECTS = [
   {
     id: "language",
     name: "Language Arts",
-    emoji: "📖",
+    emoji: "ð",
     count: "20 lessons",
     progress: 0.5,
     color: "#FF6B6B",
@@ -90,7 +91,7 @@ const SUBJECTS = [
   {
     id: "history",
     name: "World History",
-    emoji: "🏛️",
+    emoji: "ðï¸",
     count: "Coming soon",
     progress: 0,
     color: "#F59E0B",
@@ -100,12 +101,12 @@ const SUBJECTS = [
 ];
 
 const ACTIVITY = [
-  { id: "a1", emoji: "📐", name: "Linear Equations", subject: "Mathematics", status: "done", bg: "#EDE0FF" },
-  { id: "a2", emoji: "🔬", name: "Cell Biology", subject: "Science Lab", status: "in-progress", bg: "#CCFAF4" },
-  { id: "a3", emoji: "📖", name: "Essay Structure", subject: "Language Arts", status: "done", bg: "#FFE4E4" },
+  { id: "a1", emoji: "ð", name: "Linear Equations", subject: "Mathematics", status: "done", bg: "#EDE0FF" },
+  { id: "a2", emoji: "ð¬", name: "Cell Biology", subject: "Science Lab", status: "in-progress", bg: "#CCFAF4" },
+  { id: "a3", emoji: "ð", name: "Essay Structure", subject: "Language Arts", status: "done", bg: "#FFE4E4" },
 ];
 
-// ─── Sub-components ─────────────────────────────────────────────
+// âââ Sub-components âââââââââââââââââââââââââââââââââââââââââââââ
 
 function Avatar({ initials }: { initials: string }) {
   return (
@@ -135,7 +136,7 @@ function LevelPill({ level }: { level: number }) {
 function BellButton({ count }: { count: number }) {
   return (
     <TouchableOpacity style={s.bell} activeOpacity={0.75}>
-      <Text style={{ fontSize: 16 }}>🔔</Text>
+      <Text style={{ fontSize: 16 }}>ð</Text>
       {count > 0 && <View style={s.bellDot} />}
     </TouchableOpacity>
   );
@@ -156,7 +157,7 @@ function XPStrip({
   return (
     <View style={s.xpCard}>
       <View style={s.xpRow}>
-        <Text style={s.xpLabel}>⭐ Experience Points</Text>
+        <Text style={s.xpLabel}>â­ Experience Points</Text>
         <Text style={s.xpMuted}>{xpToNextLevel} XP to Level {level + 1}</Text>
       </View>
       <View style={s.xpTrack}>
@@ -176,14 +177,14 @@ function HeroCard() {
       onPress={() => router.push(`/lesson/${h.lessonId}` as any)}
     >
       <View style={s.heroTagWrap}>
-        <Text style={s.heroTagText}>📚 {h.tag}</Text>
+        <Text style={s.heroTagText}>ð {h.tag}</Text>
       </View>
 
       <Text style={s.heroTitle}>{h.title}</Text>
       <Text style={s.heroSub}>{h.subtitle}</Text>
 
       <View style={s.heroChips}>
-        {[`⏱ ${h.timeLabel}`, `📊 ${h.difficulty}`, `⭐ ${h.xpReward}`].map((c) => (
+        {[`â± ${h.timeLabel}`, `ð ${h.difficulty}`, `â­ ${h.xpReward}`].map((c) => (
           <View key={c} style={s.heroChip}>
             <Text style={s.heroChipTxt}>{c}</Text>
           </View>
@@ -196,7 +197,7 @@ function HeroCard() {
       <Text style={s.heroPLabel}>{pct} complete</Text>
 
       <View style={s.heroCta}>
-        <Text style={s.heroCtaTxt}>Continue →</Text>
+        <Text style={s.heroCtaTxt}>Continue â</Text>
       </View>
     </TouchableOpacity>
   );
@@ -242,7 +243,7 @@ function SubjectCard({ item }: { item: (typeof SUBJECTS)[0] }) {
         <Text style={s.subEmoji}>{item.emoji}</Text>
         {item.locked && (
           <View style={s.lockBadge}>
-            <Text style={{ fontSize: 10 }}>🔒</Text>
+            <Text style={{ fontSize: 10 }}>ð</Text>
           </View>
         )}
       </View>
@@ -279,16 +280,18 @@ function ActivityRow({ item }: { item: (typeof ACTIVITY)[0] }) {
       </View>
       <View style={[s.actBadge, done ? s.badgeDone : s.badgeProgress]}>
         <Text style={[s.actBadgeTxt, done ? s.badgeDoneTxt : s.badgeProgressTxt]}>
-          {done ? "✓ Done" : "In Progress"}
+          {done ? "â Done" : "In Progress"}
         </Text>
       </View>
     </View>
   );
 }
 
-// ─── Screen ─────────────────────────────────────────────────────
+// âââ Screen âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 export default function HomeScreen() {
+  // Render desktop sidebar layout on web
+  if (Platform.OS === "web") return <HomeDesktop />;
   const [filter, setFilter] = useState<SubjectFilter>("All");
 
   const hour = new Date().getHours();
@@ -306,12 +309,12 @@ export default function HomeScreen() {
         contentContainerStyle={s.content}
         showsVerticalScrollIndicator={false}
       >
-        {/* ── Header ── */}
+        {/* ââ Header ââ */}
         <View style={s.hdr}>
           <View style={s.hdrLeft}>
             <Avatar initials={MOCK_USER.initials} />
             <View>
-              <Text style={s.greeting}>{greeting} 👋</Text>
+              <Text style={s.greeting}>{greeting} ð</Text>
               <Text style={s.userName}>{MOCK_USER.name}</Text>
             </View>
           </View>
@@ -322,7 +325,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* ── XP ── */}
+        {/* ââ XP ââ */}
         <XPStrip
           xp={MOCK_USER.xp}
           xpToNextLevel={MOCK_USER.xpToNextLevel}
@@ -330,10 +333,10 @@ export default function HomeScreen() {
           xpForNextLevel={MOCK_USER.xpForNextLevel}
         />
 
-        {/* ── Hero ── */}
+        {/* ââ Hero ââ */}
         <HeroCard />
 
-        {/* ── Explore ── */}
+        {/* ââ Explore ââ */}
         <View style={s.secHdr}>
           <Text style={s.secTitle}>Explore Subjects</Text>
           <TouchableOpacity activeOpacity={0.7}>
@@ -349,7 +352,7 @@ export default function HomeScreen() {
           ))}
         </View>
 
-        {/* ── Activity ── */}
+        {/* ââ Activity ââ */}
         <View style={[s.secHdr, { marginTop: spacing.lg }]}>
           <Text style={s.secTitle}>Recent Activity</Text>
         </View>
@@ -366,7 +369,7 @@ export default function HomeScreen() {
   );
 }
 
-// ─── Styles ─────────────────────────────────────────────────────
+// âââ Styles âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 const s = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.screenBg },
