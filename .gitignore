@@ -44,3 +44,8 @@ yarn-error.*
 supabase/.temp/
 # env files with secrets
 .env
+.openclaw/
+HEARTBEAT.md
+TOOLS.md
+USER.md
+*.bak
