@@ -85,6 +85,22 @@
     .hero-card .hero-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
     .hero-card .hero-sub { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; }
 
+    /* Milestone banner */
+    .milestone-banner {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.12), rgba(0, 210, 255, 0.08));
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .milestone-banner.visible { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
     /* Progress bar */
     .overall-progress {
       background: var(--surface);
@@ -219,26 +235,81 @@
       opacity: 0.6;
     }
 
-    /* Reset button */
-    .reset-area {
+    /* Weekly summary section */
+    .weekly-summary {
+      margin-top: 2rem;
+    }
+    .weekly-summary h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .summary-card .summary-emoji { font-size: 1.5rem; }
+    .summary-card .summary-info { flex: 1; }
+    .summary-card .summary-title { font-size: 0.85rem; font-weight: 600; }
+    .summary-card .summary-stat { font-size: 0.75rem; color: var(--text-muted); }
+    .summary-card .summary-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 0.4rem;
+      overflow: hidden;
+    }
+    .summary-card .summary-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+
+    /* Action buttons */
+    .action-area {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
       text-align: center;
       margin-top: 2rem;
       padding-top: 1.5rem;
       border-top: 1px solid var(--border);
     }
-    .btn-reset {
+    .btn {
       padding: 0.5rem 1.25rem;
       border-radius: 8px;
-      border: 1px solid var(--danger);
-      background: transparent;
-      color: var(--danger);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
       font-size: 0.8rem;
       cursor: pointer;
       transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
     }
-    .btn-reset:hover {
-      background: rgba(255, 82, 82, 0.1);
+    .btn:hover { background: var(--surface-hover); color: var(--text); }
+    .btn-export {
+      border-color: var(--primary);
+      color: var(--primary);
     }
+    .btn-export:hover { background: var(--primary-glow); }
+    .btn-reset {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    .btn-reset:hover { background: rgba(255, 82, 82, 0.1); }
 
     /* Footer */
     footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
@@ -247,6 +318,8 @@
       header h1 { font-size: 1.5rem; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .day-card { padding: 0.7rem 1rem; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .action-area { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -263,10 +336,14 @@
       <a href="admin-dashboard.html" target="_blank">⚙️ Admin</a>
     </nav>
 
+    <!-- Milestone Banner -->
+    <div class="milestone-banner" id="milestoneBanner"></div>
+
     <!-- Hero Stats -->
     <div class="hero-stats" id="heroStats">
       <div class="hero-card"><div class="hero-value" id="daysCompleted">0</div><div class="hero-label">Days Completed</div><div class="hero-sub">of 28 total</div></div>
       <div class="hero-card"><div class="hero-value" id="completionPct">0%</div><div class="hero-label">Overall Progress</div><div class="hero-sub" id="streakLabel">Start your journey!</div></div>
+      <div class="hero-card"><div class="hero-value" id="studyTime">0h</div><div class="hero-label">Study Time</div><div class="hero-sub" id="studyTimeDetail">0 minutes total</div></div>
       <div class="hero-card"><div class="hero-value" id="quizAvg">—</div><div class="hero-label">Avg Quiz Score</div><div class="hero-sub" id="quizCount">0 quizzes taken</div></div>
       <div class="hero-card"><div class="hero-value" id="currentWeek">—</div><div class="hero-label">Current Focus</div><div class="hero-sub" id="currentWeekLabel">Start Day 1</div></div>
     </div>
@@ -291,9 +368,16 @@
     <!-- Weeks Loaded by JS -->
     <div id="weeksContainer"></div>
 
-    <!-- Reset -->
-    <div class="reset-area">
-      <button class="btn-reset" onclick="if(confirm('Reset ALL progress? This cannot be undone.')){resetAllProgress();}">🗑️ Reset All Progress</button>
+    <!-- Weekly Summary -->
+    <div class="weekly-summary" id="weeklySummary">
+      <h3>📋 Weekly Breakdown</h3>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-area">
+      <button class="btn btn-export" onclick="exportProgress()">📥 Export Progress (JSON)</button>
+      <button class="btn btn-reset" onclick="if(confirm('Reset ALL progress? This cannot be undone.')){resetAllProgress();}">🗑️ Reset All Progress</button>
     </div>
 
     <footer>
@@ -368,13 +452,15 @@
     const PROGRESS_KEY = 'turbo_student_progress';
     const SCORES_KEY = 'turbo_quiz_scores';
 
+    // Cache for flat day lookup
+    const ALL_DAYS = WEEKS.flatMap(w => w.days);
+
     // ============================================================
     // LocalStorage Helpers
     // ============================================================
     function getProgress() {
-      try {
-        return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {};
-      } catch { return {}; }
+      try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; }
+      catch { return {}; }
     }
 
     function saveProgress(p) {
@@ -382,9 +468,8 @@
     }
 
     function getQuizScores() {
-      try {
-        return JSON.parse(localStorage.getItem(SCORES_KEY)) || {};
-      } catch { return {}; }
+      try { return JSON.parse(localStorage.getItem(SCORES_KEY)) || {}; }
+      catch { return {}; }
     }
 
     function toggleDay(day) {
@@ -404,6 +489,47 @@
     }
 
     // ============================================================
+    // Consecutive streak (most recent consecutive days, not just from day 1)
+    // ============================================================
+    function calcStreak(progress) {
+      const completedDays = Object.keys(progress).map(Number).sort((a, b) => b - a);
+      if (completedDays.length === 0) return 0;
+
+      let streak = 1;
+      for (let i = 1; i < completedDays.length; i++) {
+        if (completedDays[i - 1] - completedDays[i] === 1) streak++;
+        else break;
+      }
+      return streak;
+    }
+
+    // ============================================================
+    // Total study time
+    // ============================================================
+    function calcStudyTime(progress) {
+      let totalMin = 0;
+      ALL_DAYS.forEach(d => {
+        if (progress[d.day]) totalMin += d.minutes;
+      });
+      return totalMin;
+    }
+
+    // ============================================================
+    // Milestone messages
+    // ============================================================
+    function getMilestone(pct, totalDone, streak) {
+      if (totalDone === 0) return null;
+      if (pct === 100) return { text: '🎓 Congratulations! You completed the entire 28-day program! You\'re ready to build with AI.', emoji: '🎉' };
+      if (pct >= 75) return { text: '🚀 You\'re in the final stretch! Just one week left — keep the momentum going!', emoji: '🚀' };
+      if (pct >= 50) return { text: '💪 Halfway there! You\'ve built a solid AI foundation. The best is yet to come.', emoji: '💪' };
+      if (pct >= 25) return { text: '🌱 Great start! You\'re building the habits that make AI mastery possible.', emoji: '🌱' };
+      if (streak >= 7) return { text: '🔥 7-day streak! Consistency is your superpower.', emoji: '🔥' };
+      if (streak >= 3) return { text: '⚡ 3-day streak! You\'re building momentum.', emoji: '⚡' };
+      if (totalDone === 1) return { text: '👋 Welcome! Day 1 is in the books. 27 more to go — you\'ve got this!', emoji: '👋' };
+      return null;
+    }
+
+    // ============================================================
     // Week color helper
     // ============================================================
     function getWeekColor(weekIdx) {
@@ -419,21 +545,23 @@
       const quizScores = getQuizScores();
       const totalDone = Object.keys(progress).length;
       const pct = Math.round((totalDone / TOTAL_DAYS) * 100);
+      const streak = calcStreak(progress);
+      const totalMin = calcStudyTime(progress);
 
       // --- Hero Stats ---
       document.getElementById('daysCompleted').textContent = totalDone;
       document.getElementById('completionPct').textContent = pct + '%';
 
-      // Streak / label
-      const sortedDays = Object.keys(progress).map(Number).sort((a, b) => a - b);
-      let streak = 0;
-      for (let i = 1; i <= TOTAL_DAYS; i++) {
-        if (progress[i]) streak++;
-        else break;
-      }
+      // Study time
+      const hours = Math.floor(totalMin / 60);
+      const mins = totalMin % 60;
+      document.getElementById('studyTime').textContent = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+      document.getElementById('studyTimeDetail').textContent = `${totalMin} minutes total`;
+
+      // Streak label
       const streakLabel = document.getElementById('streakLabel');
-      if (streak === 0) streakLabel.textContent = 'Not started yet';
-      else if (streak === TOTAL_DAYS) streakLabel.textContent = '🎉 All days complete!';
+      if (totalDone === 0) streakLabel.textContent = 'Not started yet';
+      else if (totalDone === TOTAL_DAYS) streakLabel.textContent = '🎉 All days complete!';
       else streakLabel.textContent = `🔥 ${streak}-day streak`;
 
       // Quiz stats
@@ -458,6 +586,16 @@
         document.getElementById('currentWeekLabel').textContent = nextDay <= TOTAL_DAYS ? `Day ${nextDay}` : 'Complete!';
       }
 
+      // --- Milestone Banner ---
+      const milestone = getMilestone(pct, totalDone, streak);
+      const banner = document.getElementById('milestoneBanner');
+      if (milestone) {
+        banner.textContent = `${milestone.emoji} ${milestone.text}`;
+        banner.classList.add('visible');
+      } else {
+        banner.classList.remove('visible');
+      }
+
       // --- Overall Bar ---
       document.getElementById('overallPct').textContent = pct + '%';
       document.getElementById('overallBar').style.width = pct + '%';
@@ -474,11 +612,7 @@
         const weekDiv = document.createElement('div');
         weekDiv.className = 'week' + (weekDone === weekTotal ? ' open' : '');
 
-        let badgeClass = 'badge-partial';
-        let badgeText = `${weekDone}/${weekTotal}`;
-        if (weekDone === 0) { badgeClass = ''; }
-        else if (weekDone === weekTotal) { badgeClass = ''; }
-
+        const badgeText = `${weekDone}/${weekTotal}`;
         const badgeColor = weekDone === 0 ? 'var(--danger)' : weekDone === weekTotal ? 'var(--success)' : 'var(--warn)';
 
         weekDiv.innerHTML = `
@@ -507,7 +641,7 @@
                     <div class="title">${d.title}</div>
                     <div class="meta"><span>⚡ ${d.minutes} min</span><span> · 📝 ${d.steps} steps</span> ${scoreHtml ? ' · ' + scoreHtml : ''}</div>
                   </div>
-                  ${done ? '<span class="day-streak">✅</span>' : '<span class="day-streek">⏳</span>'}
+                  ${done ? '<span class="day-streak">✅</span>' : '<span class="day-streak">⏳</span>'}
                 </div>
               `;
             }).join('')}
@@ -515,7 +649,6 @@
         `;
 
         // Mini progress bar inside week
-        const weekHeader = weekDiv.querySelector('.week-header');
         const miniBar = document.createElement('div');
         miniBar.style.cssText = `height:3px;background:var(--border);border-radius:0;overflow:hidden;`;
         const miniFill = document.createElement('div');
@@ -525,6 +658,89 @@
 
         container.appendChild(weekDiv);
       });
+
+      // --- Weekly Summary ---
+      renderWeeklySummary(progress);
+
+      // --- Init Open State ---
+      setTimeout(initOpenState, 50);
+    }
+
+    // ============================================================
+    // Weekly Summary Cards
+    // ============================================================
+    function renderWeeklySummary(progress) {
+      const grid = document.getElementById('summaryGrid');
+      grid.innerHTML = '';
+
+      WEEKS.forEach((week, wi) => {
+        const weekDone = week.days.filter(d => progress[d.day]).length;
+        const weekTotal = week.days.length;
+        const weekPct = Math.round((weekDone / weekTotal) * 100);
+        const weekMin = week.days.reduce((sum, d) => progress[d.day] ? sum + d.minutes : sum, 0);
+        const color = getWeekColor(wi);
+
+        const card = document.createElement('div');
+        card.className = 'summary-card';
+        card.innerHTML = `
+          <div class="summary-emoji">${week.emoji}</div>
+          <div class="summary-info">
+            <div class="summary-title">${week.title}</div>
+            <div class="summary-stat">${weekDone}/${weekTotal} days · ${weekMin} min</div>
+            <div class="summary-bar">
+              <div class="summary-fill" style="width:${weekPct}%;background:${color};"></div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // ============================================================
+    // Export Progress
+    // ============================================================
+    function exportProgress() {
+      const progress = getProgress();
+      const quizScores = getQuizScores();
+      const totalDone = Object.keys(progress).length;
+      const totalMin = calcStudyTime(progress);
+      const streak = calcStreak(progress);
+
+      const exportData = {
+        exportedAt: new Date().toISOString(),
+        program: 'AI Turbo Academy — 28-Day Curriculum',
+        summary: {
+          daysCompleted: totalDone,
+          totalDays: TOTAL_DAYS,
+          completionPct: Math.round((totalDone / TOTAL_DAYS) * 100),
+          streak: streak,
+          totalStudyMinutes: totalMin,
+          quizScores: quizScores
+        },
+        weeks: WEEKS.map((week, wi) => ({
+          title: week.title,
+          range: week.range,
+          daysCompleted: week.days.filter(d => progress[d.day]).length,
+          totalDays: week.days.length,
+          days: week.days.map(d => ({
+            day: d.day,
+            title: d.title,
+            completed: !!progress[d.day],
+            completedAt: progress[d.day]?.completedAt || null,
+            quizScore: quizScores[`day${d.day}`] || null
+          }))
+        }))
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `turbo-academy-progress-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     // Auto-open incomplete weeks / last completed week
@@ -532,13 +748,11 @@
       const progress = getProgress();
       WEEKS.forEach((week, wi) => {
         const weekDone = week.days.filter(d => progress[d.day]).length;
-        // Auto-open if partially done or first unstarted week
         if (weekDone > 0 && weekDone < week.days.length) {
           const els = document.querySelectorAll('.week');
           if (els[wi]) els[wi].classList.add('open');
         }
       });
-      // Open the first week if nothing started
       const totalDone = Object.keys(progress).length;
       if (totalDone === 0) {
         const firstWeek = document.querySelector('.week');
@@ -554,9 +768,7 @@
       const progress = getProgress();
       let changed = false;
 
-      // Check for quiz keys matching day patterns
       Object.keys(quizScores).forEach(key => {
-        // Match keys like "day1", "d1", "day_1"
         const match = key.match(/day[_\s]?(\d+)/i) || key.match(/^d(\d+)$/i);
         if (match) {
           const dayNum = parseInt(match[1]);
@@ -575,7 +787,6 @@
     // ============================================================
     importQuizProgress();
     renderAll();
-    setTimeout(initOpenState, 50);
   </script>
 </body>
 </html>
