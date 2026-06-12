@@ -166,7 +166,7 @@ export default function Profile() {
 
       {/* ── Edit profile ── */}
       <View style={s.card}>
-        <View style={[s.cardAccent, { backgroundColor: t.colors.sky }]} />
+        <View style={[s.cardAccent, { backgroundColor: t.colors.accentLight }]} />
         <View style={s.cardBody}>
           <Text style={s.sectionTitle}>Edit Profile</Text>
           <TextInput

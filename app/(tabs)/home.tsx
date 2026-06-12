@@ -420,10 +420,10 @@ function HomeScreenMobile() {
         {currentUnit ? (
           <HeroCard
             title={currentUnit.title}
-            subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.order_num}`}
+            subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.orderNum}`}
             unitId={currentUnit.id}
             programSlug={programSlug}
-            dayNum={currentUnit.order_num}
+            dayNum={currentUnit.orderNum}
             overallPct={overallPct}
           />
         ) : displayUnits.length > 0 ? (

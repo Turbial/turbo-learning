@@ -6,15 +6,15 @@ import * as Clipboard from "expo-clipboard";
 import { StepProps } from "../../stepRegistry";
 import type { PromptGeneratorStep as PromptGeneratorStepType } from "../../types";
 
-export default function PromptGeneratorStep({ step, onAnswer }: StepProps) {
+export default function PromptGeneratorStep({ step, onAnswer }: StepProps<PromptGeneratorStepType>) {
   const s = step as PromptGeneratorStepType;
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
   const generatedPrompt = useMemo(() => {
     if (!selectedCategory) return null;
-    return s.promptTemplate.replace(/\{category\}/g, selectedCategory);
-  }, [selectedCategory, s.promptTemplate]);
+    return s.template.replace(/\{category\}/g, selectedCategory);
+  }, [selectedCategory, s.template]);
 
   const handleSelectCategory = (cat: string) => {
     setSelectedCategory(cat);
@@ -46,7 +46,7 @@ export default function PromptGeneratorStep({ step, onAnswer }: StepProps) {
       </Text>
 
       <View style={styles.categoryGrid}>
-        {s.categories.map((cat) => (
+        {(s.fields?.map(f => f.label) ?? ["General"]).map((cat) => (
           <TouchableOpacity
             key={cat}
             style={[

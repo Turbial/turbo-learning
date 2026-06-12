@@ -385,7 +385,7 @@ export default function HomeDesktopScreen() {
 
           {/* Hero */}
           {currentUnit
-            ? <HeroBanner title={currentUnit.title} subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.order_num}`} unitId={currentUnit.id} programSlug={programSlug} dayNum={currentUnit.order_num} overallPct={overallPct} />
+            ? <HeroBanner title={currentUnit.title} subtitle={`${program?.title ?? "AI Operator"} · Day ${currentUnit.orderNum}`} unitId={currentUnit.id} programSlug={programSlug} dayNum={currentUnit.orderNum} overallPct={overallPct} />
             : displayUnits.length > 0 ? <AllDoneBanner total={totalUnits} /> : null
           }
 
