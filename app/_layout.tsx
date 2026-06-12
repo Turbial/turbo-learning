@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { ToastProvider } from "../src/components/feedback/Toast";
+import { ThemeProvider } from "../src/theme/ThemeContext";
 import ErrorBoundary from "../src/components/ui/ErrorBoundary";
 import { useAuth } from "../src/data/useAuth";
 import { useOfflineSync } from "../src/data/useOfflineSync";
@@ -57,6 +58,7 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <StatusBar style="dark" />
         <ErrorBoundary>
+        <ThemeProvider>
         <ToastProvider>
           <AuthGate>
             <Stack screenOptions={{ headerShown: false }}>
@@ -89,6 +91,7 @@ export default function RootLayout() {
             </Stack>
           </AuthGate>
         </ToastProvider>
+        </ThemeProvider>
         </ErrorBoundary>
       </QueryClientProvider>
     </GestureHandlerRootView>
