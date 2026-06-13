@@ -1,0 +1,66 @@
+{
+  "course": {
+    "title": "AI Operator",
+    "description": "28 days to go from AI user to AI operator — directing AI as a workforce, not poking at a chatbot.",
+    "voice": "direct, plain-spoken, a little contrarian — cuts hype, respects the reader's time",
+    "destination": "student internalizes the operator mindset: build repeatable systems with human review, personalize at scale, and share workflows for team leverage"
+  },
+  "lessons": [
+    {
+      "title": "Day 3: Build Systems, Not Prompts",
+      "source_text": "An AI Operator doesn't just ask questions — they build systems. The difference between someone who uses AI and someone who operates AI is simple: operators build repeatable workflows that produce consistent results, while users have one-off conversations they can never quite reproduce.\n\nMeet Tom. He runs marketing for a 50-person company and spends 4 hours every Monday writing 12 personalized client update emails, then falls behind on strategy. His boss says to 'be more strategic.' The wrong fix is a single generic template with the name swapped — that destroys the personalization that makes client updates valuable and erodes trust. The right fix is a system that personalizes at scale: feed the AI your project data, it drafts 12 personalized emails in 30 seconds, and you review for 20 minutes and send. Total time: 25 minutes, down from 4 hours, same quality, 8.5 hours a week saved. That's operating — not prompting, not coding. Building a system where the AI does the heavy lifting and you stay in control.\n\nThe operator's mantra: don't just prompt — build a system. The pieces: a System is a repeatable workflow; a Prompt is a single instruction to AI; a Template is a reusable structure; Review is the human quality-control step. Every operator workflow ends with human review before sending. A saved prompt template with project-context fields, quality criteria, and a review checklist is an operator workflow; asking 'write me a blog post' fresh every time with no template or system is just one-off prompting.\n\nOnce a workflow saves you 8 hours a week, the operator move is not to keep it to yourself — it's to document and share it so your whole team gains the time. One workflow shared across a team is exponential leverage: one workflow → many operators → massive impact.",
+      "concepts": [
+        { "tag": "build_systems", "label": "Operators build repeatable systems, not one-off conversations" },
+        { "tag": "personalize_at_scale", "label": "Systems personalize at scale; generic templates erode trust" },
+        { "tag": "human_review", "label": "Every operator workflow ends with human review" },
+        { "tag": "share_leverage", "label": "Document and share workflows for team leverage" }
+      ],
+      "quizzes": [
+        {
+          "concept": "build_systems",
+          "difficulty": 2,
+          "question": "What distinguishes an AI Operator from a regular AI user?",
+          "options": [
+            { "text": "Operators build repeatable workflows, not one-off conversations", "correct": true, "feedback": "Exactly. Operators think in systems that reproduce the same quality every time. Users have conversations they can't repeat." },
+            { "text": "Operators use more expensive AI models", "correct": false, "feedback": "Not the tool. It's the mindset — building systems that work consistently." },
+            { "text": "Operators write code in Python", "correct": false, "feedback": "Common misconception. You don't need to code to operate AI. It's workflow design, not programming." }
+          ]
+        },
+        {
+          "concept": "personalize_at_scale",
+          "difficulty": 3,
+          "question": "Tom wants to save time. Should he write one generic email template and just swap the client name each week?",
+          "options": [
+            { "text": "No — build a system that personalizes at scale", "correct": true, "feedback": "Right. Generic templates kill the personalization clients value. A workflow can personalize 12 emails fast without losing quality." },
+            { "text": "Yes — a generic template is the fastest fix", "correct": false, "feedback": "It's fast but it erodes trust. Clients notice. The operator fix personalizes at scale, not by gutting quality." }
+          ]
+        },
+        {
+          "concept": "human_review",
+          "difficulty": 1,
+          "question": "What's the final step in every operator workflow?",
+          "options": [
+            { "text": "Human review before sending", "correct": true, "feedback": "Yes. AI drafts at scale; you check quality and stay in control before anything ships." },
+            { "text": "Run it once and delete it", "correct": false, "feedback": "No — workflows are repeatable, and they end with a human review gate, not a one-time run." },
+            { "text": "Post the result on social media", "correct": false, "feedback": "Not a workflow step. The last step is human review before the output goes out." }
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "concept": "share_leverage",
+          "setup": "Your client-update workflow now saves YOU 8 hours a week and runs reliably. Your boss wants the team 'more strategic.' What's the operator move next?",
+          "choices": [
+            { "text": "Document it and share it so the whole team can run it", "good": true, "outcome": "That's the operator move — one workflow → many operators → hundreds of team hours saved. You scaled your impact, not just your own week." },
+            { "text": "Keep using it quietly and enjoy the time back", "good": false, "outcome": "A real win for you, but the leverage stops at one person. Document and share it and the whole team gains the same hours." },
+            { "text": "Rebuild it from scratch to make it perfect first", "good": false, "outcome": "It already works and saves 8 hours. Ship the docs now; refine with the team's feedback rather than polishing alone." }
+          ]
+        }
+      ],
+      "flashcards": [
+        { "concept": "build_systems", "front": "Finish the operator's mantra: 'Don't just prompt — build a ____.'", "back": "A system. Operators build repeatable workflows that produce consistent results, not one-off conversations." },
+        { "concept": "human_review", "front": "What gate ends every operator workflow before output ships?", "back": "Human review. The AI drafts at scale; you check quality and keep the final call." }
+      ]
+    }
+  ]
+}

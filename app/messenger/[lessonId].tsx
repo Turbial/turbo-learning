@@ -16,6 +16,10 @@ export default function MessengerScreen() {
     else router.replace("/(tabs)/home");
   }, []);
 
+  const handleNext = useCallback(() => {
+    if (loaded?.nextLessonId) router.replace(`/messenger/${loaded.nextLessonId}`);
+  }, [loaded?.nextLessonId]);
+
   if (!loaded) {
     return (
       <SafeAreaView style={styles.safe}>
@@ -31,7 +35,12 @@ export default function MessengerScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ChatPlayer lesson={loaded.lesson} courseTitle={loaded.courseTitle} onExit={handleExit} />
+      <ChatPlayer
+        lesson={loaded.lesson}
+        courseTitle={loaded.courseTitle}
+        onExit={handleExit}
+        onNext={loaded.nextLessonId ? handleNext : undefined}
+      />
     </SafeAreaView>
   );
 }

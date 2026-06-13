@@ -25,13 +25,14 @@ export interface ChatPlayerProps {
   lesson: CompiledLesson;
   courseTitle?: string;
   onExit?: () => void;
+  onNext?: () => void;
   onComplete?: (summary: { xp: number; events: ProgressEvent[]; mastery: ConceptMastery[] }) => void;
 }
 
 let bubbleSeq = 0;
 const nextKey = () => `b${++bubbleSeq}`;
 
-export default function ChatPlayer({ lesson, courseTitle, onExit, onComplete }: ChatPlayerProps) {
+export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComplete }: ChatPlayerProps) {
   const entry = useMemo(() => getEntry(lesson), [lesson]);
 
   const [bubbles, setBubbles] = useState<ChatBubble[]>([]);
@@ -207,6 +208,11 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onComplete }: 
         </View>
       ) : (
         <View style={styles.deck}>
+          {current.item_type === "done" && onNext && (
+            <TouchableOpacity style={[styles.btn, styles.btnPrimary]} activeOpacity={0.85} onPress={onNext}>
+              <Text style={[styles.btnText, styles.btnTextPrimary]}>Next lesson →</Text>
+            </TouchableOpacity>
+          )}
           {current.buttons.map((b, i) => (
             <TouchableOpacity
               key={`${current.id}-${i}`}
@@ -299,8 +305,10 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   btnGhost: { backgroundColor: "transparent", borderStyle: "dashed", borderColor: colors.primaryBorder },
+  btnPrimary: { backgroundColor: colors.primary, borderColor: colors.primary },
   btnText: { fontSize: fontSize.md, color: colors.textPrimary, fontWeight: fontWeight.semibold, textAlign: "center" },
   btnTextGhost: { color: colors.primaryDark },
+  btnTextPrimary: { color: colors.surface },
 
   askRow: { flexDirection: "row", alignItems: "flex-end", gap: spacing.sm },
   askInput: {

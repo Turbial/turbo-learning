@@ -133,7 +133,7 @@ function HomeScreenMobile() {
               Try the AI Tutor (beta)
             </Text>
             <Text style={{ fontSize: 13, color: "#5A4E40", marginTop: 2 }}>
-              Day 1 as a chat — tap through, or ask your own question.
+              Days 1–3 as a chat — tap through, or ask your own question.
             </Text>
           </View>
           <Text style={{ fontSize: 20, color: "#047857" }}>›</Text>

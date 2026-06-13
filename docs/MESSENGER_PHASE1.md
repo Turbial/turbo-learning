@@ -12,8 +12,9 @@ first** (per CLAUDE.md), so it runs with **no backend and no DDL applied**.
 
 ## How to see it
 
-- **In the app:** Home → **"Try the AI Tutor (beta)"** → plays AI Operator Day 1.
-- **Direct route:** `/messenger/ai-operator-day1`.
+- **In the app:** Home → **"Try the AI Tutor (beta)"** → plays AI Operator Day 1,
+  then chains to Day 2 and Day 3 via a "Next lesson →" button on completion.
+- **Direct routes:** `/messenger/ai-operator-day1` · `…day2` · `…day3`.
 
 ## What's in this phase
 
@@ -21,8 +22,8 @@ first** (per CLAUDE.md), so it runs with **no backend and no DDL applied**.
 |------|------|------|
 | Authoring format + prompt | `learning/authoring/` | LLM owns meaning; content-only JSON |
 | Deterministic compiler | `learning/authoring/compile.mjs` | wires + **validates** the graph |
-| Authored Day 1 | `learning/courses/ai_operator/day1.authoring.json` | from the existing Day 1 content |
-| Compiled Day 1 graph | `learning/courses/ai_operator/day1.compiled.json` | 20 items — the runtime input |
+| Authored Days 1–3 | `learning/courses/ai_operator/day{1,2,3}.authoring.json` | from the existing AI Operator content |
+| Compiled graphs | `learning/courses/ai_operator/day{1,2,3}.compiled.json` | 20 / 24 / 21 items — the runtime input |
 | Types (mirror `lp_` tables) | `src/messenger/types.ts` | `CompiledItem`, `ItemButton`, mastery, events |
 | Serve/resolve state machine | `src/messenger/resolve.ts` | **LLM-free**; the 5 actions |
 | Ask escape hatch | `src/messenger/ask.ts` | grounded local retrieval + threshold; backend-ready |
@@ -43,8 +44,9 @@ first** (per CLAUDE.md), so it runs with **no backend and no DDL applied**.
 ## Acceptance — verified
 
 - ✅ **A full button-only playthrough makes 0 LLM calls.** Proven by graph
-  traversal: 20/20 items reachable, 0 dead ends, 1 escape hatch (the only path that
-  could call a model). Guided path: `menu → quiz → feedback → … → done`.
+  traversal across all three days: Day 1 20/20, Day 2 24/24, Day 3 21/21 items
+  reachable, 0 dead ends, 1 escape hatch each (the only path that could call a
+  model). Guided path: `menu → quiz → feedback → … → done`.
 - ✅ **Ask stays grounded or honestly declines** (threshold short-circuit; no guessing).
 - ✅ **No typing required to play** — buttons drive the whole lesson.
 - ✅ New code typechecks clean (the only `tsc` errors are pre-existing in
