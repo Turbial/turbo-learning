@@ -15,6 +15,7 @@
 // swapping local retrieval for the real RAG+LLM endpoint is a Phase 2 drop-in.
 
 import type { CompiledLesson } from "./types";
+import { type LearnerProfile, profilePrompt } from "./profile";
 
 const ASK_URL = process.env.EXPO_PUBLIC_LP_ASK_URL;
 
@@ -58,7 +59,7 @@ function score(qTokens: string[], passage: string): number {
   return hits / qTokens.length;
 }
 
-function localGroundedAnswer(lesson: CompiledLesson, question: string): AskResult {
+function localGroundedAnswer(lesson: CompiledLesson, question: string, profile?: LearnerProfile): AskResult {
   const qTokens = tokenize(question);
   const sentences = splitSentences(lesson.source_text || "");
   let best = { text: "", s: 0 };
@@ -66,6 +67,9 @@ function localGroundedAnswer(lesson: CompiledLesson, question: string): AskResul
     const s = score(qTokens, sent);
     if (s > best.s) best = { text: sent, s };
   }
+  // Local retrieval can't rewrite content, but it can frame the citation to the
+  // learner's field (real personalization arrives with the backend LLM Ask).
+  const frame = profile?.industry ? ` (relevant to your work in ${profile.industry})` : "";
   if (best.s < MIN_SIMILARITY || !best.text) {
     return {
       grounded: false,
@@ -76,15 +80,16 @@ function localGroundedAnswer(lesson: CompiledLesson, question: string): AskResul
   }
   return {
     grounded: true,
-    answer: `Here's what the lesson says about that:\n\n“${best.text}”`,
+    answer: `Here's what the lesson says${frame}:\n\n“${best.text}”`,
   };
 }
 
 export async function askQuestion(args: {
   lesson: CompiledLesson;
   question: string;
+  profile?: LearnerProfile;
 }): Promise<AskResult> {
-  const { lesson, question } = args;
+  const { lesson, question, profile } = args;
   const q = question.trim();
   if (!q) return { grounded: false, answer: "Type a question and I'll ground it in the lesson." };
 
@@ -97,6 +102,8 @@ export async function askQuestion(args: {
           question: q,
           content_version: lesson.content_version,
           lesson_title: lesson.title,
+          // Rides the existing call — no extra LLM request for personalization.
+          profile_prompt: profile ? profilePrompt(profile) : "",
         }),
       });
       if (!res.ok) throw new Error(`Ask endpoint ${res.status}`);
@@ -107,9 +114,9 @@ export async function askQuestion(args: {
       };
     } catch {
       // Fall through to local retrieval rather than show an error.
-      return localGroundedAnswer(lesson, q);
+      return localGroundedAnswer(lesson, q, profile);
     }
   }
 
-  return localGroundedAnswer(lesson, q);
+  return localGroundedAnswer(lesson, q, profile);
 }

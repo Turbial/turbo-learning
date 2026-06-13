@@ -95,15 +95,17 @@ export async function answerGrounded(args: {
   question: string;
   chunks: string;
   voice?: string;
+  profilePrompt?: string;
 }): Promise<string> {
-  const { question, chunks, voice } = args;
+  const { question, chunks, voice, profilePrompt } = args;
   const text = await chat({
     model: ASK_MODEL,
     system:
       "You are a course tutor. Answer the student's question using ONLY the lesson excerpts provided. " +
       "If the excerpts do not contain the answer, say you can't find it in this lesson and offer to keep going — never use outside knowledge. " +
       "Be concise (2-4 sentences). Respond with only the final answer: no preamble, no meta-commentary." +
-      (voice ? ` Teaching voice: ${voice}.` : ""),
+      (voice ? ` Teaching voice: ${voice}.` : "") +
+      (profilePrompt ? ` ${profilePrompt}` : ""),
     user: `LESSON EXCERPTS:\n${chunks}\n\nSTUDENT QUESTION: ${question}`,
     maxTokens: 700,
     temperature: 0.3,

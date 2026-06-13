@@ -20,6 +20,8 @@ import type { CompiledLesson, CompiledItem, ItemButton, ChatBubble, ConceptMaste
 import { getEntry, resolveTap, toneForAnswer } from "./resolve";
 import { askQuestion } from "./ask";
 import { pickAdaptiveItem, weakestConcept } from "./adaptive";
+import { useLearnerProfile, hasProfile, profileSummary } from "./profile";
+import PersonalizeSheet from "./PersonalizeSheet";
 import MasteryBar from "./MasteryBar";
 
 export interface ChatPlayerProps {
@@ -49,6 +51,10 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
   const [askInput, setAskInput] = useState("");
   const [askLoading, setAskLoading] = useState(false);
   const preEscapeRef = useRef<CompiledItem>(entry);
+
+  // Personalization
+  const profile = useLearnerProfile((s) => s.profile);
+  const [personalizeOpen, setPersonalizeOpen] = useState(false);
 
   const scrollRef = useRef<ScrollView>(null);
   const completedRef = useRef(false);
@@ -146,7 +152,7 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
     setAskLoading(true);
     eventsRef.current.push({ itemId: preEscapeRef.current.id, conceptTag: null, wasCorrect: null, at: Date.now() });
     try {
-      const res = await askQuestion({ lesson, question: q });
+      const res = await askQuestion({ lesson, question: q, profile });
       pushBubble({ role: "bot", text: res.answer, tone: res.grounded ? "neutral" : "wrong" });
     } finally {
       setAskLoading(false);
@@ -156,7 +162,7 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
       setCurrent(back);
       pushBubble({ role: "bot", text: "Want to keep going?", itemType: back.item_type, tone: "neutral" });
     }
-  }, [askInput, askLoading, lesson, pushBubble]);
+  }, [askInput, askLoading, lesson, pushBubble, profile]);
 
   return (
     <KeyboardAvoidingView
@@ -170,12 +176,19 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.headerTitle} numberOfLines={1}>{lesson.title}</Text>
-          {!!courseTitle && <Text style={styles.headerSub} numberOfLines={1}>{courseTitle} · AI Tutor</Text>}
+          <Text style={styles.headerSub} numberOfLines={1}>
+            {hasProfile(profile) ? `Tailored for ${profileSummary(profile)}` : `${courseTitle ?? "AI Tutor"} · tap ⚙ to personalize`}
+          </Text>
         </View>
+        <TouchableOpacity onPress={() => setPersonalizeOpen(true)} hitSlop={10} style={styles.headerBtn}>
+          <Text style={styles.gear}>⚙</Text>
+        </TouchableOpacity>
         <View style={styles.xpPill}>
           <Text style={styles.xpText}>{xp} XP</Text>
         </View>
       </View>
+
+      <PersonalizeSheet visible={personalizeOpen} onClose={() => setPersonalizeOpen(false)} />
 
       <MasteryBar mastery={mastery} />
 
@@ -279,6 +292,7 @@ const styles = StyleSheet.create({
   },
   headerBtn: { width: 36, height: 36, alignItems: "center", justifyContent: "center" },
   headerBtnText: { fontSize: 28, color: colors.textSecondary, marginTop: -4 },
+  gear: { fontSize: 20 },
   headerCenter: { flex: 1 },
   headerTitle: { fontSize: fontSize.md, fontWeight: fontWeight.bold, color: colors.textPrimary },
   headerSub: { fontSize: fontSize.xs, color: colors.textMuted, marginTop: 1 },

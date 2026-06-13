@@ -28,7 +28,7 @@ const DECLINE =
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return preflight();
   try {
-    const { question, content_version, lesson_id, voice } = await req.json();
+    const { question, content_version, lesson_id, voice, profile_prompt } = await req.json();
     if (!question || !content_version) return json({ error: "question and content_version required" }, 400);
 
     const queryEmbedding = await embedOne(question);
@@ -48,7 +48,7 @@ Deno.serve(async (req) => {
     }
 
     const context = chunks.map((c: { chunk_text: string }) => c.chunk_text).join("\n---\n");
-    const answer = await answerGrounded({ question, chunks: context, voice });
+    const answer = await answerGrounded({ question, chunks: context, voice, profilePrompt: profile_prompt });
     return json({ grounded: true, answer });
   } catch (e) {
     console.error("lp-ask error", e);
