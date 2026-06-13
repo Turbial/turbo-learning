@@ -110,6 +110,35 @@ function HomeScreenMobile() {
           </View>
         )}
 
+        {/* AI Tutor (beta) — conversational chat + buttons lesson */}
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={() => router.push("/messenger/ai-operator-day1")}
+          style={{
+            marginHorizontal: 20,
+            marginTop: 20,
+            padding: 16,
+            borderRadius: 20,
+            backgroundColor: "#ecfdf5",
+            borderWidth: 1,
+            borderColor: "#a7f3d0",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <Text style={{ fontSize: 28 }}>💬</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontSize: 16, fontWeight: "700", color: "#047857" }}>
+              Try the AI Tutor (beta)
+            </Text>
+            <Text style={{ fontSize: 13, color: "#5A4E40", marginTop: 2 }}>
+              Day 1 as a chat — tap through, or ask your own question.
+            </Text>
+          </View>
+          <Text style={{ fontSize: 20, color: "#047857" }}>›</Text>
+        </TouchableOpacity>
+
         {/* Journey */}
         <View style={styles.journey}>
           <View style={[styles.journeyHeader, { justifyContent: 'center' }]}>
