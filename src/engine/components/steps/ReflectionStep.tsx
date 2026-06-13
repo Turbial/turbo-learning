@@ -27,7 +27,7 @@ export default function ReflectionStep({ step, onAnswer }: StepProps) {
       {questions.map((q: any, i: number) => (
         <View key={q.id} style={styles.qGroup}>
           <Text style={styles.qLabel}>
-            {i + 1}. {q.prompt}
+            {i + 1}. {q.label ?? q.prompt}
           </Text>
           <TextInput
             style={styles.input}

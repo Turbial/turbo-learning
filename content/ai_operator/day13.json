@@ -53,8 +53,8 @@
       ],
       "correct": 1,
       "feedback": [
-        "Not quite — AI handles volume, but human judgment is still essential for hard cases.",
         "Exactly. AI does the repetitive work so people can do the meaningful work.",
+        "Not quite — AI handles volume, but human judgment is still essential for hard cases.",
         "Auto-replying to everything frustrates customers. AI should route and draft, not spam.",
         "That adds friction. Good AI support removes friction, it does not create more."
       ],
@@ -123,8 +123,8 @@
       "question": "A customer writes: 'I have been waiting three weeks for a refund. This is unacceptable. I want to speak to a manager now.'",
       "correct": "notideal",
       "feedback": [
-        "Think again — this is emotional, urgent, and about money. AI should not handle this.",
-        "Correct. Angry tone + refund request = immediate human escalation. AI should acknowledge the frustration and promise a human will respond within the hour."
+        "Correct. Angry tone + refund request = immediate human escalation. AI should acknowledge the frustration and promise a human will respond within the hour.",
+        "Think again — this is emotional, urgent, and about money. AI should not handle this."
       ],
       "xp": 5
     },
