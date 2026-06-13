@@ -19,22 +19,26 @@ until then.
 |------|------|------|
 | Ingest pipeline | `supabase/functions/lp-ingest/` | content → chunk+embed → LLM generate → **compile+validate** → insert items (≤3 LLM calls) |
 | Serve state machine | `supabase/functions/lp-serve/` | LLM-free resolve over `lp_lesson_items` + records progress/mastery |
-| Ask escape hatch | `supabase/functions/lp-ask/` | embed → pgvector search → **threshold short-circuit or** grounded Claude answer |
+| Ask escape hatch | `supabase/functions/lp-ask/` | embed → pgvector search → **threshold short-circuit or** grounded DeepSeek answer |
 | Shared compiler | `supabase/functions/_shared/lp_compile.ts` | server port of `compile.mjs` (real UUIDs); the hard structural gate |
-| Claude calls | `supabase/functions/_shared/lp_llm.ts` | generation + grounded answer (Anthropic SDK) |
-| Embeddings | `supabase/functions/_shared/lp_embed.ts` | provider-agnostic (default OpenAI `text-embedding-3-small`, 1536d) |
+| LLM calls | `supabase/functions/_shared/lp_llm.ts` | generation + grounded answer (**DeepSeek**, OpenAI-compatible) |
+| Embeddings | `supabase/functions/_shared/lp_embed.ts` | provider-agnostic (default OpenAI `text-embedding-3-small`, 1536d) — DeepSeek has no embeddings API |
 | RLS + RPCs | `learning/migrations/lp_003_rls_and_functions.sql` | **PREVIEW** — RLS on all `lp_` tables + `lp_match_chunks` / `lp_bump_mastery` |
 | Client serve client | `src/messenger/backend.ts` | feature-flagged; off by default |
 
 ## The model choices (and why)
 
-- **Default model `claude-opus-4-8`**, env-overridable (`LP_GEN_MODEL`, `LP_ASK_MODEL`)
-  so the §8 model split — e.g. a cheaper model for generation/simple Ask — is a
-  config change, not a code change. We don't hard-downgrade for cost.
-- **Ask** uses adaptive thinking + `effort: "low"` and a concise grounded-only
-  system prompt, honoring the architecture's "direct, low-latency" tutor-path rule.
-- **Embeddings** use a separate provider (Anthropic has no embeddings API); 1536
-  dims matches the preview schema's `vector(1536)`.
+- **Provider: DeepSeek** (OpenAI-compatible chat completions). Default model
+  `deepseek-chat` (DeepSeek-V3), env-overridable (`LP_GEN_MODEL`, `LP_ASK_MODEL`)
+  so the §8 model split — e.g. `deepseek-reasoner` for harder generation — is a
+  config change, not a code change.
+- **Generation** uses DeepSeek JSON mode (`response_format: json_object`) + low
+  temperature; the deterministic compiler is still the hard structural gate.
+- **Ask** uses a low temperature + concise grounded-only system prompt, honoring
+  the architecture's "direct, low-latency" tutor-path rule.
+- **Embeddings** use a separate provider — **DeepSeek has no embeddings API** — so
+  `lp_embed.ts` defaults to OpenAI `text-embedding-3-small` (1536d, matching the
+  preview schema's `vector(1536)`); override via `LP_EMBED_*` for Voyage etc.
 
 ## Cost shape (unchanged from the design)
 
@@ -48,10 +52,10 @@ until then.
 
 1. Apply `learning/migrations/lp_001`, `lp_002`, `lp_003` to the Supabase project
    (enables `pgvector`, creates `lp_` tables + RLS + RPCs).
-2. Set function secrets: `ANTHROPIC_API_KEY`, `LP_EMBED_API_KEY` (or `OPENAI_API_KEY`),
-   optionally `LP_GEN_MODEL` / `LP_ASK_MODEL` / `LP_ASK_MIN_SIMILARITY`.
-3. Deploy the functions (`supabase functions deploy lp-ingest lp-serve lp-ask`),
-   and **pin the `npm:@anthropic-ai/sdk` version** in `lp_llm.ts`.
+2. Set function secrets: `DEEPSEEK_API_KEY`, `LP_EMBED_API_KEY` (or `OPENAI_API_KEY`
+   — for the embeddings provider, since DeepSeek has none), optionally
+   `LP_GEN_MODEL` / `LP_ASK_MODEL` / `DEEPSEEK_BASE_URL` / `LP_ASK_MIN_SIMILARITY`.
+3. Deploy the functions (`supabase functions deploy lp-ingest lp-serve lp-ask`).
 4. Seed content: insert a lesson row (or migrate an authored day) and call
    `lp-ingest`; confirm items + chunks appear and the graph validates.
 5. Flip the client: set `EXPO_PUBLIC_LP_ASK_URL` to the `lp-ask` URL (Ask goes

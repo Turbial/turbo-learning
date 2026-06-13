@@ -1,4 +1,4 @@
-// Embeddings helper — provider-agnostic (Anthropic has no embeddings API, so the
+// Embeddings helper — provider-agnostic (DeepSeek has no embeddings API, so the
 // Ask retrieval path uses a separate embeddings provider). Defaults to OpenAI's
 // text-embedding-3-small (1536 dims), which matches lp_lesson_chunks.embedding
 // vector(1536) in the preview schema. Override via env to use Voyage etc.
