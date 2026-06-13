@@ -58,7 +58,7 @@ export default function GoodFitStep({ step, onAnswer }: StepProps) {
         <View style={[styles.feedback, isCorrect ? styles.feedbackCorrect : styles.feedbackWrong]}>
           <Text style={styles.feedbackEmoji}>{isCorrect ? "✓" : "✗"}</Text>
           <Text style={styles.feedbackText}>
-            {isCorrect ? s.feedback[0] : s.feedback[1]}
+            {s.feedback[selected === "good" ? 0 : 1] ?? (isCorrect ? s.feedback[0] : s.feedback[1])}
           </Text>
         </View>
       )}

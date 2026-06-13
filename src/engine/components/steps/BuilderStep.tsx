@@ -54,7 +54,11 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
   const handleSubmit = () => {
     if (!allFilled) return;
     setSubmitted(true);
-    onAnswer(s.template ? interpolate(s.template, values) : values);
+    // Substitute template variables — supports both {key} and {{key}} syntax
+    const filled = s.template
+      ? interpolate(s.template, values)
+      : null;
+    onAnswer(filled ?? values);
   };
 
   return (
@@ -93,7 +97,9 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
           <Text style={styles.resultText}>
             {s.template
               ? interpolate(s.template, values)
-              : Object.entries(values).map(([k, v]) => `**${k}**: ${v}`).join("\n\n")}
+              : fields
+                  .map((f: any) => `**${f.label}**: ${values[f.id] ?? ""}`)
+                  .join("\n\n")}
           </Text>
         </View>
       )}

@@ -67,7 +67,11 @@ export default function McStep({ step, onAnswer }: StepProps) {
         <View style={[s.feedback, isCorrect ? s.feedbackCorrect : s.feedbackWrong]}>
           <Text style={s.feedbackEmoji}>{isCorrect ? "✓" : "✗"}</Text>
           <Text style={s.feedbackText}>
-            {isCorrect ? mc.feedback[0] : mc.feedback[1] || "Not quite. The correct answer is highlighted above."}
+            {mc.feedback.length === mc.options.length
+              ? mc.feedback[selected!] || "Not quite. The correct answer is highlighted above."
+              : isCorrect
+                ? mc.feedback[0]
+                : mc.feedback[1] || "Not quite. The correct answer is highlighted above."}
           </Text>
         </View>
       )}
