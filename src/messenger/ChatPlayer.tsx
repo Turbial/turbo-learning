@@ -19,6 +19,7 @@ import { colors, spacing, radius, fontSize, fontWeight, sizing, lineHeight } fro
 import type { CompiledLesson, CompiledItem, ItemButton, ChatBubble, ConceptMastery, ProgressEvent } from "./types";
 import { getEntry, resolveTap, toneForAnswer } from "./resolve";
 import { askQuestion } from "./ask";
+import { pickAdaptiveItem, weakestConcept } from "./adaptive";
 import MasteryBar from "./MasteryBar";
 
 export interface ChatPlayerProps {
@@ -52,6 +53,10 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
   const scrollRef = useRef<ScrollView>(null);
   const completedRef = useRef(false);
 
+  // Adaptive state: which items have been served (no-repeat) + recent answer streak.
+  const servedRef = useRef<Set<string>>(new Set([entry.id]));
+  const streakRef = useRef(0);
+
   const pushBubble = useCallback((b: Omit<ChatBubble, "key">) => {
     setBubbles((prev) => [...prev, { ...b, key: nextKey() }]);
   }, []);
@@ -60,6 +65,8 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
   useEffect(() => {
     setBubbles([{ key: nextKey(), role: "bot", text: entry.bot_text, itemType: entry.item_type }]);
     setCurrent(entry);
+    servedRef.current = new Set([entry.id]);
+    streakRef.current = 0;
   }, [entry]);
 
   useEffect(() => {
@@ -85,7 +92,10 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
       const result = resolveTap(lesson, current, button);
       eventsRef.current.push(result.event);
 
-      if (result.mastery) bumpMastery(result.mastery.tag, result.mastery.correct);
+      if (result.mastery) {
+        bumpMastery(result.mastery.tag, result.mastery.correct);
+        streakRef.current = result.mastery.correct ? Math.max(1, streakRef.current + 1) : Math.min(-1, streakRef.current - 1);
+      }
       if (result.xpAwarded) setXp((x) => x + result.xpAwarded);
 
       if (result.escape) {
@@ -101,6 +111,7 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
       const tone = next.item_type === "feedback" ? toneForAnswer(button) : "neutral";
       pushBubble({ role: "bot", text: next.bot_text, itemType: next.item_type, tone });
       setCurrent(next);
+      servedRef.current.add(next.id);
 
       if (next.item_type === "done" && !completedRef.current) {
         completedRef.current = true;
@@ -109,6 +120,23 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
     },
     [lesson, current, pushBubble, bumpMastery, xp, mastery, onComplete],
   );
+
+  // Adaptive drill: jump to a quiz on the student's weakest concept (no-repeat,
+  // difficulty tuned to their streak). Surfaced on the menu/done once there's data.
+  const handleDrill = useCallback(() => {
+    const item = pickAdaptiveItem({
+      lesson,
+      mastery,
+      servedItemIds: servedRef.current,
+      streak: streakRef.current,
+    });
+    if (!item) return;
+    const weak = weakestConcept(mastery);
+    pushBubble({ role: "user", text: `🎯 Drill${weak ? `: ${weak.label}` : ""}` });
+    pushBubble({ role: "bot", text: item.bot_text, itemType: item.item_type });
+    setCurrent(item);
+    servedRef.current.add(item.id);
+  }, [lesson, mastery, pushBubble]);
 
   const submitAsk = useCallback(async () => {
     const q = askInput.trim();
@@ -213,6 +241,14 @@ export default function ChatPlayer({ lesson, courseTitle, onExit, onNext, onComp
               <Text style={[styles.btnText, styles.btnTextPrimary]}>Next lesson →</Text>
             </TouchableOpacity>
           )}
+          {(current.item_type === "menu" || current.item_type === "done") &&
+            weakestConcept(mastery) && (
+              <TouchableOpacity style={[styles.btn, styles.btnGhost]} activeOpacity={0.85} onPress={handleDrill}>
+                <Text style={[styles.btnText, styles.btnTextGhost]}>
+                  🎯 Drill your weak spot: {weakestConcept(mastery)!.label}
+                </Text>
+              </TouchableOpacity>
+            )}
           {current.buttons.map((b, i) => (
             <TouchableOpacity
               key={`${current.id}-${i}`}

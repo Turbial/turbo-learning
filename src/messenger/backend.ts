@@ -8,7 +8,7 @@
 // The Ask escape hatch is wired separately and already live-or-local: ask.ts uses
 // EXPO_PUBLIC_LP_ASK_URL when present. This module covers the serve path.
 
-import type { CompiledItem, ItemButton } from "./types";
+import type { CompiledItem, ItemButton, ConceptMastery } from "./types";
 
 const SERVE_URL = process.env.EXPO_PUBLIC_LP_SERVE_URL;
 
@@ -47,5 +47,29 @@ export async function backendTap(args: {
     action: button.action,
     to: button.to,
     correct: button.correct,
+  });
+}
+
+/** Per-concept mastery + the student's weakest concept (for the progress UI). */
+export async function backendProgress(args: {
+  userId: string;
+  lessonId: string;
+}): Promise<{ mastery: ConceptMastery[]; weak_concept: string | null }> {
+  return post({ op: "progress", user_id: args.userId, lesson_id: args.lessonId });
+}
+
+/** Adaptive next quiz: weakest concept + target difficulty + no-repeat. */
+export async function backendNextAdaptive(args: {
+  userId: string;
+  lessonId: string;
+  contentVersion: string;
+  difficulty?: number;
+}): Promise<{ item: CompiledItem | null; weak_concept: string | null }> {
+  return post({
+    op: "next-adaptive",
+    user_id: args.userId,
+    lesson_id: args.lessonId,
+    content_version: args.contentVersion,
+    difficulty: args.difficulty ?? 2,
   });
 }

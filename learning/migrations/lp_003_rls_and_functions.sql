@@ -40,6 +40,30 @@ returns void language sql as $$
         attempts = lp_concept_mastery.attempts + 1;
 $$;
 
+-- ---- Weak-area detection (lp-serve "progress" / "next-adaptive") -----------
+create or replace function lp_weak_concept(p_user uuid, p_lesson uuid)
+returns text language sql stable as $$
+  select concept_tag from lp_concept_mastery
+  where user_id = p_user and lesson_id = p_lesson and attempts > 0
+  order by mastery_pct asc, attempts desc
+  limit 1;
+$$;
+
+-- Adaptive serving (still no LLM): pick the next quiz by weak concept + target
+-- difficulty + no-repeat. Mirrors the client pickAdaptiveItem.
+create or replace function lp_next_adaptive(
+  p_user uuid, p_lesson uuid, p_version text, p_difficulty int, p_concept text default null
+)
+returns setof lp_lesson_items language sql stable as $$
+  select * from lp_lesson_items
+  where lesson_id = p_lesson and content_version = p_version
+    and status = 'live' and item_type = 'quiz'
+    and id not in (select item_id from lp_progress_events where user_id = p_user)
+    and (p_concept is null or concept_tag = p_concept)
+  order by abs(difficulty - p_difficulty), random()
+  limit 1;
+$$;
+
 -- ============================================================================
 -- ROW LEVEL SECURITY
 -- ============================================================================

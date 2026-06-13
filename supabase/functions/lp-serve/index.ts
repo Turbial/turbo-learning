@@ -71,6 +71,35 @@ Deno.serve(async (req) => {
       return json({ next });
     }
 
+    // Mastery + weakest concept for the progress UI / recommendations.
+    if (body.op === "progress") {
+      const { data: mastery } = await supabase
+        .from("lp_concept_mastery")
+        .select("concept_tag,correct,attempts,mastery_pct")
+        .eq("user_id", body.user_id)
+        .eq("lesson_id", body.lesson_id);
+      const { data: weak } = await supabase.rpc("lp_weak_concept", {
+        p_user: body.user_id, p_lesson: body.lesson_id,
+      });
+      return json({ mastery: mastery ?? [], weak_concept: weak ?? null });
+    }
+
+    // Adaptive "next question": weakest concept + target difficulty + no-repeat.
+    if (body.op === "next-adaptive") {
+      const { data: weak } = await supabase.rpc("lp_weak_concept", {
+        p_user: body.user_id, p_lesson: body.lesson_id,
+      });
+      const { data, error } = await supabase.rpc("lp_next_adaptive", {
+        p_user: body.user_id,
+        p_lesson: body.lesson_id,
+        p_version: body.content_version,
+        p_difficulty: body.difficulty ?? 2,
+        p_concept: weak ?? null,
+      });
+      if (error) throw error;
+      return json({ item: data?.[0] ?? null, weak_concept: weak ?? null });
+    }
+
     return json({ error: "unknown op" }, 400);
   } catch (e) {
     console.error("lp-serve error", e);
