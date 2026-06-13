@@ -66,10 +66,11 @@ export function useStreakAtRisk(userId?: string) {
         return { isAtRisk: false, expiresInHours: 0, streakDays, shieldCount };
       }
 
-      // Streak is at risk — expires at midnight-ish tonight
+      // Streak is at risk — expires at 00:00:00 the next calendar day
       const now = new Date();
       const midnight = new Date(now);
-      midnight.setHours(23, 59, 59, 999);
+      midnight.setDate(midnight.getDate() + 1);
+      midnight.setHours(0, 0, 0, 0);
       const expiresInHours = Math.max(
         1,
         Math.round((midnight.getTime() - now.getTime()) / 3600000),

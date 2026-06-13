@@ -171,8 +171,8 @@ export default function LessonPlayer({
       // Calculate base XP (only for first answer)
       const baseXp = alreadyAnswered ? 0 : (handler.score?.(step, res) ?? step.xp ?? 10);
 
-      // Compute combo streak: increment on correct, reset on wrong
-      const newComboStreak = correct ? comboStreak + 1 : 0;
+      // Increment on correct, reset on wrong, leave unchanged for subjective steps (correct===undefined)
+      const newComboStreak = correct === true ? comboStreak + 1 : correct === false ? 0 : comboStreak;
 
       // Apply combo multiplier to XP
       const xp = applyCombo(baseXp, newComboStreak);

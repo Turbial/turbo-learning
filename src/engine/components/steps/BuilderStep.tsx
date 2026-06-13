@@ -48,7 +48,14 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
   const handleSubmit = () => {
     if (!allFilled) return;
     setSubmitted(true);
-    onAnswer(values);
+    // Substitute template variables — supports both {key} and {{key}} syntax
+    const filled = s.template
+      ? fields.reduce(
+          (tpl, f) => tpl.replace(new RegExp(`\\{\\{?${f.id}\\}?\\}`, "g"), values[f.id] ?? ""),
+          s.template,
+        )
+      : null;
+    onAnswer(filled ?? values);
   };
 
   return (
@@ -85,8 +92,8 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
         <View style={styles.resultBox}>
           <Text style={styles.resultLabel}>Your Output:</Text>
           <Text style={styles.resultText}>
-            {Object.entries(values)
-              .map(([k, v]) => `**${k}**: ${v}`)
+            {fields
+              .map((f: any) => `**${f.label}**: ${values[f.id] ?? ""}`)
               .join("\n\n")}
           </Text>
         </View>
