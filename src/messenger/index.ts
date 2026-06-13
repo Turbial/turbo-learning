@@ -5,4 +5,5 @@ export { loadMessengerLesson, MESSENGER_LESSON_IDS } from "./lessons";
 export type { LoadedLesson } from "./lessons";
 export { getEntry, getItem, resolveTap } from "./resolve";
 export { askQuestion } from "./ask";
+export { messengerBackendEnabled, backendStart, backendTap } from "./backend";
 export * from "./types";
