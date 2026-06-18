@@ -13,8 +13,8 @@ import {
   Platform,
 } from "react-native";
 import { router } from "expo-router";
+import { useAuth } from "../../src/data/useAuth";
 import {
-  useAuth,
   useProfile,
   useProgram,
   useUnits,
