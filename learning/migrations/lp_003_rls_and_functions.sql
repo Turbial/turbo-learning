@@ -72,7 +72,7 @@ alter table lp_modules         enable row level security;
 alter table lp_lessons         enable row level security;
 alter table lp_lesson_chunks   enable row level security;
 alter table lp_lesson_items    enable row level security;
-alter table lp_users           enable row level security;
+-- lp_users was folded into profiles (existing table)
 alter table lp_progress        enable row level security;
 alter table lp_progress_events enable row level security;
 alter table lp_concept_mastery enable row level security;
@@ -93,9 +93,6 @@ create policy lp_chunks_read on lp_lesson_chunks
   for select to authenticated using (true);
 
 -- ---- Student-owned rows: a user sees and writes only their own -------------
-create policy lp_users_self on lp_users
-  for select to authenticated using (id = auth.uid());
-
 create policy lp_progress_owner on lp_progress
   for all to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
 

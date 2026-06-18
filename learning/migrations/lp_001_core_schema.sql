@@ -1,19 +1,29 @@
 -- ============================================================================
--- Migration: lp_001_core_schema
+-- Migration: lp_001_core_schema (APPLIED — unified-messenger merge)
 -- Target: Supabase afgmlkduuapquqkcqdsk (SHARED operational DB)
--- STATUS: PREVIEW ONLY — DO NOT APPLY until Marcus approves.
--- All tables namespaced lp_ to coexist with the 47 existing tables.
+-- All tables namespaced lp_ to coexist with the existing 398 public tables.
+--
+-- Changes from PREVIEW:
+--   - Removed lp_users table. App already uses profiles (FKey to auth.users).
+--     Phase 4 personalization columns (skill_level, industry, goal) added to
+--     profiles instead. lp_progress etc. reference profiles.id (which is auth.uid()).
 -- ============================================================================
 
-create extension if not exists "pgcrypto";   -- gen_random_uuid
+create extension if not exists "pgcrypto";   -- gen_random_uuid (already exists)
 create extension if not exists "vector";       -- pgvector for Ask retrieval
+
+-- ---- Phase 4 personalization columns on existing profiles ------------------
+alter table profiles add column if not exists skill_level text
+  check (skill_level in ('beginner','intermediate','advanced'));
+alter table profiles add column if not exists industry text;
+-- goal already exists on profiles (used for onboarding)
 
 -- ---- courses / modules / lessons -------------------------------------------
 create table if not exists lp_courses (
   id          uuid primary key default gen_random_uuid(),
   title       text not null,
   description text,
-  creator_id  uuid,
+  creator_id  uuid references profiles(id) on delete set null,
   status      text not null default 'draft'
               check (status in ('draft','published','archived')),
   created_at  timestamptz not null default now(),
@@ -73,23 +83,12 @@ create table if not exists lp_lesson_items (
   created_at      timestamptz not null default now()
 );
 
--- ---- users -----------------------------------------------------------------
-create table if not exists lp_users (
-  id          uuid primary key default gen_random_uuid(),
-  name        text,
-  email       text unique,
-  role        text not null default 'student'
-              check (role in ('student','creator','admin')),
-  skill_level text check (skill_level in ('beginner','intermediate','advanced')),
-  industry    text,
-  goal        text,
-  created_at  timestamptz not null default now()
-);
-
 -- ---- progress --------------------------------------------------------------
+-- user_id references profiles(id) — which is auth.uid(). The existing app
+-- creates a profile row for every authenticated user on sign-up.
 create table if not exists lp_progress (
   id           uuid primary key default gen_random_uuid(),
-  user_id      uuid not null references lp_users(id) on delete cascade,
+  user_id      uuid not null references profiles(id) on delete cascade,
   course_id    uuid references lp_courses(id) on delete cascade,
   lesson_id    uuid references lp_lessons(id) on delete cascade,
   current_step uuid,
@@ -102,7 +101,7 @@ create table if not exists lp_progress (
 
 create table if not exists lp_progress_events (
   id          uuid primary key default gen_random_uuid(),
-  user_id     uuid not null references lp_users(id) on delete cascade,
+  user_id     uuid not null references profiles(id) on delete cascade,
   lesson_id   uuid not null references lp_lessons(id) on delete cascade,
   item_id     uuid not null references lp_lesson_items(id) on delete cascade,
   concept_tag text,
@@ -112,7 +111,7 @@ create table if not exists lp_progress_events (
 
 create table if not exists lp_concept_mastery (
   id          uuid primary key default gen_random_uuid(),
-  user_id     uuid not null references lp_users(id) on delete cascade,
+  user_id     uuid not null references profiles(id) on delete cascade,
   lesson_id   uuid not null references lp_lessons(id) on delete cascade,
   concept_tag text not null,
   correct     int not null default 0,
@@ -125,7 +124,7 @@ create table if not exists lp_concept_mastery (
 -- ---- free-text Ask history -------------------------------------------------
 create table if not exists lp_conversations (
   id         uuid primary key default gen_random_uuid(),
-  user_id    uuid not null references lp_users(id) on delete cascade,
+  user_id    uuid not null references profiles(id) on delete cascade,
   lesson_id  uuid not null references lp_lessons(id) on delete cascade,
   created_at timestamptz not null default now()
 );
