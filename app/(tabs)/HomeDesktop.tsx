@@ -344,13 +344,14 @@ export default function HomeDesktopScreen() {
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
-  const completedSet = useMemo(() => {
-    const s = new Set<string>();
-    if (completedUnitIds) completedUnitIds.forEach((id: string) => s.add(id));
-    return s;
-  }, [completedUnitIds]);
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
 
-  const localCompletedIds = useLocalProgressStore((st) => st.completedLessons);
+  const allCompletedIds = useMemo(() => {
+    return new Set([
+      ...(completedUnitIds ?? [] as string[]),
+      ...localCompletedIds,
+    ]);
+  }, [completedUnitIds, localCompletedIds]);
 
   const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"];
   const resolvedUnits = (units?.length ? units : fallbackUnits).sort(
@@ -361,20 +362,20 @@ export default function HomeDesktopScreen() {
     let dayIdx = 1;
     for (const u of resolvedUnits) {
       const unitId = u.id || `ai-${String(dayIdx).padStart(2, "0")}`;
-      if (!completedSet.has(unitId) && !localCompletedIds.has(unitId)) break;
+      if (!allCompletedIds.has(unitId)) break;
       dayIdx++;
     }
     return dayIdx;
-  }, [resolvedUnits, completedSet, localCompletedIds]);
+  }, [resolvedUnits, allCompletedIds]);
 
   const days = useMemo(() => {
     return resolvedUnits.map((u: any, i: number) => {
       const day = i + 1;
       const unitId = u.id || `ai-${String(day).padStart(2, "0")}`;
-      const status = getDayStatus(day, completedSet, currentDayNum);
+      const status = getDayStatus(day, allCompletedIds, currentDayNum);
       return { day, unitId, title: u.title || u.label || `Day ${day}`, status };
     });
-  }, [resolvedUnits, completedSet, currentDayNum]);
+  }, [resolvedUnits, allCompletedIds, currentDayNum]);
 
   const completedCount = days.filter((d) => d.status === "done").length;
   const totalDays = days.length;
