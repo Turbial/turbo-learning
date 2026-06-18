@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LP Course Authoring Format (v1)",
+  "description": "The SIMPLE, content-only format. An LLM formats raw text into this; the compiler expands it into the playable lp_lesson_items state machine. This format intentionally has NO button pointers, NO uuids, NO menu/feedback wiring — the compiler adds all of that deterministically. You author meaning; code owns structure.",
+  "type": "object",
+  "required": ["course", "lessons"],
+  "properties": {
+    "course": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "voice": {
+          "type": "string",
+          "description": "Optional teaching voice/stance injected into feedback + Ask, e.g. 'warm, plain-spoken, faith-informed (DUO/Sage)'. Lets the tutor sound like the creator."
+        },
+        "destination": {
+          "type": "string",
+          "description": "What the student can DO by the end. The arc points here. e.g. 'has a missed-call automation spec ready for MightyMax to build'."
+        }
+      }
+    },
+    "lessons": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The ARC — order matters, this is the spine. Each lesson is one teachable step toward the destination.",
+      "items": {
+        "type": "object",
+        "required": ["title", "concepts"],
+        "properties": {
+          "title": { "type": "string" },
+          "source_text": {
+            "type": "string",
+            "description": "The raw lesson body. Used for Ask retrieval (chunked + embedded) and as grounding for generation. The student never sees this as a page."
+          },
+          "concepts": {
+            "type": "array",
+            "minItems": 1,
+            "description": "3-6 teachable concepts. Each becomes a concept_tag for mastery tracking.",
+            "items": {
+              "type": "object",
+              "required": ["tag", "label"],
+              "properties": {
+                "tag": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+                "label": { "type": "string" }
+              }
+            }
+          },
+          "quizzes": {
+            "type": "array",
+            "description": "Quiz SEEDS — content only. Compiler wires them into the state machine with feedback steps + pointers.",
+            "items": {
+              "type": "object",
+              "required": ["concept", "question", "options"],
+              "properties": {
+                "concept": { "type": "string", "description": "must match a concepts[].tag in this lesson" },
+                "difficulty": { "type": "integer", "minimum": 1, "maximum": 4, "default": 2 },
+                "question": { "type": "string" },
+                "options": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "required": ["text", "correct"],
+                    "properties": {
+                      "text": { "type": "string" },
+                      "correct": { "type": "boolean" },
+                      "feedback": { "type": "string", "description": "what the bot says when this option is tapped" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scenarios": {
+            "type": "array",
+            "description": "Role-play SEEDS. One setup, 2-3 branch choices, each with a consequence + coaching.",
+            "items": {
+              "type": "object",
+              "required": ["concept", "setup", "choices"],
+              "properties": {
+                "concept": { "type": "string" },
+                "setup": { "type": "string", "description": "the in-character situation the bot presents" },
+                "choices": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "object",
+                    "required": ["text", "outcome"],
+                    "properties": {
+                      "text": { "type": "string", "description": "the button label (the student's move)" },
+                      "good": { "type": "boolean", "description": "was this a strong choice" },
+                      "outcome": { "type": "string", "description": "in-character reaction + coaching" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "flashcards": {
+            "type": "array",
+            "description": "Front prompt + back reveal. Compiler makes these flip steps.",
+            "items": {
+              "type": "object",
+              "required": ["concept", "front", "back"],
+              "properties": {
+                "concept": { "type": "string" },
+                "front": { "type": "string" },
+                "back": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
