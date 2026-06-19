@@ -2,7 +2,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from './supabase';
 
-export type CatalogItem = { id: string; slug: string; title: string; subtitle: string | null; enrolled: boolean };
+export type CatalogItem = { id: string; slug: string; title: string; subtitle: string | null; enrolled: boolean; comingSoon?: boolean };
+
+const COMING_SOON_SLUGS = new Set(['duo', 'ai-for-everyone']);
 
 export function useProgramCatalog(userId?: string) {
   return useQuery<CatalogItem[]>({
@@ -15,7 +17,7 @@ export function useProgramCatalog(userId?: string) {
         const { data: en } = await supabase.from('enrollments').select('program_id').eq('user_id', userId);
         enrolledIds = new Set((en ?? []).map(e => e.program_id));
       }
-      return (programs ?? []).map(p => ({ ...p, enrolled: enrolledIds.has(p.id) }));
+      return (programs ?? []).map(p => ({ ...p, enrolled: enrolledIds.has(p.id), comingSoon: COMING_SOON_SLUGS.has(p.slug) }));
     },
   });
 }

@@ -260,6 +260,7 @@ export type UserProfile = {
   goal?: string;
   dailyMins?: number;
   learnTime?: string;
+  notificationsEnabled?: boolean;
   onboarded?: boolean;
   streak: number;
   shieldCount: number;
