@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "unit": "day9",
+  "title": "Day 9: The Art of the Do-Over",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d9-info-1",
+      "type": "info",
+      "title": "Every Couple Needs a Reset Button",
+      "body": "Here's a truth that will save you years of frustration: you can't always avoid a bad moment, but you can always create a do-over.\n\nA do-over is exactly what it sounds like. You pause a conversation that's heading off a cliff, acknowledge it, and restart.\n\n'Can we do that over? I got defensive.'\n'Hold on \u2014 I'm not saying this right. Let me try again.'\n'I hear myself raising my voice. That's not who I want to be in this. Can we pause and come back?'\n\nA do-over isn't giving up. It's the opposite \u2014 it's refusing to let a bad moment define the outcome.",
+      "xp": 5
+    },
+    {
+      "id": "d9-highlight-1",
+      "type": "highlight",
+      "body": "The sentences that save marriages:\n\n'I want to do that over.'\n'Can we try that again?'\n'I said that wrong. Here's what I mean.'\n\nThat's not weakness. That's repair in real time.",
+      "highlights": [
+        "do that over",
+        "try that again",
+        "repair in real time"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d9-info-2",
+      "type": "info",
+      "title": "Why Do-Overs Work",
+      "body": "When a conversation goes bad, most couples keep pushing through. They think stopping means losing.\n\nBut here's what actually happens when you keep going down a bad path:\n\u2022 You say things you don't mean\n\u2022 You assign motives to your partner that aren't true\n\u2022 You build momentum in the wrong direction\n\u2022 The real issue gets buried under the damage of the fight itself\n\nA do-over stops the bleed. It's the relationship equivalent of calling a timeout in football \u2014 you stop the clock, regroup, and run a better play.\n\nThe best couples don't have fewer bad moments. They're just faster at recognizing them and hitting reset.",
+      "xp": 5
+    },
+    {
+      "id": "d9-tf-1",
+      "type": "tf",
+      "question": "Calling a do-over during an argument means you're losing the argument.",
+      "correct": false,
+      "feedback": [
+        "Correct. Calling a do-over isn't losing \u2014 it's recognizing that the current approach isn't working and choosing a better one. The strongest couples are the fastest at course-correcting mid-conversation.",
+        "Not quite. A do-over is actually a sign of strength \u2014 you're prioritizing connection over being right. You're saying, 'This matters more than this moment.'"
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-reflection-1",
+      "type": "reflection",
+      "title": "Your Do-Over History",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about a recent conversation with your partner that went badly.\n\n\u2022 Where did it first go off track?\n\u2022 What would it have felt like if one of you had said, 'Can we do that over?'\n\u2022 What prevented either of you from saying it? (Pride? Fear? Not knowing it was an option?)\n\nWrite what you'd say differently if you got a do-over of that moment."
+        }
+      ]
+    },
+    {
+      "id": "d9-scenario-1",
+      "type": "scenario_card",
+      "title": "The Do-Over in Action",
+      "body": "Scenario: Your partner says, 'You're always on your phone during dinner.'\n\nYou feel attacked. Your instinct is to snap back: 'I'm always on my phone? You watched an entire episode during breakfast yesterday.'\n\nThat's the moment. You can escalate or you can hit reset.\n\nDo-over version: 'You know what, I hear myself getting defensive. I want to hear what you're actually saying. Can we start over? Tell me what's bothering you about dinner.'\n\nSame partner. Same issue. Completely different trajectory."
+    },
+    {
+      "id": "d9-reflection-2",
+      "type": "reflection",
+      "title": "Your Do-Over Signal",
+      "minChars": 15,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Sometimes words are hard in the middle of conflict. It helps to have a signal you both agree on \u2014 a word, a gesture, a phrase that means 'let's reset.'\n\nWhat signal could you and your partner agree on? Something simple that you can both use.\n\nExamples: 'Time out,' a hand sign, 'I want to do that over.' Write what you'll suggest."
+        }
+      ]
+    },
+    {
+      "id": "d9-copy-action-1",
+      "type": "copy_action",
+      "title": "Practice the Do-Over",
+      "prompt": "You can't use a skill you've never practiced. Here's your mission:\n\nBefore your next 'real' conflict happens, tell your partner: 'I learned about this thing called a do-over. If either of us says, 'Can we start over?' the other will agree. No questions asked. Deal?'\n\nWrite that conversation out. Practice what you'll say.",
+      "xp": 10,
+      "body": "You can't use a skill you've never practiced. Here's your mission:\n\nBefore your next 'real' conflict happens, tell your partner: 'I learned about this thing called a do-over. If either of us says, 'Can we start over?' the other will agree. No questions asked. Deal?'\n\nWrite that conversation out. Practice what you'll say.",
+      "sourceStepId": "d9-info-1"
+    },
+    {
+      "id": "d9-good-fit-1",
+      "type": "good_fit",
+      "title": "Do-Overs Work Best When...",
+      "body": "\u2022 Both partners agree to the signal beforehand\n\u2022 Neither person uses it to avoid the conversation entirely\n\u2022 After the reset, the second attempt is genuinely different, not just louder\n\u2022 You acknowledge what went wrong before restarting ('I got defensive \u2014 let me try again')\n\u2022 You give each other space to use it freely, without resentment\n\nYou're building a culture of repair, not a loophole for escape.",
+      "xp": 5,
+      "button_text": "Got it",
+      "question": "Do-Overs Work Best When...",
+      "correct": "good",
+      "feedback": [
+        "Good fit!",
+        "Not quite a good fit."
+      ]
+    },
+    {
+      "id": "d9-info-3",
+      "type": "info",
+      "title": "Tomorrow: Speaking the Unspeakable",
+      "body": "Do-overs prevent small moments from becoming big ones. But what about the conversations you've been avoiding entirely?\n\nTomorrow: how to say the things you've been afraid to say \u2014 without nuclear fallout.",
+      "xp": 5
+    },
+    {
+      "id": "d9-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "unit": "day28",
+  "title": "Day 28: Your Marriage Manifesto",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d28-info-1",
+      "type": "info",
+      "title": "28 Days",
+      "body": "Twenty-eight days ago, you started a journey.\n\nYou didn't know where it would lead. You knew your marriage could be better \u2014 and you had the courage to begin.\n\nLook at what you've done:\n\n\u2014 WEEK 1: Diagnosis \u2014\nDay 1: You started with honesty\nDay 2: You learned why couples drift and how bids work\nDay 3: You audited your foundation \u2014 trust, respect, values\nDay 4: You checked your emotional and physical connection\nDay 5: You faced the household reality \u2014 money, labor, mental load\nDay 6: You identified your conflict style and repair patterns\nDay 7: You created your marriage blueprint and a vision\n\n\u2014 WEEK 2: Repair \u2014\nDay 8: You committed to moving from diagnosis to action\nDay 9: You learned the art of the do-over\nDay 10: You faced the conversations you'd been avoiding\nDay 11: You practiced listening without defending\nDay 12: You mastered the apology that actually works\nDay 13: You set boundaries that protect not push away\nDay 14: You consolidated your repair toolkit\n\n\u2014 WEEK 3: Connection \u2014\nDay 15: You put friendship back at the center\nDay 16: You went deeper into vulnerability\nDay 17: You brought play and lightness back\nDay 18: You reclaimed touch as a language of connection\nDay 19: You built rituals that anchor your relationship\nDay 20: You understood how trust is built in small moments\nDay 21: You celebrated what you'd rebuilt\n\n\u2014 WEEK 4: Mission \u2014\nDay 22: You started defining your marriage mission\nDay 23: You created your shared vision\nDay 24: You designed the practices that will carry you\nDay 25: You committed to growing together through change\nDay 26: You became a team that wins together\nDay 27: You practiced celebration and savoring\n\nAnd now, Day 28. The day you declare who you are \u2014 together.",
+      "xp": 10
+    },
+    {
+      "id": "d28-highlight-1",
+      "type": "highlight",
+      "body": "You didn't just read about marriage improvement.\nYou showed up, every day, for 28 days.\n\nThat's not a program.\nThat's a choice.\n\nAnd you made it.",
+      "highlights": [
+        "showed up every day",
+        "That's a choice",
+        "you made it"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d28-reflection-1",
+      "type": "reflection",
+      "title": "How Far Have You Come?",
+      "minChars": 40,
+      "xp": 20,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Go back to Day 1. Read what you wrote. Do you remember where you were?\n\nNow answer:\n\n\u2022 What's one belief you had about your marriage that has shifted?\n\u2022 What's one conversation you had that you wouldn't have had 28 days ago?\n\u2022 What's one habit you've changed?\n\u2022 What are you most proud of?\n\nThis isn't about perfection. It's about progress. Name your progress."
+        }
+      ]
+    },
+    {
+      "id": "d28-info-2",
+      "type": "info",
+      "title": "The Marriage Manifesto",
+      "body": "A manifesto is a public declaration of intent, values, and vision.\n\nYour Marriage Manifesto is a statement \u2014 for the two of you \u2014 that captures:\n\n\u2022 Who you are as a couple\n\u2022 What you value most\n\u2022 What you're committed to\n\u2022 Where you're going together\n\nThis isn't a contract. It's not a set of rules. It's a compass \u2014 something you can come back to when life gets noisy.\n\nOn the next step, you'll write yours.",
+      "xp": 5
+    },
+    {
+      "id": "d28-reflection-2",
+      "type": "reflection",
+      "title": "Write Your Marriage Manifesto",
+      "minChars": 40,
+      "xp": 25,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Complete these sentences:\n\nWe are a couple who _____________________________\n\nWe value ______________________________________\n\nWe commit to ___________________________________\n\nWe are building ________________________________\n\nTake your time. This is the most important writing you'll do in this program.\n\nIf you want a simpler framework:\n\n'We promise to [action] even when [obstacle], because [reason].'\n\nExample: 'We promise to turn toward each other even when we feel distant, because we chose this and we keep choosing it.'\n\nWrite your manifesto."
+        }
+      ]
+    },
+    {
+      "id": "d28-copy-action-1",
+      "type": "copy_action",
+      "title": "Share Your Manifesto",
+      "prompt": "Tonight, share your Marriage Manifesto with your partner.\n\nHere's how to start:\n\n'I wrote something that matters to me about us. I want to share it with you, and I'd love to hear yours too.'\n\nDon't negotiate it. Don't debate it. Just share \u2014 then listen to theirs.\n\nIf you can, write a combined version. Keep it somewhere you can see it. On your mirror, in your wallet, on your phone.\n\nWhen things get hard \u2014 and they will \u2014 your manifesto is your anchor.",
+      "xp": 10,
+      "body": "Tonight, share your Marriage Manifesto with your partner.\n\nHere's how to start:\n\n'I wrote something that matters to me about us. I want to share it with you, and I'd love to hear yours too.'\n\nDon't negotiate it. Don't debate it. Just share \u2014 then listen to theirs.\n\nIf you can, write a combined version. Keep it somewhere you can see it. On your mirror, in your wallet, on your phone.\n\nWhen things get hard \u2014 and they will \u2014 your manifesto is your anchor.",
+      "sourceStepId": "d28-info-1"
+    },
+    {
+      "id": "d28-info-3",
+      "type": "info",
+      "title": "What Happens After Today",
+      "body": "The program ends. Your marriage doesn't.\n\nHere's what to do next:\n\n1. Keep your daily practice \u2014 even 5 minutes. A check-in, a touch, a question. Don't let connection backslide.\n\n2. Schedule your weekly huddle \u2014 15 minutes. Win, challenge, plan. This alone will transform your marriage.\n\n3. Revisit \u2014 Come back to the four pillars every few months. Foundation, Connection, Household, Repair. You'll find different things to work on in different seasons.\n\n4. Recommit \u2014 When you slip, don't spiral. Your practices are there to come back to. A missed day isn't failure. It's a reminder.\n\nThis program gave you the tools. The rest of your life is where you use them.\n\nYou have everything you need.",
+      "xp": 10
+    },
+    {
+      "id": "d28-reflection-3",
+      "type": "reflection",
+      "title": "One Last Thought",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Complete this sentence:\n\n'The thing I want to remember most from these 28 days is...'\n\nWrite it. Memorize it. It's your takeaway \u2014 the one insight that matters most to you.\n\nEverything else is practice. This one is yours."
+        }
+      ]
+    },
+    {
+      "id": "d28-info-4",
+      "type": "info",
+      "title": "The Journey Continues",
+      "body": "You did it. All 28 days.\n\nHere's the truth: 28 days doesn't fix a marriage. But 28 days of showing up, learning, and practicing can change the direction of one.\n\nYou've built skills that will serve you for the rest of your life. Not because this program is perfect \u2014 but because YOU showed up.\n\nThe diagnosis is done. The repairs are in motion. The connection is deeper. The mission is clear.\n\nNow go live it.\n\nTogether.",
+      "xp": 10
+    },
+    {
+      "id": "d28-badge-1",
+      "type": "badge_unlock",
+      "title": "Achievement Unlocked: DUO Graduate",
+      "body": "28 days. Four weeks. A full journey from diagnosis to mission. You didn't just complete a program \u2014 you invested in the most important relationship of your life.\n\nBadge earned: DUO Graduate\n\nYou've earned this. And more importantly \u2014 your marriage has you.",
+      "badge": "duo_graduate",
+      "xp": 100,
+      "badgeSlug": "duo_graduate"
+    },
+    {
+      "id": "d28-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 30
+    }
+  ]
+}

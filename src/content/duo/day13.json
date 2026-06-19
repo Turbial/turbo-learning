@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day13",
+  "title": "Day 13: Boundaries \u2014 The Kindest No",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d13-info-1",
+      "type": "info",
+      "title": "Boundaries Are Not Walls",
+      "body": "Many people hear 'boundary' and think 'distance.' But a healthy boundary isn't a wall \u2014 it's a doorway with a clear frame.\n\nA boundary says: 'I love you, and I need this to be okay.'\n\nA boundary says: 'I want to be close, but not at this cost.'\n\nA boundary says: 'I'm saying no to this so I can say yes to us.'\n\nWithout boundaries, resentment builds. You say yes when you mean no. You avoid conflict by sacrificing yourself. And slowly, you become a version of yourself that doesn't belong to anyone \u2014 not even you.\n\nThe most loving couples aren't the ones with no boundaries. They're the ones who can say 'I need this' without fear of punishment.",
+      "xp": 5
+    },
+    {
+      "id": "d13-highlight-1",
+      "type": "highlight",
+      "body": "The quality of your marriage is determined by the boundaries you're brave enough to set.\n\nNot walls that keep your partner out.\nClear lines that keep respect in.",
+      "highlights": [
+        "brave enough to set",
+        "keep respect in",
+        "quality determined by boundaries"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d13-reflection-1",
+      "type": "reflection",
+      "title": "Where You Need a Boundary",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Is there an area where you keep giving in, saying yes when you mean no, or tolerating something that wears you down?\n\nThink about: time, money, intimacy, family, personal space, communication.\n\nWhere do you need a clearer boundary? Not to punish your partner \u2014 to protect the relationship."
+        }
+      ]
+    },
+    {
+      "id": "d13-info-2",
+      "type": "info",
+      "title": "Boundaries vs Requests",
+      "body": "A wish says: 'I hope you stop interrupting me.'\nA request says: 'Can you please not interrupt me?'\nA boundary says: 'If you interrupt me, I'll pause the conversation and continue when I feel heard.'\n\nThe difference? A boundary is about YOUR action, not their compliance.\n\nYou can't control your partner's behavior. But you can control what you'll do to protect the relationship.\n\n'I can't continue this conversation if we're yelling. Let's take 20 minutes and come back.' That's a boundary.\n\n'Stop yelling at me!' is a demand. There's a big difference.",
+      "xp": 5
+    },
+    {
+      "id": "d13-mc-1",
+      "type": "mc",
+      "question": "Which of these is a boundary (rather than a demand or request)?",
+      "options": [
+        "'You need to stop spending so much money.'",
+        "'Please ask before you invite people over.'",
+        "'I'm not comfortable discussing this in front of the kids. Let's talk about it after they're in bed.'",
+        "'I can't believe you did that again.'"
+      ],
+      "correct": 2,
+      "feedback": [
+        "That's a demand. It controls their behavior. A boundary would be: 'I need us to set a budget we both agree on.'",
+        "That's a request. A valid one! But the boundary version would be what YOU do if they don't ask first.",
+        "Yes. This names your boundary (not discussing in front of kids) and your action (talk later). It's about your behavior, not controlling theirs.",
+        "That's criticism. It expresses frustration without offering a clear boundary."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13-scenario-1",
+      "type": "scenario_card",
+      "title": "Boundary in Action: In-Laws",
+      "body": "Your partner's parent calls every night during dinner. Your partner feels obligated to answer.\n\nBad approach: 'Your mom is ruining dinner every single night. You need to stop answering.'\n\nBoundary approach: 'I love that you're close with your mom. And I'm finding that dinner interruptions make me feel disconnected from you. I'd like us to agree on a boundary \u2014 maybe we keep dinner as a no-phone time and you call her back after. What do you think?'\n\nA boundary isn't an attack on the relationship. It's a protection of it.",
+      "xp": 5
+    },
+    {
+      "id": "d13-reflection-2",
+      "type": "reflection",
+      "title": "Your Partner's Boundaries",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Have you crossed your partner's boundaries recently \u2014 even subtle ones?\n\nThink about:\n\u2022 Did they ask for space and you kept pushing?\n\u2022 Did they say something bothered them and you minimized it?\n\u2022 Did they set a limit and you tested it?\n\nIf you can think of something, write it down. Acknowledging a crossed boundary is the first step back to safety."
+        }
+      ]
+    },
+    {
+      "id": "d13-copy-action-1",
+      "type": "copy_action",
+      "title": "Set One Boundary",
+      "prompt": "Write one boundary you want to set \u2014 and how you'll communicate it.\n\nStructure: 'I need [X] to feel safe/connected/respected in our relationship. Here's what I'll do to protect that: [Y].'\n\nExample: 'I need our disagreements to stay calm. If I feel myself raising my voice, I'll pause and take a break. I'm not shutting down \u2014 I'm keeping this conversation from becoming destructive.'\n\nShare this with your partner. Not as an ultimatum \u2014 as an invitation to protect each other.",
+      "xp": 10,
+      "body": "Write one boundary you want to set \u2014 and how you'll communicate it.\n\nStructure: 'I need [X] to feel safe/connected/respected in our relationship. Here's what I'll do to protect that: [Y].'\n\nExample: 'I need our disagreements to stay calm. If I feel myself raising my voice, I'll pause and take a break. I'm not shutting down \u2014 I'm keeping this conversation from becoming destructive.'\n\nShare this with your partner. Not as an ultimatum \u2014 as an invitation to protect each other.",
+      "sourceStepId": "d13-info-1"
+    },
+    {
+      "id": "d13-tf-1",
+      "type": "tf",
+      "question": "Setting a boundary means controlling what your partner can and can't do.",
+      "correct": false,
+      "feedback": [
+        "Correct. Boundaries aren't about controlling your partner \u2014 they're about deciding what YOU will and won't accept, and what YOU will do to protect the relationship. The distinction is crucial for healthy relationships.",
+        "Not quite. Boundaries are about your own actions and limits, not controlling someone else. 'I will take a break if we start yelling' is a boundary. 'You can't yell' is a demand."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13-info-3",
+      "type": "info",
+      "title": "Tomorrow: Repair Week Wrap-Up",
+      "body": "You've learned do-overs, hard conversations, listening without defending, real apologies, and boundaries.\n\nTomorrow wraps up Repair Week. You'll reflect on what's changed this week and identify the repair skills you'll keep building.",
+      "xp": 5
+    },
+    {
+      "id": "d13-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

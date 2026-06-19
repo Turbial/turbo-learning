@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day8",
+  "title": "Day 8: Welcome to Repair Week",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d8-info-1",
+      "type": "info",
+      "title": "You Crossed the Threshold",
+      "body": "Week 1 was diagnosis. You looked at your marriage with honest eyes \u2014 the cracks, the strengths, the patterns you'd been too busy to notice.\n\nWeek 2 is different. This is Repair Week. This is where knowledge becomes action.\n\nHere's the insight most couples miss: knowing what's broken isn't enough. You need a system for fixing it.\n\nA doctor doesn't just tell you you're sick \u2014 they give you a treatment plan. A mechanic doesn't just point at the engine problem \u2014 they fix it.\n\nYou've had your diagnosis. Now you get the repair manual.\n\nThis week, you'll learn the specific skills that turn damaged walls into bridges.",
+      "xp": 5
+    },
+    {
+      "id": "d8-highlight-1",
+      "type": "highlight",
+      "body": "Diagnosis gives you the truth.\nRepair gives you the tools.\n\nThe first week was about seeing.\nThis week is about doing.\n\nDon't just talk about what needs to heal.\nPick up a tool and start mending.",
+      "highlights": [
+        "Repair gives you the tools",
+        "seeing vs doing",
+        "start mending"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d8-reflection-1",
+      "type": "reflection",
+      "title": "From Diagnosis to Action",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What's the single most important thing Week 1 revealed about your marriage?\n\nNow answer this: what would change if the two of you spent this week actively working on that one thing instead of just knowing about it?\n\nThat's what this week is. Don't let your diagnosis stay on paper."
+        }
+      ]
+    },
+    {
+      "id": "d8-info-2",
+      "type": "info",
+      "title": "Emotional Safety: The Prerequisite for Repair",
+      "body": "Before you can repair anything, both people need to feel safe.\n\nEmotional safety means:\n\u2022 I can tell you the truth without being punished for it\n\u2022 I can express anger without you abandoning me\n\u2022 I can be wrong without being made wrong\n\nWithout safety, 'repair' is just one person surrendering to keep the peace. That's not repair \u2014 that's appeasement.\n\nSafety doesn't mean comfort. It means the relationship can handle hard conversations without collapsing.",
+      "xp": 5
+    },
+    {
+      "id": "d8-reflection-2",
+      "type": "reflection",
+      "title": "Your Safety Check",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "On a scale of 1-5, how safe do you feel sharing a hard truth with your partner? (1=not safe at all, 5=completely safe)\n\nWhat would need to be different for that number to be one point higher?"
+        }
+      ]
+    },
+    {
+      "id": "d8-tf-1",
+      "type": "tf",
+      "question": "Conflict is a sign that a marriage is in trouble.",
+      "correct": false,
+      "feedback": [
+        "Correct. Conflict is normal and inevitable. It's not a sign of trouble \u2014 it's a sign that things matter to both of you. The real danger isn't conflict; it's conflict without repair. Repair week is about making your conflicts productive instead of destructive.",
+        "Not quite. Conflict itself isn't the problem \u2014 every couple disagrees. The issue is what happens after. Do you recover? Do you grow? Do you learn? That's what repair skills make possible."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-info-3",
+      "type": "info",
+      "title": "What This Week Will Feel Like",
+      "body": "Repair work is uncomfortable. That's normal. You might feel resistant, defensive, or like you're being judged.\n\nHere's the reframe: the discomfort isn't punishment. It's the stretching feeling before growth.\n\nThis week you'll:\n\u2022 Learn to speak hard truths without causing damage\n\u2022 Practice listening without getting defensive\n\u2022 Start mending one specific crack in your marriage\n\u2022 Build the habit of turning toward instead of away\n\nSome days will feel heavy. Some will feel hopeful. Both are progress.",
+      "xp": 5
+    },
+    {
+      "id": "d8-mc-1",
+      "type": "mc",
+      "question": "Emotional safety means:",
+      "options": [
+        "Nobody ever gets upset",
+        "You can express yourself without fear of punishment or abandonment",
+        "You always agree with each other",
+        "You never talk about hard things"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite. Emotional safety isn't about avoiding conflict \u2014 it's about knowing the relationship can handle hard conversations.",
+        "Right. Safety means you can be honest, angry, or wrong \u2014 and your relationship stays intact. That's the foundation for real repair.",
+        "Not quite. Safety doesn't mean agreement. It means disagreement doesn't threaten the relationship.",
+        "Not quite. Safety actually makes hard conversations possible, not impossible."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Week 2 Starter",
+      "prompt": "This week is about action. Start now.\n\nWrite down one thing you learned about your marriage in Week 1 that you want to address this week.\n\nThen write one small, specific action you can take TODAY to begin that repair.\n\nExample: 'I learned that I withdraw during conflict. Today, I'll stay present for one uncomfortable conversation instead of shutting down.'",
+      "xp": 10,
+      "body": "This week is about action. Start now.\n\nWrite down one thing you learned about your marriage in Week 1 that you want to address this week.\n\nThen write one small, specific action you can take TODAY to begin that repair.\n\nExample: 'I learned that I withdraw during conflict. Today, I'll stay present for one uncomfortable conversation instead of shutting down.'",
+      "sourceStepId": "d8-info-1"
+    },
+    {
+      "id": "d8-info-4",
+      "type": "info",
+      "title": "Tomorrow: The Art of the Do-Over",
+      "body": "Today you set the intention for Repair Week. You named what needs mending.\n\nTomorrow, you'll learn a specific skill that's more powerful than any apology: the do-over. How to pause a moment that's going wrong, reset, and actually have the conversation you need to have.",
+      "xp": 5
+    },
+    {
+      "id": "d8-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

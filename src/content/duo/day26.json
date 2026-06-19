@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day26",
+  "title": "Day 26: Becoming a Team That Wins Together",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d26-info-1",
+      "type": "info",
+      "title": "From Partners to Teammates",
+      "body": "There's a difference between being partners and being teammates.\n\nPartners share a life. Teammates share a mission. They strategize together, cover each other's weaknesses, and celebrate each other's wins.\n\nIn a great marriage team:\n\u2022 You don't keep score \u2014 because the team wins or loses together\n\u2022 You have different roles \u2014 but everyone's role matters\n\u2022 You communicate \u2014 because the team breaks without it\n\u2022 You celebrate each other \u2014 because your success is the team's success\n\u2022 You have each other's back \u2014 even when your partner is the one who made the mistake\n\nToday: how to function as a real team, not just two people sharing a zip code.",
+      "xp": 5
+    },
+    {
+      "id": "d26-highlight-1",
+      "type": "highlight",
+      "body": "Your partner is not your opponent.\nYour partner is your teammate.\n\nThe problem isn't the problem.\nThe problem is how you handle the problem as a team.",
+      "highlights": [
+        "not your opponent",
+        "your teammate",
+        "handle the problem as a team"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26-reflection-1",
+      "type": "reflection",
+      "title": "Are You Acting Like a Team?",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about the last stressful situation you and your partner faced.\n\nDid you tackle it together \u2014 'us against the problem'? Or did it become 'me against you'?\n\nWhen something goes wrong in your household, whose fault is it \u2014 or do you look at the system that failed?\n\nRate your marriage as a team: 1 (we're opposing players) to 10 (we're a championship team). What would move the needle?"
+        }
+      ]
+    },
+    {
+      "id": "d26-info-2",
+      "type": "info",
+      "title": "The Signals of Teamwork vs Rivalry",
+      "body": "Teamwork language:\n\u2022 'We need to figure this out.'\n\u2022 'How can I support you right now?'\n\u2022 'That's hard \u2014 let's tackle it together.'\n\u2022 'I trust your judgment on this.'\n\nRivalry language:\n\u2022 'Your turn.'\n\u2022 'Well, I did X, so you need to do Y.'\n\u2022 'Why can't you just...'\n\u2022 'If you'd done your part...'\n\nNotice the difference. Teamwork language is collaborative. Rivalry language is transactional.\n\nThe goal isn't to eliminate rivalry language. It's to notice when you're speaking it and course-correct.",
+      "xp": 5
+    },
+    {
+      "id": "d26-mc-1",
+      "type": "mc",
+      "question": "Which of these statements reflects a team mindset?",
+      "options": [
+        "'I did the dishes, so you owe me one.'",
+        "'This week has been brutal. Can we divide and conquer \u2014 I'll handle dinners, can you handle the kids' school stuff?'",
+        "'You're not pulling your weight around here.'",
+        "'Fine, I'll do it myself like always.'"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That's scorekeeping, not teamwork. Teammates don't track debts.",
+        "Yes. This is strategic collaboration \u2014 looking at the shared load and dividing it based on capacity, not obligation.",
+        "Accusation, not collaboration. A team approach would be: 'I'm feeling the load is uneven \u2014 can we talk about how to balance it?'",
+        "Resignation isn't teamwork. It's resentment wearing a 'martyr' mask."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-scenario-1",
+      "type": "scenario_card",
+      "title": "The Team Huddle",
+      "body": "Elite sports teams huddle. They pause, look each other in the eye, and get on the same page before the next play.\n\nYour marriage needs huddles too.\n\nA weekly huddle could be as simple as:\n\n1. What went well this week? (Win)\n2. What felt hard? (Challenge)\n3. What do we need from each other next week? (Plan)\n\nThat's 15 minutes. No fixing. No debating. Just alignment.\n\nTeams that huddle win more games. Couples who huddle feel more connected.",
+      "xp": 5
+    },
+    {
+      "id": "d26-copy-action-1",
+      "type": "copy_action",
+      "title": "Hold Your First Huddle",
+      "prompt": "This week, hold a 15-minute 'team huddle' with your partner.\n\nStructure:\n1. Win \u2014 'Something you did this week I appreciated:'\n2. Challenge \u2014 'Something that was hard:'\n3. Plan \u2014 'What I need from you next week:'\n\nGo around for each. No cross-talk. No arguing. Just sharing.\n\nWrite your proposed time and how you'll invite your partner:",
+      "xp": 10,
+      "body": "This week, hold a 15-minute 'team huddle' with your partner.\n\nStructure:\n1. Win \u2014 'Something you did this week I appreciated:'\n2. Challenge \u2014 'Something that was hard:'\n3. Plan \u2014 'What I need from you next week:'\n\nGo around for each. No cross-talk. No arguing. Just sharing.\n\nWrite your proposed time and how you'll invite your partner:",
+      "sourceStepId": "d26-info-1"
+    },
+    {
+      "id": "d26-reflection-2",
+      "type": "reflection",
+      "title": "When the Team Breaks Down",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Every team has moments where they lose coordination. A dropped ball. A miscommunication. A 'I thought YOU were handling that.'\n\nWhen that happens in your marriage, what's your reflex?\n\nDo you blame, or do you recalibrate?\n\nWhat would it look like to say: 'We dropped the ball on that one. That's on us as a team. How do we not miss it next time?'\n\nWrite your honest reflex \u2014 and how you'd like to respond instead."
+        }
+      ]
+    },
+    {
+      "id": "d26-tf-1",
+      "type": "tf",
+      "question": "In a strong marriage team, each partner should be equally good at everything.",
+      "correct": false,
+      "feedback": [
+        "Correct. Great teams don't need every player to do everything. They need each player to play their position. Know your strengths, know your partner's weaknesses, and cover for each other.",
+        "Not quite. Great teams work through complementary strengths, not identical skill sets. The key is knowing who's good at what and trusting each other to handle their role."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-info-3",
+      "type": "info",
+      "title": "Tomorrow: Celebrating and Savoring",
+      "body": "Tomorrow, something different. We've talked about hard things \u2014 repair, boundaries, growth. But thriving marriages also know how to celebrate. How to savor good moments. How to let joy land.\n\nTomorrow: the underrated skill of celebrating your marriage.",
+      "xp": 5
+    },
+    {
+      "id": "d26-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

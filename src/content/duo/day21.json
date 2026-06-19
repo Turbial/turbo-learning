@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "unit": "day21",
+  "title": "Day 21: Connection Week \u2014 What You've Rebuilt",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d21-info-1",
+      "type": "info",
+      "title": "The Heart of Your Marriage",
+      "body": "Three weeks ago, you started this journey with diagnosis. You looked honestly at where your marriage stands.\n\nWeek 2, you learned to repair \u2014 to mend what's broken and build skills for hard conversations.\n\nThis week, you did something different. You rebuilt connection. Not by fixing problems \u2014 by creating warmth.\n\nLet's name what you've built:\n\n\u2022 Day 15 \u2014 You recommitted to friendship at the center of your marriage\n\u2022 Day 16 \u2014 You went deeper into emotional intimacy and vulnerability\n\u2022 Day 17 \u2014 You brought play and lightness back into your relationship\n\u2022 Day 18 \u2014 You reclaimed physical touch as a language of connection\n\u2022 Day 19 \u2014 You created rituals that anchor your relationship\n\u2022 Day 20 \u2014 You understood how trust is built in tiny moments, not grand gestures\n\nThat's not a to-do list. That's a different way of being together.",
+      "xp": 5
+    },
+    {
+      "id": "d21-highlight-1",
+      "type": "highlight",
+      "body": "Diagnosis gave you clarity.\nRepair gave you skills.\nConnection gave you warmth.\n\nWithout connection, a marriage survives.\nWith it, a marriage thrives.",
+      "highlights": [
+        "clarity",
+        "skills",
+        "warmth",
+        "survives vs thrives"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d21-reflection-1",
+      "type": "reflection",
+      "title": "Connection Week Retrospective",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Reflect on this week:\n\n\u2022 What moment felt most connecting?\n\u2022 What was hardest?\n\u2022 Where did you resist \u2014 and why?\n\u2022 What surprised you?\n\nWrite honestly. This is your progress report to yourself."
+        }
+      ]
+    },
+    {
+      "id": "d21-mc-1",
+      "type": "mc",
+      "question": "What's the connection practice you most want to carry forward?",
+      "options": [
+        "Vulnerability \u2014 sharing more of my inner world",
+        "Play \u2014 keeping lightness and fun alive",
+        "Non-sexual touch \u2014 staying physically connected without pressure",
+        "Rituals \u2014 keeping our small anchors in place"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Vulnerability is the deepest connector. Keep climbing those rungs \u2014 even when it's scary. Your marriage gets richer as you do.",
+        "Play is the unsung hero of long-term relationships. Never let adulthood fully kill your silliness together.",
+        "Non-sexual touch is the foundation. Keep hugging, keep holding hands, keep staying close with no agenda.",
+        "Rituals are what hold against the storm. Keep at least one anchor \u2014 even just a daily check-in or a six-second kiss."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d21-reflection-2",
+      "type": "reflection",
+      "title": "Three Weeks In \u2014 Where Are You?",
+      "minChars": 40,
+      "xp": 20,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Three weeks ago, on Day 1, you rated your marriage. Do you remember what you said?\n\nIf things feel different now, how? Even small shifts count.\n\n\u2022 Can you name one conversation you've had that you wouldn't have had three weeks ago?\n\u2022 Has one habit shifted?\n\u2022 Is there one area where you feel just slightly more hopeful?\n\nWrite your progress. Acknowledge it. This matters."
+        }
+      ]
+    },
+    {
+      "id": "d21-info-2",
+      "type": "info",
+      "title": "What's Coming: Mission Week",
+      "body": "You've diagnosed. You've repaired. You've connected.\n\nWeek 4 is where it all comes together. Mission Week is about designing your shared future.\n\nThis week you'll:\n\u2022 Define your marriage mission \u2014 what are you building together?\n\u2022 Align on your shared vision for the next year, five years, and beyond\n\u2022 Create an action plan that turns insight into lasting change\n\u2022 Celebrate how far you've come in 28 days\n\nThree weeks of building. One week of launching.",
+      "xp": 5
+    },
+    {
+      "id": "d21-scenario-1",
+      "type": "scenario_card",
+      "title": "Before and After",
+      "body": "Think about where you were 21 days ago vs now.\n\nThen: You knew things could be better but weren't sure where to start.\nNow: You have language for your patterns. You've practiced repair. You've felt more connected.\n\nThen: Hard conversations felt dangerous.\nNow: You have a do-over. You have soft startups. You know how to listen without defending.\n\nThen: Connection was something you hoped for.\nNow: You have rituals that build it daily.\n\nThat's not trivial. That's transformation in three weeks.\n\nOne more week to go. The last week is where you decide what kind of marriage you're building \u2014 together, on purpose.",
+      "xp": 5
+    },
+    {
+      "id": "d21-copy-action-1",
+      "type": "copy_action",
+      "title": "Thank Your Partner",
+      "prompt": "Write a short message to your partner \u2014 not a text, actually write it down or say it \u2014 expressing gratitude for this journey.\n\n'Thank you for showing up these three weeks. I know it hasn't always been easy. I see you trying. And I'm grateful to be doing this with you.'\n\nThat's it. No requests, no feedback, no 'wouldn't it be great if.' Just gratitude for showing up.",
+      "xp": 10,
+      "body": "Write a short message to your partner \u2014 not a text, actually write it down or say it \u2014 expressing gratitude for this journey.\n\n'Thank you for showing up these three weeks. I know it hasn't always been easy. I see you trying. And I'm grateful to be doing this with you.'\n\nThat's it. No requests, no feedback, no 'wouldn't it be great if.' Just gratitude for showing up.",
+      "sourceStepId": "d21-info-1"
+    },
+    {
+      "id": "d21-badge-1",
+      "type": "badge_unlock",
+      "title": "Achievement Unlocked: The Connector",
+      "body": "You completed Connection Week. Not by reading about connection \u2014 by practicing it. Vulnerability, play, touch, rituals, trust. You've built a marriage that's not just functional but warm.\n\nBadge earned: The Connector",
+      "badge": "connector",
+      "xp": 50,
+      "badgeSlug": "the_connector"
+    },
+    {
+      "id": "d21-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 30
+    }
+  ]
+}

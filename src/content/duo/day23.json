@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "unit": "day23",
+  "title": "Day 23: Your Shared Vision",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d23-info-1",
+      "type": "info",
+      "title": "From Mission to Picture",
+      "body": "Yesterday you started exploring your marriage mission \u2014 the core purpose of what you're building together.\n\nToday, we turn that mission into a vision. A picture of what your marriage looks like when it's working at its best.\n\nA vision is specific. It's not 'we want to be happy.'\n\nIt's: 'We want a home where we laugh every day, where we handle conflict within hours not days, where we prioritize our relationship even when the kids are young, and where we dream together about our future.'\n\nVision answers the question: if our marriage were thriving in every dimension, what would we actually see, hear, and feel?",
+      "xp": 5
+    },
+    {
+      "id": "d23-highlight-1",
+      "type": "highlight",
+      "body": "Most couples drift because they never decide where they're going.\n\nA vision is deciding.\n\nIt's not predicting the future.\nIt's designing it \u2014 together.",
+      "highlights": [
+        "drift because they never decide",
+        "designing the future",
+        "together"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d23-reflection-1",
+      "type": "reflection",
+      "title": "Picture Your Thriving Marriage",
+      "minChars": 40,
+      "xp": 20,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Close your eyes for a moment. Fast-forward one year.\n\nYour marriage is genuinely thriving \u2014 not perfect, but alive, connected, and working.\n\nWhat do you see?\n\n\u2022 How do you greet each other at the end of the day?\n\u2022 What do your conversations sound like?\n\u2022 How do you handle a disagreement?\n\u2022 What do you do together for fun?\n\u2022 How do you make decisions about money and time?\n\nWrite the picture. Get specific."
+        }
+      ]
+    },
+    {
+      "id": "d23-info-2",
+      "type": "info",
+      "title": "The Vision Conversation Framework",
+      "body": "A shared vision isn't something you create alone. It's something you build together.\n\nHere's a simple framework for the conversation:\n\n1. Each of you writes your vision separately \u2014 what a thriving marriage looks like to you\n\n2. Share and listen \u2014 no editing, no correcting. Just 'tell me more about that.'\n\n3. Find overlap \u2014 what do both of you want? Where do your visions naturally align?\n\n4. Honor differences \u2014 where you diverge, ask: 'How could we do BOTH?' or 'What matters most to you about that?'\n\n5. Create one combined vision \u2014 not perfectly aligned, but genuinely shared.\n\nThe goal isn't total agreement. The goal is that both of you see yourselves in the picture.",
+      "xp": 5
+    },
+    {
+      "id": "d23-reflection-2",
+      "type": "reflection",
+      "title": "The Gap Between Current and Ideal",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about the vision you just wrote. Now look at your current reality.\n\nWhere's the biggest gap?\n\n\u2022 Communication?\n\u2022 Quality time?\n\u2022 Physical intimacy?\n\u2022 Shared purpose?\n\u2022 How you handle conflict?\n\nName the gap. Then ask: 'What's one thing we could do this week that would close that gap by even 10%?'"
+        }
+      ]
+    },
+    {
+      "id": "d23-mc-1",
+      "type": "mc",
+      "question": "When sharing your vision with your partner, the best approach is:",
+      "options": [
+        "Explain why your vision is better than theirs",
+        "Share your vision, then ask what resonates for them",
+        "Wait for the perfect vision before sharing anything",
+        "Let them share first so you can adjust yours"
+      ],
+      "correct": 1,
+      "feedback": [
+        "A vision conversation isn't a debate. The goal isn't right vs wrong.",
+        "Yes. Share openly, then invite their perspective. The combined vision comes from mutual exploration, not negotiation.",
+        "Perfectionism kills vision. Share what you have, even if it's rough.",
+        "Share authentically, not strategically. Your genuine vision matters."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23-scenario-1",
+      "type": "scenario_card",
+      "title": "Connecting the Vision to the Present",
+      "body": "Vision: 'We want to feel like a team who has each other's backs.'\n\nThat's beautiful, but it floats in the air until you connect it to something concrete.\n\nConnected to daily life: 'Having each other's backs means: when one of us is stressed, the other says 'What do you need?' instead of 'You're not the only one stressed.' It means before a hard conversation, we take a breath and do a soft startup. It means we check in every day for five minutes.'\n\nYour vision is your destination. Your daily behaviors are the path. Make the path visible."
+    },
+    {
+      "id": "d23-copy-action-1",
+      "type": "copy_action",
+      "title": "Share Your Vision",
+      "prompt": "Tonight, share the vision you wrote with your partner. Here's how to start:\n\n'I spent some time thinking about what I want our marriage to look like. I'd love to share it with you and hear yours too.'\n\nAfter they share, your job is ONLY to listen. No correcting. No explaining why your version is better. Just: 'Thank you for sharing that. Tell me more about...'\n\nWrite what you're most curious to hear from their vision:",
+      "xp": 10,
+      "body": "Tonight, share the vision you wrote with your partner. Here's how to start:\n\n'I spent some time thinking about what I want our marriage to look like. I'd love to share it with you and hear yours too.'\n\nAfter they share, your job is ONLY to listen. No correcting. No explaining why your version is better. Just: 'Thank you for sharing that. Tell me more about...'\n\nWrite what you're most curious to hear from their vision:",
+      "sourceStepId": "d23-info-1"
+    },
+    {
+      "id": "d23-tf-1",
+      "type": "tf",
+      "question": "A shared vision must be perfectly aligned between both partners to be useful.",
+      "correct": false,
+      "feedback": [
+        "Correct. Perfect alignment isn't realistic. What matters is that both partners see themselves in the vision and can point in the same general direction. Differences create richness, not conflict \u2014 if you talk about them.",
+        "Not quite. Useful visions have room for both perspectives. Perfect alignment is a fantasy. What's real and valuable is understanding each other's vision and finding where they overlap."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23-info-3",
+      "type": "info",
+      "title": "Tomorrow: Designing Your Marriage Practices",
+      "body": "Vision is your destination. But a destination without a vehicle is just a dream.\n\nTomorrow: the specific practices, habits, and commitments that will carry your vision into real life.",
+      "xp": 5
+    },
+    {
+      "id": "d23-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 30
+    }
+  ]
+}

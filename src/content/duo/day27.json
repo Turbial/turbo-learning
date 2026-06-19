@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day27",
+  "title": "Day 27: Celebrating and Savoring",
+  "estMinutes": 10,
+  "steps": [
+    {
+      "id": "d27-info-1",
+      "type": "info",
+      "title": "The Final Days Are for Celebration",
+      "body": "Most of this program has been about what needs to change \u2014 the repairs, the gaps, the growth edges.\n\nBut a thriving marriage needs something else: the ability to celebrate what's working. To savor good moments instead of rushing past them.\n\nResearch shows that couples who actively celebrate each other's wins \u2014 big and small \u2014 have significantly higher relationship satisfaction.\n\nNot because they have fewer problems. Because they balance the hard with the good.\n\nToday, you're not fixing anything. You're savoring. Recognizing. Celebrating.",
+      "xp": 5
+    },
+    {
+      "id": "d27-highlight-1",
+      "type": "highlight",
+      "body": "A marriage that only works on problems\nbecomes a marriage that only sees problems.\n\nCelebration isn't optional.\nIt's how you remind each other why you chose this.",
+      "highlights": [
+        "only sees problems",
+        "Celebration isn't optional",
+        "why you chose this"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d27-reflection-1",
+      "type": "reflection",
+      "title": "What's Going Right?",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Take a moment and list everything that's going right in your marriage right now.\n\nNot in comparison to others. Not in a 'we should be grateful' way. Just factually \u2014 what's working?\n\n\u2022 How do you support each other?\n\u2022 What are you good at as a couple?\n\u2022 What moments this week made you feel glad you're together?\n\u2022 What's something your partner does that you take for granted?\n\nWrite it down. Let it land."
+        }
+      ]
+    },
+    {
+      "id": "d27-info-2",
+      "type": "info",
+      "title": "The Science of Savoring",
+      "body": "Savoring is the act of intentionally focusing on a positive experience to extend and deepen the joy it brings.\n\nIt sounds soft. But it's actually a powerful relationship practice.\n\nWhen your partner does something you appreciate, savoring means:\n\u2022 NOTICING it (instead of being on autopilot)\n\u2022 NAMING it (instead of assuming they know)\n\u2022 LETTING IT LAND (pausing to feel the appreciation)\n\nExample:\nYou notice your partner made your coffee the way you like it.\nInstead of: silence (autopilot)\nTry: 'You remember how I like my coffee. That's such a small thing and it means a lot.'\n\nSavoring turns a nice moment into a connection moment.",
+      "xp": 5
+    },
+    {
+      "id": "d27-reflection-2",
+      "type": "reflection",
+      "title": "Your Appreciation List",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Write three specific things you appreciate about your partner RIGHT NOW:\n\n1. Something they did recently (action)\n2. Something about who they are (character)\n3. Something you're grateful for in your marriage (overall)\n\nGet specific. 'They're nice' is too vague. 'They brought me tea when I was stressed without me asking' is specific.\n\nTomorrow, you'll share these."
+        }
+      ]
+    },
+    {
+      "id": "d27-mc-1",
+      "type": "mc",
+      "question": "Why is celebrating your partner's wins important for your marriage?",
+      "options": [
+        "It keeps the relationship positive and prevents negativity",
+        "When you celebrate each other's wins, the other person feels supported and known",
+        "It distracts from the problems you should be working on",
+        "It makes your partner feel obligated to celebrate you back"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That's partly true, but it's more specific than just 'keeping it positive.'",
+        "Yes. When you celebrate your partner's wins, you're saying 'I see you, I'm on your team, and your success matters to me.' That's a powerful form of connection.",
+        "Celebration isn't a distraction from problems \u2014 it's part of a balanced relationship that can handle both.",
+        "Celebration isn't a transaction. It's genuine \u2014 or it doesn't count."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-scenario-1",
+      "type": "scenario_card",
+      "title": "Capitalizing vs Ignoring",
+      "body": "Your partner comes home excited: 'I got the project approved! My presentation went great!'\n\nIgnoring response: 'Oh nice. Did you pick up the milk?'\n\nPassive response: 'Cool.'\n\nActive constructive response \u2014 stop what you're doing, make eye contact, and engage: 'That's amazing! Tell me everything \u2014 what did they say? How did you feel presenting it?'\n\nResearch shows how you respond to your partner's good news is one of the strongest predictors of relationship quality. Active, enthusiastic responses build connection. Ignoring or minimizing builds distance.",
+      "xp": 5
+    },
+    {
+      "id": "d27-copy-action-1",
+      "type": "copy_action",
+      "title": "Celebrate Today",
+      "prompt": "Today, when your partner shares something positive \u2014 no matter how small \u2014 give them your full attention.\n\nStop what you're doing. Make eye contact. Engage. 'That's awesome \u2014 tell me more.'\n\nAnd share the appreciation list you wrote. Say those three specific things out loud.\n\nWrite how you'll share your appreciation:",
+      "xp": 10,
+      "body": "Today, when your partner shares something positive \u2014 no matter how small \u2014 give them your full attention.\n\nStop what you're doing. Make eye contact. Engage. 'That's awesome \u2014 tell me more.'\n\nAnd share the appreciation list you wrote. Say those three specific things out loud.\n\nWrite how you'll share your appreciation:",
+      "sourceStepId": "d27-info-1"
+    },
+    {
+      "id": "d27-tf-1",
+      "type": "tf",
+      "question": "Couples who actively celebrate each other's good news are more resilient during hard times.",
+      "correct": true,
+      "feedback": [
+        "Correct. Research on 'capitalization' \u2014 how couples respond to good news \u2014 shows that active enthusiastic responses build 'emotional bank accounts' that sustain couples through conflict and stress.",
+        "Actually, yes \u2014 it's called capitalization in relationship science. When couples actively celebrate each other's wins, they build a reservoir of positive connection that supports them through difficult seasons."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-info-3",
+      "type": "info",
+      "title": "Tomorrow: The Final Day \u2014 Your Marriage Manifesto",
+      "body": "27 days. You've diagnosed, repaired, connected, and designed. Tomorrow is the last day \u2014 the culmination of everything you've built.\n\nYou'll create your Marriage Manifesto: a declaration of who you are as a couple and what you're committed to building together.",
+      "xp": 5
+    },
+    {
+      "id": "d27-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 20
+    }
+  ]
+}

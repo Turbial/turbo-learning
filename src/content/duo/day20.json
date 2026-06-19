@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "unit": "day20",
+  "title": "Day 20: Trust in Small Moments",
+  "estMinutes": 10,
+  "steps": [
+    {
+      "id": "d20-info-1",
+      "type": "info",
+      "title": "Trust Is Built in the Routine",
+      "body": "When people think about trust, they think about big things: fidelity, honesty about money, showing up during a crisis.\n\nBut those are rare tests. Trust is built in the small, boring moments.\n\n\u2022 You say you'll take out the trash. You do it.\n\u2022 You say you'll be home at 6. You're home at 6.\n\u2022 Your partner asks you to pick up milk. You remember.\n\u2022 They share something vulnerable. You don't use it against them later.\n\nEvery time you follow through on a tiny promise, you deposit a coin in the trust bank.\nEvery time you don't, you make a withdrawal.\n\nA marriage where both partners reliably do what they say \u2014 in small things and big things \u2014 is a marriage where trust runs deep.",
+      "xp": 5
+    },
+    {
+      "id": "d20-highlight-1",
+      "type": "highlight",
+      "body": "Trust isn't built in the emergency room.\nIt's built in the checkout line.\n\nEvery promise kept, no matter how small,\nis a vote for 'I can count on you.'",
+      "highlights": [
+        "emergency room vs checkout line",
+        "promise kept",
+        "I can count on you"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d20-reflection-1",
+      "type": "reflection",
+      "title": "Your Follow-Through Audit",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about the last week. How many small promises did you make \u2014 even implied ones?\n\n'I'll call you back.' 'I'll handle that.' 'We should do that soon.' 'I'll be home by 7.'\n\nHow many did you follow through on?\n\nWhere might your partner feel like they can't count on your follow-through? Be honest."
+        }
+      ]
+    },
+    {
+      "id": "d20-info-2",
+      "type": "info",
+      "title": "The Trust Equation",
+      "body": "Trust = Reliability + Transparency + Benevolence\n\nReliability \u2014 You do what you say you'll do, when you say you'll do it.\n\nTransparency \u2014 You share information, even when it's uncomfortable. You don't hide things by omission.\n\nBenevolence \u2014 You act in your partner's interest, not just your own. They sense you're on their team.\n\nIf reliability is low \u2014 the partner feels like they can't count on you.\nIf transparency is low \u2014 the partner feels like they don't really know you.\nIf benevolence is low \u2014 the partner feels like you're looking out for yourself.\n\nWhere's your strongest dimension? Where might you need to improve?",
+      "xp": 5
+    },
+    {
+      "id": "d20-mc-1",
+      "type": "mc",
+      "question": "Mentioning something you did that your partner asked for \u2014 but you didn't tell them about \u2014 builds trust.",
+      "options": [
+        "True \u2014 they'll appreciate knowing",
+        "False \u2014 true reliability doesn't need to be advertised"
+      ],
+      "correct": 1,
+      "feedback": [
+        "It's actually better to just do the thing without announcing it. 'Benevolent hiding' \u2014 doing things without needing credit \u2014 builds trust more than reporting your good deeds.",
+        "Correct. The most trustworthy partners do things without tracking or announcing them. 'I noticed you already took care of X' from your partner is better than 'See, I did X.'"
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-scenario-1",
+      "type": "scenario_card",
+      "title": "Earned vs Demanded Trust",
+      "body": "Earned trust: 'You said you'd call after the meeting. You called right after. Over time, I learn I can count on your word.'\n\nDemanded trust: 'Why don't you trust me? I said I would. You should just believe me.'\n\nThe difference: earned trust is demonstrated through action over time. Demanded trust asks your partner to ignore their experience and just take your word.\n\nIf your partner's trust feels low, don't ask them to trust you more. Ask them what small, consistent actions would demonstrate reliability \u2014 then do them.",
+      "xp": 5
+    },
+    {
+      "id": "d20-copy-action-1",
+      "type": "copy_action",
+      "title": "One Trust Deposit Today",
+      "prompt": "What's one small thing you can do today to make a trust deposit?\n\nSomething your partner has asked for, mentioned wanting, or would be relieved to have handled.\n\nDon't tell them you're doing it. Just do it. The trust grows in the noticing, not the announcing.\n\nWrite what you'll do:",
+      "xp": 10,
+      "body": "What's one small thing you can do today to make a trust deposit?\n\nSomething your partner has asked for, mentioned wanting, or would be relieved to have handled.\n\nDon't tell them you're doing it. Just do it. The trust grows in the noticing, not the announcing.\n\nWrite what you'll do:",
+      "sourceStepId": "d20-info-1"
+    },
+    {
+      "id": "d20-reflection-2",
+      "type": "reflection",
+      "title": "Your Partner's Trust in You",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "If your partner was asked 'Can you count on them to follow through?' \u2014 what would they say?\n\nIf the answer is anything less than 'completely,' what's one thing you could change to move that needle?\n\nNot a grand resolution. A specific, small behavior shift."
+        }
+      ]
+    },
+    {
+      "id": "d20-tf-1",
+      "type": "tf",
+      "question": "If you have good intentions but struggle with follow-through, your partner should focus on your intentions.",
+      "correct": false,
+      "feedback": [
+        "Correct. Good intentions don't build trust \u2014 consistent action does. 'I meant to' doesn't repair broken promises. If you struggle with follow-through, set smaller commitments until your yes is reliable.",
+        "Not quite. Intentions matter, but trust is built on outcomes. Your partner experiences your follow-through, not your intentions. Work on making your 'yes' actually mean something."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-info-3",
+      "type": "info",
+      "title": "Tomorrow: Connection Week Wrap-Up",
+      "body": "You've spent this week rebuilding connection \u2014 friendship, vulnerability, play, touch, rituals, and trust.\n\nTomorrow we wrap it up. You'll reflect on what's changed and prepare for the final week: Mission \u2014 designing your shared future.",
+      "xp": 5
+    },
+    {
+      "id": "d20-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 20
+    }
+  ]
+}

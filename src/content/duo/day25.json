@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day25",
+  "title": "Day 25: Growing Together \u2014 Not Apart",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d25-info-1",
+      "type": "info",
+      "title": "The People You're Becoming",
+      "body": "Here's a truth that's rarely said out loud: you will not be the same person in 10 years. Neither will your partner.\n\nLife changes you. Experiences reshape you. Priorities shift.\n\nThe question is: will you grow together or grow apart?\n\nSome couples grow apart because they assume growth is automatic. They stop checking in. They stop learning about each other.\n\nOther couples grow together because they make it intentional. They stay curious. They ask: how are you changing? What do you need that's new? What do you want to become?\n\nToday is about making growth a shared project \u2014 not something that happens to you, but something you do together.",
+      "xp": 5
+    },
+    {
+      "id": "d25-highlight-1",
+      "type": "highlight",
+      "body": "The person you married is not the person they will become.\n\nAnd that's not a problem.\nIt's an invitation.\n\nThe question is: will you get to know each new version \u2014 or wake up one day next to a stranger?",
+      "highlights": [
+        "not the person they will become",
+        "get to know each new version",
+        "next to a stranger"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d25-reflection-1",
+      "type": "reflection",
+      "title": "Who Are You Growing Into?",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about yourself five years ago. How were you different?\n\n\u2022 What mattered to you then that matters less now?\n\u2022 What do you care about now that you didn't then?\n\u2022 How have your values, priorities, or perspectives shifted?\n\nNow think about your partner \u2014 how have THEY changed?\n\nHave you been tracking their evolution? Have they been tracking yours?"
+        }
+      ]
+    },
+    {
+      "id": "d25-info-2",
+      "type": "info",
+      "title": "The Growth Check-In",
+      "body": "Here's a simple practice: every six months, sit down and share how you're changing.\n\nQuestions you can ask each other:\n\n\u2022 How have I changed in the last six months \u2014 for better or worse?\n\u2022 What's something new you've learned about yourself?\n\u2022 What do you want more of in your life that you didn't want six months ago?\n\u2022 What do you want less of?\n\u2022 How can I support the person you're becoming?\n\nThis isn't a heavy conversation. It's a way of staying curious. Of not assuming you know everything about your partner.\n\nBecause the worst feeling in a marriage isn't fighting. It's realizing you've become strangers.",
+      "xp": 5
+    },
+    {
+      "id": "d25-mc-1",
+      "type": "mc",
+      "question": "True growth as a couple means:",
+      "options": [
+        "Always changing in the same direction at the same time",
+        "Supporting each other's individual growth while maintaining connection",
+        "Sacrificing your own growth for the stability of the marriage",
+        "Growing independently and hoping you stay aligned"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That's not realistic. You'll grow at different paces and in different directions. The key is connection through the difference.",
+        "Yes. Growth together means each person evolves while the relationship stays connected and curious. You don't have to change in the same way \u2014 just stay in each other's lives as you change.",
+        "Sacrificing growth leads to resentment. A healthy marriage supports both partners' development.",
+        "Hope is not a strategy. You need intentional check-ins to stay connected through change."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-reflection-2",
+      "type": "reflection",
+      "title": "Your Partner's Unfolding",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about your partner's growth over the last year.\n\n\u2022 What new interests have they developed?\n\u2022 What are they wrestling with?\n\u2022 What do they seem to want MORE of in their life?\n\u2022 What's one thing about them that's still unfolding that you want to stay close to?\n\nIf you can't answer these, that's information \u2014 not guilt. It means you have more to learn about each other."
+        }
+      ]
+    },
+    {
+      "id": "d25-scenario-1",
+      "type": "scenario_card",
+      "title": "Careers Change Everything",
+      "body": "You married someone who was ambitious about their career. Five years later, they want to step back and focus on family. Or vice versa.\n\nThis isn't a betrayal. It's growth.\n\nThe danger isn't that their priorities shifted. The danger is that you don't talk about it, so you operate on outdated assumptions about who they are and what they want.\n\nCheck in regularly. 'Are we still the same people we were when we set our life plan? If not, how should the plan change?'",
+      "xp": 5
+    },
+    {
+      "id": "d25-copy-action-1",
+      "type": "copy_action",
+      "title": "Schedule Your Growth Check-In",
+      "prompt": "Schedule a 30-minute growth check-in with your partner this week.\n\nHere's your invite:\n\n'I heard about this idea of a growth check-in \u2014 asking each other how we're changing and what we need. Can we do that this week over coffee? Just 30 minutes.'\n\nWrite when and where you'll do it:",
+      "xp": 10,
+      "body": "Schedule a 30-minute growth check-in with your partner this week.\n\nHere's your invite:\n\n'I heard about this idea of a growth check-in \u2014 asking each other how we're changing and what we need. Can we do that this week over coffee? Just 30 minutes.'\n\nWrite when and where you'll do it:",
+      "sourceStepId": "d25-info-1"
+    },
+    {
+      "id": "d25-tf-1",
+      "type": "tf",
+      "question": "If a couple grows in different directions, it always means the relationship is in trouble.",
+      "correct": false,
+      "feedback": [
+        "Correct. Growing in different directions is normal. What creates trouble is growing silently \u2014 not communicating about it, not staying curious, not finding ways to stay connected through the change.",
+        "Not quite. Growth in different directions is natural. The danger isn't the different direction \u2014 it's the silence that lets the distance grow unnoticed."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-info-3",
+      "type": "info",
+      "title": "Tomorrow: Becoming a Team That Wins Together",
+      "body": "You've learned to grow together through change. Tomorrow, we take it further \u2014 how to function as a real team. Not just people who share a life, but partners who strategize, support, and celebrate together.",
+      "xp": 5
+    },
+    {
+      "id": "d25-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

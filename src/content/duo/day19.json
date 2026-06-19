@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day19",
+  "title": "Day 19: Rituals That Keep You Connected",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d19-info-1",
+      "type": "info",
+      "title": "The Power of Small, Repeated Moments",
+      "body": "Grand gestures are memorable. But they're not what holds a marriage together.\n\nWhat holds a marriage together is the small, repeated moments \u2014 the rituals that say 'we're still us' even when life is chaos.\n\nA ritual is any action you do together, regularly, that has meaning beyond its function.\n\nMaking coffee together every morning isn't just about caffeine. It's the first moment of connection.\n\nAsking 'what's your high and low?' at dinner isn't just about information. It's a doorway into each other's world.\n\nA goodbye kiss isn't about the kiss. It's a seal that says 'I'll be back and I'm glad you're here.'\n\nToday, you'll identify the rituals you already have \u2014 and create the ones you need.",
+      "xp": 5
+    },
+    {
+      "id": "d19-highlight-1",
+      "type": "highlight",
+      "body": "Your marriage needs anchors.\n\nThings that hold you steady when the current is strong.\n\nRituals are those anchors.\n\nThey don't fix everything. But they remind you what matters \u2014 together.",
+      "highlights": [
+        "anchors",
+        "hold you steady",
+        "remind you what matters"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d19-reflection-1",
+      "type": "reflection",
+      "title": "Your Current Rituals",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What rituals do you and your partner already have \u2014 even small ones?\n\nThink about:\n\u2022 Morning \u2014 How do you start the day together?\n\u2022 Transition \u2014 When you come home from work\n\u2022 Evening \u2014 Before bed\n\u2022 Weekly \u2014 Any regular traditions?\n\nList the rituals you have. If you realize you don't have many, that's okay \u2014 today is about building them."
+        }
+      ]
+    },
+    {
+      "id": "d19-info-2",
+      "type": "info",
+      "title": "Three Kinds of Rituals Every Marriage Needs",
+      "body": "Connection rituals \u2014 These keep you emotionally tuned in\n\u2022 A daily check-in: 'How are you really doing?'\n\u2022 A goodbye ritual: a specific phrase, a kiss of certain duration\n\u2022 A reunion ritual: the first 60 seconds after coming home are crucial\n\nFun rituals \u2014 These keep the relationship light\n\u2022 A regular 'silly time' \u2014 watching a show, playing a game, doing something absurd\n\u2022 A shared hobby or interest that's just for the two of you\n\nStability rituals \u2014 These create predictability and security\n\u2022 A weekly date or home night\n\u2022 A regular budget meeting (yes, really \u2014 predictability reduces money conflict)\n\u2022 A shared morning or evening routine\n\nYou don't need all of them. Pick what fits. The key is repetition and meaning.",
+      "xp": 5
+    },
+    {
+      "id": "d19-scenario-1",
+      "type": "scenario_card",
+      "title": "The Six-Second Kiss",
+      "body": "Quick kisses are the default in long-term relationships. A peck as you run out the door. A quick brush of lips before sleep.\n\nGottman recommends the 'six-second kiss.' It sounds simple, but six seconds is actually pretty long for a kiss. It forces you to stop, be present, and actually feel the connection.\n\nTry it tonight. A six-second kiss. Not as a prelude to anything. Just as an anchor \u2014 a moment of full presence before you part or before you sleep.\n\nSee if it feels different from your standard goodbye peck.",
+      "xp": 5
+    },
+    {
+      "id": "d19-mc-1",
+      "type": "mc",
+      "question": "The most important reunion ritual involves:",
+      "options": [
+        "Asking about their day immediately",
+        "The first 60 seconds after you see each other \u2014 full attention, no phones",
+        "Telling them about your day first",
+        "Giving each other space for 30 minutes before talking"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That can work, but it's about the quality of presence, not the question itself.",
+        "Yes. Research shows the first moments of reunion set the tone for the entire evening. A warm greeting \u2014 eye contact, a hug, genuine interest \u2014 dramatically improves connection for hours afterward.",
+        "That shifts the focus to you first. The reunion ritual should be mutual.",
+        "Some couples need decompression time \u2014 that's fine. But even a quick warm greeting before space is better than silence."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19-copy-action-1",
+      "type": "copy_action",
+      "title": "Design a New Ritual",
+      "prompt": "Create one new ritual for your marriage:\n\n1. Choose a time \u2014 morning, evening, homecoming, before bed\n2. Choose a simple action \u2014 a specific greeting, a question you always ask, a shared moment\n3. Add meaning \u2014 Why does this matter? What does it communicate?\n\nExample: 'When we reunite after work, we'll put our phones down and hug for at least six seconds. This communicates: you matter more than anything that happened today.'\n\nWrite your new ritual below. Then share it with your partner tonight.",
+      "xp": 10,
+      "body": "Create one new ritual for your marriage:\n\n1. Choose a time \u2014 morning, evening, homecoming, before bed\n2. Choose a simple action \u2014 a specific greeting, a question you always ask, a shared moment\n3. Add meaning \u2014 Why does this matter? What does it communicate?\n\nExample: 'When we reunite after work, we'll put our phones down and hug for at least six seconds. This communicates: you matter more than anything that happened today.'\n\nWrite your new ritual below. Then share it with your partner tonight.",
+      "sourceStepId": "d19-info-1"
+    },
+    {
+      "id": "d19-reflection-2",
+      "type": "reflection",
+      "title": "Rituals You've Lost",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What rituals did you have earlier in your relationship that have faded?\n\nMaybe you used to watch a show together every week? Cook Sunday breakfast? Take walks after dinner?\n\nWhich one could you revive this week? Sometimes the best new ritual is bringing back an old one."
+        }
+      ]
+    },
+    {
+      "id": "d19-tf-1",
+      "type": "tf",
+      "question": "Establishing rituals means your relationship becomes predictable and boring.",
+      "correct": false,
+      "feedback": [
+        "Correct. Rituals create a foundation of security and connection. Within that secure structure, spontaneity and adventure actually thrive \u2014 because you both know the relationship is solid.",
+        "Not quite. Rituals actually create safety, which allows for more spontaneity, not less. Knowing you'll connect at certain times frees you up to be spontaneous at other times."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19-info-3",
+      "type": "info",
+      "title": "Tomorrow: Rebuilding Trust in Small Moments",
+      "body": "Rituals create structure. But the deepest connections are built in the in-between moments \u2014 the small choices you make every day.\n\nTomorrow: how tiny acts of reliability rebuild trust more powerfully than any grand gesture.",
+      "xp": 5
+    },
+    {
+      "id": "d19-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

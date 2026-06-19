@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "unit": "day24",
+  "title": "Day 24: Designing Your Marriage Practices",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d24-info-1",
+      "type": "info",
+      "title": "Vision Without Action Is a Hallmark Card",
+      "body": "You have a mission. You're building a vision. But if nothing changes in your daily life, it's just a nice idea.\n\nThis is where the rubber meets the road: what practices will you commit to \u2014 daily, weekly, monthly \u2014 that turn your vision into reality?\n\nThink of practices as the operating system of your marriage. They run in the background. They don't require motivation or willpower. They're just what you do.\n\n\u2022 A daily check-in isn't a 'nice to have.' It's a practice.\n\u2022 A weekly date night isn't optional. It's a practice.\n\u2022 A monthly money conversation isn't awkward. It's a practice.\n\nGreat marriages aren't built on inspiration. They're built on systems.",
+      "xp": 5
+    },
+    {
+      "id": "d24-highlight-1",
+      "type": "highlight",
+      "body": "Passion fades. Motivation fluctuates.\nSystems endure.\n\nDesign the practices that will carry your marriage\nwhen motivation is nowhere to be found.",
+      "highlights": [
+        "Passion fades",
+        "Systems endure",
+        "carry your marriage"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d24-reflection-1",
+      "type": "reflection",
+      "title": "Your Current Practices",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What practices are already working in your marriage?\n\nMaybe you always kiss goodnight. Maybe you have a running joke. Maybe you check in after tough days.\n\nNow: what practices are missing? What do you keep meaning to make consistent but haven't?\n\nThink about the four pillars \u2014 Foundation, Connection, Household, Repair. Where do you have systems? Where are you winging it?"
+        }
+      ]
+    },
+    {
+      "id": "d24-info-2",
+      "type": "info",
+      "title": "The Minimum Viable Marriage System",
+      "body": "You don't need a complex system. You need a few reliable practices:\n\nDaily (5 minutes):\n\u2022 A greeting ritual when you reunite\n\u2022 A check-in: 'What do you need from me today?'\n\nWeekly (30\u201360 minutes):\n\u2022 A state-of-the-union check-in \u2014 how are we doing this week?\n\u2022 Time that's just for the two of you, no kids, no phones\n\nMonthly (1\u20132 hours):\n\u2022 A money or logistics meeting \u2014 proactive, not reactive\n\u2022 A 'dreaming' conversation \u2014 where do we want to go?\n\nQuarterly (half day):\n\u2022 A bigger check-in \u2014 how are the four pillars doing?\n\u2022 A shared experience \u2014 trip, adventure, project\n\nThe key isn't doing all of these. The key is picking your non-negotiables and protecting them.",
+      "xp": 5
+    },
+    {
+      "id": "d24-mc-1",
+      "type": "mc",
+      "question": "The most important daily practice in a marriage is:",
+      "options": [
+        "Talking for 30 minutes about your day",
+        "A brief moment of genuine connection \u2014 even 60 seconds",
+        "Having sex regularly",
+        "Eating dinner together"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That's great if it works. But for busy couples, even a small moment is powerful.",
+        "Yes. A brief but genuine moment of connection \u2014 a real hug, a minute of 'how are you actually doing' \u2014 is more sustainable and impactful than longer but inconsistent attempts.",
+        "Physical intimacy is important, but making it a daily 'should' creates pressure. Focus on daily connection, not daily frequency.",
+        "Eating together is great \u2014 but are you present or just eating? Connection is about presence, not proximity."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-scenario-1",
+      "type": "scenario_card",
+      "title": "From Winging It to System",
+      "body": "Before: You intend to check in at dinner about how your day went. But dinner is chaos. Half the time one of you is distracted. You don't have a real conversation.\n\nAfter (system): You establish a 5-minute ritual. When you get home, you sit on the couch together for exactly five minutes before anyone starts dinner, checks email, or turns on the TV. One rule: no phones. One question: 'What do you need right now?'\n\nDoes it solve everything? No. Does it create a reliable moment of connection every single day? Yes.\n\nThat's the power of a practice over an intention."
+    },
+    {
+      "id": "d24-copy-action-1",
+      "type": "copy_action",
+      "title": "Design One Practice",
+      "prompt": "Pick ONE practice to commit to for the next 30 days:\n\n\u2022 Daily check-in \u2014 5 minutes, same time, no phones\n\u2022 Weekly sit-down \u2014 30 minutes, one question: 'How are we doing?'\n\u2022 Monthly money talk \u2014 Proactive, not reactive\n\u2022 Something else: ______________\n\nWrite exactly what it is, when you'll do it, and what you'll protect it from.",
+      "xp": 10,
+      "body": "Pick ONE practice to commit to for the next 30 days:\n\n\u2022 Daily check-in \u2014 5 minutes, same time, no phones\n\u2022 Weekly sit-down \u2014 30 minutes, one question: 'How are we doing?'\n\u2022 Monthly money talk \u2014 Proactive, not reactive\n\u2022 Something else: ______________\n\nWrite exactly what it is, when you'll do it, and what you'll protect it from.",
+      "sourceStepId": "d24-info-1"
+    },
+    {
+      "id": "d24-reflection-2",
+      "type": "reflection",
+      "title": "What Will Break the Practice?",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Be honest with yourself: what will get in the way of this practice?\n\n\u2022 Being too tired?\n\u2022 Travel?\n\u2022 Kids?\n\u2022 Forgetting?\n\u2022 Feeling like 'we don't need it' once things are good?\n\nName the obstacle now, while motivation is high. Then write one sentence about how you'll handle it when it comes."
+        }
+      ]
+    },
+    {
+      "id": "d24-tf-1",
+      "type": "tf",
+      "question": "Once a system is established, it will run on autopilot without effort.",
+      "correct": false,
+      "feedback": [
+        "Correct. Even the best systems need maintenance. Life will disrupt them \u2014 travel, illness, busy seasons. The key isn't perfection \u2014 it's noticing when the system breaks and restarting it. Good systems are easy to restart.",
+        "Not quite. All systems need maintenance. The key isn't to build the system that never breaks \u2014 it's to build the system that's easy to restart after life interrupts it."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-info-3",
+      "type": "info",
+      "title": "Tomorrow: Growing Together \u2014 Not Apart",
+      "body": "Practices keep you connected in the day-to-day. But what about the long arc of a marriage? How do you make sure you're not just surviving life's seasons \u2014 but growing together through them?\n\nTomorrow: how to keep evolving \u2014 as individuals and as a couple.",
+      "xp": 5
+    },
+    {
+      "id": "d24-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

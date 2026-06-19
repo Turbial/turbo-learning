@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day10",
+  "title": "Day 10: Speaking the Unspeakable",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d10-info-1",
+      "type": "info",
+      "title": "The Elephant That Grows",
+      "body": "Every marriage has topics that feel off-limits. Conversations you know you should have but keep putting off.\n\nMoney tension. In-law boundaries. Disappointment in the bedroom. Feeling unseen. The thing you said five years ago that's still sitting in the air.\n\nHere's the problem: silence doesn't make these things go away. It makes them grow.\n\nA conversation you avoid for a week becomes a conversation you avoid for a month. A month becomes a year. And by then, the issue has doubled in weight.\n\nToday, we learn how to speak the unspeakable \u2014 without destroying the relationship in the process.",
+      "xp": 5
+    },
+    {
+      "id": "d10-highlight-1",
+      "type": "highlight",
+      "body": "The thing you're afraid to say? They already feel it.\n\nYou're not protecting your partner by staying silent.\nYou're protecting yourself from discomfort.\n\nAnd the silence is more damaging than the conversation could ever be.",
+      "highlights": [
+        "already feel it",
+        "staying silent vs protecting",
+        "silence is more damaging"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d10-info-2",
+      "type": "info",
+      "title": "The Hard Conversation Formula",
+      "body": "Hard conversations fail when they feel like attacks. They succeed when they feel like invitations.\n\nHere's a formula that works:\n\n1. State your intent \u2014 'I want to talk about something because I want us to feel closer, not to blame you.'\n2. Name your experience, not their character \u2014 'I've been feeling lonely lately' not 'You never pay attention to me.'\n3. Invite their perspective \u2014 'I'm curious how that lands for you.'\n4. Stay curious \u2014 The goal isn't to win. It's to understand.\n\nThe message isn't 'You're the problem.' It's 'I'm hurting, and I want us to figure this out together.'",
+      "xp": 5
+    },
+    {
+      "id": "d10-reflection-1",
+      "type": "reflection",
+      "title": "Your Unspoken Topic",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What's one topic you've been avoiding in your marriage?\n\nBe specific. Don't just say 'money' \u2014 name the exact issue. 'I'm worried we're not on the same page about retirement.' Or 'I feel like we don't have enough sex.' Or 'Your mom's involvement in our life bothers me.'\n\nJust naming it here, in private, is the first step. Feel the weight of it on the page."
+        }
+      ]
+    },
+    {
+      "id": "d10-mc-1",
+      "type": "mc",
+      "question": "Which of these is the best opening line for a hard conversation?",
+      "options": [
+        "'We need to talk about why you never help around here.'",
+        "'I've been feeling disconnected lately and I want to talk about it with you.'",
+        "'Can you just stop doing that thing that drives me crazy?'",
+        "'The kids said something that made me realize you're not pulling your weight.'"
+      ],
+      "correct": 1,
+      "feedback": [
+        "That opening puts them on the defensive immediately. 'Why you never' is accusation, not invitation.",
+        "Yes. This opens with your experience, not their failure. It invites them into the conversation instead of putting them on trial.",
+        "That's hard to respond to without defensiveness. It focuses on the behavior without explaining why it matters to you.",
+        "Bringing in third parties rarely helps. It feels like ganging up.",
+        "I-statements change the entire dynamic. 'I feel' vs 'You never' \u2014 it's the difference between invitation and accusation."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-scenario-1",
+      "type": "scenario_card",
+      "title": "Soft Startups That Work",
+      "body": "Gottman calls it a 'soft startup' \u2014 the way you begin a conversation determines how it ends.\n\nHard Startup: 'Why do you always do this? You know it bothers me.'\nResult: They go on defense. The conversation is about the startup, not the issue.\n\nSoft Startup: 'Hey, can I talk to you about something? I'm feeling a little fragile about it, so I want to say it carefully.'\nResult: They lean in. They're curious. They're ready to listen.\n\nThe tone of the first ten seconds determines the next hour. Choose wisely."
+    },
+    {
+      "id": "d10-reflection-2",
+      "type": "reflection",
+      "title": "Your Soft Startup Script",
+      "minChars": 40,
+      "xp": 20,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Take the topic you named earlier. Write a soft startup for it:\n\nStart with: 'I want to talk about something because...'\n\nThen: 'I've been feeling...' (your experience, not their action)\n\nThen: 'I'm curious how this sounds to you.'\n\nWrite it out word for word. Read it aloud to yourself. Does it feel like an invitation or an accusation? Adjust until it sounds like a bid, not a bomb."
+        }
+      ]
+    },
+    {
+      "id": "d10-tf-1",
+      "type": "tf",
+      "question": "If your partner reacts poorly to a soft startup, it means the soft startup didn't work.",
+      "correct": false,
+      "feedback": [
+        "Correct. Even a perfect soft startup doesn't guarantee a great response. Your partner might have their own defenses up from past conversations. The soft startup isn't about controlling their response \u2014 it's about giving them the best possible invitation. If they still react poorly, you can say, 'I notice that landed hard. Can you tell me what you heard?'",
+        "Not quite. A soft startup reduces the chances of a defensive reaction, but it doesn't guarantee one. Your partner might be carrying their own stuff from previous experiences. The soft startup is about your approach, not controlling their response."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-copy-action-1",
+      "type": "copy_action",
+      "title": "Have the Conversation",
+      "prompt": "Your mission: before tomorrow, have the conversation you've been avoiding. Use your soft startup script.\n\nNot for 30 minutes. Just five minutes. 'Hey, can I share something real with you for a minute?'\n\nIf it goes well, great. If it's messy, that's okay too \u2014 a messy attempt is still progress over silence.\n\nWrite your commitment: I will bring this up by [time/day] using this approach.",
+      "xp": 10,
+      "body": "Your mission: before tomorrow, have the conversation you've been avoiding. Use your soft startup script.\n\nNot for 30 minutes. Just five minutes. 'Hey, can I share something real with you for a minute?'\n\nIf it goes well, great. If it's messy, that's okay too \u2014 a messy attempt is still progress over silence.\n\nWrite your commitment: I will bring this up by [time/day] using this approach.",
+      "sourceStepId": "d10-info-1"
+    },
+    {
+      "id": "d10-info-3",
+      "type": "info",
+      "title": "Tomorrow: Listening Without Defending",
+      "body": "Speaking hard truths is one skill. Receiving them is another \u2014 and it may be the harder one.\n\nTomorrow, we tackle the skill that separates couples who grow from conflict from couples who get stuck in it: listening without getting defensive.",
+      "xp": 5
+    },
+    {
+      "id": "d10-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}
