@@ -1,0 +1,300 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 2,
+    "unitLabel": "Day 2",
+    "unitTitle": "Roles and Context",
+    "lessonOrder": 1,
+    "lessonTitle": "Give AI a Job",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d2_s1",
+      "type": "info",
+      "title": "Welcome to Day 2",
+      "body": "Yesterday you learned how to ask AI a clear question. Today you learn a trick that doubles the quality of every answer: give AI a role to play.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d2_s2",
+      "type": "info",
+      "title": "What is a role prompt?",
+      "body": "A role prompt tells AI who to be before you ask your question. Instead of just asking, you say: \"Act as a friendly editor\" or \"You are an expert planner.\" This shapes every word of the answer.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d2_s3",
+      "type": "info",
+      "title": "Why does it work?",
+      "body": "AI has absorbed enormous amounts of writing from editors, coaches, planners, and experts. When you name a role, you tell it which kind of writing to draw from. The answer shifts immediately.",
+      "audioUrl": null,
+      "primaryButton": "Show me",
+      "xp": 3
+    },
+    {
+      "id": "d2_s4",
+      "type": "scenario_card",
+      "title": "Picture this",
+      "body": "You need to write a difficult email to a colleague. You type your message into AI and ask it to fix the tone. The answer is fine — but a bit generic. What if you told it to act as a professional communication coach first?",
+      "audioUrl": null,
+      "primaryButton": "See the difference",
+      "xp": 3
+    },
+    {
+      "id": "d2_s5",
+      "type": "example",
+      "title": "Role prompt in action",
+      "prompt": "Act as a professional communication coach. I need to send a message to a colleague who missed an important deadline. Help me write something that is firm but keeps the relationship positive.",
+      "primaryButton": "What makes this work",
+      "xp": 3
+    },
+    {
+      "id": "d2_s6",
+      "type": "info",
+      "title": "The formula",
+      "body": "Role prompt formula: \"Act as [role]. [Your request with context.]\" The role comes first. The request comes second. Context — your specific details — makes it personal.",
+      "audioUrl": null,
+      "primaryButton": "Got it",
+      "xp": 3
+    },
+    {
+      "id": "d2_s7",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "What does a role prompt do?",
+      "options": [
+        "It makes AI work faster.",
+        "It tells AI which style and perspective to use for its answer.",
+        "It lets AI access the internet.",
+        "It makes the answer longer."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Speed is not the point — quality is. A role shapes the style of the answer.",
+        "Exactly. The role tells AI which perspective and voice to use.",
+        "Role prompts are about style, not access to new information.",
+        "Length is not the goal — relevance and tone are."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d2_s8",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You can only use role prompts for professional work tasks.",
+      "correct": false,
+      "feedback": [
+        "Actually, role prompts work for anything — planning a trip, writing a toast, coaching yourself through a decision.",
+        "Right. Roles like \"travel planner,\" \"life coach,\" or \"recipe expert\" work just as well outside of work."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s9",
+      "type": "info",
+      "title": "Roles that work well",
+      "body": "Here are roles people use every day: editor (fix my writing), life coach (help me think through a decision), project planner (break this into steps), expert explainer (explain this simply), devil's advocate (poke holes in my plan).",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d2_s10",
+      "type": "match",
+      "title": "Match the role to the task",
+      "pairs": [
+        {
+          "left": "Rewrite my message — it sounds too harsh",
+          "right": "Act as a professional editor"
+        },
+        {
+          "left": "Help me decide whether to take this new job",
+          "right": "Act as an unbiased career coach"
+        },
+        {
+          "left": "Explain compound interest like I am twelve",
+          "right": "Act as a patient teacher"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d2_s11",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Act as a nutritionist. Help me plan simple, healthy lunches for a busy week — I do not cook much and I have about 15 minutes at noon.",
+      "correct": "good",
+      "feedback": [
+        "Yes — giving AI a role plus your constraints makes this a great prompt.",
+        "Actually, this is a strong use of role prompting. Context plus role equals useful answer."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s12",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Act as my doctor and diagnose the pain in my chest.",
+      "correct": "notideal",
+      "feedback": [
+        "Be careful here. AI can share general information, but chest pain needs a real doctor.",
+        "Right. For real medical concerns, see a professional. AI should not replace that."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s13",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "To use a role prompt, start your message with the words \"Act as a ______\" before making your request.",
+      "answer": "role",
+      "aliases": [
+        "specific role",
+        "person",
+        "professional",
+        "coach",
+        "expert"
+      ],
+      "feedback": [
+        "Exactly — naming a role first shapes everything that follows.",
+        "Close. The key idea: name the role before you make your request."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d2_s14",
+      "type": "builder",
+      "title": "Build a role prompt",
+      "fields": [
+        {
+          "id": "role",
+          "label": "What role should AI play?",
+          "placeholder": "e.g. a friendly career coach"
+        },
+        {
+          "id": "task",
+          "label": "What do you need help with?",
+          "placeholder": "e.g. decide whether to apply for a promotion"
+        },
+        {
+          "id": "context",
+          "label": "What should AI know about your situation?",
+          "placeholder": "e.g. I have been in this role two years and feel ready but nervous"
+        }
+      ],
+      "template": "Act as {{role}}. I need your help to {{task}}. Here is my situation: {{context}}.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d2_s15",
+      "type": "copy_action",
+      "title": "Copy your role prompt",
+      "body": "Copy the prompt you just built and paste it into your AI tool of choice — ChatGPT, Claude, Gemini, or Grok.",
+      "sourceStepId": "d2_s14",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d2_s16",
+      "type": "paste_capture",
+      "title": "Paste what you got back",
+      "body": "Paste the AI's response here. We will save it so you can review it later.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d2_s17",
+      "type": "reflection",
+      "title": "How was that?",
+      "questions": [
+        {
+          "id": "difference",
+          "type": "single_choice",
+          "label": "Did the role prompt feel different from yesterday's plain question?",
+          "options": [
+            "Yes — noticeably better",
+            "A little different",
+            "About the same",
+            "Not sure yet"
+          ]
+        },
+        {
+          "id": "next_role",
+          "type": "textarea",
+          "label": "What role would you try next, and for what task?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d2_s18",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the best way to start a role prompt?",
+          "options": [
+            "Please help me with...",
+            "Act as [role]. Then make your request.",
+            "Search the web for..."
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Role prompts only work for business tasks.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "A role prompt works because it tells AI which ______ and perspective to use.",
+          "answer": "style",
+          "aliases": [
+            "voice",
+            "tone",
+            "perspective",
+            "approach"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d2_s19",
+      "type": "badge_unlock",
+      "badgeSlug": "role_master",
+      "xp": 0
+    },
+    {
+      "id": "d2_s20",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d2_s21",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d2_s22",
+      "type": "completion",
+      "title": "Day 2 complete",
+      "body": "You now know how to give AI a job before you ask your question. That single habit — naming a role — will make your prompts noticeably more useful from here on. See you tomorrow.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

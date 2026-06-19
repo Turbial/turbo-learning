@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 3,
+    "unitLabel": "Day 3",
+    "unitTitle": "Better Writing, Faster",
+    "lessonOrder": 1,
+    "lessonTitle": "Emails That Actually Work",
+    "minutes": 13
+  },
+  "steps": [
+    {
+      "id": "d3_s1",
+      "type": "info",
+      "title": "Welcome to Day 3",
+      "body": "Writing emails takes time, and getting the tone right is hard. Today you will learn how to use AI to draft, edit, shorten, and improve any message — in seconds.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d3_s2",
+      "type": "info",
+      "title": "AI is a great writing partner",
+      "body": "AI does not get tired, does not judge your first draft, and can rewrite the same message ten different ways. That makes it perfect for anyone who finds writing stressful or time-consuming.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d3_s3",
+      "type": "scenario_card",
+      "title": "A familiar problem",
+      "body": "You need to follow up with someone who has not replied in two weeks. You do not want to sound pushy. You do not want to sound weak either. You have stared at a blank screen for ten minutes. Sound familiar?",
+      "audioUrl": null,
+      "primaryButton": "Show me how AI helps",
+      "xp": 3
+    },
+    {
+      "id": "d3_s4",
+      "type": "info",
+      "title": "The four things AI can do with writing",
+      "body": "1. Draft — write a first version from your notes. 2. Edit — fix grammar, clarity, or structure. 3. Shorten — cut it down without losing the point. 4. Adjust tone — make it warmer, firmer, or more professional.",
+      "audioUrl": null,
+      "primaryButton": "See examples",
+      "xp": 3
+    },
+    {
+      "id": "d3_s5",
+      "type": "example",
+      "title": "A good rewrite prompt",
+      "prompt": "Act as a professional editor. Here is a message I wrote: \"Hey, just checking in again — still waiting to hear back from you about the project. It's been a while.\" Rewrite it so it sounds confident, warm, and professional. Keep it under four sentences.",
+      "primaryButton": "Why this works",
+      "xp": 3
+    },
+    {
+      "id": "d3_s6",
+      "type": "info",
+      "title": "What made that prompt strong",
+      "body": "It gave AI: a role (professional editor), the raw material (original message), specific goals (confident, warm, professional), and a constraint (under four sentences). Every detail helps.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d3_s7",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "Which prompt will get you the most useful email rewrite?",
+      "options": [
+        "Make my email better.",
+        "Fix the grammar in my email.",
+        "Rewrite my email so it sounds warm and professional. Here is what I wrote: [paste email]. Keep it under five sentences.",
+        "Write me a good email."
+      ],
+      "correct": 2,
+      "feedback": [
+        "Too vague — AI does not know what \"better\" means to you.",
+        "Fixing grammar is useful, but it does not improve tone or structure.",
+        "Exactly. A role, the raw content, a goal, and a length constraint work together perfectly.",
+        "This has no context — AI has to guess everything."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d3_s8",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You need to write a perfect first draft before AI can help you.",
+      "correct": false,
+      "feedback": [
+        "Actually, your messy notes are fine. Paste bullet points, half-sentences, or a brain-dump. AI turns rough material into polished writing.",
+        "Right. AI works well even with rough notes — it does not need a polished draft to start."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d3_s9",
+      "type": "compare",
+      "title": "Try both",
+      "question": "Write a short version of the same email (under three sentences) and a longer version (full paragraph). Paste both prompts into AI and compare. Which version is more useful for your situation?",
+      "primaryButton": "I compared them",
+      "xp": 10
+    },
+    {
+      "id": "d3_s10",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Shorten this message to two sentences and make it sound friendly: [paste your text here].",
+      "correct": "good",
+      "feedback": [
+        "Yes — shortening and adjusting tone is one of the strongest uses of AI for writing.",
+        "Actually this is a great use of AI. It handles length and tone adjustments quickly."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d3_s11",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Write a legal contract for my freelance business.",
+      "correct": "notideal",
+      "feedback": [
+        "Careful — AI can give you a starting template, but real contracts for important business dealings need a qualified lawyer to review.",
+        "Right. AI is great for drafts and ideas. Legal documents that will bind you to something need professional review."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d3_s12",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "When asking AI to rewrite your email, always give it the ______ text to work from.",
+      "answer": "original",
+      "aliases": [
+        "existing",
+        "your",
+        "draft",
+        "raw",
+        "actual"
+      ],
+      "feedback": [
+        "Exactly — paste in what you already have so AI can improve it directly.",
+        "Close. The key point: give AI your existing text to rewrite rather than starting from scratch each time."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d3_s13",
+      "type": "builder",
+      "title": "Build your email prompt",
+      "fields": [
+        {
+          "id": "situation",
+          "label": "Who are you writing to, and why?",
+          "placeholder": "e.g. a client who has not paid an invoice for 30 days"
+        },
+        {
+          "id": "tone",
+          "label": "What tone do you want?",
+          "placeholder": "e.g. firm but polite"
+        },
+        {
+          "id": "constraint",
+          "label": "Any length or format requirement?",
+          "placeholder": "e.g. keep it under five sentences"
+        }
+      ],
+      "template": "Act as a professional editor. Write a short email to {{situation}}. Tone: {{tone}}. Constraint: {{constraint}}.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d3_s14",
+      "type": "copy_action",
+      "title": "Copy your email prompt",
+      "body": "Copy your prompt and paste it into ChatGPT, Claude, Gemini, or Grok to see what it produces.",
+      "sourceStepId": "d3_s13",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d3_s15",
+      "type": "paste_capture",
+      "title": "Paste the email AI wrote",
+      "body": "Paste the email AI gave you here so you can review it and save it to your work.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d3_s16",
+      "type": "reflection",
+      "title": "Your takeaway",
+      "questions": [
+        {
+          "id": "quality",
+          "type": "single_choice",
+          "label": "How close was the AI email to something you would actually send?",
+          "options": [
+            "I would send it as-is",
+            "Needs a small tweak",
+            "Good starting point, needs work",
+            "Needs a lot of changes"
+          ]
+        },
+        {
+          "id": "use_case",
+          "type": "textarea",
+          "label": "What is the next real email or message you would want AI to help you with?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d3_s17",
+      "type": "match",
+      "title": "Match the goal to the instruction",
+      "pairs": [
+        {
+          "left": "My email is too long",
+          "right": "Shorten this to three sentences"
+        },
+        {
+          "left": "My message sounds too blunt",
+          "right": "Rewrite so the tone is warmer"
+        },
+        {
+          "left": "I have notes but no email yet",
+          "right": "Draft an email using these bullet points"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d3_s18",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What should you always give AI when asking it to rewrite something?",
+          "options": [
+            "A perfect draft",
+            "Your original text, even if it is rough",
+            "Just the topic — AI can guess the rest"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "AI can only help with formal professional emails.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "The four things AI can do with writing: draft, edit, shorten, and adjust ______.",
+          "answer": "tone",
+          "aliases": [
+            "the tone",
+            "voice"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d3_s19",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d3_s20",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d3_s21",
+      "type": "completion",
+      "title": "Day 3 complete",
+      "body": "You now know how to use AI to draft, rewrite, shorten, and improve any message. The next time a blank screen stares back at you, you have a partner. See you tomorrow.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 7,
+    "unitLabel": "Day 7",
+    "unitTitle": "Think Bigger",
+    "lessonOrder": 1,
+    "lessonTitle": "Brainstorm With AI",
+    "minutes": 13
+  },
+  "steps": [
+    {
+      "id": "d7_s1",
+      "type": "info",
+      "title": "Welcome to Day 7",
+      "body": "You have reached the last day of your first week. Today is about creativity. You will learn how to use AI to generate ideas, explore options, and break through the blank-page problem — fast.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d7_s2",
+      "type": "info",
+      "title": "AI is an ideas machine",
+      "body": "AI has absorbed millions of books, articles, and conversations. When you ask it to brainstorm, it can generate ten ideas in ten seconds — without judgment, without fatigue, and without running out of options.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d7_s3",
+      "type": "scenario_card",
+      "title": "You know this feeling",
+      "body": "You need to name a product. Or pitch a fresh angle for a project. Or figure out how to solve an old problem in a new way. You sit. You stare. Nothing comes. AI does not have that problem.",
+      "audioUrl": null,
+      "primaryButton": "Show me how",
+      "xp": 3
+    },
+    {
+      "id": "d7_s4",
+      "type": "info",
+      "title": "What to brainstorm with AI",
+      "body": "Name something (product, project, event). Find angles on a topic. Generate options for a decision. Explore \"what if\" scenarios. Create solutions to a problem you are stuck on. AI works for all of these.",
+      "audioUrl": null,
+      "primaryButton": "See an example",
+      "xp": 3
+    },
+    {
+      "id": "d7_s5",
+      "type": "example",
+      "title": "A strong brainstorm prompt",
+      "prompt": "Act as a creative director. I am launching a small online business that teaches people to make homemade sourdough bread. Generate ten name ideas that feel warm, approachable, and memorable. For each name, write one sentence explaining why it works. Then give me your top three picks.",
+      "primaryButton": "Why this works",
+      "xp": 3
+    },
+    {
+      "id": "d7_s6",
+      "type": "info",
+      "title": "What made that prompt effective",
+      "body": "It gave AI a role, described the context clearly, asked for a quantity (ten ideas), requested a brief rationale for each, and asked for a recommendation (top three). Constraints and quantities push AI toward better output.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d7_s7",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "Which brainstorm prompt will get the most useful set of ideas?",
+      "options": [
+        "Give me ideas.",
+        "I am planning a surprise birthday party for my mum who loves gardening and tea. Give me eight theme ideas that combine both interests. Keep them realistic for a home setting.",
+        "What are some birthday party ideas?",
+        "Think of something creative."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Too vague — AI has nothing to anchor the ideas to.",
+        "Excellent. Specific context (who, what they love), a quantity (eight), and a constraint (realistic, home setting) produce targeted, useful ideas.",
+        "General ideas will come back — but they will not reflect anything specific about the person.",
+        "This gives AI nothing to work with. Constraints and context always improve creativity."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7_s8",
+      "type": "mc",
+      "title": "Another check",
+      "question": "You are stuck on how to market a new service. What is the best next step?",
+      "options": [
+        "Keep thinking on your own until an idea comes.",
+        "Ask AI: 'Give me some ideas for marketing.'",
+        "Ask AI to act as a marketing strategist, describe your service in detail, and ask for ten creative angles aimed at your target audience.",
+        "Ask a friend for ideas."
+      ],
+      "correct": 2,
+      "feedback": [
+        "That works eventually, but AI can give you ten starting points in seconds.",
+        "Possible, but without context about your service or audience, the ideas will be generic.",
+        "Exactly. Role, context, quantity, and audience focus produce ideas you can actually use.",
+        "A friend is great — but so is combining that with AI's ability to generate lots of options quickly."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7_s9",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "When brainstorming with AI, you should only use its best idea and ignore the rest.",
+      "correct": false,
+      "feedback": [
+        "Actually, many great ideas come from combining or remixing several AI suggestions. Review all the options before deciding.",
+        "Right. The full list is the point. You might combine two ideas, or an unexpected option might be exactly right."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d7_s10",
+      "type": "compare",
+      "title": "Explore options",
+      "question": "Pick a real decision you are weighing right now — big or small. Ask AI to generate options two ways: first freely with no constraints, then with your specific constraints included. Compare. Which list is more useful?",
+      "primaryButton": "I compared them",
+      "xp": 10
+    },
+    {
+      "id": "d7_s11",
+      "type": "info",
+      "title": "The \"ten ideas\" trick",
+      "body": "Whenever you are stuck, try: \"Give me ten ideas for [thing].\" Then ask: \"Now give me ten more unusual ones.\" The second list is often where the interesting answers live. People (and AI) start safe and get more creative with repetition.",
+      "audioUrl": null,
+      "primaryButton": "Good to know",
+      "xp": 3
+    },
+    {
+      "id": "d7_s12",
+      "type": "builder",
+      "title": "Build a brainstorm prompt",
+      "fields": [
+        {
+          "id": "topic",
+          "label": "What do you want to brainstorm?",
+          "placeholder": "e.g. names for my new podcast about personal finance"
+        },
+        {
+          "id": "audience",
+          "label": "Who is this for, or what vibe do you want?",
+          "placeholder": "e.g. young adults who find money confusing but want to do better"
+        },
+        {
+          "id": "quantity",
+          "label": "How many ideas do you want?",
+          "placeholder": "e.g. ten"
+        }
+      ],
+      "template": "Act as a creative director. I need to brainstorm {{topic}}. Audience/vibe: {{audience}}. Generate {{quantity}} ideas. For each idea, write one sentence explaining why it fits. Then tell me your top three.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d7_s13",
+      "type": "copy_action",
+      "title": "Copy your brainstorm prompt",
+      "body": "Copy your prompt and paste it into ChatGPT, Claude, Gemini, or Grok to see what it generates.",
+      "sourceStepId": "d7_s12",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d7_s14",
+      "type": "paste_capture",
+      "title": "Paste your brainstorm results",
+      "body": "Paste the ideas AI gave you here so we can save them to your work.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d7_s15",
+      "type": "reflection",
+      "title": "Week 1 reflection",
+      "questions": [
+        {
+          "id": "best_day",
+          "type": "single_choice",
+          "label": "Which lesson this week felt most useful to you?",
+          "options": [
+            "Day 1 — Asking a clear question",
+            "Day 2 — Role prompting",
+            "Day 3 — Writing and emails",
+            "Day 4 — Research and summarizing",
+            "Day 5 — Planning",
+            "Day 6 — Getting feedback",
+            "Day 7 — Brainstorming"
+          ]
+        },
+        {
+          "id": "habit",
+          "type": "textarea",
+          "label": "What is one AI habit you plan to keep using after this week?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d7_s16",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What improves the quality of a brainstorm prompt most?",
+          "options": [
+            "Making the request as short as possible",
+            "Adding specific context, a quantity, and your audience or vibe",
+            "Asking AI to 'be creative'"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Asking for ten ideas is better than asking for one because it gives you options to combine and remix.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "To push AI toward more unusual ideas, after the first list ask it to give you ______ more ideas.",
+          "answer": "ten",
+          "aliases": [
+            "10",
+            "ten more",
+            "more",
+            "additional"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d7_s17",
+      "type": "badge_unlock",
+      "badgeSlug": "week_one_complete",
+      "xp": 0
+    },
+    {
+      "id": "d7_s18",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d7_s19",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d7_s20",
+      "type": "completion",
+      "title": "Week 1 complete",
+      "body": "You did it. In seven days you learned to ask clear questions, assign roles, write better, research faster, plan smarter, get sharper feedback, and brainstorm on demand. These are skills most people never develop. Well done — and see you in Week 2.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

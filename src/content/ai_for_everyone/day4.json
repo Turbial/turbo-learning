@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 4,
+    "unitLabel": "Day 4",
+    "unitTitle": "Learn Faster",
+    "lessonOrder": 1,
+    "lessonTitle": "Get to the Point",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d4_s1",
+      "type": "info",
+      "title": "Welcome to Day 4",
+      "body": "The internet is full of information, but most of it is buried in long articles, reports, and videos. Today you will learn how to use AI to cut through all that — and get straight to what matters.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d4_s2",
+      "type": "info",
+      "title": "AI as your research assistant",
+      "body": "AI can summarize a long piece of content, explain a complex topic in plain language, list the pros and cons of any option, and answer follow-up questions. You can learn more in ten minutes than most people do in an hour.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d4_s3",
+      "type": "info",
+      "title": "One important limit",
+      "body": "AI knows a lot, but its knowledge has a cut-off date. For recent news or fast-changing topics, double-check with a current source. AI is great for timeless concepts — less reliable for this morning's headlines.",
+      "audioUrl": null,
+      "primaryButton": "Understood",
+      "xp": 3
+    },
+    {
+      "id": "d4_s4",
+      "type": "example",
+      "title": "A great summary prompt",
+      "prompt": "Here is an article I pasted below. Summarize it in three bullet points — focus on the main finding, why it matters, and what I should do with this information. [paste article text]",
+      "primaryButton": "Why this works",
+      "xp": 3
+    },
+    {
+      "id": "d4_s5",
+      "type": "info",
+      "title": "What made that prompt strong",
+      "body": "It told AI: what to read (the pasted content), how to format the answer (three bullet points), and exactly what to focus on (finding, significance, action). Specific instructions get specific answers.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d4_s6",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "What is the best way to ask AI to explain a complex topic?",
+      "options": [
+        "Explain blockchain.",
+        "Explain blockchain like I am completely new to technology. Use a simple everyday analogy.",
+        "Search for blockchain.",
+        "Tell me everything about blockchain."
+      ],
+      "correct": 1,
+      "feedback": [
+        "This will work but you may get a technical answer that is hard to follow.",
+        "Perfect. Saying who you are (a newcomer) and asking for an analogy steers AI toward clarity.",
+        "AI does not search the web unless it has a specific tool for that — it draws on what it already knows.",
+        "This will produce an overwhelming wall of text. Asking for a specific angle is better."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4_s7",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "AI is a reliable source for breaking news that happened today.",
+      "correct": false,
+      "feedback": [
+        "Correct — AI's knowledge has a cut-off date, so today's news may be missing or outdated.",
+        "Right. For current events, use a news site. AI is best for topics that do not change quickly."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d4_s8",
+      "type": "highlight",
+      "title": "Spot the key instructions",
+      "body": "Tap the parts of this prompt that make it specific: Summarize in three bullet points, focus on the main finding, and tell me what I should do next.",
+      "highlights": [
+        "three bullet points",
+        "main finding",
+        "what I should do next"
+      ],
+      "xp": 6
+    },
+    {
+      "id": "d4_s9",
+      "type": "info",
+      "title": "Ask for pros and cons",
+      "body": "When you are weighing a decision, asking AI for a balanced list of pros and cons is one of its most practical uses. Just give it the option you are considering and any relevant context.",
+      "audioUrl": null,
+      "primaryButton": "Show me how",
+      "xp": 3
+    },
+    {
+      "id": "d4_s10",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "When asking AI to explain a complex topic to you, it helps to say \"explain this like I am a ______\" to get a simpler answer.",
+      "answer": "beginner",
+      "aliases": [
+        "newcomer",
+        "novice",
+        "non-expert",
+        "complete beginner",
+        "twelve year old",
+        "child",
+        "non-technical person"
+      ],
+      "feedback": [
+        "Exactly. Telling AI your starting point shapes how simple or complex the explanation will be.",
+        "Good thinking. The key: tell AI how much you already know so it pitches the answer at the right level."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d4_s11",
+      "type": "builder",
+      "title": "Build a research brief",
+      "fields": [
+        {
+          "id": "topic",
+          "label": "What topic do you want to understand?",
+          "placeholder": "e.g. how credit card interest works"
+        },
+        {
+          "id": "level",
+          "label": "How much do you already know about this?",
+          "placeholder": "e.g. I understand the basics but not the math"
+        },
+        {
+          "id": "format",
+          "label": "How do you want the answer?",
+          "placeholder": "e.g. a short summary with three key takeaways"
+        }
+      ],
+      "template": "Explain {{topic}} to me. My current knowledge level: {{level}}. Please give me {{format}}.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d4_s12",
+      "type": "copy_action",
+      "title": "Copy your research prompt",
+      "body": "Copy this prompt and paste it into your AI tool to see the explanation it produces.",
+      "sourceStepId": "d4_s11",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d4_s13",
+      "type": "paste_capture",
+      "title": "Paste what you got back",
+      "body": "Paste the explanation AI gave you here to save it to your work.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d4_s14",
+      "type": "mc",
+      "title": "One more check",
+      "question": "You found a long report about a new health trend. How do you get the most useful summary?",
+      "options": [
+        "Ask AI: What is this about?",
+        "Ask AI to summarize in three bullet points covering the main finding, evidence, and what to do with the information — then paste the report.",
+        "Ask AI: Is this good for me?",
+        "Trust AI's summary without checking anything else."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Too vague — you will get a general overview without the specific angles you care about.",
+        "Great. Structured prompts with pasted content and specific angles produce the most useful summaries.",
+        "AI cannot evaluate personal health decisions — only a professional who knows you can do that.",
+        "For health information, it is always worth verifying with a qualified source."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d4_s15",
+      "type": "match",
+      "title": "Match the goal to the right prompt",
+      "pairs": [
+        {
+          "left": "Understand a complex topic quickly",
+          "right": "Explain this like I am a beginner"
+        },
+        {
+          "left": "Digest a long document",
+          "right": "Summarize in three bullet points"
+        },
+        {
+          "left": "Weigh a decision",
+          "right": "Give me the pros and cons"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d4_s16",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "Why should you not rely on AI for today's news?",
+          "options": [
+            "AI does not like news topics",
+            "AI's knowledge has a cut-off date so recent events may be missing",
+            "AI only knows about science"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Saying 'explain this like I am a beginner' usually makes AI answers clearer.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "To get a focused summary, ask AI for a specific number of ______ points.",
+          "answer": "bullet",
+          "aliases": [
+            "key",
+            "main",
+            "summary"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d4_s17",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d4_s18",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d4_s19",
+      "type": "completion",
+      "title": "Day 4 complete",
+      "body": "You can now use AI to summarize, explain, and research — turning hours of reading into minutes of clarity. That is a serious advantage. See you tomorrow.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

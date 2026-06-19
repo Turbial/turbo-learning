@@ -47,6 +47,13 @@ import aiDay25 from "../../src/content/ai_operator/day25.json";
 import aiDay26 from "../../src/content/ai_operator/day26.json";
 import aiDay27 from "../../src/content/ai_operator/day27.json";
 import aiDay28 from "../../src/content/ai_operator/day28.json";
+import afeDay1 from "../../src/content/ai_for_everyone/day1.json";
+import afeDay2 from "../../src/content/ai_for_everyone/day2.json";
+import afeDay3 from "../../src/content/ai_for_everyone/day3.json";
+import afeDay4 from "../../src/content/ai_for_everyone/day4.json";
+import afeDay5 from "../../src/content/ai_for_everyone/day5.json";
+import afeDay6 from "../../src/content/ai_for_everyone/day6.json";
+import afeDay7 from "../../src/content/ai_for_everyone/day7.json";
 import duoDay1 from "../../src/content/duo/day1.json";
 import duoDay2 from "../../src/content/duo/day2.json";
 import duoDay3 from "../../src/content/duo/day3.json";
@@ -64,6 +71,8 @@ const DAY_CONTENT: Record<string, any> = {
   "ai-19": aiDay19, "ai-20": aiDay20, "ai-21": aiDay21, "ai-22": aiDay22,
   "ai-23": aiDay23, "ai-24": aiDay24, "ai-25": aiDay25, "ai-26": aiDay26,
   "ai-27": aiDay27, "ai-28": aiDay28,
+  "afe-1": afeDay1, "afe-2": afeDay2, "afe-3": afeDay3,
+  "afe-4": afeDay4, "afe-5": afeDay5, "afe-6": afeDay6, "afe-7": afeDay7,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
   "duo-7": duoDay7,
@@ -95,8 +104,8 @@ export default function LessonScreen() {
   // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
   const supabaseQuery = useLessonByUnit(id);
   const dayNum = day ?? id;
-  // Normalize program slug: "ai-operator" → "ai", "ai_for_everyone" → "ai"
-  const normalizedProgram = program?.startsWith("ai") ? "ai" : (program ?? "ai");
+  // Normalize program slug: "ai-operator" → "ai", "ai_for_everyone" → "afe", others → program or "ai"
+  const normalizedProgram = program === "ai_for_everyone" ? "afe" : program?.startsWith("ai") ? "ai" : (program ?? "ai");
   const localKey = `${normalizedProgram}-${dayNum}`;
   const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS["ai-1"];
   const completeMutation = useCompleteLesson();

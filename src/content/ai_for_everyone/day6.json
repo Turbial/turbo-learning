@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 6,
+    "unitLabel": "Day 6",
+    "unitTitle": "Better Output",
+    "lessonOrder": 1,
+    "lessonTitle": "Use AI as Your Editor",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d6_s1",
+      "type": "info",
+      "title": "Welcome to Day 6",
+      "body": "One of the best things about AI is that it does not get bored, does not take feedback personally, and can critique your work in seconds. Today you will learn how to use it as a sharp, honest editor.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d6_s2",
+      "type": "info",
+      "title": "What AI can critique",
+      "body": "AI can review almost any type of work: emails, presentations, business plans, speeches, applications, reports, proposals, or anything you write. It can find weak spots, missing logic, and unclear phrasing — fast.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d6_s3",
+      "type": "info",
+      "title": "The key: ask for specific feedback",
+      "body": "Vague request: \"What do you think of this?\" Useful request: \"Find three weaknesses in this argument\" or \"What would someone who disagrees say?\" Specifics turn a general review into something you can act on.",
+      "audioUrl": null,
+      "primaryButton": "Show me",
+      "xp": 3
+    },
+    {
+      "id": "d6_s4",
+      "type": "example",
+      "title": "Before: a weak feedback request",
+      "prompt": "Can you look at my proposal and tell me if it is good?",
+      "primaryButton": "See the stronger version",
+      "xp": 3
+    },
+    {
+      "id": "d6_s5",
+      "type": "example",
+      "title": "After: a strong feedback prompt",
+      "prompt": "Act as a tough but fair critic. Here is my project proposal: [paste text]. 1. What are the three weakest points in my argument? 2. What questions would a skeptical reader have? 3. What is missing that would make this more convincing? Be direct.",
+      "primaryButton": "What changed",
+      "xp": 3
+    },
+    {
+      "id": "d6_s6",
+      "type": "info",
+      "title": "What changed",
+      "body": "The stronger prompt: named a role (tough but fair critic), provided the content, asked specific numbered questions, and said \"be direct.\" Each of those details shapes a more useful, actionable response.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d6_s7",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "You want AI to improve your cover letter. Which prompt will give the most useful feedback?",
+      "options": [
+        "Is my cover letter good?",
+        "Act as a hiring manager. Here is my cover letter: [paste]. What are the top three things that would make this stronger? Also, what would make you stop reading?",
+        "Fix my cover letter.",
+        "Tell me if I will get the job."
+      ],
+      "correct": 1,
+      "feedback": [
+        "This will get a vague yes or no — not useful.",
+        "Excellent. A role, the content, specific questions, and a practical angle make this highly actionable.",
+        "AI can fix surface issues, but without knowing what to focus on, it may miss the important gaps.",
+        "AI cannot predict hiring decisions — only tell you how the letter reads."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6_s8",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You should only show AI finished, polished work to get useful feedback.",
+      "correct": false,
+      "feedback": [
+        "Early drafts often get the most useful feedback. AI can spot structural problems before you spend time polishing something that needs rebuilding.",
+        "Right. Rough drafts are perfect for feedback — better to find problems early than after a lot of work."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d6_s9",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Act as a devil's advocate. Here is my plan to leave my job and freelance full-time: [paste plan]. What are the biggest risks I have not thought about?",
+      "correct": "good",
+      "feedback": [
+        "Yes — asking AI to challenge your thinking is one of its most valuable uses. It helps you prepare for what you have not considered.",
+        "Actually this is an excellent use of AI. Getting a critical perspective before a major decision is exactly what it is good for."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d6_s10",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Tell me whether my business will succeed.",
+      "correct": "notideal",
+      "feedback": [
+        "AI cannot predict business success — too many factors are outside its view. But it can help you stress-test your plan, find gaps, and think through risks.",
+        "Right. A better approach: ask AI to find weaknesses in your plan, not to predict the outcome."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d6_s11",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Asking AI to \"steelman\" an argument means asking it to find the strongest possible version of your idea.",
+      "correct": true,
+      "feedback": [
+        "Actually, steelmanning means presenting the strongest form of an argument — AI can do this to help you see your idea at its best before you defend it.",
+        "Right. \"Steelman my argument\" asks AI to make your idea as strong as possible — useful before a presentation or pitch."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d6_s12",
+      "type": "builder",
+      "title": "Build a feedback prompt",
+      "fields": [
+        {
+          "id": "work",
+          "label": "What work are you asking AI to review?",
+          "placeholder": "e.g. a short speech I am giving at my company meeting"
+        },
+        {
+          "id": "focus",
+          "label": "What specific feedback do you want?",
+          "placeholder": "e.g. is the main point clear, does it flow well, what is weak"
+        },
+        {
+          "id": "voice",
+          "label": "What kind of critic should AI be?",
+          "placeholder": "e.g. a tough but constructive editor"
+        }
+      ],
+      "template": "Act as {{voice}}. Here is my {{work}}: [paste your work here]. Please give me feedback on: {{focus}}. Be specific and direct.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d6_s13",
+      "type": "copy_action",
+      "title": "Copy your feedback prompt",
+      "body": "Copy this prompt, add your actual work in place of [paste your work here], and send it to your AI tool.",
+      "sourceStepId": "d6_s12",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d6_s14",
+      "type": "paste_capture",
+      "title": "Paste the feedback you received",
+      "body": "Paste the critique AI gave you here so we can save it to your work.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d6_s15",
+      "type": "reflection",
+      "title": "Reflect on the feedback",
+      "questions": [
+        {
+          "id": "surprise",
+          "type": "single_choice",
+          "label": "Did AI point out anything you had not noticed yourself?",
+          "options": [
+            "Yes — something significant",
+            "Yes — a small thing",
+            "No — I had already seen all of it",
+            "I am not sure yet"
+          ]
+        },
+        {
+          "id": "action",
+          "type": "textarea",
+          "label": "What is one specific improvement you will make based on the feedback?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d6_s16",
+      "type": "match",
+      "title": "Match the feedback goal to the prompt",
+      "pairs": [
+        {
+          "left": "Find gaps in my argument",
+          "right": "What questions would a skeptical reader have?"
+        },
+        {
+          "left": "Strengthen my strongest point",
+          "right": "Steelman this argument for me"
+        },
+        {
+          "left": "Prepare for objections",
+          "right": "Act as a devil's advocate and challenge this"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d6_s17",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What makes a feedback prompt most useful?",
+          "options": [
+            "Keeping the request open-ended so AI can choose what to fix",
+            "Asking specific questions and giving AI the actual content to review",
+            "Only showing AI work that is already nearly perfect"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Asking AI to 'be direct' in its feedback will make the response more actionable.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "To get AI to challenge your plan, ask it to act as a ______ advocate.",
+          "answer": "devil's",
+          "aliases": [
+            "devils",
+            "devil",
+            "critical",
+            "tough"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d6_s18",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d6_s19",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d6_s20",
+      "type": "completion",
+      "title": "Day 6 complete",
+      "body": "You now know how to use AI to critique, strengthen, and stress-test your work — before anyone else sees it. That is a powerful editing loop. One more day to go — see you tomorrow.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

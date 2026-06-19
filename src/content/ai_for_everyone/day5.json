@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 5,
+    "unitLabel": "Day 5",
+    "unitTitle": "From Chaos to Clarity",
+    "lessonOrder": 1,
+    "lessonTitle": "Let AI Plan With You",
+    "minutes": 13
+  },
+  "steps": [
+    {
+      "id": "d5_s1",
+      "type": "info",
+      "title": "Welcome to Day 5",
+      "body": "Big goals can feel overwhelming. Long to-do lists can be paralyzing. Today you will learn how to use AI to break any goal into a clear, realistic plan — and then actually use it.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d5_s2",
+      "type": "info",
+      "title": "AI is a great planning partner",
+      "body": "AI does not get overwhelmed. You give it a goal, constraints, and any context. It produces a structured plan in seconds. You can then edit, adjust, and make it your own.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d5_s3",
+      "type": "scenario_card",
+      "title": "Sound familiar?",
+      "body": "You have a goal that feels big: start a side project, get fit, learn something new, reorganize your home. You know what you want — but you have no idea where to begin. AI can give you a first map.",
+      "audioUrl": null,
+      "primaryButton": "Show me",
+      "xp": 3
+    },
+    {
+      "id": "d5_s4",
+      "type": "info",
+      "title": "The three planning questions",
+      "body": "Before you ask AI to plan anything, know: 1. What is the goal? 2. What are the constraints (time, money, energy)? 3. How specific do you want the output — high-level overview or a step-by-step breakdown?",
+      "audioUrl": null,
+      "primaryButton": "Good to know",
+      "xp": 3
+    },
+    {
+      "id": "d5_s5",
+      "type": "example",
+      "title": "A goal breakdown prompt",
+      "prompt": "Act as a personal productivity coach. My goal is to start a small online store selling handmade candles within 60 days. I have about five hours a week to work on this and a budget of $300. Break this goal into a realistic weekly action plan for the first four weeks. Keep each week to three clear tasks.",
+      "primaryButton": "Why this works",
+      "xp": 3
+    },
+    {
+      "id": "d5_s6",
+      "type": "info",
+      "title": "What made that prompt work",
+      "body": "It included a role (productivity coach), the goal (online store), time available (5 hours/week), budget ($300), timeline (60 days), and output format (weekly tasks). Nothing was left for AI to guess.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d5_s7",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "You want AI to help you plan a kitchen renovation. Which prompt will get the best result?",
+      "options": [
+        "Plan my kitchen renovation.",
+        "How do I renovate a kitchen?",
+        "Act as a home renovation planner. I want to renovate my kitchen in the next three months with a budget of $5,000. I can work on it on weekends only. Give me a four-phase plan with the most important tasks in each phase.",
+        "What are some kitchen renovation tips?"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Possible, but too vague — AI will produce a generic answer.",
+        "This will give you general information, not a plan tailored to your situation.",
+        "Excellent. Role, goal, constraints, timeline, and output format — all included.",
+        "Tips are useful but not the same as a personalized action plan."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5_s8",
+      "type": "compare",
+      "title": "Two approaches",
+      "question": "Try this: ask AI to plan your goal two ways — once as a high-level three-step overview, and once as a detailed week-by-week plan. Compare them. Which format is more useful for how you actually think and work?",
+      "primaryButton": "I compared them",
+      "xp": 10
+    },
+    {
+      "id": "d5_s9",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Once AI gives you a plan, you should follow it exactly without making any changes.",
+      "correct": false,
+      "feedback": [
+        "The AI plan is a starting point, not a final answer. Edit it, adjust it, and make it fit your real life.",
+        "Right. Think of the AI plan as a strong first draft — yours to improve from there."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5_s10",
+      "type": "match",
+      "title": "Match the planning request",
+      "pairs": [
+        {
+          "left": "I have 20 tasks and no idea what to do first",
+          "right": "Help me prioritize these by impact and urgency"
+        },
+        {
+          "left": "My goal feels too big to start",
+          "right": "Break this goal into the first three steps"
+        },
+        {
+          "left": "I keep forgetting to do important things",
+          "right": "Turn this list into a simple weekly schedule"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d5_s11",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Help me prioritize my tasks for this week. Here they are: [list of 10 tasks]. I have about six hours free and need to finish the client report first.",
+      "correct": "good",
+      "feedback": [
+        "Yes — giving AI your task list with your constraints is a practical and powerful use.",
+        "Actually this is a strong planning prompt. Context plus a concrete list works well."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d5_s12",
+      "type": "builder",
+      "title": "Build a goal breakdown prompt",
+      "fields": [
+        {
+          "id": "goal",
+          "label": "What goal do you want to plan?",
+          "placeholder": "e.g. learn to speak basic Spanish"
+        },
+        {
+          "id": "timeframe",
+          "label": "How much time do you have, and over what period?",
+          "placeholder": "e.g. 20 minutes a day for 8 weeks"
+        },
+        {
+          "id": "output",
+          "label": "How do you want the plan formatted?",
+          "placeholder": "e.g. a weekly plan with three tasks per week"
+        }
+      ],
+      "template": "Act as a personal productivity coach. My goal is to {{goal}}. I have {{timeframe}} to work on this. Give me {{output}}.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d5_s13",
+      "type": "copy_action",
+      "title": "Copy your planning prompt",
+      "body": "Copy your prompt and paste it into your AI tool to see the plan it creates.",
+      "sourceStepId": "d5_s12",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d5_s14",
+      "type": "paste_capture",
+      "title": "Paste your plan",
+      "body": "Paste the plan AI gave you here. We will save it so you can refer back to it.",
+      "minLength": 20,
+      "primaryButton": "Submit",
+      "xp": 15
+    },
+    {
+      "id": "d5_s15",
+      "type": "reflection",
+      "title": "Your planning reflection",
+      "questions": [
+        {
+          "id": "realism",
+          "type": "single_choice",
+          "label": "How realistic did the plan feel for your actual life?",
+          "options": [
+            "Very realistic — I could start tomorrow",
+            "Needs some adjustments",
+            "Too ambitious — I need to scale it down",
+            "Too general — I need more detail"
+          ]
+        },
+        {
+          "id": "tweak",
+          "type": "textarea",
+          "label": "What is one thing you would change or add to make the plan work better for you?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d5_s16",
+      "type": "quiz",
+      "title": "Quick mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What three things should every planning prompt include?",
+          "options": [
+            "Your name, location, and age",
+            "The goal, your constraints, and the output format you want",
+            "The topic, a long explanation, and a thank-you"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "AI-generated plans should always be treated as a starting point that you adapt.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "When a goal feels too big to start, ask AI to break it into the first ______ steps.",
+          "answer": "three",
+          "aliases": [
+            "3",
+            "a few",
+            "small",
+            "next"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d5_s17",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d5_s18",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d5_s19",
+      "type": "completion",
+      "title": "Day 5 complete",
+      "body": "You now know how to turn any overwhelming goal into a clear, structured plan — with AI as your thinking partner. The next time something feels too big to start, you have a process. See you tomorrow.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}
