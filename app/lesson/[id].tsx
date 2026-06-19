@@ -25,6 +25,27 @@ import aiDay4 from "../../src/content/ai_operator/day4.json";
 import aiDay5 from "../../src/content/ai_operator/day5.json";
 import aiDay6 from "../../src/content/ai_operator/day6.json";
 import aiDay7 from "../../src/content/ai_operator/day7.json";
+import aiDay8 from "../../src/content/ai_operator/day8.json";
+import aiDay9 from "../../src/content/ai_operator/day9.json";
+import aiDay10 from "../../src/content/ai_operator/day10.json";
+import aiDay11 from "../../src/content/ai_operator/day11.json";
+import aiDay12 from "../../src/content/ai_operator/day12.json";
+import aiDay13 from "../../src/content/ai_operator/day13.json";
+import aiDay14 from "../../src/content/ai_operator/day14.json";
+import aiDay15 from "../../src/content/ai_operator/day15.json";
+import aiDay16 from "../../src/content/ai_operator/day16.json";
+import aiDay17 from "../../src/content/ai_operator/day17.json";
+import aiDay18 from "../../src/content/ai_operator/day18.json";
+import aiDay19 from "../../src/content/ai_operator/day19.json";
+import aiDay20 from "../../src/content/ai_operator/day20.json";
+import aiDay21 from "../../src/content/ai_operator/day21.json";
+import aiDay22 from "../../src/content/ai_operator/day22.json";
+import aiDay23 from "../../src/content/ai_operator/day23.json";
+import aiDay24 from "../../src/content/ai_operator/day24.json";
+import aiDay25 from "../../src/content/ai_operator/day25.json";
+import aiDay26 from "../../src/content/ai_operator/day26.json";
+import aiDay27 from "../../src/content/ai_operator/day27.json";
+import aiDay28 from "../../src/content/ai_operator/day28.json";
 import duoDay1 from "../../src/content/duo/day1.json";
 import duoDay2 from "../../src/content/duo/day2.json";
 import duoDay3 from "../../src/content/duo/day3.json";
@@ -36,6 +57,12 @@ import duoDay7 from "../../src/content/duo/day7.json";
 const DAY_CONTENT: Record<string, any> = {
   "ai-1": aiDay1, "ai-2": aiDay2, "ai-3": aiDay3,
   "ai-4": aiDay4, "ai-5": aiDay5, "ai-6": aiDay6, "ai-7": aiDay7,
+  "ai-8": aiDay8, "ai-9": aiDay9, "ai-10": aiDay10,
+  "ai-11": aiDay11, "ai-12": aiDay12, "ai-13": aiDay13, "ai-14": aiDay14,
+  "ai-15": aiDay15, "ai-16": aiDay16, "ai-17": aiDay17, "ai-18": aiDay18,
+  "ai-19": aiDay19, "ai-20": aiDay20, "ai-21": aiDay21, "ai-22": aiDay22,
+  "ai-23": aiDay23, "ai-24": aiDay24, "ai-25": aiDay25, "ai-26": aiDay26,
+  "ai-27": aiDay27, "ai-28": aiDay28,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
   "duo-7": duoDay7,

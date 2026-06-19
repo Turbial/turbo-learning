@@ -35,7 +35,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "seed": "ts-node scripts/seed-content.ts"
   },
   "private": true
 }

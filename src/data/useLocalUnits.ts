@@ -48,8 +48,34 @@ const DUO_UNITS: Unit[] = Array.from({ length: 28 }, (_, i) => ({
   theme: "#8b5cf6",
 }));
 
+// ─── AI For Everyone — 28 days ───
+
+const AI_FOR_EVERYONE_UNITS: Unit[] = Array.from({ length: 28 }, (_, i) => ({
+  id: `local-ai-for-everyone-unit-${i + 1}`,
+  programId: "ai-for-everyone-program-id",
+  orderNum: i + 1,
+  label: `Day ${i + 1}`,
+  title: [
+    "Why AI Matters Now", "How AI Tools Actually Work",
+    "AI for Writing & Communication", "AI for Research & Learning",
+    "AI for Problem Solving", "AI for Creative Work",
+    "Week 1 Review", "AI in Your Daily Workflow",
+    "Prompting That Gets Results", "AI for Email & Messaging",
+    "AI for Planning & Organisation", "AI for Data & Spreadsheets",
+    "AI for Customer Support", "AI for Social Media",
+    "Building Simple Automations", "AI Tools Comparison",
+    "Staying Safe with AI", "AI Ethics & Bias",
+    "AI at Work", "AI in Your Industry",
+    "Week 3 Review", "AI for Small Business",
+    "AI for Side Projects", "Staying Current with AI",
+    "AI Myths Busted", "Building Your AI Habit",
+    "Your AI Action Plan", "Graduation: Your AI Journey",
+  ][i] ?? `Day ${i + 1}`,
+  theme: "#4A8ED4",
+}));
+
 export const LOCAL_UNITS: Record<string, Unit[]> = {
   "ai-operator": AI_OPERATOR_UNITS,
-  "ai_for_everyone": [],
+  "ai_for_everyone": AI_FOR_EVERYONE_UNITS,
   "duo": DUO_UNITS,
 };
