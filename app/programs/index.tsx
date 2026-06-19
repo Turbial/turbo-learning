@@ -9,12 +9,15 @@ import { EmptyState } from '../../src/components/ui/EmptyState';
 import { Skeleton } from '../../src/components/ui/LoadingSkeleton';
 import { useTheme } from '../../src/theme/ThemeContext';
 import { spacing, fontSize, fontWeight, radius } from '../../src/theme/tokens';
+import { trackEvent } from '../../src/integrations/analytics';
+import type { CatalogItem } from '../../src/data/useProgramCatalog';
 
 export default function Programs({ userId }: { userId?: string }) {
   const { colors } = useTheme(); const router = useRouter();
   const { data, isLoading, refetch } = useProgramCatalog(userId);
-  const enroll = async (programId: string) => {
-    await supabase.from('enrollments').upsert({ user_id: userId, program_id: programId }, { onConflict: 'user_id,program_id' });
+  const enroll = async (item: CatalogItem) => {
+    await supabase.from('enrollments').upsert({ user_id: userId, program_id: item.id }, { onConflict: 'user_id,program_id' });
+    trackEvent({ name: 'program_enrolled', programSlug: item.slug });
     refetch(); router.push('/home');
   };
   if (isLoading) return <View style={{ padding: spacing.xl, gap: spacing.md }}>{[0,1,2].map(i => <Skeleton key={i} height={88} />)}</View>;
@@ -66,7 +69,7 @@ export default function Programs({ userId }: { userId?: string }) {
                   <Text style={{ color: colors.textMuted, fontWeight: '600', fontSize: fontSize.body }}>Coming Soon</Text>
                 </View>
               ) : (
-                <Button title={item.enrolled ? 'Continue' : 'Enroll'} onPress={() => item.enrolled ? router.push('/home') : enroll(item.id)} />
+                <Button title={item.enrolled ? 'Continue' : 'Enroll'} onPress={() => item.enrolled ? router.push('/home') : enroll(item)} />
               )}
             </View>
           </Card>

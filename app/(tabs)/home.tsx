@@ -9,6 +9,7 @@ import { useProfile, useUnits, useProgram, useLessonProgressMap, useActiveProgra
 import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
 import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
+import { useStreakRiskNotification } from "../../src/hooks/useStreakRiskNotification";
 
 function HomeScreenMobile() {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ function HomeScreenMobile() {
   const { data: completedUnitIds } = useLessonProgressMap(user?.id);
   const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
   const { data: streakRisk } = useStreakAtRisk(user?.id);
+  useStreakRiskNotification(user?.id);
 
   const allCompletedIds = new Set([
     ...(completedUnitIds ?? new Set<string>()),

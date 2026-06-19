@@ -1,6 +1,6 @@
 // ─── Onboarding — redesigned with illustrations, bolder progress indicator ───
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity,
   TextInput, SafeAreaView,
@@ -9,6 +9,7 @@ import { router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../src/theme/tokens";
 import { useAuth } from "../src/data/useAuth";
 import { useProfile, useUpdateProfile, useEnroll } from "../src/data/queries";
+import { trackEvent } from "../src/integrations/analytics";
 
 const goals = [
   { key: "automate", label: "Automate my work", emoji: "⚡", desc: "Build AI workflows that save hours" },
@@ -44,6 +45,10 @@ export default function OnboardScreen() {
   const { data: profile, isLoading: profileLoading } = useProfile();
   const updateProfile = useUpdateProfile();
   const enroll = useEnroll();
+
+  useEffect(() => {
+    trackEvent({ name: 'onboarding_started' });
+  }, []);
 
   if (profile?.onboarded) {
     router.replace("/(tabs)/home");
@@ -81,6 +86,7 @@ export default function OnboardScreen() {
         return;
       }
     }
+    trackEvent({ name: 'onboarding_completed', goal, dailyMins, learnTime });
     router.replace("/(tabs)/home");
   };
 

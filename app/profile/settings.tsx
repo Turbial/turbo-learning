@@ -8,9 +8,17 @@ import { Button } from '../../src/components/ui/Button';
 import { useTheme } from '../../src/theme/ThemeContext';
 import { spacing, fontSize, fontWeight, radius } from '../../src/theme/tokens';
 import { useProfile, useUpdateProfile } from '../../src/data/queries';
+import { scheduleStreakReminder } from '../../src/integrations/push';
 
 const SLOTS = ['Morning', 'Afternoon', 'Evening', 'Night'] as const;
 type Slot = typeof SLOTS[number];
+
+const SLOT_HOURS: Record<string, number> = {
+  Morning: 8,
+  Afternoon: 13,
+  Evening: 18,
+  Night: 21,
+};
 
 export default function Settings() {
   const { colors } = useTheme();
@@ -42,6 +50,10 @@ export default function Settings() {
 
   const savePreferences = async () => {
     await updateProfile.mutateAsync({ learnTime: slot, notificationsEnabled: notif });
+    if (notif) {
+      const hour = SLOT_HOURS[slot] ?? 8;
+      await scheduleStreakReminder(hour);
+    }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

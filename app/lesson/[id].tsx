@@ -5,7 +5,7 @@
 //   program — program slug (needed for local fallback key: "ai-2", "duo-3", etc.)
 //   day    — day number for local fallback when UUID lookup fails
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { View, StyleSheet, SafeAreaView, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { LessonPlayer } from "../../src/engine";
@@ -16,6 +16,7 @@ import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
 import { useLessonStateStore } from "../../src/store/lessonStateStore";
 import ChatWidget from "../../src/components/chat/ChatWidget";
+import { trackEvent } from "../../src/integrations/analytics";
 
 // Local fallbacks when Supabase isn't available or lesson not found there
 import aiDay1 from "../../src/content/ai_operator/day1.json";
@@ -103,6 +104,20 @@ export default function LessonScreen() {
   const lesson: Lesson | undefined = supabaseQuery.data ?? localLesson;
   const isLoading = supabaseQuery.isLoading && !localLesson;
 
+  const lessonStartRef = useRef<number>(Date.now());
+
+  useEffect(() => {
+    if (lesson) {
+      lessonStartRef.current = Date.now();
+      trackEvent({
+        name: 'lesson_started',
+        programSlug: program ?? 'ai-operator',
+        unitOrder: parseInt(day ?? '1'),
+        lessonId: lesson.id,
+      });
+    }
+  }, [lesson?.id]);
+
   const handleComplete = useCallback(
     (sessionXp: number, score: number, correct: number, total: number) => {
       const dbLessonId = supabaseQuery.data?.id;
@@ -113,6 +128,14 @@ export default function LessonScreen() {
         correct: String(correct),
         total: String(total),
       };
+      trackEvent({
+        name: 'lesson_completed',
+        programSlug: program ?? 'ai-operator',
+        unitOrder: parseInt(day ?? '1'),
+        sessionXp,
+        score: Math.round(score * 100),
+        durationMs: Date.now() - lessonStartRef.current,
+      });
       if (user && dbLessonId) {
         completeMutation.mutate(
           { lessonId: dbLessonId, xpEarned: sessionXp, score },
