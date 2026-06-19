@@ -29,7 +29,10 @@
     "zustand": "^5.0.13"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.2.2",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.11",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -37,7 +40,18 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "seed": "ts-node scripts/seed-content.ts"
+    "seed": "ts-node scripts/seed-content.ts",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": ["**/__tests__/**/*.test.ts"],
+    "watchPathIgnorePatterns": [".claude"],
+    "modulePathIgnorePatterns": [".claude"],
+    "transform": {
+      "^.+\\.tsx?$": ["ts-jest", { "tsconfig": { "strict": false } }]
+    }
   },
   "private": true
 }

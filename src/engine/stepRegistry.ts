@@ -39,6 +39,7 @@ import CopyActionStep from "./components/steps/CopyActionStep";
 import QuizStepComp from "./components/steps/QuizStep";
 import CompareStep from "./components/steps/CompareStep";
 import FallbackStep from "./components/steps/FallbackStep";
+import EngineChatStep from "./components/steps/ChatStep";
 import EngineTrueFalseStep from "./components/steps/TrueFalseStep";
 import EngineFillBlankStep from "./components/steps/FillBlankStep";
 import EngineMatchStep from "./components/steps/MatchStep";
@@ -250,7 +251,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: true },
   },
   chat: {
-    component: FallbackStep as React.ComponentType<StepProps<any>>,
+    component: EngineChatStep as React.ComponentType<StepProps<any>>,
     score: defRescore,
     behavior: { requiresInteraction: true },
   },
