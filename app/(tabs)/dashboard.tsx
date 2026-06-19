@@ -1,5 +1,5 @@
 // app/(tabs)/dashboard.tsx — redesigned: centered grid, clean stats
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Card } from '../../src/components/ui/Card';
 import { Button } from '../../src/components/ui/Button';
@@ -9,11 +9,16 @@ import { Skeleton } from '../../src/components/ui/LoadingSkeleton';
 import { useProfile, useLessonProgressMap } from '../../src/data/queries';
 import { useTheme } from '../../src/theme/ThemeContext';
 import { spacing, fontSize, fontWeight, radius } from '../../src/theme/tokens';
+import { useAuth } from '../../src/data/useAuth';
+import { useReviewQueue } from '../../src/data/useReviewQueue';
 
 export default function Dashboard() {
   const { colors } = useTheme(); const router = useRouter();
+  const { user } = useAuth();
   const { data: profile, isLoading } = useProfile();
   const { data: progressMap, isLoading: progressLoading } = useLessonProgressMap(profile?.id);
+  const { data: reviewItems = [] } = useReviewQueue(user?.id);
+  const reviewDueCount = reviewItems.length;
   const days = Array.from({ length: 28 }, (_, i) => i + 1);
   const completedCount = progressMap ? progressMap.size : 0;
   const currentDay = Math.min(completedCount + 1, 28);
@@ -36,6 +41,28 @@ export default function Dashboard() {
           <StreakFire streak={profile?.streak ?? 0} />
         </View>
       </Card>
+
+      {/* review queue action card */}
+      <TouchableOpacity
+        onPress={() => router.push('/review')}
+        style={[s.reviewCard, reviewDueCount > 0 ? s.reviewCardActive : s.reviewCardIdle]}
+        activeOpacity={0.8}
+      >
+        <View style={s.reviewCardLeft}>
+          <Text style={s.reviewCardIcon}>📚</Text>
+          <View>
+            <Text style={[s.reviewCardLabel, reviewDueCount > 0 ? s.reviewCardLabelActive : s.reviewCardLabelIdle]}>
+              Review Queue
+            </Text>
+            {reviewDueCount > 0 ? (
+              <Text style={s.reviewCardCount}>{reviewDueCount} {reviewDueCount === 1 ? 'card' : 'cards'} due</Text>
+            ) : (
+              <Text style={s.reviewCardCaughtUp}>✓ All caught up</Text>
+            )}
+          </View>
+        </View>
+        <Text style={[s.reviewCardChevron, reviewDueCount > 0 ? s.reviewCardChevronActive : s.reviewCardChevronIdle]}>›</Text>
+      </TouchableOpacity>
 
       {/* quick start — centered */}
       <Card>
@@ -87,6 +114,67 @@ export default function Dashboard() {
 
 const s = StyleSheet.create({
   content: { padding: spacing.xl, gap: spacing.lg, backgroundColor: '#f9fafb' },
+  // Review Queue card
+  reviewCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 20,
+    padding: spacing.md,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  reviewCardActive: {
+    backgroundColor: '#059669',
+  },
+  reviewCardIdle: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#e8e2d9',
+  },
+  reviewCardLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  reviewCardIcon: {
+    fontSize: 28,
+  },
+  reviewCardLabel: {
+    fontSize: 16,
+    fontWeight: '700' as const,
+  },
+  reviewCardLabelActive: {
+    color: '#fff',
+  },
+  reviewCardLabelIdle: {
+    color: '#1a1a2e',
+  },
+  reviewCardCount: {
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.85)',
+    fontWeight: '500' as const,
+    marginTop: 2,
+  },
+  reviewCardCaughtUp: {
+    fontSize: 13,
+    color: '#059669',
+    fontWeight: '600' as const,
+    marginTop: 2,
+  },
+  reviewCardChevron: {
+    fontSize: 28,
+    fontWeight: '300' as const,
+  },
+  reviewCardChevronActive: {
+    color: 'rgba(255,255,255,0.8)',
+  },
+  reviewCardChevronIdle: {
+    color: '#9ca3af',
+  },
   // Header
   headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   headerLabel: { color: '#9ca3af', fontSize: 12, fontWeight: '800' as const, letterSpacing: 1.5 },
