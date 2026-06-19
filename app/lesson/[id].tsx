@@ -202,6 +202,7 @@ export default function LessonScreen() {
       <LessonPlayer
         steps={lesson.steps}
         lessonId={lesson.id}
+        lessonTitle={lesson.title}
         onComplete={handleComplete}
         allowBack
       />

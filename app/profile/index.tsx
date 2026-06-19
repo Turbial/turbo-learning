@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import { supabase } from "../../src/data/supabase";
 import { Field } from "../../src/components/ui/Field";
 import { Button } from "../../src/components/ui/Button";
@@ -11,12 +12,19 @@ import { useTheme } from "../../src/theme/ThemeContext";
 import { spacing, fontSize, fontWeight, radius, colors as themeColors } from "../../src/theme/tokens";
 import { useProfile, useBadges } from "../../src/data/queries";
 import { useStreakShield } from "../../src/data/useStreakShield";
+import { useAuth } from "../../src/data/useAuth";
+
+const ADMIN_EMAILS = (process.env.EXPO_PUBLIC_ADMIN_EMAILS ?? "mvk8000@gmail.com")
+  .split(",").map((e) => e.trim().toLowerCase());
 
 export default function Profile() {
   const { colors } = useTheme(); const toast = useToast();
+  const router = useRouter();
+  const { user } = useAuth();
   const { data: profile } = useProfile();
   const { data: badges } = useBadges(profile?.id);
   const { data: shields, purchase } = useStreakShield(profile?.id);
+  const isAdmin = ADMIN_EMAILS.includes(user?.email?.toLowerCase() ?? "");
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
 
@@ -176,6 +184,25 @@ export default function Profile() {
         multiline
       />
       <Button title="Save changes" onPress={save} />
+
+      {isAdmin && (
+        <TouchableOpacity
+          onPress={() => router.push("/admin")}
+          style={{
+            backgroundColor: "#1a1a2e",
+            borderRadius: radius.md,
+            paddingVertical: spacing.md,
+            paddingHorizontal: spacing.lg,
+            alignItems: "center",
+            marginTop: spacing.sm,
+          }}
+          activeOpacity={0.8}
+        >
+          <Text style={{ color: "#fff", fontWeight: "700", fontSize: fontSize.sm }}>
+            ⚙️ Admin Dashboard
+          </Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 }

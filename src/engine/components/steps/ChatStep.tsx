@@ -15,8 +15,11 @@ type Message = {
   content: string;
 };
 
-export default function ChatStep({ step, onAnswer, onContinue }: StepProps) {
+export default function ChatStep({ step, onAnswer, onContinue, state }: StepProps) {
   const s = step as ChatStepType;
+
+  const contextSystemPrompt = s.systemPrompt ?? buildContextPrompt(state.lessonTitle);
+
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: s.greeting ?? "Hi! I'm your AI learning assistant. Ask me anything about what you're learning today." },
   ]);
@@ -36,7 +39,7 @@ export default function ChatStep({ step, onAnswer, onContinue }: StepProps) {
     setInteracted(true);
 
     try {
-      const response = await callLLM(s.systemPrompt, [...messages, userMsg]);
+      const response = await callLLM(contextSystemPrompt, [...messages, userMsg]);
       const assistantMsg: Message = { role: "assistant", content: response };
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err) {
@@ -121,6 +124,20 @@ export default function ChatStep({ step, onAnswer, onContinue }: StepProps) {
       </TouchableOpacity>
     </View>
   );
+}
+
+// ─── Context prompt builder ───
+
+function buildContextPrompt(lessonTitle?: string): string {
+  const topic = lessonTitle ? `"${lessonTitle}"` : "today's lesson";
+  return `You are a helpful AI learning assistant supporting a learner who is currently studying ${topic}. Your role is to:
+- Answer questions about concepts covered in this lesson
+- Give practical examples related to the topic
+- Encourage and clarify when the learner is confused
+- Keep answers concise and conversational (2-4 sentences unless more detail is needed)
+- Stay focused on the lesson topic; gently redirect off-topic questions back
+
+Be warm, encouraging, and practical. Avoid jargon.`;
 }
 
 // ─── LLM call ───

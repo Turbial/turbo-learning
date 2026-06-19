@@ -18,6 +18,7 @@ import { useAddXp } from "../data/queries";
 export interface LessonPlayerProps {
   steps: Step[];
   lessonId: string;
+  lessonTitle?: string;
   onComplete?: (sessionXp: number, score: number, correctCount: number, totalGraded: number) => void;
   /** If true, renders a "Back" button to the previous step */
   allowBack?: boolean;
@@ -34,6 +35,7 @@ export interface LessonPlayerState {
   isLast: boolean;
   progress: number; // 0–1
   comboStreak: number;
+  lessonTitle?: string;
 }
 
 // ─── Component ───
@@ -41,6 +43,7 @@ export interface LessonPlayerState {
 export default function LessonPlayer({
   steps,
   lessonId,
+  lessonTitle,
   onComplete,
   allowBack = true,
 }: LessonPlayerProps) {
@@ -216,8 +219,9 @@ export default function LessonPlayer({
       isLast: isLastStep(stepIndex, steps.length),
       progress: steps.length > 0 ? stepIndex / steps.length : 0,
       comboStreak,
+      lessonTitle,
     }),
-    [stepIndex, sessionXp, responses, correctCount, totalGraded, steps.length, comboStreak],
+    [stepIndex, sessionXp, responses, correctCount, totalGraded, steps.length, comboStreak, lessonTitle],
   );
 
   // ─── Render ───
