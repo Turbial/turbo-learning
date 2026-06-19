@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day12",
+  "title": "Day 12: The Apology That Actually Works",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d12-info-1",
+      "type": "info",
+      "title": "The Difference Between an Apology and Repair",
+      "body": "'I'm sorry, okay?' is not an apology. It's a shutdown.\n\n'I'm sorry you feel that way' is not an apology. It's a redirect.\n\n'I already said I was sorry!' is not an apology. It's scorekeeping.\n\nA real apology does three things:\n\n1. NAMES the specific thing you did wrong \u2014 not a vague 'whatever happened.'\n2. OWNS the impact \u2014 'I see how that hurt you.'\n3. OFFERS a change \u2014 'Next time I'll do X instead.'\n\nWords without change isn't an apology. It's a performance.",
+      "xp": 5
+    },
+    {
+      "id": "d12-highlight-1",
+      "type": "highlight",
+      "body": "An apology is not a transaction.\n\nYou don't say sorry to make the problem go away.\nYou say sorry to show you understand what happened \u2014\nand that you care enough to do it differently next time.",
+      "highlights": [
+        "not a transaction",
+        "show you understand",
+        "do it differently"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d12-reflection-1",
+      "type": "reflection",
+      "title": "Your Apology Track Record",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about the last time you apologized to your partner. Write down exactly what you said.\n\nNow rate yourself:\n\u2022 Did you name the specific behavior? (Not 'for everything' \u2014 what specifically?)\n\u2022 Did you acknowledge the impact on them? (Not how it made YOU feel \u2014 how it affected THEM?)\n\u2022 Did you commit to a change?\n\nIf you're honest \u2014 was it a real apology or a conversation-ender?"
+        }
+      ]
+    },
+    {
+      "id": "d12-info-2",
+      "type": "info",
+      "title": "The Three-Part Apology",
+      "body": "Here's the structure that actually lands:\n\nPart 1 \u2014 The Acknowledgment\n'I was short with you this morning when you asked about the weekend plans.'\n\nPart 2 \u2014 The Impact\n'I realize that probably made you feel dismissed, especially since you were just trying to coordinate things.'\n\nPart 3 \u2014 The Change\n'I want to be more present when you're trying to plan with me. Next time, I'll take a breath before I respond instead of snapping.'\n\nThat's it. No 'but.' No 'you also.' No excuses. The 'but' invalidates everything before it.\n\n'Sorry, but you started it' isn't an apology. It's blame dressed up.",
+      "xp": 5
+    },
+    {
+      "id": "d12-mc-1",
+      "type": "mc",
+      "question": "Which of these is a real three-part apology?",
+      "options": [
+        "'I'm sorry you got upset about the dishes.'",
+        "'I was dismissive when you talked about your day, and I see how that hurt you. I'll put my phone down when you walk in the door.'",
+        "'I already said I was sorry. What more do you want?'",
+        "'I'm sorry for everything. You know I love you.'"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite. 'Sorry you got upset' puts the problem on their reaction, not your action.",
+        "Yes. Naming the behavior (dismissive), the impact (hurt you), and the change (put phone down). That's the full package.",
+        "That's frustration disguised as an apology. It closes the conversation instead of opening repair.",
+        "Vague and empty. What's 'everything'? A genuine apology requires specificity."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-scenario-1",
+      "type": "scenario_card",
+      "title": "The 'But' Problem",
+      "body": "Bad apology: 'I'm sorry I yelled, but you were pushing my buttons.'\n\nEverything before 'but' gets erased by what comes after.\n\nGood apology: 'I'm sorry I yelled. I was frustrated, but I should have taken a break instead of raising my voice. I'll do better.'\n\nSee the difference? The good one takes full ownership. The bad one shares blame.\n\nHere's a rule: if your apology contains 'but,' 'if,' or 'however,' it's not an apology yet.",
+      "xp": 5
+    },
+    {
+      "id": "d12-copy-action-1",
+      "type": "copy_action",
+      "title": "Write a Real Apology",
+      "prompt": "Think of something \u2014 big or small \u2014 that you could apologize for right now.\n\nWrite it using the three-part structure:\n\n1. The specific thing you did:_______\n2. The impact on them:_______\n3. What you'll change:_______\n\nNow say it to your partner. Don't add anything. Don't explain. Don't defend. Just deliver it and let it land.",
+      "xp": 10,
+      "body": "Think of something \u2014 big or small \u2014 that you could apologize for right now.\n\nWrite it using the three-part structure:\n\n1. The specific thing you did:_______\n2. The impact on them:_______\n3. What you'll change:_______\n\nNow say it to your partner. Don't add anything. Don't explain. Don't defend. Just deliver it and let it land.",
+      "sourceStepId": "d12-info-1"
+    },
+    {
+      "id": "d12-reflection-2",
+      "type": "reflection",
+      "title": "Receiving an Apology",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "When your partner apologizes to you, how do you receive it?\n\nDo you accept it gracefully \u2014 or do you use it as an opportunity to bring up what they're still not getting right?\n\n'A real apology costs the giver something. Don't make them pay interest.'\n\nHow can you be a better receiver of apologies?"
+        }
+      ]
+    },
+    {
+      "id": "d12-tf-1",
+      "type": "tf",
+      "question": "If you apologize for something, your partner should accept it and move on.",
+      "correct": false,
+      "feedback": [
+        "Correct. An apology is an offer, not a transaction. Your partner may need time to process. They may need to talk about it more before they can move on. Pushing for instant acceptance invalidates their timeline.",
+        "Not quite. An apology is an offering. Your partner's healing process might not match your timeline. A genuine apology gives space for the other person to receive it on their own terms."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-info-3",
+      "type": "info",
+      "title": "Tomorrow: Boundaries \u2014 The Kindest No",
+      "body": "You've been learning how to repair when things go wrong. But what about preventing things from going wrong in the first place?\n\nTomorrow: setting boundaries \u2014 the kindest thing you can do for your marriage, even when it feels hard.",
+      "xp": 5
+    },
+    {
+      "id": "d12-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

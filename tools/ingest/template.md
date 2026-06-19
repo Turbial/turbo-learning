@@ -122,13 +122,11 @@ prompt: >
 id: d15-ref1
 questions:
   - id: r1
-    prompt: What's one thing you learned today that changes how you think about AI?
-    placeholder: Write your reflection here...
-    minChars: 20
+    type: textarea
+    label: What's one thing you learned today that changes how you think about AI?
   - id: r2
-    prompt: How will you apply this tomorrow?
-    placeholder: Your action plan...
-    minChars: 20
+    type: textarea
+    label: How will you apply this tomorrow?
 
 ---
 
@@ -157,7 +155,7 @@ body: >
 | `builder` | Multi-field form builder | `id, fields[{id, label, placeholder}][]` |
 | `scenario_card` | Narrative scenario | `id, title, body` |
 | `example` | Concrete example / template | `id, title, prompt` |
-| `reflection` | Open-ended reflection | `id, questions[{id, prompt, placeholder}][]` |
+| `reflection` | Open-ended reflection | `id, questions[{id, type, label}][]` |
 | `completion` | Day/lesson complete screen | `id, title, body` |
 
 ## Tips

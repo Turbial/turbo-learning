@@ -239,9 +239,18 @@ export function useUpdateProfile() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
+      // Map camelCase UserProfile fields → snake_case DB columns
+      const dbUpdates: Record<string, unknown> = {};
+      if (updates.name       !== undefined) dbUpdates.name        = updates.name;
+      if (updates.email      !== undefined) dbUpdates.email       = updates.email;
+      if (updates.goal       !== undefined) dbUpdates.goal        = updates.goal;
+      if (updates.dailyMins  !== undefined) dbUpdates.daily_mins  = updates.dailyMins;
+      if (updates.learnTime  !== undefined) dbUpdates.learn_time  = updates.learnTime;
+      if (updates.onboarded  !== undefined) dbUpdates.onboarded   = updates.onboarded;
+
       const { error } = await supabase
         .from("profiles")
-        .update(updates)
+        .update(dbUpdates)
         .eq("id", user.id);
       if (error) throw error;
     },

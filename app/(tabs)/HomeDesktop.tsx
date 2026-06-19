@@ -1,12 +1,8 @@
-// âââ Home Screen â Desktop / Web layout âââ
-// Renders when Platform.OS === 'web' (Expo web via React Native Web).
-// Layout: macOS-style title bar + fixed left sidebar + scrollable main area.
-//
-// Usage: In app/(tabs)/_layout.tsx (web), swap home.tsx for this file,
-// or use a responsive wrapper that mounts one or the other based on
-// useWindowDimensions().width >= 768.
+// ─── Home Screen — Desktop / Web layout ───
+// Renders when Platform.OS === 'web' && window.innerWidth >= 768.
+// Same real data as the mobile view, but a desktop-optimized layout.
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   View,
   Text,
@@ -17,99 +13,96 @@ import {
   Platform,
 } from "react-native";
 import { router } from "expo-router";
+import { useAuth } from "../../src/data/useAuth";
 import {
-  colors,
-  spacing,
-  radius,
-  fontSize,
-  fontWeight,
-  shadow,
-} from "../../src/theme/tokens";
+  useProfile,
+  useProgram,
+  useUnits,
+  useLessonProgressMap,
+  useActiveProgramSlug,
+} from "../../src/data/queries";
+import { LOCAL_UNITS } from "../../src/data/useLocalUnits";
+import { useStreakAtRisk } from "../../src/data/useStreakAtRisk";
+import { useLocalProgressStore } from "../../src/store/localProgressStore";
+import { colors } from "../../src/theme/tokens";
 
-// âââ Mock data (same shapes as mobile â replace with Supabase queries in M3) ââ
-
-const MOCK_USER = {
-  initials: "AJ",
-  name: "Alexandra J.",
-  handle: "@alex_learns",
-  coins: 4892,
-  level: 24,
-  xp: 3692,
-  xpToNextLevel: 308,
-  xpForNextLevel: 4000,
-  streak: 7,
-  rank: 42,
-  notifications: 2,
-};
-
-const MOCK_HERO = {
-  tag: "Continue Learning",
-  title: "Quadratic Equations",
-  subtitle: "Mathematics Â· Chapter 4 of 8",
-  timeLabel: "5â7 min",
-  difficulty: "HARD",
-  xpReward: "250 XP",
-  progress: 0.78,
-  lessonId: "lesson-quadratic-1",
-};
-
+// ─── Types ──────────────────────────────────────────────────────────────────
 type SubjectFilter = "All" | "Math" | "Science" | "Language" | "History" | "Logic" | "Art";
-const FILTERS: SubjectFilter[] = ["All", "Math", "Science", "Language", "History", "Logic", "Art"];
 
-const SUBJECTS = [
-  { id: "math", name: "Mathematics", emoji: "ð", count: "150+ Questions", progress: 0.79, color: "#4A8ED4", category: "Math" as SubjectFilter, locked: false },
-  { id: "science", name: "Science Lab", emoji: "ð¬", count: "120+ Questions", progress: 0.45, color: "#00C4A7", category: "Science" as SubjectFilter, locked: false },
-  { id: "language", name: "Language Arts", emoji: "ð", count: "200+ Questions", progress: 0.30, color: "#FF6B6B", category: "Language" as SubjectFilter, locked: false },
-  { id: "history", name: "World History", emoji: "ðï¸", count: "90+ Questions", progress: 0.12, color: "#F59E0B", category: "History" as SubjectFilter, locked: false },
-  { id: "logic", name: "Logic & Puzzles", emoji: "ð§©", count: "Coming soon", progress: 0, color: "#9090B8", category: "Logic" as SubjectFilter, locked: true },
-  { id: "art", name: "Creative Arts", emoji: "ð¨", count: "Coming soon", progress: 0, color: "#B0B0D0", category: "Art" as SubjectFilter, locked: true },
+// ─── Data helpers ───────────────────────────────────────────────────────────
+function getDayStatus(
+  orderNum: number,
+  completedSet: Set<string>,
+  currentDay: number,
+): "done" | "current" | "locked" {
+  const id = `ai-${String(orderNum).padStart(2, "0")}`;
+  if (completedSet.has(id)) return "done";
+  if (orderNum === currentDay) return "current";
+  if (orderNum <= currentDay) return "done"; // past but not in completed set — treat as done (side-loaded)
+  return "locked";
+}
+
+// ─── SVG path for decorative blobs ─────────────────────────────────────────
+const blobPaths = [
+  "M0,0 C40,20 60,60 30,100 C0,80 -20,40 0,0Z",
+  "M0,0 C30,30 50,80 20,120 C-10,90 -30,50 0,0Z",
+  "M0,0 C50,10 70,50 40,90 C10,70 -20,30 0,0Z",
 ];
 
-const ACTIVITY = [
-  { id: "a1", emoji: "ð", name: "Calculus Integration", chapter: "Chapter 3", subject: "Mathematics", time: "2 hours ago", status: "done" },
-  { id: "a2", emoji: "âï¸", name: "Newton's Laws of Motion", chapter: "Chapter 2", subject: "Physics", time: "5 hours ago", status: "in-progress" },
-  { id: "a3", emoji: "ð", name: "Essay Structure Basics", chapter: "Chapter 1", subject: "Language Arts", time: "Yesterday", status: "new" },
+// ─── Sidebar ────────────────────────────────────────────────────────────────
+
+interface SidebarProps {
+  activeNav: string;
+  onNav: (id: string) => void;
+  profile: any;
+  streak: number;
+  xp: number;
+  level: number;
+}
+
+const NAV_MAIN = [
+  { id: "home", label: "Home", emoji: "🏠" },
+  { id: "explore", label: "Explore", emoji: "🔍" },
+  { id: "progress", label: "Progress", emoji: "📈" },
+  { id: "profile", label: "Profile", emoji: "👤" },
 ];
 
-const NAV_ITEMS = [
-  { id: "home", label: "Home", emoji: "ð " },
-  { id: "explore", label: "Explore", emoji: "ð" },
-  { id: "progress", label: "Progress", emoji: "ð" },
-  { id: "profile", label: "Profile", emoji: "ð¤" },
-];
 const NAV_MORE = [
-  { id: "leaderboard", label: "Leaderboard", emoji: "ð" },
-  { id: "settings", label: "Settings", emoji: "âï¸" },
+  { id: "leaderboard", label: "Leaderboard", emoji: "🏆" },
+  { id: "settings", label: "Settings", emoji: "⚙️" },
 ];
 
-// âââ Sidebar âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+function Sidebar({ activeNav, onNav, profile, streak, xp, level }: SidebarProps) {
+  const initials = profile?.name
+    ? profile.name.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2)
+    : "TL";
 
-function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) => void }) {
-  const u = MOCK_USER;
-  const xpPct = Math.round(Math.min(u.xp / u.xpForNextLevel, 1) * 100);
+  // XP for next level (simple formula)
+  const xpForNext = (level || 1) * 500;
+  const xpPct = Math.min(Math.round((xp || 0) / xpForNext * 100), 100);
 
   return (
     <View style={s.sidebar}>
       {/* Brand */}
       <View style={s.brand}>
-        <View style={s.brandIco}><Text style={s.brandIcoTxt}>â¦</Text></View>
-        <Text style={s.brandName}>EduApp</Text>
+        <View style={s.brandIco}><Text style={s.brandIcoTxt}>✦</Text></View>
+        <Text style={s.brandName}>Turbo Academy</Text>
       </View>
 
       {/* User card */}
       <View style={s.userCard}>
         <View style={s.userRow}>
           <View style={s.sbAvatar}>
-            <Text style={s.sbAvatarTxt}>{u.initials}</Text>
+            <Text style={s.sbAvatarTxt}>{initials}</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={s.sbName}>{u.name}</Text>
-            <Text style={s.sbHandle}>{u.handle}</Text>
+            <Text style={s.sbName}>{profile?.name || "Learner"}</Text>
+            <Text style={s.sbHandle}>@{profile?.email?.split("@")[0] || "user"}</Text>
           </View>
         </View>
 
         <View style={s.lvlPill}>
-          <Text style={s.lvlTxt}>â­ Level {u.level}</Text>
+          <Text style={s.lvlTxt}>⭐ Level {level || 1}</Text>
         </View>
 
         <View style={s.xpRow}>
@@ -122,36 +115,38 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
 
         <View style={s.coinRow}>
           <View style={s.coinDot} />
-          <Text style={s.coinVal}>{u.coins.toLocaleString()} XP</Text>
-          <Text style={s.coinSub}>{u.xpToNextLevel} to Lvl {u.level + 1}</Text>
+          <Text style={s.coinVal}>{(xp || 0).toLocaleString()} XP</Text>
+          <Text style={s.coinSub}>{xpForNext - (xp || 0)} to Lvl {(level || 1) + 1}</Text>
         </View>
       </View>
 
-      {/* Nav */}
-      <Text style={s.navSec}>Menu</Text>
-      {NAV_ITEMS.map((item) => (
-        <TouchableOpacity
-          key={item.id}
-          style={[s.navItem, activeNav === item.id && s.navItemActive]}
-          onPress={() => onNav(item.id)}
-          activeOpacity={0.75}
-        >
-          <Text style={s.navIco}>{item.emoji}</Text>
-          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
-        </TouchableOpacity>
-      ))}
-      <Text style={s.navSec}>More</Text>
-      {NAV_MORE.map((item) => (
-        <TouchableOpacity
-          key={item.id}
-          style={[s.navItem, activeNav === item.id && s.navItemActive]}
-          onPress={() => onNav(item.id)}
-          activeOpacity={0.75}
-        >
-          <Text style={s.navIco}>{item.emoji}</Text>
-          <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
-        </TouchableOpacity>
-      ))}
+      {/* Navigation */}
+      <View style={s.navSection}>
+        <Text style={s.navSec}>Menu</Text>
+        {NAV_MAIN.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={[s.navItem, activeNav === item.id && s.navItemActive]}
+            onPress={() => onNav(item.id)}
+            activeOpacity={0.75}
+          >
+            <Text style={s.navIco}>{item.emoji}</Text>
+            <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
+          </TouchableOpacity>
+        ))}
+        <Text style={s.navSec}>More</Text>
+        {NAV_MORE.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={[s.navItem, activeNav === item.id && s.navItemActive]}
+            onPress={() => onNav(item.id)}
+            activeOpacity={0.75}
+          >
+            <Text style={s.navIco}>{item.emoji}</Text>
+            <Text style={[s.navLbl, activeNav === item.id && s.navLblActive]}>{item.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
       {/* Quick stats */}
       <View style={s.statsArea}>
@@ -161,18 +156,18 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
             <Text style={s.statSub}>Keep it up!</Text>
           </View>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>ð¥ {MOCK_USER.streak}</Text>
+            <Text style={s.statVal}>🔥 {streak}</Text>
             <Text style={s.statUnit}>days</Text>
           </View>
         </View>
         <View style={s.statCard}>
           <View>
             <Text style={s.statLbl}>Global Rank</Text>
-            <Text style={s.statSub}>Top 5%</Text>
+            <Text style={s.statSub}>Top learner</Text>
           </View>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.statVal}>#{MOCK_USER.rank}</Text>
-            <Text style={s.statUnit}>worldwide</Text>
+            <Text style={s.statVal}>#{level || 1}</Text>
+            <Text style={s.statUnit}>level</Text>
           </View>
         </View>
       </View>
@@ -180,42 +175,53 @@ function Sidebar({ activeNav, onNav }: { activeNav: string; onNav: (id: string) 
   );
 }
 
-// âââ Hero Banner âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Hero (Continue Learning) ───────────────────────────────────────────────
 
-function HeroBanner() {
-  const h = MOCK_HERO;
+function HeroBanner({
+  label,
+  title,
+  subtitle,
+  progress,
+  timeLabel,
+  difficulty,
+  xpReward,
+  onPress,
+}: {
+  label: string;
+  title?: string;
+  subtitle?: string;
+  progress: number;
+  timeLabel: string;
+  difficulty: string;
+  xpReward: string;
+  onPress: () => void;
+}) {
+  const blob = blobPaths[Math.floor(Math.random() * blobPaths.length)];
   return (
-    <TouchableOpacity
-      style={s.hero}
-      activeOpacity={0.9}
-      onPress={() => router.push(`/lesson/${h.lessonId}` as any)}
-    >
-      {/* Left content */}
+    <TouchableOpacity style={s.hero} activeOpacity={0.9} onPress={onPress}>
       <View style={s.heroLeft}>
-        <View>
-          <Text style={s.heroTag}>ð {h.tag.toUpperCase()}</Text>
-          <Text style={s.heroTitle}>{h.title}</Text>
-          <Text style={s.heroSub}>{h.subtitle}</Text>
-          <View style={s.heroChips}>
-            {[`â± ${h.timeLabel}`, `â ${h.difficulty}`, `â¦ ${h.xpReward}`].map((c) => (
-              <View key={c} style={[s.heroChip, c.includes("HARD") && s.heroChipHard]}>
-                <Text style={s.heroChipTxt}>{c}</Text>
-              </View>
-            ))}
-          </View>
+        <View style={{ flex: 1 }}>
+          <Text style={s.heroTag}>📚 {label.toUpperCase()}</Text>
+          <Text style={s.heroTitle}>{title || "Start your first lesson"}</Text>
+          <Text style={s.heroSub}>{subtitle || "AI Operator · 28-Day Program"}</Text>
+        </View>
+        <View style={s.heroChips}>
+          {[timeLabel, difficulty, xpReward].map((c, i) => (
+            <View key={i} style={[s.heroChip, difficulty.includes("HARD") && s.heroChipHard]}>
+              <Text style={s.heroChipTxt}>{c}</Text>
+            </View>
+          ))}
         </View>
         <View style={s.heroBottom}>
           <View style={s.heroPTrack}>
-            <View style={[s.heroPFill, { width: `${Math.round(h.progress * 100)}%` as any }]} />
+            <View style={[s.heroPFill, { width: `${Math.min(Math.round(progress * 100), 100)}%` as any }]} />
           </View>
-          <Text style={s.heroPct}>{Math.round(h.progress * 100)}%</Text>
-          <TouchableOpacity style={s.heroCta} activeOpacity={0.85}>
-            <Text style={s.heroCtaTxt}>Continue â</Text>
+          <Text style={s.heroPct}>{Math.round(progress * 100)}%</Text>
+          <TouchableOpacity style={s.heroCta} activeOpacity={0.85} onPress={onPress}>
+            <Text style={s.heroCtaTxt}>Continue →</Text>
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Right decorative area */}
       <View style={s.heroRight}>
         <View style={[s.hrc, s.hrc1]} />
         <View style={[s.hrc, s.hrc2]} />
@@ -226,107 +232,175 @@ function HeroBanner() {
   );
 }
 
-// âââ Subject grid (3-col) ââââââââââââââââââââââââââââââââââââââââ
+// ─── Day Cards (replaces mock SubjectGrid) ──────────────────────────────────
 
-function SubjectGrid({ filter }: { filter: SubjectFilter }) {
-  const visible = filter === "All" ? SUBJECTS : SUBJECTS.filter((x) => x.category === filter);
+function DayCards({
+  days,
+  onPressDay,
+}: {
+  days: Array<{ day: number; unitId: string; title: string; status: string }>;
+  onPressDay: (unitId: string, day: number) => void;
+}) {
+  const currentIdx = days.findIndex((d) => d.status === "current");
+  const nextUp = currentIdx >= 0 && currentIdx < days.length - 1 ? days[currentIdx + 1] : null;
+
   return (
-    <View style={s.subGrid}>
-      {visible.map((item) => (
+    <View style={s.daysGrid}>
+      {days.slice(0, 28).map((d) => (
         <TouchableOpacity
-          key={item.id}
-          style={[s.subCard, item.locked && s.subCardLocked]}
-          activeOpacity={item.locked ? 1 : 0.85}
-          disabled={item.locked}
+          key={d.day}
+          style={[
+            s.dayCard,
+            d.status === "current" && s.dayCardCurrent,
+            d.status === "locked" && s.dayCardLocked,
+            d.status === "done" && s.dayCardDone,
+          ]}
+          activeOpacity={d.status === "locked" ? 1 : 0.7}
+          disabled={d.status === "locked"}
+          onPress={() => onPressDay(d.unitId, d.day)}
         >
-          <View style={[s.subTop, { backgroundColor: item.color }]}>
-            <View style={[s.subC1, { backgroundColor: item.color + "55" }]} />
-            <View style={[s.subC2, { backgroundColor: item.color + "33" }]} />
-            <Text style={s.subEmoji}>{item.emoji}</Text>
-          </View>
-          <View style={s.subBody}>
-            <Text style={[s.subName, item.locked && { color: colors.textMuted }]} numberOfLines={1}>
-              {item.name}
-            </Text>
-            <Text style={s.subCount}>{item.count}</Text>
-            {!item.locked ? (
-              <View style={s.subPTrack}>
-                <View style={[s.subPFill, { width: `${Math.round(item.progress * 100)}%` as any, backgroundColor: item.color }]} />
-              </View>
+          <View style={[s.dayCircle, d.status === "done" && s.dayCircleDone, d.status === "current" && s.dayCircleCurrent]}>
+            {d.status === "done" ? (
+              <Text style={s.dayCheck}>✓</Text>
             ) : (
-              <Text style={s.lockLbl}>ð LOCKED</Text>
+              <Text style={[s.dayNum, d.status === "current" && s.dayNumCurrent, d.status === "locked" && s.dayNumLocked]}>
+                {d.day}
+              </Text>
             )}
           </View>
+          <Text style={[s.dayCardTitle, d.status === "locked" && { color: "#b0a8c0" }]} numberOfLines={2}>
+            {d.title}
+          </Text>
+          {d.status === "current" && <Text style={s.currentPill}>▶ CURRENT</Text>}
+          {d.status === "locked" && <Text style={s.lockPill}>🔒</Text>}
         </TouchableOpacity>
       ))}
     </View>
   );
 }
 
-// âââ Activity table âââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Activity table ─────────────────────────────────────────────────────────
+
+const ACTIVITY = [
+  { emoji: "📐", name: "Day 1: What AI Is", chapter: "Start here", subject: "AI Operator", time: "Today", status: "in-progress" },
+  { emoji: "⚗️", name: "Day 2: Prompting", chapter: "Foundation", subject: "AI Operator", time: "Today", status: "new" },
+];
 
 const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }> = {
-  done: { bg: "#D1FAE5", color: "#065F46", label: "Answered" },
-  "in-progress": { bg: "#FEF3C7", color: "#92400E", label: "Pending" },
+  done: { bg: "#D1FAE5", color: "#065F46", label: "Done" },
+  "in-progress": { bg: "#FEF3C7", color: "#92400E", label: "In Progress" },
   new: { bg: "#EDE9FE", color: "#4C1D95", label: "New" },
 };
 
-const ICON_BG: Record<string, string> = {
-  "ð": "#F0E8FF",
-  "âï¸": "#DFF7F4",
-  "ð": "#FFE8EC",
-};
-
-function ActivityTable() {
+function ActivityTable({ completedCount, totalDays }: { completedCount: number; totalDays: number }) {
   return (
-    <View style={s.actBox}>
-      {/* Header */}
-      <View style={s.actHead}>
-        {["LESSON", "SUBJECT", "TIME", "STATUS"].map((h) => (
-          <Text key={h} style={s.actHeadTxt}>{h}</Text>
-        ))}
+    <View>
+      <View style={s.actHeader}>
+        <Text style={s.actHdrCell}>LESSON</Text>
+        <Text style={s.actHdrCell}>PROGRAM</Text>
+        <Text style={s.actHdrCell}>TIME</Text>
+        <Text style={s.actHdrCell}>STATUS</Text>
       </View>
-      {/* Rows */}
-      {ACTIVITY.map((item, i) => {
-        const st = STATUS_STYLE[item.status];
-        return (
-          <TouchableOpacity key={item.id} style={[s.actRow, i === ACTIVITY.length - 1 && { borderBottomWidth: 0 }]} activeOpacity={0.75}>
-            <View style={s.actCell}>
-              <View style={[s.actIco, { backgroundColor: ICON_BG[item.emoji] ?? "#F0E8FF" }]}>
-                <Text style={{ fontSize: 16 }}>{item.emoji}</Text>
-              </View>
-              <View>
-                <Text style={s.actName}>{item.name}</Text>
-                <Text style={s.actChapter}>{item.chapter}</Text>
-              </View>
-            </View>
-            <Text style={s.actSubject}>{item.subject}</Text>
-            <Text style={s.actTime}>{item.time}</Text>
-            <View>
-              <View style={[s.actBadge, { backgroundColor: st.bg }]}>
-                <Text style={[s.actBadgeTxt, { color: st.color }]}>{st.label}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        );
-      })}
+      <View style={s.actRow}>
+        <View style={s.actCell}>
+          <View style={[s.actIconBg, { backgroundColor: "#EEF2FF" }]}>
+            <Text>🎯</Text>
+          </View>
+          <View>
+            <Text style={s.actName}>AI Operator Program</Text>
+            <Text style={s.actChap}>{completedCount}/{totalDays} days completed</Text>
+          </View>
+        </View>
+        <Text style={s.actCell}>AI Operator</Text>
+        <Text style={s.actCell}>Active</Text>
+        <View style={s.actCell}>
+          <View style={s.actStatus}>
+            <Text style={s.actStatusTxt}>
+              {completedCount === totalDays ? "🎉 Complete" : `${totalDays - completedCount} remaining`}
+            </Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
 
-// âââ Main Screen âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Main Screen ────────────────────────────────────────────────────────────
 
 export default function HomeDesktopScreen() {
   const [activeNav, setActiveNav] = useState("home");
-  const [filter, setFilter] = useState<SubjectFilter>("All");
+  const [filter] = useState<SubjectFilter>("All");
   const [search, setSearch] = useState("");
+
+  const { user } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: activeSlug } = useActiveProgramSlug();
+  const programSlug = activeSlug || "ai-operator";
+  const { data: program } = useProgram(programSlug);
+  const { data: units, isLoading: unitsLoading } = useUnits(program?.id);
+  const { data: completedUnitIds } = useLessonProgressMap(user?.id);
+  const { data: streakRisk } = useStreakAtRisk(user?.id);
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
+  const localCompletedIds = useLocalProgressStore((s) => s.completedUnitIds);
+
+  const allCompletedIds = useMemo(() => {
+    return new Set([
+      ...(completedUnitIds ?? [] as string[]),
+      ...localCompletedIds,
+    ]);
+  }, [completedUnitIds, localCompletedIds]);
+
+  const fallbackUnits = LOCAL_UNITS[programSlug] ?? LOCAL_UNITS["ai-operator"];
+  const resolvedUnits = (units?.length ? units : fallbackUnits).sort(
+    (a: any, b: any) => (a.order_num || a.day || 0) - (b.order_num || b.day || 0),
+  );
+
+  const currentDayNum = useMemo(() => {
+    let dayIdx = 1;
+    for (const u of resolvedUnits) {
+      const unitId = u.id || `ai-${String(dayIdx).padStart(2, "0")}`;
+      if (!allCompletedIds.has(unitId)) break;
+      dayIdx++;
+    }
+    return dayIdx;
+  }, [resolvedUnits, allCompletedIds]);
+
+  const days = useMemo(() => {
+    return resolvedUnits.map((u: any, i: number) => {
+      const day = i + 1;
+      const unitId = u.id || `ai-${String(day).padStart(2, "0")}`;
+      const status = getDayStatus(day, allCompletedIds, currentDayNum);
+      return { day, unitId, title: u.title || u.label || `Day ${day}`, status };
+    });
+  }, [resolvedUnits, allCompletedIds, currentDayNum]);
+
+  const completedCount = days.filter((d) => d.status === "done").length;
+  const totalDays = days.length;
+
+  const currentDay = days.find((d) => d.status === "current");
+  const nextUp = days.find((d) => d.status === "locked");
+
+  const handlePressDay = (unitId: string, day: number) => {
+    if (day <= currentDayNum) {
+      router.push({ pathname: `/lesson/${unitId}`, params: { program: programSlug, day: String(day) } });
+    }
+  };
+
+  const handleMessenger = () => {
+    router.push("/messenger/ai-operator-day1");
+  };
+
+  const profileName = profile?.name || user?.email?.split("@")[0] || "Learner";
+  const streak = streakRisk?.streakDays ?? profile?.streak ?? 0;
+  const xp = profile?.xp ?? 0;
+  const level = profile?.level ?? 1;
+
   return (
     <View style={s.root}>
-      {/* ââ macOS title bar ââ */}
+      {/* Title bar */}
       <View style={s.titleBar}>
         <View style={s.trafficLights}>
           <View style={[s.tl, { backgroundColor: "#FF5F57" }]} />
@@ -334,35 +408,38 @@ export default function HomeDesktopScreen() {
           <View style={[s.tl, { backgroundColor: "#28C840" }]} />
         </View>
         <View style={s.titleMid}>
-          <View style={s.titleIco}><Text style={s.titleIcoTxt}>â¦</Text></View>
-          <Text style={s.titleName}>EduApp Â· Home</Text>
+          <View style={s.titleIco}><Text style={s.titleIcoTxt}>✦</Text></View>
+          <Text style={s.titleName}>Turbo Academy · Home</Text>
         </View>
         <View style={s.titleRight}>
-          <Text style={s.titleTime}>9:41 AM</Text>
+          <Text style={s.titleTime}>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</Text>
           <TouchableOpacity style={s.titleBell}>
-            <Text style={{ fontSize: 13 }}>ð</Text>
-            {MOCK_USER.notifications > 0 && <View style={s.titleBellDot} />}
+            <Text style={{ fontSize: 13 }}>🔔</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* ââ App shell ââ */}
+      {/* App shell */}
       <View style={s.shell}>
-        <Sidebar activeNav={activeNav} onNav={setActiveNav} />
+        <Sidebar activeNav={activeNav} onNav={setActiveNav} profile={profile} streak={streak} xp={xp} level={level} />
 
         {/* Main content */}
         <ScrollView style={s.main} contentContainerStyle={s.mainContent} showsVerticalScrollIndicator={false}>
           {/* Greeting + search */}
           <View style={s.topBar}>
             <View>
-              <Text style={s.greetTitle}>{greeting}, Alexandra! ð</Text>
-              <Text style={s.greetSub}>You're on a {MOCK_USER.streak}-day streak â keep going!</Text>
+              <Text style={s.greetTitle}>{greeting}, {profileName}! 👋</Text>
+              <Text style={s.greetSub}>
+                {streak > 0
+                  ? `You're on a ${streak}-day streak — keep going!`
+                  : "Complete a lesson to start your streak!"}
+              </Text>
             </View>
             <View style={s.searchBox}>
-              <Text style={{ fontSize: 14, opacity: 0.4 }}>ð</Text>
+              <Text style={{ fontSize: 14, opacity: 0.4 }}>🔍</Text>
               <TextInput
                 style={s.searchInput}
-                placeholder="Search subjects, topicsâ¦"
+                placeholder="Search subjects, topics…"
                 placeholderTextColor={colors.textMuted}
                 value={search}
                 onChangeText={setSearch}
@@ -371,32 +448,79 @@ export default function HomeDesktopScreen() {
           </View>
 
           {/* Hero */}
-          <HeroBanner />
+          {currentDay ? (
+            <HeroBanner
+              label="Continue Learning"
+              title={currentDay.title}
+              subtitle={`Day ${currentDay.day} of ${totalDays} · ${program?.title || "AI Operator"}`}
+              progress={completedCount / totalDays}
+              timeLabel="~10–15 min"
+              difficulty=""
+              xpReward={`${completedCount}/${totalDays}`}
+              onPress={() => handlePressDay(currentDay.unitId, currentDay.day)}
+            />
+          ) : nextUp ? (
+            <HeroBanner
+              label="AI Operator"
+              title="28-Day Program"
+              subtitle={`${completedCount}/${totalDays} completed`}
+              progress={completedCount / totalDays}
+              timeLabel="~10–15 min"
+              difficulty=""
+              xpReward={`${completedCount}/${totalDays}`}
+              onPress={() => handlePressDay(nextUp.unitId, nextUp.day)}
+            />
+          ) : (
+            <HeroBanner
+              label={program?.title || "AI Operator"}
+              title={`${completedCount}/${totalDays} completed`}
+              subtitle="28-Day Program"
+              progress={completedCount / totalDays}
+              timeLabel="~10–15 min"
+              difficulty={completedCount === totalDays ? "🎉" : ""}
+              xpReward={`${completedCount}/${totalDays}`}
+              onPress={() => {}}
+            />
+          )}
 
-          {/* Explore */}
+          {/* AI Tutor (beta) */}
+          {currentDay && (
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={handleMessenger}
+              style={s.tutorBanner}
+            >
+              <Text style={{ fontSize: 28 }}>💬</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={s.tutorTitle}>
+                  Try the AI Tutor (beta)
+                </Text>
+                <Text style={s.tutorSub}>
+                  Days 1–3 as a chat — tap through, or ask your own question.
+                </Text>
+              </View>
+              <Text style={s.tutorArrow}>›</Text>
+            </TouchableOpacity>
+          )}
+
+          {/* Day Cards */}
           <View style={s.secHdr}>
-            <Text style={s.secTitle}>Explore Subjects</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
+            <Text style={s.secTitle}>AI Operator · 28-Day Program</Text>
+            <Text style={s.journeyProgress}>{completedCount}/{totalDays} days</Text>
           </View>
 
-          {/* Filter pills */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.filterRow}>
-            {FILTERS.map((f) => (
-              <TouchableOpacity key={f} style={[s.pill, filter === f && s.pillActive]} onPress={() => setFilter(f)} activeOpacity={0.75}>
-                <Text style={[s.pillTxt, filter === f && s.pillTxtActive]}>{f}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-
-          <SubjectGrid filter={filter} />
+          {profileLoading || unitsLoading ? (
+            <Text style={{ color: "#b0a8c0", padding: 20 }}>Loading program…</Text>
+          ) : (
+            <DayCards days={days} onPressDay={handlePressDay} />
+          )}
 
           {/* Activity */}
-          <View style={[s.secHdr, { marginTop: spacing.lg }]}>
+          <View style={[s.secHdr, { marginTop: 32 }]}>
             <Text style={s.secTitle}>Recent Activity</Text>
-            <TouchableOpacity activeOpacity={0.7}><Text style={s.seeAll}>See all â</Text></TouchableOpacity>
           </View>
 
-          <ActivityTable />
+          <ActivityTable completedCount={completedCount} totalDays={totalDays} />
 
           <View style={{ height: 32 }} />
         </ScrollView>
@@ -405,7 +529,7 @@ export default function HomeDesktopScreen() {
   );
 }
 
-// âââ Styles âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── Styles ─────────────────────────────────────────────────────────────────
 
 const SIDEBAR_W = 210;
 
@@ -420,294 +544,187 @@ const s = StyleSheet.create({
     borderBottomColor: "rgba(255,255,255,0.07)",
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 18,
+    paddingHorizontal: 12,
+    gap: 12,
   },
-  trafficLights: { flexDirection: "row", gap: 8 },
-  tl: { width: 13, height: 13, borderRadius: 7 },
-  titleMid: {
-    position: "absolute" as any,
-    left: "50%" as any,
-    transform: [{ translateX: -60 }],
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-  },
-  titleIco: {
-    width: 22, height: 22, borderRadius: 7,
-    backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
-  },
-  titleIcoTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
-  titleName: { fontSize: 13, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)" },
-  titleRight: { marginLeft: "auto" as any, flexDirection: "row", alignItems: "center", gap: 14 },
-  titleTime: { fontSize: 12, color: "rgba(255,255,255,0.38)", fontWeight: fontWeight.semibold },
-  titleBell: {
-    width: 28, height: 28, borderRadius: 9,
-    backgroundColor: "rgba(255,255,255,0.07)",
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.10)",
-    justifyContent: "center", alignItems: "center",
-  },
-  titleBellDot: {
-    position: "absolute", top: 5, right: 5,
-    width: 6, height: 6, borderRadius: 3,
-    backgroundColor: colors.coral,
-    borderWidth: 1.5, borderColor: "#160D38",
-  },
+  trafficLights: { flexDirection: "row", gap: 6, width: 60 },
+  tl: { width: 12, height: 12, borderRadius: 6 },
+  titleMid: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6 },
+  titleIco: { width: 18, height: 18, borderRadius: 6, backgroundColor: "#6565E6", justifyContent: "center", alignItems: "center" },
+  titleIcoTxt: { color: "#fff", fontSize: 11, fontWeight: "700" },
+  titleName: { color: "rgba(255,255,255,0.5)", fontSize: 12, fontWeight: "500" },
+  titleRight: { width: 60, flexDirection: "row", alignItems: "center", justifyContent: "flex-end", gap: 8 },
+  titleTime: { color: "rgba(255,255,255,0.5)", fontSize: 11 },
+  titleBell: { padding: 2 },
 
   // Shell
-  shell: { flex: 1, flexDirection: "row", overflow: "hidden" },
+  shell: { flex: 1, flexDirection: "row" },
 
   // Sidebar
   sidebar: {
     width: SIDEBAR_W,
-    backgroundColor: "#FEFEFE",
+    backgroundColor: "#1C1040",
     borderRightWidth: 1,
-    borderRightColor: "rgba(0,0,0,0.07)",
-    padding: 16,
-    overflow: "hidden" as any,
+    borderRightColor: "rgba(255,255,255,0.06)",
+    paddingTop: 20,
+    paddingHorizontal: 12,
   },
-  brand: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 18 },
-  brandIco: {
-    width: 30, height: 30, borderRadius: 9,
-    backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
-  },
-  brandIcoTxt: { fontSize: 14, fontWeight: fontWeight.black, color: "#FFF" },
-  brandName: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary },
+  brand: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 24, paddingHorizontal: 4 },
+  brandIco: { width: 28, height: 28, borderRadius: 8, backgroundColor: "#6565E6", justifyContent: "center", alignItems: "center" },
+  brandIcoTxt: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  brandName: { color: "#fff", fontSize: 15, fontWeight: "700" },
 
-  // User card
   userCard: {
-    backgroundColor: "#EBF4FF",
-    borderRadius: radius.lg,
-    padding: 13,
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "rgba(108,60,225,0.12)",
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 16,
   },
-  userRow: { flexDirection: "row", alignItems: "center", gap: 9, marginBottom: 10 },
-  sbAvatar: {
-    width: 38, height: 38, borderRadius: 11,
-    backgroundColor: colors.violet,
-    justifyContent: "center", alignItems: "center",
-  },
-  sbAvatarTxt: { fontSize: 13, fontWeight: fontWeight.black, color: "#FFF" },
-  sbName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, lineHeight: 18 },
-  sbHandle: { fontSize: 10, color: colors.textMuted },
+  userRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 10 },
+  sbAvatar: { width: 34, height: 34, borderRadius: 17, backgroundColor: "#6565E6", justifyContent: "center", alignItems: "center" },
+  sbAvatarTxt: { color: "#fff", fontSize: 13, fontWeight: "700" },
+  sbName: { color: "#fff", fontSize: 13, fontWeight: "600" },
+  sbHandle: { color: "rgba(255,255,255,0.4)", fontSize: 11 },
   lvlPill: {
-    alignSelf: "flex-start",
-    backgroundColor: colors.violet,
-    borderRadius: radius.pill,
-    paddingHorizontal: 10, paddingVertical: 3,
-    marginBottom: 9,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderRadius: 20, paddingVertical: 3, paddingHorizontal: 10,
+    alignSelf: "flex-start", marginBottom: 10,
   },
-  lvlTxt: { fontSize: 10, fontWeight: fontWeight.bold, color: "#FFF" },
-  xpRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 5 },
-  xpRowLbl: { fontSize: 10, fontWeight: fontWeight.semibold, color: colors.violet },
-  xpRowPct: { fontSize: 10, color: colors.textMuted },
-  xpTrack: { height: 7, backgroundColor: "#BDD4FF", borderRadius: radius.pill, overflow: "hidden" },
-  xpFill: { height: "100%", backgroundColor: colors.violet, borderRadius: radius.pill },
-  coinRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.goldBg,
-    borderRadius: 9,
-    padding: 7,
-    marginTop: 9,
-    borderWidth: 1,
-    borderColor: colors.goldBorder,
-    gap: 6,
-  },
-  coinDot: { width: 13, height: 13, borderRadius: 7, backgroundColor: colors.gold },
-  coinVal: { fontSize: 11, fontWeight: fontWeight.extrabold, color: "#A05A00" },
-  coinSub: { fontSize: 9, color: "#B07800", marginLeft: "auto" as any },
+  lvlTxt: { color: "#B8ACE0", fontSize: 11, fontWeight: "600" },
+  xpRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
+  xpRowLbl: { color: "rgba(255,255,255,0.4)", fontSize: 10 },
+  xpRowPct: { color: "rgba(255,255,255,0.5)", fontSize: 10 },
+  xpTrack: { height: 4, backgroundColor: "rgba(255,255,255,0.1)", borderRadius: 2, marginBottom: 8 },
+  xpFill: { height: 4, backgroundColor: "#6565E6", borderRadius: 2 },
+  coinRow: { flexDirection: "row", alignItems: "center", gap: 4 },
+  coinDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: "#FCD34D" },
+  coinVal: { color: "#fff", fontSize: 12, fontWeight: "700" },
+  coinSub: { color: "rgba(255,255,255,0.4)", fontSize: 10, marginLeft: 4 },
 
-  // Nav
-  navSec: {
-    fontSize: 9, fontWeight: fontWeight.bold,
-    color: colors.textDim, letterSpacing: 1.5,
-    textTransform: "uppercase" as any,
-    paddingVertical: 10, paddingHorizontal: 8,
-  },
-  navItem: {
-    flexDirection: "row", alignItems: "center", gap: 9,
-    paddingVertical: 8, paddingHorizontal: 10,
-    borderRadius: 11, marginBottom: 1,
-  },
-  navItemActive: {
-    backgroundColor: colors.violet,
-  },
-  navIco: { fontSize: 16 },
-  navLbl: { fontSize: 13, fontWeight: fontWeight.semibold, color: "#6060A0" },
-  navLblActive: { color: "#FFF" },
+  navSection: {},
+  navSec: { color: "rgba(255,255,255,0.3)", fontSize: 10, fontWeight: "600", letterSpacing: 1, textTransform: "uppercase", marginTop: 12, marginBottom: 4, paddingHorizontal: 4 },
+  navItem: { flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 8, paddingHorizontal: 4, borderRadius: 8 },
+  navItemActive: { backgroundColor: "rgba(101, 101, 230, 0.15)" },
+  navIco: { fontSize: 16, width: 24, textAlign: "center" },
+  navLbl: { color: "rgba(255,255,255,0.65)", fontSize: 13, fontWeight: "500" },
+  navLblActive: { color: "#fff", fontWeight: "600" },
 
-  // Stats
-  statsArea: { marginTop: "auto" as any, gap: 7, paddingTop: 14 },
+  statsArea: { marginTop: "auto", paddingTop: 16, gap: 8 },
   statCard: {
-    backgroundColor: "#F8F8FF",
-    borderRadius: 11,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#EEEEFF",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "row", justifyContent: "space-between", alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 10, padding: 10,
   },
-  statLbl: { fontSize: 10, color: colors.textMuted, fontWeight: fontWeight.medium },
-  statSub: { fontSize: 9, color: colors.textDim },
-  statVal: { fontSize: 15, fontWeight: fontWeight.black, color: colors.textPrimary, textAlign: "right" as any },
-  statUnit: { fontSize: 9, color: colors.textDim, textAlign: "right" as any },
+  statLbl: { color: "rgba(255,255,255,0.7)", fontSize: 12, fontWeight: "600" },
+  statSub: { color: "rgba(255,255,255,0.35)", fontSize: 10, marginTop: 1 },
+  statVal: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  statUnit: { color: "rgba(255,255,255,0.4)", fontSize: 10 },
 
-  // Main
-  main: { flex: 1 },
-  mainContent: {
-    padding: spacing.lg,
-    backgroundColor: "#EBF4FF",
-    minHeight: "100%" as any,
-    gap: 20,
-  },
+  // Main content
+  main: { flex: 1, backgroundColor: "#0D0A1A" },
+  mainContent: { padding: 24, maxWidth: 900 },
 
-  // Top bar
-  topBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  greetTitle: { fontSize: 22, fontWeight: fontWeight.black, color: colors.textPrimary, letterSpacing: -0.5 },
-  greetSub: { fontSize: 13, color: colors.textMuted, marginTop: 2 },
+  topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 },
+  greetTitle: { color: "#fff", fontSize: 22, fontWeight: "700" },
+  greetSub: { color: "rgba(255,255,255,0.5)", fontSize: 13, marginTop: 4 },
   searchBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-    backgroundColor: "#FFF",
-    borderWidth: 1.5,
-    borderColor: "#BDD4FF",
-    borderRadius: 13,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    minWidth: 220,
-    ...shadow.sm,
+    flexDirection: "row", alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.06)", borderRadius: 10,
+    paddingHorizontal: 12, height: 40, width: 240, gap: 8,
   },
-  searchInput: {
-    fontSize: 12,
-    fontWeight: fontWeight.medium,
-    color: colors.textMuted,
-    flex: 1,
-    outlineStyle: "none" as any,
-  },
+  searchInput: { flex: 1, color: "#fff", fontSize: 13, outlineStyle: "none" as any, outlineWidth: 0 },
 
   // Hero
   hero: {
-    backgroundColor: "#2B6CB0",
-    borderRadius: 24,
-    flexDirection: "row",
-    overflow: "hidden",
-    minHeight: 188,
-    ...shadow.hero,
+    backgroundColor: "#1C1040", borderRadius: 16, overflow: "hidden",
+    borderWidth: 1, borderColor: "rgba(255,255,255,0.06)",
+    flexDirection: "row", marginBottom: 20,
   },
-  heroLeft: {
-    flex: 1,
-    padding: 28,
-    justifyContent: "space-between",
-  },
-  heroTag: { fontSize: 10, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.55)", letterSpacing: 2, marginBottom: 7 },
-  heroTitle: { fontSize: 26, fontWeight: fontWeight.black, color: "#FFF", lineHeight: 30, marginBottom: 5, letterSpacing: -0.5 },
-  heroSub: { fontSize: 12, color: "rgba(255,255,255,0.55)", fontWeight: fontWeight.medium, marginBottom: 12 },
-  heroChips: { flexDirection: "row", gap: 7, flexWrap: "wrap" as any },
+  heroLeft: { flex: 1, padding: 20 },
+  heroTag: { color: "#6565E6", fontSize: 11, fontWeight: "700", letterSpacing: 1, marginBottom: 8 },
+  heroTitle: { color: "#fff", fontSize: 18, fontWeight: "700", marginBottom: 4 },
+  heroSub: { color: "rgba(255,255,255,0.5)", fontSize: 13 },
+  heroChips: { flexDirection: "row", gap: 6, marginTop: 12 },
   heroChip: {
-    backgroundColor: "rgba(255,255,255,0.13)",
-    borderRadius: radius.pill,
+    backgroundColor: "rgba(255,255,255,0.06)", borderRadius: 20,
     paddingHorizontal: 10, paddingVertical: 4,
   },
-  heroChipHard: { backgroundColor: "rgba(255,90,70,0.30)" },
-  heroChipTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: "rgba(255,255,255,0.9)" },
-  heroBottom: { flexDirection: "row", alignItems: "center", gap: 14 },
-  heroPTrack: { flex: 1, height: 8, backgroundColor: "rgba(255,255,255,0.16)", borderRadius: radius.pill, overflow: "hidden" },
-  heroPFill: { height: "100%", backgroundColor: "#FFF", borderRadius: radius.pill },
-  heroPct: { fontSize: 13, fontWeight: fontWeight.extrabold, color: "#FFF" },
+  heroChipHard: { backgroundColor: "rgba(239,68,68,0.15)" },
+  heroChipTxt: { color: "rgba(255,255,255,0.6)", fontSize: 11 },
+  heroBottom: { flexDirection: "row", alignItems: "center", marginTop: 16, gap: 10 },
+  heroPTrack: { flex: 1, height: 6, backgroundColor: "rgba(255,255,255,0.08)", borderRadius: 3 },
+  heroPFill: { height: 6, backgroundColor: "#6565E6", borderRadius: 3 },
+  heroPct: { color: "rgba(255,255,255,0.5)", fontSize: 12, fontWeight: "600", width: 36, textAlign: "right" },
   heroCta: {
-    backgroundColor: "#FFF",
-    borderRadius: 12,
-    paddingVertical: 10, paddingHorizontal: 20,
+    backgroundColor: "#6565E6", borderRadius: 8,
+    paddingHorizontal: 16, paddingVertical: 8,
   },
-  heroCtaTxt: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.violet },
-  heroRight: { width: 180, position: "relative" as any, overflow: "hidden" },
-  hrc: { position: "absolute", borderRadius: 9999 },
-  hrc1: { width: 220, height: 220, top: -70, right: -60, backgroundColor: "rgba(255,255,255,0.08)" },
-  hrc2: { width: 120, height: 120, bottom: -40, right: 10, backgroundColor: "rgba(255,255,255,0.07)" },
-  hrc3: { width: 65, height: 65, top: 28, right: 80, backgroundColor: "rgba(255,255,255,0.09)" },
-  hrd: {
-    position: "absolute", width: 72, height: 72,
-    top: "50%" as any, left: "50%" as any,
-    marginTop: -36, marginLeft: -36,
-    backgroundColor: "rgba(255,255,255,0.10)",
-    transform: [{ rotate: "45deg" }], borderRadius: 12,
-  },
+  heroCtaTxt: { color: "#fff", fontSize: 13, fontWeight: "600" },
+  heroRight: { width: 100, position: "relative", overflow: "hidden" },
+  hrc: { position: "absolute", width: 100, height: 20, borderRadius: 10, opacity: 0.1 },
+  hrc1: { top: 10, right: -20, width: 120, height: 120, backgroundColor: "#6565E6", borderRadius: 60 },
+  hrc2: { bottom: 30, right: -30, width: 100, height: 100, backgroundColor: "#8B5CF6", borderRadius: 50 },
+  hrc3: { bottom: -10, right: -10, width: 80, height: 80, backgroundColor: "#EC4899", borderRadius: 40 },
+  hrd: { position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(101,101,230,0.05)" },
 
-  // Section headers
-  secHdr: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  secTitle: { fontSize: 16, fontWeight: fontWeight.extrabold, color: colors.textPrimary, letterSpacing: -0.3 },
-  seeAll: { fontSize: 12, fontWeight: fontWeight.semibold, color: colors.violet },
-
-  // Filter pills
-  filterRow: { gap: 7, paddingBottom: 14 },
-  pill: {
-    borderRadius: radius.pill, paddingHorizontal: 15, paddingVertical: 7,
-    backgroundColor: "#FFF", borderWidth: 2, borderColor: "#BDD4FF",
-  },
-  pillActive: { backgroundColor: colors.violet, borderColor: colors.violet },
-  pillTxt: { fontSize: 11, fontWeight: fontWeight.bold, color: colors.textMuted },
-  pillTxtActive: { color: "#FFF" },
-
-  // Subject grid (3-col)
-  subGrid: { flexDirection: "row", flexWrap: "wrap" as any, gap: 12 },
-  subCard: {
-    width: "31%" as any,
-    backgroundColor: "#FFF",
-    borderRadius: 18,
-    overflow: "hidden",
-    ...shadow.sm,
-  },
-  subCardLocked: { opacity: 0.6 },
-  subTop: { height: 80, justifyContent: "center", alignItems: "center", position: "relative" },
-  subC1: { position: "absolute", width: 78, height: 78, borderRadius: 39, top: -22, right: -18 },
-  subC2: { position: "absolute", width: 42, height: 42, borderRadius: 21, bottom: -12, left: 10 },
-  subEmoji: { fontSize: 30, zIndex: 1 },
-  subBody: { padding: 12 },
-  subName: { fontSize: 13, fontWeight: fontWeight.extrabold, color: colors.textPrimary, marginBottom: 2 },
-  subCount: { fontSize: 10, color: colors.textMuted, marginBottom: 8 },
-  subPTrack: { height: 5, backgroundColor: "#F0EAFF", borderRadius: radius.pill, overflow: "hidden" },
-  subPFill: { height: "100%", borderRadius: radius.pill },
-  lockLbl: { fontSize: 10, fontWeight: fontWeight.bold, color: colors.textDim, marginTop: 4 },
-
-  // Activity table
-  actBox: {
-    backgroundColor: "#FFF",
-    borderRadius: 18,
-    overflow: "hidden",
-    ...shadow.sm,
-  },
-  actHead: {
-    flexDirection: "row",
-    paddingVertical: 11, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: "#F0F0FA",
-  },
-  actHeadTxt: {
-    flex: 1, fontSize: 9, fontWeight: fontWeight.bold,
-    color: "#B8B8D0", letterSpacing: 1.2,
-    textTransform: "uppercase" as any,
-  },
-  actRow: {
+  // Tutor banner
+  tutorBanner: {
+    marginBottom: 20,
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: "#ecfdf5",
+    borderWidth: 1,
+    borderColor: "#a7f3d0",
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 13, paddingHorizontal: 18,
-    borderBottomWidth: 1, borderBottomColor: "#F8F8FF",
+    gap: 12,
   },
-  actCell: { flex: 1, flexDirection: "row", alignItems: "center", gap: 11 },
-  actIco: { width: 36, height: 36, borderRadius: 11, justifyContent: "center", alignItems: "center" },
-  actName: { fontSize: 13, fontWeight: fontWeight.bold, color: colors.textPrimary },
-  actChapter: { fontSize: 10, color: colors.textMuted, marginTop: 1 },
-  actSubject: { flex: 1, fontSize: 12, color: "#6060A0", fontWeight: fontWeight.medium },
-  actTime: { flex: 1, fontSize: 11, color: colors.textDim },
-  actBadge: { borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4 },
-  actBadgeTxt: { fontSize: 10, fontWeight: fontWeight.bold },
+  tutorTitle: { fontSize: 16, fontWeight: "700", color: "#047857" },
+  tutorSub: { fontSize: 13, color: "#5A4E40", marginTop: 2 },
+  tutorArrow: { fontSize: 20, color: "#047857" },
+
+  // Section header
+  secHdr: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 16 },
+  secTitle: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  journeyProgress: { color: "rgba(255,255,255,0.5)", fontSize: 12 },
+
+  // Day cards
+  daysGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  dayCard: {
+    width: 100,
+    backgroundColor: "rgba(255,255,255,0.04)",
+    borderRadius: 12,
+    padding: 10,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.06)",
+  },
+  dayCardCurrent: { borderColor: "#6565E6", backgroundColor: "rgba(101,101,230,0.1)" },
+  dayCardDone: { borderColor: "rgba(5,150,105,0.3)", backgroundColor: "rgba(5,150,105,0.08)" },
+  dayCardLocked: { opacity: 0.5 },
+  dayCircle: {
+    width: 36, height: 36, borderRadius: 18,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    justifyContent: "center", alignItems: "center",
+    marginBottom: 6,
+  },
+  dayCircleDone: { backgroundColor: "#059669" },
+  dayCircleCurrent: { backgroundColor: "#6565E6" },
+  dayCheck: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  dayNum: { fontSize: 14, fontWeight: "700", color: "rgba(255,255,255,0.7)" },
+  dayNumCurrent: { color: "#fff" },
+  dayNumLocked: { color: "rgba(255,255,255,0.3)" },
+  dayCardTitle: { fontSize: 11, fontWeight: "600", color: "rgba(255,255,255,0.8)", textAlign: "center", lineHeight: 14 },
+  currentPill: { fontSize: 9, fontWeight: "700", color: "#6565E6", marginTop: 4, letterSpacing: 1 },
+  lockPill: { fontSize: 12, marginTop: 4 },
+
+  // Activity
+  actHeader: { flexDirection: "row", borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.06)", paddingBottom: 8, marginBottom: 4 },
+  actHdrCell: { flex: 1, color: "rgba(255,255,255,0.3)", fontSize: 10, fontWeight: "600", letterSpacing: 1 },
+  actRow: { flexDirection: "row", alignItems: "center", paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.04)" },
+  actCell: { flex: 1 },
+  actIconBg: { width: 32, height: 32, borderRadius: 8, justifyContent: "center", alignItems: "center" },
+  actName: { color: "#fff", fontSize: 13, fontWeight: "600" },
+  actChap: { color: "rgba(255,255,255,0.4)", fontSize: 11, marginTop: 1 },
+  actStatus: { backgroundColor: "rgba(101,101,230,0.15)", borderRadius: 20, paddingHorizontal: 10, paddingVertical: 3, alignSelf: "flex-start" },
+  actStatusTxt: { color: "#B8ACE0", fontSize: 11, fontWeight: "500" },
 });

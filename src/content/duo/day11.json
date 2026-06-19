@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day11",
+  "title": "Day 11: Listening Without Defending",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d11-info-1",
+      "type": "info",
+      "title": "The Harder Skill",
+      "body": "Yesterday was about speaking hard truths. That takes courage.\n\nToday is about hearing them. That takes something harder \u2014 humility.\n\nWhen your partner says something that stings, your brain launches a defense immediately:\n\u2022 'That's not fair.'\n\u2022 'They're misremembering.'\n\u2022 'They did the same thing last week!'\n\u2022 'I'm not the only problem here.'\n\nThe instinct to defend is natural. It's also the fastest way to shut down the conversation.\n\nToday, we build the muscle of listening without defending. Not agreeing. Not apologizing. Just listening.",
+      "xp": 5
+    },
+    {
+      "id": "d11-highlight-1",
+      "type": "highlight",
+      "body": "Listening without defending doesn't mean you agree.\n\nIt means you're choosing understanding over winning.\n\nAnd ironically, when both people stop trying to win,\neveryone does.",
+      "highlights": [
+        "choose understanding over winning",
+        "stop trying to win",
+        "everyone does"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d11-info-2",
+      "type": "info",
+      "title": "Why Defensiveness Is So Damaging",
+      "body": "Defensiveness is one of the Four Horsemen for a reason. Here's what it does:\n\n\u2022 It dismisses your partner's reality \u2014 'That's not what happened.'\n\u2022 It shifts blame \u2014 'Well, you did X first.'\n\u2022 It escalates \u2014 The original issue gets buried under a new argument about who's worse.\n\u2022 It prevents repair \u2014 You can't fix something you won't acknowledge.\n\nHere's the crucial insight: defensiveness feels like self-protection. But it's actually self-sabotage. Because a defensive partner is an un-hearable partner.\n\nAnd your partner stops bringing things to you when they know they'll be met with a wall.",
+      "xp": 5
+    },
+    {
+      "id": "d11-reflection-1",
+      "type": "reflection",
+      "title": "Your Defensiveness Pattern",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think about the last time your partner brought up something that bothered them.\n\nWhat was your first internal reaction? ('That's not fair.' 'Oh, here we go.' 'What about you?')\n\nWhat did you say OUT LOUD? Did it help or hurt?\n\nJust notice the pattern. No judgment. Awareness is the first edit."
+        }
+      ]
+    },
+    {
+      "id": "d11-mc-1",
+      "type": "mc",
+      "question": "What's a better alternative when you feel the urge to defend yourself?",
+      "options": [
+        "Explain why they're wrong about the facts",
+        "Bring up something they did wrong to balance things out",
+        "Say 'Tell me more about that' \u2014 even if it's hard to hear",
+        "Walk away until you feel ready to defend yourself"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Explaining why they're wrong is the definition of defensiveness. It says 'your reality is incorrect.'",
+        "That's counterattack, not defense. It escalates and buries the original issue.",
+        "Yes. 'Tell me more' is the anti-defensiveness move. It says 'Your experience matters to me.' You can share your side AFTER you've fully heard theirs.",
+        "Walking away can be a good pause if you're flooding. But if you use it to prepare a better defense instead of returning with curiosity, it's just delayed defensiveness."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-scenario-1",
+      "type": "scenario_card",
+      "title": "The Defensive Spiral vs The Curious Pivot",
+      "body": "Your partner says: 'You've been really checked out lately. You come home and go straight to your phone.'\n\nDefensive response: 'I'm not checked out! I've had a brutal week at work. And you were on your phone for like an hour last night. So don't\u2014'\n\nCurious pivot: 'You feel like I've been distant. Tell me more about what you're noticing.'\n\nThe defensive response might feel justified. But it ends the conversation. The curious pivot keeps it going \u2014 and might actually get you somewhere.",
+      "xp": 5
+    },
+    {
+      "id": "d11-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Three Go-To Phrases",
+      "prompt": "When you feel defensiveness rising, you need pre-loaded phrases. Write three:\n\n1. 'Tell me more about that.'\n2. 'I want to understand what you're feeling. Can you help me?'\n3. 'I hear you. I might not see it the same way yet, but I want to.'\n\nAdd your own: _________________________________\n\nKeep these ready. The defensive instinct comes fast. Having words loaded buys you time to choose connection instead of self-protection.",
+      "xp": 10,
+      "body": "When you feel defensiveness rising, you need pre-loaded phrases. Write three:\n\n1. 'Tell me more about that.'\n2. 'I want to understand what you're feeling. Can you help me?'\n3. 'I hear you. I might not see it the same way yet, but I want to.'\n\nAdd your own: _________________________________\n\nKeep these ready. The defensive instinct comes fast. Having words loaded buys you time to choose connection instead of self-protection.",
+      "sourceStepId": "d11-info-1"
+    },
+    {
+      "id": "d11-reflection-2",
+      "type": "reflection",
+      "title": "What Your Partner Needs to Hear",
+      "minChars": 40,
+      "xp": 20,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "If your partner could tell you one thing without you getting defensive, what would it be?\n\nYou might not know for sure. But you can probably guess.\n\nImagine they're saying it now. Your job is not to agree \u2014 it's to stay present. To hear it. To let them know they've been heard.\n\nWrite what you imagine they would say. Then write how you would respond if you were committed to listening, not defending."
+        }
+      ]
+    },
+    {
+      "id": "d11-tf-1",
+      "type": "tf",
+      "question": "The best way to handle feedback is to listen fully first, then share your perspective.",
+      "correct": true,
+      "feedback": [
+        "Correct. That's the whole formula. Listen first. Validate their experience. THEN share your side. Most couples reverse this \u2014 they defend first and never get back to understanding.",
+        "Actually, yes \u2014 that's the key. Listen fully, then share. When you defend before understanding, your partner never feels heard, so they just keep repeating themselves louder."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-info-3",
+      "type": "info",
+      "title": "Tomorrow: The Apology That Actually Works",
+      "body": "You've learned do-overs, how to speak hard truths, and how to listen without defending.\n\nTomorrow: the skill that ties it all together \u2014 the apology that actually lands. Not 'I'm sorry you feel that way.' The real thing.",
+      "xp": 5
+    },
+    {
+      "id": "d11-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

@@ -68,6 +68,10 @@ export default function RootLayout() {
                 options={{ animation: "slide_from_right" }}
               />
               <Stack.Screen
+                name="messenger/[lessonId]"
+                options={{ animation: "slide_from_right" }}
+              />
+              <Stack.Screen
                 name="complete/[unitId]"
                 options={{ animation: "fade" }}
               />

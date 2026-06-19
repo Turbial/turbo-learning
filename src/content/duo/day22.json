@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day22",
+  "title": "Day 22: Welcome to Mission Week",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d22-info-1",
+      "type": "info",
+      "title": "The Final Week",
+      "body": "You've done something remarkable.\n\nWeek 1 \u2014 You had the courage to look honestly at your marriage.\nWeek 2 \u2014 You learned the skills to repair what's broken.\nWeek 3 \u2014 You rebuilt connection, warmth, and friendship.\n\nAnd now: Week 4 \u2014 Mission.\n\nThis week isn't about fixing or patching. It's about building. Designing. Choosing.\n\nA marriage without a mission drifts. A marriage with a mission has direction, momentum, and meaning.\n\nWhat are you building together? Not just surviving \u2014 what are you creating?\n\nThis week answers that question. Not with vague visions \u2014 with something real you can build toward.",
+      "xp": 5
+    },
+    {
+      "id": "d22-highlight-1",
+      "type": "highlight",
+      "body": "A good marriage survives the storms.\nA great marriage knows where it's sailing.\n\nMission Week is about picking a destination \u2014 and pointing in the same direction.",
+      "highlights": [
+        "knows where it's sailing",
+        "picking a destination",
+        "same direction"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d22-reflection-1",
+      "type": "reflection",
+      "title": "What Are You Building?",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "If someone asked you, 'What's the mission of your marriage?' \u2014 what would you say?\n\nNot what you DO together. What you're BUILDING together.\n\nAre you building a safe harbor from the world? A launching pad for each other's growth? A legacy for your family? A partnership that makes the world better?\n\nYou might not have a clear answer. That's okay. Today is about finding one."
+        }
+      ]
+    },
+    {
+      "id": "d22-info-2",
+      "type": "info",
+      "title": "The Four Dimensions of a Marriage Mission",
+      "body": "A strong marriage mission usually touches four dimensions:\n\n1. Partnership \u2014 How you show up for each other. The quality of your daily life together.\n2. Growth \u2014 How you help each other become the people you want to be.\n3. Legacy \u2014 What you're creating that outlasts you. Family, community, impact.\n4. Adventure \u2014 How you keep life interesting, curious, and alive together.\n\nThese aren't categories to check off. They're areas to explore.\n\nWhere are you strong? Where have you drifted? Where do you want to focus your energy in this next season of life?\n\nNot every dimension needs equal attention in every season. But they all deserve a conversation.",
+      "xp": 5
+    },
+    {
+      "id": "d22-reflection-2",
+      "type": "reflection",
+      "title": "Your Mission Priorities",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Look at the four dimensions: Partnership, Growth, Legacy, Adventure.\n\nRank them in order of importance to you right now.\n\nNow guess how your partner would rank them.\n\nWhere do you align? Where might there be tension?\n\nThis isn't about being right \u2014 it's about understanding what each of you is pointing toward."
+        }
+      ]
+    },
+    {
+      "id": "d22-tf-1",
+      "type": "tf",
+      "question": "A couple needs to agree on every detail of their shared vision for their marriage to work.",
+      "correct": false,
+      "feedback": [
+        "Correct. You don't need total alignment \u2014 you need mutual understanding and respect for each other's priorities. The goal is a shared conversation, not a perfect match on every detail.",
+        "Not quite. Total agreement isn't the goal. What matters is that you understand each other's priorities and can find overlap. Differences can be complementary."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-scenario-1",
+      "type": "scenario_card",
+      "title": "Two Different Missions",
+      "body": "Partner A: 'Our mission is to create a stable, peaceful home where our kids feel safe and we can grow old together.'\n\nPartner B: 'Our mission is to keep pushing each other to grow, take risks, and have adventures \u2014 even when it's uncomfortable.'\n\nNeither is wrong. They're different. And if A and B never talk about this, A will feel like B is destabilizing the home, while B will feel like A is holding them back.\n\nThe answer isn't for one to convert the other. The answer is to talk about it until you find a mission that honors both.\n\n'A stable home that's also a launching pad for each other's growth.' \u2014 that's a mission both can point toward.",
+      "xp": 5
+    },
+    {
+      "id": "d22-copy-action-1",
+      "type": "copy_action",
+      "title": "Start the Mission Conversation",
+      "prompt": "Tonight, start a conversation with your partner:\n\n'What do you want our marriage to be about? Not just day-to-day \u2014 but what are we really building together?'\n\nDon't try to answer it tonight. Just start the conversation. Let it breathe. Come back to it.\n\nWrite what you hope to learn from this conversation:",
+      "xp": 10,
+      "body": "Tonight, start a conversation with your partner:\n\n'What do you want our marriage to be about? Not just day-to-day \u2014 but what are we really building together?'\n\nDon't try to answer it tonight. Just start the conversation. Let it breathe. Come back to it.\n\nWrite what you hope to learn from this conversation:",
+      "sourceStepId": "d22-info-1"
+    },
+    {
+      "id": "d22-mc-1",
+      "type": "mc",
+      "question": "A marriage mission is most useful when it:",
+      "options": [
+        "Perfectly describes every aspect of your relationship",
+        "Provides direction and helps you make decisions together",
+        "Sounds impressive when you tell other people",
+        "Is set once and never revisited"
+      ],
+      "correct": 1,
+      "feedback": [
+        "A mission doesn't need to cover everything. It's a compass, not a map.",
+        "Yes. A mission's value is in giving you a 'north star' \u2014 something to orient toward when you're making decisions about time, money, and priorities.",
+        "A mission isn't for other people. It's for you.",
+        "Missions evolve. Revisit yours every season of life."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-info-3",
+      "type": "info",
+      "title": "Tomorrow: Your Shared Vision",
+      "body": "Today you started thinking about your marriage mission. Tomorrow, we get specific \u2014 creating a shared vision for where you're going together. Not a five-year plan with bullet points. A picture of what you're building.",
+      "xp": 5
+    },
+    {
+      "id": "d22-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

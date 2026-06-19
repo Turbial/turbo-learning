@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "unit": "day17",
+  "title": "Day 17: Play and Lightness",
+  "estMinutes": 10,
+  "steps": [
+    {
+      "id": "d17-info-1",
+      "type": "info",
+      "title": "The Forgotten Ingredient",
+      "body": "When you were dating, fun was the point. You laughed, teased, flirted, did spontaneous things.\n\nThen life happened. Careers, kids, bills, responsibilities. Somewhere along the way, fun got filed under 'optional' \u2014 right after everything else.\n\nBut here's the research: couples who play together stay together. Laughter releases oxytocin \u2014 the same bonding chemical released during physical intimacy. Shared fun creates shared memories. Teasing and inside jokes build a private world that only the two of you inhabit.\n\nPlay isn't a distraction from adult life. It's the antidote to the heaviness of adult life.",
+      "xp": 5
+    },
+    {
+      "id": "d17-highlight-1",
+      "type": "highlight",
+      "body": "You don't have to be serious all the time to be a serious couple.\n\nPlay is not the opposite of commitment.\nPlay is the celebration of commitment.",
+      "highlights": [
+        "serious all the time",
+        "Play is not the opposite",
+        "celebration of commitment"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17-reflection-1",
+      "type": "reflection",
+      "title": "When Did You Last Play?",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "When's the last time you and your partner did something purely for fun \u2014 no agenda, no logistics, no 'we should'?\n\nThink about the early days. What did you do together that made you laugh? What brought lightness?\n\nWhat's one small, fun thing you could do this week that doesn't require a reservation or a plan?"
+        }
+      ]
+    },
+    {
+      "id": "d17-info-2",
+      "type": "info",
+      "title": "Types of Play in Relationships",
+      "body": "Play doesn't have to mean skydiving or a weekend getaway. Play comes in many forms:\n\nIntellectual play \u2014 debating something silly, doing a crossword together, sharing hot takes on a movie\n\nPhysical play \u2014 wrestling, dancing in the kitchen, chasing each other around the house\n\nVerbal play \u2014 inside jokes, silly voices, teasing that's affectionate not cutting\n\nCompetitive play \u2014 a board game, a video game, betting on who can do something faster\n\nImprovisational play \u2014 making up stories together, recreating a funny moment, being ridiculous on purpose\n\nThe common thread? You're present, you're engaged, and you're not taking yourselves too seriously.",
+      "xp": 5
+    },
+    {
+      "id": "d17-mc-1",
+      "type": "mc",
+      "question": "Which type of play comes most naturally to you? Which comes most naturally to your partner?",
+      "options": [
+        "Intellectual \u2014 debating, puzzles, conversations",
+        "Physical \u2014 movement, touch, activity",
+        "Verbal \u2014 jokes, teasing, wordplay",
+        "Competitive \u2014 games, challenges, winning together"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Intellectual play is great \u2014 it keeps your minds engaged together. Just make sure it doesn't turn into arguing.",
+        "Physical play is wonderful for connection. Movement together releases endorphins and builds teamwork.",
+        "Verbal play builds a private world of shared humor. Just keep it affectionate, not cutting.",
+        "Competitive play can be fun \u2014 just remember the goal is connection, not winning."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17-scenario-1",
+      "type": "scenario_card",
+      "title": "Bringing Play Back",
+      "body": "You're both exhausted from a long week. The couch is calling. You could scroll your phones in silence, or...\n\nPlay option A: 'Let's watch the first five minutes of three terrible movies and rate them.'\n\nPlay option B: 'I'll make us weird mocktails with whatever's in the fridge. No googling recipes.'\n\nPlay option C: 'Let's each write down the worst marriage advice we've ever received and read them in a serious voice.'\n\nNone of these require planning, money, or energy. They just require choosing fun over default."
+    },
+    {
+      "id": "d17-copy-action-1",
+      "type": "copy_action",
+      "title": "Plan One Playful Moment",
+      "prompt": "Write down one specific, low-effort playful thing you can do with your partner in the next 48 hours.\n\nNot 'go on a date.' Something small, spontaneous, and silly.\n\nExamples: make up a new dance move together, recreate a photo from your first year together, have a 'worst pun competition.'\n\nWrite your plan:",
+      "xp": 10,
+      "body": "Write down one specific, low-effort playful thing you can do with your partner in the next 48 hours.\n\nNot 'go on a date.' Something small, spontaneous, and silly.\n\nExamples: make up a new dance move together, recreate a photo from your first year together, have a 'worst pun competition.'\n\nWrite your plan:",
+      "sourceStepId": "d17-info-1"
+    },
+    {
+      "id": "d17-reflection-2",
+      "type": "reflection",
+      "title": "What Blocks Play?",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What stops you from being playful with your partner?\n\n\u2022 You're too tired?\n\u2022 You think they won't engage?\n\u2022 You feel silly?\n\u2022 There's unresolved tension that makes play feel fake?\n\nName the block. Then ask yourself: is that block real, or is it protecting you from something?"
+        }
+      ]
+    },
+    {
+      "id": "d17-tf-1",
+      "type": "tf",
+      "question": "Couples who play together have higher relationship satisfaction across all stages of marriage.",
+      "correct": true,
+      "feedback": [
+        "Correct. Research consistently shows that shared play, humor, and lightness are strongly correlated with long-term relationship satisfaction \u2014 even more than shared values in some studies.",
+        "Actually, yes \u2014 studies show that playfulness and shared humor are hallmarks of the happiest couples, from newlyweds to couples married 40+ years."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17-info-3",
+      "type": "info",
+      "title": "Tomorrow: Physical Intimacy \u2014 Reclaiming Touch",
+      "body": "Play and lightness warm the connection. Tomorrow, we build on that with the physical dimension \u2014 touch, affection, and sexual intimacy. No pressure, no performance. Just reconnecting through your bodies.",
+      "xp": 5
+    },
+    {
+      "id": "d17-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 20
+    }
+  ]
+}

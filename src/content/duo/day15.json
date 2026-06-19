@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day15",
+  "title": "Day 15: Welcome to Connection Week",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d15-info-1",
+      "type": "info",
+      "title": "The Good Part",
+      "body": "Weeks 1 and 2 were about clearing the ground. Diagnosing what's broken. Learning to repair the cracks.\n\nWeek 3 is different. This is the week where marriage stops being a project and starts being a pleasure.\n\nConnection Week is about emotional intimacy, friendship, physical closeness, and the daily practices that make two people genuinely enjoy each other.\n\nNot just tolerate. Not just coexist. Enjoy.\n\nThis week, you're not fixing anything. You're building something. You're creating the kind of connection that makes the hard weeks worth it.",
+      "xp": 5
+    },
+    {
+      "id": "d15-highlight-1",
+      "type": "highlight",
+      "body": "Connection isn't a feeling you wait for.\nIt's a practice you choose.\n\nEvery single day.",
+      "highlights": [
+        "practice you choose",
+        "Every single day",
+        "Connection isn't a feeling"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d15-reflection-1",
+      "type": "reflection",
+      "title": "The Current State of Connection",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "On a scale of 1\u201310, how connected do you feel to your partner RIGHT NOW?\n\nWhat would make that number go up by just ONE point this week? (Not ten points \u2014 one. Small, achievable.)\n\nThink about emotional connection separately from physical connection. Are they at the same level? If not, which needs more attention?"
+        }
+      ]
+    },
+    {
+      "id": "d15-info-2",
+      "type": "info",
+      "title": "The Friendship First Principle",
+      "body": "Here's what decades of marriage research keep showing: the couples who stay happiest are the ones who genuinely like each other.\n\nNot just love. Like.\n\nThey're curious about each other. They turn toward each other's bids. They have inside jokes and shared references. They enjoy hanging out together \u2014 even when there's nothing to do.\n\nRomance is a fire. Friendship is the fireplace. Without the fireplace, the fire just burns everything down.\n\nThis week, you're going to build friendship back into the center of your marriage. Not through grand gestures \u2014 through daily habits of attention and curiosity.",
+      "xp": 5
+    },
+    {
+      "id": "d15-tf-1",
+      "type": "tf",
+      "question": "Strong romantic relationships usually start with strong friendship and keep it at the center.",
+      "correct": true,
+      "feedback": [
+        "Correct. The best relationships are built on genuine friendship. Passion without friendship fades. Friendship plus passion is what lasts decades.",
+        "Actually, yes \u2014 research consistently shows that couples who maintain strong friendship remain happiest long-term. Friendship is the container that holds everything else."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-reflection-2",
+      "type": "reflection",
+      "title": "The Friendship Check",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Answer these questions honestly:\n\n\u2022 When was the last time you laughed together \u2014 really laughed?\n\u2022 When was the last time you had a conversation that wasn't about logistics, kids, or money?\n\u2022 If your partner was a stranger, would you want to be friends with them?\n\u2022 What do you know about their inner world right now \u2014 their worries, dreams, private thoughts?\n\nThe answers tell you where your friendship stands."
+        }
+      ]
+    },
+    {
+      "id": "d15-scenario-1",
+      "type": "scenario_card",
+      "title": "The Love Map",
+      "body": "Gottman calls it a 'Love Map' \u2014 your internal knowledge of your partner's world.\n\nA strong love map means you know:\n\u2022 Who's their closest friend right now, and why\n\u2022 What's their biggest stressor this week\n\u2022 What's a small win they had today\n\u2022 What they'd want for their birthday, not what they told you to get\n\u2022 What's making them anxious that they haven't mentioned\n\nA weak love map means you know the broad strokes but not the details. You know they're stressed but not about what. You know they're happy but not why.\n\nThis week, you'll rebuild your love map \u2014 not by quizzing each other, but by staying curious.",
+      "xp": 5
+    },
+    {
+      "id": "d15-mc-1",
+      "type": "mc",
+      "question": "A 'Love Map' refers to:",
+      "options": [
+        "A shared list of date night ideas",
+        "Your detailed knowledge of your partner's inner world",
+        "A map of places you've been together",
+        "Your partner's love language"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite. That's a date idea list \u2014 nice, but different.",
+        "Yes. A Love Map is your knowledge of their internal landscape \u2014 stresses, dreams, joys, fears. Strong love maps predict happy marriages.",
+        "Nope. Though those can be fun memories!",
+        "Close, but a Love Map is broader \u2014 it covers everything in their inner world."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-copy-action-1",
+      "type": "copy_action",
+      "title": "Two Questions Today",
+      "prompt": "Ask your partner two questions today that aren't about logistics:\n\n1. 'What was the best part of your day?'\n2. 'What's something you're looking forward to?'\n\nListen without interrupting. Ask one follow-up question. That's it.\n\nThe goal isn't a deep conversation. The goal is the habit of turning toward each other.",
+      "xp": 10,
+      "body": "Ask your partner two questions today that aren't about logistics:\n\n1. 'What was the best part of your day?'\n2. 'What's something you're looking forward to?'\n\nListen without interrupting. Ask one follow-up question. That's it.\n\nThe goal isn't a deep conversation. The goal is the habit of turning toward each other.",
+      "sourceStepId": "d15-info-1"
+    },
+    {
+      "id": "d15-info-3",
+      "type": "info",
+      "title": "Tomorrow: Emotional Intimacy \u2014 Going Deeper",
+      "body": "Today was about re-establishing friendship and curiosity. Tomorrow, we go deeper \u2014 into the vulnerability and emotional intimacy that transforms a good friendship into a great marriage.",
+      "xp": 5
+    },
+    {
+      "id": "d15-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

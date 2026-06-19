@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "unit": "day16",
+  "title": "Day 16: Emotional Intimacy \u2014 Going Deeper",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d16-info-1",
+      "type": "info",
+      "title": "Beyond Surface-Level",
+      "body": "Most couples talk about logistics. Who's picking up the kids. What's for dinner. Whether you need to call the plumber.\n\nThat's not connection. That's coordination.\n\nEmotional intimacy is the willingness to share your inner world \u2014 the messy, unpolished parts you usually keep to yourself.\n\nIt's saying:\n\u2022 'I'm actually really anxious about the presentation tomorrow.'\n\u2022 'I felt hurt when you didn't notice I cleaned the whole kitchen.'\n\u2022 'I'm scared we're drifting apart and I don't know what to do about it.'\n\nEmotional intimacy is risky. That's exactly why it creates connection.",
+      "xp": 5
+    },
+    {
+      "id": "d16-highlight-1",
+      "type": "highlight",
+      "body": "Vulnerability is not weakness.\n\nIt's the courage to say:\n'I need you to see the real me \u2014\nnot the put-together version,\nnot the one who has it all figured out.\nThe one who's scared, hopeful, confused, and wants you close.'",
+      "highlights": [
+        "Vulnerability is not weakness",
+        "the real me",
+        "wants you close"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d16-reflection-1",
+      "type": "reflection",
+      "title": "Your Vulnerability Comfort Zone",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "On a scale of 1\u20135, how comfortable are you being vulnerable with your partner?\n\nThink about:\n\u2022 Do you share when you're struggling \u2014 or do you wait until you've figured it out?\n\u2022 Do you tell them when you're disappointed, or do you 'protect' them by staying quiet?\n\u2022 Do you let them see you at your worst, or do you keep a polished front?\n\nWhat would it take to share something vulnerable today?"
+        }
+      ]
+    },
+    {
+      "id": "d16-info-2",
+      "type": "info",
+      "title": "The Vulnerability Ladder",
+      "body": "Vulnerability isn't all-or-nothing. It's a ladder you can climb step by step.\n\nRung 1 \u2014 Sharing facts: 'I had a rough day.'\nRung 2 \u2014 Sharing emotions: 'I felt really frustrated today.'\nRung 3 \u2014 Sharing needs: 'I needed someone to listen, and I didn't know how to ask.'\nRung 4 \u2014 Sharing fears: 'I'm worried I'm not good enough at my job.'\nRung 5 \u2014 Sharing relational fears: 'I'm scared that if you see this side of me, you'll think less of me.'\n\nMost couples stay on rungs 1\u20132 their whole marriage. The deepest connections happen on rungs 3\u20135.\n\nYou don't need to go from 1 to 5 today. Just try one rung higher than usual.",
+      "xp": 5
+    },
+    {
+      "id": "d16-mc-1",
+      "type": "mc",
+      "question": "Emotional intimacy is built by:",
+      "options": [
+        "Spending as much time together as possible",
+        "Sharing your inner world \u2014 feelings, fears, needs \u2014 with each other",
+        "Never arguing or disagreeing",
+        "Having great physical chemistry"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Quantity of time helps, but it's about quality of sharing. Two quiet people in the same room isn't intimacy.",
+        "Yes. Emotional intimacy is built when both partners share what's actually going on inside them, not just what's happening around them.",
+        "Disagreement is healthy. Emotional intimacy is what happens when you can disagree and still feel close.",
+        "Physical chemistry is great, but without emotional intimacy, it doesn't sustain connection."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-scenario-1",
+      "type": "scenario_card",
+      "title": "Surface vs Deeper",
+      "body": "Surface: 'Work was rough today.'\n\nDeeper: 'I had a moment today where I felt like I don't know what I'm doing, and it shook me more than I expected.'\n\nSurface: 'Sorry I was grumpy earlier.'\n\nDeeper: 'I was grumpy earlier and I think it's because I felt invisible. I wanted you to notice me and I didn't know how to say it, so I just got quiet.'\n\nThe deeper versions are scarier to say. That's exactly why they build connection.",
+      "xp": 5
+    },
+    {
+      "id": "d16-copy-action-1",
+      "type": "copy_action",
+      "title": "Share Something Real",
+      "prompt": "Take one step up the vulnerability ladder today.\n\nTell your partner something you'd normally keep to yourself. Something small is fine \u2014 just one rung higher than you usually go.\n\nTemplate: 'I want to share something with you. I'm feeling [emotion] about [situation]. I'm telling you because I want you to know what's going on with me.'\n\nWrite what you'll share:",
+      "xp": 10,
+      "body": "Take one step up the vulnerability ladder today.\n\nTell your partner something you'd normally keep to yourself. Something small is fine \u2014 just one rung higher than you usually go.\n\nTemplate: 'I want to share something with you. I'm feeling [emotion] about [situation]. I'm telling you because I want you to know what's going on with me.'\n\nWrite what you'll share:",
+      "sourceStepId": "d16-info-1"
+    },
+    {
+      "id": "d16-reflection-2",
+      "type": "reflection",
+      "title": "Receiving Vulnerability",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "When your partner shares something vulnerable, how do you respond?\n\nDo you:\n\u2022 Jump to problem-solving? ('You should do X.')\n\u2022 Minimize? ('It's not that bad.')\n\u2022 Compare? ('Well, I had a worse day.')\n\u2022 Or receive it? ('Thank you for telling me. I'm here.')\n\nThe way you receive their vulnerability determines whether they'll offer it again."
+        }
+      ]
+    },
+    {
+      "id": "d16-tf-1",
+      "type": "tf",
+      "question": "When your partner shares a vulnerable feeling, the best response is to help them solve the problem.",
+      "correct": false,
+      "feedback": [
+        "Correct. Most people want to be heard before they want to be fixed. When someone shares vulnerability, the first response should be connection: 'I hear you. I'm with you.' Problem-solving can come later, and only if they ask.",
+        "Not quite. Most people actually need to be heard first. Problem-solving before connection can feel like dismissal. Try listening first, fixing later."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-info-3",
+      "type": "info",
+      "title": "Tomorrow: Play and Lightness",
+      "body": "Emotional intimacy doesn't have to be heavy. In fact, some of the deepest connection happens through play, laughter, and joy.\n\nTomorrow: how to bring fun, spontaneity, and lightness back into your marriage \u2014 even in the middle of real life.",
+      "xp": 5
+    },
+    {
+      "id": "d16-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}

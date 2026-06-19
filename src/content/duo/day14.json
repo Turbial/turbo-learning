@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "unit": "day14",
+  "title": "Day 14: Repair Week \u2014 What You've Built",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d14-info-1",
+      "type": "info",
+      "title": "You Did the Hard Work",
+      "body": "Repair Week. You showed up for seven days and did the work most couples never do.\n\nLet's name what you've built this week:\n\n\u2022 Day 8 \u2014 You committed to moving from diagnosis to action\n\u2022 Day 9 \u2014 You learned the do-over, the power of resetting a bad moment\n\u2022 Day 10 \u2014 You faced the conversations you'd been avoiding\n\u2022 Day 11 \u2014 You practiced listening without getting defensive\n\u2022 Day 12 \u2014 You learned what a real apology looks like\n\u2022 Day 13 \u2014 You set boundaries that protect instead of push away\n\nThat's not a list of skills. That's a repair toolkit. And you own it now.\n\nToday, we consolidate. You'll look back at what changed and set yourself up for Week 3 \u2014 Connection.",
+      "xp": 5
+    },
+    {
+      "id": "d14-highlight-1",
+      "type": "highlight",
+      "body": "You can't undo the past.\nBut you can repair the future.\n\nEvery do-over, every hard conversation, every real apology\nis a brick in a bridge you're building back to each other.",
+      "highlights": [
+        "repair the future",
+        "brick in a bridge",
+        "building back to each other"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d14-reflection-1",
+      "type": "reflection",
+      "title": "What Changed This Week?",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Think back to Day 8. What felt different about your marriage then vs now?\n\nBe specific:\n\u2022 Did you have a conversation you've been avoiding?\n\u2022 Did you use a do-over in a moment of conflict?\n\u2022 Did you receive hard feedback without getting defensive?\n\u2022 Did you give or receive a real apology?\n\nEven one small win is real progress. Name it."
+        }
+      ]
+    },
+    {
+      "id": "d14-mc-1",
+      "type": "mc",
+      "question": "Which repair skill from this week feels most valuable to keep practicing?",
+      "options": [
+        "The do-over \u2014 stopping bad moments before they escalate",
+        "Soft startups \u2014 beginning hard conversations better",
+        "Listening without defending \u2014 staying curious under fire",
+        "Real apologies \u2014 owning my part fully"
+      ],
+      "correct": 0,
+      "feedback": [
+        "The do-over is a game-changer. It stops small fires from becoming four-alarm blazes. Keep using it \u2014 even when it feels awkward.",
+        "Soft startups are the preventive medicine. A better beginning means fewer messes to clean up. Keep practicing those first ten seconds.",
+        "This is the hardest skill of all, and the most powerful. Keep the 'tell me more' muscle flexing. It will serve you for a lifetime.",
+        "Real apologies are where trust gets rebuilt brick by brick. Keep using that three-part structure until it's automatic."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d14-info-2",
+      "type": "info",
+      "title": "Repair Is a Practice, Not a Destination",
+      "body": "Here's the truth about repair work: you'll never be 'done.'\n\nThere will always be moments you handle poorly. There will always be words you wish you could take back. There will always be times you get defensive instead of curious.\n\nThat's not failure. That's being human.\n\nThe goal isn't perfection. The goal is that your defaults keep shifting.\n\n\u2022 That defensiveness gets a millisecond slower and curiosity gets a millisecond faster.\n\u2022 That do-overs become more natural than pushing through.\n\u2022 That 'I'm sorry' means something real because you've practiced it.\n\nYou're not fixing your marriage once. You're building a practice that will serve it for years.",
+      "xp": 5
+    },
+    {
+      "id": "d14-reflection-2",
+      "type": "reflection",
+      "title": "Your Repair Progress",
+      "minChars": 40,
+      "xp": 20,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Rate yourself 1\u20135 on each repair skill before this week vs after this week:\n\nSkill               | Before | After\nCalling a do-over   |  __/5  |  __/5\nSoft startups       |  __/5  |  __/5\nListening w/o defense|  __/5  |  __/5\nReal apologies      |  __/5  |  __/5\nSetting boundaries  |  __/5  |  __/5\n\nWhich skill improved the most? Which still needs practice?"
+        }
+      ]
+    },
+    {
+      "id": "d14-info-3",
+      "type": "info",
+      "title": "What's Coming: Connection Week",
+      "body": "Week 2 was about repair \u2014 mending the cracks so the structure is sound.\n\nWeek 3 is about Connection \u2014 building the intimacy, friendship, and emotional closeness that makes a marriage not just functional but fulfilling.\n\nYou'll learn:\n\u2022 How to rebuild friendship in a busy life\n\u2022 How emotional intimacy fuels physical intimacy (and vice versa)\n\u2022 How to stay curious about each other \u2014 even after years together\n\u2022 How to create shared meaning and rituals\n\nFix what's broken, then build something beautiful on top.",
+      "xp": 5
+    },
+    {
+      "id": "d14-scenario-1",
+      "type": "scenario_card",
+      "title": "The Repaired Foundation",
+      "body": "Imagine a house where the foundation had cracks. You spent a week patching them \u2014 not perfectly, but meaningfully.\n\nNow those cracks aren't growing wider. The house is stable.\n\nThat's what this week was. You can't make the cracks disappear. But you've stopped them from spreading. And now you can start building the rooms you actually want to live in.\n\nConnection Week starts tomorrow. You need a stable foundation first. You built it. Now comes the good part.",
+      "xp": 5
+    },
+    {
+      "id": "d14-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Week 2 Legacy",
+      "prompt": "Write a one-sentence summary of what repair means to you now.\n\nExample: 'Repair means I can mess up and still come back.'\n'Or: 'Repair is the bridge between rupture and deeper connection.'\n\nKeep this somewhere you'll see it. When you have a bad moment next week, this sentence will remind you that repair is always available.",
+      "xp": 10,
+      "body": "Write a one-sentence summary of what repair means to you now.\n\nExample: 'Repair means I can mess up and still come back.'\n'Or: 'Repair is the bridge between rupture and deeper connection.'\n\nKeep this somewhere you'll see it. When you have a bad moment next week, this sentence will remind you that repair is always available.",
+      "sourceStepId": "d14-info-1"
+    },
+    {
+      "id": "d14-badge-1",
+      "type": "badge_unlock",
+      "title": "Achievement Unlocked: The Repairer",
+      "body": "You completed Repair Week. You picked up the tools and started mending. Not by pretending nothing was wrong \u2014 by naming it, facing it, and doing the work.\n\nBadge earned: The Repairer",
+      "badge": "repairer",
+      "xp": 50,
+      "badgeSlug": "the_repairer"
+    },
+    {
+      "id": "d14-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 30
+    }
+  ]
+}

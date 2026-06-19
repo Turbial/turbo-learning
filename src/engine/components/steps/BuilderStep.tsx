@@ -37,6 +37,12 @@ function parseFields(s: BuilderStepType): Array<{ id: string; label: string; pla
   return fields;
 }
 
+function interpolate(template: string, values: Record<string, string>): string {
+  return template
+    .replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? `{{${key}}}`)
+    .replace(/\{(\w+)\}/g, (_, key) => values[key] ?? `{${key}}`);
+}
+
 export default function BuilderStep({ step, onAnswer }: StepProps) {
   const s = step as BuilderStepType;
   const fields = parseFields(s);
@@ -48,7 +54,11 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
   const handleSubmit = () => {
     if (!allFilled) return;
     setSubmitted(true);
-    onAnswer(values);
+    // Substitute template variables — supports both {key} and {{key}} syntax
+    const filled = s.template
+      ? interpolate(s.template, values)
+      : null;
+    onAnswer(filled ?? values);
   };
 
   return (
@@ -85,9 +95,11 @@ export default function BuilderStep({ step, onAnswer }: StepProps) {
         <View style={styles.resultBox}>
           <Text style={styles.resultLabel}>Your Output:</Text>
           <Text style={styles.resultText}>
-            {Object.entries(values)
-              .map(([k, v]) => `**${k}**: ${v}`)
-              .join("\n\n")}
+            {s.template
+              ? interpolate(s.template, values)
+              : fields
+                  .map((f: any) => `**${f.label}**: ${values[f.id] ?? ""}`)
+                  .join("\n\n")}
           </Text>
         </View>
       )}

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "unit": "day18",
+  "title": "Day 18: Physical Intimacy \u2014 Reclaiming Touch",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d18-info-1",
+      "type": "info",
+      "title": "Touch Is Not a Request \u2014 It's a Language",
+      "body": "Physical intimacy is the third rail of marriage conversations. Everyone knows it matters. Nobody wants to talk about it when it's not working.\n\nLet's be direct: physical intimacy isn't about frequency, performance, or meeting a quota. It's about connection through touch.\n\nWhen physical intimacy is healthy, it's a source of bonding, pleasure, and felt love.\nWhen it's not, it becomes a source of rejection, pressure, and loneliness.\n\nThe goal isn't more sex or specific acts. The goal is to reclaim touch as a natural, mutual language of connection \u2014 not a negotiation, not a chore, not a source of anxiety.",
+      "xp": 5
+    },
+    {
+      "id": "d18-highlight-1",
+      "type": "highlight",
+      "body": "Touch is not a transaction.\nIt's not 'if you do this, I'll do that.'\nIt's not performance. It's not evaluation.\n\nIt's two bodies saying:\n'I see you. I want you close. We're still us.'",
+      "highlights": [
+        "not a transaction",
+        "not performance",
+        "We're still us"
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d18-reflection-1",
+      "type": "reflection",
+      "title": "Your Physical Connection Reality",
+      "minChars": 30,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "Answer honestly \u2014 this is private:\n\n\u2022 When was the last time you touched your partner with no agenda? (Held hands, stroked their arm, hugged without rushing?)\n\u2022 When was the last time physical intimacy felt genuinely connecting, not just habitual?\n\u2022 Is there pressure or expectation around physical intimacy in your marriage?\n\nHow does your physical connection feel right now \u2014 nourishing, neutral, tense, or absent?"
+        }
+      ]
+    },
+    {
+      "id": "d18-info-2",
+      "type": "info",
+      "title": "The Non-Sexual Foundation",
+      "body": "One of the biggest mistakes couples make is jumping straight to sex without building the physical foundation underneath.\n\nThat foundation is non-sexual touch:\n\u2022 A hand on the shoulder while passing by\n\u2022 A hug that lasts longer than three seconds\n\u2022 Spooning on the couch during a movie\n\u2022 A kiss that's just a kiss, not a negotiation\nThe research is clear: couples who maintain non-sexual physical intimacy have more satisfying sexual intimacy. Because touch becomes natural, expected, and safe \u2014 not charged with expectation.\n\nYour mission this week: increase non-sexual touch without ever letting it become 'just a prelude.'",
+      "xp": 5
+    },
+    {
+      "id": "d18-mc-1",
+      "type": "mc",
+      "question": "What's true about non-sexual touch in relationships?",
+      "options": [
+        "It's a gateway to sexual intimacy, so it counts as foreplay",
+        "It's separate from sexual intimacy and valuable on its own",
+        "It's not necessary if sexual intimacy is regular",
+        "It only matters if you have physical touch as a love language"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite. Non-sexual touch isn't foreplay. Making it always lead to sex is what destroys it.",
+        "Yes. Non-sexual touch has independent value. When it's treated as an end in itself, it actually strengthens sexual intimacy.",
+        "Actually, non-sexual touch is important regardless of sexual frequency. It's the soil that grows the plant.",
+        "Non-sexual touch matters for everyone, not just people who identify as 'physical touch' love language people."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-scenario-1",
+      "type": "scenario_card",
+      "title": "The Touch Conversation",
+      "body": "Scenario: You want more physical connection. Your partner seems less interested.\n\nWhat not to say: 'We never have sex anymore. What's wrong with you?'\n\nWhat to try: 'I've been thinking about our physical connection. I miss feeling close to you in that way. I don't want pressure \u2014 I just want to understand where you are.'\n\nOr: 'Can we try something? For the next week, let's just focus on non-sexual touch \u2014 hugs, hand-holding, back rubs \u2014 with no expectation of it going anywhere. Just to see how it feels.'\n\nTaking sex off the table is often what finally allows it back on the table."
+    },
+    {
+      "id": "d18-copy-action-1",
+      "type": "copy_action",
+      "title": "Non-Sexual Touch Challenge",
+      "prompt": "Today, initiate non-sexual touch three times with no agenda:\n\n1. A 10-second hug when you see each other\n2. A hand on their back as you walk past\n3. Hold their hand for no reason\n\nThe rule: you can't let it lead anywhere. It's just touch, for the sake of being close.\n\nWrite your commitment: 'Today I will initiate touch with no agenda, just connection.'",
+      "xp": 10,
+      "body": "Today, initiate non-sexual touch three times with no agenda:\n\n1. A 10-second hug when you see each other\n2. A hand on their back as you walk past\n3. Hold their hand for no reason\n\nThe rule: you can't let it lead anywhere. It's just touch, for the sake of being close.\n\nWrite your commitment: 'Today I will initiate touch with no agenda, just connection.'",
+      "sourceStepId": "d18-info-1"
+    },
+    {
+      "id": "d18-reflection-2",
+      "type": "reflection",
+      "title": "What Gets in the Way",
+      "minChars": 20,
+      "xp": 15,
+      "questions": [
+        {
+          "type": "textarea",
+          "label": "What blocks physical intimacy in your marriage right now?\n\n\u2022 Exhaustion?\n\u2022 Resentment from other areas?\n\u2022 Different desire levels?\n\u2022 Body image issues?\n\u2022 Past hurt or rejection?\n\u2022 Never having time alone?\n\nName the biggest barrier. No judgment \u2014 just naming it gives you power over it."
+        }
+      ]
+    },
+    {
+      "id": "d18-tf-1",
+      "type": "tf",
+      "question": "If a couple's sexual frequency drops, their relationship is in trouble.",
+      "correct": false,
+      "feedback": [
+        "Correct. Sexual frequency naturally fluctuates across a relationship \u2014 during stressful periods, illness, new parenthood, etc. The issue isn't frequency \u2014 it's whether both partners feel satisfied with the quality and feel safe talking about it.",
+        "Not quite. Many happy couples have varying sex frequencies. What matters is mutual satisfaction and the ability to have honest conversations about physical intimacy without shame or pressure."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-info-3",
+      "type": "info",
+      "title": "Tomorrow: Rituals That Keep You Connected",
+      "body": "Touch and play are daily practices. But deep connection also needs structure \u2014 rituals that anchor your relationship against the chaos of life.\n\nTomorrow: creating small, meaningful rituals that keep you connected even when everything else is falling apart.",
+      "xp": 5
+    },
+    {
+      "id": "d18-completion-1",
+      "type": "completion",
+      "title": "Day Complete",
+      "body": "Great work today! You're building something real.",
+      "xp": 24
+    }
+  ]
+}
