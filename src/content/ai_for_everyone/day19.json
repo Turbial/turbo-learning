@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 19,
+    "unitLabel": "Day 19",
+    "unitTitle": "AI at Work",
+    "lessonOrder": 1,
+    "lessonTitle": "Bringing AI Into Your Job",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d19_s1",
+      "type": "info",
+      "title": "Welcome to Day 19 — AI at Work",
+      "body": "AI is not just for personal tasks. It is one of the most powerful things you can bring to your job. Today you learn how to use AI to prepare for meetings, draft reports, handle email, and build presentations — all faster and with less stress.",
+      "audioUrl": null,
+      "primaryButton": "Let's get to work",
+      "xp": 3
+    },
+    {
+      "id": "d19_s2",
+      "type": "scenario_card",
+      "title": "A typical Monday morning",
+      "body": "You arrive at the office with 47 unread emails, a status report due by noon, and a team meeting in an hour. With AI: you summarize the email thread in two minutes, generate a draft report in five, and walk into the meeting with talking points already in hand.",
+      "audioUrl": null,
+      "primaryButton": "That sounds like my life",
+      "xp": 3
+    },
+    {
+      "id": "d19_s3",
+      "type": "info",
+      "title": "Four work tasks AI handles well",
+      "body": "The best work uses of AI right now: (1) Meeting prep — agenda, talking points, questions to raise. (2) Report drafting — structured first drafts from bullet points. (3) Email summarizing — cut a long thread down to three key points. (4) Presentation building — slide outlines and speaker notes.",
+      "audioUrl": null,
+      "primaryButton": "Four tasks — clear",
+      "xp": 3
+    },
+    {
+      "id": "d19_s4",
+      "type": "example",
+      "title": "Meeting prep prompt",
+      "prompt": "I have a meeting tomorrow about [topic]. The attendees are [names and roles]. Our goal is [outcome]. Help me: (1) draft a five-point agenda, (2) suggest three questions I should raise, (3) list two things I should follow up on after.",
+      "primaryButton": "I will use this tomorrow",
+      "xp": 3
+    },
+    {
+      "id": "d19_s5",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "What is the most useful thing AI can do before a meeting?",
+      "options": [
+        "Attend the meeting and take notes automatically",
+        "Help you prepare an agenda and talking points",
+        "Cancel meetings that run long",
+        "Choose the best time slot for everyone"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI cannot attend on your behalf — but it makes you far more effective when you do.",
+        "Exactly. Walking in prepared is the biggest advantage AI gives you.",
+        "AI cannot control your calendar that way — it helps with content, not scheduling.",
+        "Scheduling tools exist for that, but the bigger win is what you do before you walk in."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19_s6",
+      "type": "info",
+      "title": "Summarizing email threads",
+      "body": "Long email chains waste time. Paste the thread into AI and ask: 'Summarize this thread in three bullet points: (1) what was decided, (2) what is still open, (3) what action is needed from me.' You get the whole picture in seconds.",
+      "audioUrl": null,
+      "primaryButton": "Paste and summarize",
+      "xp": 3
+    },
+    {
+      "id": "d19_s7",
+      "type": "example",
+      "title": "Report drafting prompt",
+      "prompt": "I need to write a status report for my team. Here are my bullet points: [paste notes]. Turn these into a clear, professional report with: an executive summary (2 sentences), key achievements this week, blockers, and next steps. Keep it under one page.",
+      "primaryButton": "Draft in minutes, not hours",
+      "xp": 3
+    },
+    {
+      "id": "d19_s8",
+      "type": "highlight",
+      "title": "Which tasks save the most time?",
+      "body": "Rank these by how much time AI saves: choosing a font for a report, drafting a first version of a status update, summarizing a 20-email thread, deciding what to have for lunch, creating slide titles from your notes.",
+      "audioUrl": null,
+      "primaryButton": "I see the pattern",
+      "xp": 6
+    },
+    {
+      "id": "d19_s9",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You should send AI's first draft directly to your manager without reviewing it.",
+      "correct": false,
+      "feedback": [
+        "Always review before you send. AI drafts are starting points, not finished work.",
+        "Right. AI gives you the first 80%. You add the final 20% that makes it yours."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d19_s10",
+      "type": "info",
+      "title": "Building presentations with AI",
+      "body": "Start with your key message, not your slides. Tell AI: 'My presentation is about [topic]. The audience is [people]. The main message is [one sentence]. Give me a six-slide outline with a title and two bullet points per slide.' Then build from there.",
+      "audioUrl": null,
+      "primaryButton": "Message first, slides second",
+      "xp": 3
+    },
+    {
+      "id": "d19_s11",
+      "type": "scenario_card",
+      "title": "The 10-minute report",
+      "body": "Your manager asks for a project update in 30 minutes. Without AI: you scramble, forget things, write something rushed. With AI: you paste your notes, get a clean draft in two minutes, review and adjust in eight, and send something you are proud of.",
+      "audioUrl": null,
+      "primaryButton": "Ten minutes is enough",
+      "xp": 3
+    },
+    {
+      "id": "d19_s12",
+      "type": "builder",
+      "title": "Build your work use case prompt",
+      "fields": [
+        {
+          "id": "task",
+          "label": "What work task do you want AI to help with?",
+          "placeholder": "write a weekly status report"
+        },
+        {
+          "id": "context",
+          "label": "What context does AI need?",
+          "placeholder": "I manage a team of 4, we are building a new product feature"
+        },
+        {
+          "id": "format",
+          "label": "What format or length do you need?",
+          "placeholder": "one page, bullet points, professional tone"
+        }
+      ],
+      "template": "Help me {{task}}. Here is the context: {{context}}. Please format the output as: {{format}}. Make it clear, professional, and easy to read.",
+      "primaryButton": "Build my work prompt",
+      "xp": 15
+    },
+    {
+      "id": "d19_s13",
+      "type": "copy_action",
+      "title": "Copy your work prompt",
+      "body": "Copy the prompt you just built and paste it into your AI tool to see a draft of your work task.",
+      "sourceStepId": "d19_s12",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d19_s14",
+      "type": "paste_capture",
+      "title": "Save your AI output",
+      "body": "Paste the output AI gave you. Take a moment to review it — what would you keep, change, or add?",
+      "minLength": 10,
+      "primaryButton": "Save output",
+      "xp": 15
+    },
+    {
+      "id": "d19_s15",
+      "type": "info",
+      "title": "Your review step matters",
+      "body": "The best AI work users do two things: they give clear prompts, and they review the output before using it. AI drafts can miss your tone, your team's context, or a key detail only you know. A quick review turns a good draft into a great one.",
+      "audioUrl": null,
+      "primaryButton": "Prompt, review, done",
+      "xp": 3
+    },
+    {
+      "id": "d19_s16",
+      "type": "reflection",
+      "title": "Your work AI plan",
+      "questions": [
+        {
+          "id": "top_task",
+          "type": "textarea",
+          "label": "What is the one work task you most want AI to help with this week?"
+        },
+        {
+          "id": "time_saved",
+          "type": "single_choice",
+          "label": "How much time per week do you think AI could save you at work?",
+          "options": [
+            "Less than 30 minutes",
+            "30 minutes to 1 hour",
+            "1 to 3 hours",
+            "More than 3 hours"
+          ]
+        },
+        {
+          "id": "barrier",
+          "type": "textarea",
+          "label": "What has stopped you from using AI at work before today?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19_s17",
+      "type": "quiz",
+      "title": "Day 19 check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What should you always do before sending an AI-drafted report?",
+          "options": [
+            "Send it straight away to save time",
+            "Review and adjust it before sending",
+            "Ask AI to send it for you",
+            "Run it through a second AI without reading it"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "AI is more useful for creating slide designs than for drafting the content of a presentation.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Pasting a long email chain into AI and asking for the key points is called ______.",
+          "answer": "summarizing",
+          "aliases": [
+            "summarization",
+            "a summary",
+            "email summarizing"
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "mc",
+          "question": "When building a presentation with AI, what should you give AI first?",
+          "options": [
+            "A list of slide designs you like",
+            "Your key message and audience",
+            "The number of slides you want",
+            "A completed draft to format"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d19_s18",
+      "type": "completion",
+      "title": "Day 19 complete — Work Smarter",
+      "body": "You now have a practical AI toolkit for your job — meeting prep, report drafting, email summarizing, and presentation building. Tomorrow: AI across different industries and how it is being used where you work.",
+      "primaryButton": "See you tomorrow",
+      "xp": 0
+    }
+  ]
+}

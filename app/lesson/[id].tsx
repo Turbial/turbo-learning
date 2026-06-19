@@ -57,6 +57,27 @@ import afeDay4 from "../../src/content/ai_for_everyone/day4.json";
 import afeDay5 from "../../src/content/ai_for_everyone/day5.json";
 import afeDay6 from "../../src/content/ai_for_everyone/day6.json";
 import afeDay7 from "../../src/content/ai_for_everyone/day7.json";
+import afeDay8 from "../../src/content/ai_for_everyone/day8.json";
+import afeDay9 from "../../src/content/ai_for_everyone/day9.json";
+import afeDay10 from "../../src/content/ai_for_everyone/day10.json";
+import afeDay11 from "../../src/content/ai_for_everyone/day11.json";
+import afeDay12 from "../../src/content/ai_for_everyone/day12.json";
+import afeDay13 from "../../src/content/ai_for_everyone/day13.json";
+import afeDay14 from "../../src/content/ai_for_everyone/day14.json";
+import afeDay15 from "../../src/content/ai_for_everyone/day15.json";
+import afeDay16 from "../../src/content/ai_for_everyone/day16.json";
+import afeDay17 from "../../src/content/ai_for_everyone/day17.json";
+import afeDay18 from "../../src/content/ai_for_everyone/day18.json";
+import afeDay19 from "../../src/content/ai_for_everyone/day19.json";
+import afeDay20 from "../../src/content/ai_for_everyone/day20.json";
+import afeDay21 from "../../src/content/ai_for_everyone/day21.json";
+import afeDay22 from "../../src/content/ai_for_everyone/day22.json";
+import afeDay23 from "../../src/content/ai_for_everyone/day23.json";
+import afeDay24 from "../../src/content/ai_for_everyone/day24.json";
+import afeDay25 from "../../src/content/ai_for_everyone/day25.json";
+import afeDay26 from "../../src/content/ai_for_everyone/day26.json";
+import afeDay27 from "../../src/content/ai_for_everyone/day27.json";
+import afeDay28 from "../../src/content/ai_for_everyone/day28.json";
 import duoDay1 from "../../src/content/duo/day1.json";
 import duoDay2 from "../../src/content/duo/day2.json";
 import duoDay3 from "../../src/content/duo/day3.json";
@@ -76,6 +97,12 @@ const DAY_CONTENT: Record<string, any> = {
   "ai-27": aiDay27, "ai-28": aiDay28,
   "afe-1": afeDay1, "afe-2": afeDay2, "afe-3": afeDay3,
   "afe-4": afeDay4, "afe-5": afeDay5, "afe-6": afeDay6, "afe-7": afeDay7,
+  "afe-8": afeDay8, "afe-9": afeDay9, "afe-10": afeDay10,
+  "afe-11": afeDay11, "afe-12": afeDay12, "afe-13": afeDay13, "afe-14": afeDay14,
+  "afe-15": afeDay15, "afe-16": afeDay16, "afe-17": afeDay17, "afe-18": afeDay18,
+  "afe-19": afeDay19, "afe-20": afeDay20, "afe-21": afeDay21, "afe-22": afeDay22,
+  "afe-23": afeDay23, "afe-24": afeDay24, "afe-25": afeDay25, "afe-26": afeDay26,
+  "afe-27": afeDay27, "afe-28": afeDay28,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
   "duo-7": duoDay7,
@@ -87,8 +114,9 @@ for (const [key, json] of Object.entries(DAY_CONTENT)) {
     id: `${key}-local`,
     unitId: `day${key.split("-")[1]}`,
     orderNum: parseInt(key.split("-")[1]),
-    title: json.title,
-    estMinutes: json.estMinutes,
+    // Support both old schema (json.title) and new schema (json.meta.lessonTitle / unitTitle)
+    title: json.title ?? json.meta?.lessonTitle ?? json.meta?.unitTitle ?? key,
+    estMinutes: json.estMinutes ?? json.meta?.minutes,
     steps: json.steps as Step[],
   };
 }

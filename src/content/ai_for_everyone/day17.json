@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 17,
+    "unitLabel": "Day 17",
+    "unitTitle": "Staying Safe with AI",
+    "lessonOrder": 1,
+    "lessonTitle": "What Not to Share",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d17_s1",
+      "type": "info",
+      "title": "Welcome to Day 17 — Staying Safe Online",
+      "body": "AI tools are powerful, but they are also connected to the internet. What you type into them does not always stay private. Today you will learn exactly what to share, what to keep to yourself, and how to stay safe every time you use AI.",
+      "audioUrl": null,
+      "primaryButton": "Let's stay safe",
+      "xp": 3
+    },
+    {
+      "id": "d17_s2",
+      "type": "scenario_card",
+      "title": "A common mistake",
+      "body": "Maria needed help fixing a problem with her bank account. She copied her full account number, password, and bank name into an AI chat and asked for advice. The AI gave helpful tips — but Maria had just sent sensitive financial details to an outside server she did not control.",
+      "audioUrl": null,
+      "primaryButton": "I see the problem",
+      "xp": 3
+    },
+    {
+      "id": "d17_s3",
+      "type": "info",
+      "title": "The golden rule of AI privacy",
+      "body": "Never paste anything into AI that you would not write on a sticky note and leave on your desk at work. That means: no passwords, no bank details, no government ID numbers, no private medical records, and no confidential work documents.",
+      "audioUrl": null,
+      "primaryButton": "Got it — the sticky note rule",
+      "xp": 3
+    },
+    {
+      "id": "d17_s4",
+      "type": "highlight",
+      "title": "Things you should NEVER share with AI",
+      "body": "Read this list carefully: your password, your Social Security number, your bank account number, your credit card number, private medical test results, someone else's personal information, your employer's confidential files.",
+      "audioUrl": null,
+      "primaryButton": "I will remember this list",
+      "xp": 6
+    },
+    {
+      "id": "d17_s5",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "It is safe to paste your bank account number into an AI chat if you are just asking for budgeting advice.",
+      "correct": false,
+      "feedback": [
+        "Correct — it is not safe. You can ask for budgeting advice without sharing your account number. Describe your situation in general terms instead.",
+        "Actually, this is not safe. AI tools send your text to outside servers. Never share real account numbers, even for advice."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17_s6",
+      "type": "info",
+      "title": "How AI tools store your data",
+      "body": "When you type into most AI tools, your words travel to a server run by the AI company. Some services store your conversations for months to improve their AI. Some use your data for training. Check the privacy policy of any AI tool you use regularly.",
+      "audioUrl": null,
+      "primaryButton": "Check the privacy policy — noted",
+      "xp": 3
+    },
+    {
+      "id": "d17_s7",
+      "type": "scenario_card",
+      "title": "Work documents and confidentiality",
+      "body": "James wanted AI to summarize a report from his company. The report contained client names, financial projections, and internal strategy. He pasted the whole thing in. His company had a data policy that forbade sharing internal documents with outside services. James did not realize he had broken that policy.",
+      "audioUrl": null,
+      "primaryButton": "I need to check my company's rules",
+      "xp": 3
+    },
+    {
+      "id": "d17_s8",
+      "type": "mc",
+      "title": "What should James have done?",
+      "question": "James needed to summarize a confidential company report using AI. What is the safest approach?",
+      "options": [
+        "Paste the full document and delete the chat afterward",
+        "Describe the key themes in his own words without pasting private details",
+        "Use a different AI tool that he has never heard of",
+        "Share it only if the report is less than one page long"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Deleting the chat does not guarantee the data was not stored on the server. The risk remains.",
+        "Exactly. Describing the topic without pasting private data keeps you safe and still gets helpful output.",
+        "Using an unknown tool is actually riskier, not safer. Stick to reputable services with clear privacy policies.",
+        "The length of the document does not change the privacy risk."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17_s9",
+      "type": "good_fit",
+      "title": "Safe to share?",
+      "question": "Paste your full name, home address, and date of birth into AI to get a personalized meal plan.",
+      "correct": "notideal",
+      "feedback": [
+        "Good instinct. A meal plan does not need your full personal details. Use general info like your age range and dietary preferences instead.",
+        "Actually, this is not ideal. You can get a great meal plan without sharing identifying personal details. Keep sensitive info off AI chats."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17_s10",
+      "type": "good_fit",
+      "title": "Safe to share?",
+      "question": "Describe a health symptom in general terms and ask AI for possible explanations before seeing a doctor.",
+      "correct": "good",
+      "feedback": [
+        "This is actually fine. Describing symptoms generally — without your name, medical records, or insurance details — is a safe way to get a starting point before your doctor's visit.",
+        "Good thinking. General symptom descriptions without personal identifiers are safe to discuss with AI."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17_s11",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Reputable AI companies may store your conversations to improve their product, even if they do not sell your data.",
+      "correct": true,
+      "feedback": [
+        "This is actually true. Many AI companies store conversations for safety review and model improvement. Always check the privacy policy of the tool you use.",
+        "Correct. Storing conversations for improvement is common practice. That is why what you type matters."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17_s12",
+      "type": "info",
+      "title": "What you CAN safely share",
+      "body": "AI is very useful when you share general information. Say 'I have a budget of about $500 a month' instead of your account number. Say 'I have a meeting with a client in the tech sector' instead of the client's name. Say 'I have a headache and feel tired' instead of your full medical history.",
+      "audioUrl": null,
+      "primaryButton": "General is safer — makes sense",
+      "xp": 3
+    },
+    {
+      "id": "d17_s13",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "Instead of sharing private details with AI, describe your situation in ______ terms.",
+      "answer": "general",
+      "aliases": ["broad", "vague", "generic"],
+      "feedback": [
+        "Close! The key word is 'general.' Describe situations broadly without including names, numbers, or identifying details.",
+        "Exactly right. General terms give AI enough to help you without exposing private information."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d17_s14",
+      "type": "scenario_card",
+      "title": "The phishing risk",
+      "body": "Some websites pretend to be AI tools to steal your data. You type in what looks like a helpful chatbot, but the site is collecting your passwords and personal details. Always use official, well-known AI tools from reputable companies, and check the web address before typing anything personal.",
+      "audioUrl": null,
+      "primaryButton": "Check the address first",
+      "xp": 3
+    },
+    {
+      "id": "d17_s15",
+      "type": "mc",
+      "title": "Spot the red flag",
+      "question": "You find a website called 'SuperAI-Helper.net' that offers a free AI assistant. It asks for your email and password to get started. What should you do?",
+      "options": [
+        "Enter your details — it looks helpful and it is free",
+        "Enter a fake password just to see what happens",
+        "Leave the site immediately and use a known, trusted AI service instead",
+        "Share the site with friends so they can try it too"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Never enter real credentials on an unfamiliar site. This has the hallmarks of a phishing attempt.",
+        "Even entering a fake password confirms your activity and may lead to further attempts to steal your data.",
+        "Correct. Unfamiliar sites asking for passwords are a red flag. Stick to well-known, trusted services.",
+        "Sharing a potentially harmful site puts others at risk too."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17_s16",
+      "type": "info",
+      "title": "Three quick safety habits",
+      "body": "1. Always use official AI tools with a clear privacy policy. 2. Keep details general — no account numbers, passwords, or full names. 3. If your company has an AI policy, read it before using AI at work. These three habits protect you in almost every situation.",
+      "audioUrl": null,
+      "primaryButton": "Three habits — I can do that",
+      "xp": 3
+    },
+    {
+      "id": "d17_s17",
+      "type": "quiz",
+      "title": "Safety check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "Which of these is safe to share with an AI tool?",
+          "options": [
+            "Your bank account number",
+            "Your password",
+            "A general description of your financial situation",
+            "Your government ID number"
+          ],
+          "correct": 2
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Deleting your chat history in an AI tool guarantees that the company has not stored your data on their servers.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "The simple test for what to share with AI: would you write it on a ______ and leave it on your desk?",
+          "answer": "sticky note",
+          "aliases": ["post-it", "post it", "note"]
+        },
+        {
+          "id": "q4",
+          "type": "mc",
+          "question": "Why should you check a company's privacy policy before using their AI tool?",
+          "options": [
+            "To find out if the tool is free to use",
+            "To understand how your conversations may be stored or used",
+            "Privacy policies are not important for AI tools",
+            "To see which languages the tool supports"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d17_s18",
+      "type": "completion",
+      "title": "Day 17 complete — Safety First",
+      "body": "You now know what to share, what to protect, and how AI tools handle your data. These habits will keep you safe every time you use AI. Tomorrow: understanding AI bias and why you should always double-check what AI tells you.",
+      "primaryButton": "On to Day 18!",
+      "xp": 0
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 27,
+    "unitLabel": "Day 27",
+    "unitTitle": "Your AI Action Plan",
+    "lessonOrder": 1,
+    "lessonTitle": "What You'll Do This Month",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d27_s1",
+      "type": "info",
+      "title": "Learning is only the beginning",
+      "body": "You have spent 26 days discovering what AI can do. Now comes the part that actually changes your life — putting it to work. Today you will build a real 30-day action plan.",
+      "audioUrl": null,
+      "primaryButton": "Let's go",
+      "xp": 3
+    },
+    {
+      "id": "d27_s2",
+      "type": "info",
+      "title": "The knowing-doing gap",
+      "body": "Most people learn something useful and then... do nothing with it. The gap between knowing and doing is where progress dies. Three small wins in 30 days will close that gap for you.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d27_s3",
+      "type": "scenario_card",
+      "title": "Picture this",
+      "body": "Meet Dana. Dana finished a course on AI, felt excited, and then went back to doing everything the old way. A month later, nothing had changed. Dana never picked one thing to actually try.",
+      "audioUrl": null,
+      "primaryButton": "I don't want to be Dana",
+      "xp": 3
+    },
+    {
+      "id": "d27_s4",
+      "type": "info",
+      "title": "Three wins, not thirty",
+      "body": "You do not need to transform everything at once. Pick three specific moments in your week where AI can save you time or effort. Small wins stack up fast.",
+      "audioUrl": null,
+      "primaryButton": "Show me examples",
+      "xp": 3
+    },
+    {
+      "id": "d27_s5",
+      "type": "highlight",
+      "title": "What a good AI win looks like",
+      "body": "A good AI win is specific, fits your real life, and saves you something — time, energy, or stress. 'Use AI to draft my weekly status email every Monday' is a win. 'Get better at AI' is not.",
+      "audioUrl": null,
+      "primaryButton": "Got it",
+      "xp": 6
+    },
+    {
+      "id": "d27_s6",
+      "type": "scenario_card",
+      "title": "Real wins from real people",
+      "body": "One person uses AI every Sunday to plan the week's meals and shopping list. Another uses it to respond to difficult messages without stressing. A third uses it to learn one new skill per week. All three now call themselves AI-confident.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d27_s7",
+      "type": "mc",
+      "title": "Which goal is most actionable?",
+      "question": "You want to save time at work using AI. Which goal is specific enough to actually do?",
+      "options": [
+        "Use AI more often at work.",
+        "Try to save time with AI somehow.",
+        "Use AI every Tuesday to draft meeting notes before sending them.",
+        "Become an AI expert in 30 days."
+      ],
+      "correct": 2,
+      "feedback": [
+        "This is too vague to act on — when exactly, and for what?",
+        "Still too open — there is no clear moment or task here.",
+        "Perfect. A specific day, a specific task — that is something you can actually do.",
+        "Expertise takes longer than 30 days, and it is not a single action you can take."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27_s8",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You need to change your entire routine to get real value from AI.",
+      "correct": false,
+      "feedback": [
+        "Great. One or two small, specific habits are all it takes to start.",
+        "Actually, small changes work best — you do not need to overhaul everything."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d27_s9",
+      "type": "info",
+      "title": "Make it stick with accountability",
+      "body": "Writing down a plan makes you far more likely to follow through. When you can see your goal, you remember it. When you share it, you feel responsible for it.",
+      "audioUrl": null,
+      "primaryButton": "I'm ready to write mine",
+      "xp": 3
+    },
+    {
+      "id": "d27_s10",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "The best AI goals are ______ and fit into your real, everyday life.",
+      "answer": "specific",
+      "aliases": [
+        "clear",
+        "actionable",
+        "concrete",
+        "focused"
+      ],
+      "feedback": [
+        "Not quite — the key word is specific. Vague goals are easy to skip.",
+        "Exactly. Specific goals are the ones you actually follow through on."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d27_s11",
+      "type": "highlight",
+      "title": "A plan has three parts",
+      "body": "Every good AI win needs: (1) a specific task — what you will ask AI to do; (2) a trigger — when or where you will do it; and (3) a measure — how you will know it helped.",
+      "audioUrl": null,
+      "primaryButton": "Build mine now",
+      "xp": 6
+    },
+    {
+      "id": "d27_s12",
+      "type": "builder",
+      "title": "Build your 30-day AI plan",
+      "fields": [
+        {
+          "id": "win1",
+          "label": "AI win #1 — What will you ask AI to help with, and when?",
+          "placeholder": "Draft my weekly report every Friday morning"
+        },
+        {
+          "id": "win2",
+          "label": "AI win #2 — Another specific task and moment in your week",
+          "placeholder": "Use AI to plan meals every Sunday evening"
+        },
+        {
+          "id": "win3",
+          "label": "AI win #3 — One more area where AI saves you time or stress",
+          "placeholder": "Ask AI to help me reply to hard emails when I feel stuck"
+        }
+      ],
+      "template": "My 30-day AI action plan:\n\nWin 1: {{win1}}\n\nWin 2: {{win2}}\n\nWin 3: {{win3}}\n\nI am committing to these three AI habits over the next 30 days.",
+      "primaryButton": "Create my plan",
+      "xp": 15
+    },
+    {
+      "id": "d27_s13",
+      "type": "copy_action",
+      "title": "Copy your plan",
+      "body": "Copy your 30-day plan and paste it somewhere you will see it — your notes app, your calendar, or even a sticky note on your desk.",
+      "sourceStepId": "d27_s12",
+      "primaryButton": "I copied it",
+      "xp": 5
+    },
+    {
+      "id": "d27_s14",
+      "type": "scenario_card",
+      "title": "What to do when you miss a day",
+      "body": "Missing one day is normal — it means nothing about your progress. The only mistake is deciding you failed and stopping. When you miss a day, pick up right where you left off. That is the whole recovery plan.",
+      "audioUrl": null,
+      "primaryButton": "Good to know",
+      "xp": 3
+    },
+    {
+      "id": "d27_s15",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "You skipped your AI habit for two days in a row. What should you do?",
+      "options": [
+        "Start the whole plan over from scratch.",
+        "Decide the plan was not realistic and give up.",
+        "Pick up where you left off and carry on.",
+        "Add more goals to make up for lost time."
+      ],
+      "correct": 2,
+      "feedback": [
+        "Starting over is not necessary — you have not lost anything, just resume.",
+        "Missing two days does not mean the plan was wrong — it means you are human.",
+        "Exactly. Missing a day does not erase your progress. Just keep going.",
+        "Adding pressure after a stumble usually makes things harder, not easier."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27_s16",
+      "type": "info",
+      "title": "Check in with yourself",
+      "body": "At the end of week one, spend two minutes asking: Which win did I actually do? Which one did I skip? What made the difference? That reflection will sharpen every week that follows.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d27_s17",
+      "type": "reflection",
+      "title": "Your commitment check",
+      "questions": [
+        {
+          "id": "readiness",
+          "type": "single_choice",
+          "label": "How ready do you feel to start your 30-day plan?",
+          "options": [
+            "Very ready — I know exactly what I will do",
+            "Mostly ready — I have an idea but need to refine it",
+            "A little unsure — I am still figuring out the best wins",
+            "Not ready yet — I need more time to think"
+          ]
+        },
+        {
+          "id": "biggest_win",
+          "type": "textarea",
+          "label": "Which of your three AI wins excites you most, and why?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27_s18",
+      "type": "info",
+      "title": "You are one day away",
+      "body": "Tomorrow is Day 28 — the final day of your AI for Everyone journey. You have already done the hardest part: you showed up, day after day, and built real skills. One more day.",
+      "audioUrl": null,
+      "primaryButton": "I'm ready",
+      "xp": 3
+    },
+    {
+      "id": "d27_s19",
+      "type": "completion",
+      "title": "Day 27 complete",
+      "body": "You turned learning into action today. Your 30-day AI plan is written, your three wins are chosen, and you know exactly what to do next. That is the whole difference between learning and growing. See you tomorrow for graduation.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

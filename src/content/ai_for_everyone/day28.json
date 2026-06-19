@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 28,
+    "unitLabel": "Day 28",
+    "unitTitle": "Graduation: Your AI Journey",
+    "lessonOrder": 1,
+    "lessonTitle": "From Beginner to AI-Confident",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d28_s1",
+      "type": "info",
+      "title": "You made it",
+      "body": "28 days ago you opened this app and took a leap. Today you finish — not because the learning stops, but because you have everything you need to keep going on your own. This is graduation day.",
+      "audioUrl": null,
+      "primaryButton": "Let's celebrate",
+      "xp": 3
+    },
+    {
+      "id": "d28_s2",
+      "type": "scenario_card",
+      "title": "Look how far you have come",
+      "body": "On Day 1 you were not sure what AI was or whether it was for someone like you. Today you know how to write strong prompts, spot AI mistakes, use AI for work and life, build automations, protect your privacy, and make a real action plan. That is not small — that is a transformation.",
+      "audioUrl": null,
+      "primaryButton": "That is me",
+      "xp": 3
+    },
+    {
+      "id": "d28_s3",
+      "type": "highlight",
+      "title": "Skills you now have",
+      "body": "You can write prompts that get useful answers. You can fact-check AI output. You can use AI to write, plan, summarize, and organize. You know when AI is a great fit and when to call a human expert. You have a 30-day action plan ready to go. These are real, lasting skills.",
+      "audioUrl": null,
+      "primaryButton": "I earned these",
+      "xp": 6
+    },
+    {
+      "id": "d28_s4",
+      "type": "info",
+      "title": "The journey in four chapters",
+      "body": "You started by learning to talk to AI. Then you put it to work in your everyday life. Then you went deeper — automations, privacy, creative uses. And now you have a plan to keep the momentum going. Four chapters, 28 days, one confident new you.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d28_s5",
+      "type": "scenario_card",
+      "title": "What changed — and what did not",
+      "body": "AI did not replace your judgment — it sharpened it. You now know what to ask, when to trust, and when to push back. That combination — human judgment plus AI speed — is exactly what makes someone AI-confident.",
+      "audioUrl": null,
+      "primaryButton": "That's the key",
+      "xp": 3
+    },
+    {
+      "id": "d28_s6",
+      "type": "mc",
+      "title": "Mastery check",
+      "question": "When an AI answer sounds confident but feels off, what is the right move?",
+      "options": [
+        "Trust it — AI does not make things up.",
+        "Ignore it and do everything manually instead.",
+        "Check the key facts with a reliable source before using the answer.",
+        "Ask AI the same question again until you get a better answer."
+      ],
+      "correct": 2,
+      "feedback": [
+        "AI can sound very confident and still be wrong — that is one of its key quirks.",
+        "That throws away all the value — use AI and verify, do not avoid it.",
+        "Exactly. Use AI for speed, use your judgment for accuracy. Always verify what matters.",
+        "Repeating a question can help rephrase it, but it does not fix a factual error."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d28_s7",
+      "type": "quiz",
+      "title": "Final mastery quiz",
+      "questions": [
+        {
+          "id": "fq1",
+          "type": "mc",
+          "question": "What is the single biggest factor in getting a useful AI answer?",
+          "options": [
+            "Using the most expensive AI tool available.",
+            "Giving clear, specific, relevant detail in your prompt.",
+            "Keeping your question as short as possible.",
+            "Asking in formal, professional language."
+          ],
+          "correct": 1
+        },
+        {
+          "id": "fq2",
+          "type": "tf",
+          "question": "AI is a good fit for diagnosing a serious medical condition with certainty.",
+          "correct": false
+        },
+        {
+          "id": "fq3",
+          "type": "fillblank",
+          "question": "When you build a prompt, the three key ingredients are your goal, your context, and the ______ you want.",
+          "answer": "format",
+          "aliases": [
+            "output",
+            "structure",
+            "type of answer",
+            "response format"
+          ]
+        },
+        {
+          "id": "fq4",
+          "type": "mc",
+          "question": "What does 'AI hallucination' mean?",
+          "options": [
+            "AI refuses to answer a question.",
+            "AI generates text that sounds confident but is factually wrong.",
+            "AI gives an answer that is too short to be useful.",
+            "AI crashes or stops responding."
+          ],
+          "correct": 1
+        },
+        {
+          "id": "fq5",
+          "type": "tf",
+          "question": "You should avoid sharing sensitive personal information — like passwords or financial details — with AI tools.",
+          "correct": true
+        },
+        {
+          "id": "fq6",
+          "type": "mc",
+          "question": "Which of these is the best example of a specific, actionable AI habit?",
+          "options": [
+            "Use AI whenever I feel like it.",
+            "Get better at AI this month.",
+            "Use AI every Monday morning to draft my weekly to-do list.",
+            "Explore AI tools in my free time."
+          ],
+          "correct": 2
+        },
+        {
+          "id": "fq7",
+          "type": "fillblank",
+          "question": "A good prompt tells AI your goal, your ______, and the format of answer you want.",
+          "answer": "context",
+          "aliases": [
+            "situation",
+            "background",
+            "details",
+            "information"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d28_s8",
+      "type": "info",
+      "title": "You passed",
+      "body": "That quiz covered the whole course — and you just handled it. Your knowledge is real, tested, and ready to use in the world.",
+      "audioUrl": null,
+      "primaryButton": "What's next?",
+      "xp": 3
+    },
+    {
+      "id": "d28_s9",
+      "type": "highlight",
+      "title": "AI keeps getting better — and so will you",
+      "body": "New AI tools launch every month. You now have the foundation to learn any of them quickly. The skill is not knowing every tool — it is knowing how to think about AI. You have that skill.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 6
+    },
+    {
+      "id": "d28_s10",
+      "type": "scenario_card",
+      "title": "What AI-confident looks like",
+      "body": "An AI-confident person does not use AI for everything — they use it for the right things. They know when to ask, how to ask, and when to double-check. That is you now. Welcome to the club.",
+      "audioUrl": null,
+      "primaryButton": "I'm in",
+      "xp": 3
+    },
+    {
+      "id": "d28_s11",
+      "type": "reflection",
+      "title": "Your journey, in your words",
+      "questions": [
+        {
+          "id": "biggest_change",
+          "type": "single_choice",
+          "label": "What changed most for you over these 28 days?",
+          "options": [
+            "I feel confident using AI where I felt confused before",
+            "I now have specific habits and a real action plan",
+            "I understand AI's limits and know when to trust it",
+            "I see possibilities I never noticed before"
+          ]
+        },
+        {
+          "id": "proud_moment",
+          "type": "textarea",
+          "label": "What moment or skill from this course are you most proud of?"
+        },
+        {
+          "id": "next_step",
+          "type": "textarea",
+          "label": "What is the very first AI win you will go after this week?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d28_s12",
+      "type": "info",
+      "title": "A note from your AI coach",
+      "body": "You could have stopped any day. You did not. That says more about you than any skill does. Keep that same curiosity and consistency — it is what got you here, and it is what will take you further.",
+      "audioUrl": null,
+      "primaryButton": "Thank you",
+      "xp": 3
+    },
+    {
+      "id": "d28_s13b",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Being AI-confident means using AI for every task in your life.",
+      "correct": false,
+      "feedback": [
+        "Exactly. Confidence means knowing when to use it and when not to — not using it for everything.",
+        "Actually, the most AI-confident people are selective. They use AI where it helps most."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d28_s13c",
+      "type": "scenario_card",
+      "title": "Keep exploring",
+      "body": "Every week, try one new thing with AI. A new type of prompt. A new tool. A new problem you hand off. Curiosity is the engine — you have already proven yours is running.",
+      "audioUrl": null,
+      "primaryButton": "I will",
+      "xp": 3
+    },
+    {
+      "id": "d28_s13",
+      "type": "badge_unlock",
+      "badgeSlug": "ai_graduate",
+      "xp": 0
+    },
+    {
+      "id": "d28_s14",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d28_s15",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d28_s16",
+      "type": "completion",
+      "title": "You graduated",
+      "body": "28 days. Real skills. A plan you can use. You went from curious beginner to AI-confident — and that is something no one can take from you. Go use what you have learned. The world is full of problems that could use someone like you.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

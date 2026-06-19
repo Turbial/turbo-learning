@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 16,
+    "unitLabel": "Day 16",
+    "unitTitle": "AI Tools Comparison",
+    "lessonOrder": 1,
+    "lessonTitle": "Picking the Right Tool",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d16_s1",
+      "type": "info",
+      "title": "Welcome to Day 16",
+      "body": "There are dozens of AI tools out there — and more appear every month. But a handful of names come up again and again: ChatGPT, Claude, Gemini, and Grok. Today you will learn what makes each one different and when to reach for which one.",
+      "audioUrl": null,
+      "primaryButton": "Meet the tools",
+      "xp": 3
+    },
+    {
+      "id": "d16_s2",
+      "type": "info",
+      "title": "They are all AI assistants — but not identical",
+      "body": "All four tools can write, summarize, answer questions, and help you think. The differences are in personality, depth, speed, where they pull information from, and what they are tuned to do well. Knowing this saves you time and frustration.",
+      "audioUrl": null,
+      "primaryButton": "Differences matter",
+      "xp": 3
+    },
+    {
+      "id": "d16_s3",
+      "type": "scenario_card",
+      "title": "ChatGPT — the crowd favourite",
+      "body": "Made by OpenAI, ChatGPT is the most widely used AI assistant in the world. It is great at creative tasks, coding help, general writing, and explanations. It has a huge library of plugins and can browse the web. Best for: everyday tasks, creative writing, learning new things.",
+      "audioUrl": null,
+      "primaryButton": "Got it — ChatGPT",
+      "xp": 3
+    },
+    {
+      "id": "d16_s4",
+      "type": "scenario_card",
+      "title": "Claude — the careful thinker",
+      "body": "Made by Anthropic, Claude is known for being thoughtful, nuanced, and safe. It shines at long documents, detailed analysis, and conversations that require careful reasoning. It tends to be more cautious and less likely to make things up. Best for: research, editing, complex reasoning.",
+      "audioUrl": null,
+      "primaryButton": "Got it — Claude",
+      "xp": 3
+    },
+    {
+      "id": "d16_s5",
+      "type": "scenario_card",
+      "title": "Gemini — Google's AI",
+      "body": "Made by Google, Gemini is deeply connected to Google's apps — Docs, Gmail, Search, and Maps. It is excellent at pulling real-time information from the web and works best when you are already inside Google's ecosystem. Best for: real-time search, Google Workspace tasks.",
+      "audioUrl": null,
+      "primaryButton": "Got it — Gemini",
+      "xp": 3
+    },
+    {
+      "id": "d16_s6",
+      "type": "scenario_card",
+      "title": "Grok — the real-time rebel",
+      "body": "Made by xAI and built into X (formerly Twitter), Grok has access to live posts and trending topics. It has a more casual, sometimes edgy tone and is built for people who want to stay current on news and social media. Best for: real-time events, trending topics, X platform users.",
+      "audioUrl": null,
+      "primaryButton": "Got it — Grok",
+      "xp": 3
+    },
+    {
+      "id": "d16_s7",
+      "type": "highlight",
+      "title": "Key differences at a glance",
+      "body": "ChatGPT: most versatile, largest ecosystem. Claude: best for long documents and careful analysis. Gemini: best for Google Workspace and live search. Grok: best for real-time social media and current events. No single tool wins everything — the right one depends on the task.",
+      "audioUrl": null,
+      "primaryButton": "Right tool for the job",
+      "xp": 6
+    },
+    {
+      "id": "d16_s8",
+      "type": "match",
+      "title": "Match the tool to the use case",
+      "pairs": [
+        { "left": "Editing a long research report", "right": "Claude" },
+        { "left": "Checking what is trending on X right now", "right": "Grok" },
+        { "left": "Drafting a reply inside Gmail", "right": "Gemini" },
+        { "left": "Getting help with a creative writing project", "right": "ChatGPT" }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d16_s9",
+      "type": "mc",
+      "title": "Tool knowledge check",
+      "question": "Which AI tool is most deeply connected to Google's apps like Gmail and Docs?",
+      "options": [
+        "ChatGPT",
+        "Grok",
+        "Gemini",
+        "Claude"
+      ],
+      "correct": 2,
+      "feedback": [
+        "ChatGPT is made by OpenAI and is not part of Google's ecosystem.",
+        "Grok is built by xAI and is connected to X, not Google.",
+        "Correct! Gemini is Google's AI and integrates directly with Gmail, Docs, and Google Search.",
+        "Claude is made by Anthropic and is not part of Google's tools."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16_s10",
+      "type": "mc",
+      "title": "Best tool for the task",
+      "question": "You need to analyze a 20-page contract and summarize the key risks. Which tool is the best starting point?",
+      "options": [
+        "Grok — it is fast and casual",
+        "Gemini — it can search Google for legal terms",
+        "Claude — it handles long documents and careful reasoning",
+        "ChatGPT — it is the most popular"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Grok is great for real-time topics but is not tuned for long legal document analysis.",
+        "Gemini is helpful for search but Claude leads on lengthy analytical tasks.",
+        "Exactly. Claude is built for long, detailed documents and careful analytical reading.",
+        "Popularity does not always mean best fit. Claude's strengths align better with this task."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16_s11",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You should always pick one AI tool and never switch between them.",
+      "correct": false,
+      "feedback": [
+        "Right. Different tools have different strengths — switching based on the task is a smart strategy.",
+        "Not quite. Using the best tool for each job — even if that means switching — will get you better results."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d16_s12",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Use Grok to summarize a breaking news story that happened an hour ago.",
+      "correct": "good",
+      "feedback": [
+        "Actually, Grok is ideal here. It has live access to posts and real-time information.",
+        "Correct. Real-time events are exactly where Grok shines over the other tools."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d16_s13",
+      "type": "good_fit",
+      "title": "Good fit?",
+      "question": "Use Gemini to write a detailed analysis of a historical event from 1850.",
+      "correct": "notideal",
+      "feedback": [
+        "Good thinking. Gemini can handle this but its real advantage is live search and Google Workspace — historical analysis plays equally well in ChatGPT or Claude.",
+        "Right. For deep historical analysis with no need for real-time data, Claude or ChatGPT would be a better match than Gemini."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d16_s14",
+      "type": "fillblank",
+      "question": "The AI tool made by Anthropic that is known for careful, nuanced reasoning is called ______.",
+      "answer": "Claude",
+      "aliases": ["claude ai", "anthropic claude"],
+      "feedback": [
+        "The answer is Claude — made by Anthropic and designed for thoughtful, careful responses.",
+        "Correct! Claude is Anthropic's AI and is known for its careful, analytical approach."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d16_s15",
+      "type": "info",
+      "title": "The golden rule of tool selection",
+      "body": "Ask yourself three questions: (1) Does this task need live internet data? If yes, lean toward Gemini or Grok. (2) Is this a long or complex document? If yes, lean toward Claude. (3) Is this creative, general, or code-related? If yes, ChatGPT is a strong default. When unsure — just try one and compare.",
+      "audioUrl": null,
+      "primaryButton": "Three questions to guide me",
+      "xp": 3
+    },
+    {
+      "id": "d16_s16",
+      "type": "highlight",
+      "title": "You do not have to be loyal to one tool",
+      "body": "Professional AI users often have two or three tools open at once. They might draft in ChatGPT, fact-check in Gemini, and edit in Claude. There is no rule that says you must pick one. The goal is the best result — not brand loyalty.",
+      "audioUrl": null,
+      "primaryButton": "Multi-tool mindset",
+      "xp": 6
+    },
+    {
+      "id": "d16_s17",
+      "type": "quiz",
+      "title": "AI tools final check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "Which AI tool is built into X (formerly Twitter) and specializes in real-time content?",
+          "options": [
+            "Claude",
+            "Gemini",
+            "ChatGPT",
+            "Grok"
+          ],
+          "correct": 3
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "It is fine to use more than one AI tool for the same project.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "The AI tool made by OpenAI and known for its versatility and large plugin ecosystem is called ______.",
+          "answer": "ChatGPT",
+          "aliases": ["chat gpt", "openai chatgpt", "gpt"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d16_s18",
+      "type": "reflection",
+      "title": "Your tool strategy",
+      "questions": [
+        {
+          "id": "go_to_tool",
+          "type": "single_choice",
+          "label": "Which AI tool do you think will be your main go-to after today?",
+          "options": [
+            "ChatGPT",
+            "Claude",
+            "Gemini",
+            "Grok",
+            "I will switch based on the task"
+          ]
+        },
+        {
+          "id": "best_use",
+          "type": "textarea",
+          "label": "What is one specific task you now know which tool to use for?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16_s19",
+      "type": "completion",
+      "title": "Day 16 complete — Tool Selector",
+      "body": "You now know the strengths of ChatGPT, Claude, Gemini, and Grok — and when to reach for each one. The best AI users are not loyal to one tool. They pick the right one for the job.",
+      "primaryButton": "I pick the right tool",
+      "xp": 0
+    }
+  ],
+  "version": "1.0"
+}

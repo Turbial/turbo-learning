@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 20,
+    "unitLabel": "Day 20",
+    "unitTitle": "AI in Your Industry",
+    "lessonOrder": 1,
+    "lessonTitle": "AI Where You Work",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d20_s1",
+      "type": "info",
+      "title": "Welcome to Day 20 — AI in Your Industry",
+      "body": "AI is showing up everywhere — hospitals, classrooms, banks, stores, and studios. Today you look at how AI is being used in five major industries. You will probably recognize something from your own world.",
+      "audioUrl": null,
+      "primaryButton": "Show me what is happening",
+      "xp": 3
+    },
+    {
+      "id": "d20_s2",
+      "type": "scenario_card",
+      "title": "Healthcare — AI in the clinic",
+      "body": "A nurse uses AI to summarize a patient's history before the doctor walks in. A radiologist uses AI to flag unusual spots in an X-ray. An admin uses AI to draft discharge notes. The doctor still decides — AI just makes the team faster and sharper.",
+      "audioUrl": null,
+      "primaryButton": "AI supports, humans decide",
+      "xp": 3
+    },
+    {
+      "id": "d20_s3",
+      "type": "scenario_card",
+      "title": "Education — AI in the classroom",
+      "body": "A teacher uses AI to generate three versions of the same lesson — one for advanced students, one for beginners, one in Spanish. A student uses AI as a tutor who explains concepts in plain language. The teacher still teaches — AI handles the prep and personalization.",
+      "audioUrl": null,
+      "primaryButton": "One teacher, many versions",
+      "xp": 3
+    },
+    {
+      "id": "d20_s4",
+      "type": "info",
+      "title": "Finance — faster and smarter",
+      "body": "In finance, AI is used to: flag unusual transactions before fraud happens, generate plain-language summaries of dense reports, draft client emails from key talking points, and help advisors prepare personalized recommendations. AI does the reading — humans make the calls.",
+      "audioUrl": null,
+      "primaryButton": "AI reads the numbers",
+      "xp": 3
+    },
+    {
+      "id": "d20_s5",
+      "type": "scenario_card",
+      "title": "Retail — AI on the shop floor",
+      "body": "A store manager uses AI to predict which products will run out next week. A customer service team uses AI to draft replies to complaints. A buying team uses AI to summarize competitor pricing. Every team saves hours — and stocks shelves before they are empty.",
+      "audioUrl": null,
+      "primaryButton": "Predict before problems happen",
+      "xp": 3
+    },
+    {
+      "id": "d20_s6",
+      "type": "info",
+      "title": "Creative industries — AI as a collaborator",
+      "body": "Writers use AI to overcome blank-page fear and generate first drafts to react to. Designers use AI to explore ten visual directions in the time it used to take to sketch one. Marketers use AI to test ten headlines instead of one. The human creative still leads — AI accelerates the process.",
+      "audioUrl": null,
+      "primaryButton": "More ideas, faster",
+      "xp": 3
+    },
+    {
+      "id": "d20_s7",
+      "type": "match",
+      "title": "Match the industry to the AI use",
+      "pairs": [
+        {
+          "left": "Summarizing a patient's medical history",
+          "right": "Healthcare"
+        },
+        {
+          "left": "Generating three versions of a lesson plan",
+          "right": "Education"
+        },
+        {
+          "left": "Flagging unusual transactions before fraud",
+          "right": "Finance"
+        },
+        {
+          "left": "Predicting which products will sell out",
+          "right": "Retail"
+        },
+        {
+          "left": "Generating ten headline options in seconds",
+          "right": "Creative industries"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d20_s8",
+      "type": "mc",
+      "title": "Healthcare check",
+      "question": "In a hospital, what is the best role for AI right now?",
+      "options": [
+        "Making diagnosis decisions without a doctor",
+        "Supporting clinicians with information, summaries, and admin tasks",
+        "Replacing nurses in patient care",
+        "Running the hospital scheduling system autonomously"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI is not ready to diagnose on its own — it helps clinicians make better decisions.",
+        "Exactly. AI handles the time-consuming background work so humans can focus on patients.",
+        "AI is a support tool, not a replacement for hands-on care.",
+        "AI can assist with scheduling, but autonomous control of critical systems is not the goal."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20_s9",
+      "type": "info",
+      "title": "What all these industries have in common",
+      "body": "Across every sector, AI is being used the same three ways: (1) Summarizing information so humans can make faster decisions. (2) Drafting first versions of written work so humans can refine. (3) Spotting patterns humans would miss. The industry changes — the principles stay the same.",
+      "audioUrl": null,
+      "primaryButton": "Three uses, every industry",
+      "xp": 3
+    },
+    {
+      "id": "d20_s10",
+      "type": "example",
+      "title": "AI prompt for your industry",
+      "prompt": "I work in [your industry]. I need help with [specific task]. The audience is [who will see this]. Give me a first draft I can refine, and flag anything you are unsure about.",
+      "primaryButton": "I can adapt this for my role",
+      "xp": 3
+    },
+    {
+      "id": "d20_s11",
+      "type": "mc",
+      "title": "Creative industry check",
+      "question": "How do most creative professionals use AI best?",
+      "options": [
+        "They let AI produce the final creative work",
+        "They use AI to generate options and drafts, then apply their own judgment",
+        "They avoid AI because it copies their style",
+        "They use AI only for admin tasks, not creative work"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Handing over the final product means losing the human touch that makes creative work stand out.",
+        "Right. AI gives you a starting point and more options — your judgment is what makes it great.",
+        "AI creates options for you to react to, which actually protects and exercises your creative voice.",
+        "AI is increasingly used inside the creative process itself, not just around it."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20_s12",
+      "type": "good_fit",
+      "title": "Good for AI in your industry?",
+      "question": "Summarize this 20-page industry report into a one-page brief for my team.",
+      "correct": "good",
+      "feedback": [
+        "Yes — summarizing long documents is one of AI's strongest uses across every industry.",
+        "Exactly. What used to take two hours now takes two minutes."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d20_s13",
+      "type": "good_fit",
+      "title": "Good for AI in your industry?",
+      "question": "Make a final legal ruling in a court case based on the evidence I describe.",
+      "correct": "notideal",
+      "feedback": [
+        "Legal rulings require human judgment, accountability, and due process — AI cannot replace that.",
+        "Right. AI can summarize case notes or research precedents, but the decision belongs to a human."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d20_s14",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "AI is only useful in technology companies — traditional industries like healthcare and retail do not benefit much.",
+      "correct": false,
+      "feedback": [
+        "Traditional industries are seeing some of the biggest gains from AI — especially in admin, summaries, and pattern detection.",
+        "Right. AI is just as powerful in healthcare, retail, or education as in any tech company."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d20_s15",
+      "type": "reflection",
+      "title": "AI in your world",
+      "questions": [
+        {
+          "id": "your_industry",
+          "type": "single_choice",
+          "label": "Which industry are you closest to?",
+          "options": [
+            "Healthcare",
+            "Education",
+            "Finance",
+            "Retail",
+            "Creative industries",
+            "Another field"
+          ]
+        },
+        {
+          "id": "ai_use_you_see",
+          "type": "textarea",
+          "label": "Where do you already see AI being used in your industry or workplace?"
+        },
+        {
+          "id": "opportunity",
+          "type": "textarea",
+          "label": "What is one task in your work that AI could handle or speed up?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20_s16",
+      "type": "info",
+      "title": "The jobs that will thrive",
+      "body": "Every industry shift creates new winners. The jobs that thrive with AI are those that combine human judgment with AI speed. You are already building that combination. The question is not 'will AI affect my industry?' — it is 'how will I lead that change?'",
+      "audioUrl": null,
+      "primaryButton": "I will lead the change",
+      "xp": 3
+    },
+    {
+      "id": "d20_s17",
+      "type": "quiz",
+      "title": "Day 20 check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What do AI's best uses across industries have in common?",
+          "options": [
+            "They replace human workers entirely",
+            "They summarize, draft, and spot patterns to help humans decide faster",
+            "They only apply to industries with lots of data",
+            "They work best without any human review"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "A teacher who uses AI to personalize lessons is still the one doing the teaching.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Using AI to notice unusual patterns in transactions to prevent crime is called fraud ______.",
+          "answer": "detection",
+          "aliases": [
+            "fraud detection",
+            "flagging",
+            "prevention"
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "mc",
+          "question": "In retail, what is one practical use of AI?",
+          "options": [
+            "Replacing checkout staff with robots",
+            "Predicting which products will sell out so stores can restock in time",
+            "Setting prices without any human approval",
+            "Writing product reviews automatically"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d20_s18",
+      "type": "completion",
+      "title": "Day 20 complete — Industry Insider",
+      "body": "You can now see how AI is transforming healthcare, education, finance, retail, and creative work — and how the same principles apply in every field. Your industry is changing. You are ready to change with it.",
+      "primaryButton": "Keep going",
+      "xp": 0
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 21,
+    "unitLabel": "Day 21",
+    "unitTitle": "Week 3 Review",
+    "lessonOrder": 1,
+    "lessonTitle": "What You've Built So Far",
+    "minutes": 15
+  },
+  "steps": [
+    {
+      "id": "d21_s1",
+      "type": "info",
+      "title": "Welcome to Day 21 — Your Three-Week Mark",
+      "body": "Three weeks ago you sent your first AI prompt. Today you know how to automate tasks, use AI safely, think through ethics, pick the right tools, and apply AI to your real work. That is not a small thing. Let's see how much you have grown.",
+      "audioUrl": null,
+      "primaryButton": "Let's review",
+      "xp": 3
+    },
+    {
+      "id": "d21_s2",
+      "type": "highlight",
+      "title": "Week 1 recap — The foundation",
+      "body": "You learned how to write clear prompts, give AI the right context, and ask follow-up questions. You built the habit of treating AI like a smart assistant who needs good instructions. Every skill since then rests on that foundation.",
+      "audioUrl": null,
+      "primaryButton": "I remember",
+      "xp": 6
+    },
+    {
+      "id": "d21_s3",
+      "type": "highlight",
+      "title": "Week 2 recap — Systems and workflows",
+      "body": "You built templates, chained workflows, automated repeating tasks, and learned how to collaborate with AI on bigger projects. You stopped treating AI as a one-off tool and started using it as part of how you work every day.",
+      "audioUrl": null,
+      "primaryButton": "That changed things",
+      "xp": 6
+    },
+    {
+      "id": "d21_s4",
+      "type": "highlight",
+      "title": "Week 3 recap — Depth and responsibility",
+      "body": "Week 3 went deeper. You explored automation tools and triggers, learned how to stay safe with AI-generated content, thought through the ethics of using AI at work, discovered the right tool for different jobs, and applied everything to your actual career. That is where it gets real.",
+      "audioUrl": null,
+      "primaryButton": "It did get real",
+      "xp": 6
+    },
+    {
+      "id": "d21_s5",
+      "type": "info",
+      "title": "Why reviews matter",
+      "body": "Learning sticks when you revisit it. Today's quiz covers automation, safety, ethics, tools, and work applications — the five pillars of week 3. Even if you nail every question, you will walk away with ideas sharper than before.",
+      "audioUrl": null,
+      "primaryButton": "Sharpen me up",
+      "xp": 3
+    },
+    {
+      "id": "d21_s6",
+      "type": "scenario_card",
+      "title": "Meet Priya",
+      "body": "Priya runs a small nonprofit. She has been using AI for three weeks. This week she set up an automated email digest, checked that AI outputs were accurate before sharing them, and used AI to help write grant language without overstating results. She is doing it right.",
+      "audioUrl": null,
+      "primaryButton": "I want to do it right too",
+      "xp": 3
+    },
+    {
+      "id": "d21_s7",
+      "type": "info",
+      "title": "Before the quiz — a quick mindset tip",
+      "body": "Do not stress the questions. Think of them as a mirror, not a test. If something stumps you, that is the most useful information you will get today — it shows you exactly where to spend 10 more minutes this week.",
+      "audioUrl": null,
+      "primaryButton": "Mirror, not test",
+      "xp": 3
+    },
+    {
+      "id": "d21_s8",
+      "type": "quiz",
+      "title": "Week 3 mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What are the two essential parts of any automation?",
+          "options": [
+            "A question and an answer",
+            "A trigger and an action",
+            "A template and a prompt",
+            "A login and a password"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Q&A describes how you talk to AI — not how automations are structured.",
+            "Correct. A trigger is what starts the automation, and an action is what happens next.",
+            "Templates and prompts are useful tools, but automations are built on triggers and actions.",
+            "Those are for logging in, not for building automations."
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "AI-generated content is always accurate and safe to share publicly without reviewing it first.",
+          "correct": false,
+          "feedback": [
+            "Correct — AI can produce errors or outdated facts, so reviewing before sharing is always worth it.",
+            "This is actually not safe. AI can make mistakes, so checking outputs before you share them is an important habit."
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "mc",
+          "question": "Which is the best safety habit when using AI at work?",
+          "options": [
+            "Never tell anyone you used AI",
+            "Paste private client data into any free AI tool without checking its terms",
+            "Verify AI outputs against reliable sources before using them in decisions",
+            "Always accept the first answer AI gives you"
+          ],
+          "correct": 2,
+          "feedback": [
+            "Hiding your AI use can create trust problems. Transparency is usually the better path.",
+            "Pasting private data into untrusted tools is a real risk. Always read the privacy policy first.",
+            "Yes — verifying outputs is the single most important safety habit you can build.",
+            "First answers are a starting point, not a final answer. Always review before acting."
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fillblank",
+          "question": "When AI produces a confident but completely made-up fact, that error is called a ______.",
+          "answer": "hallucination",
+          "aliases": ["hallucination error", "ai hallucination"]
+        },
+        {
+          "id": "q5",
+          "type": "mc",
+          "question": "When is it most important to disclose that AI helped create a piece of work?",
+          "options": [
+            "Never — AI is just a tool like a calculator",
+            "When your workplace, client, or context has a policy requiring disclosure",
+            "Only if the AI made an obvious mistake",
+            "Only for documents longer than two pages"
+          ],
+          "correct": 1,
+          "feedback": [
+            "AI raises more questions than a calculator does. Many situations now require disclosure.",
+            "Right. Following the policy protects you, your client, and the people reading the work.",
+            "Disclosure is about transparency, not just errors. The whole piece may need a note.",
+            "Length does not determine the need for disclosure — context and policy do."
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "tf",
+          "question": "Different AI tools are built for different types of tasks — there is no single best tool for everything.",
+          "correct": true,
+          "feedback": [
+            "Actually, this is true. Text tools, image tools, code tools, and audio tools each have different strengths.",
+            "Exactly right. Choosing the right tool for the right job is its own important skill."
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "mc",
+          "question": "Which approach works best when applying AI to your actual job for the first time?",
+          "options": [
+            "Replace every manual step with an AI step as fast as possible",
+            "Start with one low-risk task, learn from it, then expand gradually",
+            "Only use AI for personal projects, never professional ones",
+            "Wait until your entire team adopts it before you start"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Moving too fast without learning creates problems. A phased start is safer and smarter.",
+            "Yes — starting small builds confidence, catches issues early, and makes the habit stick.",
+            "Professional use is where AI creates the most value. Low-risk work tasks are a great entry point.",
+            "You do not need to wait. You can start learning on your own today."
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fillblank",
+          "question": "Using AI to produce work and claiming it is entirely your own, when your context requires honesty, is an example of an ______ concern.",
+          "answer": "ethics",
+          "aliases": ["ethical", "ethical concern"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d21_s9",
+      "type": "info",
+      "title": "You just covered a lot of ground",
+      "body": "Eight questions spanning automation, safety, ethics, tools, and work applications. However you scored, you now have a clearer picture of what you know and what is worth revisiting. That clarity is the whole point.",
+      "audioUrl": null,
+      "primaryButton": "Good to know",
+      "xp": 3
+    },
+    {
+      "id": "d21_s10",
+      "type": "scenario_card",
+      "title": "The most common mistake at week 3",
+      "body": "People at the three-week mark often stop experimenting. They find two or three things that work and stick with only those. That is fine for now — but the people who keep growing try one new use case every week, even a small one.",
+      "audioUrl": null,
+      "primaryButton": "I will keep trying new things",
+      "xp": 3
+    },
+    {
+      "id": "d21_s11",
+      "type": "info",
+      "title": "Ethics is not a one-time lesson",
+      "body": "As AI gets more powerful, the questions get more interesting. Can AI write a whole report for your boss? Can you use it to draft a legal letter? Is it okay to use AI images in a commercial project? There are no universal rules yet — which means your judgment matters more, not less.",
+      "audioUrl": null,
+      "primaryButton": "My judgment matters",
+      "xp": 3
+    },
+    {
+      "id": "d21_s12",
+      "type": "highlight",
+      "title": "The skill that ties it all together",
+      "body": "Knowing when NOT to use AI is just as important as knowing when to use it. Some conversations need a human. Some decisions need your expertise. Some moments need empathy that no tool can fake. Knowing the difference is the mark of a truly skilled AI user.",
+      "audioUrl": null,
+      "primaryButton": "That is wisdom",
+      "xp": 6
+    },
+    {
+      "id": "d21_s13",
+      "type": "reflection",
+      "title": "What has been most valuable to you?",
+      "questions": [
+        {
+          "id": "most_valuable",
+          "type": "single_choice",
+          "label": "Which topic from the past three weeks has helped you most?",
+          "options": [
+            "Prompt writing and getting clear outputs",
+            "Templates and workflows that save time",
+            "Automation and chaining tasks together",
+            "Safety and knowing what to watch out for",
+            "Ethics and using AI responsibly",
+            "Finding the right tool for the right job",
+            "Applying AI to my specific work"
+          ]
+        },
+        {
+          "id": "real_win",
+          "type": "textarea",
+          "label": "Describe one real task where AI has already saved you time or made your work better."
+        },
+        {
+          "id": "next_growth",
+          "type": "textarea",
+          "label": "What is one area where you want to get better at using AI over the next three weeks?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d21_s14",
+      "type": "info",
+      "title": "What week 4 holds",
+      "body": "Coming up: AI for small business, creative work, your personal life, advanced prompting, and building a routine that lasts. You have the foundation. Now you build on it.",
+      "audioUrl": null,
+      "primaryButton": "Ready for week 4",
+      "xp": 3
+    },
+    {
+      "id": "d21_s15",
+      "type": "badge_unlock",
+      "badgeSlug": "ai_intermediate",
+      "xp": 0
+    },
+    {
+      "id": "d21_s16",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d21_s17",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d21_s18",
+      "type": "completion",
+      "title": "Day 21 complete — Three weeks strong",
+      "body": "You have finished your first major milestone. Three weeks of daily practice, real experiments, and honest reflection. The intermediate badge is yours. Week 4 starts tomorrow — and it goes to places you have not explored yet.",
+      "primaryButton": "On to week 4",
+      "xp": 0
+    }
+  ]
+}

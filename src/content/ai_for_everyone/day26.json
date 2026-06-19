@@ -1,0 +1,288 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 26,
+    "unitLabel": "Day 26",
+    "unitTitle": "Building Your AI Habit",
+    "lessonOrder": 1,
+    "lessonTitle": "Making AI Part of Your Day",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d26_s1",
+      "type": "info",
+      "title": "Welcome to Day 26 — Habit Day",
+      "body": "Knowing how to use AI is one thing. Using it every day without thinking about it — that is the real skill. Today you design a simple, realistic AI habit that fits into the life you already have.",
+      "audioUrl": null,
+      "primaryButton": "Build my AI habit",
+      "xp": 3
+    },
+    {
+      "id": "d26_s2",
+      "type": "info",
+      "title": "Why habits beat motivation",
+      "body": "Motivation goes up and down. Habits run on autopilot. The people who get the most from AI are not the most motivated — they are the ones who made AI use automatic. A small habit done every day beats a big effort done once a month.",
+      "audioUrl": null,
+      "primaryButton": "Small and consistent wins",
+      "xp": 3
+    },
+    {
+      "id": "d26_s3",
+      "type": "scenario_card",
+      "title": "What a daily AI habit looks like",
+      "body": "Every morning, Maya opens AI and types one question about her workday before she opens her email. Every evening, she spends two minutes asking AI to help her prepare for tomorrow. Once a week she tries one new use case. In three months, she saved eight hours a week without changing her schedule.",
+      "audioUrl": null,
+      "primaryButton": "I want that",
+      "xp": 3
+    },
+    {
+      "id": "d26_s4",
+      "type": "info",
+      "title": "The morning prompt habit",
+      "body": "Start each morning with one AI prompt before you open your inbox. It could be: \"What are the three most important things I should focus on today?\" or \"Help me plan my top priorities for the next four hours.\" This takes 60 seconds and sets the tone for a focused day.",
+      "audioUrl": null,
+      "primaryButton": "60 seconds, focused day",
+      "xp": 3
+    },
+    {
+      "id": "d26_s5",
+      "type": "mc",
+      "title": "The morning prompt",
+      "question": "When is the best time to use your morning AI habit?",
+      "options": [
+        "After you have already answered all your emails",
+        "Before you open your inbox, to set your priorities first",
+        "Only when you have a hard problem to solve",
+        "At lunch, when you have more time"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Once your inbox is open, reactive mode takes over. Use AI first to plan, then tackle messages.",
+        "Exactly. Planning before reacting puts you in control of the day.",
+        "The morning habit is most powerful when it is routine — not just saved for hard days.",
+        "Lunch works for reflection, but the morning slot primes your whole day."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26_s6",
+      "type": "info",
+      "title": "The evening reflection habit",
+      "body": "At the end of the day — before you close your laptop — spend two minutes with AI. Ask: \"What did I accomplish today? What should I carry forward to tomorrow?\" AI helps you turn scattered thoughts into a clean handoff to your future self.",
+      "audioUrl": null,
+      "primaryButton": "Two-minute wind-down",
+      "xp": 3
+    },
+    {
+      "id": "d26_s7",
+      "type": "highlight",
+      "title": "Habit stacking — the secret weapon",
+      "body": "Attach your new AI habit to something you already do. Morning coffee = morning prompt. Closing your laptop = evening reflection. Walking to lunch = think of your weekly new AI use case. Connecting new habits to old ones makes them automatic much faster.",
+      "audioUrl": null,
+      "primaryButton": "Stack it onto what I already do",
+      "xp": 6
+    },
+    {
+      "id": "d26_s8",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Attaching a new habit to an existing routine helps it stick faster.",
+      "correct": true,
+      "feedback": [
+        "Actually, this is true. Habit stacking is one of the most effective techniques for building new behaviors.",
+        "Correct. Existing habits act as a reliable trigger for the new one."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26_s9",
+      "type": "info",
+      "title": "The one-new-thing-per-week habit",
+      "body": "Every week, try one thing with AI you have never tried before. A new type of prompt. A new task category. A new tool. It does not need to be big — just new. This keeps your skills growing without any pressure. In a year you will have tried 52 new things.",
+      "audioUrl": null,
+      "primaryButton": "One new thing a week",
+      "xp": 3
+    },
+    {
+      "id": "d26_s10",
+      "type": "scenario_card",
+      "title": "Habit stacking in action",
+      "body": "James already makes coffee every morning. He decided: \"While the coffee brews, I ask AI one question about my day.\" He already reviews his calendar at 5pm. He added: \"After I close my calendar, I do a two-minute AI evening reflection.\" Neither habit required extra time — just a new attachment.",
+      "audioUrl": null,
+      "primaryButton": "Attach, don't add",
+      "xp": 3
+    },
+    {
+      "id": "d26_s11",
+      "type": "mc",
+      "title": "Habit stacking",
+      "question": "Which of these is a good example of habit stacking for an AI habit?",
+      "options": [
+        "Set aside two hours on Saturday to use AI for the whole week",
+        "Use AI only when you remember to",
+        "After you pour your morning coffee, immediately open AI and type your first prompt",
+        "Replace your existing morning routine entirely with AI tasks"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Two hours on Saturday creates pressure and is easy to skip. Daily small habits work better.",
+        "\"When you remember\" usually means never. A reliable trigger is key.",
+        "Yes. The coffee is already a reliable trigger — now AI piggybacks onto it.",
+        "Replacing an existing routine creates resistance. Adding onto it is much easier."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26_s12",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You need to spend at least 30 minutes a day with AI for it to make a real difference.",
+      "correct": false,
+      "feedback": [
+        "Correct. Even five minutes of consistent, focused AI use every day adds up to a significant advantage over time.",
+        "This is actually false. Consistency matters more than duration. Five focused minutes every day beats one hour once a week."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26_s13",
+      "type": "good_fit",
+      "title": "Good AI habit?",
+      "question": "Every Monday morning, before opening email, use AI to list your top three priorities for the week.",
+      "correct": "good",
+      "feedback": [
+        "This is a strong habit. It is specific, tied to an existing trigger (Monday morning), and keeps you in control of the week.",
+        "Yes. Specific, regular, and low-effort — this is exactly what a good AI habit looks like."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26_s14",
+      "type": "good_fit",
+      "title": "Good AI habit?",
+      "question": "Use AI to plan every minute of every hour of every day, and adjust the plan each time anything changes.",
+      "correct": "notideal",
+      "feedback": [
+        "Right. Over-relying on AI for micro-planning creates more stress than it relieves. Keep habits light and sustainable.",
+        "Correct. A good AI habit saves energy — it does not consume it. Keep it simple."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d26_s15",
+      "type": "builder",
+      "title": "Design your AI habit routine",
+      "fields": [
+        {
+          "id": "morning_trigger",
+          "label": "What existing morning routine will you attach your AI habit to?",
+          "placeholder": "making coffee, checking my calendar, eating breakfast"
+        },
+        {
+          "id": "morning_prompt",
+          "label": "What will your morning AI prompt be?",
+          "placeholder": "Help me plan my top three priorities for today"
+        },
+        {
+          "id": "evening_trigger",
+          "label": "What existing evening routine will you attach your reflection to?",
+          "placeholder": "closing my laptop, finishing my last meeting, making dinner"
+        },
+        {
+          "id": "weekly_new",
+          "label": "What is one new AI use case you want to try this week?",
+          "placeholder": "summarizing a long article, drafting a tricky email, creating a checklist"
+        }
+      ],
+      "template": "Help me build a sustainable AI habit routine. Morning trigger: {{morning_trigger}}. My morning prompt will be: {{morning_prompt}}. Evening trigger: {{evening_trigger}}. This week I want to try: {{weekly_new}}. Create a simple one-week habit plan I can follow starting tomorrow, with a reminder of why each habit matters.",
+      "primaryButton": "Build my habit plan",
+      "xp": 15
+    },
+    {
+      "id": "d26_s16",
+      "type": "reflection",
+      "title": "Commit to one habit",
+      "questions": [
+        {
+          "id": "chosen_habit",
+          "type": "single_choice",
+          "label": "Which AI habit will you start with this week?",
+          "options": [
+            "Morning prompt — plan my day before opening email",
+            "Evening reflection — two-minute wind-down before closing my laptop",
+            "Weekly new thing — try one use case I have never tried before",
+            "All three — I am ready to go all in"
+          ]
+        },
+        {
+          "id": "trigger",
+          "type": "textarea",
+          "label": "What existing routine will you attach it to? Be specific."
+        },
+        {
+          "id": "obstacle",
+          "type": "textarea",
+          "label": "What is the one thing most likely to knock you off this habit — and how will you handle it?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26_s17",
+      "type": "quiz",
+      "title": "Habit check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is habit stacking?",
+          "options": [
+            "Doing many habits at exactly the same time",
+            "Attaching a new habit to an existing routine as a trigger",
+            "Building as many habits as possible in one week",
+            "Replacing old habits with better ones"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Consistency matters more than the amount of time spent on a habit.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "mc",
+          "question": "What is the purpose of a morning AI prompt?",
+          "options": [
+            "To replace your to-do list app entirely",
+            "To set your priorities before reactive tasks like email take over",
+            "To fill in time before your first meeting",
+            "To make AI feel included in your morning"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q4",
+          "type": "fillblank",
+          "question": "To build a habit that sticks, attach it to a routine you ______ do.",
+          "answer": "already",
+          "aliases": [
+            "always",
+            "regularly"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d26_s18",
+      "type": "completion",
+      "title": "Day 26 complete — Habit Builder",
+      "body": "You now have a plan, a trigger, and a commitment. The habit you build this week will compound into hundreds of hours saved over the next year. You did not just learn about AI — you built a system for growing with it every single day.",
+      "primaryButton": "Let's make it stick",
+      "xp": 0
+    }
+  ]
+}

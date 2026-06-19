@@ -1,0 +1,282 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 18,
+    "unitLabel": "Day 18",
+    "unitTitle": "AI Ethics & Bias",
+    "lessonOrder": 1,
+    "lessonTitle": "When AI Gets It Wrong",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d18_s1",
+      "type": "info",
+      "title": "Welcome to Day 18 — When AI Gets It Wrong",
+      "body": "AI is impressive, but it is not perfect. It can be biased, it can make things up, and it can sound completely confident while being completely wrong. Today you will learn how to spot these problems — and what to do about them.",
+      "audioUrl": null,
+      "primaryButton": "I want to know the truth",
+      "xp": 3
+    },
+    {
+      "id": "d18_s2",
+      "type": "scenario_card",
+      "title": "Confident and wrong",
+      "body": "David asked an AI tool to name the CEO of a company. The AI gave a name, a job title, and even a short biography — all stated with complete confidence. The problem: that person had left the role two years ago. The AI had no idea it was wrong. It just sounded certain.",
+      "audioUrl": null,
+      "primaryButton": "That is unsettling",
+      "xp": 3
+    },
+    {
+      "id": "d18_s3",
+      "type": "info",
+      "title": "What is a hallucination?",
+      "body": "When AI makes up facts, dates, names, or quotes that do not exist, it is called a hallucination. The AI is not lying — it does not know it is wrong. It generates text that sounds plausible based on patterns, even when the facts are missing or outdated. Always verify important facts from a real source.",
+      "audioUrl": null,
+      "primaryButton": "Verify important facts — got it",
+      "xp": 3
+    },
+    {
+      "id": "d18_s4",
+      "type": "mc",
+      "title": "What is a hallucination?",
+      "question": "When an AI confidently states something that is false or made up, this is called:",
+      "options": [
+        "A glitch",
+        "A hallucination",
+        "A bug report",
+        "An override"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite. A glitch is a technical error. This problem has a specific name in AI.",
+        "Correct. Hallucination is the term used when AI generates convincing but false information.",
+        "A bug report is feedback submitted to developers. This is different — it happens in real-time during a chat.",
+        "An override is a setting change. Hallucination is when AI invents confident-sounding falsehoods."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18_s5",
+      "type": "info",
+      "title": "What is AI bias?",
+      "body": "AI learns from huge amounts of human-written text and data. If that data has patterns that favor certain groups over others, the AI picks those patterns up. This is called bias. For example, an AI trained mostly on data from one culture may give advice that does not fit others. Bias is not always obvious — you have to watch for it.",
+      "audioUrl": null,
+      "primaryButton": "Bias hides in patterns",
+      "xp": 3
+    },
+    {
+      "id": "d18_s6",
+      "type": "scenario_card",
+      "title": "Bias in action",
+      "body": "A company used an AI tool to screen job applications. The AI had been trained on ten years of past hiring decisions — decisions made mostly by humans who tended to hire people from certain backgrounds. The AI learned to replicate those patterns, consistently ranking some groups of applicants lower without anyone intending that result.",
+      "audioUrl": null,
+      "primaryButton": "AI can inherit human mistakes",
+      "xp": 3
+    },
+    {
+      "id": "d18_s7",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "If AI gives you a confident, detailed answer, you can trust it is accurate without checking.",
+      "correct": false,
+      "feedback": [
+        "Correct — confidence does not equal accuracy. AI can sound certain while being entirely wrong. Always verify important facts.",
+        "Actually, this is false. Confidence is not a reliability signal for AI. It can hallucinate with total certainty."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d18_s8",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "AI bias can appear even when the people who built the AI had no intention of creating a biased system.",
+      "correct": true,
+      "feedback": [
+        "This is actually true. Bias often comes from patterns in training data, not from intentional decisions. Good intentions do not eliminate it.",
+        "Correct. Bias emerges from patterns in data, not from intent. That is what makes it so tricky to spot and fix."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d18_s9",
+      "type": "good_fit",
+      "title": "Should you rely on AI for this?",
+      "question": "Use AI to get the final, definitive answer on a complex legal question without consulting a lawyer.",
+      "correct": "notideal",
+      "feedback": [
+        "Good call. AI can help you understand legal concepts, but it can also hallucinate specific laws or miss details. Always consult a qualified professional for legal decisions.",
+        "This is not ideal. AI may sound authoritative on legal topics, but it can be wrong in ways that have real consequences. Use AI for background research, then verify with a professional."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d18_s10",
+      "type": "info",
+      "title": "How to check AI's work",
+      "body": "When AI gives you facts, statistics, or quotes: (1) Search for the claim on a trusted website. (2) Check the original source — not just another AI summary. (3) If it is a quote, look for the original text. (4) For medical, legal, or financial decisions, always involve a real expert. AI is a starting point, not the final word.",
+      "audioUrl": null,
+      "primaryButton": "Four steps to verify",
+      "xp": 3
+    },
+    {
+      "id": "d18_s11",
+      "type": "mc",
+      "title": "Best practice check",
+      "question": "You ask AI to summarize the findings of a research study. What should you do before using that summary in a report?",
+      "options": [
+        "Use it immediately — AI is always accurate with research",
+        "Ask the AI the same question twice to double-check",
+        "Find the original study and verify the key points yourself",
+        "Add a disclaimer that says 'AI wrote this'"
+      ],
+      "correct": 2,
+      "feedback": [
+        "AI is not always accurate, especially with specific research details. Summaries can omit or misrepresent key findings.",
+        "Asking the same AI the same question will likely produce the same errors — it is not a verification method.",
+        "Correct. Going back to the original source is the only reliable way to verify what AI told you.",
+        "A disclaimer does not make incorrect information accurate. Verify first, then cite properly."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18_s12",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "When AI invents a convincing but false fact, this is known as a ______.",
+      "answer": "hallucination",
+      "aliases": ["hallucinating", "ai hallucination"],
+      "feedback": [
+        "Not quite — the term is 'hallucination.' It describes when AI generates confident-sounding information that is simply not true.",
+        "Exactly. 'Hallucination' is the term for when AI confidently produces false or made-up information."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d18_s13",
+      "type": "info",
+      "title": "Ethical use of AI",
+      "body": "Using AI ethically means being honest about when you used it, checking its output before sharing it as fact, not using AI to mislead or manipulate others, and thinking about who might be affected by AI decisions. You do not need to be a tech expert to use AI ethically — you just need to stay thoughtful.",
+      "audioUrl": null,
+      "primaryButton": "Thoughtful use matters",
+      "xp": 3
+    },
+    {
+      "id": "d18_s14",
+      "type": "scenario_card",
+      "title": "The copy-paste trap",
+      "body": "Sofia used AI to write a short article for her company newsletter. The AI wrote smoothly and she was impressed, so she published it without reading it carefully. Later, a colleague pointed out that one statistic in the article was completely made up — and several readers had already shared it. Sofia had to issue a correction.",
+      "audioUrl": null,
+      "primaryButton": "Always read what AI writes",
+      "xp": 3
+    },
+    {
+      "id": "d18_s15",
+      "type": "reflection",
+      "title": "Your AI ethics check-in",
+      "questions": [
+        {
+          "id": "trust_level",
+          "type": "single_choice",
+          "label": "Before today, how much did you trust AI output without checking it?",
+          "options": [
+            "I trusted it completely",
+            "I trusted it most of the time",
+            "I was sometimes skeptical",
+            "I always double-checked everything"
+          ]
+        },
+        {
+          "id": "verify_plan",
+          "type": "textarea",
+          "label": "Name one type of task where you will now make a habit of verifying what AI tells you."
+        },
+        {
+          "id": "bias_awareness",
+          "type": "single_choice",
+          "label": "How concerned are you about AI bias affecting decisions in your field?",
+          "options": [
+            "Very concerned",
+            "Somewhat concerned",
+            "Not very concerned",
+            "I had not thought about it before today"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18_s16",
+      "type": "mc",
+      "title": "Ethical AI use",
+      "question": "A colleague asks if you used AI to write your project proposal. You did. What is the ethical response?",
+      "options": [
+        "Deny it — everyone uses AI anyway",
+        "Be honest and explain that you used AI as a starting point and reviewed everything yourself",
+        "Say you used AI only for the formatting, not the ideas",
+        "Avoid the question"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Honesty builds trust. Denying it is misleading and risks your credibility if the truth comes out.",
+        "Correct. Being transparent about AI use — and noting that you reviewed the work — is the honest and professional approach.",
+        "Partial honesty is still misleading. If AI contributed to the content, say so clearly.",
+        "Avoiding the question signals that something is wrong. Honesty is always the better path."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18_s17",
+      "type": "quiz",
+      "title": "Ethics and accuracy check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What should you do before using an AI-generated statistic in a report?",
+          "options": [
+            "Use it — AI is always accurate with numbers",
+            "Ask the AI where it got the number",
+            "Find the original source and verify the number yourself",
+            "Round the number to make it look more official"
+          ],
+          "correct": 2
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "AI bias only appears when the developers of the AI intended to create a biased system.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Using AI in a way that is honest, fair, and thoughtful is called ______ AI use.",
+          "answer": "ethical",
+          "aliases": ["responsible", "ethical and responsible"]
+        },
+        {
+          "id": "q4",
+          "type": "mc",
+          "question": "Which of these is an example of a hallucination?",
+          "options": [
+            "AI takes a long time to respond",
+            "AI confidently cites a scientific study that does not exist",
+            "AI refuses to answer a question",
+            "AI gives a shorter answer than you expected"
+          ],
+          "correct": 1
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d18_s18",
+      "type": "completion",
+      "title": "Day 18 complete — Think Before You Trust",
+      "body": "You now know about hallucinations, AI bias, and why verification matters. Being a thoughtful AI user means you catch mistakes others miss — and you use AI in a way that is honest and fair. Well done.",
+      "primaryButton": "Keep going!",
+      "xp": 0
+    }
+  ]
+}

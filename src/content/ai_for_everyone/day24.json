@@ -1,0 +1,278 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 24,
+    "unitLabel": "Day 24",
+    "unitTitle": "Staying Current with AI",
+    "lessonOrder": 1,
+    "lessonTitle": "AI Moves Fast — Here's How to Keep Up",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d24_s1",
+      "type": "info",
+      "title": "AI changes every week",
+      "body": "New tools, new features, and new announcements seem to arrive every few days. The good news: you do not need to follow all of it. You just need a simple system that keeps you informed without overwhelming you.",
+      "audioUrl": null,
+      "primaryButton": "Show me the system",
+      "xp": 3
+    },
+    {
+      "id": "d24_s2",
+      "type": "info",
+      "title": "The smart way to stay current",
+      "body": "The best approach is a short daily or weekly digest — a quick scan of what matters, filtered by someone who reads so you do not have to. Newsletters are the lowest-effort, highest-value way to do this.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d24_s3",
+      "type": "highlight",
+      "title": "Three newsletters worth your inbox",
+      "body": "The Rundown AI — a daily 5-minute digest of the biggest AI news. TLDR AI — a concise daily email covering tools, research, and launches. The Neuron — fun, practical, and focused on how real people use AI. Any one of these is enough to start.",
+      "audioUrl": null,
+      "primaryButton": "Good to know",
+      "xp": 6
+    },
+    {
+      "id": "d24_s4",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "What is the main advantage of following an AI newsletter?",
+      "options": [
+        "You will learn to code AI tools yourself.",
+        "Someone else filters the noise so you get only what matters.",
+        "You will always be the first to know about every new tool.",
+        "It replaces the need to actually use AI."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Newsletters are about staying informed, not learning to code.",
+        "Exactly — a good newsletter does the heavy lifting of filtering for you.",
+        "There are hundreds of new tools every week. No newsletter covers all of them, and that is fine.",
+        "Reading about AI is just the start — using it is still the most important habit."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24_s5",
+      "type": "scenario_card",
+      "title": "Carlos's Monday morning habit",
+      "body": "Carlos spends five minutes every Monday morning reading one AI newsletter while his coffee brews. He does not try to test every tool he reads about. He just flags anything that seems useful for his work and tries one new thing per week.",
+      "audioUrl": null,
+      "primaryButton": "Smart approach",
+      "xp": 3
+    },
+    {
+      "id": "d24_s6",
+      "type": "info",
+      "title": "YouTube channels that actually help",
+      "body": "If you prefer video, a few channels stand out. Matt Wolfe covers new AI tools in plain language. Marques Brownlee (MKBHD) covers broader tech with clear AI explainers. AI Explained goes deeper on how things work, without needing a science degree.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d24_s7",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You need to test every new AI tool you hear about to stay current.",
+      "correct": false,
+      "feedback": [
+        "Correct — that is not necessary and would quickly burn you out. A selective approach works much better.",
+        "Actually, trying every tool would be exhausting and counterproductive. Being selective is the smarter move."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d24_s8",
+      "type": "info",
+      "title": "How to test a new tool efficiently",
+      "body": "When a new tool catches your eye, give it exactly one task you already do. If it handles that task better or faster than what you use now, keep it. If not, move on. Spend 10 minutes — not 10 hours.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d24_s9",
+      "type": "highlight",
+      "title": "The 10-minute test",
+      "body": "Pick one real task from your week. Give the new tool that exact task. Judge it on one question: did it save me time or produce something better than what I had before? If yes, add it. If no, move on without guilt.",
+      "audioUrl": null,
+      "primaryButton": "That's doable",
+      "xp": 6
+    },
+    {
+      "id": "d24_s10",
+      "type": "mc",
+      "title": "Best way to evaluate a new AI tool",
+      "question": "You hear about a new AI writing tool. What is the best way to decide if it is worth using?",
+      "options": [
+        "Read every review you can find before trying it.",
+        "Sign up, spend a few hours exploring all its features, then decide.",
+        "Give it one real task you already do and see if it does it better.",
+        "Ask AI if the new tool is good."
+      ],
+      "correct": 2,
+      "feedback": [
+        "Reviews help, but your own workflow is the real test — what works for others may not work for you.",
+        "Spending hours on evaluation defeats the purpose. A focused 10-minute test tells you what you need to know.",
+        "Exactly. A real task from your own work is the fastest and most honest test.",
+        "Interesting idea, but AI cannot know your specific needs — only you can test that."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24_s11",
+      "type": "scenario_card",
+      "title": "When NOT to switch tools",
+      "body": "Priya reads about a new AI tool every week. For a while she switched tools constantly — and spent more time setting up new tools than actually getting work done. Now she has a rule: a new tool has to be clearly better at something specific before she adopts it.",
+      "audioUrl": null,
+      "primaryButton": "Good rule",
+      "xp": 3
+    },
+    {
+      "id": "d24_s12",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "Switching to a new AI tool is always worth it if the tool has good reviews.",
+      "correct": false,
+      "feedback": [
+        "Right — reviews are one input, but the real test is whether the tool fits your specific tasks and habits.",
+        "Actually, good reviews are not enough. A tool is only worth switching to if it clearly improves something in your own workflow."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d24_s13",
+      "type": "info",
+      "title": "Build a simple reading habit",
+      "body": "Pick one newsletter. Subscribe today. Read it for two weeks — even if you just skim the headlines. After two weeks you will have a much clearer picture of what is happening in AI, without spending more than a few minutes a day.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d24_s14",
+      "type": "fillblank",
+      "title": "Fill in the blank",
+      "question": "To test a new AI tool efficiently, give it one real ______ from your week and see if it does the job better.",
+      "answer": "task",
+      "aliases": [
+        "a task",
+        "job",
+        "a job",
+        "project",
+        "a project"
+      ],
+      "feedback": [
+        "Exactly — one real task is all you need to judge whether a new tool is worth your time.",
+        "Close. The key is using a real task from your own work, not a made-up test."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d24_s15",
+      "type": "mc",
+      "title": "Which newsletter is best for a daily 5-minute update?",
+      "question": "You want a quick daily email that covers the biggest AI news in about five minutes. Which newsletter fits best?",
+      "options": [
+        "The Wall Street Journal.",
+        "The Rundown AI.",
+        "A general tech blog.",
+        "A weekly magazine."
+      ],
+      "correct": 1,
+      "feedback": [
+        "The WSJ covers AI sometimes, but it is not focused or concise enough for a daily AI digest.",
+        "Yes — The Rundown AI is designed specifically as a 5-minute daily AI news digest.",
+        "General tech blogs vary a lot in quality and depth — a dedicated AI newsletter is more efficient.",
+        "A weekly magazine is useful but comes too infrequently to keep you current on fast-moving AI news."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24_s16",
+      "type": "reflection",
+      "title": "Your staying-current plan",
+      "questions": [
+        {
+          "id": "newsletter_pick",
+          "type": "single_choice",
+          "label": "Which newsletter or channel are you most likely to try?",
+          "options": [
+            "The Rundown AI",
+            "TLDR AI",
+            "The Neuron",
+            "A YouTube channel",
+            "I'm not sure yet"
+          ]
+        },
+        {
+          "id": "reading_time",
+          "type": "single_choice",
+          "label": "When would you realistically read or watch AI updates?",
+          "options": [
+            "Morning with coffee",
+            "Lunch break",
+            "Evening",
+            "Weekends only"
+          ]
+        },
+        {
+          "id": "tool_test",
+          "type": "textarea",
+          "label": "Is there a new AI tool you have been curious about? What one task would you use to test it?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24_s17",
+      "type": "quiz",
+      "title": "Day 24 mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the lowest-effort way to stay informed about AI news?",
+          "options": [
+            "Follow every AI company on social media.",
+            "Subscribe to a daily AI newsletter.",
+            "Read full research papers each week.",
+            "Watch live AI product launches."
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "You should test every new AI tool you hear about to stay competitive.",
+          "correct": false
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "A good rule for testing new tools: spend 10 ______ — not 10 hours.",
+          "answer": "minutes",
+          "aliases": [
+            "mins",
+            "10 minutes",
+            "min"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d24_s18",
+      "type": "completion",
+      "title": "Day 24 complete",
+      "body": "You now have a practical system for keeping up with AI — a newsletter habit, a few trusted channels, and a 10-minute test for new tools. You do not need to track everything. You just need to stay curious and keep one good habit going.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

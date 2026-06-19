@@ -1,0 +1,259 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 25,
+    "unitLabel": "Day 25",
+    "unitTitle": "AI Myths Busted",
+    "lessonOrder": 1,
+    "lessonTitle": "What AI Can't Actually Do",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d25_s1",
+      "type": "info",
+      "title": "Welcome to Day 25 — Myth-Busting Day",
+      "body": "A lot of scary headlines surround AI. Today we look at the most common fears and separate fact from fiction. By the end, you will have a clearer, calmer view of what AI actually is — and what it is not.",
+      "audioUrl": null,
+      "primaryButton": "Let's bust some myths",
+      "xp": 3
+    },
+    {
+      "id": "d25_s2",
+      "type": "scenario_card",
+      "title": "You have probably heard this",
+      "body": "\"AI will take my job.\" \"AI is smarter than doctors.\" \"AI knows what I'm thinking.\" \"If AI is wrong, no one can tell.\" These ideas spread fast — but most of them are either exaggerated or simply untrue. Let's look at the real picture.",
+      "audioUrl": null,
+      "primaryButton": "Show me the truth",
+      "xp": 3
+    },
+    {
+      "id": "d25_s3",
+      "type": "info",
+      "title": "Myth 1: AI will take all jobs",
+      "body": "History tells a different story. Every major technology — from the printing press to the computer — shifted what people do, not how many people work. AI is doing the same thing. Routine tasks get handed to AI; human judgment, creativity, and relationships become more valuable than ever.",
+      "audioUrl": null,
+      "primaryButton": "Jobs shift, not disappear",
+      "xp": 3
+    },
+    {
+      "id": "d25_s4",
+      "type": "mc",
+      "title": "Jobs and AI",
+      "question": "What does history suggest about new technology and jobs?",
+      "options": [
+        "Technology always eliminates more jobs than it creates",
+        "Technology tends to shift the type of work people do, not eliminate work entirely",
+        "Technology has no effect on employment",
+        "Technology only creates jobs for engineers"
+      ],
+      "correct": 1,
+      "feedback": [
+        "This fear is understandable, but history shows a more balanced outcome — jobs change more than they disappear.",
+        "Exactly. The nature of work evolves. New roles appear as old ones change.",
+        "Technology does affect work — it transforms what skills are needed most.",
+        "That has not been the pattern. Many industries and roles benefit from new technology."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25_s5",
+      "type": "highlight",
+      "title": "What AI shifts in your role",
+      "body": "Think about your own work. Tasks AI handles well: sorting and summarizing information, drafting first versions, answering common questions. Tasks that stay human: judging nuance, building trust, making ethical decisions, leading people through change.",
+      "audioUrl": null,
+      "primaryButton": "My human skills matter more",
+      "xp": 6
+    },
+    {
+      "id": "d25_s6",
+      "type": "info",
+      "title": "Myth 2: AI is always right",
+      "body": "AI can be confidently wrong. It \"hallucinates\" — that means it generates text that sounds authoritative but contains made-up facts, wrong dates, or invented sources. This is not a bug that will be fully fixed. It is a built-in trait of how AI works. Your job is to verify anything that matters.",
+      "audioUrl": null,
+      "primaryButton": "Always verify what matters",
+      "xp": 3
+    },
+    {
+      "id": "d25_s7",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "AI can produce incorrect information that sounds completely convincing.",
+      "correct": true,
+      "feedback": [
+        "Actually, this is true — AI can be confidently wrong. Always check important facts.",
+        "Correct. Sounding confident and being correct are two different things when it comes to AI."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d25_s8",
+      "type": "mc",
+      "title": "Handling AI errors",
+      "question": "A colleague says AI told them a surprising fact. What is the best response?",
+      "options": [
+        "Trust it — AI would not make that up",
+        "Ignore it — AI is always wrong",
+        "Verify it with a reliable source before acting on it",
+        "Ask AI the same question again and accept the second answer"
+      ],
+      "correct": 2,
+      "feedback": [
+        "AI can sound very confident while being completely wrong. Trust, but verify.",
+        "AI is often very helpful — the goal is smart verification, not blanket distrust.",
+        "Yes. A quick check against a credible source is the right habit.",
+        "Asking again can give a different answer, but neither is guaranteed to be correct."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25_s9",
+      "type": "scenario_card",
+      "title": "When hallucinations happen",
+      "body": "A lawyer once submitted an AI-written brief that cited court cases that did not exist. The AI invented them. The lawyer did not check. This is a real story — and a real reminder. AI is a powerful first draft, not a final authority.",
+      "audioUrl": null,
+      "primaryButton": "First draft, not final word",
+      "xp": 3
+    },
+    {
+      "id": "d25_s10",
+      "type": "info",
+      "title": "Myth 3: AI is conscious",
+      "body": "AI does not think, feel, want, or understand. It processes patterns in text and generates statistically likely responses. When it says \"I feel excited about this,\" it is not experiencing excitement — it is producing words that fit the pattern. There is no one home.",
+      "audioUrl": null,
+      "primaryButton": "Patterns, not feelings",
+      "xp": 3
+    },
+    {
+      "id": "d25_s11",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "When an AI says it is excited to help you, it is genuinely experiencing excitement.",
+      "correct": false,
+      "feedback": [
+        "Correct. AI produces words that fit patterns. It does not have feelings or experiences.",
+        "This is actually false. AI generates text that sounds emotional, but there is no experience behind it."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d25_s12",
+      "type": "good_fit",
+      "title": "Good use of AI?",
+      "question": "Ask AI to decide whether you should quit your job by explaining all your personal feelings and asking it to make the call for you.",
+      "correct": "notideal",
+      "feedback": [
+        "That is the right call. AI can help you think through options and pros and cons, but the final judgment on a life decision belongs to you.",
+        "Correct. AI is a thinking partner, not a decision-maker for choices that affect your life deeply."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d25_s13",
+      "type": "info",
+      "title": "Myth 4: AI replaces human expertise",
+      "body": "AI augments expertise — it does not replace it. A doctor who uses AI to review scan results is more effective. A lawyer who uses AI to draft briefs is faster. A teacher who uses AI to personalize lessons reaches more students. The expert stays in the loop. The expert makes the call.",
+      "audioUrl": null,
+      "primaryButton": "AI + expert = better outcomes",
+      "xp": 3
+    },
+    {
+      "id": "d25_s14",
+      "type": "mc",
+      "title": "AI and expertise",
+      "question": "How does AI work best alongside human experts?",
+      "options": [
+        "AI handles everything and the expert signs off without reviewing",
+        "The expert uses AI to work faster and smarter while keeping judgment and accountability",
+        "AI replaces the expert for all routine work",
+        "The expert does all the work and AI is only used for final formatting"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Signing off without reviewing defeats the purpose. The expert's judgment is what makes AI safe to use.",
+        "Exactly. AI raises the floor of what an expert can produce, while the expert provides the judgment.",
+        "Even in routine cases, the expert's review catches AI errors that could cause real harm.",
+        "That leaves a lot of value on the table. AI can assist throughout the whole process."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25_s15",
+      "type": "good_fit",
+      "title": "Good use of AI?",
+      "question": "Use AI to draft a first version of a project proposal, then review and refine it yourself before sending.",
+      "correct": "good",
+      "feedback": [
+        "This is a great use of AI — it speeds up drafting while keeping your expertise in charge.",
+        "Yes. AI drafts, you judge. That is the winning combination."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d25_s16",
+      "type": "highlight",
+      "title": "The four myths in one view",
+      "body": "Myth 1: AI takes all jobs. Truth: AI shifts roles. Myth 2: AI is always right. Truth: AI hallucinates — verify what matters. Myth 3: AI is conscious. Truth: AI processes patterns, not feelings. Myth 4: AI replaces experts. Truth: AI amplifies experts.",
+      "audioUrl": null,
+      "primaryButton": "I see the full picture now",
+      "xp": 6
+    },
+    {
+      "id": "d25_s17",
+      "type": "quiz",
+      "title": "Myth-busting check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What does AI \"hallucination\" mean?",
+          "options": [
+            "AI sees images that are not there",
+            "AI generates confident but incorrect or made-up information",
+            "AI becomes confused when given too much input",
+            "AI repeats the same answer in a loop"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Technology throughout history has generally shifted jobs rather than permanently eliminating all work.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "mc",
+          "question": "When AI expresses feelings like excitement or curiosity, what is actually happening?",
+          "options": [
+            "AI is genuinely experiencing those emotions",
+            "AI is generating words that statistically fit the conversation pattern",
+            "AI is testing whether the user will be fooled",
+            "AI is reflecting the user's emotions back at them"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q4",
+          "type": "fillblank",
+          "question": "AI works best by ______ human expertise, not replacing it.",
+          "answer": "augmenting",
+          "aliases": [
+            "amplifying",
+            "supporting",
+            "enhancing"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d25_s18",
+      "type": "completion",
+      "title": "Day 25 complete — Myth Buster",
+      "body": "You now have a calm, clear view of AI. You know what it can and cannot do, why you should always verify important facts, and why your human judgment is more valuable than ever. Tomorrow: building the daily AI habits that stick.",
+      "primaryButton": "See you tomorrow",
+      "xp": 0
+    }
+  ]
+}

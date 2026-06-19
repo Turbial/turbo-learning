@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 23,
+    "unitLabel": "Day 23",
+    "unitTitle": "AI for Side Projects",
+    "lessonOrder": 1,
+    "lessonTitle": "Build Faster With AI",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d23_s1",
+      "type": "info",
+      "title": "AI is your side-project co-founder",
+      "body": "Got an idea you have been sitting on? AI can help you move from idea to action in an afternoon — without a team, a big budget, or a technical background.",
+      "audioUrl": null,
+      "primaryButton": "Let's build",
+      "xp": 3
+    },
+    {
+      "id": "d23_s2",
+      "type": "info",
+      "title": "What AI can do for your idea",
+      "body": "AI is great at the tasks that usually slow you down: testing whether your idea makes sense, coming up with names, writing your first page of copy, and planning a simple launch.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d23_s3",
+      "type": "scenario_card",
+      "title": "Meet Maya",
+      "body": "Maya has wanted to sell custom pet portraits for two years. She never started because she did not know what to call it, how to price it, or how to tell people about it. She used AI to answer all three questions in one evening.",
+      "audioUrl": null,
+      "primaryButton": "How did she do it?",
+      "xp": 3
+    },
+    {
+      "id": "d23_s4",
+      "type": "info",
+      "title": "Step 1 — Validate the idea",
+      "body": "Before you spend hours building something, ask AI to poke holes in it. Describe your idea and ask: who would buy this, what problems might come up, and is there already something like it?",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d23_s5",
+      "type": "example",
+      "title": "Validation prompt example",
+      "prompt": "I want to sell custom pet portraits online. My target customer is dog owners aged 25 to 45. What problems might come up with this idea? Who else is doing this, and what would make my version stand out?",
+      "primaryButton": "That makes sense",
+      "xp": 3
+    },
+    {
+      "id": "d23_s6",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "What is the best reason to validate your idea with AI before building?",
+      "options": [
+        "To get AI to do all the work for you.",
+        "To spot problems early so you do not waste time.",
+        "Because AI always knows what customers want.",
+        "To get a list of competitors to copy."
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite — AI is a thinking partner, not a replacement for your effort.",
+        "Exactly. Catching problems early saves a lot of wasted time and energy.",
+        "AI can suggest ideas, but it does not know your specific customers.",
+        "Understanding competitors is useful, but the goal is finding your angle — not copying."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23_s7",
+      "type": "info",
+      "title": "Step 2 — Name your project",
+      "body": "Coming up with a name is harder than it sounds. Give AI your idea, your vibe, and who you are targeting, and ask for 10 to 20 name ideas. Then pick the one that feels right.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d23_s8",
+      "type": "example",
+      "title": "Naming prompt example",
+      "prompt": "My side project sells custom pet portraits as digital downloads. My customers are dog and cat owners who want something personal and fun. Give me 15 name ideas — some playful, some elegant. Keep them short and easy to remember.",
+      "primaryButton": "Nice — what's next?",
+      "xp": 3
+    },
+    {
+      "id": "d23_s9",
+      "type": "info",
+      "title": "Step 3 — Write your landing page",
+      "body": "A landing page does one job: convince someone to buy or sign up. Give AI your name, what you sell, who it is for, and the price. Ask it to write a headline, a short description, and three bullet points.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d23_s10",
+      "type": "compare",
+      "title": "Vague vs. specific landing page prompt",
+      "leftLabel": "Vague",
+      "rightLabel": "Specific",
+      "leftContent": "Write a landing page for my pet portrait business.",
+      "rightContent": "Write a landing page for Pawtraits, a shop selling custom digital pet portraits for $29. Customers are dog and cat owners who want a unique gift. Include a punchy headline, two sentences about what makes it special, and three benefit bullet points.",
+      "caption": "The specific prompt gives AI everything it needs to write something you can actually use.",
+      "primaryButton": "Got it",
+      "xp": 10
+    },
+    {
+      "id": "d23_s11",
+      "type": "info",
+      "title": "Step 4 — Build your templates",
+      "body": "AI can create reusable templates for you — email replies to customers, social media captions, product descriptions. Build them once and fill in the blanks every time.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d23_s12",
+      "type": "builder",
+      "title": "Build your side project prompt",
+      "fields": [
+        {
+          "id": "project",
+          "label": "What is your side project idea?",
+          "placeholder": "custom pet portraits as digital downloads"
+        },
+        {
+          "id": "customer",
+          "label": "Who is your target customer?",
+          "placeholder": "dog and cat owners who want a personal gift"
+        },
+        {
+          "id": "help",
+          "label": "What do you need AI to help with right now?",
+          "placeholder": "write a short landing page headline and description"
+        }
+      ],
+      "template": "My side project is {{project}}. My target customer is {{customer}}. Please help me {{help}}.",
+      "primaryButton": "Generate my prompt",
+      "xp": 15
+    },
+    {
+      "id": "d23_s13",
+      "type": "info",
+      "title": "Step 5 — Plan your launch",
+      "body": "A launch does not have to be complicated. Ask AI for a simple 7-day plan: what to post, where to share it, and how to get your first five customers.",
+      "audioUrl": null,
+      "primaryButton": "Continue",
+      "xp": 3
+    },
+    {
+      "id": "d23_s14",
+      "type": "example",
+      "title": "Launch plan prompt example",
+      "prompt": "I am launching a custom pet portrait shop next week. I have no audience yet. Give me a simple 7-day launch plan — what to post each day, which platforms to use, and how to get my first five customers without spending money on ads.",
+      "primaryButton": "That's practical",
+      "xp": 3
+    },
+    {
+      "id": "d23_s15",
+      "type": "mc",
+      "title": "Which task is AI best suited for?",
+      "question": "You want to start a side project selling homemade candles. Which task should you use AI for first?",
+      "options": [
+        "Making the candles.",
+        "Deciding how much to charge by asking AI to set the price with no other input.",
+        "Brainstorming names, writing a product description, and spotting weaknesses in the idea.",
+        "Building the website from scratch."
+      ],
+      "correct": 2,
+      "feedback": [
+        "That part is up to you — AI handles the words and strategy, not the crafting.",
+        "AI can help you think through pricing, but it needs your cost and market info to be useful.",
+        "Exactly. Writing, naming, and pressure-testing the idea are where AI saves you the most time.",
+        "AI can help you write content for a website, but building it usually takes a separate tool."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23_s16",
+      "type": "reflection",
+      "title": "Your side project check-in",
+      "questions": [
+        {
+          "id": "idea_status",
+          "type": "single_choice",
+          "label": "Do you have a side project idea you want to act on?",
+          "options": [
+            "Yes — I have a clear idea",
+            "Kind of — it is still fuzzy",
+            "Not yet, but I am thinking",
+            "I just want to learn the skill"
+          ]
+        },
+        {
+          "id": "first_step",
+          "type": "textarea",
+          "label": "What is the very first thing you would ask AI to help you with for your idea?"
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23_s17",
+      "type": "quiz",
+      "title": "Day 23 mastery check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What should you do before you start building your side project?",
+          "options": [
+            "Design the logo first.",
+            "Validate the idea — find the problems and the audience.",
+            "Buy a domain name.",
+            "Wait until you have a team."
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "A specific, detailed prompt will get you better landing page copy than a vague one.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "You can ask AI to create reusable ______ so you only have to write something once.",
+          "answer": "templates",
+          "aliases": [
+            "a template",
+            "template",
+            "scripts",
+            "a script"
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d23_s18",
+      "type": "completion",
+      "title": "Day 23 complete",
+      "body": "You now have a full playbook for using AI on a side project — from validating the idea to naming it, writing copy, building templates, and planning a launch. The only thing left is to start.",
+      "primaryButton": "Go to my journey",
+      "xp": 0
+    }
+  ]
+}

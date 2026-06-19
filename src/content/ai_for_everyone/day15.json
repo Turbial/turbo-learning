@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 15,
+    "unitLabel": "Day 15",
+    "unitTitle": "Building Simple Automations",
+    "lessonOrder": 1,
+    "lessonTitle": "Let AI Do the Repetitive Work",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d15_s1",
+      "type": "info",
+      "title": "Welcome to Day 15",
+      "body": "Some tasks eat your time every single day — replying to the same kinds of emails, scheduling meetings, sending reminders. Today you will learn how to hand those tasks to AI so they happen on their own.",
+      "audioUrl": null,
+      "primaryButton": "Free up my time",
+      "xp": 3
+    },
+    {
+      "id": "d15_s2",
+      "type": "info",
+      "title": "What is automation?",
+      "body": "Automation means setting up a chain of steps that run without you. You describe the trigger and the action once — then it just happens. Think of it like a domino: you push one tile and the rest fall in sequence.",
+      "audioUrl": null,
+      "primaryButton": "Simple enough",
+      "xp": 3
+    },
+    {
+      "id": "d15_s3",
+      "type": "scenario_card",
+      "title": "Marcus's Monday mornings",
+      "body": "Every Monday Marcus spent 45 minutes on the same tasks: replying to the weekly status email, sending a meeting reminder to his team, and logging the week's goals in a doc. He set up three automations and got those 45 minutes back. Every week.",
+      "audioUrl": null,
+      "primaryButton": "45 minutes a week adds up",
+      "xp": 3
+    },
+    {
+      "id": "d15_s4",
+      "type": "info",
+      "title": "The two parts of an automation",
+      "body": "Every automation has two parts: a TRIGGER (what starts it) and an ACTION (what happens next). Example — Trigger: you receive an email with the word 'invoice'. Action: AI drafts a reply and labels the email. That is it. Trigger then action.",
+      "audioUrl": null,
+      "primaryButton": "Trigger then action",
+      "xp": 3
+    },
+    {
+      "id": "d15_s5",
+      "type": "highlight",
+      "title": "Automation ideas for daily life",
+      "body": "Here are tasks you can automate today: drafting replies to routine emails, sending weekly team check-in reminders, scheduling recurring meetings, logging daily tasks to a doc, summarizing long email threads, flagging urgent messages.",
+      "audioUrl": null,
+      "primaryButton": "I see possibilities",
+      "xp": 6
+    },
+    {
+      "id": "d15_s6",
+      "type": "example",
+      "title": "An automation prompt",
+      "prompt": "I get a lot of emails from clients asking for a status update on their project. Write me a short reply template I can use or automate. The reply should: acknowledge their question, tell them I will follow up within 24 hours, and sound friendly but professional. Keep it under 5 sentences.",
+      "primaryButton": "That is reusable",
+      "xp": 3
+    },
+    {
+      "id": "d15_s7",
+      "type": "info",
+      "title": "Tools that connect AI to your apps",
+      "body": "You do not need to code anything. Tools like Zapier and Make act as connectors. You pick an app (like Gmail or Google Calendar), pick a trigger, pick an action, and the tool does the wiring for you. Think of them as 'if this, then that' machines.",
+      "audioUrl": null,
+      "primaryButton": "No coding needed",
+      "xp": 3
+    },
+    {
+      "id": "d15_s8",
+      "type": "scenario_card",
+      "title": "How a connector tool works",
+      "body": "Imagine you use Gmail and Google Calendar. You set up a rule: 'When I receive a meeting invite, automatically add it to my calendar and send the organizer a quick confirmation.' You set it up once in a connector tool. From then on it runs silently in the background.",
+      "audioUrl": null,
+      "primaryButton": "Set it and forget it",
+      "xp": 3
+    },
+    {
+      "id": "d15_s9",
+      "type": "mc",
+      "title": "Automation check",
+      "question": "What are the two essential parts of any automation?",
+      "options": [
+        "A question and an answer",
+        "A trigger and an action",
+        "A password and a username",
+        "A prompt and a template"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Not quite — Q&A is how you talk to AI, not how automations are structured.",
+        "Exactly right. A trigger starts the chain and an action is what happens next.",
+        "Those are for logging in, not for automations.",
+        "Prompts and templates are helpful, but automations are built on triggers and actions."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15_s10",
+      "type": "tf",
+      "title": "True or false?",
+      "question": "You need programming skills to set up most simple AI automations.",
+      "correct": false,
+      "feedback": [
+        "Correct! Most automation tools today use simple point-and-click interfaces. No coding required.",
+        "Actually, modern automation tools like Zapier and Make are designed for non-technical users."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d15_s11",
+      "type": "good_fit",
+      "title": "Good for automation?",
+      "question": "Send a thank-you email every time someone fills out my contact form on my website.",
+      "correct": "good",
+      "feedback": [
+        "Yes! This is a perfect automation — same trigger, same action, every time.",
+        "Exactly. Repetitive, predictable tasks like this are ideal candidates for automation."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d15_s12",
+      "type": "good_fit",
+      "title": "Good for automation?",
+      "question": "Automatically decide whether to fire an employee based on their performance data.",
+      "correct": "notideal",
+      "feedback": [
+        "Right to be cautious. Decisions that affect people's lives need human judgment, not automation.",
+        "Correct. Automation handles routine tasks. High-stakes people decisions always need a human."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d15_s13",
+      "type": "fillblank",
+      "question": "In an automation, the event that starts the chain is called the ______.",
+      "answer": "trigger",
+      "aliases": ["trigger event", "starting trigger"],
+      "feedback": [
+        "The correct word is 'trigger' — it is the event that kicks everything off.",
+        "Exactly right. The trigger is what starts the automation running."
+      ],
+      "xp": 5
+    },
+    {
+      "id": "d15_s14",
+      "type": "mc",
+      "title": "Which task is best for automation?",
+      "question": "Which of these tasks is the best candidate for automation?",
+      "options": [
+        "Writing a heartfelt birthday message for your best friend",
+        "Sending the same weekly reminder to your team every Monday at 9am",
+        "Deciding how to respond to a complaint from an unhappy client",
+        "Choosing which job offer to accept"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Personal messages benefit from your own voice and care — not a great fit for full automation.",
+        "Perfect. It is the same action, same time, every week — exactly what automation is built for.",
+        "Client complaints need judgment and empathy, which humans do better.",
+        "Major life decisions always need your own thinking, not an automated system."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15_s15",
+      "type": "builder",
+      "title": "Design your first automation",
+      "fields": [
+        {
+          "id": "repetitive_task",
+          "label": "What repetitive task takes up your time?",
+          "placeholder": "replying to client status requests"
+        },
+        {
+          "id": "trigger",
+          "label": "What event should start the automation?",
+          "placeholder": "when I receive an email with the word 'status'"
+        },
+        {
+          "id": "action",
+          "label": "What should happen automatically?",
+          "placeholder": "send a template reply saying I will follow up in 24 hours"
+        }
+      ],
+      "template": "Help me design an automation for this repetitive task: {{repetitive_task}}. The trigger should be: {{trigger}}. The desired action: {{action}}. Give me: (1) a simple plain-language description of the automation, (2) a draft of any text or message it would send, and (3) which free tool I could use to set it up (Zapier, Make, or a built-in app feature).",
+      "primaryButton": "Design my automation",
+      "xp": 15
+    },
+    {
+      "id": "d15_s16",
+      "type": "reflection",
+      "title": "Your automation mindset",
+      "questions": [
+        {
+          "id": "top_task",
+          "type": "textarea",
+          "label": "What is one repetitive task you do every week that you wish would just handle itself?"
+        },
+        {
+          "id": "readiness",
+          "type": "single_choice",
+          "label": "How ready do you feel to try setting up a simple automation?",
+          "options": [
+            "Ready to try it today",
+            "Interested but want to learn more first",
+            "A little nervous but open to it",
+            "Not ready yet"
+          ]
+        }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15_s17",
+      "type": "quiz",
+      "title": "Automation knowledge check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What does a connector tool like Zapier or Make do?",
+          "options": [
+            "It writes code for you",
+            "It links your apps together so they can trigger actions automatically",
+            "It replaces your email inbox",
+            "It stores all your AI prompts"
+          ],
+          "correct": 1
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "Automations work best for tasks that are the same every time they happen.",
+          "correct": true
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "The result that an automation produces is called the ______.",
+          "answer": "action",
+          "aliases": ["automated action", "output"]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d15_s18",
+      "type": "completion",
+      "title": "Day 15 complete — Automation Starter",
+      "body": "You now understand what automation is, how triggers and actions work, and which tasks are worth automating. Tomorrow: you will compare the top AI tools so you always know which one to reach for.",
+      "primaryButton": "On to Day 16!",
+      "xp": 0
+    }
+  ],
+  "version": "1.0"
+}

@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "program": "ai_for_everyone",
+    "unitOrder": 22,
+    "unitLabel": "Day 22",
+    "unitTitle": "AI for Small Business",
+    "lessonOrder": 1,
+    "lessonTitle": "The One-Person AI Department",
+    "minutes": 12
+  },
+  "steps": [
+    {
+      "id": "d22_s1",
+      "type": "info",
+      "title": "Welcome to Day 22 — Your One-Person AI Department",
+      "body": "Running a small business or going solo means wearing every hat — marketer, customer service rep, copywriter, and admin all at once. AI does not replace you. It handles the drafting so you can focus on the deciding, the relationships, and the work only you can do.",
+      "audioUrl": null,
+      "primaryButton": "I am all those hats",
+      "xp": 3
+    },
+    {
+      "id": "d22_s2",
+      "type": "scenario_card",
+      "title": "Meet Jordan",
+      "body": "Jordan makes custom furniture from a home workshop. Great at woodworking, not so great at writing product descriptions or answering the same customer questions over and over. This week Jordan used AI to write three product listings, draft a FAQ page, and prepare five social posts — in under an hour total.",
+      "audioUrl": null,
+      "primaryButton": "One hour for all of that",
+      "xp": 3
+    },
+    {
+      "id": "d22_s3",
+      "type": "info",
+      "title": "Five tasks AI handles well for small businesses",
+      "body": "Here is where AI makes the biggest difference for solo operators: (1) Marketing copy for ads and landing pages. (2) Customer FAQ responses. (3) Product and service descriptions. (4) Social media captions and posts. (5) Professional language for invoices and payment reminders. You still approve everything — AI just does the first draft.",
+      "audioUrl": null,
+      "primaryButton": "That covers most of it",
+      "xp": 3
+    },
+    {
+      "id": "d22_s4",
+      "type": "highlight",
+      "title": "Why the first draft is the hard part",
+      "body": "Most people spend 80% of their writing time staring at a blank page. AI eliminates the blank page. Once you have a draft — even an imperfect one — editing is fast and easy. You still bring the personality, the details, and the final judgment. AI just gets you started.",
+      "audioUrl": null,
+      "primaryButton": "No more blank page",
+      "xp": 6
+    },
+    {
+      "id": "d22_s5",
+      "type": "example",
+      "title": "Marketing copy prompt",
+      "prompt": "Write a short Facebook ad for my handmade candle business. The candles are soy-based, come in lavender and vanilla scents, and cost $18 each. The audience is women aged 25-45 who care about natural products. Keep the copy under 50 words and end with a call to action.",
+      "primaryButton": "That is specific — and it works",
+      "xp": 3
+    },
+    {
+      "id": "d22_s6",
+      "type": "scenario_card",
+      "title": "Customer FAQs — the hidden time sink",
+      "body": "Most small businesses answer the same 10 questions over and over: What are your hours? Do you offer refunds? How long does delivery take? How do I care for this product? Writing good answers once and saving them as a FAQ page saves hours every month — and AI can draft that whole page in minutes.",
+      "audioUrl": null,
+      "primaryButton": "Write it once, use it forever",
+      "xp": 3
+    },
+    {
+      "id": "d22_s7",
+      "type": "example",
+      "title": "FAQ prompt",
+      "prompt": "I run a small online plant shop. Write a FAQ section with answers to these five questions: How long does shipping take? Do you ship live plants in winter? What if my plant arrives damaged? Do you offer returns? How do I care for the plant after it arrives? Keep each answer friendly and under 60 words.",
+      "primaryButton": "Friendly and specific",
+      "xp": 3
+    },
+    {
+      "id": "d22_s8",
+      "type": "mc",
+      "title": "Quick check",
+      "question": "What is the biggest advantage of using AI for your first draft?",
+      "options": [
+        "The AI's version is always better than anything you could write",
+        "You skip the blank-page problem and have something to edit right away",
+        "You never have to read or change what AI produces",
+        "AI automatically posts the content for you"
+      ],
+      "correct": 1,
+      "feedback": [
+        "AI drafts often need your personal touch — they are a starting point, not a finished product.",
+        "Exactly. Getting from nothing to a draft is the hardest step. AI handles that part.",
+        "You should always read and adjust what AI writes before publishing or sending it.",
+        "AI drafts content — posting it is still your decision and your action."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22_s9",
+      "type": "info",
+      "title": "Product descriptions that sell",
+      "body": "A great product description answers three questions: What is it? Why does the customer want it? Why is yours worth the price? AI can generate a strong draft when you give it the right details — the material, the size, the feeling it gives, and the price. You add the final personality.",
+      "audioUrl": null,
+      "primaryButton": "What, why, worth it",
+      "xp": 3
+    },
+    {
+      "id": "d22_s10",
+      "type": "scenario_card",
+      "title": "Social posts in bulk",
+      "body": "Instead of sitting down every day and trying to think of something to post, small business owners can use AI to batch-create a week's worth of social content in one session. Give AI your product, your audience, and the tone you want — and ask for five post ideas at once.",
+      "audioUrl": null,
+      "primaryButton": "Batch it — save the week",
+      "xp": 3
+    },
+    {
+      "id": "d22_s11",
+      "type": "builder",
+      "title": "Build your business content prompt",
+      "fields": [
+        {
+          "id": "business_type",
+          "label": "What kind of business do you run?",
+          "placeholder": "online bakery, freelance photography, home cleaning service"
+        },
+        {
+          "id": "content_goal",
+          "label": "What do you need written right now?",
+          "placeholder": "product description, FAQ answer, Instagram caption, invoice note"
+        },
+        {
+          "id": "tone",
+          "label": "What tone fits your brand?",
+          "placeholder": "warm and friendly, professional, playful, straightforward"
+        },
+        {
+          "id": "key_detail",
+          "label": "What is one key detail the reader needs to know?",
+          "placeholder": "handmade in small batches, same-day service available, free first consultation"
+        }
+      ],
+      "template": "I run a {{business_type}}. Please write {{content_goal}} for me. Tone: {{tone}}. Make sure to highlight this key detail: {{key_detail}}. Keep the writing clear, engaging, and under 100 words. Avoid jargon. End with a natural call to action.",
+      "primaryButton": "Generate my content",
+      "xp": 15
+    },
+    {
+      "id": "d22_s12",
+      "type": "copy_action",
+      "title": "Copy your business prompt",
+      "body": "Here is the custom prompt your builder just created. Copy it and paste it into your AI tool of choice — ChatGPT, Claude, Gemini, or any other. Your business details are already baked in.",
+      "sourceStepId": "d22_s11",
+      "primaryButton": "Copy prompt",
+      "xp": 5
+    },
+    {
+      "id": "d22_s13",
+      "type": "paste_capture",
+      "title": "Save your AI-generated content",
+      "body": "Paste the content your AI tool produced. This is your first business asset created with AI — a draft you can edit, reuse, and build on.",
+      "minLength": 20,
+      "primaryButton": "Save my draft",
+      "xp": 15
+    },
+    {
+      "id": "d22_s14",
+      "type": "info",
+      "title": "Invoices and payment reminders",
+      "body": "Asking for money is awkward. AI can write professional, friendly payment reminder language so you do not have to agonize over the words. Give it the context — the amount owed, how overdue it is, and the relationship — and it will draft something that is firm but kind.",
+      "audioUrl": null,
+      "primaryButton": "Less awkward asking",
+      "xp": 3
+    },
+    {
+      "id": "d22_s15",
+      "type": "highlight",
+      "title": "The golden rule of AI business content",
+      "body": "Always read every word before you send or publish. AI does not know your customer by name, does not know that your return policy changed last month, and cannot feel the tone of your specific relationship. You add that layer. AI saves you the blank page — you provide the judgment.",
+      "audioUrl": null,
+      "primaryButton": "I am the final editor",
+      "xp": 6
+    },
+    {
+      "id": "d22_s16",
+      "type": "quiz",
+      "title": "Small business AI check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "Which of these is a good use of AI for a solo business owner?",
+          "options": [
+            "Letting AI automatically reply to all customer emails without your review",
+            "Using AI to draft a FAQ page that you then edit and publish",
+            "Having AI set your prices based on competitor data",
+            "Letting AI handle customer refund decisions automatically"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Auto-replying without review is risky — AI can get details wrong in ways that damage trust.",
+            "Yes — draft, review, edit, publish. That is the right flow for AI business content.",
+            "Pricing involves strategy and judgment that should always stay with you.",
+            "Refund decisions affect real customer relationships and should never be fully automated."
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "You need to read and edit AI-generated content before you publish or send it.",
+          "correct": true,
+          "feedback": [
+            "Actually, this is true — and important. AI drafts need your review before they go to customers.",
+            "Exactly right. AI gives you a head start, but your review is what makes the content trustworthy."
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fillblank",
+          "question": "Writing content for multiple days or platforms in a single AI session is called ______ your content.",
+          "answer": "batching",
+          "aliases": ["batch creating", "batch writing", "batch-creating"]
+        },
+        {
+          "id": "q4",
+          "type": "mc",
+          "question": "What three things should a great product description answer?",
+          "options": [
+            "Who made it, when it was made, and where it ships from",
+            "What it is, why the customer wants it, and why it is worth the price",
+            "How heavy it is, how big it is, and what color it comes in",
+            "What the competitor charges, what your margin is, and what the discount is"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Those details can help, but they do not address what motivates a buyer.",
+            "Yes — answer these three and your description does most of the selling for you.",
+            "Specs matter, but feelings and value close the sale. Lead with those.",
+            "Internal business numbers should never appear in customer-facing copy."
+          ]
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d22_s17",
+      "type": "info",
+      "title": "Your AI content routine",
+      "body": "The most time-efficient way to use AI for your business is to batch everything in one weekly session. Spend 30 minutes on Monday: generate this week's social captions, update your FAQ if anything changed, draft any emails you need to send. The rest of the week, you just edit and publish.",
+      "audioUrl": null,
+      "primaryButton": "30 minutes on Monday",
+      "xp": 3
+    },
+    {
+      "id": "d22_s18",
+      "type": "mc",
+      "title": "Final check",
+      "question": "What makes a business content prompt more effective?",
+      "options": [
+        "Making it as short as possible and letting AI fill in the blanks",
+        "Including your business type, the content goal, the tone, and a key detail",
+        "Copying a prompt you found online and hoping it fits",
+        "Asking AI to write everything at once in one giant request"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Vague prompts produce generic content. Specifics make the output actually useful.",
+        "Exactly right. Context is everything — the more you give, the better the draft.",
+        "Borrowed prompts rarely fit your specific business. Build your own.",
+        "Breaking requests into clear, focused pieces produces much better results than one big request."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22_s19",
+      "type": "completion",
+      "title": "Day 22 complete — One-Person AI Department",
+      "body": "You now know how to use AI for marketing copy, customer FAQs, product descriptions, social posts, and professional invoicing language. You have your own business content prompt ready to use. Tomorrow: AI for your creative life — writing, ideas, and making things that did not exist before.",
+      "primaryButton": "On to Day 23",
+      "xp": 0
+    }
+  ]
+}
