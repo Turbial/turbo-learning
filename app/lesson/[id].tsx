@@ -13,6 +13,9 @@ import type { Lesson, Step } from "../../src/engine/types";
 import { colors } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
+import { useIsPremium } from "../../src/data/useSubscription";
+
+const FREE_DAYS = 3;
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
 import { useLessonStateStore } from "../../src/store/lessonStateStore";
 import ChatWidget from "../../src/components/chat/ChatWidget";
@@ -104,8 +107,19 @@ export default function LessonScreen() {
   // Try Supabase by unit UUID first (when id is a UUID), fall back to local JSON
   const supabaseQuery = useLessonByUnit(id);
   const dayNum = day ?? id;
-  // Normalize program slug: "ai-operator" → "ai", "ai_for_everyone" → "afe", others → program or "ai"
-  const normalizedProgram = program === "ai_for_everyone" ? "afe" : program?.startsWith("ai") ? "ai" : (program ?? "ai");
+  const dayInt = parseInt(dayNum ?? "1", 10);
+  const isPremium = useIsPremium(user?.id);
+
+  // Normalize program slug → local content key prefix
+  // "ai-operator" | "ai_operator" → "ai"
+  // "ai-for-everyone" | "ai_for_everyone" → "afe"
+  // "duo" → "duo"
+  const normalizedProgram =
+    program?.includes("for_everyone") || program?.includes("for-everyone")
+      ? "afe"
+      : program?.startsWith("ai")
+      ? "ai"
+      : (program ?? "ai");
   const localKey = `${normalizedProgram}-${dayNum}`;
   const localLesson = LOCAL_LESSONS[localKey] ?? LOCAL_LESSONS["ai-1"];
   const completeMutation = useCompleteLesson();
@@ -136,6 +150,8 @@ export default function LessonScreen() {
         score: Math.round(score * 100),
         correct: String(correct),
         total: String(total),
+        day: String(dayInt),
+        program: program ?? "ai-operator",
       };
       trackEvent({
         name: 'lesson_completed',
@@ -173,7 +189,7 @@ export default function LessonScreen() {
         router.replace({ pathname: "/complete/[unitId]", params: baseParams });
       }
     },
-    [user, supabaseQuery.data, lesson, completeMutation, id, markLocalCompleted],
+    [user, supabaseQuery.data, lesson, completeMutation, id, markLocalCompleted, program, dayInt],
   );
 
   if (isLoading) {
@@ -194,6 +210,31 @@ export default function LessonScreen() {
           <Text style={styles.missingText}>Lesson not found.</Text>
           <TouchableOpacity onPress={handleHome}>
             <Text style={styles.homeLink}>🏠 Home</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // Paywall: days beyond FREE_DAYS require premium
+  if (dayInt > FREE_DAYS && !isPremium) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.center}>
+          <Text style={{ fontSize: 48, marginBottom: 16 }}>🔒</Text>
+          <Text style={[styles.missingText, { marginBottom: 8 }]}>Day {dayInt} is Premium</Text>
+          <Text style={{ fontSize: 14, color: colors.textMuted, textAlign: "center", marginBottom: 24, lineHeight: 20 }}>
+            Upgrade to unlock all 28 days and your full learning journey.
+          </Text>
+          <TouchableOpacity
+            style={{ backgroundColor: colors.primary, paddingVertical: 14, paddingHorizontal: 32, borderRadius: 12, marginBottom: 12 }}
+            onPress={() => router.push("/pricing")}
+            activeOpacity={0.8}
+          >
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "700" }}>See plans →</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleHome}>
+            <Text style={styles.homeLink}>← Back to Journey</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

@@ -29,6 +29,8 @@ export default function CompleteScreen() {
     streak: streakParam,
     correct: correctParam,
     total: totalParam,
+    day: dayParam,
+    program: programParam,
   } = useLocalSearchParams<{
     xp: string;
     score: string;
@@ -37,6 +39,8 @@ export default function CompleteScreen() {
     streak?: string;
     correct?: string;
     total?: string;
+    day?: string;
+    program?: string;
   }>();
   const { data: profile, isLoading } = useProfile();
   const { data: badges } = useBadges(profile?.id);
@@ -44,6 +48,9 @@ export default function CompleteScreen() {
   const xpNum = parseInt(xp ?? "0", 10);
   const scoreNum = parseInt(score ?? "100", 10);
   const streakDays = profile?.streak ?? parseInt(streakParam ?? "1", 10);
+  const dayNum = parseInt(dayParam ?? "0", 10);
+  const programSlug = programParam ?? "ai-operator";
+  const isGraduation = dayNum >= 28;
   const correctCount = parseInt(correctParam ?? "0", 10);
   const totalGraded = parseInt(totalParam ?? "0", 10);
 
@@ -167,13 +174,23 @@ export default function CompleteScreen() {
 
         {/* Phase 3: Actions */}
         <View style={[styles.actionsRow, phase === "actions" && styles.actionsVisible]}>
-          <TouchableOpacity
-            style={styles.btnPrimary}
-            onPress={() => router.replace("/(tabs)/home")}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.btnPrimaryText}>Continue Journey</Text>
-          </TouchableOpacity>
+          {isGraduation ? (
+            <TouchableOpacity
+              style={[styles.btnPrimary, { backgroundColor: "#7c3aed" }]}
+              onPress={() => router.replace({ pathname: "/graduate/[programSlug]", params: { programSlug, totalXp: totalXp ?? "0", streak: String(streakDays) } })}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.btnPrimaryText}>🎓 See your certificate</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.btnPrimary}
+              onPress={() => router.replace("/(tabs)/home")}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.btnPrimaryText}>Continue Journey</Text>
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity
             style={styles.btnSecondary}

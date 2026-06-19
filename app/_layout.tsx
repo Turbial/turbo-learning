@@ -10,6 +10,9 @@ import { ToastProvider } from "../src/components/feedback/Toast";
 import ErrorBoundary from "../src/components/ui/ErrorBoundary";
 import { useAuth } from "../src/data/useAuth";
 import { useOfflineSync } from "../src/data/useOfflineSync";
+import { initErrorReporting, setUserContext, clearUserContext } from "../src/integrations/errorReporting";
+
+initErrorReporting();
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +27,11 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
   const segments = useSegments();
   useOfflineSync(); // handles offline queue flush
+
+  useEffect(() => {
+    if (user) setUserContext(user.id, user.email ?? undefined);
+    else clearUserContext();
+  }, [user?.id]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -86,6 +94,9 @@ export default function RootLayout() {
               <Stack.Screen name="profile/index" />
               <Stack.Screen name="profile/settings" />
               <Stack.Screen name="programs/index" />
+              <Stack.Screen name="review" />
+              <Stack.Screen name="graduate/[programSlug]" />
+              <Stack.Screen name="admin" options={{ headerShown: false }} />
             </Stack>
           </AuthGate>
         </ToastProvider>

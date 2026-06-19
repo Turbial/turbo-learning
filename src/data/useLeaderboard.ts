@@ -10,9 +10,11 @@ export function useLeaderboard(scope: 'global' | 'friends' = 'global', limit = 5
   return useQuery<LeaderRow[]>({
     queryKey: ['leaderboard', scope, limit],
     queryFn: async () => {
+      // NOTE: 'friends' scope requires a follows/friendship table in the view.
+      // Until that's implemented both scopes query the same global view.
       const { data, error } = await supabase
         .from('leaderboard_view').select('user_id,display_name,xp,rank')
-        .order('xp', { ascending: false }).limit(limit);
+        .order('rank', { ascending: true }).limit(limit);
       if (error) throw error;
       return (data ?? []) as LeaderRow[];
     },

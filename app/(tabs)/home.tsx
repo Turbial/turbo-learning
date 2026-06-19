@@ -63,9 +63,9 @@ function HomeScreenMobile() {
         <View style={styles.header}>
           <View style={styles.headerTop}>
             <View>
-              <Text style={styles.programBadge}>AI OPERATOR</Text>
+              <Text style={styles.programBadge}>{(program?.title ?? programSlug).toUpperCase()}</Text>
               <Text style={styles.greeting}>{program?.title ?? "AI Operator"}</Text>
-              <Text style={styles.subtitle}>28 days to go from user â operator</Text>
+              <Text style={styles.subtitle}>{program?.subtitle ?? "28 days to build real AI skills"}</Text>
             </View>
             <View style={styles.headerEmoji}>
               <Text style={{ fontSize: 48 }}>ð¤</Text>

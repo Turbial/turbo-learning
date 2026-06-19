@@ -3,6 +3,7 @@
 
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { captureError } from "../../integrations/errorReporting";
 
 interface Props {
   children: React.ReactNode;
@@ -21,6 +22,10 @@ export default class ErrorBoundary extends React.Component<Props, State> {
 
   static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    captureError(error, { componentStack: info.componentStack });
   }
 
   handleRetry = () => {
