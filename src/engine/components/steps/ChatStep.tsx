@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { StepProps } from "../../stepRegistry";
 import type { ChatStep as ChatStepType } from "../../types";
+import { supabase } from "../../../data/supabase";
 
 type Message = {
   role: "user" | "assistant" | "system";
@@ -140,53 +141,18 @@ function buildContextPrompt(lessonTitle?: string): string {
 Be warm, encouraging, and practical. Avoid jargon.`;
 }
 
-// ─── LLM call ───
+// ─── LLM call — proxied through Supabase Edge Function ───
 
 async function callLLM(
   systemPrompt: string | undefined,
   history: Message[],
 ): Promise<string> {
-  const endpoint =
-    process.env.EXPO_PUBLIC_LLM_ENDPOINT ??
-    "https://api.openai.com/v1/chat/completions";
-
-  const apiKey = process.env.EXPO_PUBLIC_LLM_API_KEY;
-
-  // If no API key configured, return a helpful placeholder
-  if (!apiKey) {
-    const userQuestions = history.filter((m) => m.role === "user");
-    const lastQuestion = userQuestions[userQuestions.length - 1]?.content ?? "";
-    return `This is a great question about "${lastQuestion.slice(0, 50)}..."!
-
-In a production setup, this chat connects to an LLM API (OpenAI, Anthropic, etc.) and provides real-time AI tutoring.
-
-For now, here's what you should know: this step type works — messages flow, the UI responds, and when wired to an API key, your learners get an interactive AI tutor embedded directly in the lesson.`;
-  }
-
-  const messages = systemPrompt
-    ? [{ role: "system", content: systemPrompt }, ...history]
-    : history;
-
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      messages: messages.map((m) => ({ role: m.role, content: m.content })),
-      max_tokens: 500,
-      temperature: 0.7,
-    }),
+  const { data, error } = await supabase.functions.invoke("chat", {
+    body: { messages: history, systemPrompt },
   });
 
-  if (!res.ok) {
-    throw new Error(`LLM error: ${res.status}`);
-  }
-
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? "No response from AI.";
+  if (error) throw error;
+  return data?.choices?.[0]?.message?.content ?? "No response from AI.";
 }
 
 // ─── Styles ───

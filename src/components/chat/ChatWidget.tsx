@@ -19,10 +19,16 @@ declare global {
   }
 }
 
+const SUPABASE_URL =
+  process.env.EXPO_PUBLIC_SUPABASE_URL ?? "https://afgmlkduuapquqkcqdsk.supabase.co";
+const SUPABASE_ANON_KEY =
+  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ??
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmZ21sa2R1dWFwcXVxa2NxZHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNDA2NzYsImV4cCI6MjA5MzkxNjY3Nn0.-WQ34Jxy9CmI-SsQfcMNWPZi5AfZCzv9jZHDQ6ccEWc";
+
 const CONFIG = {
-  endpoint: "https://api.deepseek.com/v1/chat/completions",
-  apiKey: "sk-3e898d7853f343c087332e0a155059a1",
-  model: "deepseek-chat",
+  endpoint: `${SUPABASE_URL}/functions/v1/chat`,
+  apiKey: SUPABASE_ANON_KEY,
+  model: "claude-haiku",
   title: "Turbo Assistant",
   welcomeMessage:
     "Hey! 👋 I'm your Turbo Learning assistant. Ask me about the AI Operator course, AI concepts, or anything you're stuck on.",
