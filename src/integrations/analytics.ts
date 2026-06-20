@@ -27,7 +27,12 @@ export type TrackEvent =
   | { name: 'program_enrolled'; programSlug: string }
   | { name: 'program_completed'; programSlug: string; totalDays: number }
   | { name: 'push_permission_granted' }
-  | { name: 'push_permission_denied' };
+  | { name: 'push_permission_denied' }
+  | { name: 'challenge_completed'; score: number; totalQuestions: number; timeTakenMs: number; dayKey: string }
+  | { name: 'challenge_shared'; score: number; dayKey: string }
+  | { name: 'league_enrolled'; tier: string }
+  | { name: 'shield_consumed'; newStreak: number }
+  | { name: 'review_completed'; cardsReviewed: number; avgDifficulty: string };
 
 export function trackEvent(event: TrackEvent): void {
   track(event.name, event);

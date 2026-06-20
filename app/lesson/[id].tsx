@@ -14,6 +14,7 @@ import { colors } from "../../src/theme/tokens";
 import { useAuth } from "../../src/data/useAuth";
 import { useLessonByUnit, useCompleteLesson } from "../../src/data/queries";
 import { useIsPremium } from "../../src/data/useSubscription";
+import { supabase } from "../../src/data/supabase";
 
 const FREE_DAYS = 3;
 import { useLocalProgressStore } from "../../src/store/localProgressStore";
@@ -215,12 +216,31 @@ export default function LessonScreen() {
         score: Math.round(score * 100),
         durationMs: Date.now() - lessonStartRef.current,
       });
+
+      const scheduleReviews = () => {
+        if (!supabaseQuery.data?.id || !lesson?.steps) return;
+        const isGoodScore = score >= 0.7;
+        lesson.steps
+          .filter((s: any) => ['mc', 'tf', 'fillblank'].includes(s.type))
+          .forEach((s: any) => {
+            supabase.rpc('schedule_review', {
+              p_step_id: s.id,
+              p_lesson_id: supabaseQuery.data!.id,
+              p_correct: isGoodScore,
+            }).then(() => {}, () => {});
+          });
+      };
+
       if (user && dbLessonId) {
         completeMutation.mutate(
           { lessonId: dbLessonId, xpEarned: sessionXp, score },
           {
             onSuccess: (result: any) => {
+              if (result?.shield_consumed) {
+                trackEvent({ name: 'shield_consumed', newStreak: result?.streak ?? 1 });
+              }
               markLocalCompleted(id);
+              scheduleReviews();
               router.replace({
                 pathname: "/complete/[unitId]",
                 params: {
@@ -228,18 +248,21 @@ export default function LessonScreen() {
                   totalXp: String(result?.total_xp ?? 0),
                   newLevel: String(result?.new_level ?? 1),
                   streak: String(result?.streak ?? 1),
+                  shieldSaved: String(result?.shield_consumed ?? false),
                 },
               });
             },
             onError: (err) => {
               console.warn("complete_lesson RPC failed:", err);
               markLocalCompleted(id);
+              scheduleReviews();
               router.replace({ pathname: "/complete/[unitId]", params: baseParams });
             },
           },
         );
       } else {
         markLocalCompleted(id);
+        scheduleReviews();
         router.replace({ pathname: "/complete/[unitId]", params: baseParams });
       }
     },

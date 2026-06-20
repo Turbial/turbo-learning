@@ -14,6 +14,7 @@ import { colors, spacing, radius, fontSize, fontWeight, shadow } from "../../src
 import { QUESTION_BANK } from "../../src/engine/questionBank";
 import { seededShuffle } from "../../src/utils/seedRandom";
 import { useDailyChallengeStore } from "../../src/store/dailyChallengeStore";
+import { trackEvent } from "../../src/integrations/analytics";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -115,6 +116,13 @@ export default function ChallengeScreen() {
         const score = newAnswers.filter(Boolean).length;
         store.setResult(todayKey, score, timeTakenMs, newAnswers);
         setElapsedMs(timeTakenMs);
+        trackEvent({
+          name: 'challenge_completed',
+          score,
+          totalQuestions: 5,
+          timeTakenMs,
+          dayKey: todayKey,
+        });
         setPhase("done");
       } else {
         setCurrentIdx((i) => i + 1);
@@ -131,6 +139,7 @@ export default function ChallengeScreen() {
     const timeSec = resultTimeMs / 1000;
     const msg = `⚡ Turbo AI Challenge — Day ${dayNum}\n${resultScore}/5 correct · ${Math.round(timeSec)}s\n\n${grid}\n\nCan you beat me? turbolearning.app`;
     Share.share({ message: msg });
+    trackEvent({ name: 'challenge_shared', score: resultScore, dayKey: todayKey });
   }
 
   // ── Intro ──────────────────────────────────────────────────────────────────

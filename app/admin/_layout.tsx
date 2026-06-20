@@ -10,11 +10,11 @@ import { colors } from "../../src/theme/tokens";
 
 const ADMIN_EMAILS = (process.env.EXPO_PUBLIC_ADMIN_EMAILS ?? "mvk8000@gmail.com")
   .split(",")
-  .map((e) => e.trim().toLowerCase());
+  .map((e: string) => e.trim().toLowerCase());
 
 export default function AdminLayout() {
   const router = useRouter();
-  const { user, loading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
 
   const isLoading = authLoading || profileLoading;

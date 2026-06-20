@@ -10,6 +10,8 @@ import { ToastProvider } from "../src/components/feedback/Toast";
 import ErrorBoundary from "../src/components/ui/ErrorBoundary";
 import { useAuth } from "../src/data/useAuth";
 import { useOfflineSync } from "../src/data/useOfflineSync";
+import { useNotifications } from "../src/data/useNotifications";
+import { useProfile } from "../src/data/queries";
 import { initErrorReporting, setUserContext, clearUserContext } from "../src/integrations/errorReporting";
 import * as Notifications from "expo-notifications";
 
@@ -38,6 +40,8 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
   const segments = useSegments();
   useOfflineSync(); // handles offline queue flush
+  const { data: profile } = useProfile();
+  useNotifications(user?.id, profile?.learnTime);
 
   useEffect(() => {
     if (user) setUserContext(user.id, user.email ?? undefined);

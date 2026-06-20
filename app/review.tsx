@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { useAuth } from '../src/data/useAuth';
 import { useReviewQueue, useMarkReviewed } from '../src/data/useReviewQueue';
 import { colors, spacing, radius, fontSize } from '../src/theme/tokens';
+import { trackEvent } from '../src/integrations/analytics';
 
 const DANGER = '#DC2626';
 const WARNING = '#D97706';
@@ -18,6 +19,7 @@ export default function ReviewScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [allDone, setAllDone] = useState(false);
+  const [difficultyLog, setDifficultyLog] = useState<Array<'easy' | 'hard' | 'again'>>([]);
 
   const totalCards = items.length;
   const currentItem = items[currentIndex];
@@ -29,8 +31,20 @@ export default function ReviewScreen() {
       {
         onSuccess: () => {
           const nextIndex = currentIndex + 1;
-          setAnsweredCount(prev => prev + 1);
+          const newCount = answeredCount + 1;
+          const newLog = [...difficultyLog, difficulty];
+          setDifficultyLog(newLog);
+          setAnsweredCount(newCount);
           if (nextIndex >= totalCards) {
+            // Compute average difficulty: easy=2, hard=1, again=0
+            const scores: Record<string, number> = { easy: 2, hard: 1, again: 0 };
+            const avg = newLog.reduce((sum, d) => sum + scores[d], 0) / newLog.length;
+            const avgDifficulty = avg >= 1.5 ? 'easy' : avg >= 0.75 ? 'hard' : 'again';
+            trackEvent({
+              name: 'review_completed',
+              cardsReviewed: newCount,
+              avgDifficulty,
+            });
             setAllDone(true);
           } else {
             setCurrentIndex(nextIndex);

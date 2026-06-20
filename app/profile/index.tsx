@@ -15,7 +15,7 @@ import { useStreakShield } from "../../src/data/useStreakShield";
 import { useAuth } from "../../src/data/useAuth";
 
 const ADMIN_EMAILS = (process.env.EXPO_PUBLIC_ADMIN_EMAILS ?? "mvk8000@gmail.com")
-  .split(",").map((e) => e.trim().toLowerCase());
+  .split(",").map((e: string) => e.trim().toLowerCase());
 
 export default function Profile() {
   const { colors } = useTheme(); const toast = useToast();

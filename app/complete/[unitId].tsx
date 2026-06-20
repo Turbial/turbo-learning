@@ -31,6 +31,7 @@ export default function CompleteScreen() {
     total: totalParam,
     day: dayParam,
     program: programParam,
+    shieldSaved,
   } = useLocalSearchParams<{
     xp: string;
     score: string;
@@ -41,6 +42,7 @@ export default function CompleteScreen() {
     total?: string;
     day?: string;
     program?: string;
+    shieldSaved?: string;
   }>();
   const { data: profile, isLoading } = useProfile();
   const { data: badges } = useBadges(profile?.id);
@@ -179,6 +181,11 @@ export default function CompleteScreen() {
                     ? "You're building real momentum. Keep it up!"
                     : "You're on fire. This is becoming a habit."}
                 </Text>
+                {shieldSaved === 'true' && (
+                  <Text style={{ fontSize: 12, color: '#059669', marginTop: 2, fontWeight: '600' }}>
+                    🛡️ Streak shield used — streak protected!
+                  </Text>
+                )}
               </>
             )}
           </View>

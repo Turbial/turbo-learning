@@ -1,6 +1,6 @@
 // ─── Leaderboard Screen — My League (weekly) + Global rankings ───
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import { colors, spacing, radius, fontSize, fontWeight, shadow } from "../../src
 import { useLeaderboard, LeaderRow } from "../../src/data/useLeaderboard";
 import { useMyLeague, LeagueStanding, TIER_INFO } from "../../src/data/useLeagues";
 import { useAuth } from "../../src/data/useAuth";
+import { trackEvent } from "../../src/integrations/analytics";
 
 // ─── Helpers ───
 
@@ -194,6 +195,15 @@ export default function LeaderboardScreen() {
 
   const leagueQuery = useMyLeague(user?.id);
   const globalQuery = useLeaderboard("global", 50);
+  const hasTrackedRef = useRef(false);
+
+  useEffect(() => {
+    const tier = leagueQuery.data?.tier;
+    if (tier && !hasTrackedRef.current) {
+      hasTrackedRef.current = true;
+      trackEvent({ name: 'league_enrolled', tier });
+    }
+  }, [leagueQuery.data?.tier]);
 
   const myEntry = leagueQuery.data?.standings.find((s) => s.user_id === user?.id);
   const myTier = leagueQuery.data?.tier ?? "bronze";

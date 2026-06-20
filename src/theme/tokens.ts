@@ -80,6 +80,13 @@ export const colors = {
   streak: "#f59e0b",
   badge: "#4A8ED4",
   level: "#4A8ED4",
+
+  // Extended palette (used by HomeDesktop and league UI)
+  coral: "#ff6b6b",
+  violet: "#7c3aed",
+  gold: "#f59e0b",
+  goldBg: "#fef9c3",
+  goldBorder: "#fde047",
 };
 
 export const spacing = {
@@ -124,6 +131,7 @@ export const fontWeight = {
   semibold: "600",
   bold: "700",
   extrabold: "800",
+  black: "900",
 } as const;
 
 export const shadow = {
@@ -140,5 +148,12 @@ export const shadow = {
     shadowOpacity: 0.06,
     shadowRadius: 8,
     elevation: 3,
+  },
+  hero: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.15,
+    shadowRadius: 24,
+    elevation: 10,
   },
 };
