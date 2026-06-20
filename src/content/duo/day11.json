@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "unit": "day11",
+  "title": "Day 11: The Emotional Bank Account",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d11-info-1",
+      "type": "info",
+      "title": "A Metaphor That Changes Everything",
+      "body": "Gottman introduced a concept so simple and so powerful that once you see it, you can't unsee it.\n\nEvery relationship has an Emotional Bank Account.\n\nJust like a financial account, you make deposits and withdrawals. Deposits are positive interactions — kindness, attention, humor, affection, care, support. Withdrawals are negative — criticism, dismissiveness, broken promises, ignoring bids.\n\nWhen the account is full, you have reserves. A fight doesn't devastate you because you have goodwill to draw on.\n\nWhen the account is empty, everything hurts. Small slights become major wounds. Conflict feels existential because there's nothing in the bank.",
+      "xp": 5
+    },
+    {
+      "id": "d11-highlight-1",
+      "type": "highlight",
+      "body": "Happy couples don't avoid conflict.\n\nThey maintain such a high balance in their Emotional Bank Account that when conflict hits, they have the reserves to weather it.\n\nThriving marriages aren't conflict-free. They're richly funded.",
+      "highlights": ["don't avoid conflict", "high balance", "richly funded"],
+      "xp": 5
+    },
+    {
+      "id": "d11-info-2",
+      "type": "info",
+      "title": "Bids for Connection",
+      "body": "The most important deposits come through something Gottman calls 'bids for connection.'\n\nA bid is any attempt to connect — attention, affirmation, affection, or support. They're almost always small:\n\n'Look at this funny thing I found.'\n'How was your day?'\n*reaching for your hand in the car*\n'Did you hear about what happened at work?'\n'Will you watch this show with me?'\n\nWhen a bid lands, there are three possible responses:\n• Turning toward (accepting the bid)\n• Turning away (ignoring it)\n• Turning against (rejecting or mocking it)\n\nGottman's research found that couples headed for divorce turned toward each other's bids 33% of the time. Happy couples: 87%.",
+      "xp": 5
+    },
+    {
+      "id": "d11-match-1",
+      "type": "match",
+      "title": "Bid Responses",
+      "question": "Match each bid response to its example:",
+      "pairs": [
+        { "left": "Turning toward", "right": "'Oh wow, let me see that.'" },
+        { "left": "Turning away", "right": "Continues scrolling phone, doesn't look up" },
+        { "left": "Turning against", "right": "'Why are you always showing me stuff like this?'" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-tf-1",
+      "type": "tf",
+      "question": "Happy couples turn toward each other's bids for connection about the same percentage of the time as couples headed for divorce.",
+      "correct": false,
+      "feedback": [
+        "Correct — the difference is dramatic. Gottman found that couples heading for divorce turned toward bids 33% of the time. Happy couples: 87%. The small everyday bids are where connection is built or eroded.",
+        "Actually, there's a massive difference. Couples heading for divorce turned toward bids 33% of the time. Happy couples turned toward them 87% of the time. The little moments are where it all happens."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d11-scenario-1",
+      "type": "scenario_card",
+      "title": "The Bid You Missed",
+      "body": "Your partner is making dinner and says, 'This week has been so much.'\n\nYou're on your phone. You say, 'Mm-hmm.'\n\nIn that moment, there was a bid. Not for a long conversation — just for acknowledgment. 'Yeah, it really has been. Tell me about it.'\n\nThat response takes six seconds.\n\nThe missed bid took two seconds. But what it said — without words — was: your feelings don't register to me right now.\n\nMost relationship damage isn't done in the big fights. It's done in a thousand moments like this."
+    },
+    {
+      "id": "d11-reflection-1",
+      "type": "reflection",
+      "title": "Your Missed Bids",
+      "prompt": "Think about your average day together. When do you tend to turn away from your partner's bids?\n\n• Are you on your phone when they're talking?\n• Do you dismiss their excitement about things you find boring?\n• Do you respond to bids for affection with busyness?\n\nBe honest. What's one pattern of bid-missing you want to change?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d11-info-3",
+      "type": "info",
+      "title": "What Counts as a Deposit",
+      "body": "Deposits are not just grand gestures. In fact, Gottman found that small, frequent positive interactions matter more than big, occasional ones.\n\nDeposits include:\n• Genuine interest ('How was your conversation with your sister?')\n• Physical affection (a hand on the back, a hug that lasts)\n• Expressing admiration or appreciation\n• Turning toward bids — especially boring ones\n• Keeping small promises\n• Showing up when things are hard\n• Laughing together\n• Saying 'I was thinking about you today'\n\nThe key word is genuine. A perfunctory 'that's nice' while staring at your phone is not a deposit. It's a disguised withdrawal.",
+      "xp": 5
+    },
+    {
+      "id": "d11-mc-1",
+      "type": "mc",
+      "question": "You plan an elaborate anniversary trip as a surprise. Six days earlier, your partner mentioned they were stressed about a work situation and you said 'it'll be fine' and changed the subject. What's the net impact on the Emotional Bank Account?",
+      "options": [
+        "The anniversary trip is a big deposit that more than covers the withdrawal",
+        "Both actions are roughly equal and cancel each other out",
+        "The small dismissal may have done more damage than the trip repairs, depending on the account balance",
+        "The bank account concept doesn't apply to big romantic gestures"
+      ],
+      "correct": -1,
+      "feedback": [
+        "Big gestures do create deposits — but Gottman's research shows that small, frequent connections matter more than occasional grand gestures. A single dismissal during a vulnerable moment can be more costly than it appears.",
+        "Not quite a neutral situation — the dismissal of a real concern is a meaningful withdrawal, and a trip planned weeks in advance doesn't erase the moment your partner felt unseen when they most needed you.",
+        "This is Gottman's key insight. A big gesture doesn't erase a pattern of small disconnections. The account balance matters, and small dismissals accumulate over time regardless of romantic gestures.",
+        "The bank account concept absolutely applies. In fact, couples often use grand gestures as substitutes for the small daily deposits that actually build a high-balance account."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d11-info-4",
+      "type": "info",
+      "title": "What Counts as a Withdrawal",
+      "body": "Withdrawals are not just the big things — the fights, the betrayals, the cruel words.\n\nThey're also:\n• Ignoring or dismissing bids\n• Being on your phone when your partner is talking to you\n• Breaking small promises (being late without texting)\n• Sarcasm or put-downs, even 'joking'\n• Forgetting things that matter to them\n• Not following through on something you said you'd do\n• Criticizing in front of others\n\nMost withdrawals feel small in the moment. They accumulate in ways you don't feel until the account is nearly empty — and then everything breaks.",
+      "xp": 5
+    },
+    {
+      "id": "d11-reflection-2",
+      "type": "reflection",
+      "title": "Your Audit",
+      "prompt": "Be honest with yourself right now.\n\nIn a typical week, are you making more deposits or withdrawals?\n\nWhat's your estimate of your current account balance — is there a surplus of goodwill, or does the relationship feel like it's running low?\n\nWhat's one deposit you could make today — specific, small, and genuine?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d11-highlight-2",
+      "type": "highlight",
+      "body": "The account balance isn't just about you.\n\nIf your partner's balance is low — if they're feeling depleted and unseen — they will experience your neutral actions as withdrawals.\n\nYou can't fill an empty account with neutrality. You have to actively deposit.\n\nAnd you have to make it a practice, not a performance.",
+      "highlights": ["neutral actions as withdrawals", "actively deposit", "a practice, not a performance"],
+      "xp": 5
+    },
+    {
+      "id": "d11-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Deposit Plan",
+      "prompt": "Name 3 specific deposits you will make this week. Be concrete.\n\nNot 'be more attentive.' More like: 'When she tells me about her day, I'll put my phone face-down and ask one follow-up question.'\n\nWrite your 3 deposits:",
+      "xp": 10
+    },
+    {
+      "id": "d11-fillblank-1",
+      "type": "fillblank",
+      "question": "Gottman found that happy couples turn toward each other's bids for connection ___% of the time.",
+      "answer": "87",
+      "xp": 8
+    },
+    {
+      "id": "d11-info-5",
+      "type": "info",
+      "title": "Tomorrow: Fighting Fair",
+      "body": "Now that you understand the Emotional Bank Account, tomorrow's lesson lands differently.\n\nEvery fight is either a withdrawal — or, if handled well, actually a deposit.\n\nTomorrow: the difference between a complaint and a criticism, how to take a timeout that actually works, and the repair attempt — the skill that determines whether conflict deepens connection or destroys it.",
+      "xp": 5
+    },
+    {
+      "id": "d11-completion-1",
+      "type": "completion",
+      "title": "Day 11 Complete",
+      "body": "The bank account is always open. Every small moment is a transaction.\n\nChoose your deposits intentionally this week. They compound.",
+      "xp": 0
+    }
+  ]
+}

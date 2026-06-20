@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "unit": "day14",
+  "title": "Day 14: Sharing Deeply",
+  "estMinutes": 16,
+  "steps": [
+    {
+      "id": "d14-info-1",
+      "type": "info",
+      "title": "Week 2 Closing: Safety Built",
+      "body": "Look at what you did this week.\n\nYou named the Four Horsemen — the patterns that predicted your relationship's erosion. You learned the antidotes and practiced the Gentle Startup. You explored vulnerability and learned why armor costs you the closeness it promises to protect.\n\nYou mapped the Emotional Bank Account and identified your deposit and withdrawal habits. You learned to fight fair — complaints not criticisms, productive timeouts, repair attempts. And yesterday, you learned to actually listen.\n\nThat's not a list of concepts. That's a new set of tools — tools that change how a marriage feels from the inside.\n\nToday, we close Week 2 with the deepest kind of sharing.",
+      "xp": 5
+    },
+    {
+      "id": "d14-highlight-1",
+      "type": "highlight",
+      "body": "In 1997, psychologist Arthur Aron published a study on accelerated intimacy.\n\nHis finding: mutual vulnerability — structured, reciprocal sharing of progressively deeper questions — creates genuine closeness between strangers in under an hour.\n\nThe paper became famous as 'The 36 Questions That Lead to Love.'\n\nThe questions work on strangers. They work even better on couples who've been together for years — because you'll discover that some of the answers have changed.",
+      "highlights": ["36 Questions That Lead to Love", "mutual vulnerability", "some of the answers have changed"],
+      "xp": 5
+    },
+    {
+      "id": "d14-info-2",
+      "type": "info",
+      "title": "Why Questions Build Intimacy",
+      "body": "Most couples stop asking each other deep questions after the first year or two.\n\nYou think you know each other. You know the facts — schedules, preferences, history. But when was the last time you asked:\n\nWhat are you most proud of? What do you secretly regret? What's a dream you've never said out loud? What's something about yourself you're still figuring out?\n\nPeople change. Your partner is not the same person they were five years ago. Neither are you.\n\nDeep questions create fresh seeing. And fresh seeing creates the same feeling that first drew you together — the sense of encountering someone genuinely interesting who wants to know you back.",
+      "xp": 5
+    },
+    {
+      "id": "d14-info-3",
+      "type": "info",
+      "title": "The Rules for Deep Sharing",
+      "body": "For this exercise to work, a few ground rules:\n\n1. No judgment. Whatever they say, receive it with curiosity, not evaluation.\n\n2. Answer the questions too. This is mutual. It's not an interview.\n\n3. No phones. One hour of real presence.\n\n4. You don't have to do all the questions. Pick the ones that feel right. Depth is the goal, not completion.\n\n5. If something comes up that surprises you — about them or about yourself — name it. 'I didn't know that about you.' 'I've never said that to anyone before.'\n\nThose moments are the point.",
+      "xp": 5
+    },
+    {
+      "id": "d14-reflection-1",
+      "type": "reflection",
+      "title": "Question 1: The Dinner Guests",
+      "prompt": "If you could invite anyone in the world — living or dead — to dinner, who would it be and why?\n\nAnswer for yourself first. Then imagine your partner's answer.\n\nWill you ask them tonight?",
+      "minChars": 20,
+      "xp": 10
+    },
+    {
+      "id": "d14-reflection-2",
+      "type": "reflection",
+      "title": "Question 2: What You're Grateful For",
+      "prompt": "Name three things in your life that you feel genuinely grateful for — and try to be specific about why each one matters to you, not just what it is.\n\nInclude things beyond the obvious. Something small that matters more than it should. Something you're afraid you take for granted.",
+      "minChars": 30,
+      "xp": 10
+    },
+    {
+      "id": "d14-reflection-3",
+      "type": "reflection",
+      "title": "Question 3: A Perfect Day",
+      "prompt": "Describe your perfect day — from the moment you wake up to the moment you fall asleep. Include where you are, who's with you, what you're doing and feeling.\n\nDon't make it practical. Make it true.",
+      "minChars": 30,
+      "xp": 10
+    },
+    {
+      "id": "d14-scenario-1",
+      "type": "scenario_card",
+      "title": "When the Questions Get Hard",
+      "body": "Some of these questions will surface things that are uncomfortable. Old longings. Unspoken fears. Dreams that didn't happen the way you hoped.\n\nThat's not a problem. That's the point.\n\nIf a question surfaces a feeling — name it. 'That one hit something I didn't expect.' You don't have to know why. You just have to stay in the room with it instead of deflecting.\n\nThe couples who do this exercise and go deeper than they planned aren't the ones with the least to process. They're the ones who are willing to be seen anyway."
+    },
+    {
+      "id": "d14-reflection-4",
+      "type": "reflection",
+      "title": "Question 4: Your Life Story (Short Version)",
+      "prompt": "In four minutes or less, tell your life story — as many chapters as you can. Include the pivotal moments, the turns you didn't expect, the things that shaped who you are.\n\nWrite it here first. Then share it with your partner — and ask for theirs.",
+      "minChars": 30,
+      "xp": 10
+    },
+    {
+      "id": "d14-reflection-5",
+      "type": "reflection",
+      "title": "Question 5: What I Never Say",
+      "prompt": "Name one thing you wish your partner understood about you that you've never found the right way to say.\n\nNot a complaint. Not a criticism. Something about who you are — a fear, a need, a way you experience the world — that feels important and unsaid.",
+      "minChars": 20,
+      "xp": 15
+    },
+    {
+      "id": "d14-reflection-6",
+      "type": "reflection",
+      "title": "Question 6: What You Love About Them",
+      "prompt": "Name 5 things you genuinely love or admire about your partner. Not their role ('great parent'). Their person.\n\nThings like: the way they laugh. How they handle pressure. A quality you've noticed that they don't see in themselves. Something they do when they think nobody's watching.\n\nWrite it. Then say it to them.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d14-reflection-7",
+      "type": "reflection",
+      "title": "Question 7: A Dream You Haven't Said Out Loud",
+      "prompt": "Is there something you've wanted — a life, a version of yourself, a path not taken — that you've never fully said out loud to your partner?\n\nNot a complaint about your current life. A genuine dream or desire that's still alive in you.\n\nWrite it here. Then decide: is this worth sharing?",
+      "minChars": 20,
+      "xp": 15
+    },
+    {
+      "id": "d14-info-4",
+      "type": "info",
+      "title": "What These Questions Build",
+      "body": "Arthur Aron's research found something important: it wasn't any single question that created intimacy. It was the experience of mutual, progressive, honest disclosure — combined with attentive listening.\n\nWhen both people are willing to be seen and both people show up fully to witness the other — something shifts.\n\nYou move from being two people who live together to being two people who truly know each other.\n\nThat's the foundation all the other skills are built on. And it doesn't expire — you can come back to these questions any time. Pick three. Sit outside. See what emerges.",
+      "xp": 5
+    },
+    {
+      "id": "d14-badge-1",
+      "type": "badge_unlock",
+      "title": "Achievement Unlocked: Foundation Builder",
+      "body": "You completed Week 2 — Safety. You learned what destroys emotional safety and spent seven days building the skills to restore it. You practiced vulnerability, listening, and honest sharing.\n\nThat's not theory anymore. That's a lived experience.\n\nBadge earned: Foundation Builder",
+      "badge": "foundation_builder",
+      "xp": 50
+    },
+    {
+      "id": "d14-streak-1",
+      "type": "streak_commitment",
+      "title": "Week 3 Begins Tomorrow",
+      "body": "You've built safety. Next week is about connection — deepening the friendship, intimacy, and joy at the center of your relationship.\n\nTwo weeks down. The work you've done this week will be felt for years.\n\nSee you tomorrow.",
+      "xp": 10
+    },
+    {
+      "id": "d14-reminder-1",
+      "type": "reminder_setup",
+      "title": "Keep the Conversations Going",
+      "body": "Set a reminder to try the deep questions exercise with your partner this week. Pick 3–5 questions and make an evening of it.\n\nThe best time: no phones, no kids, no agenda. Just two people who chose each other, trying to keep knowing each other.",
+      "xp": 5
+    },
+    {
+      "id": "d14-completion-1",
+      "type": "completion",
+      "title": "Week 2 Complete",
+      "body": "Safety is built one honest moment at a time.\n\nYou've had a lot of those moments this week. Keep going.",
+      "xp": 0
+    }
+  ]
+}

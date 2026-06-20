@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "unit": "day15",
+  "title": "Day 15: The Gratitude Loop",
+  "estMinutes": 12,
+  "steps": [
+    {
+      "id": "d15-info-1",
+      "type": "info",
+      "title": "Week 3: Connection",
+      "body": "Welcome to Week 3.\n\nYou've built safety. Now we build connection — the warmth, friendship, and positive energy that makes a marriage feel like home instead of just a household.\n\nHere's what most people miss: connection isn't about the big romantic gestures. It's about the daily texture of how you treat each other. The way you look at each other across the room. Whether you laugh. Whether you're genuinely glad to see each other.\n\nThis week, we rebuild that texture. And we start with the simplest, most researched tool there is: gratitude.",
+      "xp": 5
+    },
+    {
+      "id": "d15-highlight-1",
+      "type": "highlight",
+      "body": "Researchers at the University of Georgia found that gratitude in a relationship is the single biggest predictor of couple satisfaction — bigger than communication style, sexual frequency, or income.\n\nNot occasional gratitude. Daily gratitude.\n\nNot grand appreciation. Specific appreciation.\n\nThe couple that stays curious about what the other is doing right has a fundamentally different daily experience than the couple scanning for what's wrong.",
+      "highlights": ["single biggest predictor", "Daily gratitude", "Specific appreciation", "stays curious about what the other is doing right"],
+      "xp": 5
+    },
+    {
+      "id": "d15-info-2",
+      "type": "info",
+      "title": "The 5:1 Ratio",
+      "body": "Gottman's research identified a critical ratio in relationships.\n\nFor every one negative interaction — a criticism, a cold moment, a fight, a dismissal — it takes five positive interactions to restore balance.\n\nFive to one.\n\nThis doesn't mean you need to fake five compliments after every argument. It means that in your day-to-day, if the ratio falls below 5:1, the relationship starts to feel negative — even if the actual fights are rare.\n\nThe couples who thrive maintain 20:1. Their ordinary days are saturated with small warmth — a touch, a laugh, a note of appreciation, a moment of genuine interest.\n\nGratitude is the cheapest, fastest way to increase that ratio.",
+      "xp": 5
+    },
+    {
+      "id": "d15-tf-1",
+      "type": "tf",
+      "question": "For relationships to feel positive, you need at least 5 positive interactions for every 1 negative one.",
+      "correct": true,
+      "feedback": [
+        "Correct — Gottman found that the 5:1 ratio is the minimum threshold for a relationship to feel positive. Below that ratio, even couples who fight rarely can feel chronically negative. Thriving couples tend to maintain much higher ratios.",
+        "Actually, this is Gottman's finding. Five positive interactions are needed to balance every one negative one. Below that ratio, relationships start feeling consistently negative even without frequent fights."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d15-info-3",
+      "type": "info",
+      "title": "Why Gratitude Erodes in Long Relationships",
+      "body": "When you first got together, you noticed everything. The way they laughed. How they handled something difficult. A small kindness you hadn't expected.\n\nOver time, these things become background. They don't disappear — they become invisible. You adapt to the good, and your attention migrates to what's missing or wrong.\n\nPsychologists call this hedonic adaptation. It's not a moral failure. It's how human attention works.\n\nThe intervention is simple and it works: deliberately redirect your attention to the good. Not as a performance — as a practice. You're essentially reprogramming where your mind goes by default.",
+      "xp": 5
+    },
+    {
+      "id": "d15-scenario-1",
+      "type": "scenario_card",
+      "title": "The Gratitude Microscope",
+      "body": "Your partner makes dinner. Again. Like they do almost every night.\n\nOption A: you notice it the way you notice the lights are on. It's background.\n\nOption B: you look at it differently. They planned what to make. They bought the ingredients — or they remembered what was in the fridge. They cooked after a full day. They thought about what you'd like.\n\nSame dinner. Different seeing.\n\n'Thank you for dinner — you always think about what I'll like' lands completely differently than 'thanks' said while walking past.\n\nThe act of seeing specifically is what creates the feeling of being appreciated."
+    },
+    {
+      "id": "d15-mc-1",
+      "type": "mc",
+      "question": "Your partner has been patient with a difficult family situation for weeks without complaining. What's the most connection-building response?",
+      "options": [
+        "'You're so patient.'",
+        "'Thanks for dealing with all of this.'",
+        "'I've been watching how you've handled all of this. The way you stayed calm with my mother last week — I know that was hard. I really admire that about you.'",
+        "'I don't know how you do it.'"
+      ],
+      "correct": 2,
+      "feedback": [
+        "General appreciation is a deposit, but specificity is what makes it memorable. 'You're patient' is about a trait — the deeper version shows you were watching.",
+        "Gratitude is a deposit, but specific gratitude is a much larger one. This version acknowledges without showing what you actually saw.",
+        "Correct. Specific, observed appreciation — naming the exact moment, acknowledging the effort, expressing genuine admiration — is the most powerful form of gratitude. It says: I see you. I was paying attention."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d15-reflection-1",
+      "type": "reflection",
+      "title": "What You Take for Granted",
+      "prompt": "Make a list of 5 things your partner does that you've started to take for granted — things that have become background.\n\nFor each one, write a sentence about why it actually matters. What would it be like if they stopped doing it? What does it tell you about who they are?\n\nThis isn't a list for them. It's a list for you — to remember what's in front of you.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d15-highlight-2",
+      "type": "highlight",
+      "body": "Couples who express specific gratitude to each other daily — not for dramatic acts, but for ordinary ones — report feeling more connected, more secure, and more committed.\n\nThe brain can't tell the difference between 'I'm grateful for this person' and 'I love this person.'\n\nGratitude doesn't just reflect love. It generates it.",
+      "highlights": ["express specific gratitude daily", "can't tell the difference", "Gratitude generates love"],
+      "xp": 5
+    },
+    {
+      "id": "d15-info-4",
+      "type": "info",
+      "title": "The Daily Gratitude Practice",
+      "body": "Here's the exercise. It takes two minutes a day.\n\nEvery day this week, tell your partner one specific thing you're grateful for about them. Not a general compliment — a specific observation.\n\nFormat: 'I noticed [specific thing]. I'm grateful for it because [reason].\n\nExamples:\n• 'I noticed you let me sleep in on Saturday without saying anything. I'm grateful for it because you knew I needed it without me having to ask.'\n• 'I noticed how you talked to the kids tonight when they were upset. I'm grateful for how patient you are — I learn from watching you.'\n• 'I noticed you texted me just to check in today. It was small but it mattered.'\n\nDo this for seven days. Notice what happens.",
+      "xp": 5
+    },
+    {
+      "id": "d15-copy-action-1",
+      "type": "copy_action",
+      "title": "Your First Gratitude Statement",
+      "prompt": "Write your Day 1 gratitude statement right now.\n\n'I noticed [specific thing your partner did or is]. I'm grateful for it because [reason].'\n\nMake it true. Make it specific. Then say it to them today.",
+      "xp": 10
+    },
+    {
+      "id": "d15-fillblank-1",
+      "type": "fillblank",
+      "question": "Gottman found that thriving relationships require at least ___ positive interactions for every negative one.",
+      "answer": "5",
+      "xp": 8
+    },
+    {
+      "id": "d15-reflection-2",
+      "type": "reflection",
+      "title": "Your Gratitude Ratio",
+      "prompt": "Be honest about your current 5:1 ratio.\n\nIn an average week, how many positive interactions — genuine warmth, appreciation, affection, laughter — do you and your partner have versus negative ones?\n\nIs the ratio above 5:1? Below it? What would it take to shift it by one notch this week?",
+      "minChars": 20,
+      "xp": 10
+    },
+    {
+      "id": "d15-good-fit-1",
+      "type": "good_fit",
+      "question": "How often do you express specific (not general) appreciation to your partner?",
+      "options": [
+        "Rarely — I feel it but don't often say it",
+        "Sometimes — when something big happens",
+        "Often — several times a week",
+        "Daily — it's already a habit"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d15-info-5",
+      "type": "info",
+      "title": "Tomorrow: Physical Connection",
+      "body": "Tomorrow, we talk about touch.\n\nNot just sexual touch — the full spectrum of physical connection that keeps a relationship feeling close and warm. The science here is fascinating and the exercises are concrete.\n\nSee you there.",
+      "xp": 5
+    },
+    {
+      "id": "d15-completion-1",
+      "type": "completion",
+      "title": "Day 15 Complete",
+      "body": "Gratitude is a muscle. The more you use it, the stronger it gets.\n\nStart today. One specific thing. The practice builds from there.",
+      "xp": 0
+    }
+  ]
+}

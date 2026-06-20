@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "unit": "day8",
+  "title": "Day 8: Creating Safety — Part 1",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d8-info-1",
+      "type": "info",
+      "title": "Week 2: Safety",
+      "body": "Welcome to Week 2.\n\nLast week, you mapped the terrain — where your marriage is, what each pillar needs, what you're building toward.\n\nThis week is about safety. Not the absence of conflict. Something deeper.\n\nEmotional safety is the condition where both of you can be fully honest — about feelings, fears, needs — without bracing for an attack. It's the difference between a marriage that's livable and one that's truly alive.\n\nThis week, you'll learn what destroys safety and exactly how to rebuild it.",
+      "xp": 5
+    },
+    {
+      "id": "d8-highlight-1",
+      "type": "highlight",
+      "body": "Dr. John Gottman spent 40 years studying couples in his 'Love Lab.' His research could predict divorce with 93% accuracy.\n\nHe didn't look at how much couples fought. He looked at HOW they fought.\n\nThe four patterns he found were so destructive he called them the Four Horsemen of the Apocalypse.",
+      "highlights": ["93% accuracy", "not how much couples fought", "Four Horsemen of the Apocalypse"],
+      "xp": 5
+    },
+    {
+      "id": "d8-info-2",
+      "type": "info",
+      "title": "Horseman #1: Criticism",
+      "body": "Criticism attacks the person, not the behavior.\n\nA complaint says: 'I'm frustrated that you didn't call when you were running late.'\n\nCriticism says: 'You never think about anyone but yourself. You're so irresponsible.'\n\nThe difference is the words 'always,' 'never,' 'you are.' Criticism turns a specific frustration into a character indictment.\n\nMost criticism starts as a legitimate complaint — a need that isn't getting met. But it arrives wrapped in an attack, and the person receiving it goes immediately into defense mode. The message — the real need — never lands.",
+      "xp": 5
+    },
+    {
+      "id": "d8-tf-1",
+      "type": "tf",
+      "question": "Criticism and complaint are essentially the same thing — both express dissatisfaction with a partner's behavior.",
+      "correct": false,
+      "feedback": [
+        "Correct — they're quite different. A complaint targets a specific behavior in this moment. Criticism attacks the person's character, often with words like 'always' or 'never.' One invites problem-solving; the other invites defensiveness.",
+        "Actually, there's a critical distinction. A complaint is about a specific behavior: 'You forgot to call.' Criticism attacks character: 'You're so thoughtless.' One opens a conversation; the other closes it."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d8-info-3",
+      "type": "info",
+      "title": "Horseman #2: Contempt",
+      "body": "Contempt is the most dangerous of the four. Gottman found it to be the single strongest predictor of divorce.\n\nContempt communicates: I am better than you. You are beneath me.\n\nIt shows up as eye-rolling, sneering, mockery, sarcasm used as a weapon, name-calling, or mimicking your partner dismissively.\n\n'Oh, right, because you're so perfect.'\n'That's the dumbest thing I've ever heard.'\n*rolls eyes*\n\nContempt is built on a foundation of long-standing resentment and unresolved grievances. It's what happens when criticism goes unaddressed for months or years. And it corrodes love faster than almost anything else.",
+      "xp": 5
+    },
+    {
+      "id": "d8-scenario-1",
+      "type": "scenario_card",
+      "title": "Contempt in Disguise",
+      "body": "Contempt doesn't always look mean. Sometimes it's subtle:\n\n• Sighing heavily when your partner speaks\n• Finishing their sentences dismissively\n• Using a 'can you believe this person' tone with others\n• Laughing at (not with) your partner in front of friends\n• 'Whatever you say'\n\nThe test: does the behavior communicate 'you are less than me'? If yes, it's contempt.\n\nNone of these feel like big moments. But they accumulate. Every instance is a tiny withdrawal from the emotional bank account."
+    },
+    {
+      "id": "d8-info-4",
+      "type": "info",
+      "title": "Horseman #3: Defensiveness",
+      "body": "Defensiveness is a natural response to feeling attacked. But it makes everything worse.\n\nWhen we're defensive, we're essentially saying: 'The problem isn't me, it's you.'\n\nIt looks like:\n• Making excuses ('I was tired,' 'I was stressed')\n• Counter-attacking ('Well YOU never...')\n• Innocent victim stance ('I can't do anything right around here')\n\nThe irony of defensiveness: it's actually a way of protecting yourself that prevents the repair your partner is trying to start.\n\nYour partner raises a concern. You explain it away. They don't feel heard. They escalate. Now you're in a full fight that started with a small frustration.",
+      "xp": 5
+    },
+    {
+      "id": "d8-info-5",
+      "type": "info",
+      "title": "Horseman #4: Stonewalling",
+      "body": "Stonewalling is shutting down — going cold, withdrawing, giving the silent treatment, or leaving the room emotionally even if your body stays.\n\nStonewallers aren't always being cruel. Usually, they're flooded. Their heart rate is over 100 bpm, they're overwhelmed, and withdrawal is the only way they know to cope.\n\nBut from the outside, it looks like: I don't care. You're not worth engaging with. You're alone in this.\n\nGottman found that 85% of stonewallers are men — not because men care less, but because men's cardiovascular systems tend to get flooded more easily and take longer to calm down.\n\nStonewalling shuts down communication at exactly the moment connection is most needed.",
+      "xp": 5
+    },
+    {
+      "id": "d8-match-1",
+      "type": "match",
+      "title": "Match the Horseman",
+      "question": "Match each Horseman to its defining behavior:",
+      "pairs": [
+        { "left": "Criticism", "right": "Attacking character, not behavior" },
+        { "left": "Contempt", "right": "Eye-rolling, mockery, superiority" },
+        { "left": "Defensiveness", "right": "Counter-attacking or playing the victim" },
+        { "left": "Stonewalling", "right": "Shutting down, going cold, withdrawing" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-mc-1",
+      "type": "mc",
+      "question": "Your partner says: 'You never make time for me. You're so selfish.' Which Horseman is this?",
+      "options": [
+        "Criticism",
+        "Contempt",
+        "Defensiveness",
+        "Stonewalling"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Exactly. 'Never' and 'you're so selfish' turn a legitimate need (more quality time) into a character attack. This is criticism in its classic form.",
+        "Contempt goes further — it communicates superiority or disgust. This is a character attack, which makes it criticism."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-reflection-1",
+      "type": "reflection",
+      "title": "Your Horseman Profile",
+      "prompt": "Thinking about your last few significant conflicts — which of the Four Horsemen showed up?\n\nBe honest about your OWN patterns first, then your partner's.\n\nWhich Horseman do you reach for when you're upset? What does it look like for you specifically? (Give a real example if you can.)",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d8-highlight-2",
+      "type": "highlight",
+      "body": "Here's the thing about the Four Horsemen: they're not signs that your marriage is broken.\n\nEvery couple uses them sometimes. The research shows that what matters isn't whether they appear — it's how OFTEN, and whether you have antidotes.\n\nThat's tomorrow's lesson. Today: just see them clearly.",
+      "highlights": ["Every couple uses them sometimes", "how OFTEN", "antidotes"],
+      "xp": 5
+    },
+    {
+      "id": "d8-mc-2",
+      "type": "mc",
+      "question": "According to Gottman's research, which Horseman is the single strongest predictor of divorce?",
+      "options": [
+        "Criticism",
+        "Contempt",
+        "Defensiveness",
+        "Stonewalling"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Criticism is damaging, but Gottman identified contempt as the most corrosive. Contempt communicates 'you are beneath me' — and that erodes love at its root.",
+        "Correct. Contempt — eye-rolling, mockery, disgust — is built on long-simmering resentment and is the single strongest predictor of divorce Gottman found."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d8-fillblank-1",
+      "type": "fillblank",
+      "question": "Gottman found he could predict divorce with ___% accuracy by studying how couples fight.",
+      "answer": "93",
+      "xp": 8
+    },
+    {
+      "id": "d8-reflection-2",
+      "type": "reflection",
+      "title": "A Moment You Want to Take Back",
+      "prompt": "Think of a recent conflict where one of the Four Horsemen showed up — one you're not proud of.\n\nDescribe what happened, which Horseman appeared, and what you wish you had said or done instead.\n\nThis isn't about shame. It's about seeing clearly so you can do differently next time.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d8-scenario-2",
+      "type": "scenario_card",
+      "title": "The Flooding Threshold",
+      "body": "When an argument gets intense, your body goes into fight-or-flight. Heart rate spikes. Cortisol floods the bloodstream. Rational thinking narrows.\n\nGottman calls this 'flooding,' and it's a physiological event — not a character flaw.\n\nWhen you're flooded, you cannot have a productive conversation. Literally cannot — the part of your brain that does nuanced communication goes offline.\n\nThis is why taking a break during a fight isn't weakness. It's biology. The trick is taking a break the right way.\n\nMore on that tomorrow."
+    },
+    {
+      "id": "d8-good-fit-1",
+      "type": "good_fit",
+      "question": "Which Horseman do you most want to work on reducing in your conflicts?",
+      "options": [
+        "Criticism — I attack the person instead of the problem",
+        "Contempt — I sometimes go cold or dismissive",
+        "Defensiveness — I have trouble owning my part",
+        "Stonewalling — I shut down when things get hard"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d8-info-6",
+      "type": "info",
+      "title": "Tomorrow: The Antidotes",
+      "body": "Now that you can name the Horsemen — in yourself and in your relationship — you're ready for the most important part.\n\nEvery single Horseman has an antidote. A specific, learnable behavior that replaces it.\n\nTomorrow, you'll learn exactly what to say and do instead. And you'll practice the most important one: the gentle startup — the single skill that prevents more fights than any other.\n\nThis is where it gets practical.",
+      "xp": 5
+    },
+    {
+      "id": "d8-completion-1",
+      "type": "completion",
+      "title": "Day 8 Complete",
+      "body": "You just learned something most couples never name — the exact patterns that predict relationship failure. Naming them is the first step to changing them.\n\nSee you tomorrow for the antidotes.",
+      "xp": 0
+    }
+  ]
+}

@@ -85,6 +85,14 @@ import duoDay4 from "../../src/content/duo/day4.json";
 import duoDay5 from "../../src/content/duo/day5.json";
 import duoDay6 from "../../src/content/duo/day6.json";
 import duoDay7 from "../../src/content/duo/day7.json";
+import duoDay8 from "../../src/content/duo/day8.json";
+import duoDay9 from "../../src/content/duo/day9.json";
+import duoDay10 from "../../src/content/duo/day10.json";
+import duoDay11 from "../../src/content/duo/day11.json";
+import duoDay12 from "../../src/content/duo/day12.json";
+import duoDay13 from "../../src/content/duo/day13.json";
+import duoDay14 from "../../src/content/duo/day14.json";
+import duoDay15 from "../../src/content/duo/day15.json";
 
 const DAY_CONTENT: Record<string, any> = {
   "ai-1": aiDay1, "ai-2": aiDay2, "ai-3": aiDay3,
@@ -105,7 +113,9 @@ const DAY_CONTENT: Record<string, any> = {
   "afe-27": afeDay27, "afe-28": afeDay28,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
-  "duo-7": duoDay7,
+  "duo-7": duoDay7, "duo-8": duoDay8, "duo-9": duoDay9, "duo-10": duoDay10,
+  "duo-11": duoDay11, "duo-12": duoDay12, "duo-13": duoDay13, "duo-14": duoDay14,
+  "duo-15": duoDay15,
 };
 
 const LOCAL_LESSONS: Record<string, Lesson> = {};

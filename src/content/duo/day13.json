@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "unit": "day13",
+  "title": "Day 13: Listening to Understand",
+  "estMinutes": 13,
+  "steps": [
+    {
+      "id": "d13-info-1",
+      "type": "info",
+      "title": "The Listening Illusion",
+      "body": "Most people think they're good listeners. Almost nobody is.\n\nHere's what's actually happening when your partner is talking and you think you're listening:\n\nYou're forming your response. You're evaluating whether they're being fair to you. You're noticing where you disagree. You're waiting for a pause so you can make your point.\n\nThat's not listening. That's waiting to talk.\n\nReal listening — the kind that makes your partner feel genuinely heard — is one of the rarest and most powerful things you can offer another person. It's also something almost nobody was taught how to do.",
+      "xp": 5
+    },
+    {
+      "id": "d13-highlight-1",
+      "type": "highlight",
+      "body": "The deepest human need is to be understood.\n\nNot agreed with. Not fixed. Not given advice.\n\nUnderstood.\n\nWhen your partner talks to you, they're not usually asking you to solve the problem. They're asking you to be present with it. Those are completely different things.",
+      "highlights": ["to be understood", "not agreed with", "be present with it"],
+      "xp": 5
+    },
+    {
+      "id": "d13-info-2",
+      "type": "info",
+      "title": "Active Listening vs. Waiting to Talk",
+      "body": "Active listening means your entire focus is on understanding the other person — not preparing your response, not evaluating their logic, not defending yourself.\n\nThe signs you're actively listening:\n• Your body is turned toward them\n• Your phone is away\n• You're not finishing their sentences\n• You're asking questions to understand more, not to poke holes\n• You can repeat back what they said — not just the words, but the feeling behind them\n\nThe sign you're waiting to talk:\n• You feel the urge to say 'but' before they're finished\n• You're scanning for the part where you can make your point\n• You feel impatient when they take a long time to get to the point\n\nNone of these make you a bad person. They make you human. And they can be changed.",
+      "xp": 5
+    },
+    {
+      "id": "d13-tf-1",
+      "type": "tf",
+      "question": "A partner who asks clarifying questions during a conversation is usually good at active listening.",
+      "correct": true,
+      "feedback": [
+        "Correct — asking questions to understand more deeply is one of the hallmarks of active listening. The key distinction is the intent: questions that dig deeper into your partner's experience signal genuine interest, while questions that challenge or poke holes signal defensiveness.",
+        "Actually, asking questions to understand is a positive sign — it's one of the markers of active listening. The important thing is the intent behind the questions: understanding vs. challenging."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d13-info-3",
+      "type": "info",
+      "title": "Reflective Listening: The Technique",
+      "body": "Reflective listening is the single most effective listening technique there is. It's deceptively simple.\n\nStep 1: Listen without interrupting.\n\nStep 2: When they pause, reflect back what you heard — both the content AND the feeling.\n\n'It sounds like you're feeling really overwhelmed by the situation at work, and also maybe a little hurt that your manager didn't stand up for you. Is that right?'\n\nStep 3: Wait for them to correct or confirm. Let them tell you if you got it right.\n\nStep 4: Don't give advice until they ask for it. Often they won't. Often they don't need it — they need to be heard.\n\nThis feels awkward the first few times. It also works the first few times. Keep going.",
+      "xp": 5
+    },
+    {
+      "id": "d13-scenario-1",
+      "type": "scenario_card",
+      "title": "Reflective Listening vs. Standard Response",
+      "body": "Your partner comes home and says: 'My sister called again. She wants me to plan her whole wedding and I just — I don't have the bandwidth for this.'\n\nStandard response: 'Just tell her no. You don't have to do everything for her.'\n\nReflective response: 'That sounds exhausting. Like you love her and you want to show up for her, but you're running on empty and this feels like one more thing being asked of you?'\n\nThe first response is logical. The second makes them feel understood.\n\nAfter the reflective response, your partner will likely say 'yes, exactly' and then be able to actually think through what they want to do — because they're not still trying to feel heard."
+    },
+    {
+      "id": "d13-mc-1",
+      "type": "mc",
+      "question": "Your partner says: 'I just feel like no one appreciates anything I do around here.' The best reflective response is:",
+      "options": [
+        "'I appreciate you — I tell you all the time.'",
+        "'What makes you feel that way?'",
+        "'It sounds like you're feeling invisible — like your effort is going unnoticed?'",
+        "'You do a lot. What's a specific thing that happened?'"
+      ],
+      "correct": 2,
+      "feedback": [
+        "This response makes it about you — defending yourself — before your partner feels heard. Even if it's true, it will make them feel more unheard.",
+        "Reflective listening goes first. This is the right response after they feel understood."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13-reflection-1",
+      "type": "reflection",
+      "title": "When Have You Felt Truly Heard?",
+      "prompt": "Think of a time when someone really listened to you — not just waited for their turn, not fixed it, not turned it around to their experience. Just heard you.\n\nWhat did they do? How did it feel? What did it make you feel about them?\n\nNow ask: does your partner feel that way with you? How often?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d13-info-4",
+      "type": "info",
+      "title": "The Listening Killers",
+      "body": "There are several responses that feel like listening but actually shut the conversation down:\n\n• Giving advice immediately ('Here's what you should do...')\n• Minimizing ('It's not that bad. At least...')\n• One-upping ('That's nothing — wait till you hear what happened to me')\n• Interrogating ('But why did you do it that way?')\n• Moralizing ('Well, you knew what you were getting into')\n• Distracting ('Hey, want to watch something?')\n\nEvery single one of these communicates — without meaning to — that the person's experience is too much, too boring, or not valid.\n\nNotice which ones you reach for. The goal isn't to never say them. The goal is to notice when you're doing it and redirect.",
+      "xp": 5
+    },
+    {
+      "id": "d13-match-1",
+      "type": "match",
+      "title": "Listening Killer or Active Listening?",
+      "question": "Match each response to its category:",
+      "pairs": [
+        { "left": "'It sounds like you're really frustrated.'", "right": "Active listening" },
+        { "left": "'At least you still have your job.'", "right": "Minimizing (listening killer)" },
+        { "left": "'Tell me more about what happened.'", "right": "Active listening" },
+        { "left": "'Here's what I would do...'", "right": "Advice-giving (listening killer)" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d13-scenario-2",
+      "type": "scenario_card",
+      "title": "The 20-Minute Listening Practice",
+      "body": "This week, try this exercise with your partner:\n\nPerson A talks uninterrupted for 10 minutes about something that's been on their mind — anything. Work, family, a feeling, a worry. Person B's only job: listen and reflect back. No advice. No sharing their own experience. Just listening and reflecting.\n\nThen switch.\n\nGround rules:\n• Phones away. Physically away, not just face down.\n• Person A can talk about anything — it doesn't have to be about the relationship.\n• Person B reflects back what they heard at the end, before switching.\n\nThis exercise sounds simple. It will likely be one of the most meaningful 20 minutes you spend this week."
+    },
+    {
+      "id": "d13-reflection-2",
+      "type": "reflection",
+      "title": "Your Listening Habit",
+      "prompt": "Honestly — which listening killer do you reach for most often when your partner is sharing something difficult?\n\nAdvice-giving? Minimizing? One-upping? Something else?\n\nWhat do you think drives it — discomfort with their pain, wanting to help, impatience, something else?\n\nWhat would you do instead if you were listening purely to understand?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d13-fillblank-1",
+      "type": "fillblank",
+      "question": "Reflective listening involves reflecting back both the content AND the ___ behind what your partner said.",
+      "answer": "feeling",
+      "xp": 8
+    },
+    {
+      "id": "d13-good-fit-1",
+      "type": "good_fit",
+      "question": "When your partner comes home upset about something, what's your typical first response?",
+      "options": [
+        "I ask questions to understand more",
+        "I offer advice or suggest a solution",
+        "I try to cheer them up or lighten the mood",
+        "I reflect back what I'm hearing them say"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d13-info-5",
+      "type": "info",
+      "title": "Tomorrow: Sharing Deeply",
+      "body": "This week has been about safety — seeing clearly what destroys it, and building the skills that restore it.\n\nTomorrow is Day 14: the Week 2 wrap. We'll go deeper than any conversation technique — into the kind of questions that build genuine closeness.\n\nYou've earned it. See you there.",
+      "xp": 5
+    },
+    {
+      "id": "d13-completion-1",
+      "type": "completion",
+      "title": "Day 13 Complete",
+      "body": "Listening is an act of love. Not the loud kind — the quiet, disciplined, full-attention kind.\n\nTry the 20-minute practice this week. It will change something.",
+      "xp": 0
+    }
+  ]
+}

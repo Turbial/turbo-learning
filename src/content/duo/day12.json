@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "unit": "day12",
+  "title": "Day 12: Fighting Fair",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d12-info-1",
+      "type": "info",
+      "title": "Fighting Is Not the Problem",
+      "body": "Let's get something out of the way: the goal is not to stop fighting.\n\nCouples who never fight aren't more connected — they're usually more disconnected. Avoiding conflict is its own kind of withdrawal.\n\nThe goal is to fight in a way that leaves you both feeling heard, respected, and — strange as it sounds — closer when it's over.\n\nThat's what 'fighting fair' means. Not being nice during a fight. Fighting with intention — protecting the relationship even when you're genuinely angry at the person.\n\nToday, three skills that make the difference.",
+      "xp": 5
+    },
+    {
+      "id": "d12-info-2",
+      "type": "info",
+      "title": "Skill #1 — Complaint vs. Criticism (Review + Practice)",
+      "body": "You learned this in Day 8. Now you're going to drill it.\n\nA complaint is about a behavior. It's specific. It's in the present. It's about something that happened.\n\n'I'm frustrated that you didn't text when you were running late. I was waiting and I didn't know what was happening.'\n\nA criticism is about a person. It's global. It uses 'always' and 'never.' It attacks character.\n\n'You never think about me. You're so inconsiderate.'\n\nThe same underlying frustration. But the first invites a solution. The second invites a war.\n\nBefore you raise a concern this week, ask yourself: is this a complaint or a criticism? Then convert it.",
+      "xp": 5
+    },
+    {
+      "id": "d12-mc-1",
+      "type": "mc",
+      "question": "Which of these is a complaint (not a criticism)?",
+      "options": [
+        "'You always make us late. You're so disorganized.'",
+        "'I felt embarrassed when we arrived 20 minutes late. Can we plan extra time next time?'",
+        "'You never consider how your behavior affects me.'",
+        "'You're impossible to make plans with.'"
+      ],
+      "correct": 1,
+      "feedback": [
+        "This is a complaint phrased as a fair fight. It names a specific situation, describes a feeling, and makes a positive request — without attacking character.",
+        "Correct. This is a complaint — specific situation, specific feeling, forward-looking request. No character attacks."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-highlight-1",
+      "type": "highlight",
+      "body": "Every criticism is a complaint in disguise.\n\nUnder 'you're so selfish' is usually: 'I feel unseen and I don't know how to say that.'\n\nUnder 'you never listen' is usually: 'I need to feel like what I say matters to you.'\n\nFinding the complaint under the criticism is the most important thing you can do in a fight. Not for your partner — for yourself. So you know what you actually need.",
+      "highlights": ["complaint in disguise", "finding the complaint under the criticism", "what you actually need"],
+      "xp": 5
+    },
+    {
+      "id": "d12-info-3",
+      "type": "info",
+      "title": "Skill #2 — The Productive Timeout",
+      "body": "A timeout during a fight can be one of the most loving things you do — or one of the most damaging. The difference is how you do it.\n\nThe damaging version: walking out mid-sentence, stonewalling, disappearing without a word, or staying away for hours or days.\n\nThe productive version:\n1. Name what's happening: 'I'm getting flooded and I can't think clearly.'\n2. Give a specific return time: 'I need 30 minutes. I'll be back at 7.'\n3. Spend the break genuinely calming down — walk, breathe, listen to music. Not rehearsing your argument.\n4. Return at the time you said. Keep your word.\n\nThe 30-minute mark matters. Research shows it takes at least 20–30 minutes for cortisol to clear after an escalated fight. Less than that, and you're still flooded.",
+      "xp": 5
+    },
+    {
+      "id": "d12-tf-1",
+      "type": "tf",
+      "question": "Taking a break during an argument is a form of stonewalling.",
+      "correct": false,
+      "feedback": [
+        "Correct — they're fundamentally different. Stonewalling is shutting down without communication and with no intention to return. A productive timeout names the state, gives a return time, and follows through. One closes connection; the other protects it.",
+        "Not quite. A productive timeout is the antidote to stonewalling, not a version of it. The key differences: you name what's happening, you commit to a return time, and you actually return. Stonewalling is disappearing — a timeout is a structured pause."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d12-scenario-1",
+      "type": "scenario_card",
+      "title": "The Timeout Script",
+      "body": "Practicing this before you need it makes all the difference. Here's a script:\n\n'I'm starting to get flooded — my heart is racing and I know I'm not going to say what I mean well right now. I don't want to say something I'll regret. Can we take 30 minutes and come back to this at [specific time]? I'm not avoiding the conversation — I want to have it when I can actually be present.'\n\nThat's it. The key elements:\n• Naming your internal state\n• Taking responsibility (not blaming them)\n• A specific return time\n• A reassurance that you're coming back\n\nYou won't remember this in the heat of the moment unless you practice it now."
+    },
+    {
+      "id": "d12-reflection-1",
+      "type": "reflection",
+      "title": "What Happens in Your Fights",
+      "prompt": "Think about how conflicts typically unfold in your relationship. Walk through what usually happens step by step.\n\nWhere does it typically go wrong? Do you escalate? Does one of you shut down? Do old wounds get pulled in?\n\nWhat's the moment in your fights where things could go differently — and what would 'differently' look like?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d12-info-4",
+      "type": "info",
+      "title": "Skill #3 — The Repair Attempt",
+      "body": "A repair attempt is anything you do to de-escalate, reconnect, or course-correct during a conflict.\n\nGottman calls the ability to make and accept repair attempts 'the most important predictor of relationship quality.'\n\nRepairs don't have to be eloquent:\n• 'Can we start over?'\n• 'I love you even when we're in this.'\n• 'I don't want to fight with you. I want to figure this out together.'\n• 'I'm sorry. That came out wrong.'\n• A hand on the arm.\n• A moment of eye contact.\n\nBut repair only works if your partner can receive it. When the account is low, repairs get rejected ('Don't try to hug me right now'). When the account is full, even an imperfect repair lands.",
+      "xp": 5
+    },
+    {
+      "id": "d12-match-1",
+      "type": "match",
+      "title": "Identify the Skill",
+      "question": "Match each statement to the fighting fair skill it represents:",
+      "pairs": [
+        { "left": "'I felt hurt when you didn't call.'", "right": "Complaint (not criticism)" },
+        { "left": "'I need 20 minutes to calm down. Back at 9.'", "right": "Productive timeout" },
+        { "left": "'I'm sorry. Can we try that again?'", "right": "Repair attempt" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d12-scenario-2",
+      "type": "scenario_card",
+      "title": "Accepting the Repair",
+      "body": "Your partner tries to repair mid-fight. They touch your arm and say, 'I love you. I don't want to fight.'\n\nYou're still angry. Your instinct is to pull away.\n\nHere's what Gottman found: couples who can accept imperfect repairs — who can feel the anger AND reach back — have dramatically better conflict outcomes than couples who need everything resolved before they can reconnect.\n\nYou don't have to drop the issue. You can say: 'I love you too. And I still need us to figure this out. Can we keep going but slow down?'\n\nThe repair doesn't end the conflict. It changes the temperature. That's its entire job."
+    },
+    {
+      "id": "d12-reflection-2",
+      "type": "reflection",
+      "title": "Your Repair Toolkit",
+      "prompt": "What repair attempts tend to work in your relationship? What does your partner do that helps you come back from a heated moment?\n\nAnd what do you do that helps them?\n\nWrite 3 repair phrases or actions that you could use (or use more consistently) in your conflicts — specific enough that you'd remember them in the heat of the moment.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d12-fillblank-1",
+      "type": "fillblank",
+      "question": "According to Gottman, the ability to make and accept repair attempts is the most important predictor of relationship ___.",
+      "answer": "quality",
+      "xp": 8
+    },
+    {
+      "id": "d12-good-fit-1",
+      "type": "good_fit",
+      "question": "Which fighting fair skill do you most need to develop?",
+      "options": [
+        "Complaint vs. criticism — I need to stop attacking character",
+        "Productive timeouts — I either power through badly or shut down",
+        "Making repairs — I struggle to reach back first",
+        "Accepting repairs — I push them away when I'm still angry"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d12-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Fighting Fair Commitment",
+      "prompt": "Choose one fighting fair skill to practice this week. Write a specific commitment:\n\n'This week, when [specific trigger], I will [specific action] instead of [old pattern].'\n\nMake it concrete. 'Be nicer' doesn't count. Specific actions only.",
+      "xp": 10
+    },
+    {
+      "id": "d12-info-5",
+      "type": "info",
+      "title": "Tomorrow: Listening to Understand",
+      "body": "Fighting fair is about what you say.\n\nTomorrow is about what you hear — or more accurately, what you fail to hear when you're waiting for your turn to talk.\n\nListening is the most underrated relationship skill. Tomorrow, you'll learn why — and practice the one technique that changes conversations immediately.",
+      "xp": 5
+    },
+    {
+      "id": "d12-completion-1",
+      "type": "completion",
+      "title": "Day 12 Complete",
+      "body": "Three skills. One to start the conversation right. One to pause before it damages. One to repair when it does.\n\nPractice them this week. Imperfectly is fine.",
+      "xp": 0
+    }
+  ]
+}

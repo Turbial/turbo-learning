@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "unit": "day10",
+  "title": "Day 10: Vulnerability as Strength",
+  "estMinutes": 13,
+  "steps": [
+    {
+      "id": "d10-info-1",
+      "type": "info",
+      "title": "The Paradox",
+      "body": "Here's what nobody tells you about marriage: the thing that makes you feel safest is also the thing that terrifies you the most.\n\nVulnerability.\n\nBeing truly seen — your fears, your shame, your uncertainties — by the person you've chosen to build your life with.\n\nWe're taught that strength means staying composed. That needing things is weakness. That showing too much of yourself gives someone power over you.\n\nBut in relationships, the opposite is true. Vulnerability isn't the end of safety. It's the beginning of it.",
+      "xp": 5
+    },
+    {
+      "id": "d10-highlight-1",
+      "type": "highlight",
+      "body": "Dr. Brené Brown spent years studying human connection. Her finding:\n\n'Vulnerability is not weakness. It is our most accurate measure of courage.'\n\nAnd in relationships, it's not optional. You cannot have deep intimacy without it. You can have comfort. You can have familiarity. But not intimacy. Not the real thing.",
+      "highlights": ["Vulnerability is not weakness", "most accurate measure of courage", "cannot have deep intimacy without it"],
+      "xp": 5
+    },
+    {
+      "id": "d10-info-2",
+      "type": "info",
+      "title": "Why We Armor Up",
+      "body": "Most of us learned early that showing vulnerability was risky.\n\nMaybe you shared something tender and it was used against you. Maybe someone mocked you for crying. Maybe you grew up in a family where emotions were a sign of weakness, and you learned to keep everything inside.\n\nSo you built armor. Jokes to deflect serious moments. Busyness to avoid stillness. Anger when sadness is what's actually present. Sarcasm when love feels dangerous.\n\nThe armor worked. It protected you.\n\nBut now you're in a marriage — the one relationship where the armor is costing you exactly what you're trying to protect: real closeness.",
+      "xp": 5
+    },
+    {
+      "id": "d10-tf-1",
+      "type": "tf",
+      "question": "Emotional armor that protected us in childhood tends to serve us equally well in adult intimate relationships.",
+      "correct": false,
+      "feedback": [
+        "Correct — the armor that helped us survive early environments often becomes the thing that blocks intimacy in adult relationships. What was adaptive then becomes a barrier now.",
+        "Actually, the opposite is usually true. Protective patterns we developed as children — deflecting, staying closed, not needing — can be the exact things that prevent real closeness in adult partnerships."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d10-info-3",
+      "type": "info",
+      "title": "The Shame-Connection Cycle",
+      "body": "Brown's research identified a painful loop that plays out in many relationships:\n\n1. You feel something uncomfortable (inadequate, afraid, overwhelmed)\n2. Shame says: if they really knew this about you, they'd think less of you\n3. So you hide it — change the subject, get busy, deflect with humor\n4. Your partner senses the distance but doesn't know why\n5. They pull away or push harder\n6. You both feel more alone\n\nThe exit from this loop is always vulnerability. Not performing vulnerability — actually naming what's happening inside.\n\n'I'm scared about this and I haven't wanted to say it out loud.'\n'I've been feeling like I'm failing at everything lately and I don't know what to do with that.'\n\nThose sentences change everything. Every time.",
+      "xp": 5
+    },
+    {
+      "id": "d10-scenario-1",
+      "type": "scenario_card",
+      "title": "The Armor in Action",
+      "body": "Marcus is worried about money. Really worried — he can't sleep, he runs the numbers in his head constantly.\n\nBut instead of telling his wife, he picks fights about small things. Gets irritable. Works late. Gets quieter.\n\nHis wife sees his mood and thinks she's done something wrong. She gets distant to give him space.\n\nNow they're both lonely, disconnected, and have no idea why.\n\nThe sentence that breaks the cycle: 'I'm scared about our finances and I've been carrying that alone. Can I tell you what I'm worried about?'\n\nVulnerability is not oversharing. It's letting the real thing be seen instead of its disguise."
+    },
+    {
+      "id": "d10-mc-1",
+      "type": "mc",
+      "question": "What is the primary function of vulnerability in a marriage?",
+      "options": [
+        "To give your partner the power to hurt you",
+        "To create the conditions for genuine intimacy and closeness",
+        "To show your partner you're emotionally mature",
+        "To process your feelings out loud so you feel better"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Vulnerability does involve risk — but the purpose isn't to create risk. It's to create connection. Without it, intimacy stays shallow.",
+        "Exactly. Vulnerability creates the conditions for genuine intimacy — being truly known by someone who chooses you anyway. That's what builds lasting closeness."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d10-reflection-1",
+      "type": "reflection",
+      "title": "Your Armor",
+      "prompt": "What does your emotional armor look like? When things get uncomfortable, what do you do instead of being vulnerable?\n\n(Examples: get busy, deflect with humor, get angry instead of sad, shut down, go logical when emotional is needed)\n\nWhere did you learn this pattern? And what has it cost you in your relationship?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d10-highlight-2",
+      "type": "highlight",
+      "body": "The things we're most ashamed of — our fears, our failures, the parts of ourselves we've judged most harshly — are the exact things that make other people feel less alone when we share them.\n\nShame grows in secrecy. It dies in the light.\n\nYour partner married a human being. Not a performance.",
+      "highlights": ["most ashamed of", "make other people feel less alone", "Shame grows in secrecy", "a human being. Not a performance."],
+      "xp": 5
+    },
+    {
+      "id": "d10-info-4",
+      "type": "info",
+      "title": "What Vulnerability Is Not",
+      "body": "Let's be clear about what we're not asking for:\n\nVulnerability is NOT:\n• Trauma dumping — sharing everything all at once\n• Weaponizing your pain to control your partner\n• Performing emotion to get a reaction\n• Sharing things that would genuinely hurt your partner for no good reason\n\nVulnerability IS:\n• Letting someone see what's actually happening inside you\n• Sharing a fear, a need, a hope, or a doubt\n• Saying the thing you've been afraid to say\n• Asking for what you actually need instead of testing to see if they notice\n\nIt starts small. 'I've been anxious about this.' 'I'm not sure I'm doing this right.' 'I need more reassurance than I've been asking for.'",
+      "xp": 5
+    },
+    {
+      "id": "d10-fillblank-1",
+      "type": "fillblank",
+      "question": "According to Brené Brown, vulnerability is our most accurate measure of ___.",
+      "answer": "courage",
+      "xp": 8
+    },
+    {
+      "id": "d10-reflection-2",
+      "type": "reflection",
+      "title": "The Thing You Haven't Said",
+      "prompt": "There is something you haven't said to your partner. Maybe a fear. Maybe a need. Maybe a feeling about your relationship, your future, or yourself.\n\nWrite it here — not to send, just to see it clearly.\n\n'The thing I haven't said is...'\n\nThen: is there any part of this that would be worth sharing? What would change if you said it out loud?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d10-scenario-2",
+      "type": "scenario_card",
+      "title": "Creating Space for Vulnerability",
+      "body": "Vulnerability requires a safe landing.\n\nIf your partner shares something tender and you respond with advice-giving, minimizing ('it's not that bad'), or changing the subject — the message they receive is: this space isn't safe.\n\nWhen your partner is vulnerable, the response that builds intimacy is:\n• 'Thank you for telling me that.'\n• 'I had no idea. I'm glad you said something.'\n• 'That sounds really hard. I'm here.'\n\nYou don't have to fix it. You don't have to have the right answer. You just have to be present with it.\n\nPresence is the response. Full stop."
+    },
+    {
+      "id": "d10-good-fit-1",
+      "type": "good_fit",
+      "question": "When your partner shares something emotionally vulnerable, what's your most common response?",
+      "options": [
+        "I try to fix it or offer solutions",
+        "I match their vulnerability and share something of my own",
+        "I minimize it or say 'it's not that bad'",
+        "I get quiet — I don't know what to say"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d10-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Vulnerability Statement",
+      "prompt": "Write one vulnerable statement to share with your partner today. Start with one of these:\n\n'I've been afraid to tell you...'\n'Something I need that I haven't asked for is...'\n'I've been feeling ___ and I haven't wanted to worry you, but...'\n\nStart small. One sentence. Send it today.",
+      "xp": 10
+    },
+    {
+      "id": "d10-info-5",
+      "type": "info",
+      "title": "Tomorrow: The Bank Account",
+      "body": "Every vulnerable moment you share, every time your partner opens up and you're truly present — these are deposits.\n\nTomorrow, we map the entire system: Gottman's Emotional Bank Account. The concept that explains why some couples feel rich in connection and others always feel like they're in debt.\n\nSee you there.",
+      "xp": 5
+    },
+    {
+      "id": "d10-completion-1",
+      "type": "completion",
+      "title": "Day 10 Complete",
+      "body": "Vulnerability isn't something you perfect. It's something you practice. One small honest moment at a time.\n\nYou've got the framework. Now use it.",
+      "xp": 0
+    }
+  ]
+}

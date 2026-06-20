@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "unit": "day9",
+  "title": "Day 9: Creating Safety — Part 2",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d9-info-1",
+      "type": "info",
+      "title": "The Antidotes Exist",
+      "body": "Yesterday you met the Four Horsemen — the four patterns that erode safety and predict relationship failure.\n\nHere's the good news: every single one has a direct antidote. Gottman's research didn't just identify the problems. It mapped the solutions.\n\nThese aren't vague suggestions like 'communicate better.' They're specific, learnable behaviors with specific, measurable effects.\n\nToday, you learn all four. Then you practice the most important one.",
+      "xp": 5
+    },
+    {
+      "id": "d9-highlight-1",
+      "type": "highlight",
+      "body": "The antidote to Criticism is the Gentle Startup.\nThe antidote to Contempt is building a Culture of Appreciation.\nThe antidote to Defensiveness is taking Responsibility.\nThe antidote to Stonewalling is Physiological Soothing.\n\nFour problems. Four solutions. All learnable.",
+      "highlights": ["Gentle Startup", "Culture of Appreciation", "taking Responsibility", "Physiological Soothing"],
+      "xp": 5
+    },
+    {
+      "id": "d9-info-2",
+      "type": "info",
+      "title": "Antidote #1: The Gentle Startup",
+      "body": "Ninety-six percent of the time, the way a conversation begins predicts how it will end.\n\nIf you start with an attack, you'll end with a fight. If you start gently, you can navigate almost anything.\n\nThe Gentle Startup formula:\n1. 'I feel...' (emotion, not accusation)\n2. 'About a specific situation...' (not 'always' or 'never')\n3. 'And what I need is...' (positive need, not what you don't want)\n\nInstead of: 'You're always on your phone. You don't care about us.'\nTry: 'I feel disconnected when we're both on our phones in the evenings. I need us to have at least 30 minutes without screens.'\n\nSame underlying frustration. Completely different landing.",
+      "xp": 5
+    },
+    {
+      "id": "d9-scenario-1",
+      "type": "scenario_card",
+      "title": "Gentle Startup in Action",
+      "body": "The criticism version: 'You never help with the kids at bedtime. I'm exhausted and you just sit there. I feel like a single parent.'\n\nThe gentle startup version: 'I feel overwhelmed by bedtime alone most nights. I need us to share that routine — could we talk about how we split it?'\n\nNotice what's the same: the underlying feeling (overwhelmed, alone) and the underlying need (partnership at bedtime).\n\nNotice what's different: one accuses, one invites. One makes the partner defensive, one makes them a collaborator."
+    },
+    {
+      "id": "d9-reflection-1",
+      "type": "reflection",
+      "title": "Practice: Convert Your Criticism",
+      "prompt": "Think of a criticism or complaint you've been carrying — something that bothers you about your partner that you've expressed as an attack, or that you've been swallowing instead of saying.\n\nNow rewrite it as a Gentle Startup:\n'I feel ____ when ____ happens. What I need is ____.\n\nWrite both versions — the old way and the new way.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d9-info-3",
+      "type": "info",
+      "title": "Antidote #2: Culture of Appreciation",
+      "body": "Contempt is built from accumulated resentment and unfulfilled longing.\n\nYou can't argue someone out of contempt. You have to build a different atmosphere — one where admiration and appreciation become the default, not the exception.\n\nGottman calls this a 'Culture of Appreciation.' It's created by:\n• Noticing what your partner does right, not just wrong\n• Saying it out loud — specifically, not generally\n• Scanning for gratitude instead of grievances\n\n'Thank you for handling that call while I was busy.'\n'I love how patient you are with the kids.'\n'You're really good at making people feel comfortable.'\n\nSmall. Specific. Consistent. That's how you inoculate against contempt.",
+      "xp": 5
+    },
+    {
+      "id": "d9-tf-1",
+      "type": "tf",
+      "question": "The antidote to contempt is learning better ways to argue during conflicts.",
+      "correct": false,
+      "feedback": [
+        "Correct — contempt can't be fixed in the moment of conflict. It's built from long-simmering resentment, and the antidote is building a culture of appreciation in the everyday fabric of the relationship, not just fixing how you fight.",
+        "Not quite. Contempt isn't addressed in arguments — it's addressed between arguments. Building a culture of appreciation (noticing what's good, saying it out loud, scanning for gratitude) is the antidote, not better arguing tactics."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d9-info-4",
+      "type": "info",
+      "title": "Antidote #3: Taking Responsibility",
+      "body": "The antidote to defensiveness is simple in concept and hard in practice: take responsibility for your part.\n\nNot all of the conflict. Not if you did nothing wrong. But almost every argument has two contributors, and owning even a small piece changes everything.\n\nWhen your partner says you were late and you got defensive: 'You're right. I should have texted. I'm sorry that left you waiting.'\n\nThat's it. You don't have to agree with everything. You don't have to accept blame for things that aren't yours. But finding something — even something small — to own, and owning it genuinely, is the move that de-escalates a fight faster than anything else.\n\nThe research is clear: one person taking responsibility almost always softens the other person.",
+      "xp": 5
+    },
+    {
+      "id": "d9-mc-1",
+      "type": "mc",
+      "question": "Your partner says they felt hurt that you didn't tell them about a change of plans. The defensive response would be:",
+      "options": [
+        "'You're right, I should have called. I'm sorry.'",
+        "'Well if you ever answered your phone I would have told you!'",
+        "'I understand that was frustrating. Next time I'll text ahead.'",
+        "'I hear that you felt left out. Can we talk about what happened?'"
+      ],
+      "correct": 1,
+      "feedback": [
+        "This is actually taking responsibility — a great antidote to defensiveness.",
+        "Correct. This is the classic defensive counter-attack: instead of acknowledging the partner's hurt, you redirect blame. 'Well YOU...' is a textbook defensive move."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-info-5",
+      "type": "info",
+      "title": "Antidote #4: Physiological Soothing",
+      "body": "The antidote to stonewalling is physiological soothing — but it requires agreement in advance.\n\nWhen you're flooded (heart rate over 100 bpm), you cannot have a productive conversation. So the antidote isn't staying in the room and white-knuckling it. It's taking a structured break.\n\nThe rules for a productive break:\n• Tell your partner you're flooded and need 20–30 minutes (not hours, not days)\n• Do something that genuinely calms you — walk, breathe, listen to music. Not more thinking about the fight.\n• Agree to return. Set a specific time.\n\nThis is different from stonewalling, where you disappear without explanation. A soothing break says: 'I want to have this conversation. I just need to be in a state where I can.'\n\nThat one sentence keeps the connection alive during the pause.",
+      "xp": 5
+    },
+    {
+      "id": "d9-match-1",
+      "type": "match",
+      "title": "Horseman and Antidote",
+      "question": "Match each Horseman to its antidote:",
+      "pairs": [
+        { "left": "Criticism", "right": "Gentle Startup (I feel... about... I need...)" },
+        { "left": "Contempt", "right": "Culture of Appreciation" },
+        { "left": "Defensiveness", "right": "Taking Responsibility" },
+        { "left": "Stonewalling", "right": "Physiological Soothing" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d9-highlight-2",
+      "type": "highlight",
+      "body": "These four antidotes don't require your partner to do anything different first.\n\nYou can start with the Gentle Startup tonight. You can start building appreciation tomorrow morning. You can take responsibility the next time you get defensive.\n\nYou don't need your partner's permission to change the pattern.",
+      "highlights": ["don't require your partner to do anything", "start tonight", "don't need your partner's permission"],
+      "xp": 5
+    },
+    {
+      "id": "d9-reflection-2",
+      "type": "reflection",
+      "title": "Your Antidote Plan",
+      "prompt": "Based on the Horseman you most identified with yesterday — what is your specific antidote?\n\nWrite out:\n1. The Horseman you reach for most\n2. The antidote you're committing to practice\n3. One specific situation coming up this week where you'll try it",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d9-copy-action-1",
+      "type": "copy_action",
+      "title": "Write Your Gentle Startup Script",
+      "prompt": "Right now, write one Gentle Startup for an issue that's been simmering in your relationship.\n\nFormat: 'I feel [emotion] when [specific situation]. What I need is [positive ask].'\n\nDon't send it yet. Just write it. Getting it out of your head and into words is the first step.",
+      "xp": 10
+    },
+    {
+      "id": "d9-scenario-2",
+      "type": "scenario_card",
+      "title": "The Repair Attempt",
+      "body": "Even with the antidotes, conflicts will happen. Things will escalate. Someone will say something they regret.\n\nThis is where repair attempts come in — anything either partner does to de-escalate, reconnect, or course-correct during a conflict.\n\n'Can we start over?'\n'I'm getting flooded — can we take 20 minutes?'\n'I love you even when we're fighting.'\n'I don't want to fight. I want to solve this together.'\n\nThe key finding: happy couples don't have fewer ruptures. They repair more quickly.\n\nYour ability to repair is more important than your ability to avoid conflict."
+    },
+    {
+      "id": "d9-fillblank-1",
+      "type": "fillblank",
+      "question": "Gottman found that the way a conversation begins predicts how it will end ___% of the time.",
+      "answer": "96",
+      "xp": 8
+    },
+    {
+      "id": "d9-good-fit-1",
+      "type": "good_fit",
+      "question": "Which antidote will you try first this week?",
+      "options": [
+        "Gentle Startup — replace criticism with 'I feel... I need...'",
+        "Culture of Appreciation — say something specific and positive daily",
+        "Taking Responsibility — own my part before defending myself",
+        "Physiological Soothing — ask for a structured break when flooded"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d9-info-6",
+      "type": "info",
+      "title": "Tomorrow: Vulnerability",
+      "body": "You now have the tools to stop the patterns that destroy safety.\n\nTomorrow, we go deeper — into what creates safety at its core.\n\nVulnerability. The thing most of us were taught to avoid. The one thing that builds the kind of intimacy that lasts.\n\nIt's not as scary as it sounds. It's also more important than most people realize.",
+      "xp": 5
+    },
+    {
+      "id": "d9-completion-1",
+      "type": "completion",
+      "title": "Day 9 Complete",
+      "body": "The antidotes are in your hands. Not as concepts — as actual phrases and behaviors you can use today.\n\nThe Gentle Startup alone will change your relationship if you use it consistently. Try it this week.",
+      "xp": 0
+    }
+  ]
+}
