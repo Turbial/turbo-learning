@@ -47,6 +47,7 @@ import EnginePasteCaptureStep from "./components/steps/PasteCaptureStep";
 import EngineReflectionStep from "./components/steps/ReflectionStep";
 import EngineBadgeUnlockStep from "./components/steps/BadgeUnlockStep";
 import EngineStreakCommitStep from "./components/steps/StreakCommitStep";
+import EngineReminderSetupStep from "./components/steps/ReminderSetupStep";
 import EngineCompletionStep from "./components/steps/CompletionStep";
 import PromptGenerator from "../components/steps/PromptGenerator";
 
@@ -238,7 +239,7 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
     behavior: { requiresInteraction: false },
   },
   reminder_setup: {
-    component: FallbackStep as React.ComponentType<StepProps<any>>, // Deferred — requires native push permissions
+    component: EngineReminderSetupStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: true },
   },
   completion: {

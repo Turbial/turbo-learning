@@ -11,8 +11,17 @@ import ErrorBoundary from "../src/components/ui/ErrorBoundary";
 import { useAuth } from "../src/data/useAuth";
 import { useOfflineSync } from "../src/data/useOfflineSync";
 import { initErrorReporting, setUserContext, clearUserContext } from "../src/integrations/errorReporting";
+import * as Notifications from "expo-notifications";
 
 initErrorReporting();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {
