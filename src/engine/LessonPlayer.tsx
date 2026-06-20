@@ -3,7 +3,8 @@
 // Product-agnostic. Content controls the rhythm; the engine just plays it.
 
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity, Platform } from "react-native";
+import * as Haptics from "expo-haptics";
 import type { Step, StepResponse, NarrationController } from "./types";
 import { stepRegistry } from "./stepRegistry";
 import { lessonReducer, createInitialState, isLastStep, completionScore } from "./lessonMachine";
@@ -141,6 +142,12 @@ export default function LessonPlayer({
       clearSavedState(); // Lesson done — don't resume here
       const snap = sessionRef.current;
       const score = completionScore(snap);
+      // Level-up haptic: fires when the lesson completes (XP earned signals a level-up moment)
+      if (Platform.OS !== "web" && snap.sessionXp > 0) {
+        try {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        } catch (_) { /* haptics unavailable on simulator/web */ }
+      }
       onComplete?.(snap.sessionXp, score, snap.correctCount, snap.totalGraded);
     }
   }, [stepIndex, steps.length, onComplete, clearSavedState]);
@@ -174,13 +181,24 @@ export default function LessonPlayer({
       // Calculate base XP (only for first answer)
       const baseXp = alreadyAnswered ? 0 : (handler.score?.(step, res) ?? step.xp ?? 10);
 
-      // Increment on correct, reset on wrong, leave unchanged for subjective steps (correct===undefined)
-      const newComboStreak = correct === true ? comboStreak + 1 : correct === false ? 0 : comboStreak;
+      // Compute combo streak: increment on correct, reset on wrong
+      const newComboStreak = correct ? comboStreak + 1 : 0;
 
       // Apply combo multiplier to XP
       const xp = applyCombo(baseXp, newComboStreak);
 
       dispatch({ type: "ANSWER", stepId: step.id, response: res, xp, correct, comboStreak: newComboStreak });
+
+      // Haptic feedback for correct / wrong answers
+      if (Platform.OS !== "web") {
+        try {
+          if (correct === true) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          } else if (correct === false) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+          }
+        } catch (_) { /* haptics unavailable on simulator/web */ }
+      }
 
       // Spawn XP burst animation when user earns XP (only on first answer)
       if (xp > 0) {
@@ -191,6 +209,13 @@ export default function LessonPlayer({
         }, 800);
         // Persist XP incrementally so Journey/Progress/Dashboard reflect it immediately
         addXp.mutate({ xp });
+
+        // Light impact alongside the XP burst animation
+        if (Platform.OS !== "web") {
+          try {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          } catch (_) { /* haptics unavailable on simulator/web */ }
+        }
       }
 
       // Auto-advance: just dispatch ADVANCE — completion is handled by useEffect

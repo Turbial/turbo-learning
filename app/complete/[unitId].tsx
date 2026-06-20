@@ -1,7 +1,7 @@
 // ─── Unit Complete Screen — XP tally, knowledge meter, streak fire, level-up celebration, badge reveal ───
 
 import { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator, Share } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { colors, spacing, radius, fontSize } from "../../src/theme/tokens";
 import { useProfile, useBadges } from "../../src/data/queries";
@@ -125,6 +125,24 @@ export default function CompleteScreen() {
 
   const levelName = levelNames[Math.min(currentLevel - 1, 4)] ?? `Master +${currentLevel - 5}`;
 
+  const handleShare = useCallback(async () => {
+    const programLabel = programSlug === "duo" ? "Marriage" : programSlug === "ai_for_everyone" ? "AI for Everyone" : "AI Operator";
+    const msg = [
+      `🚀 Day ${dayNum} of ${programLabel} — done.`,
+      ``,
+      `🔥 ${streakDays}-day streak`,
+      `⚡ +${xpNum} XP earned`,
+      scoreNum > 0 ? `✅ ${scoreNum}% score` : null,
+      ``,
+      `Learning something real every day with Turbo Learning.`,
+      `→ turbolearning.app`,
+      `#TurboLearning #LearningStreak`,
+    ].filter(Boolean).join('\n');
+    try {
+      await Share.share({ message: msg });
+    } catch (_) {}
+  }, [dayNum, programSlug, streakDays, xpNum, scoreNum]);
+
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
@@ -198,6 +216,14 @@ export default function CompleteScreen() {
             activeOpacity={0.8}
           >
             <Text style={styles.btnSecondaryText}>View Progress</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btnShare}
+            onPress={handleShare}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.btnShareText}>📣 Share your win</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -305,6 +331,21 @@ const styles = StyleSheet.create({
   btnSecondaryText: {
     color: colors.primary,
     fontSize: fontSize.md,
+    fontWeight: "600",
+  },
+  btnShare: {
+    paddingVertical: 14,
+    borderRadius: radius.lg,
+    width: "100%",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: colors.surfaceBorder,
+    backgroundColor: colors.surface,
+    marginTop: spacing.xs,
+  },
+  btnShareText: {
+    color: colors.textSecondary,
+    fontSize: fontSize.sm,
     fontWeight: "600",
   },
 });

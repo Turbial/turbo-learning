@@ -52,6 +52,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="challenge"
+        options={{
+          tabBarLabel: "Daily",
+          tabBarIcon: ({ focused }) => <TabIcon emoji="⚡" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
         name="leaderboard"
         options={{
           tabBarLabel: "Ranks",
