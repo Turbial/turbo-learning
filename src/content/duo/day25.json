@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "unit": "day25",
+  "title": "Day 25: The Weekly Marriage Meeting",
+  "estMinutes": 13,
+  "steps": [
+    {
+      "id": "d25-info-1",
+      "type": "info",
+      "title": "The Meeting That Changes Everything",
+      "body": "There is one practice that relationship researchers, marriage therapists, and couples coaches consistently recommend above almost all others.\n\nIt isn't date night, though that matters.\nIt isn't a specific communication technique, though those help.\nIt isn't therapy, though therapy works.\n\nIt's a weekly 30-minute conversation — structured, consistent, and protected.\n\nCouples who implement a weekly marriage meeting report:\n• Significantly fewer recurring arguments\n• More progress on shared goals\n• Higher reported relationship satisfaction\n• Better sex lives (yes — feeling organized and aligned turns out to be a precursor to feeling close)\n\nThe meeting works because it prevents small things from becoming big things. You process each week before it becomes last year's unresolved resentment.",
+      "xp": 5
+    },
+    {
+      "id": "d25-highlight-1",
+      "type": "highlight",
+      "body": "Drs. John and Julie Gottman, after decades of research, developed the State of the Union meeting as a core practice for thriving couples.\n\nThe format they recommend — and which research backs — follows a consistent sequence:\n\n1. Appreciation first. Always.\n2. Administrative topics (the logistics of your shared life).\n3. Concerns and issues (the things that need attention).\n4. Fun and planning (something to look forward to).\n\nThe sequence matters. Starting with appreciation primes both people for connection. Ending with something fun ensures the meeting doesn't feel like a business review.",
+      "highlights": ["weekly 30 minutes", "Appreciation first. Always.", "sequence matters", "primed for connection"],
+      "xp": 5
+    },
+    {
+      "id": "d25-info-2",
+      "type": "info",
+      "title": "The 4-Agenda Format",
+      "body": "Here is the exact format for a 30-minute weekly marriage meeting:\n\n1. Appreciation (5 minutes): Each partner shares one specific thing they appreciate about the other this week. Not generic praise — something they actually noticed. This sets the emotional tone for everything that follows.\n\n2. To-Dos and Logistics (10 minutes): The household agenda. Schedule coordination, upcoming decisions, shared responsibilities, things that need attention. This week only.\n\n3. Concerns (10 minutes): Anything one or both of you has been wanting to raise — a feeling, a pattern, something that came up this week. Raise it now. Not at 11pm in bed. Not in the car with the kids. Here, with space for it.\n\n4. Fun Planning (5 minutes): Something to look forward to. A date, a trip, a project, something small. End the meeting pointed at something good.",
+      "xp": 5
+    },
+    {
+      "id": "d25-highlight-2",
+      "type": "highlight",
+      "body": "The Four Agenda Items:\n\n1. Appreciation — what you noticed and are grateful for this week\n2. To-Dos — logistics, schedule, household admin\n3. Concerns — what needs honest conversation\n4. Fun Planning — something to look forward to together\n\nIn that order. Every time.",
+      "highlights": ["1. Appreciation", "2. To-Dos", "3. Concerns", "4. Fun Planning"],
+      "xp": 5
+    },
+    {
+      "id": "d25-mc-1",
+      "type": "mc",
+      "question": "Why does the weekly marriage meeting format start with appreciation rather than the administrative topics?",
+      "options": [
+        "To make the meeting feel like therapy, which normalizes the conversation",
+        "Because logistics go faster when everyone's in a good mood",
+        "To prime both partners for connection and goodwill before raising anything that requires it",
+        "Appreciation is the most important item, so it goes first"
+      ],
+      "correct": 2,
+      "feedback": [
+        "The meeting isn't meant to feel like therapy — it's meant to be a normal couple practice. The structure has a specific emotional logic.",
+        "While mood does affect efficiency, that's not the primary reason. The sequence has an emotional function, not just a practical one.",
+        "Exactly. Starting with specific appreciation shifts both people's nervous systems toward connection and goodwill. When you then move into logistics and concerns, you're doing it as two people who just named what they value about each other — not as two people opening a complaint session.",
+        "Appreciation is important, but it's placed first for strategic emotional reasons, not because of its inherent priority over logistics."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-tf-1",
+      "type": "tf",
+      "question": "The weekly marriage meeting is most useful only for couples who have significant problems to discuss.",
+      "correct": false,
+      "feedback": [
+        "Correct — the weekly meeting is most valuable when things are going well, because it's the practice that keeps things going well. It prevents the accumulation of unaddressed concerns that, over time, become entrenched resentments. Couples who implement it proactively, not reactively, get the most from it.",
+        "Actually, the weekly meeting is most powerful as a preventive practice, not a reactive one. Couples who wait until they have significant problems to discuss often find the meeting too loaded. Starting it when things are good normalizes the practice and makes it easier to use when real challenges arise."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d25-scenario-1",
+      "type": "scenario_card",
+      "title": "How the Meeting Stops Resentment",
+      "body": "David and Marta used to have the same argument every few months — a blowup about household responsibilities that left both of them feeling unseen and overwhelmed.\n\nAfter they started a weekly marriage meeting, something changed. Not dramatically. Week to week, they mentioned small things: 'I've been carrying more of the morning routine lately — can we rebalance?' 'I'm feeling overwhelmed by my work project — I may need help with dinner this week.'\n\nThe monthly blowup stopped happening. Not because the logistics got easier — life stayed messy. But because nothing was allowed to silently accumulate.\n\nThe meeting became the drainage system that prevented flooding."
+    },
+    {
+      "id": "d25-mc-2",
+      "type": "mc",
+      "question": "A couple starts their weekly meeting, but one partner keeps steering the concerns segment into lengthy arguments. The best approach is:",
+      "options": [
+        "Cancel the meetings — they're making things worse",
+        "Skip the concerns segment and stick to logistics and appreciation",
+        "Agree on a ground rule: concerns can be raised and acknowledged, but complex issues get a separate dedicated conversation",
+        "Set a timer and cut the conversation off regardless of where it is"
+      ],
+      "correct": 2,
+      "feedback": [
+        "The meeting format isn't the problem — the lack of a clear ground rule is. Canceling removes a valuable tool without solving the underlying issue.",
+        "Skipping concerns defeats a core purpose of the meeting and means things will accumulate unaddressed. The fix is structure, not removal.",
+        "Exactly. The weekly meeting isn't the right venue for complex, emotional processing — it's the triage center. A ground rule that says 'we raise it here and decide if it needs its own conversation' keeps the meeting functional without suppressing what needs to be addressed.",
+        "Cutting off conversations with a timer can feel dismissive and escalate rather than contain. Structure through agreements is more effective."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d25-good-fit-1",
+      "type": "good_fit",
+      "question": "When you imagine implementing a weekly marriage meeting, what feels like the biggest obstacle?",
+      "options": [
+        "Scheduling — we barely have 30 minutes that works for both of us",
+        "My partner's buy-in — I'm not sure they'd be willing",
+        "Keeping it productive rather than turning it into a complaint session",
+        "Not much — this actually sounds doable and useful to us"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d25-reflection-1",
+      "type": "reflection",
+      "title": "What You'd Bring to the First Meeting",
+      "prompt": "Imagine you have your first weekly marriage meeting tonight.\n\nWhat appreciation would you share? What logistical thing is most in need of a shared conversation? What concern — if you could say it with care — would you raise? What's something fun you'd want to plan?\n\nWrite a rough draft of what you'd bring to each of the four agenda items.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d25-builder-1",
+      "type": "builder",
+      "title": "Schedule Your First Meeting",
+      "fields": [
+        {
+          "id": "day_time",
+          "label": "The day and time that works reliably every week",
+          "placeholder": "e.g. Sunday evenings at 8pm, after the kids are down"
+        },
+        {
+          "id": "location",
+          "label": "Where you'll have it (phones away, no interruptions)",
+          "placeholder": "e.g. Kitchen table — phones in the other room, tea on the table"
+        },
+        {
+          "id": "first_meeting_date",
+          "label": "When will your first meeting be? (Commit to a date)",
+          "placeholder": "e.g. This Sunday, June 22nd"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d25-copy-action-1",
+      "type": "copy_action",
+      "title": "Send the Invite",
+      "prompt": "Write a short message to your partner proposing the weekly marriage meeting.\n\nBe direct and warm: 'I want to try something with you. A 30-minute weekly check-in — structured, consistent, no phones. I think it would help us stay connected and handle things before they become big things. Are you in? I was thinking [day/time].'\n\nSend it today.",
+      "xp": 10
+    },
+    {
+      "id": "d25-fillblank-1",
+      "type": "fillblank",
+      "question": "The weekly marriage meeting format developed by the Gottmans always begins with ___ to prime both partners for connection.",
+      "answer": "appreciation",
+      "xp": 8
+    },
+    {
+      "id": "d25-completion-1",
+      "type": "completion",
+      "title": "Day 25 Complete",
+      "body": "You have a meeting scheduled. That's more than most couples ever do.\n\nThe first one won't be perfect. That's fine. Do it anyway.",
+      "xp": 0
+    }
+  ]
+}

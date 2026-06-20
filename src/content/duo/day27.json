@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "unit": "day27",
+  "title": "Day 27: The Commitment Ceremony",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d27-info-1",
+      "type": "info",
+      "title": "Not Wedding Vows — Growth Vows",
+      "body": "Tomorrow is graduation.\n\nBut first: today you write vows.\n\nNot the vows you said at your wedding — the ones that were about who you were then, in front of an audience, with a script and a tradition.\n\nThese are different. These are private. Just for you and your partner.\n\nThey're vows for the next chapter. The chapter that starts after 28 days of honest work. The chapter where you know more about yourself, your partner, and your relationship than you did on Day 1.\n\nGrowth vows are specific. They're honest. They name what you've learned and what you're committing to. They're the most personal thing you'll write in this program.",
+      "xp": 5
+    },
+    {
+      "id": "d27-highlight-1",
+      "type": "highlight",
+      "body": "Researchers who study commitment in long-term relationships have found something important: couples who periodically renew and re-articulate their commitment — in their own words, for their own relationship — report higher relationship satisfaction and resilience.\n\nNot because the ceremony is magic.\n\nBecause the act of saying specifically what you promise, in the context of who you both are right now, creates a different kind of intention than vague ongoing commitment.\n\n'I do' was the beginning. Growth vows are the next chapter.",
+      "highlights": ["renew and re-articulate", "specifically what you promise", "who you both are right now", "next chapter"],
+      "xp": 5
+    },
+    {
+      "id": "d27-scenario-1",
+      "type": "scenario_card",
+      "title": "What Makes Growth Vows Different",
+      "body": "Traditional wedding vows are beautiful — but they're written in advance, for everyone, in a context of celebration and performance.\n\nGrowth vows are:\n\nPrivate: Nobody else reads them. That changes what you're willing to say.\n\nSpecific: Not 'I promise to love and cherish you.' More like: 'I promise to ask how you're really doing and actually wait for the answer.'\n\nHonest: Written after difficulty, growth, and honest self-examination. Not aspirational performance — real intention.\n\nPresent-tense: Based on who you are now, what you've learned, and what this relationship needs from you specifically — not a generic promise.\n\nThey're not for social media. They're not for framing. They're for the two of you, in a moment of real choosing."
+    },
+    {
+      "id": "d27-info-2",
+      "type": "info",
+      "title": "How to Write Yours",
+      "body": "Growth vows have three parts:\n\nWhat I promise: The specific behaviors, commitments, and ways of showing up you're choosing going forward. Not 'I promise to be better' — specific: 'I promise to stay in the room when things get hard instead of shutting down.'\n\nWhat I ask: What you need from your partner to thrive. Specific, honest, asking from vulnerability not demand: 'I need you to tell me when you're struggling before it becomes a wall between us.'\n\nWhat I celebrate: What you see in your partner and in your relationship that you're proud of. The specific goodness that already exists — witnessed and named.\n\nWrite from the inside. Take your time.",
+      "xp": 5
+    },
+    {
+      "id": "d27-mc-1",
+      "type": "mc",
+      "question": "What most distinguishes effective growth vows from general relationship intentions?",
+      "options": [
+        "They are longer and more formal",
+        "They are specific to who both partners are right now and what this relationship actually needs",
+        "They focus on what went wrong in the past",
+        "They are reviewed with a therapist to ensure they are realistic"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Length and formality don't determine effectiveness. A short, specific, honest vow outperforms a long, eloquent, generic one every time.",
+        "Exactly. The power of growth vows is their specificity to this couple, at this moment, after this work. Not borrowed language — your own. Not who you want to appear to be, but who you're actually committing to become.",
+        "Growth vows aren't a reckoning with the past — they're a commitment for the future, made from an honest understanding of the present. Looking backward is research; the vow is forward-facing.",
+        "Therapist review can be useful but it's not what makes vows effective. Authentic personal specificity is."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-reflection-1",
+      "type": "reflection",
+      "title": "What You've Learned About Yourself",
+      "prompt": "Before you write your vows, one more honest look inward.\n\nIn 27 days of work, what have you learned about yourself as a partner — your patterns, your strengths, your growing edges?\n\nWhat is the single most important thing you know now about what your marriage needs from you that you weren't fully clear on Day 1?\n\nWrite it plainly. This is the raw material of your vows.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d27-builder-1",
+      "type": "builder",
+      "title": "Your Growth Vows",
+      "fields": [
+        {
+          "id": "what_i_promise",
+          "label": "What I promise (specific commitments for the next chapter)",
+          "placeholder": "e.g. I promise to stay present when you're upset instead of getting defensive. I promise to express appreciation weekly — specifically, not generically. I promise to ask for what I need instead of hoping you'll notice."
+        },
+        {
+          "id": "what_i_ask",
+          "label": "What I ask (what you need from your partner to thrive)",
+          "placeholder": "e.g. I ask you to tell me when something is bothering you before it becomes distance. I ask for patience when I'm learning something I don't yet know how to do. I ask you to still choose me, especially when it's inconvenient."
+        },
+        {
+          "id": "what_i_celebrate",
+          "label": "What I celebrate (the specific goodness in your partner and your relationship)",
+          "placeholder": "e.g. I celebrate the way you love our children without making them the whole of us. I celebrate how far we've come from where we were. I celebrate that even after everything, you're still the person I want to tell things to."
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d27-copy-action-1",
+      "type": "copy_action",
+      "title": "Share Your Vows",
+      "prompt": "These vows are meant to be shared.\n\nCopy what you wrote and find a moment — tonight, this week — to read them to your partner. Not via text. In person, with them present and listening.\n\nAsk them to write and share theirs too.\n\nThis doesn't have to be ceremonial. It just has to be real.",
+      "xp": 10
+    },
+    {
+      "id": "d27-scenario-2",
+      "type": "scenario_card",
+      "title": "When Sharing Feels Hard",
+      "body": "For some people, reading personal vows out loud feels exposing.\n\nThat's the point.\n\nVulnerability is the mechanism. Not performance of emotion — but genuine willingness to be seen in your intentions, your needs, and your acknowledgment of your partner's goodness.\n\nIf reading out loud feels like too much, try this: share them in writing first. Then sit together while they read them. Then talk.\n\nThe goal isn't a script. It's a real moment of choosing each other again — with full eyes, after real work.\n\nThat's what this has always been about."
+    },
+    {
+      "id": "d27-reflection-2",
+      "type": "reflection",
+      "title": "The Person You're Choosing",
+      "prompt": "Look at your partner — or hold them in your mind if they're not here.\n\nNot who they were when you got together. Not who you wish they were. Who they are.\n\nWhat do you see? What is good, and real, and worth celebrating that you don't say often enough?\n\nAnd what do you want to choose today — not as performance, but as genuine decision?\n\nWrite it here. You don't have to share this one if you don't want to. It's for you.",
+      "minChars": 60,
+      "xp": 15
+    },
+    {
+      "id": "d27-mc-2",
+      "type": "mc",
+      "question": "Research on commitment renewal in relationships suggests that periodically re-articulating your commitment:",
+      "options": [
+        "Is primarily for couples in distress who need to repair serious damage",
+        "Works best when done publicly, as social accountability strengthens the commitment",
+        "Increases relationship resilience and satisfaction regardless of current relationship quality",
+        "Is unnecessary for couples who have been together more than a decade"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Commitment renewal has benefits for all couples — not just those in distress. Couples who proactively renew and re-articulate their commitment, rather than taking it for granted, report higher ongoing satisfaction.",
+        "Public commitment has some social effects, but the research on private, personal commitment renewal shows it's the specificity and authenticity that matter — not the audience.",
+        "Exactly. Couples who periodically articulate their specific commitments — in their own words, for their own relationship — report higher satisfaction and more resilience during difficult periods. It's a maintenance practice, not a repair practice.",
+        "Length of relationship doesn't reduce the benefit. In fact, longer relationships may benefit more — because partners who've been together a long time are more likely to take commitment as background rather than active choice."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d27-fillblank-1",
+      "type": "fillblank",
+      "question": "Growth vows have three parts: what I ___, what I ask, and what I celebrate.",
+      "answer": "promise",
+      "xp": 8
+    },
+    {
+      "id": "d27-completion-1",
+      "type": "completion",
+      "title": "Day 27 Complete",
+      "body": "You wrote your vows. That took courage.\n\nTomorrow is Day 28. The last day. The celebration of everything you've built.\n\nSee you there.",
+      "xp": 0
+    }
+  ]
+}

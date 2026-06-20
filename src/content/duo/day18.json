@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "unit": "day18",
+  "title": "Day 18: The Forgiveness Protocol",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d18-info-1",
+      "type": "info",
+      "title": "The Weight You Might Still Be Carrying",
+      "body": "Most couples carry old pain that they've never fully processed.\n\nNot the dramatic things — though sometimes those too. More often it's the accumulation of small hurts that didn't seem worth addressing at the time. The thing said in a fight three years ago that landed wrong. The promise that wasn't kept. The moment they weren't there when you needed them.\n\nThese don't disappear because you moved on. They become part of the emotional landscape of your relationship — shaping your reactions, narrowing your trust, making new hurts feel heavier than they are.\n\nForgiveness isn't about those people not mattering. It's about you not being permanently shaped by what they did.",
+      "xp": 5
+    },
+    {
+      "id": "d18-highlight-1",
+      "type": "highlight",
+      "body": "Forgiveness is one of the most misunderstood concepts in relationships.\n\nWhat forgiveness IS NOT:\n• Condoning what happened\n• Forgetting it occurred\n• Excusing the behavior\n• Automatic reconciliation or trust restoration\n• Something the other person has to earn before you do it\n\nWhat forgiveness IS:\n• A decision you make for yourself\n• Releasing the grip that resentment has on your nervous system\n• Choosing not to be permanently defined by someone else's actions\n• A step toward healing — not a declaration that no healing is needed",
+      "highlights": ["not condoning", "not forgetting", "a decision you make for yourself", "releasing the grip", "not a declaration that no healing is needed"],
+      "xp": 5
+    },
+    {
+      "id": "d18-info-2",
+      "type": "info",
+      "title": "Why We Hold On",
+      "body": "Resentment has a function. It protects you.\n\nHolding onto an old hurt is the mind's way of staying vigilant: 'Remember what happened last time. Don't let your guard down.'\n\nThe problem is that this protection comes at a cost. Resentment lives in your body. It shows up as a tightening when a specific topic comes up. As a hair-trigger reaction to something small. As a subtle withdrawal that neither of you can fully explain.\n\nCarrying resentment into your marriage is like driving with the parking brake on. You can still move, but everything is harder, and eventually something burns out.\n\nForgiveness doesn't remove all the guardrails. It releases the brake so the two of you can actually move forward.",
+      "xp": 5
+    },
+    {
+      "id": "d18-mc-1",
+      "type": "mc",
+      "question": "Your partner did something that hurt you two years ago. They've apologized and changed their behavior. You've 'moved on' but still feel a tightening when the topic comes up. This most likely means:",
+      "options": [
+        "You haven't truly forgiven them and should express more anger",
+        "The original hurt was too severe to ever fully process",
+        "You moved past it without completing the emotional work of forgiveness",
+        "Your reaction is a sign they haven't fully changed"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Expressing more anger isn't the path — it often re-opens wounds without resolving them. The tightening suggests unprocessed emotion, not unexpressed emotion.",
+        "Most hurts, even significant ones, can be processed with the right approach. The severity of the original event matters less than whether you've done the internal work.",
+        "Exactly. 'Moving on' is behavioral — you stopped talking about it and kept living. But forgiveness is internal — acknowledging the pain, releasing the resentment, and consciously choosing connection anyway. Those aren't the same process, and the tightening tells you the internal work isn't finished.",
+        "Your body's reaction to topics is about your own unprocessed emotions, not a reliable indicator of your partner's current behavior."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-info-3",
+      "type": "info",
+      "title": "The 3-Step Forgiveness Protocol",
+      "body": "Forgiveness isn't one moment. It's a process with three distinct steps.\n\nStep 1: Acknowledge the pain — fully, without minimizing. Not 'it wasn't that bad' or 'they didn't mean it.' It hurt. It was real. You don't have to protect anyone from that truth — including yourself.\n\nStep 2: Release the resentment — a deliberate, internal decision. Not something that happens to you when enough time passes. Something you choose. 'I am done letting this hurt shape how I show up in this relationship.'\n\nStep 3: Choose connection — a forward-facing commitment. Not to pretend the past didn't happen, but to invest in the relationship you want to build from here.\n\nThese steps can happen in one session or over months. What matters is that each step is real.",
+      "xp": 5
+    },
+    {
+      "id": "d18-scenario-1",
+      "type": "scenario_card",
+      "title": "Forgiveness Without Forgetting",
+      "body": "Sarah and Marcus went through a painful season three years ago — financial stress led to dishonesty on his part about how bad things were. He came clean. They got through it. But Sarah still feels a spike of anxiety every time they talk about money.\n\nThe forgiveness work for Sarah isn't pretending it didn't happen. It's separating the past event from the present person.\n\nShe can hold both truths: 'That experience hurt me, AND the person in front of me has done the work to earn my trust back.'\n\nForgiveness doesn't erase the memory. It changes what the memory does to you — from threat signal to information."
+    },
+    {
+      "id": "d18-mc-2",
+      "type": "mc",
+      "question": "Forgiveness in a relationship primarily benefits:",
+      "options": [
+        "The person who did the harm — it lets them off the hook",
+        "The relationship only — not the individual who forgives",
+        "The person doing the forgiving — it releases them from resentment's hold",
+        "Neither person — some things just have to be accepted and endured"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Forgiveness isn't about letting someone off a hook — it has nothing to do with whether the other person deserves it. It's an internal act that benefits the person doing it.",
+        "Forgiveness does benefit the relationship, but its primary mechanism is internal — releasing the forgiving person from the ongoing cost of carrying resentment.",
+        "Correct. Research on forgiveness consistently shows its primary benefit is to the person forgiving. Resentment is metabolically and emotionally costly. Releasing it frees cognitive and emotional resources — regardless of what the other person does.",
+        "Endurance without forgiveness often leads to slow accumulation of bitterness. Forgiveness is an active intervention, not passive acceptance."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d18-tf-1",
+      "type": "tf",
+      "question": "Forgiving your partner means you have to tell them you've forgiven them and restore full trust immediately.",
+      "correct": false,
+      "feedback": [
+        "Correct — forgiveness is an internal act that doesn't require any particular external declaration or immediate trust restoration. Trust is rebuilt through consistent behavior over time. Forgiveness is the internal release of resentment. The two happen on different timelines.",
+        "Not quite. Forgiveness happens inside you — it's your decision to release the resentment, regardless of whether you announce it or restore trust immediately. Trust is rebuilt through consistent behavior over time, which is a separate process."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d18-good-fit-1",
+      "type": "good_fit",
+      "question": "When you think about forgiveness in your relationship, which best describes where you are?",
+      "options": [
+        "There's nothing I'm holding onto — we're in a good place with this",
+        "There are small things I've moved past but not fully forgiven",
+        "There's one significant hurt I know I haven't fully processed",
+        "Forgiveness feels complicated in our relationship — there's real work to do here"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d18-scenario-2",
+      "type": "scenario_card",
+      "title": "When the Hurt Is Serious",
+      "body": "Some hurts are larger — betrayal, broken trust, things that shook the foundation of what you thought you had.\n\nFor these, the forgiveness protocol doesn't change, but the timeline does. And the order matters more.\n\nStep 1 — acknowledging the pain — may take longer and may need more support than this app can provide. That's not failure. That's honoring the weight of what happened.\n\nIf you're carrying something significant, this lesson isn't asking you to rush past it. It's inviting you to name it honestly: 'This is something I haven't fully processed. I want to.'\n\nThat recognition is where the work begins. For deeper wounds, consider a couples therapist who can guide you both through it with care."
+    },
+    {
+      "id": "d18-good-fit-2",
+      "type": "good_fit",
+      "question": "Which step of the forgiveness protocol feels hardest for you personally?",
+      "options": [
+        "Step 1: Acknowledging the pain — I tend to minimize or move past it quickly",
+        "Step 2: Releasing the resentment — I hold on longer than I'd like to",
+        "Step 3: Choosing connection — even after processing, turning toward feels hard",
+        "All three steps feel accessible — forgiveness comes relatively naturally to me"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d18-reflection-1",
+      "type": "reflection",
+      "title": "Something to Forgive",
+      "prompt": "Identify one thing — large or small — that you haven't fully forgiven in your relationship.\n\nWork through the three steps honestly:\n\n1. Acknowledge the pain: What happened? How did it hurt you? Don't minimize.\n\n2. Release: What would it look like to stop letting this shape how you show up? What are you willing to let go of?\n\n3. Choose connection: What does moving forward look like from here?\n\nYou don't have to share this with your partner today. Just write it.",
+      "minChars": 40,
+      "xp": 15
+    },
+    {
+      "id": "d18-info-4",
+      "type": "info",
+      "title": "Asking for Forgiveness",
+      "body": "Forgiveness runs in both directions.\n\nIs there something you've done — or failed to do — that your partner may still be carrying? Something you apologized for but never fully owned?\n\nAsking for forgiveness is different from apologizing. An apology says 'I'm sorry.' Asking for forgiveness says: 'I know I hurt you. I want you to know I see it, I own it, and I'm committed to being different. And whenever you're ready — if you ever are — I'd like to ask you to forgive me.'\n\nYou can't demand or timeline someone else's forgiveness. But you can create the conditions where it's possible.",
+      "xp": 5
+    },
+    {
+      "id": "d18-fillblank-1",
+      "type": "fillblank",
+      "question": "The second step of the forgiveness protocol is to ___ the resentment — a deliberate internal decision.",
+      "answer": "release",
+      "xp": 8
+    },
+    {
+      "id": "d18-completion-1",
+      "type": "completion",
+      "title": "Day 18 Complete",
+      "body": "Forgiveness is one of the hardest things a person can do — and one of the most freeing.\n\nYou named something today. That's the beginning of releasing it.",
+      "xp": 0
+    }
+  ]
+}

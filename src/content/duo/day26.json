@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "unit": "day26",
+  "title": "Day 26: Your Partnership Vision",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d26-info-1",
+      "type": "info",
+      "title": "The Couple Who Plans Together",
+      "body": "Research on long-term relationship happiness reveals something counterintuitive: the couples who remain most satisfied across decades aren't primarily those who had the fewest problems.\n\nThey're the couples who maintained a shared sense of where they were going.\n\nA marriage without a vision is a marriage that just happens. You respond to whatever the next thing is. You drift. Slowly, imperceptibly, you become two people living in the same house rather than two people building something together.\n\nA shared vision doesn't have to be elaborate. But it has to be specific to you — to this couple, in this life, with these values and these dreams.\n\nToday, you build it.",
+      "xp": 5
+    },
+    {
+      "id": "d26-highlight-1",
+      "type": "highlight",
+      "body": "The vision isn't a fantasy. It's a commitment.\n\nNot 'we'll be rich and happy and never fight' — that's fantasy.\n\nA real vision is specific about what you're building:\n• What does thriving look like for THIS couple?\n• What kind of partnership do we want to be known for?\n• What do we want to look back at from age 80 and feel proud of?\n• What does a good life look like for us — not for anyone else?\n\nThe answers are different for every couple. That's the point.",
+      "highlights": ["specific to this couple", "commitment", "not for anyone else", "different for every couple"],
+      "xp": 5
+    },
+    {
+      "id": "d26-info-2",
+      "type": "info",
+      "title": "Short, Medium, Long",
+      "body": "Partnership visions work best at three time horizons:\n\nOne year: Close enough to be concrete. What do you want to be true about your relationship one year from now that isn't true today? What will you have built, changed, or deepened?\n\nFive years: Far enough for real ambition. Where do you live? What are you working on together? What kind of couple are you known as? What has your relationship enabled in both of your lives?\n\nLife vision: The long view. What kind of partnership do you want to have lived? What would you regret not building? What do you want your love story to have been?\n\nYou don't have to have all the answers. You have to start the conversation.",
+      "xp": 5
+    },
+    {
+      "id": "d26-mc-1",
+      "type": "mc",
+      "question": "What most distinguishes couples who maintain long-term relationship satisfaction from those who don't?",
+      "options": [
+        "They have fewer arguments",
+        "They maintain a shared sense of direction and purpose",
+        "They have more financial resources",
+        "They share more hobbies and interests"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Conflict frequency is not the predictor. Happy couples still argue — they just repair better and maintain a shared sense of direction.",
+        "Exactly. Research consistently shows that couples who maintain a shared sense of where they're going — a shared vision — report higher long-term satisfaction. It's not the absence of problems; it's the presence of purpose.",
+        "Income has surprisingly little correlation with relationship satisfaction above a basic comfort threshold.",
+        "Shared interests help, but couples with very different interests can thrive if they have a shared vision for their partnership and life."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-scenario-1",
+      "type": "scenario_card",
+      "title": "What 'Thriving' Looks Like — For You",
+      "body": "Most couples have a generic idea of 'a good marriage' that's borrowed from culture, their parents, or their friends.\n\nRarely do they sit down and ask: what does thriving specifically look like for us?\n\nFor one couple, thriving looks like: a small house in the country, a slower life, deep friendships, and a marriage where they both feel completely free to be themselves.\n\nFor another couple, thriving looks like: building a business together, raising children in the city, staying ambitious and driven, and being each other's biggest advocates.\n\nBoth are valid. Neither is right.\n\nThe problem isn't having different visions. The problem is not knowing what each other's visions are — and drifting apart because you never named them."
+    },
+    {
+      "id": "d26-reflection-1",
+      "type": "reflection",
+      "title": "Your Private Vision",
+      "prompt": "Before you design your vision together, write your own.\n\nFive years from now, your relationship is thriving. Not perfect — real, alive, and genuinely good. What's true?\n\nHow do you talk to each other? What does a typical week feel like? What have you built? What have you let go of? What are you proud of?\n\nWrite as specifically as you can. This is your internal compass before the shared conversation.",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d26-mc-2",
+      "type": "mc",
+      "question": "A couple discovers that their individual visions for five years from now are quite different. What's the most productive response?",
+      "options": [
+        "Accept that they may not be compatible and plan accordingly",
+        "The partner with the more practical vision should guide the couple's direction",
+        "Use the differences as a starting point for a deeper conversation about what both people need and value",
+        "Both partners should compromise on their individual visions until they agree"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Differences in vision don't indicate incompatibility — they indicate an important conversation hasn't happened yet. Most vision differences are workable when the underlying needs are understood.",
+        "Whose vision is 'more practical' is a judgment call that can easily turn into power imbalance. The goal is a shared vision both people genuinely invest in.",
+        "Exactly. Differences in vision are information, not verdicts. What does each person's vision tell you about what they most need and value? Often there's more overlap at the values level than the details level. Start there.",
+        "Compromise on vision often produces a vision neither person is excited about. The goal is to understand each other's deepest needs and build a vision that genuinely serves both."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d26-info-3",
+      "type": "info",
+      "title": "What People Say About Thriving Couples",
+      "body": "There's a useful question to anchor your vision:\n\nIf people who love you both were talking about your relationship in 20 years, what would you want them to say?\n\nNot 'they never fought' or 'they had a beautiful home.' Deeper:\n\n'When you were around them, you could feel how much they actually liked each other.'\n\n'They raised their kids in a home that felt safe and warm.'\n\n'They built something together — not just a family, but a life that meant something.'\n\n'They were each other's greatest adventure.'\n\nThose sentences, or whatever version is true for you, are your vision. Work backward from there.",
+      "xp": 5
+    },
+    {
+      "id": "d26-builder-1",
+      "type": "builder",
+      "title": "Your Partnership Vision",
+      "fields": [
+        {
+          "id": "one_year",
+          "label": "One year from now: What's true about our relationship that isn't true today?",
+          "placeholder": "e.g. We have a weekly marriage meeting that we both look forward to. We've done one completely new shared experience. Our physical connection is a daily ritual, not an afterthought."
+        },
+        {
+          "id": "five_year",
+          "label": "Five years from now: What does thriving look like for this couple?",
+          "placeholder": "e.g. We've built a financial foundation that gives us options. Our kids feel our marriage as a safe, warm thing they grew up inside of. We still make each other laugh."
+        },
+        {
+          "id": "what_people_say",
+          "label": "What we want people to say about our relationship (your legacy sentence)",
+          "placeholder": "e.g. 'They were genuinely each other's favorite person. You could feel it.'"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d26-copy-action-1",
+      "type": "copy_action",
+      "title": "Share Your Vision",
+      "prompt": "The partnership vision you just wrote is meant to be shared.\n\nCopy what you wrote and start a conversation with your partner: 'I wrote something about where I want us to be in 1 and 5 years. I'd love to hear your version too.'\n\nDon't convince them of your vision. Listen to theirs first. Then build one together from both.",
+      "xp": 10
+    },
+    {
+      "id": "d26-reflection-2",
+      "type": "reflection",
+      "title": "The Gap and the Bridge",
+      "prompt": "Looking at the vision you wrote — and your honest assessment of where your relationship is today — what's the biggest gap?\n\nNot with despair. With curiosity: what is the one thing that, if you changed it, would most move you toward that vision?\n\nWhat would you start doing differently, starting this week?",
+      "minChars": 25,
+      "xp": 10
+    },
+    {
+      "id": "d26-tf-1",
+      "type": "tf",
+      "question": "A partnership vision should be set once and referred to without revision.",
+      "correct": false,
+      "feedback": [
+        "Correct — a partnership vision is a living document. Life changes. Children are born, careers shift, values deepen, priorities evolve. The annual relationship review (covered on Day 17) is specifically designed to revisit and update your shared vision. A good vision grows with you — it doesn't fix you in place.",
+        "Not quite. A good partnership vision is revisited and updated as life changes. The annual relationship review is specifically designed for this. A vision that never updates can become a source of guilt or irrelevance rather than direction."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d26-completion-1",
+      "type": "completion",
+      "title": "Day 26 Complete",
+      "body": "You now have a direction. Not just a marriage — a marriage with a vision.\n\nTwo days left. Tomorrow, you'll write vows for the next chapter.",
+      "xp": 0
+    }
+  ]
+}

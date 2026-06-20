@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "unit": "day24",
+  "title": "Day 24: External Pressure Shield",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d24-info-1",
+      "type": "info",
+      "title": "The Pressure From Outside",
+      "body": "Your marriage doesn't exist in a sealed container. It lives in the middle of families, work, finances, social media, friendships, and a culture that constantly tells you what your relationship should look like.\n\nFor many couples, the biggest threats to their marriage don't come from within — they come from outside. Not dramatic betrayals. The slow erosion of:\n\n• Family members who overstep without meaning to\n• Work demands that colonize your evenings and weekends\n• Social comparison that makes what you have feel inadequate\n• Friends or family whose opinions carry more weight than they should\n\nStrong couples don't eliminate these pressures. They build a shield — a shared stance that says: we face these together, not separately.",
+      "xp": 5
+    },
+    {
+      "id": "d24-highlight-1",
+      "type": "highlight",
+      "body": "The research on couples who thrive under external pressure reveals a key mindset:\n\n'Us vs. the problem' — not 'you vs. me.'\n\nWhen external pressure enters a marriage, it can take one of two forms:\n\nDestructive: The pressure comes between you. You argue about how to handle it. You take different sides. You blame each other.\n\nStrengthening: The pressure brings you together. You face it as a unit. You decide together. You protect each other.\n\nThe difference isn't the pressure. It's the stance.",
+      "highlights": ["us vs. the problem", "pressure comes between you", "pressure brings you together", "the stance"],
+      "xp": 5
+    },
+    {
+      "id": "d24-scenario-1",
+      "type": "scenario_card",
+      "title": "The Family Interference Pattern",
+      "body": "James and Priya love their families. They also spend an enormous amount of energy managing them.\n\nPriya's mother has opinions about how they parent. James's brother expects them to attend every family event, no matter the cost in time or money.\n\nFor years, they've handled these separately — each managing their own family, each taking the criticism aimed at them individually. The result: they feel like two separate people with two separate families, rather than one couple with two extended families.\n\nThe shift: they start handling it as a team. Priya tells her mother: 'James and I have talked about this and we're doing it our way.' James tells his brother: 'Priya and I can't make that one.'\n\nNot 'I can't.' 'We.' The marriage becomes the unit. The external family responds to the unit."
+    },
+    {
+      "id": "d24-mc-1",
+      "type": "mc",
+      "question": "When a family member frequently offers unsolicited advice that conflicts with how you run your household, the most effective response as a couple is:",
+      "options": [
+        "Each partner manages their own family member separately",
+        "Avoid family gatherings to reduce conflict",
+        "Establish shared language and present a united front to extended family",
+        "Always defer to whatever keeps the peace in the moment"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Managing separately feels efficient but it means you're two individuals dealing with external pressure, not a team. The person whose family is the source of friction is also usually most defensive of them — which can create conflict between partners.",
+        "Avoidance removes short-term friction but doesn't build the capability to handle the relationship long-term and can create isolation.",
+        "Exactly. Shared language — 'James and I have decided...' / 'We're going to handle it this way...' — makes clear that the couple is the unit of decision-making. External family responds differently when they're engaging with a team versus one member of the couple.",
+        "Perpetual deference to keep the peace often means the relationship absorbs damage that should have been redirected externally. It can feel like one partner is choosing family over marriage."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-scenario-2",
+      "type": "scenario_card",
+      "title": "Work Stress and the Marriage",
+      "body": "Work stress is probably the most pervasive external pressure in modern marriages.\n\nHere's the pattern: One partner is under enormous work pressure. They come home depleted. Their emotional availability drops. The other partner feels the distance and doesn't know if it's about them. They either pursue (which feels like more demand) or withdraw (which deepens the distance).\n\nNobody is doing anything wrong. And both people feel alone.\n\nThe intervention that works: name it explicitly, as a team.\n\n'I'm going through a hard work season. I want you to know it's not about us — I'm just depleted. Can we check in weekly on how I'm doing and how you're doing?'\n\nThat sentence transforms the dynamic. Instead of stress creating distance, it creates a conversation. Instead of the marriage absorbing the damage silently, the couple faces the season together."
+    },
+    {
+      "id": "d24-tf-1",
+      "type": "tf",
+      "question": "Setting limits with family members shows a lack of care for them.",
+      "correct": false,
+      "feedback": [
+        "Correct — limits aren't a withdrawal of love. They're a description of what works for your marriage and your life. Couples who set clear limits with extended family members often report better relationships with those family members over time — because everyone knows what to expect and resentment doesn't build.",
+        "Not quite. Limits are actually a form of care — for the relationship, and often for the family member too. When limits are clear, nobody is guessing, and resentment doesn't accumulate. Limits protect the quality of the relationship rather than damaging it."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d24-info-2",
+      "type": "info",
+      "title": "Social Comparison and the Marriage",
+      "body": "Social media has given couples an endless stream of other people's highlight reels to measure themselves against.\n\nThe couple on vacation. The husband with the romantic gesture. The wife with the perfect family portrait. The relationship that looks like it's never had a hard season.\n\nHere's what the research shows: social comparison consistently reduces relationship satisfaction — even when people know they're comparing to curated content.\n\nThe antidote isn't to delete social media. It's to build a shared awareness: 'We don't compare our real relationship to other people's best moments.' And to actively notice and appreciate what's genuinely good about what you have.\n\nThe gratitude practice from Week 3 is the direct counter to social comparison. You can't feel grateful and envious in the same moment.",
+      "xp": 5
+    },
+    {
+      "id": "d24-mc-2",
+      "type": "mc",
+      "question": "Work stress is affecting one partner's emotional availability. The 'us vs. the problem' approach would look like:",
+      "options": [
+        "The stressed partner minimizes the stress to protect the marriage from it",
+        "The other partner gives them space and doesn't bring up relationship needs",
+        "Both partners name what's happening and create an explicit plan for navigating the season together",
+        "They separate life domains — work is work, marriage is marriage, never the two shall meet"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Minimizing the stress means the other partner is left guessing why there's distance. Silence about the pressure doesn't protect the marriage — it creates a different kind of damage.",
+        "Unilateral withdrawal from the stressed partner can feel like abandonment. Giving space without naming what's happening leaves both people navigating alone.",
+        "Exactly. Naming it explicitly — 'here's what's happening, here's what I need, here's what I know about how this affects us' — transforms external pressure from something that damages the marriage into something the couple faces together.",
+        "Completely separating life domains is neither realistic nor effective. Work stress affects the marriage whether you acknowledge it or not. Better to acknowledge it and make a team plan."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d24-good-fit-1",
+      "type": "good_fit",
+      "question": "Which external pressure most impacts your relationship right now?",
+      "options": [
+        "Family members — opinions, expectations, or involvement that crosses limits",
+        "Work stress — one or both of us coming home depleted and unavailable",
+        "Financial pressure — external circumstances affecting our financial wellbeing",
+        "Social comparison — measuring ourselves against what we see in others' relationships",
+        "Multiple of these — it's a combination"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d24-reflection-1",
+      "type": "reflection",
+      "title": "The Pressure You're Under",
+      "prompt": "Name the external pressure that most affects your marriage right now. Be specific — not 'work stress' but 'my boss's demands mean I come home too depleted to be present for the first two hours.'\n\nHow is it currently landing in your relationship? Does your partner know how it's affecting you? Do you know how it's affecting them?\n\nWhat would 'us vs. this problem' look like in your specific situation?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d24-builder-1",
+      "type": "builder",
+      "title": "Your Shared Boundary Plan",
+      "fields": [
+        {
+          "id": "the_pressure",
+          "label": "The external pressure that most needs a shared response",
+          "placeholder": "e.g. My parents call constantly and expect us to be available every Sunday, which is our only real couple time"
+        },
+        {
+          "id": "shared_limit",
+          "label": "The shared limit or stance we'll take together",
+          "placeholder": "e.g. Sunday afternoons are protected for us — we'll call back in the evening. We'll communicate this together, not separately."
+        },
+        {
+          "id": "how_we_say_it",
+          "label": "How we'll communicate this — the actual language we'll use",
+          "placeholder": "e.g. 'We've decided to protect our Sunday afternoons — we'll always get back to you by evening.' Using 'we' is intentional."
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d24-reflection-2",
+      "type": "reflection",
+      "title": "The Stance You're Taking",
+      "prompt": "Look at the limit you just designed. How do you feel about it — are you comfortable with it, or does it feel uncomfortable to hold?\n\nWhat would be the cost of NOT taking this stance — to your marriage, to your individual wellbeing, to the quality of the relationship you're building?\n\nWhat's one thing you can do this week to put the 'us vs. the problem' mindset into practice?",
+      "minChars": 25,
+      "xp": 10
+    },
+    {
+      "id": "d24-completion-1",
+      "type": "completion",
+      "title": "Day 24 Complete",
+      "body": "The world will press against your marriage. That's guaranteed.\n\nWhat's not guaranteed is whether you'll face it as two individuals or as one team. You just chose.",
+      "xp": 0
+    }
+  ]
+}

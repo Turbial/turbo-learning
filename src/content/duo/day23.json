@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "unit": "day23",
+  "title": "Day 23: Parenting as a Team",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d23-info-1",
+      "type": "info",
+      "title": "The Second-Biggest Source of Conflict",
+      "body": "After money, parenting — in all its forms — is the #2 source of conflict in long-term relationships.\n\nAnd this applies to you whether you have children, are planning to have them, are step-parenting, are parenting adult children, or have chosen not to have children.\n\nIf you have children or step-children: today's content is directly about your daily life.\n\nIf you're planning to have children: this is the pre-game. The couples who discuss parenting philosophy before they're in the thick of it navigate it far better.\n\nIf you're child-free by choice: the teamwork principles here apply to how you navigate family expectations, nieces and nephews, and future decisions together.",
+      "xp": 5
+    },
+    {
+      "id": "d23-highlight-1",
+      "type": "highlight",
+      "body": "Research on couple satisfaction shows a consistent finding: relationship happiness often dips after the birth of a first child — not because love decreases, but because the team dynamics get harder.\n\nThe couples who navigate the parenting transition well share one thing in common: they had explicit conversations about their values, roles, and approach before and during — not just during conflicts.\n\nThe goal isn't to parent identically. It's to parent as a team — with enough shared framework that your children experience one unified approach, even if the two of you implement it in different styles.",
+      "highlights": ["relationship happiness dips", "explicit conversations", "one unified approach", "different styles"],
+      "xp": 5
+    },
+    {
+      "id": "d23-info-2",
+      "type": "info",
+      "title": "The Unified Front",
+      "body": "Children are extraordinarily perceptive. When parents are divided — even subtly — children feel it, and many learn to navigate the gap.\n\nThis doesn't mean you and your partner have to agree on every parenting decision. It means you resolve your disagreements between the two of you, then present a shared response to your children.\n\nWhy? Several reasons:\n\nConsistency creates psychological safety for children — they know what the rules are.\n\nDisagreeing in front of children puts them in an impossible position: their loyalty to one parent feels like betrayal of the other.\n\nOnce children learn they can get different answers from different parents, they will — and the space between you gets larger.\n\nThe unified front isn't about being rigid. It's about being a team where the team matters more than being right.",
+      "xp": 5
+    },
+    {
+      "id": "d23-mc-1",
+      "type": "mc",
+      "question": "A child asks one parent for permission to stay out late. That parent says no. The child then asks the other parent. What's the most effective response from the second parent?",
+      "options": [
+        "Make the decision independently based on their own judgment",
+        "Say 'I need to talk to [your other parent] first and we'll let you know'",
+        "Say yes, if they genuinely believe it's okay",
+        "Tell the child they shouldn't have asked twice"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Making an independent decision at this point overrides the first parent's answer and invites the child to work the gap between parents. This erodes team dynamics over time.",
+        "Exactly. This response respects the first parent's decision without undermining them, keeps the team intact, and doesn't reward the child for seeking a second opinion. It also gives the parents space to actually talk and present a joint response.",
+        "Even if the second parent genuinely thinks it's fine, overriding the first parent's no teaches the child to keep asking until they get what they want — and widens the gap between parents.",
+        "Chastising the child isn't necessary — many children naturally ask again. The key is the second parent's response, not punishing the child for trying."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23-scenario-1",
+      "type": "scenario_card",
+      "title": "When You Disagree About Parenting",
+      "body": "You and your partner won't always agree on parenting decisions. That's normal and actually healthy — different perspectives make for more thoughtful choices.\n\nThe structure that works:\n\n1. If a decision needs to happen immediately, the on-duty parent makes the call — without the other undermining them later in front of the children.\n\n2. If the off-duty parent disagrees, they bring it up privately, later: 'I want to talk about how we handled bedtime tonight. I had a different take.'\n\n3. Any new understanding gets implemented together, going forward.\n\nThe rule: disagreements happen in private. Solidarity happens in front of the children.\n\nThis doesn't mean hiding conflict from your children — healthy conflict is worth modeling. It means not making them the audience for your disagreement about them."
+    },
+    {
+      "id": "d23-tf-1",
+      "type": "tf",
+      "question": "Both parents need to use identical parenting styles for the unified front to work.",
+      "correct": false,
+      "feedback": [
+        "Correct — the unified front is about shared values and rules, not identical styles. One parent might be naturally warmer and more lenient in their day-to-day approach; the other might be firmer. What matters is that they agree on the key principles, resolve disagreements privately, and don't contradict each other in front of the children.",
+        "Not quite. Different parenting styles can coexist in a unified front. What makes the front unified is the shared agreement on values, rules, and the commitment to resolve disagreements privately rather than in front of the children."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d23-tf-2",
+      "type": "tf",
+      "question": "Research shows that relationship satisfaction typically increases after the birth of a first child.",
+      "correct": false,
+      "feedback": [
+        "Correct — research consistently shows the opposite. Couple satisfaction often dips after the birth of the first child because the demands of parenting — sleep deprivation, role shifts, reduced couple time — strain the relationship. The couples who navigate this best are those who have explicit ongoing conversations about their roles and approach.",
+        "Actually, the research shows the opposite. Couple satisfaction typically dips after having a first child — not because love goes away, but because the team dynamics become significantly harder. The key is having the conversations before and during, not just when conflict emerges."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d23-good-fit-1",
+      "type": "good_fit",
+      "question": "Which parenting or family scenario best describes where you are right now?",
+      "options": [
+        "We have young children at home",
+        "We have older children or teenagers",
+        "We're step-parenting or blending families",
+        "We're planning to have children in the future",
+        "We're child-free by choice, but parenting topics still affect our relationship (family expectations, etc.)"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d23-info-3",
+      "type": "info",
+      "title": "The Parenting Values Conversation",
+      "body": "Most couples discover their parenting differences in real time — mid-conflict, under pressure, with a child watching.\n\nThe more effective approach: have the conversation when nobody is upset.\n\nKey questions for the parenting values conversation:\n\n• What did we want more of from our own parents? What do we want to do differently?\n• What are our non-negotiables — the things we both agree on absolutely?\n• How will we handle it when we disagree in the moment?\n• Who handles which domains, and how do we make sure neither of us burns out?\n• What do we want our children to look back and say about how we raised them?\n\nYou don't have to answer all of these today. You just have to know they exist.",
+      "xp": 5
+    },
+    {
+      "id": "d23-good-fit-2",
+      "type": "good_fit",
+      "question": "When you and your partner disagree about a parenting or family decision, what typically happens?",
+      "options": [
+        "We talk it through privately and come to a shared position",
+        "One of us defers, even if we disagree",
+        "The disagreement sometimes plays out in front of the children or other family members",
+        "We avoid parenting disagreements — we don't discuss them much"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d23-reflection-1",
+      "type": "reflection",
+      "title": "Your Parenting Philosophy",
+      "prompt": "What are your core beliefs about parenting — or about the family you're building together?\n\nWhat did you most want from your own parents that you got? What did you most want that you didn't get?\n\nWhat do you most want to pass on to the next generation — whether your own children, nieces and nephews, or the people your life touches?\n\nAnd: where do you think you and your partner most align, and where might you have real differences in approach?",
+      "minChars": 50,
+      "xp": 15
+    },
+    {
+      "id": "d23-builder-1",
+      "type": "builder",
+      "title": "Our Parenting Principles",
+      "fields": [
+        {
+          "id": "non_negotiables",
+          "label": "Our non-negotiables (the things we both agree on absolutely)",
+          "placeholder": "e.g. We don't put each other down in front of the children; we follow through on consequences we've stated; we both show up to the things that matter to them"
+        },
+        {
+          "id": "disagreement_protocol",
+          "label": "How we'll handle parenting disagreements (our team protocol)",
+          "placeholder": "e.g. The on-duty parent makes the call in the moment; we debrief privately the same evening if needed; we don't relitigate past decisions in front of the kids"
+        },
+        {
+          "id": "what_we_want_them_to_say",
+          "label": "What we want our children (or the next generation) to say about us when they're grown",
+          "placeholder": "e.g. That they always felt safe, that we showed them what a loving partnership looks like, that we took them seriously as people"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d23-mc-2",
+      "type": "mc",
+      "question": "What is the most important benefit of having a unified parenting front?",
+      "options": [
+        "Children will agree with all of your decisions",
+        "You'll never have parenting conflicts again",
+        "Children experience psychological safety because the rules are consistent and the team is solid",
+        "One parent doesn't have to do as much work"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Children will still push back and test limits — that's developmentally normal. The unified front doesn't eliminate pushback; it just means the pushback hits a solid wall rather than a gap.",
+        "You'll still have parenting disagreements — the unified front is about how you handle them, not whether they exist.",
+        "Exactly. Consistent, predictable expectations create psychological safety for children. When the team is unified, children know where they stand — and they're not put in the position of having to choose between parents or work the gap.",
+        "The unified front is actually more work in some ways — it requires ongoing communication between parents. But it produces better outcomes for children and for the relationship."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d23-completion-1",
+      "type": "completion",
+      "title": "Day 23 Complete",
+      "body": "Parenting is one of the hardest things a couple does together — and one of the most bonding when you do it as a team.\n\nBring the principles you wrote today to a real conversation with your partner this week.",
+      "xp": 0
+    }
+  ]
+}

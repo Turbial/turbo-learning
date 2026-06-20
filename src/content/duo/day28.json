@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "unit": "day28",
+  "title": "Day 28: Graduation — Your Marriage 2.0",
+  "estMinutes": 18,
+  "steps": [
+    {
+      "id": "d28-info-1",
+      "type": "info",
+      "title": "You Did the Work",
+      "body": "Twenty-eight days.\n\nYou showed up every day — not just to learn, but to look. At yourself. At your partner. At your marriage with clear, honest eyes.\n\nYou didn't just read about the Four Horsemen. You named the ones you use.\nYou didn't just learn about vulnerability. You practiced it.\nYou didn't just understand forgiveness. You identified something real to let go of.\nYou didn't just build a vision. You wrote vows.\n\nThat's not a program completed. That's a marriage changed.\n\nToday, you graduate. And then you learn how to maintain what you've built.",
+      "xp": 5
+    },
+    {
+      "id": "d28-highlight-1",
+      "type": "highlight",
+      "body": "Four pillars. Four weeks. One marriage.\n\nPillar 1 — Foundation: Trust, respect, and shared values. The ground you build on.\n\nPillar 2 — Safety: Emotional security, the antidotes to the Four Horsemen, vulnerability, fighting fair, listening to understand.\n\nPillar 3 — Connection: Gratitude, physical and relationship rituals, forgiveness, trust through ATTUNE, the full map of intimacy.\n\nPillar 4 — Mission: Money, parenting, external pressure, weekly meetings, partnership vision, growth vows.\n\nYou've touched all of it. Some of it has already changed. Some of it will take months to fully integrate. All of it matters.",
+      "highlights": ["Foundation", "Safety", "Connection", "Mission"],
+      "xp": 5
+    },
+    {
+      "id": "d28-info-2",
+      "type": "info",
+      "title": "What 'Thriving' Actually Means",
+      "body": "After 28 days, it's worth being clear about what you're building toward.\n\nA thriving marriage is not:\n• A marriage without conflict\n• A marriage where both partners are always happy\n• A marriage that looks good from the outside\n• A marriage that reached some final destination\n\nA thriving marriage is:\n• A marriage where both people feel genuinely safe\n• A marriage where repair happens faster than damage accumulates\n• A marriage with a shared direction and the rituals to keep moving toward it\n• A marriage where both people are still choosing each other on purpose\n\nThat's the standard. It's not about perfection. It's about maintenance, repair, and continuing to choose.",
+      "xp": 5
+    },
+    {
+      "id": "d28-quiz-1",
+      "type": "quiz",
+      "title": "28-Day Mastery Check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "What is the single strongest predictor of divorce that Gottman identified in his research?",
+          "options": [
+            "Criticism",
+            "Stonewalling",
+            "Contempt",
+            "Defensiveness"
+          ],
+          "correct": 2,
+          "feedback": [
+            "Criticism is damaging — it attacks character rather than behavior — but Gottman identified contempt as the most corrosive of the four.",
+            "Stonewalling is destructive, particularly because it shuts down communication when connection is most needed, but it's not the top predictor.",
+            "Correct. Contempt — the communication that says 'I am better than you, you are beneath me' — is built on long-standing resentment and is the single strongest predictor of divorce Gottman found.",
+            "Defensiveness prevents repair, but it's not the strongest predictor in Gottman's research."
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "The antidote to criticism is to stop expressing dissatisfaction with your partner's behavior.",
+          "correct": false,
+          "feedback": [
+            "Correct — the antidote to criticism isn't silence. It's the Gentle Startup: expressing the same concern as a complaint (about a specific behavior) rather than a criticism (an attack on character). 'I feel frustrated when...' instead of 'You always...'",
+            "Not quite. The antidote to criticism is the Gentle Startup — expressing your concern about a specific behavior rather than attacking your partner's character. Suppressing legitimate needs doesn't solve anything."
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "mc",
+          "question": "According to the Emotional Bank Account concept, what most depletes a relationship?",
+          "options": [
+            "Having arguments",
+            "Ignoring bids for connection and withholding emotional deposits",
+            "Not having enough shared interests",
+            "Spending too much time apart"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Arguments are withdrawals but not the primary depleting force. The bank account is more affected by the ongoing ratio of deposits to withdrawals in daily interactions.",
+            "Correct. Missed bids — turning away from a partner's attempts at connection — and withheld deposits are the primary way the emotional bank account becomes overdrawn. Small consistent deposits maintain the balance that makes conflict recovery possible.",
+            "Shared interests help but they're not the core mechanism of the emotional bank account.",
+            "Time apart isn't inherently depleting — the quality of connection during time together is what matters most."
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "tf",
+          "question": "Forgiveness requires the person who caused harm to first apologize and make amends.",
+          "correct": false,
+          "feedback": [
+            "Correct — forgiveness is an internal act that you do for yourself, regardless of whether the other person has apologized. It's the release of resentment's grip on your nervous system. Trust restoration is a separate process that does require changed behavior over time.",
+            "Not quite. Forgiveness and trust restoration are different things. You can forgive someone internally — releasing resentment — regardless of their actions. Trust is rebuilt through consistent behavior over time. Forgiveness doesn't require the other person to do anything."
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "mc",
+          "question": "In the ATTUNE model of trust-building, what does 'Turning toward' mean?",
+          "options": [
+            "Physically facing your partner when they speak",
+            "Choosing to engage rather than avoid when your partner needs connection",
+            "Sharing your own feelings in response to your partner's",
+            "Agreeing with your partner's perspective"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Physical orientation is part of it, but Turning toward is about the choice to engage — to move toward connection rather than away from it when your partner presents a bid.",
+            "Exactly. Turning toward is the active choice to engage when your partner reaches for connection — to move toward them rather than ignoring, avoiding, or dismissing the bid. This is the fundamental motion of trust-building.",
+            "That's closer to vulnerability and emotional engagement — valuable, but not specifically what 'Turning toward' means in ATTUNE.",
+            "ATTUNE doesn't require agreement. 'Understanding' is about comprehending their experience; 'Non-defensive' is about receiving feedback. Turning toward is specifically about the choice to engage."
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "mc",
+          "question": "What is the correct sequence for the weekly marriage meeting?",
+          "options": [
+            "Concerns → To-Dos → Appreciation → Fun Planning",
+            "To-Dos → Concerns → Appreciation → Fun Planning",
+            "Appreciation → To-Dos → Concerns → Fun Planning",
+            "Fun Planning → Appreciation → To-Dos → Concerns"
+          ],
+          "correct": 2,
+          "feedback": [
+            "Starting with concerns before appreciation means you're entering the harder topics without the warmth and goodwill that appreciation creates.",
+            "Starting with logistics is practical but misses the emotional priming that appreciation provides — you're doing admin before you've reconnected.",
+            "Correct. Appreciation first primes both partners for connection and goodwill. Then logistics, then concerns (with that goodwill still present), then fun planning to end pointed at something positive. The sequence has deliberate emotional logic.",
+            "Ending with concerns leaves the meeting with unresolved tension. Fun Planning at the end ensures you close with something both people are looking forward to."
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "tf",
+          "question": "The three money personalities identified in relationship research are Spender, Saver, and Avoider.",
+          "correct": true,
+          "feedback": [
+            "Correct. Financial therapists have identified these three primary money personalities. Spenders experience money as life and experiences. Savers experience it as security. Avoiders experience it as anxiety to be not thought about. Knowing yours — and your partner's — changes how you have financial conversations.",
+            "Actually, these are exactly the three money personalities covered: Spender (money is for living), Saver (money is security), and Avoider (money produces anxiety). Knowing your type and your partner's type is the foundation of the Financial Agreement."
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "mc",
+          "question": "What is the primary difference between a partnership vision and an unrealistic fantasy about your relationship?",
+          "options": [
+            "A vision is backed by research; a fantasy is not",
+            "A vision is specific to this couple's actual values and needs; a fantasy is generic and borrowed",
+            "A vision is achievable in one year; a fantasy takes longer",
+            "A vision is written down; a fantasy is just in your head"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Research can inform a vision but the distinction isn't about research support.",
+            "Exactly. A fantasy is generic — borrowed from culture, other couples, or a vague idea of what a good relationship should be. A vision is specific: what does thriving look like for THIS couple, with THESE values, in THIS life? That specificity is what gives it power and direction.",
+            "Time horizon doesn't determine whether something is vision or fantasy.",
+            "Writing helps, but the distinction is in the specificity and ownership of the content, not the format."
+          ]
+        }
+      ],
+      "xp": 40
+    },
+    {
+      "id": "d28-reflection-1",
+      "type": "reflection",
+      "title": "What Changed in 28 Days",
+      "prompt": "Look back at Day 1 — your honest starting-line assessment of your marriage.\n\nWhat has actually shifted? Not what you hope will change. What has already changed — in how you see your marriage, in how you show up, in how you understand yourself as a partner?\n\nAnd: what is the one thing from this program you most want to carry into the years ahead? Not a concept — a practice. Something you'll actually do.",
+      "minChars": 40,
+      "xp": 15
+    },
+    {
+      "id": "d28-info-3",
+      "type": "info",
+      "title": "The Maintenance Mindset",
+      "body": "Here's the truth about what you've built:\n\nIt will erode if you don't maintain it.\n\nNot because you'll forget what you learned — but because life will press back. Stress will accumulate. Old patterns will resurface. The touch ritual will get skipped, then skipped again. The weekly meeting will get cancelled three weeks in a row. The gratitude practice will get quiet.\n\nThis is normal. This happens to every couple who does this work.\n\nThe couples who maintain their progress aren't the ones who never slip. They're the ones who have a maintenance plan — specific practices scheduled at specific intervals — that they return to when they drift.\n\nYour last task is building that plan.",
+      "xp": 5
+    },
+    {
+      "id": "d28-builder-1",
+      "type": "builder",
+      "title": "Your Marriage Maintenance Plan",
+      "fields": [
+        {
+          "id": "weekly",
+          "label": "Weekly practices (what you'll do every week to maintain connection and communication)",
+          "placeholder": "e.g. Weekly marriage meeting Sunday evenings. One specific gratitude expressed daily. The 6-second kiss every morning and evening."
+        },
+        {
+          "id": "monthly",
+          "label": "Monthly practices (what you'll do each month to invest in your relationship)",
+          "placeholder": "e.g. One date night that's genuinely different from our routine. One check-in on our Financial Agreement. One new shared experience — even small."
+        },
+        {
+          "id": "annual",
+          "label": "Annual practices (what you'll do each year to review and renew)",
+          "placeholder": "e.g. Annual relationship review on our anniversary — the five questions. Update our partnership vision. Write new growth vows."
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d28-copy-action-1",
+      "type": "copy_action",
+      "title": "Your Maintenance Commitment",
+      "prompt": "Copy your marriage maintenance plan and share it with your partner.\n\nSay: 'I want us to actually keep this going. Here's what I'm committing to. What would you add or change?'\n\nMake it a joint plan. Both of you have to own it for it to last.",
+      "xp": 10
+    },
+    {
+      "id": "d28-reflection-2",
+      "type": "reflection",
+      "title": "A Letter to Your Future Marriage",
+      "prompt": "Write a short letter — to your marriage, one year from now.\n\nWhat do you hope is true? What do you promise you'll keep doing? What do you hope you'll have built together?\n\nAddress it to the couple you're still becoming.",
+      "minChars": 40,
+      "xp": 15
+    },
+    {
+      "id": "d28-badge-1",
+      "type": "badge_unlock",
+      "title": "Achievement Unlocked: Marriage Graduate",
+      "body": "You completed the full 28-day DUO program.\n\nYou mapped all four pillars. You built safety. You deepened connection. You built shared mission. You wrote vows for the next chapter. You built a maintenance plan to protect what you've built.\n\nMost couples never do what you just did. They hope their marriage gets better. You worked to make it better.\n\nThat's the whole game.\n\nBadge earned: Marriage Graduate",
+      "badge": "marriage_graduate",
+      "xp": 0
+    },
+    {
+      "id": "d28-streak-1",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d28-reminder-1",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d28-completion-1",
+      "type": "completion",
+      "title": "Graduation: Marriage 2.0",
+      "body": "You did it.\n\nNot perfectly. Not easily. But you showed up for 28 days and did the work.\n\nNow go live it. The program ends here. The marriage continues.\n\nAnd it continues differently than it started.",
+      "xp": 0
+    }
+  ]
+}

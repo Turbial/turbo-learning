@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "unit": "day19",
+  "title": "Day 19: Trust Rebuilding",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d19-info-1",
+      "type": "info",
+      "title": "How Trust Actually Works",
+      "body": "Trust isn't a switch you flip. It's a muscle you build through repetition.\n\nMost people think trust is rebuilt through grand gestures — the trip, the declaration, the dramatic change. But that's not how it works. Research on trust in relationships shows something more ordinary and more powerful:\n\nTrust is built in small moments. The moment you said you'd text and you did. The moment they were upset and you stayed present instead of shutting down. The moment you chose honesty when a comfortable lie would have been easier.\n\nThose moments, repeated over weeks and months, are what trust is actually made of.",
+      "xp": 5
+    },
+    {
+      "id": "d19-highlight-1",
+      "type": "highlight",
+      "body": "Gottman describes trust as built through what he calls 'sliding door moments' — the countless small choices every day where you either turn toward your partner or away from them.\n\nThese moments are easily missed. You walk past someone who's quiet and wondering if you'll ask. You see the dishes and wonder if they'll bother. You have something to say and wonder if it's safe.\n\nIn each of these moments, a deposit or a withdrawal is made.\n\nTrust isn't built in crises. It's built in Tuesdays.",
+      "highlights": ["sliding door moments", "turn toward or away", "built in Tuesdays"],
+      "xp": 5
+    },
+    {
+      "id": "d19-info-2",
+      "type": "info",
+      "title": "The ATTUNE Model",
+      "body": "Gottman's research on trust-building produced the ATTUNE framework — six behaviors that, when practiced consistently, build the experience of being known and safe.\n\nA — Awareness: Noticing your partner's emotional state. 'You seem off today.'\n\nT — Turning toward: Choosing to engage rather than avoid when they need connection.\n\nT — Tolerance: Making room for their experience even when it differs from yours.\n\nU — Understanding: Trying to genuinely comprehend their world, not just your version of it.\n\nN — Non-defensive: Receiving feedback without counter-attacking or shutting down.\n\nE — Empathy: Feeling with them — not just understanding intellectually, but being moved by what moves them.\n\nATTUNE isn't a formula. It's a daily orientation.",
+      "xp": 5
+    },
+    {
+      "id": "d19-mc-1",
+      "type": "mc",
+      "question": "Your partner comes home frustrated after a hard day at work and mentions it briefly, then goes quiet. An ATTUNE response would be:",
+      "options": [
+        "Give them space and let them come to you when they're ready",
+        "Share about your own difficult day so they know they're not alone",
+        "Notice their state, turn toward them, and ask: 'Do you want to talk about it or just decompress together?'",
+        "Change the subject to something lighter to help them shift their mood"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Space has its place, but withdrawing without checking in can feel like indifference. The ATTUNE approach involves turning toward and asking what they need — which might be space, or might be connection.",
+        "Sharing your own difficulty can feel like one-upping. The first move in ATTUNE is awareness and turning toward — focusing on them before bringing in your experience.",
+        "Exactly. This demonstrates Awareness (noticing), Turning toward (engaging), and Understanding (asking what kind of support they need rather than assuming). It invites without demanding.",
+        "Redirecting to lightness can work sometimes, but it often communicates 'your feelings are inconvenient.' First check in — then they can choose how to proceed."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19-tf-1",
+      "type": "tf",
+      "question": "Trust in a relationship is most effectively rebuilt through large, significant gestures that demonstrate commitment.",
+      "correct": false,
+      "feedback": [
+        "Correct — research consistently shows that trust is rebuilt through consistent small deposits over time, not grand gestures. Grand gestures can signal intention, but they don't build trust on their own. What builds it is the daily accumulation of small moments where you showed up as someone reliable.",
+        "Actually, the research points the opposite direction. Grand gestures can signal intent but don't build trust. Trust is rebuilt through the repeated, consistent experience of small deposits — being present, keeping small commitments, turning toward in daily moments."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d19-scenario-1",
+      "type": "scenario_card",
+      "title": "Trust Deposits in the Wild",
+      "body": "David and Amara have been working on their relationship after a period of serious distance. David wants to show he's committed to change.\n\nHis instinct: plan a weekend trip, write a long letter, make a big declaration.\n\nWhat the research says will actually work: Tell her you'll be home for dinner and be home. When she mentions something that matters to her, remember it and bring it up later. When she's upset, stay in the room instead of going quiet. Say what you mean and mean what you say — consistently, in small things.\n\nThe trip is nice. The consistency is what changes the nervous system.\n\nTrust is a body experience, not a mind experience. It accumulates through patterns, not moments."
+    },
+    {
+      "id": "d19-tf-2",
+      "type": "tf",
+      "question": "Empathy in the ATTUNE model means agreeing with your partner's perspective.",
+      "correct": false,
+      "feedback": [
+        "Correct — empathy means feeling with someone, not agreeing with them. You can fully feel your partner's frustration and still see things differently. Empathy is about emotional presence and understanding, not intellectual agreement.",
+        "Not quite. Empathy is about being moved by what moves them — feeling with them emotionally — without needing to agree with their interpretation of events. You can be empathetic and still have a different perspective."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d19-info-3",
+      "type": "info",
+      "title": "The Non-Defensive Challenge",
+      "body": "Of the six ATTUNE elements, Non-defensive is usually the hardest.\n\nWhen someone we love says something critical — or something we interpret as critical — our nervous system reads it as a threat. Defensiveness is the automatic response: push back, deflect, counter-attack.\n\nNon-defensive listening doesn't mean accepting unfair criticism without comment. It means your first move is understanding before defending.\n\n'Let me make sure I understand. You're saying [X]?'\n\nThen — after you've actually heard them — you can share your perspective.\n\nThe sequence matters enormously. Understanding first, then responding. Not simultaneously.",
+      "xp": 5
+    },
+    {
+      "id": "d19-fillblank-1",
+      "type": "fillblank",
+      "question": "In the ATTUNE model, the 'N' stands for ___, which means receiving feedback without counter-attacking.",
+      "answer": "Non-defensive",
+      "xp": 8
+    },
+    {
+      "id": "d19-mc-2",
+      "type": "mc",
+      "question": "Which of the following best represents what 'Understanding' means in the ATTUNE model?",
+      "options": [
+        "Agreeing with your partner's point of view",
+        "Asking enough questions to poke holes in their argument",
+        "Genuinely trying to comprehend their experience from the inside",
+        "Explaining why they feel the way they do"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Understanding doesn't require agreement. You can fully understand someone's experience and still see things differently.",
+        "Questioning to find inconsistencies is more like debate than understanding. The goal is to comprehend, not to counter.",
+        "Correct. Understanding means trying to see and feel your partner's world from their vantage point — not evaluating whether they're right, not analyzing their psychology, just genuinely trying to get it.",
+        "Explaining why someone feels a way can feel dismissive — it positions you as the expert on their inner life. Understanding is listening, not interpreting."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d19-reflection-1",
+      "type": "reflection",
+      "title": "Your ATTUNE Profile",
+      "prompt": "Looking honestly at the six elements of ATTUNE — Awareness, Turning toward, Tolerance, Understanding, Non-defensive, Empathy — which are your strengths and which are your growing edges?\n\nFor the one that feels hardest: what typically happens in you when you try to practice it? What does it take from you? What do you think it would give your relationship if you practiced it more consistently?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d19-builder-1",
+      "type": "builder",
+      "title": "Your Trust Deposit Today",
+      "fields": [
+        {
+          "id": "deposit",
+          "label": "One specific trust deposit you will make today",
+          "placeholder": "e.g. When she tells me about her day, I'll put my phone face-down and ask one follow-up question"
+        },
+        {
+          "id": "attune_element",
+          "label": "Which ATTUNE element does this practice most?",
+          "placeholder": "e.g. Turning toward + Understanding"
+        },
+        {
+          "id": "commitment",
+          "label": "How will you remember to do it? (Be specific)",
+          "placeholder": "e.g. I'll set a reminder at 6pm — the time they usually get home"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d19-good-fit-1",
+      "type": "good_fit",
+      "question": "How would you describe the current trust level in your relationship?",
+      "options": [
+        "Strong — I feel very safe and relied upon",
+        "Mostly good — with a few specific areas that still feel tender",
+        "Fragile — we're rebuilding after some damage",
+        "Low — there's significant repair work needed here"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d19-reflection-2",
+      "type": "reflection",
+      "title": "The Small Moment You Remember",
+      "prompt": "Think of a small moment — not a grand gesture — where your partner built trust with you. A moment where they chose you when they didn't have to. Where they stayed when they could have gone quiet.\n\nWhat was it? Why did it matter? Do they know it mattered?\n\nAnd: is there a small trust deposit you've been meaning to make that you keep putting off?",
+      "minChars": 20,
+      "xp": 10
+    },
+    {
+      "id": "d19-completion-1",
+      "type": "completion",
+      "title": "Day 19 Complete",
+      "body": "Trust is built in Tuesdays. Today is your Tuesday.\n\nMake the deposit you planned. Notice what happens.",
+      "xp": 0
+    }
+  ]
+}

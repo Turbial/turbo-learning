@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "unit": "day20",
+  "title": "Day 20: Intimacy Inventory",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d20-info-1",
+      "type": "info",
+      "title": "Intimacy Is Not One Thing",
+      "body": "Most people, when they hear the word 'intimacy,' think of one thing.\n\nBut intimacy is five things. And when couples feel disconnected, it's rarely all five at once — usually it's one or two areas that have quietly depleted while others remain strong.\n\nThe reason this matters: you can't fix 'we're not intimate' as one problem. But you can address 'our intellectual connection has dried up' or 'we've stopped having shared experiences' as specific, solvable things.\n\nToday, you'll map all five areas and get clear on where your relationship actually is — so you can put energy where it's needed most.",
+      "xp": 5
+    },
+    {
+      "id": "d20-info-2",
+      "type": "info",
+      "title": "The 5 Types of Intimacy",
+      "body": "Emotional intimacy: Feeling genuinely known by your partner — your fears, dreams, vulnerabilities, and inner world. The sense that they see you, not just the version of you that functions in the world.\n\nPhysical intimacy: Touch, closeness, and sexual connection. The full spectrum — from a held hand to full physical presence — not just sex.\n\nIntellectual intimacy: The ability to think together. To discuss ideas, disagree respectfully, wonder about the same things, learn from each other.\n\nSpiritual intimacy: A shared sense of meaning, purpose, or values. This doesn't have to be religious — it's about what you both believe life is for and what you're building together.\n\nExperiential intimacy: Sharing experiences that are genuinely new or meaningful. Adventures, challenges, projects — the feeling of doing life together, not just beside each other.",
+      "xp": 5
+    },
+    {
+      "id": "d20-match-1",
+      "type": "match",
+      "title": "Match the Intimacy Type",
+      "question": "Match each intimacy type to its description:",
+      "pairs": [
+        { "left": "Emotional", "right": "Feeling genuinely known in your inner world" },
+        { "left": "Physical", "right": "Touch and bodily closeness across the full spectrum" },
+        { "left": "Intellectual", "right": "Thinking together, discussing ideas, learning from each other" },
+        { "left": "Experiential", "right": "Sharing meaningful new experiences and doing life together" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-highlight-1",
+      "type": "highlight",
+      "body": "Couples therapist and researcher Dr. Emily Nagoski notes that for many couples, the intimacy type that drives the most dissatisfaction is the one they've never named.\n\nOne partner is longing for more intellectual connection. The other is working hard on physical affection. Neither is solving for what the other actually needs — because they've never mapped their specific intimacy landscape together.\n\nThe inventory isn't just a tool for diagnosis. It's a tool for communication.\n\n'Here's where I feel us. Where do you feel us?'",
+      "highlights": ["the intimacy type they've never named", "not solving for what the other needs", "tool for communication"],
+      "xp": 5
+    },
+    {
+      "id": "d20-info-3",
+      "type": "info",
+      "title": "Spiritual Intimacy — Without the Religious Filter",
+      "body": "Spiritual intimacy is the intimacy type that gets the most confused.\n\nFor some couples, it means shared faith and practice. But for couples who aren't religious — or who have different beliefs — it can mean something equally powerful: a shared sense of what life is for.\n\n• What do you believe you're building together?\n• What values do you both hold deeply?\n• What do you want to be true about the impact you have on the world, your family, or your community?\n• Is there a sense of shared mission beyond the household?\n\nCouples with strong spiritual intimacy — however they define it — have a feeling of being pointed in the same direction. That shared orientation is one of the most stabilizing forces in a long relationship.",
+      "xp": 5
+    },
+    {
+      "id": "d20-mc-1",
+      "type": "mc",
+      "question": "A couple reports that their physical and emotional intimacy are strong, but they've stopped having conversations about ideas, current events, or things they're curious about. Which intimacy type is most depleted?",
+      "options": [
+        "Emotional intimacy",
+        "Spiritual intimacy",
+        "Intellectual intimacy",
+        "Experiential intimacy"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Emotional intimacy involves feeling known in your inner world — fears, dreams, vulnerabilities. The description is more about the loss of intellectual engagement.",
+        "Spiritual intimacy involves shared meaning and values — not primarily conversation about ideas and curiosity.",
+        "Exactly. Intellectual intimacy is the ability to think together, discuss ideas, and stay curious about the same things. When that disappears, partners can feel like they're living parallel but separate intellectual lives — even when other areas of intimacy are strong.",
+        "Experiential intimacy is about shared activities and adventures, not specifically the loss of stimulating conversation."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-scenario-1",
+      "type": "scenario_card",
+      "title": "When One Type Carries the Others",
+      "body": "Some couples have very strong physical intimacy and use it as the primary bridge for all the others. They feel close because they're physically connected — but emotional intimacy (true knowing) has actually been thin for years.\n\nWhen physical intimacy decreases — illness, stress, life changes — they suddenly discover the other bridges weren't built, and they feel completely disconnected from someone they've slept next to for a decade.\n\nOther couples have deep emotional intimacy but haven't had a genuinely new shared experience in years. They know each other beautifully and feel like roommates.\n\nBalanced intimacy isn't about equal investment in all five areas. It's about not letting any one area carry the full load indefinitely."
+    },
+    {
+      "id": "d20-mc-2",
+      "type": "mc",
+      "question": "A couple has strong emotional connection but reports feeling like they're 'just going through the motions' — same routines, no newness, no shared adventures or challenges. Which area would most benefit from intentional investment?",
+      "options": [
+        "Emotional intimacy — they need to go deeper in their conversations",
+        "Experiential intimacy — they need new shared experiences and challenges",
+        "Physical intimacy — more touch would rekindle the spark",
+        "Intellectual intimacy — they need to discuss more stimulating ideas"
+      ],
+      "correct": 1,
+      "feedback": [
+        "They already have strong emotional connection. Adding more of what's already working won't address the 'going through the motions' feeling.",
+        "Exactly. When a couple feels emotionally connected but life feels stale, the missing ingredient is usually experiential — novelty, challenge, and the feeling of doing something together for the first time. Shared new experiences create new memories and reactivate the dopamine system that was active when the relationship was new.",
+        "Physical intimacy can help, but the 'going through the motions' description points more specifically to a lack of novel shared experience.",
+        "Intellectual intimacy doesn't directly address the staleness of routine — it's the experiential dimension that counteracts 'same thing, different day.'"
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d20-reflection-1",
+      "type": "reflection",
+      "title": "Rate Your 5 Intimacy Areas",
+      "prompt": "Rate each type of intimacy in your relationship honestly — from 1 (needs serious attention) to 5 (thriving).\n\nEmotional: __/5\nPhysical: __/5\nIntellectual: __/5\nSpiritual (shared meaning/values): __/5\nExperiential: __/5\n\nWhich is your highest? Which is your lowest?\n\nWhat would your partner rate these? Where do you think your ratings would differ most — and what does that gap tell you?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d20-builder-1",
+      "type": "builder",
+      "title": "Your Intimacy Plan",
+      "fields": [
+        {
+          "id": "lowest_area",
+          "label": "Your lowest-rated intimacy area",
+          "placeholder": "e.g. Experiential — we haven't done anything genuinely new together in over a year"
+        },
+        {
+          "id": "one_action",
+          "label": "One specific action to invest in that area this week",
+          "placeholder": "e.g. Sign up for the pottery class she's mentioned three times; actually put it in the calendar"
+        },
+        {
+          "id": "one_conversation",
+          "label": "One conversation to have with your partner about this (what will you say?)",
+          "placeholder": "e.g. 'I've been thinking about how we could have more new experiences together. I want to try something completely new with you this month — what's something you've always wanted to do?'"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d20-good-fit-1",
+      "type": "good_fit",
+      "question": "Which intimacy type do you personally tend to invest in most naturally?",
+      "options": [
+        "Emotional — I'm good at deep conversation and being present with feelings",
+        "Physical — touch and closeness come naturally to me",
+        "Intellectual — I love thinking and learning together",
+        "Spiritual — shared values and meaning are how I primarily connect",
+        "Experiential — I'm happiest doing things together"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d20-reflection-2",
+      "type": "reflection",
+      "title": "What Your Partner Most Needs",
+      "prompt": "Based on what you know about your partner — their history, their love language, what lights them up — which of the five intimacy types do you think they most need from you right now?\n\nThis might not be the area you're naturally strongest in. If there's a gap between what they most need and what you most naturally give, what would it take for you to stretch into their language?",
+      "minChars": 25,
+      "xp": 10
+    },
+    {
+      "id": "d20-completion-1",
+      "type": "completion",
+      "title": "Day 20 Complete",
+      "body": "You've mapped your intimacy landscape. The lowest area isn't a failure — it's a direction.\n\nStart the plan you built today. One action, this week.",
+      "xp": 0
+    }
+  ]
+}

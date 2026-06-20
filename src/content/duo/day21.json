@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "unit": "day21",
+  "title": "Day 21: Week 3 Wrap — Connection",
+  "estMinutes": 16,
+  "steps": [
+    {
+      "id": "d21-info-1",
+      "type": "info",
+      "title": "Three Weeks In",
+      "body": "Look at what you've done.\n\nWeek 1: You looked at your marriage honestly. You mapped where you actually are across the four pillars. You named what needed to change.\n\nWeek 2: You built safety. You learned what destroys emotional security and spent a week replacing those patterns with something better.\n\nWeek 3: You built connection. Gratitude. Touch rituals. Relationship rituals. Forgiveness. Trust. A full map of your intimacy landscape.\n\nThis isn't theory. This is lived experience now.\n\nToday, you consolidate what you've learned — and earn your next badge.",
+      "xp": 5
+    },
+    {
+      "id": "d21-highlight-1",
+      "type": "highlight",
+      "body": "Week 3 covered the things that make a marriage feel like home.\n\nNot safety — though safety matters. Home.\n\nThe warmth. The gratitude. The rituals that say 'we are still us.' The forgiveness that makes it possible to keep going. The trust built in a thousand small moments. The five kinds of intimacy that keep a relationship alive across decades.\n\nThis is what connection looks like when it's made of something real.",
+      "highlights": ["feel like home", "warmth", "forgiveness makes it possible to keep going", "five kinds of intimacy"],
+      "xp": 5
+    },
+    {
+      "id": "d21-reflection-1",
+      "type": "reflection",
+      "title": "What You Did This Week",
+      "prompt": "Review what you actually did this week — not what you intended to do, but what you did.\n\nDid you express specific gratitude to your partner? Did you try any of the touch rituals? Did you design relationship rituals?\n\nDid you do any forgiveness work — even internally? Did you make any trust deposits from the ATTUNE framework?\n\nBe honest. What landed? What didn't? What surprised you?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d21-quiz-1",
+      "type": "quiz",
+      "title": "Week 3 Connection Check",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mc",
+          "question": "According to research, what is the single biggest predictor of couple satisfaction?",
+          "options": [
+            "Sexual frequency",
+            "Daily gratitude",
+            "Communication style",
+            "Income level"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Sexual frequency matters, but research found it ranks below gratitude as a predictor of overall satisfaction.",
+            "Correct. University of Georgia research found daily gratitude to be the single biggest predictor of couple satisfaction — bigger than communication, sex, or income.",
+            "Communication is important but it's not the top predictor in this research.",
+            "Income has very little to do with relationship satisfaction according to the research covered this week."
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "tf",
+          "question": "The 6-second kiss works because it is long enough for oxytocin to be released.",
+          "correct": false,
+          "feedback": [
+            "Correct — the 6-second kiss works not because of a specific biochemical threshold, but because it's long enough to require presence and intention. You can't do it on autopilot. The power is in the attention it demands, not just the chemistry.",
+            "Actually, the mechanism is about intention rather than a specific oxytocin threshold. The 6 seconds forces you to be present and to actually choose your partner in that moment — that intentionality is what makes it powerful."
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "mc",
+          "question": "Which of the following is true about forgiveness?",
+          "options": [
+            "Forgiving someone means you have to tell them and restore trust immediately",
+            "Forgiveness requires the other person to have apologized first",
+            "Forgiveness is primarily an internal act that benefits the person doing the forgiving",
+            "Forgiveness means what happened was acceptable"
+          ],
+          "correct": 2,
+          "feedback": [
+            "Forgiveness is an internal act. You don't have to announce it, and trust restoration is a separate process on its own timeline.",
+            "Forgiveness can happen regardless of whether the other person has apologized — it's not contingent on their behavior.",
+            "Exactly. Forgiveness is primarily something you do for yourself — releasing the grip that resentment has on your nervous system. It doesn't require a declaration or trust restoration, and it doesn't mean condoning what happened.",
+            "Forgiveness explicitly does not mean what happened was acceptable. It means you're choosing not to be permanently shaped by it."
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "mc",
+          "question": "In the ATTUNE model, what does the 'N' stand for?",
+          "options": [
+            "Nurturing",
+            "Non-defensive",
+            "Naming emotions",
+            "Nearness"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Nurturing isn't part of the ATTUNE acronym.",
+            "Correct. Non-defensive — receiving feedback and concerns without counter-attacking or shutting down. Understanding first, then responding.",
+            "Naming emotions is a valuable skill, but it's not the 'N' in ATTUNE.",
+            "Nearness isn't part of the acronym — though the concept of turning toward is represented by 'T'."
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "tf",
+          "question": "The key difference between a routine and a ritual is the intention and meaning assigned to it.",
+          "correct": true,
+          "feedback": [
+            "Correct — routines and rituals can look identical from the outside. What makes something a ritual is that both partners have assigned meaning to it: 'this is who we are, this is something we've chosen.' That intention changes the emotional experience of the activity completely.",
+            "Actually, this is exactly right. Rituals and routines can involve the same actions — the distinction is in the intention. A ritual is a moment set apart, something you've both decided matters. That meaning is what makes it bond you."
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "mc",
+          "question": "Which of the five intimacy types involves sharing new experiences and doing life together actively?",
+          "options": [
+            "Emotional intimacy",
+            "Intellectual intimacy",
+            "Spiritual intimacy",
+            "Experiential intimacy"
+          ],
+          "correct": 3,
+          "feedback": [
+            "Emotional intimacy is about being known — your inner world, feelings, and vulnerabilities.",
+            "Intellectual intimacy involves thinking together and engaging with ideas.",
+            "Spiritual intimacy involves shared meaning, values, and sense of purpose.",
+            "Correct. Experiential intimacy is built through shared activities, adventures, challenges, and new experiences — the feeling of actively doing life together rather than just alongside each other."
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "tf",
+          "question": "Trust in relationships is built primarily through large gestures during key moments.",
+          "correct": false,
+          "feedback": [
+            "Correct — trust is built through the accumulation of small consistent moments, not grand gestures. Gottman's concept of 'sliding door moments' shows that the countless small choices — whether to engage or withdraw, whether to follow through on small commitments — are what actually construct trust over time.",
+            "Actually, the research shows the opposite. Trust is built through small, consistent moments — the text you said you'd send, staying present when they're upset, keeping minor commitments. Grand gestures can signal intention but they don't build the lived experience of reliability."
+          ]
+        }
+      ],
+      "xp": 35
+    },
+    {
+      "id": "d21-reflection-2",
+      "type": "reflection",
+      "title": "What Changed?",
+      "prompt": "Compared to where you were at the start of this week — has anything shifted? Not necessarily in your relationship yet, but in how you see it?\n\nIs there a concept from this week that you'll carry into your daily life? A conversation you want to have? Something you're looking at differently?\n\nWhat changed — even a little?",
+      "minChars": 25,
+      "xp": 15
+    },
+    {
+      "id": "d21-info-2",
+      "type": "info",
+      "title": "Week 4: Mission",
+      "body": "You've built safety. You've built connection.\n\nNext week is about mission — the shared life you're building together.\n\nMoney. Parenting. External pressures. Weekly check-ins. A shared vision for where you're going. Personal vows for the next chapter. And on Day 28 — graduation.\n\nThis is the week that transforms two people who love each other into a team with a direction.\n\nSee you tomorrow.",
+      "xp": 5
+    },
+    {
+      "id": "d21-badge-1",
+      "type": "badge_unlock",
+      "title": "Achievement Unlocked: Connection Builder",
+      "body": "You completed Week 3 — Connection. You built a gratitude practice, designed touch and relationship rituals, worked through forgiveness, rebuilt trust using the ATTUNE framework, and mapped your full intimacy landscape.\n\nThat's not just learning. That's transformation.\n\nBadge earned: Connection Builder",
+      "badge": "connection_builder",
+      "xp": 0
+    },
+    {
+      "id": "d21-streak-1",
+      "type": "streak_commitment",
+      "commitOptions": [7, 14, 28],
+      "xp": 0
+    },
+    {
+      "id": "d21-reminder-1",
+      "type": "reminder_setup",
+      "reminderOptions": ["Morning", "Afternoon", "Evening"],
+      "xp": 0
+    },
+    {
+      "id": "d21-completion-1",
+      "type": "completion",
+      "title": "Week 3 Complete",
+      "body": "Three weeks of real work. Three weeks of choosing your marriage.\n\nWeek 4 starts tomorrow. The final push — and the most practical week yet.",
+      "xp": 0
+    }
+  ]
+}

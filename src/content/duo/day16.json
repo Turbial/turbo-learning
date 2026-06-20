@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "unit": "day16",
+  "title": "Day 16: Physical Connection Plans",
+  "estMinutes": 14,
+  "steps": [
+    {
+      "id": "d16-info-1",
+      "type": "info",
+      "title": "The Body Remembers",
+      "body": "You can love someone deeply and still feel like strangers.\n\nFor many couples, physical disconnection happens gradually. Life gets busy. Affection becomes functional — a quick peck, a pat on the shoulder as you pass. Touch that used to signal 'I see you' becomes habit, then nothing.\n\nHere's what the research shows: non-sexual physical touch is one of the most powerful ways to maintain emotional closeness. Not just pleasure — actual neurological bonding.\n\nToday, you're going to understand why, and you're going to design a daily physical connection ritual for your relationship.",
+      "xp": 5
+    },
+    {
+      "id": "d16-highlight-1",
+      "type": "highlight",
+      "body": "Dr. John Gottman's research identified two deceptively simple rituals:\n\nThe 6-second kiss: long enough that you can't phone it in. Long enough to register as connection, not just habit.\n\nThe 20-second hug: long enough for oxytocin — the bonding hormone — to be released. Long enough to feel held, not just greeted.\n\nCouples who practice these daily report feeling significantly more connected — even in periods of stress.",
+      "highlights": ["6-second kiss", "20-second hug", "oxytocin", "significantly more connected"],
+      "xp": 5
+    },
+    {
+      "id": "d16-info-2",
+      "type": "info",
+      "title": "Why Touch Matters So Much",
+      "body": "Human beings are wired for touch. Skin-to-skin contact activates the vagus nerve, slows the heart rate, and releases oxytocin and serotonin — the same chemicals that create feelings of safety and attachment.\n\nIn long-term relationships, touch can drift into the purely transactional: a tap to pass the salt, a nudge to wake up. The warm, intentional, 'I'm thinking about you' kind of touch gets lost.\n\nThe effect is cumulative and quiet. You don't notice the loss until one day the emotional distance feels enormous and you can't quite trace where it started.\n\nMost of the time, it started with the slow disappearance of small physical moments.",
+      "xp": 5
+    },
+    {
+      "id": "d16-tf-1",
+      "type": "tf",
+      "question": "Non-sexual physical touch — like hugs, hand-holding, and shoulder rubs — has measurable effects on emotional closeness between partners.",
+      "correct": true,
+      "feedback": [
+        "Correct. Research consistently shows that intentional, non-sexual touch releases oxytocin, reduces cortisol, and increases feelings of connection and security. It's not just comforting — it's biologically bonding.",
+        "Actually, this is well-supported by research. Non-sexual touch activates oxytocin release, reduces stress hormones, and measurably increases feelings of emotional closeness and security."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d16-scenario-1",
+      "type": "scenario_card",
+      "title": "What Gets In the Way",
+      "body": "For most couples, touch doesn't disappear in one moment. It erodes.\n\nYou reach for their hand and they're typing. They lean in for a kiss and you're already heading out the door. You stop initiating because it sometimes feels like an interruption. They stop initiating because your response is unpredictable.\n\nSlowly, without any agreement or argument, the physical language of your relationship goes quiet.\n\nThe solution isn't just 'touch more.' It's building intentional moments — specific, protected, predictable — where physical connection is the whole point.\n\nThat's what a ritual is. Not romance on demand. A commitment that runs on a schedule."
+    },
+    {
+      "id": "d16-info-3",
+      "type": "info",
+      "title": "The Science of the 6-Second Kiss",
+      "body": "Gottman tested couples in his Love Lab with a specific prescription: a kiss that lasts at least six seconds every day.\n\nWhy six seconds? Because anything shorter can be done automatically — a reflex, a habit, a kiss that barely registers. Six seconds forces you to be present. To actually arrive.\n\nThe couples who implemented the 6-second kiss reported something surprising: the kiss itself began to feel more meaningful. Not because six seconds is particularly long — but because the intention behind it changed everything.\n\nIt said: right now, in this moment, you are worth stopping for.",
+      "xp": 5
+    },
+    {
+      "id": "d16-mc-1",
+      "type": "mc",
+      "question": "Which best explains why the 6-second kiss is effective for maintaining connection?",
+      "options": [
+        "It increases sexual frequency in relationships",
+        "Six seconds is the minimum time required for oxytocin to release",
+        "It forces presence and intentionality that a quick peck doesn't require",
+        "It works as a nonverbal apology after conflict"
+      ],
+      "correct": 2,
+      "feedback": [
+        "The kiss isn't primarily about sexual connection — it's about intentional daily contact and presence.",
+        "The oxytocin mechanism is more associated with sustained embrace than a kiss of this length. The power here is the intention it requires.",
+        "Exactly. Six seconds is long enough that you can't do it on autopilot. It requires stopping, being present, and choosing your partner in that moment. That intention is what makes it powerful.",
+        "It can be part of reconnection, but its primary function is daily intentional contact — not conflict repair specifically."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-info-4",
+      "type": "info",
+      "title": "Building a Touch Ritual",
+      "body": "A physical connection ritual isn't a performance. It's a scheduled point in your day where touch is protected from the noise.\n\nExamples couples use:\n• Hello and goodbye: a real kiss — not a peck — every time you leave and return\n• Morning hold: two minutes of just holding each other before phones get checked\n• Hand-holding during the first five minutes of any car ride\n• A shoulder rub while one of you is cooking or working\n• Sitting close enough to touch during evening TV — legs touching, hand on a knee\n• The 20-second hug before bed\n\nThe specific ritual matters less than the commitment to it. Pick something you'll actually do, not something that sounds impressive.",
+      "xp": 5
+    },
+    {
+      "id": "d16-scenario-2",
+      "type": "scenario_card",
+      "title": "When Touch Feels Complicated",
+      "body": "For some couples, touch has become loaded. Maybe one partner associates any physical contact with pressure to be sexual. Maybe one person's default is pulling away when stressed. Maybe there's been hurt that made physical closeness feel unsafe.\n\nIf this is your reality, the touch ritual doesn't fix that in one move. But it creates a container — a predictable, low-stakes moment — where physical connection isn't about anything except being close.\n\nThe 20-second morning hug asks nothing of either person except to be there. That's a starting point.\n\nIf the complexity feels significant, name it. Say: 'I want more physical closeness and I'm not sure how to get there. Can we talk about what feels comfortable?' That conversation is the ritual too."
+    },
+    {
+      "id": "d16-mc-2",
+      "type": "mc",
+      "question": "Couples who feel physically disconnected would benefit most from:",
+      "options": [
+        "Increasing sexual frequency immediately",
+        "Building predictable, low-stakes touch rituals as a starting point",
+        "Discussing the disconnection without changing any behaviors",
+        "Waiting until they feel emotionally reconnected before attempting physical contact"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Sexual reconnection often follows from non-sexual physical closeness — not the other way around. Jumping there first often increases pressure rather than connection.",
+        "Exactly. Low-stakes, predictable touch rituals reduce pressure while rebuilding the physical language of the relationship. They create a safe foundation without demand.",
+        "Discussion alone without behavioral change doesn't rebuild the neural pathways of physical closeness. You have to actually touch each other.",
+        "For many couples, the physical connection is what helps re-establish emotional closeness — they reinforce each other. You don't have to wait."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d16-reflection-1",
+      "type": "reflection",
+      "title": "Your Physical Connection Audit",
+      "prompt": "Think about your current daily physical connection with your partner.\n\nHow often do you touch each other with intention — not just functionally, but as a genuine gesture of 'I choose you'? Be honest about the current state.\n\nWhat used to exist that no longer does? When did it change? Is there any touch that one of you initiates and the other doesn't receive well? What's underneath that?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d16-builder-1",
+      "type": "builder",
+      "title": "Design Your Touch Ritual",
+      "fields": [
+        {
+          "id": "morning",
+          "label": "Morning ritual (when you wake up or before you leave)",
+          "placeholder": "e.g. A 20-second hug before either of us checks our phones"
+        },
+        {
+          "id": "daily",
+          "label": "Daily ritual (something you can do every day)",
+          "placeholder": "e.g. A real 6-second kiss when one of us comes home"
+        },
+        {
+          "id": "evening",
+          "label": "Evening ritual (before sleep or during winding down)",
+          "placeholder": "e.g. Holding hands for the first 5 minutes of being in bed together"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d16-fillblank-1",
+      "type": "fillblank",
+      "question": "Gottman prescribes a kiss lasting at least ___ seconds daily to maintain connection.",
+      "answer": "6",
+      "xp": 8
+    },
+    {
+      "id": "d16-reflection-2",
+      "type": "reflection",
+      "title": "What Touch Says",
+      "prompt": "Physical connection isn't just about feel-good chemistry. It communicates something.\n\nWhat do you want your daily touch to say to your partner? What message does your current level of physical connection send — even unintentionally?\n\nHow will it feel different when you're following through on the ritual you designed?",
+      "minChars": 20,
+      "xp": 10
+    },
+    {
+      "id": "d16-info-5",
+      "type": "info",
+      "title": "Tomorrow: Rituals That Bind",
+      "body": "Today you designed a touch ritual. Tomorrow, we zoom out — to the bigger picture of relationship rituals and why the most connected couples build intentional rhythms into their entire relationship, not just their physical connection.\n\nSee you there.",
+      "xp": 5
+    },
+    {
+      "id": "d16-completion-1",
+      "type": "completion",
+      "title": "Day 16 Complete",
+      "body": "You've designed something simple and profound: a daily moment of chosen connection. Start tonight. The ritual becomes real the first time you do it.",
+      "xp": 0
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "unit": "day17",
+  "title": "Day 17: Rituals That Bind",
+  "estMinutes": 13,
+  "steps": [
+    {
+      "id": "d17-info-1",
+      "type": "info",
+      "title": "Routine vs. Ritual",
+      "body": "You already have routines. Coffee at 7am. Bills on the first of the month. TV before bed.\n\nRoutines are efficient. They reduce decision fatigue. They run on autopilot.\n\nBut rituals are different. Not because of what they are — but because of what they mean.\n\nA ritual is a routine with intention behind it. It says: this isn't just what we do, it's who we are. This moment is set apart. It exists because we chose each other.\n\nThe most connected couples don't have more time. They have more meaning in the time they already share.",
+      "xp": 5
+    },
+    {
+      "id": "d17-highlight-1",
+      "type": "highlight",
+      "body": "Gottman's research on lasting couples revealed something unexpected: what predicted relationship happiness wasn't the quality of their vacation or how often they went on dates.\n\nIt was the presence of shared rituals — small, predictable moments both partners looked forward to.\n\nThe couples who thrived had things like: a specific greeting when one came home. A Sunday morning coffee routine. An annual trip that was always theirs.\n\nNot grand gestures. Consistent ones.",
+      "highlights": ["shared rituals", "small, predictable moments", "Not grand gestures. Consistent ones."],
+      "xp": 5
+    },
+    {
+      "id": "d17-info-2",
+      "type": "info",
+      "title": "Why Rituals Work",
+      "body": "Rituals create three things that couples need:\n\n1. Anticipation — something to look forward to. Even a Tuesday night dinner that's 'yours' creates a weekly point of warmth to move toward.\n\n2. Identity — 'this is something we do' becomes 'this is who we are.' Couples with strong shared rituals have a clearer sense of 'us' as a unit.\n\n3. Continuity — rituals anchor a relationship through difficult seasons. When everything else is uncertain, the Saturday morning walk is still there. It says: we're still us.\n\nA ritual doesn't need to be elaborate. It needs to be intentional and consistent.",
+      "xp": 5
+    },
+    {
+      "id": "d17-tf-1",
+      "type": "tf",
+      "question": "The key difference between a routine and a ritual is the amount of effort or time required.",
+      "correct": false,
+      "feedback": [
+        "Correct — the difference isn't effort or time, it's intention. A ritual can be as simple as a specific greeting or a shared cup of coffee. What makes it a ritual is the meaning both partners assign to it — the sense that this moment exists because they chose each other.",
+        "Actually, the distinction isn't about effort. A ritual can be exactly as quick as a routine. The difference is intention and meaning — a ritual is something you've both decided matters, something that says 'this is who we are together.'"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d17-scenario-1",
+      "type": "scenario_card",
+      "title": "Three Kinds of Ritual",
+      "body": "The most resilient couples build rituals in three time frames:\n\nDaily rituals: The 6-second goodbye kiss. The 'how are you really' conversation when one person comes home. Evening wind-down together before phones come out.\n\nWeekly rituals: Date night — even a cheap one. Sunday morning routine. The call you make on the drive home.\n\nAnnual rituals: The trip you always take. The anniversary tradition. New Year's Eve where you review the year together. A ritual that marks: we've done another year. We're still choosing this.\n\nEach layer reinforces the others. The daily ones build the warmth that makes the weekly ones feel rich. The annual ones give the daily ones meaning."
+    },
+    {
+      "id": "d17-mc-1",
+      "type": "mc",
+      "question": "A couple has a weekly Saturday coffee ritual they've maintained for years. During a particularly stressful season, this ritual most likely:",
+      "options": [
+        "Loses its meaning because they're too distracted to enjoy it",
+        "Feels like a burden when they have more important things to deal with",
+        "Provides continuity and an anchor point that helps them feel like 'us' despite the stress",
+        "Needs to be upgraded to something more significant to matter during hard times"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Research shows the opposite — familiar rituals become more valuable during stress, not less. They provide continuity when everything else is uncertain.",
+        "Couples who maintain rituals during hard seasons report that those rituals are often what holds them together — not a distraction from the difficulty.",
+        "Exactly. Shared rituals are most valuable during difficult periods because they provide continuity. They say 'we are still us' when everything else is uncertain. That anchoring effect is precisely why they matter.",
+        "Rituals work because they're consistent and familiar, not because they're elaborate. The upgrade might actually diminish its function."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17-info-3",
+      "type": "info",
+      "title": "The Hello/Goodbye Ritual",
+      "body": "Gottman identified two transitions that predict enormous amounts about relationship quality: how couples greet each other and how they say goodbye.\n\nThe couple who leaves for work with a real moment of connection — eye contact, a real kiss, 'have a good day' that isn't said to the air — carries something warm into their day.\n\nThe couple who returns home and gets a genuine welcome — not just a grunt from the other room — enters an evening where reconnection is possible.\n\nNone of this requires time. It requires presence for thirty seconds.\n\nThirty seconds, twice a day. That's the hello/goodbye ritual. And it changes everything it touches.",
+      "xp": 5
+    },
+    {
+      "id": "d17-good-fit-1",
+      "type": "good_fit",
+      "question": "Which type of ritual feels most missing in your relationship right now?",
+      "options": [
+        "Daily — our everyday moments feel rushed and automatic",
+        "Weekly — we don't have a regular time that's just for us",
+        "Annual — we don't have traditions that mark our relationship across time",
+        "All of the above — ritual is generally underdeveloped for us"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d17-info-4",
+      "type": "info",
+      "title": "The Annual Relationship Review",
+      "body": "One ritual that sets exceptional couples apart: the annual relationship review.\n\nOnce a year — many couples do it on their anniversary or New Year's Eve — you sit together and ask:\n\n• What worked really well this year?\n• What was hard, and how did we handle it?\n• What do we want more of next year?\n• What are we proud of?\n• What do we want to build?\n\nThis isn't a performance review. It's a state-of-us conversation — intentional, reflective, forward-looking.\n\nCouples who do this report feeling more like intentional partners in a shared project, and less like two people who just happened to live together for another year.",
+      "xp": 5
+    },
+    {
+      "id": "d17-mc-2",
+      "type": "mc",
+      "question": "What makes a relationship ritual effective, according to research on lasting couples?",
+      "options": [
+        "It should be expensive and special to signal that the relationship matters",
+        "It should be spontaneous — scheduling removes the romance",
+        "It should be predictable, consistent, and meaningful to both partners",
+        "It should evolve constantly so it never becomes boring"
+      ],
+      "correct": 2,
+      "feedback": [
+        "Expense has nothing to do with it. Couples with very simple, free rituals consistently outperform those who only invest in big gestures.",
+        "Spontaneity has its place, but rituals work precisely because they're scheduled — you don't have to decide whether today is the day. It just is.",
+        "Exactly. Predictability creates anticipation and continuity. Consistency builds identity. Shared meaning creates connection. These three elements are what make a ritual powerful regardless of what it actually is.",
+        "Some evolution is natural, but the core stability of a ritual is part of what makes it work. Constantly changing it loses the continuity that gives it power."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d17-reflection-1",
+      "type": "reflection",
+      "title": "Rituals You Already Have",
+      "prompt": "Before you design new rituals, look at what already exists.\n\nWhat do you and your partner already do that functions as a ritual — something you both look forward to, something that marks 'us'? It might be small. It might be something you haven't consciously labeled.\n\nWhat makes it feel different from a routine? What would be lost if it disappeared?",
+      "minChars": 25,
+      "xp": 10
+    },
+    {
+      "id": "d17-builder-1",
+      "type": "builder",
+      "title": "Design 3 Rituals for Your Relationship",
+      "fields": [
+        {
+          "id": "daily_ritual",
+          "label": "Daily ritual (something that happens every day)",
+          "placeholder": "e.g. A 30-second check-in when we both get home — phones away, just: 'how are you really?'"
+        },
+        {
+          "id": "weekly_ritual",
+          "label": "Weekly ritual (a specific time that's just for us)",
+          "placeholder": "e.g. Sunday morning coffee — no phones, no agenda, just us for an hour"
+        },
+        {
+          "id": "annual_ritual",
+          "label": "Annual ritual (something that marks the passage of time together)",
+          "placeholder": "e.g. Anniversary dinner where we each write down three things we're proud of about our relationship this year"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d17-copy-action-1",
+      "type": "copy_action",
+      "title": "Share Your Ritual Plan",
+      "prompt": "Look at the three rituals you just designed. Write a short message to your partner — or a note you'll share tonight — that invites them into one of these rituals.\n\nKeep it simple and warm: 'I've been thinking about something I'd love for us to try. Would you be open to...'",
+      "xp": 10
+    },
+    {
+      "id": "d17-fillblank-1",
+      "type": "fillblank",
+      "question": "According to Gottman's research, what differentiates rituals from routines is the presence of shared ___.",
+      "answer": "meaning",
+      "xp": 8
+    },
+    {
+      "id": "d17-reflection-2",
+      "type": "reflection",
+      "title": "The Ritual You Most Want",
+      "prompt": "Of the three rituals you designed, which one do you most want to actually happen?\n\nWhat would need to be true for it to stick — not just start, but last? What's the one thing most likely to get in the way, and how will you handle that?",
+      "minChars": 20,
+      "xp": 10
+    },
+    {
+      "id": "d17-completion-1",
+      "type": "completion",
+      "title": "Day 17 Complete",
+      "body": "You now have a ritual plan. The plan is worth nothing. The rituals are worth everything.\n\nStart the daily one tonight.",
+      "xp": 0
+    }
+  ]
+}

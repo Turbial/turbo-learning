@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "unit": "day22",
+  "title": "Day 22: Money Without War",
+  "estMinutes": 15,
+  "steps": [
+    {
+      "id": "d22-info-1",
+      "type": "info",
+      "title": "Week 4: Mission",
+      "body": "Welcome to Week 4.\n\nYou've built safety. You've built connection.\n\nThis week is about mission — the external life you're building together. The decisions you make as a team. The pressures you face as a unit. The vision you're moving toward.\n\nWe start with the #1 source of conflict in long-term relationships: money.\n\nNot because money is everything — but because nothing causes more recurring friction between couples who otherwise love each other than financial disagreement. And because most couples have never had a real money conversation. They've had fights. They haven't had a conversation.",
+      "xp": 5
+    },
+    {
+      "id": "d22-highlight-1",
+      "type": "highlight",
+      "body": "Research by the American Psychological Association consistently ranks money as the leading source of stress in relationships.\n\nNot money itself — the differences in how partners relate to it.\n\nOne person's relationship with money was shaped by scarcity. The other's was shaped by abundance. One grew up watching money cause panic. The other grew up watching it flow freely. One feels safety through savings. The other feels it through experiences.\n\nThose aren't character flaws. They're money stories. And until you know each other's stories, you're not having a money conversation — you're having a collision.",
+      "highlights": ["#1 source of stress", "money stories", "not a money conversation — a collision"],
+      "xp": 5
+    },
+    {
+      "id": "d22-info-2",
+      "type": "info",
+      "title": "The 3 Money Personalities",
+      "body": "Financial therapists have identified three primary money personalities that show up in relationships:\n\nThe Spender: Money is for living. Spending creates joy, experiences, and connection. Delayed gratification feels like deprivation. Often grew up in households where money was used to show love — or where scarcity made spending feel like freedom.\n\nThe Saver: Money is security. Saving creates safety and options. Spending on non-essentials can feel physically uncomfortable. Often grew up in households where financial instability caused real harm.\n\nThe Avoider: Money is a source of anxiety to be not thought about. Bills, budgets, and bank accounts produce dread. Often grew up in households where money was a source of conflict or silence.\n\nMost people have a primary type and elements of the others. Knowing yours — and your partner's — changes every money conversation.",
+      "xp": 5
+    },
+    {
+      "id": "d22-match-1",
+      "type": "match",
+      "title": "Match the Money Personality",
+      "question": "Match each money personality to its core pattern:",
+      "pairs": [
+        { "left": "Spender", "right": "Money is for living — experiences over savings" },
+        { "left": "Saver", "right": "Money is security — saving creates safety and options" },
+        { "left": "Avoider", "right": "Money is anxiety — avoids engaging with finances" }
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-mc-1",
+      "type": "mc",
+      "question": "A Saver married to a Spender will most likely experience conflict when:",
+      "options": [
+        "The Spender makes a large unilateral purchase without discussion",
+        "The Saver suggests reviewing the monthly budget",
+        "Both partners disagree about which savings account to use",
+        "One partner earns more than the other"
+      ],
+      "correct": 0,
+      "feedback": [
+        "Exactly. For a Saver, an unilateral large purchase by a Spender violates both the safety need (financial security) and the partnership need (shared decisions). This is the most common flashpoint between these two types.",
+        "A budget review might cause some eye-rolling from a Spender, but it's unlikely to escalate. The conflict usually comes from spending behavior, not savings conversations.",
+        "This is more of a practical logistics disagreement, not a Saver/Spender collision.",
+        "Income differences can create tension but they're not the core Saver/Spender conflict point — it's how money gets spent and saved, not how much is earned."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-scenario-1",
+      "type": "scenario_card",
+      "title": "The Conversation You Haven't Had",
+      "body": "Most couples who fight about money aren't fighting about money.\n\nThey're fighting about safety, freedom, control, and trust.\n\nWhen the Saver says 'we can't afford this,' what they often mean is: 'I feel afraid when I see our balance drop. I need to know we're secure.'\n\nWhen the Spender says 'you're being controlling about money,' what they often mean is: 'I feel trapped when we can't enjoy what we've worked for. I need to feel like life is worth living now, not just later.'\n\nNeither is wrong. Both are scared.\n\nThe fight ends when you stop arguing about the purchase and start talking about the feelings underneath it."
+    },
+    {
+      "id": "d22-info-3",
+      "type": "info",
+      "title": "The Financial Agreement",
+      "body": "A Financial Agreement isn't a budget. Most budget conversations fail because they focus on numbers before they've addressed values.\n\nA Financial Agreement is a document — usually one page — that captures:\n\n1. Our shared financial values (what we both agree money is for)\n2. Our individual needs (what each of us needs to feel financially safe and alive)\n3. Our decision rules (how we make financial decisions — what requires a conversation, what can be individual)\n4. Our shared goals (where we're trying to get to)\n\nThis conversation is hard to have. It requires both of you to be honest about things you may have kept to yourself. But couples who have a Financial Agreement have dramatically fewer money fights — because they're operating from a shared framework, not colliding from separate ones.",
+      "xp": 5
+    },
+    {
+      "id": "d22-tf-1",
+      "type": "tf",
+      "question": "A Financial Agreement is primarily a detailed budget that outlines how every dollar should be spent.",
+      "correct": false,
+      "feedback": [
+        "Correct — a Financial Agreement is not a budget. It addresses the layer underneath the numbers: shared values, individual needs, decision rules, and shared goals. Budgets often fail because they skip this layer. A Financial Agreement makes budgeting easier because both partners are operating from a shared set of principles.",
+        "Actually, a Financial Agreement specifically focuses on what budgets miss — the values, needs, and decision frameworks that make financial conversations possible. The numbers come after the values."
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d22-mc-2",
+      "type": "mc",
+      "question": "A couple keeps having the same money fight every few months. The most likely root cause is:",
+      "options": [
+        "They don't have enough money to meet both their needs",
+        "They haven't established shared financial values and decision rules",
+        "One partner is financially irresponsible",
+        "They need a stricter budget with more categories"
+      ],
+      "correct": 1,
+      "feedback": [
+        "Income level matters, but couples at all income levels report recurring money fights. The root cause is almost always about values and framework, not the amount.",
+        "Exactly. Recurring money fights are usually a sign that the couple is operating from two separate, unspoken financial frameworks. Every new incident triggers the same collision because the underlying values and decision rules have never been aligned.",
+        "One partner's spending may look irresponsible through the lens of the other's money personality — but that label rarely helps and often hides a values misalignment that's more nuanced.",
+        "More categories in a budget doesn't address the values and decision-making framework that underlies the conflict."
+      ],
+      "xp": 10
+    },
+    {
+      "id": "d22-reflection-1",
+      "type": "reflection",
+      "title": "Your Money Story",
+      "prompt": "Every money personality was shaped by something.\n\nWhat was the money environment you grew up in? Was it abundant or scarce? Was money a source of conflict or something barely discussed? What did money mean — love, security, freedom, danger?\n\nNow: what money personality do you most identify with? And how do you think your upbringing created that relationship with money?\n\nWhat about your partner — what do you know about their money story?",
+      "minChars": 30,
+      "xp": 15
+    },
+    {
+      "id": "d22-builder-1",
+      "type": "builder",
+      "title": "Your Financial Agreement (Draft)",
+      "fields": [
+        {
+          "id": "shared_values",
+          "label": "Our shared financial values (what do we both agree money is ultimately for?)",
+          "placeholder": "e.g. Security for our family, experiences that create memories, and the freedom to not panic about emergencies"
+        },
+        {
+          "id": "individual_needs",
+          "label": "Our individual financial needs (what does each of you need to feel financially okay?)",
+          "placeholder": "e.g. I need a savings buffer of at least 3 months; they need a personal spending budget with no questions asked"
+        },
+        {
+          "id": "decision_rules",
+          "label": "Our decision rules (how will you handle financial decisions, including what threshold requires a joint conversation?)",
+          "placeholder": "e.g. Any purchase over $200 gets mentioned; over $500 gets discussed before it happens"
+        }
+      ],
+      "xp": 15
+    },
+    {
+      "id": "d22-good-fit-1",
+      "type": "good_fit",
+      "question": "Which money personality do you most identify with?",
+      "options": [
+        "Spender — money is for living and enjoying",
+        "Saver — money is security and I'm most comfortable with a cushion",
+        "Avoider — I tend to disengage from financial conversations and decisions",
+        "A mix — I have elements of more than one type"
+      ],
+      "xp": 8
+    },
+    {
+      "id": "d22-reflection-2",
+      "type": "reflection",
+      "title": "The Money Conversation You Need",
+      "prompt": "What is the money conversation you and your partner have been avoiding or keep having badly?\n\nNow that you know both of your money personalities — what's really underneath that conversation? What does each of you actually need in order to feel financially secure and respected?\n\nWhat would a 'we're a team' version of this conversation look like?",
+      "minChars": 25,
+      "xp": 10
+    },
+    {
+      "id": "d22-completion-1",
+      "type": "completion",
+      "title": "Day 22 Complete",
+      "body": "Money fights are rarely about money. They're about fear, freedom, and feeling like a team.\n\nYou've started building the framework. Bring the draft you created to a real conversation this week.",
+      "xp": 0
+    }
+  ]
+}
