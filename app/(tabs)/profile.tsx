@@ -163,6 +163,30 @@ export default function Profile() {
         <Button title="Save changes" onPress={save} />
       </View>
 
+      {/* Quick links */}
+      <View style={s.card}>
+        <Text style={s.sectionTitle}>Explore</Text>
+        {[
+          { label: 'Leagues & Tier Ladder', emoji: '🏆', route: '/leagues' },
+          { label: 'Shield Shop', emoji: '🛡️', route: '/shop' },
+          { label: 'My Portfolio', emoji: '📄', route: '/profile/portfolio' },
+          { label: 'Badge Gallery', emoji: '🏅', route: '/profile/badges' },
+          { label: 'Billing & Subscription', emoji: '💳', route: '/profile/billing' },
+          { label: 'Settings', emoji: '⚙️', route: '/profile/settings' },
+        ].map(({ label, emoji, route }, i, arr) => (
+          <TouchableOpacity
+            key={route}
+            style={[s.navRow, i < arr.length - 1 && s.navRowBorder]}
+            onPress={() => router.push(route as any)}
+            activeOpacity={0.7}
+          >
+            <Text style={s.navEmoji}>{emoji}</Text>
+            <Text style={s.navLabel}>{label}</Text>
+            <Text style={s.navArrow}>›</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
       {/* Sign out */}
       <TouchableOpacity style={s.signOutBtn} onPress={signOut} activeOpacity={0.7}>
         <Text style={s.signOutText}>Sign out</Text>
@@ -243,6 +267,13 @@ const s = StyleSheet.create({
   },
   badgeIcon: { fontSize: 18 },
   badgeName: { fontSize: 13, fontWeight: '600' as const, color: '#374151' },
+
+  // Nav rows
+  navRow:       { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 14 },
+  navRowBorder: { borderBottomWidth: 1, borderBottomColor: '#f3f4f6' },
+  navEmoji:     { fontSize: 20, width: 28 },
+  navLabel:     { flex: 1, fontSize: 15, fontWeight: '600' as const, color: '#1a1a2e' },
+  navArrow:     { fontSize: 20, color: '#9ca3af' },
 
   // Sign out
   signOutBtn: {

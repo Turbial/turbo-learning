@@ -113,6 +113,11 @@ export default function RootLayout() {
               <Stack.Screen name="story" options={{ animation: "slide_from_bottom" }} />
               <Stack.Screen name="graduate/[programSlug]" />
               <Stack.Screen name="admin" options={{ headerShown: false }} />
+              <Stack.Screen name="shop" options={{ animation: "slide_from_right" }} />
+              <Stack.Screen name="leagues" options={{ animation: "slide_from_right" }} />
+              <Stack.Screen name="profile/billing" options={{ animation: "slide_from_right" }} />
+              <Stack.Screen name="profile/badges" options={{ animation: "slide_from_right" }} />
+              <Stack.Screen name="profile/portfolio" options={{ animation: "slide_from_right" }} />
             </Stack>
           </AuthGate>
         </ToastProvider>

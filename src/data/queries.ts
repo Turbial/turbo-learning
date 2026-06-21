@@ -345,3 +345,59 @@ export function useActiveProgramSlug() {
     staleTime: 10 * 60 * 1000,
   });
 }
+
+export function usePaymentHistory(userId?: string) {
+  return useQuery({
+    queryKey: ["payment-history", userId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("payment_history")
+        .select("id, amount_cents, currency, status, stripe_payment_intent, created_at")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      return (data ?? []) as Array<{
+        id: string; amount_cents: number; currency: string;
+        status: string; stripe_payment_intent: string | null; created_at: string;
+      }>;
+    },
+    enabled: !!userId,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+export function useAllBadges() {
+  return useQuery({
+    queryKey: ["all-badges"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("badges")
+        .select("slug, name, icon, unlock_condition");
+      if (error) throw error;
+      return (data ?? []) as Array<{ slug: string; name: string; icon: string | null; unlock_condition: string | null }>;
+    },
+    staleTime: 10 * 60 * 1000,
+  });
+}
+
+export function usePortfolioResponses(userId?: string) {
+  return useQuery({
+    queryKey: ["portfolio", userId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("step_responses")
+        .select("id, step_id, lesson_id, response, created_at")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      return (data ?? []) as Array<{
+        id: string; step_id: string; lesson_id: string | null;
+        response: unknown; created_at: string;
+      }>;
+    },
+    enabled: !!userId,
+    staleTime: 5 * 60 * 1000,
+  });
+}
