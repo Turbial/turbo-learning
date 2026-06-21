@@ -179,6 +179,14 @@ export type StorySceneStep = StepBase & {
   scene?: "office" | "lab" | "space" | "city" | "classroom";
 };
 
+export type StoryChapterStep = StepBase & {
+  type: "story_chapter";
+  episode?: number;
+  act?: string;
+  title: string;
+  subtitle?: string;
+};
+
 export type CompletionStep = StepBase & {
   type: "completion";
   title?: string;
@@ -226,7 +234,8 @@ export type Step =
   | CompletionStep
   | PromptGeneratorStep
   | ChatStep
-  | StorySceneStep;
+  | StorySceneStep
+  | StoryChapterStep;
 
 // ─── Content types ───
 

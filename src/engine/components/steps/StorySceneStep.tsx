@@ -1,353 +1,536 @@
-// Story Mode — cinematic character dialogue scene.
-// Renders a dark immersive panel with animated character + typewriter text.
-// Tap once to skip typewriter; tap again (or Continue button) to advance.
+// Story Mode — full-screen cinematic character scene.
+// Renders in a Modal so it truly covers the entire screen (nav bar, status bar, all).
+// Tap once to skip typewriter; tap again to advance.
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
-  View, Text, TouchableOpacity, StyleSheet, Animated,
-  Dimensions, Platform,
+  View, Text, Modal, TouchableWithoutFeedback, StyleSheet,
+  Animated, Dimensions, Platform,
 } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import Svg, { Circle, Polygon } from 'react-native-svg';
 import type { StepProps } from '../../stepRegistry';
 import type { StorySceneStep as StorySceneStepType } from '../../types';
 
-const { width } = Dimensions.get('window');
+const { width: W, height: H } = Dimensions.get('window');
 
-// ─── Scene backgrounds (dark immersive palettes) ─────────────────────────────
+// ─── Scene palettes ───────────────────────────────────────────────────────────
 
-const SCENES: Record<string, { bg: string; accent: string; skyGlow: string }> = {
-  office:    { bg: '#0d1b2e', accent: '#4a90d9', skyGlow: '#1e3a5f' },
-  lab:       { bg: '#0d0621', accent: '#8b5cf6', skyGlow: '#1a0a3b' },
-  space:     { bg: '#05080d', accent: '#60a5fa', skyGlow: '#0a1a2e' },
-  city:      { bg: '#0a1520', accent: '#34d399', skyGlow: '#1a3040' },
-  classroom: { bg: '#100800', accent: '#f59e0b', skyGlow: '#2d1b00' },
+const SCENES: Record<string, { bg: string; sky: string; accent: string; accentRgb: string }> = {
+  lab:       { bg: '#09041a', sky: '#150b30', accent: '#8b5cf6', accentRgb: '139,92,246' },
+  space:     { bg: '#020810', sky: '#061224', accent: '#38bdf8', accentRgb: '56,189,248' },
+  office:    { bg: '#0b1525', sky: '#1a2e4a', accent: '#60a5fa', accentRgb: '96,165,250' },
+  city:      { bg: '#071510', sky: '#0d2820', accent: '#34d399', accentRgb: '52,211,153' },
+  classroom: { bg: '#160b00', sky: '#2e1800', accent: '#fbbf24', accentRgb: '251,191,36' },
 };
 
-// ─── Character definitions ────────────────────────────────────────────────────
+// ─── Characters ───────────────────────────────────────────────────────────────
 
-const CHARACTERS: Record<string, { emoji: string; name: string; color: string; glow: string }> = {
-  aria:     { emoji: '🤖', name: 'Aria',        color: '#10b981', glow: 'rgba(16,185,129,0.25)' },
-  coach:    { emoji: '👨‍🏫', name: 'Coach',       color: '#3b82f6', glow: 'rgba(59,130,246,0.25)' },
-  villain:  { emoji: '🦹',  name: 'Prometheus', color: '#ef4444', glow: 'rgba(239,68,68,0.25)' },
-  narrator: { emoji: '📖',  name: 'Narrator',   color: '#a78bfa', glow: 'rgba(167,139,250,0.25)' },
+const CHARS: Record<string, { emoji: string; name: string; color: string; rgb: string }> = {
+  aria:     { emoji: '🤖', name: 'ARIA',        color: '#10b981', rgb: '16,185,129' },
+  coach:    { emoji: '👨‍🏫', name: 'COACH',       color: '#60a5fa', rgb: '96,165,250' },
+  villain:  { emoji: '🦹',  name: 'PROMETHEUS', color: '#f87171', rgb: '248,113,113' },
+  narrator: { emoji: '📖',  name: 'NARRATOR',   color: '#c084fc', rgb: '192,132,252' },
 };
 
-// ─── Mood overlays ────────────────────────────────────────────────────────────
-
-const MOOD_EMOJI: Record<string, string> = {
+const MOOD_BADGE: Record<string, string> = {
   excited: '🤩', thinking: '🤔', shocked: '😱', surprised: '😮', happy: '😊',
 };
 
-// ─── Decorative star particles (static, deterministic positions) ──────────────
+// ─── Particle definitions (deterministic, pixel-based) ────────────────────────
 
-const STARS = [
-  { x: '8%', y: '12%', size: 2 }, { x: '18%', y: '5%', size: 1.5 },
-  { x: '30%', y: '18%', size: 2.5 }, { x: '55%', y: '8%', size: 1.5 },
-  { x: '72%', y: '15%', size: 2 }, { x: '85%', y: '6%', size: 1 },
-  { x: '92%', y: '20%', size: 2.5 }, { x: '42%', y: '25%', size: 1 },
-  { x: '65%', y: '3%', size: 1.5 }, { x: '78%', y: '28%', size: 1 },
-];
+const PARTICLES = Array.from({ length: 10 }, (_, i) => ({
+  x:        ((i * 113 + 29) % (W - 30)) + 15,
+  y:        ((i * 79  + 55) % (H * 0.55)) + H * 0.08,
+  travel:   70 + (i * 27 % 90),
+  size:     2 + (i % 3),
+  delay:    i * 280,
+  duration: 3200 + (i * 450 % 2200),
+}));
 
-// ─── Component ────────────────────────────────────────────────────────────────
+// ─── Main component ───────────────────────────────────────────────────────────
 
-export default function StorySceneStep({
-  step,
-  onAnswer,
-  onContinue,
-}: StepProps<StorySceneStepType>) {
-  const sceneKey = step.scene ?? 'lab';
-  const scene = SCENES[sceneKey] ?? SCENES.lab;
-  const char = CHARACTERS[step.character] ?? CHARACTERS.aria;
-  const mood = step.mood && step.mood !== 'neutral' ? MOOD_EMOJI[step.mood] : null;
+export default function StorySceneStep({ step, onAnswer, onContinue, state }: StepProps<StorySceneStepType>) {
+  const scene  = SCENES[step.scene ?? 'lab'] ?? SCENES.lab;
+  const char   = CHARS[step.character]       ?? CHARS.aria;
+  const mood   = step.mood ?? 'neutral';
+  const moodBadge = mood !== 'neutral' ? MOOD_BADGE[mood] : null;
 
+  // ── Animation refs ────────────────────────────────────────────────────────
+  const bgOpacity    = useRef(new Animated.Value(0)).current;
+  const contentOpacity = useRef(new Animated.Value(0)).current;
+
+  const charScale    = useRef(new Animated.Value(0.1)).current;
+  const charOpacity  = useRef(new Animated.Value(0)).current;
+  const charY        = useRef(new Animated.Value(0)).current;   // mood bounce
+  const charX        = useRef(new Animated.Value(0)).current;   // shocked shake
+  const charRotate   = useRef(new Animated.Value(0)).current;   // thinking tilt
+
+  const glowScale    = useRef(new Animated.Value(1)).current;
+  const glowOpacity  = useRef(new Animated.Value(0.5)).current;
+
+  const nameTagY     = useRef(new Animated.Value(16)).current;
+  const nameTagOp    = useRef(new Animated.Value(0)).current;
+
+  const bubbleY      = useRef(new Animated.Value(32)).current;
+  const bubbleOp     = useRef(new Animated.Value(0)).current;
+  const bubbleScale  = useRef(new Animated.Value(0.92)).current;
+
+  const cursorOp     = useRef(new Animated.Value(1)).current;
+  const continueScale = useRef(new Animated.Value(1)).current;
+
+  // Particles — each has a 0→1 progress value
+  const particleAnims = useRef(PARTICLES.map(() => new Animated.Value(0))).current;
+
+  // ── State ─────────────────────────────────────────────────────────────────
   const [displayedText, setDisplayedText] = useState('');
-  const [typingDone, setTypingDone] = useState(false);
-  const [charReady, setCharReady] = useState(false);
+  const [typingDone, setTypingDone]       = useState(false);
+  const [bubbleReady, setBubbleReady]     = useState(false);
 
-  const charScale = useRef(new Animated.Value(0.3)).current;
-  const charOpacity = useRef(new Animated.Value(0)).current;
-  const bubbleY = useRef(new Animated.Value(24)).current;
-  const bubbleOpacity = useRef(new Animated.Value(0)).current;
-  const cursorOpacity = useRef(new Animated.Value(1)).current;
+  // ── Haptics helper ────────────────────────────────────────────────────────
+  const haptic = useCallback((type: 'light' | 'medium' | 'success') => {
+    if (Platform.OS === 'web') return;
+    try {
+      if (type === 'success') Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      else if (type === 'medium') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      else Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    } catch (_) {}
+  }, []);
 
-  // Character entrance → bubble slide-in → start typewriter
+  // ── Scene entry sequence ──────────────────────────────────────────────────
   useEffect(() => {
-    Animated.parallel([
-      Animated.spring(charScale, { toValue: 1, tension: 55, friction: 7, useNativeDriver: true }),
-      Animated.timing(charOpacity, { toValue: 1, duration: 380, useNativeDriver: true }),
-    ]).start(() => {
+    haptic('medium');
+
+    // 1. Fade in background
+    Animated.timing(bgOpacity, { toValue: 1, duration: 450, useNativeDriver: true }).start();
+    Animated.timing(contentOpacity, { toValue: 1, duration: 200, delay: 150, useNativeDriver: true } as any).start();
+
+    // 2. Character springs in
+    Animated.sequence([
+      Animated.delay(300) as any,
       Animated.parallel([
-        Animated.spring(bubbleY, { toValue: 0, tension: 80, friction: 8, useNativeDriver: true }),
-        Animated.timing(bubbleOpacity, { toValue: 1, duration: 280, useNativeDriver: true }),
-      ]).start(() => setCharReady(true));
+        Animated.spring(charScale,   { toValue: 1, tension: 70, friction: 6, useNativeDriver: true }),
+        Animated.timing(charOpacity, { toValue: 1, duration: 300, useNativeDriver: true }),
+      ]),
+    ]).start();
+
+    // 3. Name tag slides in
+    Animated.sequence([
+      Animated.delay(520) as any,
+      Animated.parallel([
+        Animated.spring(nameTagY, { toValue: 0, tension: 90, friction: 8, useNativeDriver: true }),
+        Animated.timing(nameTagOp, { toValue: 1, duration: 250, useNativeDriver: true }),
+      ]),
+    ]).start();
+
+    // 4. Bubble springs in → start typewriter
+    Animated.sequence([
+      Animated.delay(680) as any,
+      Animated.parallel([
+        Animated.spring(bubbleY,    { toValue: 0,   tension: 75, friction: 7, useNativeDriver: true }),
+        Animated.spring(bubbleScale,{ toValue: 1,   tension: 75, friction: 7, useNativeDriver: true }),
+        Animated.timing(bubbleOp,   { toValue: 1, duration: 280, useNativeDriver: true }),
+      ]),
+    ]).start(() => setBubbleReady(true));
+
+    // 5. Glow ring breathe (loop)
+    Animated.loop(Animated.sequence([
+      Animated.parallel([
+        Animated.timing(glowScale,   { toValue: 1.22, duration: 1600, useNativeDriver: true }),
+        Animated.timing(glowOpacity, { toValue: 1.0,  duration: 1600, useNativeDriver: true }),
+      ]),
+      Animated.parallel([
+        Animated.timing(glowScale,   { toValue: 0.95, duration: 1600, useNativeDriver: true }),
+        Animated.timing(glowOpacity, { toValue: 0.45, duration: 1600, useNativeDriver: true }),
+      ]),
+    ])).start();
+
+    // 6. Particles — staggered rising loops
+    PARTICLES.forEach((p, i) => {
+      const tid = setTimeout(() => {
+        Animated.loop(
+          Animated.timing(particleAnims[i], { toValue: 1, duration: p.duration, useNativeDriver: true })
+        ).start();
+      }, p.delay);
+      return () => clearTimeout(tid);
     });
   }, []);
 
-  // Typewriter
+  // ── Mood-reactive character animation ────────────────────────────────────
   useEffect(() => {
-    if (!charReady) return;
+    let anim: Animated.CompositeAnimation | null = null;
+
+    if (mood === 'shocked') {
+      anim = Animated.loop(Animated.sequence([
+        Animated.timing(charX, { toValue: -7, duration: 55, useNativeDriver: true }),
+        Animated.timing(charX, { toValue:  7, duration: 55, useNativeDriver: true }),
+        Animated.timing(charX, { toValue: -5, duration: 55, useNativeDriver: true }),
+        Animated.timing(charX, { toValue:  5, duration: 55, useNativeDriver: true }),
+        Animated.timing(charX, { toValue:  0, duration: 55, useNativeDriver: true }),
+        Animated.timing(charX, { toValue:  0, duration: 1400, useNativeDriver: true }), // pause
+      ]));
+    } else if (mood === 'excited') {
+      anim = Animated.loop(Animated.sequence([
+        Animated.timing(charY, { toValue: -14, duration: 320, useNativeDriver: true }),
+        Animated.timing(charY, { toValue:   0, duration: 320, useNativeDriver: true }),
+        Animated.timing(charY, { toValue: -10, duration: 280, useNativeDriver: true }),
+        Animated.timing(charY, { toValue:   0, duration: 280, useNativeDriver: true }),
+        Animated.timing(charY, { toValue:   0, duration: 200, useNativeDriver: true }), // rest
+      ]));
+    } else if (mood === 'thinking') {
+      // gentle float + slow tilt
+      anim = Animated.loop(Animated.sequence([
+        Animated.parallel([
+          Animated.timing(charY,      { toValue: -6,  duration: 1100, useNativeDriver: true }),
+          Animated.timing(charRotate, { toValue:  5,  duration: 1100, useNativeDriver: true }),
+        ]),
+        Animated.parallel([
+          Animated.timing(charY,      { toValue: 0,  duration: 1100, useNativeDriver: true }),
+          Animated.timing(charRotate, { toValue: -5, duration: 1100, useNativeDriver: true }),
+        ]),
+        Animated.timing(charRotate,   { toValue: 0,  duration: 300,  useNativeDriver: true }),
+      ]));
+    } else {
+      // default: calm bob
+      anim = Animated.loop(Animated.sequence([
+        Animated.timing(charY, { toValue: -7, duration: 800, useNativeDriver: true }),
+        Animated.timing(charY, { toValue:  0, duration: 800, useNativeDriver: true }),
+      ]));
+    }
+    anim.start();
+    return () => anim?.stop();
+  }, [mood]);
+
+  // ── Typewriter ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!bubbleReady) return;
     let i = 0;
     const len = step.dialogue.length;
-    const msPerChar = len > 120 ? 14 : len > 60 ? 18 : 22;
+    const ms  = len > 130 ? 13 : len > 70 ? 17 : 22;
     const timer = setInterval(() => {
       i++;
       setDisplayedText(step.dialogue.slice(0, i));
-      if (i >= len) { clearInterval(timer); setTypingDone(true); }
-    }, msPerChar);
+      if (i >= len) {
+        clearInterval(timer);
+        setTypingDone(true);
+        haptic('success');
+      }
+    }, ms);
     return () => clearInterval(timer);
-  }, [charReady, step.dialogue]);
+  }, [bubbleReady, step.dialogue]);
 
-  // Cursor blink when typing
+  // ── Cursor blink ──────────────────────────────────────────────────────────
   useEffect(() => {
-    if (typingDone) return;
-    const blink = Animated.loop(
-      Animated.sequence([
-        Animated.timing(cursorOpacity, { toValue: 0, duration: 400, useNativeDriver: true }),
-        Animated.timing(cursorOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
-      ])
-    );
+    if (typingDone) { cursorOp.setValue(0); return; }
+    const blink = Animated.loop(Animated.sequence([
+      Animated.timing(cursorOp, { toValue: 0, duration: 380, useNativeDriver: true }),
+      Animated.timing(cursorOp, { toValue: 1, duration: 380, useNativeDriver: true }),
+    ]));
     blink.start();
     return () => blink.stop();
   }, [typingDone]);
 
-  const handleTap = () => {
+  // ── Continue hint pulse ───────────────────────────────────────────────────
+  useEffect(() => {
+    if (!typingDone) return;
+    const pulse = Animated.loop(Animated.sequence([
+      Animated.timing(continueScale, { toValue: 1.06, duration: 550, useNativeDriver: true }),
+      Animated.timing(continueScale, { toValue: 1.00, duration: 550, useNativeDriver: true }),
+    ]));
+    pulse.start();
+    return () => pulse.stop();
+  }, [typingDone]);
+
+  // ── Tap handler ───────────────────────────────────────────────────────────
+  const handleTap = useCallback(() => {
     if (!typingDone) {
       setDisplayedText(step.dialogue);
       setTypingDone(true);
+      haptic('success');
     } else {
+      haptic('light');
       onAnswer('seen');
       onContinue();
     }
-  };
+  }, [typingDone, step.dialogue, onAnswer, onContinue]);
+
+  // ── Derived values ────────────────────────────────────────────────────────
+  const rotateStr = charRotate.interpolate({ inputRange: [-10, 0, 10], outputRange: ['-10deg', '0deg', '10deg'] });
 
   return (
-    <TouchableOpacity
-      style={[styles.container, { backgroundColor: scene.bg }]}
-      onPress={handleTap}
-      activeOpacity={1}
-    >
-      {/* Sky gradient layer */}
-      <View style={[styles.skyGlow, { backgroundColor: scene.skyGlow }]} />
+    <Modal visible transparent statusBarTranslucent animationType="none">
+      <TouchableWithoutFeedback onPress={handleTap}>
+        <Animated.View style={[styles.root, { opacity: bgOpacity, backgroundColor: scene.bg }]}>
 
-      {/* Decorative stars */}
-      {STARS.map((s, i) => (
-        <View
-          key={i}
-          style={[
-            styles.star,
-            {
-              left: s.x as any,
-              top: s.y as any,
-              width: s.size,
-              height: s.size,
-              borderRadius: s.size / 2,
-              backgroundColor: scene.accent,
-              opacity: 0.5,
-            },
-          ]}
-        />
-      ))}
+          {/* Sky gradient layer */}
+          <View style={[styles.sky, { backgroundColor: scene.sky }]} />
 
-      {/* Story Mode badge */}
-      <View style={styles.header}>
-        <View style={[styles.badge, { borderColor: char.color + '60' }]}>
-          <Text style={[styles.badgeText, { color: char.color }]}>🎬 Story Mode</Text>
-        </View>
-      </View>
+          {/* Floating SVG particles */}
+          <View style={StyleSheet.absoluteFill} pointerEvents="none">
+            {PARTICLES.map((p, i) => {
+              const opacity = particleAnims[i].interpolate({
+                inputRange: [0, 0.15, 0.80, 1],
+                outputRange: [0, 0.7, 0.7, 0],
+              });
+              const translateY = particleAnims[i].interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -p.travel],
+              });
+              return (
+                <Animated.View
+                  key={i}
+                  style={{
+                    position: 'absolute',
+                    left: p.x,
+                    top:  p.y,
+                    opacity,
+                    transform: [{ translateY }],
+                  }}
+                >
+                  <Svg width={p.size * 2} height={p.size * 2}>
+                    <Circle
+                      cx={p.size} cy={p.size} r={p.size}
+                      fill={scene.accent}
+                    />
+                  </Svg>
+                </Animated.View>
+              );
+            })}
+          </View>
 
-      {/* Character area */}
-      <View style={styles.charArea}>
-        <Animated.View
-          style={[
-            styles.charWrapper,
-            { opacity: charOpacity, transform: [{ scale: charScale }] },
-          ]}
-        >
-          {/* Glow ring */}
-          <View style={[styles.glowRing, { backgroundColor: char.glow, shadowColor: char.color }]} />
-          {/* Emoji */}
-          <Text style={styles.charEmoji}>{char.emoji}</Text>
-          {/* Mood overlay */}
-          {mood && (
-            <View style={styles.moodBubble}>
-              <Text style={styles.moodEmoji}>{mood}</Text>
+          {/* Header: story badge + lesson context */}
+          <Animated.View style={[styles.header, { opacity: contentOpacity }]}>
+            <View style={[styles.storyBadge, { borderColor: char.color + '55' }]}>
+              <Text style={[styles.storyBadgeText, { color: char.color }]}>🎬 STORY MODE</Text>
             </View>
-          )}
+            {state.lessonTitle && (
+              <Text style={styles.lessonLabel} numberOfLines={1}>{state.lessonTitle}</Text>
+            )}
+          </Animated.View>
+
+          {/* Character */}
+          <Animated.View style={[styles.charArea, { opacity: contentOpacity }]}>
+            <Animated.View style={{
+              transform: [
+                { scale: charScale },
+                { translateY: Animated.add(charY, new Animated.Value(0)) },
+                { translateX: charX },
+                { rotate: rotateStr },
+              ],
+              opacity: charOpacity,
+              alignItems: 'center',
+            }}>
+              {/* Glow ring */}
+              <Animated.View style={[
+                styles.glowRing,
+                {
+                  backgroundColor: `rgba(${char.rgb},0.18)`,
+                  shadowColor: char.color,
+                  transform: [{ scale: glowScale }],
+                  opacity: glowOpacity,
+                },
+              ]} />
+
+              {/* Outer accent ring */}
+              <View style={[styles.accentRing, { borderColor: char.color + '40' }]} />
+
+              {/* Character emoji */}
+              <Text style={styles.charEmoji}>{char.emoji}</Text>
+
+              {/* Mood badge */}
+              {moodBadge && (
+                <View style={styles.moodBadge}>
+                  <Text style={styles.moodBadgeText}>{moodBadge}</Text>
+                </View>
+              )}
+            </Animated.View>
+
+            {/* Name tag */}
+            <Animated.View style={[
+              styles.nameTag,
+              { backgroundColor: char.color, transform: [{ translateY: nameTagY }], opacity: nameTagOp },
+            ]}>
+              <Text style={styles.nameTagText}>{char.name}</Text>
+            </Animated.View>
+          </Animated.View>
+
+          {/* Dialogue bubble */}
+          <Animated.View style={[
+            styles.bubble,
+            {
+              borderColor: char.color + '40',
+              opacity: bubbleOp,
+              transform: [{ translateY: bubbleY }, { scale: bubbleScale }],
+            },
+          ]}>
+            {/* Bubble pointer — SVG triangle pointing upward */}
+            <View style={styles.pointerWrap} pointerEvents="none">
+              <Svg width={18} height={10}>
+                <Polygon
+                  points="9,0 18,10 0,10"
+                  fill="rgba(255,255,255,0.07)"
+                  stroke={char.color + '40'}
+                  strokeWidth={1}
+                />
+              </Svg>
+            </View>
+
+            {/* Dialogue text */}
+            <Text style={styles.dialogueText}>
+              {displayedText}
+              {!typingDone && (
+                <Animated.Text style={[styles.cursor, { color: char.color, opacity: cursorOp }]}>
+                  {'  ▋'}
+                </Animated.Text>
+              )}
+            </Text>
+          </Animated.View>
+
+          {/* Continue indicator */}
+          <View style={styles.footer}>
+            {typingDone ? (
+              <Animated.View style={{ transform: [{ scale: continueScale }] }}>
+                <Text style={[styles.continueText, { color: char.color }]}>Tap to continue →</Text>
+              </Animated.View>
+            ) : (
+              <Text style={[styles.skipText, { color: char.color + '70' }]}>Tap to skip</Text>
+            )}
+          </View>
+
         </Animated.View>
-
-        {/* Name tag */}
-        <Animated.View style={[styles.nameTag, { backgroundColor: char.color, opacity: charOpacity }]}>
-          <Text style={styles.nameTagText}>{char.name}</Text>
-        </Animated.View>
-      </View>
-
-      {/* Dialogue bubble */}
-      <Animated.View
-        style={[
-          styles.bubble,
-          {
-            opacity: bubbleOpacity,
-            transform: [{ translateY: bubbleY }],
-            borderColor: char.color + '35',
-          },
-        ]}
-      >
-        {/* Triangle pointer pointing up at character */}
-        <View style={[styles.bubblePointer, { borderBottomColor: 'rgba(255,255,255,0.07)' }]} />
-
-        <Text style={styles.dialogueText}>
-          {displayedText}
-          {!typingDone && (
-            <Animated.Text style={[styles.cursor, { color: char.color, opacity: cursorOpacity }]}>
-              {' '}▋
-            </Animated.Text>
-          )}
-        </Text>
-      </Animated.View>
-
-      {/* Continue hint */}
-      <View style={styles.footer}>
-        {typingDone ? (
-          <Text style={[styles.continueHint, { color: char.color }]}>Tap to continue →</Text>
-        ) : (
-          <Text style={[styles.skipHint, { color: char.color + '80' }]}>Tap to skip</Text>
-        )}
-      </View>
-    </TouchableOpacity>
+      </TouchableWithoutFeedback>
+    </Modal>
   );
 }
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  container: {
-    // Negative margins cancel the stepArea's padding: 20 so we go edge-to-edge
-    margin: -20,
+  root: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    overflow: 'hidden',
-    paddingBottom: 20,
-    minHeight: 480,
+    paddingBottom: Platform.OS === 'ios' ? 34 : 24,
   },
-  skyGlow: {
-    position: 'absolute',
-    top: 0, left: 0, right: 0,
-    height: '52%',
-    opacity: 0.55,
-  },
-  star: {
-    position: 'absolute',
+  sky: {
+    ...StyleSheet.absoluteFill,
+    height: '55%',
+    top: 0,
+    opacity: 0.6,
   },
   header: {
-    width: '100%',
+    paddingTop: Platform.OS === 'ios' ? 56 : 40,
     alignItems: 'center',
-    paddingTop: Platform.OS === 'ios' ? 10 : 16,
-    zIndex: 2,
+    gap: 8,
   },
-  badge: {
+  storyBadge: {
     borderWidth: 1,
     borderRadius: 20,
     paddingHorizontal: 14,
     paddingVertical: 5,
-    backgroundColor: 'rgba(0,0,0,0.35)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
   },
-  badgeText: {
+  storyBadgeText: {
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 1.2,
+  },
+  lessonLabel: {
     fontSize: 11,
-    fontWeight: '700',
-    letterSpacing: 0.6,
+    color: 'rgba(200,210,230,0.5)',
+    fontWeight: '600',
+    letterSpacing: 0.4,
+    maxWidth: W - 60,
   },
   charArea: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  charWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    marginBottom: 10,
+    gap: 10,
   },
   glowRing: {
     position: 'absolute',
-    width: 112,
-    height: 112,
-    borderRadius: 56,
+    width: 130,
+    height: 130,
+    borderRadius: 65,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.9,
-    shadowRadius: 28,
-    elevation: 10,
+    shadowOpacity: 0.8,
+    shadowRadius: 30,
+    elevation: 12,
+  },
+  accentRing: {
+    position: 'absolute',
+    width: 108,
+    height: 108,
+    borderRadius: 54,
+    borderWidth: 1.5,
   },
   charEmoji: {
-    fontSize: 76,
+    fontSize: 80,
     lineHeight: 96,
     zIndex: 1,
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 12,
   },
-  moodBubble: {
+  moodBadge: {
     position: 'absolute',
     top: -4,
-    right: -18,
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    right: -16,
+    backgroundColor: 'rgba(5,5,15,0.75)',
     borderRadius: 14,
     padding: 4,
     zIndex: 2,
   },
-  moodEmoji: { fontSize: 20 },
+  moodBadgeText: { fontSize: 22 },
   nameTag: {
     borderRadius: 20,
-    paddingHorizontal: 16,
+    paddingHorizontal: 18,
     paddingVertical: 5,
   },
   nameTagText: {
     color: '#fff',
-    fontSize: 12,
-    fontWeight: '800',
-    letterSpacing: 0.6,
+    fontSize: 11,
+    fontWeight: '900',
+    letterSpacing: 1.5,
   },
   bubble: {
     backgroundColor: 'rgba(255,255,255,0.07)',
     borderWidth: 1,
-    borderRadius: 20,
-    padding: 20,
-    marginHorizontal: 16,
-    width: width - 52,
+    borderRadius: 22,
+    padding: 22,
+    marginHorizontal: 18,
+    width: W - 36,
     position: 'relative',
-    marginBottom: 4,
   },
-  bubblePointer: {
+  pointerWrap: {
     position: 'absolute',
-    top: -9,
+    top: -10,
     alignSelf: 'center',
-    width: 0,
-    height: 0,
-    borderLeftWidth: 9,
-    borderRightWidth: 9,
-    borderBottomWidth: 9,
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
   },
   dialogueText: {
-    color: '#e8edf2',
-    fontSize: 16,
-    lineHeight: 25,
+    color: '#dde8f5',
+    fontSize: 16.5,
+    lineHeight: 26,
     fontWeight: '500',
-    letterSpacing: 0.15,
+    letterSpacing: 0.2,
   },
   cursor: {
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   footer: {
-    height: 28,
+    paddingBottom: 8,
+    height: 36,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  continueHint: {
-    fontSize: 12,
-    fontWeight: '700',
-    letterSpacing: 0.5,
-    opacity: 0.85,
+  continueText: {
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.6,
   },
-  skipHint: {
+  skipText: {
     fontSize: 11,
     fontWeight: '600',
     letterSpacing: 0.4,

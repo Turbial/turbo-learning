@@ -5,6 +5,14 @@
   "estMinutes": 15,
   "steps": [
     {
+      "id": "d1-chapter-1",
+      "type": "story_chapter",
+      "episode": 1,
+      "act": "Act I · The Foundation",
+      "title": "What AI Actually Is",
+      "subtitle": "And why the real power has always been yours"
+    },
+    {
       "id": "d1-story-1",
       "type": "story_scene",
       "character": "aria",

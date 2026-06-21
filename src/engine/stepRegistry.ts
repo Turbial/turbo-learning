@@ -51,6 +51,7 @@ import EngineReminderSetupStep from "./components/steps/ReminderSetupStep";
 import EngineCompletionStep from "./components/steps/CompletionStep";
 import PromptGenerator from "../components/steps/PromptGenerator";
 import StorySceneStep from "./components/steps/StorySceneStep";
+import StoryChapterStep from "./components/steps/StoryChapterStep";
 
 // ─── Scoring helpers ───
 
@@ -260,5 +261,9 @@ export const stepRegistry: Record<Step["type"], StepHandler<any>> = {
   story_scene: {
     component: StorySceneStep as React.ComponentType<StepProps<any>>,
     behavior: { requiresInteraction: true },
+  },
+  story_chapter: {
+    component: StoryChapterStep as React.ComponentType<StepProps<any>>,
+    behavior: { requiresInteraction: true }, // self-advances internally
   },
 };
