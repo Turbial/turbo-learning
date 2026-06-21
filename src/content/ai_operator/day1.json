@@ -5,6 +5,14 @@
   "estMinutes": 15,
   "steps": [
     {
+      "id": "d1-story-1",
+      "type": "story_scene",
+      "character": "aria",
+      "mood": "excited",
+      "scene": "lab",
+      "dialogue": "Welcome, operator. I'm Aria — your AI guide through this program.\n\nForget the hype. Forget the fear. By the time we're done today, you'll see AI for what it actually is.\n\nSpoiler: it's simpler than you think — and more powerful than you've been told."
+    },
+    {
       "id": "d1-info-1",
       "type": "info",
       "title": "Welcome to Day 1",
@@ -34,6 +42,14 @@
         "Close, but not quite. While AI can interact with databases, its core mechanism is prediction — not retrieval."
       ],
       "xp": 10
+    },
+    {
+      "id": "d1-story-2",
+      "type": "story_scene",
+      "character": "aria",
+      "mood": "happy",
+      "scene": "lab",
+      "dialogue": "Exactly. A prediction engine.\n\nMost people stop there and use AI as a fancy search box. But you're not here for that.\n\nLet me show you what the real job impact looks like — and why the question most people ask is completely wrong."
     },
     {
       "id": "d1-scenario-1",
@@ -82,6 +98,14 @@
       "body": "The operator mindset: You don't use AI. You direct it.\n\nYou're not asking AI to do your work. You're building systems where AI executes, you decide, and the output is better than either could produce alone.\n\nThis is the difference between being replaced and being amplified.",
       "highlights": ["You don't use AI. You direct it.", "building systems", "replaced and being amplified"],
       "xp": 5
+    },
+    {
+      "id": "d1-story-3",
+      "type": "story_scene",
+      "character": "aria",
+      "mood": "thinking",
+      "scene": "lab",
+      "dialogue": "Before you move on, I want you to think about something personal.\n\nThe best operators I've seen? They all started by identifying one task they hated doing repeatedly. Then they handed it to AI.\n\nWhat's yours?"
     },
     {
       "id": "d1-reflection-1",

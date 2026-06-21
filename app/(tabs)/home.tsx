@@ -112,6 +112,20 @@ function HomeScreenMobile() {
           </View>
         )}
 
+        {/* Story Mode banner */}
+        <TouchableOpacity
+          style={styles.storyBanner}
+          onPress={() => router.push("/story")}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.storyBannerIcon}>🎬</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.storyBannerTitle}>Story Mode</Text>
+            <Text style={styles.storyBannerSub}>Experience Day 1 as an interactive story</Text>
+          </View>
+          <Text style={styles.storyBannerArrow}>→</Text>
+        </TouchableOpacity>
+
         {/* Journey */}
         <View style={styles.journey}>
           <View style={[styles.journeyHeader, { justifyContent: 'center' }]}>
@@ -339,6 +353,30 @@ const styles = StyleSheet.create({
   statIcon: { fontSize: 18, marginBottom: 4 },
   statValue: { fontSize: 20, fontWeight: "800" as const, color: "#fff" },
   statLabel: { fontSize: 10, color: "rgba(255,255,255,0.65)", marginTop: 2, fontWeight: "700" as const, textTransform: 'uppercase' as const, letterSpacing: 0.8 },
+
+  // Story Mode banner
+  storyBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: '#0d0621',
+    marginHorizontal: 20,
+    marginTop: 16,
+    marginBottom: 4,
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: 'rgba(139,92,246,0.35)',
+    shadowColor: '#8b5cf6',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  storyBannerIcon: { fontSize: 28 },
+  storyBannerTitle: { fontSize: 14, fontWeight: '800' as const, color: '#e8edf2' },
+  storyBannerSub: { fontSize: 11, color: '#8b9bb4', marginTop: 1 },
+  storyBannerArrow: { fontSize: 18, color: '#a78bfa', fontWeight: '700' as const },
 
   // Streak risk
   streakRisk: {

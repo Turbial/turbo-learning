@@ -110,6 +110,7 @@ export default function RootLayout() {
               <Stack.Screen name="profile/settings" />
               <Stack.Screen name="programs/index" />
               <Stack.Screen name="review" />
+              <Stack.Screen name="story" options={{ animation: "slide_from_bottom" }} />
               <Stack.Screen name="graduate/[programSlug]" />
               <Stack.Screen name="admin" options={{ headerShown: false }} />
             </Stack>

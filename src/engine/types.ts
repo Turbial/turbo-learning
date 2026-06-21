@@ -171,6 +171,14 @@ export type ChatStep = StepBase & {
   systemPrompt?: string;
 };
 
+export type StorySceneStep = StepBase & {
+  type: "story_scene";
+  character: "aria" | "coach" | "villain" | "narrator";
+  mood?: "happy" | "excited" | "thinking" | "shocked" | "surprised" | "neutral";
+  dialogue: string;
+  scene?: "office" | "lab" | "space" | "city" | "classroom";
+};
+
 export type CompletionStep = StepBase & {
   type: "completion";
   title?: string;
@@ -217,7 +225,8 @@ export type Step =
   | ReminderStep
   | CompletionStep
   | PromptGeneratorStep
-  | ChatStep;
+  | ChatStep
+  | StorySceneStep;
 
 // ─── Content types ───
 
