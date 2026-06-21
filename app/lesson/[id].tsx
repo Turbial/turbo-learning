@@ -25,6 +25,7 @@ import aiDay4 from "../../src/content/ai_operator/day4.json";
 import aiDay5 from "../../src/content/ai_operator/day5.json";
 import aiDay6 from "../../src/content/ai_operator/day6.json";
 import aiDay7 from "../../src/content/ai_operator/day7.json";
+import aiDay13 from "../../src/content/ai_operator/day13.json";
 import duoDay1 from "../../src/content/duo/day1.json";
 import duoDay2 from "../../src/content/duo/day2.json";
 import duoDay3 from "../../src/content/duo/day3.json";
@@ -35,7 +36,7 @@ import duoDay7 from "../../src/content/duo/day7.json";
 
 const DAY_CONTENT: Record<string, any> = {
   "ai-1": aiDay1, "ai-2": aiDay2, "ai-3": aiDay3,
-  "ai-4": aiDay4, "ai-5": aiDay5, "ai-6": aiDay6, "ai-7": aiDay7,
+  "ai-4": aiDay4, "ai-5": aiDay5, "ai-6": aiDay6, "ai-7": aiDay7, "ai-13": aiDay13,
   "duo-1": duoDay1, "duo-2": duoDay2, "duo-3": duoDay3,
   "duo-4": duoDay4, "duo-5": duoDay5, "duo-6": duoDay6,
   "duo-7": duoDay7,

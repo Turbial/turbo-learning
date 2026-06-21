@@ -15,7 +15,7 @@ const AI_OPERATOR_UNITS: Unit[] = Array.from({ length: 28 }, (_, i) => ({
     "Quality Control Systems", "Scaling Your Workflows",
     "Team AI Onboarding", "Advanced Prompt Patterns",
     "API Integration Basics", "Building AI Assistants",
-    "Data-Driven Decisions", "Automation Auditing",
+    "AI for Customer Support", "Automation Auditing",
     "Client-Facing AI", "Security & Privacy",
     "Measuring AI ROI", "Workflow Optimization",
     "Cross-Platform AI", "Enterprise AI Patterns",
