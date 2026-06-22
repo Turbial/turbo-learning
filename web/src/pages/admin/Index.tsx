@@ -70,8 +70,8 @@ export default function AdminIndex() {
             <div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto -mx-6 px-6">
+            <table className="w-full min-w-[500px] text-sm">
               <thead>
                 <tr className="text-left border-b border-gray-100">
                   <th className="pb-2 text-xs font-medium text-gray-500 uppercase tracking-wide">User</th>

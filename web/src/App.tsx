@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from './data/useAuth'
 import AppLayout from './components/layout/AppLayout'
+import { ToastProvider } from './contexts/ToastContext'
+import ErrorBoundary from './components/ui/ErrorBoundary'
 
 // Auth pages
 import Login from './pages/auth/Login'
@@ -148,10 +150,14 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   )
 }

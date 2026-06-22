@@ -110,44 +110,46 @@ function LeaderboardTable({
 
   return (
     <Card padding="none">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-gray-100">
-            <th className="text-left text-xs font-semibold text-gray-500 px-6 py-3">Rank</th>
-            <th className="text-left text-xs font-semibold text-gray-500 px-4 py-3">Learner</th>
-            <th className="text-right text-xs font-semibold text-gray-500 px-6 py-3">{xpLabel}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => {
-            const isMe = row.user_id === currentUserId
-            const rankEmoji = getRankEmoji(row.rank)
-            return (
-              <tr
-                key={row.user_id}
-                className={`border-b border-gray-50 last:border-0 ${isMe ? 'bg-green-50' : 'hover:bg-gray-50'}`}
-              >
-                <td className="px-6 py-3 text-sm font-bold text-gray-500 w-16">
-                  {rankEmoji ? <span className="text-lg">{rankEmoji}</span> : `#${row.rank}`}
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <Avatar name={row.display_name} size="sm" />
-                    <span className={`text-sm font-medium ${isMe ? 'text-green-700 font-bold' : 'text-gray-900'}`}>
-                      {row.display_name}
-                      {isMe && <span className="ml-1 text-xs text-green-600">(you)</span>}
-                    </span>
-                  </div>
-                </td>
-                <td className="px-6 py-3 text-right">
-                  <span className="text-sm font-bold text-gray-900">{row.xp.toLocaleString()}</span>
-                  <span className="text-xs text-gray-400 ml-1">XP</span>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto -mx-6 px-6">
+        <table className="w-full min-w-[500px] text-sm">
+          <thead>
+            <tr className="border-b border-gray-100">
+              <th className="text-left text-xs font-semibold text-gray-500 px-6 py-3">Rank</th>
+              <th className="text-left text-xs font-semibold text-gray-500 px-4 py-3">Learner</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-6 py-3">{xpLabel}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => {
+              const isMe = row.user_id === currentUserId
+              const rankEmoji = getRankEmoji(row.rank)
+              return (
+                <tr
+                  key={row.user_id}
+                  className={`border-b border-gray-50 last:border-0 ${isMe ? 'bg-green-50' : 'hover:bg-gray-50'}`}
+                >
+                  <td className="px-6 py-3 text-sm font-bold text-gray-500 w-16">
+                    {rankEmoji ? <span className="text-lg">{rankEmoji}</span> : `#${row.rank}`}
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <Avatar name={row.display_name} size="sm" />
+                      <span className={`text-sm font-medium min-w-0 truncate ${isMe ? 'text-green-700 font-bold' : 'text-gray-900'}`}>
+                        {row.display_name}
+                        {isMe && <span className="ml-1 text-xs text-green-600">(you)</span>}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-3 text-right">
+                    <span className="text-sm font-bold text-gray-900">{row.xp.toLocaleString()}</span>
+                    <span className="text-xs text-gray-400 ml-1">XP</span>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </Card>
   )
 }

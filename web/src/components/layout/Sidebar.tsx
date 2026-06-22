@@ -31,7 +31,12 @@ const bottomItems = [
   { to: '/pricing', label: 'Upgrade', icon: '⭐' },
 ]
 
-export default function Sidebar() {
+interface SidebarProps {
+  open?: boolean
+  onClose?: () => void
+}
+
+export default function Sidebar({ open = false, onClose }: SidebarProps) {
   const { signOut } = useAuth()
   const { data: profile } = useProfile()
   const navigate = useNavigate()
@@ -49,7 +54,20 @@ export default function Sidebar() {
   const levelTotal = nextLevelXp - currentLevelXp
 
   return (
-    <aside className="w-60 min-h-screen bg-gray-900 text-white flex flex-col fixed left-0 top-0 bottom-0 z-10 overflow-y-auto">
+    <aside
+      className={`fixed left-0 top-0 h-screen w-60 bg-gray-900 text-white flex flex-col z-40 overflow-y-auto transition-transform duration-300 ${
+        open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}
+    >
+      {/* Mobile close button */}
+      <button
+        className="md:hidden absolute top-4 right-4 text-gray-400 hover:text-white p-1"
+        onClick={onClose}
+        aria-label="Close menu"
+      >
+        <span className="text-xl leading-none">×</span>
+      </button>
+
       {/* Brand */}
       <div className="px-5 py-6 border-b border-gray-800">
         <NavLink to="/" className="flex items-center gap-2 no-underline">
