@@ -1,13 +1,15 @@
 import { useAuth } from '../data/useAuth'
 import { useMyLeague, TIER_INFO } from '../data/useLeagues'
 import { Card } from '../components/ui/Card'
+import { Skeleton } from '../components/ui/Skeleton'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 const TIER_ORDER = ['bronze', 'silver', 'gold', 'diamond', 'master']
 
 function RankBadge({ rank }: { rank: number }) {
-  if (rank === 1) return <span className="text-xl">🥇</span>
-  if (rank === 2) return <span className="text-xl">🥈</span>
-  if (rank === 3) return <span className="text-xl">🥉</span>
+  if (rank === 1) return <span className="text-xl" role="img" aria-label="Gold medal">🥇</span>
+  if (rank === 2) return <span className="text-xl" role="img" aria-label="Silver medal">🥈</span>
+  if (rank === 3) return <span className="text-xl" role="img" aria-label="Bronze medal">🥉</span>
   return <span className="text-sm font-bold text-gray-500 w-6 text-center">#{rank}</span>
 }
 
@@ -24,6 +26,7 @@ function getNextReset(): string {
 }
 
 export default function Leagues() {
+  usePageTitle('My League')
   const { user } = useAuth()
   const { data: league, isLoading, error } = useMyLeague(user?.id)
 
@@ -34,8 +37,11 @@ export default function Leagues() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+      <div className="max-w-2xl mx-auto space-y-4">
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-40 w-full rounded-2xl" />
+        <Skeleton className="h-48 w-full rounded-2xl" />
+        <Skeleton className="h-48 w-full rounded-2xl" />
       </div>
     )
   }
@@ -63,7 +69,7 @@ export default function Leagues() {
           <div>
             <p className="text-white/70 text-sm font-medium mb-1">Current Tier</p>
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              {tierInfo.emoji} {tierInfo.label} League
+              <span aria-hidden="true">{tierInfo.emoji}</span> {tierInfo.label} League
             </h2>
           </div>
           <div className="text-right">
@@ -98,7 +104,7 @@ export default function Leagues() {
                 key={t}
                 className={`flex items-center gap-3 p-3 rounded-xl ${isCurrentTier ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}`}
               >
-                <span className="text-xl">{info.emoji}</span>
+                <span className="text-xl" aria-hidden="true">{info.emoji}</span>
                 <div className="flex-1">
                   <p className={`font-medium text-sm ${isCurrentTier ? 'text-green-700' : 'text-gray-700'}`}>
                     {info.label}
@@ -118,17 +124,18 @@ export default function Leagues() {
       {/* Standings */}
       <Card>
         <h2 className="font-semibold text-gray-900 mb-4">
-          {tierInfo.emoji} {tierInfo.label} Standings
+          <span aria-hidden="true">{tierInfo.emoji}</span> {tierInfo.label} Standings
         </h2>
         {standings.length === 0 ? (
           <p className="text-gray-400 text-sm text-center py-4">No standings yet this week.</p>
         ) : (
-          <div className="space-y-1">
+          <div className="space-y-1" role="list">
             {standings.map(s => {
               const isMe = s.user_id === user?.id
               return (
                 <div
                   key={s.user_id}
+                  role="listitem"
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${isMe ? 'bg-green-50 border border-green-200' : 'hover:bg-gray-50'}`}
                 >
                   <div className="w-8 flex items-center justify-center">

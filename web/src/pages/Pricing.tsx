@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../data/useAuth'
 import { useSubscription } from '../data/useSubscription'
 import { supabase } from '../lib/supabase'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 const FREE_FEATURES = [
   '3 lessons per day',
@@ -23,6 +24,7 @@ const PREMIUM_FEATURES = [
 ]
 
 export default function Pricing() {
+  usePageTitle('Pricing')
   const { user } = useAuth()
   const { data: sub } = useSubscription(user?.id)
   const [loading, setLoading] = useState<'monthly' | 'yearly' | null>(null)
@@ -85,7 +87,7 @@ export default function Pricing() {
 
       {isPremium ? (
         <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center mb-8">
-          <div className="text-4xl mb-3">🎉</div>
+          <div className="text-4xl mb-3" aria-hidden="true">🎉</div>
           <h2 className="text-xl font-bold text-green-800 mb-1">You're on Premium!</h2>
           <p className="text-green-600 mb-4">
             {sub?.current_period_end
@@ -114,7 +116,7 @@ export default function Pricing() {
             <ul className="space-y-2.5 mb-6">
               {FREE_FEATURES.map(f => (
                 <li key={f} className="flex items-start gap-2.5 text-sm text-gray-600">
-                  <span className="text-green-500 mt-0.5 flex-shrink-0">✓</span>
+                  <span className="text-green-500 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
                   {f}
                 </li>
               ))}
@@ -150,7 +152,7 @@ export default function Pricing() {
             <ul className="space-y-2.5 mb-6">
               {PREMIUM_FEATURES.map(f => (
                 <li key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
-                  <span className="text-green-400 mt-0.5 flex-shrink-0">✓</span>
+                  <span className="text-green-400 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
                   {f}
                 </li>
               ))}

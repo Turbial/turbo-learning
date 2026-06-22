@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../data/useAuth'
 import { Button } from '../../components/ui/Button'
+import { Input } from '../../components/ui/Input'
 
 export default function Register() {
   const { signUpWithEmail } = useAuth()
@@ -10,22 +11,74 @@ export default function Register() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [serverError, setServerError] = useState('')
   const [loading, setLoading] = useState(false)
   const [confirmation, setConfirmation] = useState(false)
 
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+
+  function validateField(
+    name: string,
+    value: string,
+    allErrors = errors,
+    currentPassword = password,
+  ) {
+    const newErrors = { ...allErrors }
+    if (name === 'name') {
+      newErrors.name = value.trim().length >= 2 ? '' : 'Name must be at least 2 characters'
+    }
+    if (name === 'email') {
+      newErrors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+        ? ''
+        : 'Enter a valid email address'
+    }
+    if (name === 'password') {
+      newErrors.password = value.length >= 8 ? '' : 'Password must be at least 8 characters'
+      // Re-validate confirm password whenever password changes
+      if (touched.confirmPassword || newErrors.confirmPassword !== undefined) {
+        newErrors.confirmPassword =
+          confirmPassword === value ? '' : 'Passwords do not match'
+      }
+    }
+    if (name === 'confirmPassword') {
+      newErrors.confirmPassword =
+        value === currentPassword ? '' : 'Passwords do not match'
+    }
+    setErrors(newErrors)
+    return newErrors
+  }
+
+  function handleBlur(field: string, value: string) {
+    setTouched(prev => ({ ...prev, [field]: true }))
+    validateField(field, value, errors, field === 'confirmPassword' ? password : password)
+  }
+
+  const isValid =
+    !Object.values(errors).some(Boolean) &&
+    name.trim().length > 0 &&
+    email.length > 0 &&
+    password.length > 0 &&
+    confirmPassword.length > 0
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setError('')
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters.')
-      return
-    }
+    setServerError('')
+
+    // Validate all fields
+    let newErrors = validateField('name', name, {})
+    newErrors = validateField('email', email, newErrors)
+    newErrors = validateField('password', password, newErrors)
+    newErrors = validateField('confirmPassword', confirmPassword, newErrors, password)
+    setTouched({ name: true, email: true, password: true, confirmPassword: true })
+    if (Object.values(newErrors).some(Boolean)) return
+
     setLoading(true)
     const result = await signUpWithEmail(email, password, name)
     setLoading(false)
     if (result.error) {
-      setError(result.error)
+      setServerError(result.error)
     } else if (result.needsConfirmation) {
       setConfirmation(true)
     } else {
@@ -65,47 +118,70 @@ export default function Register() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Create your account</h2>
 
-          {error && (
+          {serverError && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
-              {error}
+              {serverError}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Full name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
-                required
-                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="At least 6 characters"
-                required
-                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-            </div>
-            <Button type="submit" loading={loading} className="w-full" size="lg">
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <Input
+              label="Full name"
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              onBlur={() => handleBlur('name', name)}
+              error={touched.name ? errors.name : undefined}
+              placeholder="Your name"
+              required
+              autoComplete="name"
+            />
+            <Input
+              label="Email address"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              onBlur={() => handleBlur('email', email)}
+              error={touched.email ? errors.email : undefined}
+              placeholder="you@example.com"
+              required
+              autoComplete="email"
+            />
+            <Input
+              label="Password"
+              type="password"
+              value={password}
+              onChange={e => {
+                setPassword(e.target.value)
+                if (touched.password) validateField('password', e.target.value)
+              }}
+              onBlur={() => handleBlur('password', password)}
+              error={touched.password ? errors.password : undefined}
+              placeholder="At least 8 characters"
+              required
+              autoComplete="new-password"
+            />
+            <Input
+              label="Confirm password"
+              type="password"
+              value={confirmPassword}
+              onChange={e => {
+                setConfirmPassword(e.target.value)
+                if (touched.confirmPassword) validateField('confirmPassword', e.target.value, errors, password)
+              }}
+              onBlur={() => handleBlur('confirmPassword', confirmPassword)}
+              error={touched.confirmPassword ? errors.confirmPassword : undefined}
+              placeholder="Re-enter your password"
+              required
+              autoComplete="new-password"
+            />
+            <Button
+              type="submit"
+              loading={loading}
+              disabled={!isValid || loading}
+              className="w-full"
+              size="lg"
+            >
               Create Account
             </Button>
           </form>

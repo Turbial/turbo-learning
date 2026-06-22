@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../data/useAuth'
 import { supabase } from '../lib/supabase'
 import { Button } from '../components/ui/Button'
+import { Input } from '../components/ui/Input'
 
 const GOALS = [
   { id: 'career', label: 'Advance my career', emoji: '💼' },
@@ -35,6 +36,23 @@ export default function Onboard() {
   const [dailyMins, setDailyMins] = useState(10)
   const [learnTime, setLearnTime] = useState('morning')
   const [loading, setLoading] = useState(false)
+
+  // Step 1: name validation
+  const [nameError, setNameError] = useState('')
+  const [nameTouched, setNameTouched] = useState(false)
+
+  function validateName(val: string) {
+    const err = val.trim().length >= 2 ? '' : 'Name must be at least 2 characters'
+    setNameError(err)
+    return err
+  }
+
+  function handleNameBlur() {
+    setNameTouched(true)
+    validateName(name)
+  }
+
+  const nameIsValid = name.trim().length >= 2
 
   const handleFinish = async () => {
     if (!user) return
@@ -105,19 +123,34 @@ export default function Onboard() {
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">What should we call you?</h2>
               <p className="text-gray-500 mb-6">Your name will appear on your profile and leaderboards.</p>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
-                autoFocus
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 mb-6"
-              />
+              <div className="mb-6">
+                <Input
+                  label="Your name"
+                  type="text"
+                  value={name}
+                  onChange={e => {
+                    setName(e.target.value)
+                    if (nameTouched) validateName(e.target.value)
+                  }}
+                  onBlur={handleNameBlur}
+                  error={nameTouched ? nameError : undefined}
+                  placeholder="Your name"
+                  autoFocus
+                />
+              </div>
               <div className="flex gap-3">
                 <Button variant="secondary" onClick={() => setStep(0)} className="flex-1">
                   Back
                 </Button>
-                <Button onClick={() => setStep(2)} className="flex-1" disabled={!name.trim()}>
+                <Button
+                  onClick={() => {
+                    const err = validateName(name)
+                    setNameTouched(true)
+                    if (!err) setStep(2)
+                  }}
+                  className="flex-1"
+                  disabled={!nameIsValid}
+                >
                   Continue
                 </Button>
               </div>
@@ -146,6 +179,9 @@ export default function Onboard() {
                   </button>
                 ))}
               </div>
+              {!goal && (
+                <p className="text-xs text-red-500 mb-4">Please select a goal to continue.</p>
+              )}
               <div className="flex gap-3">
                 <Button variant="secondary" onClick={() => setStep(1)} className="flex-1">
                   Back

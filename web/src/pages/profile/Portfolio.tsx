@@ -1,15 +1,34 @@
 import { useAuth } from '../../data/useAuth'
 import { usePortfolioResponses } from '../../data/queries'
 import { Card } from '../../components/ui/Card'
+import { Skeleton } from '../../components/ui/Skeleton'
+import { EmptyState } from '../../components/ui/EmptyState'
+import { usePageTitle } from '../../hooks/usePageTitle'
+
+function renderResponse(response: unknown): string {
+  if (typeof response === 'string') return response
+  if (typeof response === 'object' && response !== null) {
+    // Try to extract a meaningful text field
+    const r = response as Record<string, unknown>
+    if (r.text) return String(r.text)
+    if (r.content) return String(r.content)
+    if (r.response) return String(r.response)
+    if (r.answer) return String(r.answer)
+    return JSON.stringify(response, null, 2)
+  }
+  return String(response)
+}
 
 export default function Portfolio() {
+  usePageTitle('Portfolio')
   const { user } = useAuth()
   const { data: responses, isLoading } = usePortfolioResponses(user?.id)
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+      <div className="max-w-2xl mx-auto space-y-4">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton lines={4} />
       </div>
     )
   }
@@ -24,13 +43,11 @@ export default function Portfolio() {
       </div>
 
       {(!responses || responses.length === 0) ? (
-        <Card className="text-center py-16">
-          <p className="text-5xl mb-4">📁</p>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">Nothing here yet</h2>
-          <p className="text-sm text-gray-500">
-            Complete lessons with portfolio-building exercises to populate this gallery.
-          </p>
-        </Card>
+        <EmptyState
+          icon="📁"
+          title="Nothing here yet"
+          description="Complete lessons with portfolio-building exercises to populate this gallery."
+        />
       ) : (
         <div className="space-y-4">
           {responses.map((item: any) => (
@@ -47,7 +64,7 @@ export default function Portfolio() {
               </div>
               <div className="bg-gray-50 rounded-xl p-4">
                 <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                  {typeof item.response === 'string' ? item.response : JSON.stringify(item.response, null, 2)}
+                  {renderResponse(item.response)}
                 </p>
               </div>
             </Card>

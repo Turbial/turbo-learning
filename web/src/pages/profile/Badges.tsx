@@ -1,8 +1,12 @@
 import { useAuth } from '../../data/useAuth'
 import { useBadges, useAllBadges } from '../../data/queries'
 import { Card } from '../../components/ui/Card'
+import { Skeleton } from '../../components/ui/Skeleton'
+import { EmptyState } from '../../components/ui/EmptyState'
+import { usePageTitle } from '../../hooks/usePageTitle'
 
 export default function Badges() {
+  usePageTitle('Badges')
   const { user } = useAuth()
   const { data: userBadges, isLoading } = useBadges(user?.id)
   const { data: allBadges } = useAllBadges()
@@ -11,8 +15,9 @@ export default function Badges() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+      <div className="max-w-2xl mx-auto space-y-4">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton lines={4} />
       </div>
     )
   }
@@ -38,7 +43,7 @@ export default function Badges() {
                   key={b.badge_id}
                   className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-col items-center text-center"
                 >
-                  <span className="text-3xl mb-2">{badge?.icon ?? '🎖️'}</span>
+                  <span className="text-3xl mb-2" aria-hidden="true">{badge?.icon ?? '🎖️'}</span>
                   <p className="font-semibold text-sm text-amber-900">{badge?.name ?? 'Badge'}</p>
                   {badge?.unlock_condition && (
                     <p className="text-xs text-amber-600 mt-1">{badge.unlock_condition}</p>
@@ -62,7 +67,7 @@ export default function Badges() {
                   key={badge.slug}
                   className={`rounded-xl p-4 flex flex-col items-center text-center border ${earned ? 'bg-amber-50 border-amber-200' : 'bg-gray-50 border-gray-100 opacity-50 grayscale'}`}
                 >
-                  <span className="text-3xl mb-2">{badge.icon ?? '🎖️'}</span>
+                  <span className="text-3xl mb-2" aria-hidden="true">{badge.icon ?? '🎖️'}</span>
                   <p className={`font-semibold text-sm ${earned ? 'text-amber-900' : 'text-gray-600'}`}>
                     {badge.name}
                   </p>
@@ -82,10 +87,11 @@ export default function Badges() {
       )}
 
       {(!userBadges || userBadges.length === 0) && (!allBadges || allBadges.length === 0) && (
-        <Card className="text-center py-12">
-          <p className="text-4xl mb-3">🎖️</p>
-          <p className="text-gray-500">Complete lessons to earn badges!</p>
-        </Card>
+        <EmptyState
+          icon="🎖️"
+          title="No badges yet"
+          description="Complete lessons to earn your first badge!"
+        />
       )}
     </div>
   )

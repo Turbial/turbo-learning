@@ -2,22 +2,49 @@ import { useState, FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../data/useAuth'
 import { Button } from '../../components/ui/Button'
+import { Input } from '../../components/ui/Input'
 
 export default function ForgotPassword() {
   const { resetPassword } = useAuth()
   const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
+  const [serverError, setServerError] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
 
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+
+  function validateField(name: string, value: string, allErrors = errors) {
+    const newErrors = { ...allErrors }
+    if (name === 'email') {
+      newErrors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+        ? ''
+        : 'Enter a valid email address'
+    }
+    setErrors(newErrors)
+    return newErrors
+  }
+
+  function handleBlur(field: string, value: string) {
+    setTouched(prev => ({ ...prev, [field]: true }))
+    validateField(field, value)
+  }
+
+  const isValid = !Object.values(errors).some(Boolean) && email.length > 0
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setError('')
+    setServerError('')
+
+    const newErrors = validateField('email', email, {})
+    setTouched({ email: true })
+    if (Object.values(newErrors).some(Boolean)) return
+
     setLoading(true)
     const result = await resetPassword(email)
     setLoading(false)
     if (result.error) {
-      setError(result.error)
+      setServerError(result.error)
     } else {
       setSent(true)
     }
@@ -53,25 +80,31 @@ export default function ForgotPassword() {
                 Enter your email and we&apos;ll send you a reset link.
               </p>
 
-              {error && (
+              {serverError && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
-                  {error}
+                  {serverError}
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
-                    required
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div>
-                <Button type="submit" loading={loading} className="w-full" size="lg">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                <Input
+                  label="Email address"
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  onBlur={() => handleBlur('email', email)}
+                  error={touched.email ? errors.email : undefined}
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                />
+                <Button
+                  type="submit"
+                  loading={loading}
+                  disabled={!isValid || loading}
+                  className="w-full"
+                  size="lg"
+                >
                   Send Reset Link
                 </Button>
               </form>

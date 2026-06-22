@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useAuth } from '../data/useAuth'
 import { useStreakShield } from '../data/useStreakShield'
 import { Card } from '../components/ui/Card'
+import { useToast } from '../contexts/ToastContext'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 const SHIELD_PACKS = [
   { id: 1, count: 1, price: '$0.99', emoji: '🛡️', label: '1 Shield', desc: 'Protect one streak day' },
@@ -10,19 +12,19 @@ const SHIELD_PACKS = [
 ]
 
 export default function Shop() {
+  usePageTitle('Shield Shop')
   const { user } = useAuth()
   const { data: shields, purchase } = useStreakShield(user?.id)
   const [purchasing, setPurchasing] = useState<number | null>(null)
-  const [success, setSuccess] = useState(false)
+  const { success, error } = useToast()
 
   async function handlePurchase(count: number) {
     setPurchasing(count)
     try {
       await purchase.mutateAsync()
-      setSuccess(true)
-      setTimeout(() => setSuccess(false), 3000)
+      success('Shield purchased! Your streak is protected.')
     } catch {
-      // error handled by TanStack Query
+      error('Purchase failed. Please try again.')
     } finally {
       setPurchasing(null)
     }
@@ -43,18 +45,11 @@ export default function Shop() {
             <p className="text-sm text-gray-500 mt-0.5">Automatically used when you miss a day</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl">🛡️</p>
+            <p className="text-3xl" aria-hidden="true">🛡️</p>
             <p className="text-xl font-bold text-gray-900">{shields?.count ?? 0}</p>
           </div>
         </div>
       </Card>
-
-      {success && (
-        <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3">
-          <span className="text-green-600 text-xl">✓</span>
-          <p className="text-green-700 font-medium">Shield purchased! Your streak is protected.</p>
-        </div>
-      )}
 
       {/* How shields work */}
       <Card>
@@ -66,7 +61,7 @@ export default function Shop() {
             { icon: '🛡️', text: 'One shield = one missed day protection.' },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
-              <span className="text-xl flex-shrink-0">{item.icon}</span>
+              <span className="text-xl flex-shrink-0" aria-hidden="true">{item.icon}</span>
               <p className="text-sm text-gray-600">{item.text}</p>
             </div>
           ))}
@@ -84,7 +79,7 @@ export default function Shop() {
               <div className="absolute -mt-8 ml-auto">
               </div>
             )}
-            <div className="text-2xl flex-shrink-0">{pack.emoji[0]}</div>
+            <div className="text-2xl flex-shrink-0" aria-hidden="true">{pack.emoji[0]}</div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <p className="font-semibold text-gray-900">{pack.label}</p>

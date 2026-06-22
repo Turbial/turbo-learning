@@ -4,6 +4,10 @@ import { useAuth } from '../data/useAuth'
 import { useProfile, useBadges } from '../data/queries'
 import { useStreakShield } from '../data/useStreakShield'
 import { Card } from '../components/ui/Card'
+import { Spinner } from '../components/ui/Spinner'
+import { Modal } from '../components/ui/Modal'
+import { useToast } from '../contexts/ToastContext'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function xpToLevel(xp: number) {
   return Math.floor(Math.sqrt(xp / 100)) + 1
@@ -27,11 +31,13 @@ const NAV_LINKS = [
 ]
 
 export default function Profile() {
+  usePageTitle('Profile')
   const { user, signOut } = useAuth()
   const { data: profile, isLoading } = useProfile()
   const { data: badges } = useBadges(user?.id)
   const { data: shields } = useStreakShield(user?.id)
   const navigate = useNavigate()
+  const { success } = useToast()
 
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState('')
@@ -51,12 +57,13 @@ export default function Profile() {
     // In a real app, update profile in DB
     setSaving(false)
     setIsEditing(false)
+    success('Profile updated!')
   }
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+        <Spinner />
       </div>
     )
   }
@@ -100,35 +107,40 @@ export default function Profile() {
             Edit
           </button>
         </div>
-
-        {isEditing && (
-          <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-              <input
-                value={name}
-                onChange={e => setName(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={handleSave}
-                disabled={saving}
-                className="bg-green-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-green-700 disabled:opacity-60"
-              >
-                {saving ? 'Saving…' : 'Save'}
-              </button>
-              <button
-                onClick={() => setIsEditing(false)}
-                className="text-sm text-gray-500 px-4 py-2 rounded-lg hover:bg-gray-100"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
       </Card>
+
+      {/* Edit Profile Modal */}
+      <Modal
+        open={isEditing}
+        onClose={() => setIsEditing(false)}
+        title="Edit Profile"
+      >
+        <div className="space-y-3">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input
+              value={name}
+              onChange={e => setName(e.target.value)}
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="bg-green-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-green-700 disabled:opacity-60"
+            >
+              {saving ? 'Saving…' : 'Save'}
+            </button>
+            <button
+              onClick={() => setIsEditing(false)}
+              className="text-sm text-gray-500 px-4 py-2 rounded-lg hover:bg-gray-100"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
 
       {/* Goal */}
       {goal && (
@@ -150,7 +162,7 @@ export default function Profile() {
               {shields?.count ?? 0} shield{shields?.count !== 1 ? 's' : ''} available
             </p>
           </div>
-          <span className="text-3xl">🛡️</span>
+          <span className="text-3xl" aria-hidden="true">🛡️</span>
         </div>
         <Link
           to="/shop"
@@ -175,7 +187,7 @@ export default function Profile() {
                 key={badge.id}
                 className="flex items-center gap-1.5 bg-amber-50 text-amber-800 text-sm px-3 py-1.5 rounded-full border border-amber-200"
               >
-                <span>{badge.badges?.icon ?? '🎖️'}</span>
+                <span aria-hidden="true">{badge.badges?.icon ?? '🎖️'}</span>
                 <span className="font-medium">{badge.badges?.name ?? 'Badge'}</span>
               </span>
             ))}
@@ -191,7 +203,7 @@ export default function Profile() {
             to={link.to}
             className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex items-center gap-3 hover:border-green-300 hover:shadow transition-all"
           >
-            <span className="text-xl">{link.icon}</span>
+            <span className="text-xl" aria-hidden="true">{link.icon}</span>
             <span className="text-sm font-medium text-gray-800">{link.label}</span>
           </Link>
         ))}

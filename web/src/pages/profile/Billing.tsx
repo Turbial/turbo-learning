@@ -4,24 +4,30 @@ import { useAuth } from '../../data/useAuth'
 import { useSubscription } from '../../data/useSubscription'
 import { usePaymentHistory } from '../../data/queries'
 import { Card } from '../../components/ui/Card'
+import { Skeleton } from '../../components/ui/Skeleton'
+import { useToast } from '../../contexts/ToastContext'
+import { usePageTitle } from '../../hooks/usePageTitle'
 import { supabase } from '../../lib/supabase'
 
 export default function Billing() {
+  usePageTitle('Billing')
   const { user } = useAuth()
   const { data: sub } = useSubscription(user?.id)
   const { data: payments, isLoading } = usePaymentHistory(user?.id)
   const [portalLoading, setPortalLoading] = useState(false)
+  const { error } = useToast()
 
   const isPremium = sub?.tier === 'premium'
 
   async function handlePortal() {
     setPortalLoading(true)
     try {
-      const { data, error } = await supabase.functions.invoke('create-portal-session', {})
-      if (error) throw error
+      const { data, error: invokeError } = await supabase.functions.invoke('create-portal-session', {})
+      if (invokeError) throw invokeError
       if (data?.url) window.location.href = data.url
     } catch (err) {
       console.error(err)
+      error('Could not open billing portal. Please try again.')
     } finally {
       setPortalLoading(false)
     }
@@ -71,9 +77,7 @@ export default function Billing() {
       <Card>
         <h2 className="font-semibold text-gray-900 mb-4">Payment History</h2>
         {isLoading ? (
-          <div className="flex justify-center py-6">
-            <div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
-          </div>
+          <Skeleton lines={3} />
         ) : (!payments || payments.length === 0) ? (
           <p className="text-sm text-gray-400 text-center py-6">No payments yet.</p>
         ) : (

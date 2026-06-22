@@ -3,12 +3,17 @@ import { useAuth } from '../data/useAuth'
 import { useActiveProgramSlug, useUnits, useProgram, useLessonProgressMap } from '../data/queries'
 import { useLocalProgressStore } from '../store/localProgressStore'
 import { Card } from '../components/ui/Card'
+import { Spinner } from '../components/ui/Spinner'
+import { Skeleton } from '../components/ui/Skeleton'
+import { EmptyState } from '../components/ui/EmptyState'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function xpToLevel(xp: number) {
   return Math.floor(Math.sqrt(xp / 100)) + 1
 }
 
 export default function Home() {
+  usePageTitle('Journey')
   const { user } = useAuth()
   const navigate = useNavigate()
   const { data: slug, isLoading: slugLoading } = useActiveProgramSlug()
@@ -43,28 +48,35 @@ export default function Home() {
 
   if (slugLoading || unitsLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+      <div className="space-y-4">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-32 w-full rounded-2xl" />
+        <Skeleton className="h-48 w-full rounded-2xl" />
+        <Skeleton className="h-48 w-full rounded-2xl" />
+        <Skeleton className="h-48 w-full rounded-2xl" />
+        <Skeleton className="h-48 w-full rounded-2xl" />
       </div>
     )
   }
 
   if (!slug) {
     return (
-      <div className="text-center py-20">
-        <span className="text-5xl">📚</span>
-        <h2 className="mt-4 text-xl font-bold text-gray-900">No program enrolled</h2>
-        <p className="mt-2 text-gray-500">Complete onboarding to get started.</p>
-      </div>
+      <EmptyState
+        icon="📚"
+        title="No program enrolled"
+        description="Complete onboarding to get started."
+      />
     )
   }
+
+  const progressPercent = (completedCount / Math.max(units.length, 1)) * 100
 
   return (
     <div>
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">
-          {program?.emoji} {program?.title ?? 'Your Journey'}
+          <span aria-hidden="true">{program?.emoji}</span> {program?.title ?? 'Your Journey'}
         </h1>
         <p className="text-gray-500 mt-1">
           {completedCount} of {units.length} lessons completed
@@ -75,12 +87,19 @@ export default function Home() {
       <Card className="mb-6">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-semibold text-gray-700">Overall Progress</span>
-          <span className="text-sm text-gray-500">{Math.round((completedCount / Math.max(units.length, 1)) * 100)}%</span>
+          <span className="text-sm text-gray-500">{Math.round(progressPercent)}%</span>
         </div>
-        <div className="w-full bg-gray-100 rounded-full h-3">
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round(progressPercent)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Overall lesson progress"
+          className="w-full bg-gray-100 rounded-full h-3"
+        >
           <div
             className="bg-green-500 h-3 rounded-full transition-all duration-500"
-            style={{ width: `${(completedCount / Math.max(units.length, 1)) * 100}%` }}
+            style={{ width: `${progressPercent}%` }}
           />
         </div>
       </Card>
@@ -92,7 +111,7 @@ export default function Home() {
             <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">
               Week {week}
             </h2>
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-3" role="list">
               {weekUnits.map((unit, idxInWeek) => {
                 const globalIdx = units.findIndex((u) => u.id === unit.id)
                 const done = isCompleted(unit.id)
@@ -102,8 +121,11 @@ export default function Home() {
                 return (
                   <button
                     key={unit.id}
+                    role="listitem"
                     onClick={() => handleUnitClick(unit, globalIdx)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleUnitClick(unit, globalIdx)}
                     disabled={locked}
+                    tabIndex={locked ? -1 : 0}
                     className={`
                       flex items-center gap-4 p-4 rounded-2xl border text-left transition-all
                       ${done ? 'bg-green-50 border-green-200 hover:bg-green-100' : ''}
@@ -146,10 +168,10 @@ export default function Home() {
 
                     {/* Locked icon */}
                     {locked && (
-                      <span className="text-gray-300 flex-shrink-0">🔒</span>
+                      <span aria-hidden="true" className="text-gray-300 flex-shrink-0">🔒</span>
                     )}
                     {isCurrent && (
-                      <span className="text-yellow-500 flex-shrink-0">▶</span>
+                      <span aria-hidden="true" className="text-yellow-500 flex-shrink-0">▶</span>
                     )}
                   </button>
                 )
@@ -159,10 +181,11 @@ export default function Home() {
         ))}
 
         {weeks.length === 0 && (
-          <Card className="text-center py-12">
-            <span className="text-4xl">📖</span>
-            <p className="mt-3 text-gray-500">No lessons available yet. Check back soon!</p>
-          </Card>
+          <EmptyState
+            icon="📖"
+            title="No lessons yet"
+            description="No lessons available yet. Check back soon!"
+          />
         )}
       </div>
     </div>

@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../data/useAuth'
 import { useProfile, useUpdateProfile } from '../../data/queries'
 import { Card } from '../../components/ui/Card'
+import { Input } from '../../components/ui/Input'
+import { useToast } from '../../contexts/ToastContext'
+import { usePageTitle } from '../../hooks/usePageTitle'
 
 const GOAL_OPTIONS = [
   { value: 'career_change', label: '🚀 Career Change' },
@@ -15,27 +18,55 @@ const GOAL_OPTIONS = [
 const TIME_OPTIONS = ['Morning', 'Afternoon', 'Evening', 'Anytime']
 
 export default function Settings() {
+  usePageTitle('Settings')
+
   const { user, signOut } = useAuth()
   const { data: profile } = useProfile()
   const updateProfile = useUpdateProfile()
   const navigate = useNavigate()
+  const toast = useToast()
 
   const [name, setName] = useState(profile?.name ?? '')
   const [goal, setGoal] = useState(profile?.goal ?? '')
   const [dailyMins, setDailyMins] = useState(profile?.daily_mins ?? 15)
   const [learnTime, setLearnTime] = useState(profile?.learn_time ?? 'Anytime')
   const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
+
+  // Validation
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+
+  function validateField(fieldName: string, value: string, allErrors = errors) {
+    const newErrors = { ...allErrors }
+    if (fieldName === 'name') {
+      newErrors.name = value.trim().length >= 2 ? '' : 'Name must be at least 2 characters'
+    }
+    setErrors(newErrors)
+    return newErrors
+  }
+
+  function handleBlur(fieldName: string, value: string) {
+    setTouched(prev => ({ ...prev, [fieldName]: true }))
+    validateField(fieldName, value)
+  }
+
+  const isValid = !Object.values(errors).some(Boolean) && name.trim().length >= 2
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
+
+    // Validate
+    const newErrors = validateField('name', name, {})
+    setTouched({ name: true })
+    if (Object.values(newErrors).some(Boolean)) return
+
     setSaving(true)
     try {
       await updateProfile.mutateAsync({ name, goal, daily_mins: dailyMins, learn_time: learnTime })
-      setSaved(true)
-      setTimeout(() => setSaved(false), 2500)
+      toast.success('Settings saved!')
     } catch (err) {
       console.error(err)
+      toast.error('Failed to save settings. Please try again.')
     } finally {
       setSaving(false)
     }
@@ -50,20 +81,23 @@ export default function Settings() {
     <div className="max-w-xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
 
-      <form onSubmit={handleSave} className="space-y-6">
+      <form onSubmit={handleSave} className="space-y-6" noValidate>
         {/* Profile */}
         <Card>
           <h2 className="font-semibold text-gray-900 mb-4">Profile</h2>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
-              <input
-                value={name}
-                onChange={e => setName(e.target.value)}
-                placeholder="Your name"
-                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </div>
+            <Input
+              label="Display Name"
+              type="text"
+              value={name}
+              onChange={e => {
+                setName(e.target.value)
+                if (touched.name) validateField('name', e.target.value)
+              }}
+              onBlur={() => handleBlur('name', name)}
+              error={touched.name ? errors.name : undefined}
+              placeholder="Your name"
+            />
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
@@ -138,16 +172,9 @@ export default function Settings() {
           </div>
         </Card>
 
-        {saved && (
-          <div className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2">
-            <span className="text-green-600">✓</span>
-            <p className="text-sm text-green-700 font-medium">Settings saved!</p>
-          </div>
-        )}
-
         <button
           type="submit"
-          disabled={saving}
+          disabled={saving || !isValid}
           className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white rounded-xl py-3 font-semibold transition-colors"
         >
           {saving ? 'Saving…' : 'Save Settings'}

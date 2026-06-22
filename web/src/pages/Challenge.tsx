@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useDailyChallengeStore, getDailyQuestions, ChallengeQuestion } from '../store/dailyChallengeStore'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 const LETTER = ['A', 'B', 'C', 'D']
 
 function ScoreEmoji({ correct }: { correct: boolean }) {
-  return <span className={`text-2xl ${correct ? 'opacity-100' : 'opacity-30'}`}>{correct ? '🟩' : '🟥'}</span>
+  return <span className={`text-2xl ${correct ? 'opacity-100' : 'opacity-30'}`} aria-hidden="true">{correct ? '🟩' : '🟥'}</span>
 }
 
 export default function Challenge() {
+  usePageTitle('Daily Challenge')
   const store = useDailyChallengeStore()
   const [questions] = useState<ChallengeQuestion[]>(() => getDailyQuestions())
   const [currentIdx, setCurrentIdx] = useState(0)
@@ -71,11 +73,11 @@ export default function Challenge() {
     return (
       <div className="max-w-xl mx-auto">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
-          <div className="text-5xl mb-4">⚡</div>
+          <div className="text-5xl mb-4" aria-hidden="true">⚡</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Daily Challenge Complete!</h1>
           <p className="text-gray-500 mb-6">Come back tomorrow for a fresh set.</p>
 
-          <div className="flex justify-center gap-2 mb-6">
+          <div className="flex justify-center gap-2 mb-6" aria-label={`Score: ${score} out of 5`}>
             {(localAnswers.length > 0 ? localAnswers : Array(5).fill(score >= 3)).map((correct, i) => (
               <ScoreEmoji key={i} correct={correct} />
             ))}
@@ -107,7 +109,7 @@ export default function Challenge() {
     return (
       <div className="max-w-xl mx-auto">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
-          <div className="text-5xl mb-4">⚡</div>
+          <div className="text-5xl mb-4" aria-hidden="true">⚡</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Daily Challenge</h1>
           <p className="text-gray-500 mb-6">Test your AI knowledge with 5 questions. New questions every day!</p>
 
@@ -118,7 +120,7 @@ export default function Challenge() {
               { icon: '🔥', label: 'Streak Bonus' },
             ].map(item => (
               <div key={item.label} className="flex flex-col items-center gap-1">
-                <span className="text-2xl">{item.icon}</span>
+                <span className="text-2xl" aria-hidden="true">{item.icon}</span>
                 <span className="text-xs text-gray-500 font-medium">{item.label}</span>
               </div>
             ))}
@@ -143,12 +145,12 @@ export default function Challenge() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-lg font-bold text-gray-900">Daily Challenge</h1>
         <span className="text-sm font-mono text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-          ⏱ {formatTime(timer)}
+          <span aria-hidden="true">⏱</span> {formatTime(timer)}
         </span>
       </div>
 
       {/* Progress dots */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-2 mb-6" aria-label={`Question ${currentIdx + 1} of ${questions.length}`}>
         {questions.map((_, i) => (
           <div
             key={i}
@@ -164,7 +166,10 @@ export default function Challenge() {
       </div>
 
       {/* Question card */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4">
+      <div
+        className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4"
+        aria-label="Daily challenge question"
+      >
         <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full mb-3 inline-block">
           Question {currentIdx + 1} of {questions.length}
         </span>
@@ -172,7 +177,7 @@ export default function Challenge() {
       </div>
 
       {/* Options */}
-      <div className="space-y-3">
+      <div className="space-y-3" role="group" aria-label="Answer options">
         {current.options.map((opt, i) => {
           let style = 'bg-white border border-gray-200 hover:border-green-400 hover:bg-green-50'
           if (showFeedback) {
@@ -188,6 +193,7 @@ export default function Challenge() {
               key={i}
               onClick={() => handleSelect(i)}
               disabled={showFeedback}
+              aria-pressed={selected === i}
               className={`w-full text-left rounded-xl p-4 flex items-center gap-3 transition-all ${style}`}
             >
               <span className="w-7 h-7 rounded-full bg-gray-100 text-gray-700 text-sm font-bold flex items-center justify-center flex-shrink-0">
