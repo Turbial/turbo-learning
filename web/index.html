@@ -4,10 +4,48 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Turbo Learning</title>
+    <title>Turbo Learning — Master AI in 28 Days</title>
+
+    <!-- Primary meta -->
+    <meta name="description" content="Master AI skills in 28 days. Daily bite-sized lessons on AI prompting, tools, and workflows — built for busy professionals." />
+    <meta name="keywords" content="AI learning, prompt engineering, AI skills, online learning, LLM, ChatGPT" />
+    <meta name="author" content="Turbo Learning" />
+    <meta name="theme-color" content="#059669" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://turbolearning.ai/" />
+    <meta property="og:title" content="Turbo Learning — Master AI in 28 Days" />
+    <meta property="og:description" content="Daily bite-sized AI lessons. Build real skills in prompting, workflows, and AI tools — 10 minutes a day." />
+    <meta property="og:image" content="https://turbolearning.ai/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Turbo Learning — Master AI in 28 Days" />
+    <meta name="twitter:description" content="Daily bite-sized AI lessons. 10 minutes a day." />
+    <meta name="twitter:image" content="https://turbolearning.ai/og-image.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://turbolearning.ai/" />
+
+    <!-- Plausible analytics (privacy-friendly, no cookies) -->
+    <script defer data-domain="turbolearning.ai" src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Initial loading state shown before React hydrates -->
+      <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f9fafb;flex-direction:column;gap:12px;font-family:system-ui,sans-serif;">
+        <div style="width:48px;height:48px;border:4px solid #059669;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+        <p style="color:#6b7280;font-size:14px;margin:0;">Loading Turbo Learning…</p>
+      </div>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

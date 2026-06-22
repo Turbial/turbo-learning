@@ -1,10 +1,10 @@
 // ─── Content Seed Script — reads all JSON files from src/content/ and upserts into Supabase ───
 //
-// Usage: npx ts-node scripts/seed-content.ts
+// Usage: npx tsx scripts/seed-content.ts
 //
 // Env vars required:
-//   SUPABASE_URL          — service URL (or falls back to EXPO_PUBLIC_SUPABASE_URL)
-//   SUPABASE_SERVICE_KEY  — service role key (bypasses RLS)
+//   SUPABASE_URL               — service URL (or falls back to EXPO_PUBLIC_SUPABASE_URL)
+//   SUPABASE_SERVICE_ROLE_KEY  — service role key (bypasses RLS); also accepted as SUPABASE_SERVICE_KEY
 
 import * as fs from "fs";
 import * as path from "path";
@@ -17,10 +17,11 @@ const supabaseUrl =
   process.env.EXPO_PUBLIC_SUPABASE_URL ??
   "https://afgmlkduuapquqkcqdsk.supabase.co";
 
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
+const supabaseServiceKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SERVICE_KEY;
 
 if (!supabaseServiceKey) {
-  console.error("✗ SUPABASE_SERVICE_KEY env var is required");
+  console.error("✗ SUPABASE_SERVICE_ROLE_KEY env var is required (also accepted as SUPABASE_SERVICE_KEY)");
   process.exit(1);
 }
 
