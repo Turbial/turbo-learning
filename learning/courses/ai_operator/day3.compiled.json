@@ -1,0 +1,413 @@
+{
+  "course": {
+    "title": "AI Operator",
+    "description": "28 days to go from AI user to AI operator — directing AI as a workforce, not poking at a chatbot.",
+    "voice": "direct, plain-spoken, a little contrarian — cuts hype, respects the reader's time",
+    "destination": "student internalizes the operator mindset: build repeatable systems with human review, personalize at scale, and share workflows for team leverage"
+  },
+  "lessons": [
+    {
+      "title": "Day 3: Build Systems, Not Prompts",
+      "source_text": "An AI Operator doesn't just ask questions — they build systems. The difference between someone who uses AI and someone who operates AI is simple: operators build repeatable workflows that produce consistent results, while users have one-off conversations they can never quite reproduce.\n\nMeet Tom. He runs marketing for a 50-person company and spends 4 hours every Monday writing 12 personalized client update emails, then falls behind on strategy. His boss says to 'be more strategic.' The wrong fix is a single generic template with the name swapped — that destroys the personalization that makes client updates valuable and erodes trust. The right fix is a system that personalizes at scale: feed the AI your project data, it drafts 12 personalized emails in 30 seconds, and you review for 20 minutes and send. Total time: 25 minutes, down from 4 hours, same quality, 8.5 hours a week saved. That's operating — not prompting, not coding. Building a system where the AI does the heavy lifting and you stay in control.\n\nThe operator's mantra: don't just prompt — build a system. The pieces: a System is a repeatable workflow; a Prompt is a single instruction to AI; a Template is a reusable structure; Review is the human quality-control step. Every operator workflow ends with human review before sending. A saved prompt template with project-context fields, quality criteria, and a review checklist is an operator workflow; asking 'write me a blog post' fresh every time with no template or system is just one-off prompting.\n\nOnce a workflow saves you 8 hours a week, the operator move is not to keep it to yourself — it's to document and share it so your whole team gains the time. One workflow shared across a team is exponential leverage: one workflow → many operators → massive impact.",
+      "key_concepts": [
+        {
+          "tag": "build_systems",
+          "label": "Operators build repeatable systems, not one-off conversations"
+        },
+        {
+          "tag": "personalize_at_scale",
+          "label": "Systems personalize at scale; generic templates erode trust"
+        },
+        {
+          "tag": "human_review",
+          "label": "Every operator workflow ends with human review"
+        },
+        {
+          "tag": "share_leverage",
+          "label": "Document and share workflows for team leverage"
+        }
+      ],
+      "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810",
+      "items": [
+        {
+          "id": "L1-020",
+          "item_type": "menu",
+          "concept_tag": null,
+          "difficulty": 1,
+          "bot_text": "You're on \"Day 3: Build Systems, Not Prompts\". How do you want to lock it in?",
+          "buttons": [
+            {
+              "label": "🎯 Quiz me",
+              "action": "goto",
+              "to": "L1-001"
+            },
+            {
+              "label": "🎭 Play a scenario",
+              "action": "goto",
+              "to": "L1-012"
+            },
+            {
+              "label": "🃏 Flashcards",
+              "action": "goto",
+              "to": "L1-016"
+            },
+            {
+              "label": "💬 Ask my own question",
+              "action": "escape"
+            },
+            {
+              "label": "✓ Finish lesson",
+              "action": "goto",
+              "to": "L1-021"
+            }
+          ],
+          "is_entry": true,
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-002",
+          "item_type": "feedback",
+          "concept_tag": "build_systems",
+          "difficulty": 2,
+          "bot_text": "Exactly. Operators think in systems that reproduce the same quality every time. Users have conversations they can't repeat.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-005"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-003",
+          "item_type": "feedback",
+          "concept_tag": "build_systems",
+          "difficulty": 2,
+          "bot_text": "Not the tool. It's the mindset — building systems that work consistently.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-005"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-004",
+          "item_type": "feedback",
+          "concept_tag": "build_systems",
+          "difficulty": 2,
+          "bot_text": "Common misconception. You don't need to code to operate AI. It's workflow design, not programming.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-005"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-001",
+          "item_type": "quiz",
+          "concept_tag": "build_systems",
+          "difficulty": 2,
+          "bot_text": "What distinguishes an AI Operator from a regular AI user?",
+          "buttons": [
+            {
+              "label": "Operators build repeatable workflows, not one-off conversations",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-002"
+            },
+            {
+              "label": "Operators use more expensive AI models",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-003"
+            },
+            {
+              "label": "Operators write code in Python",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-004"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-006",
+          "item_type": "feedback",
+          "concept_tag": "personalize_at_scale",
+          "difficulty": 3,
+          "bot_text": "Right. Generic templates kill the personalization clients value. A workflow can personalize 12 emails fast without losing quality.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-008"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-007",
+          "item_type": "feedback",
+          "concept_tag": "personalize_at_scale",
+          "difficulty": 3,
+          "bot_text": "It's fast but it erodes trust. Clients notice. The operator fix personalizes at scale, not by gutting quality.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-008"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-005",
+          "item_type": "quiz",
+          "concept_tag": "personalize_at_scale",
+          "difficulty": 3,
+          "bot_text": "Tom wants to save time. Should he write one generic email template and just swap the client name each week?",
+          "buttons": [
+            {
+              "label": "No — build a system that personalizes at scale",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-006"
+            },
+            {
+              "label": "Yes — a generic template is the fastest fix",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-007"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-009",
+          "item_type": "feedback",
+          "concept_tag": "human_review",
+          "difficulty": 1,
+          "bot_text": "Yes. AI drafts at scale; you check quality and stay in control before anything ships.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-012"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-010",
+          "item_type": "feedback",
+          "concept_tag": "human_review",
+          "difficulty": 1,
+          "bot_text": "No — workflows are repeatable, and they end with a human review gate, not a one-time run.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-012"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-011",
+          "item_type": "feedback",
+          "concept_tag": "human_review",
+          "difficulty": 1,
+          "bot_text": "Not a workflow step. The last step is human review before the output goes out.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-012"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-008",
+          "item_type": "quiz",
+          "concept_tag": "human_review",
+          "difficulty": 1,
+          "bot_text": "What's the final step in every operator workflow?",
+          "buttons": [
+            {
+              "label": "Human review before sending",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-009"
+            },
+            {
+              "label": "Run it once and delete it",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-010"
+            },
+            {
+              "label": "Post the result on social media",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-011"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-013",
+          "item_type": "feedback",
+          "concept_tag": "share_leverage",
+          "difficulty": 3,
+          "bot_text": "That's the operator move — one workflow → many operators → hundreds of team hours saved. You scaled your impact, not just your own week.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-016"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-014",
+          "item_type": "feedback",
+          "concept_tag": "share_leverage",
+          "difficulty": 3,
+          "bot_text": "A real win for you, but the leverage stops at one person. Document and share it and the whole team gains the same hours.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-016"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-015",
+          "item_type": "feedback",
+          "concept_tag": "share_leverage",
+          "difficulty": 3,
+          "bot_text": "It already works and saves 8 hours. Ship the docs now; refine with the team's feedback rather than polishing alone.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-016"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-012",
+          "item_type": "scenario",
+          "concept_tag": "share_leverage",
+          "difficulty": 3,
+          "bot_text": "Your client-update workflow now saves YOU 8 hours a week and runs reliably. Your boss wants the team 'more strategic.' What's the operator move next?",
+          "buttons": [
+            {
+              "label": "Document it and share it so the whole team can run it",
+              "action": "branch",
+              "to": "L1-013"
+            },
+            {
+              "label": "Keep using it quietly and enjoy the time back",
+              "action": "branch",
+              "to": "L1-014"
+            },
+            {
+              "label": "Rebuild it from scratch to make it perfect first",
+              "action": "branch",
+              "to": "L1-015"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-017",
+          "item_type": "feedback",
+          "concept_tag": "build_systems",
+          "difficulty": 1,
+          "bot_text": "A system. Operators build repeatable workflows that produce consistent results, not one-off conversations.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-018"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-016",
+          "item_type": "flash",
+          "concept_tag": "build_systems",
+          "difficulty": 1,
+          "bot_text": "Finish the operator's mantra: 'Don't just prompt — build a ____.'",
+          "buttons": [
+            {
+              "label": "Flip card",
+              "action": "goto",
+              "to": "L1-017"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-019",
+          "item_type": "feedback",
+          "concept_tag": "human_review",
+          "difficulty": 1,
+          "bot_text": "Human review. The AI drafts at scale; you check quality and keep the final call.",
+          "buttons": [
+            {
+              "label": "Finish →",
+              "action": "goto",
+              "to": "L1-021"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-018",
+          "item_type": "flash",
+          "concept_tag": "human_review",
+          "difficulty": 1,
+          "bot_text": "What gate ends every operator workflow before output ships?",
+          "buttons": [
+            {
+              "label": "Flip card",
+              "action": "goto",
+              "to": "L1-019"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        },
+        {
+          "id": "L1-021",
+          "item_type": "done",
+          "concept_tag": null,
+          "difficulty": 1,
+          "bot_text": "Nice — that's the lesson. Ready for the next piece?",
+          "buttons": [
+            {
+              "label": "↻ Replay this lesson",
+              "action": "goto",
+              "to": "L1-020"
+            }
+          ],
+          "content_version": "90be13efc3efff16ce7e6ead6c28bd767e075d61aad5c3301784d4f5b6d65810"
+        }
+      ]
+    }
+  ]
+}

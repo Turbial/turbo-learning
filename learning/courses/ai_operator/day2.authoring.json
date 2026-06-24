@@ -1,0 +1,75 @@
+{
+  "course": {
+    "title": "AI Operator",
+    "description": "28 days to go from AI user to AI operator — directing AI as a workforce, not poking at a chatbot.",
+    "voice": "direct, plain-spoken, a little contrarian — cuts hype, respects the reader's time",
+    "destination": "student can design a real AI automation: identify a repetitive task, define trigger → action → output, and think in systems rather than one-off prompts"
+  },
+  "lessons": [
+    {
+      "title": "Day 2: Building Your First AI Automation",
+      "source_text": "AI without automation is a calculator. AI with automation is a factory. The difference between someone who chats with ChatGPT and an AI Operator is simple: operators build systems; everyone else builds prompts. Becoming an operator means thinking in workflows, not isolated requests.\n\nYou do not need to know how to code. Modern AI tools let you build automations through natural language and visual interfaces — you describe what you want and the AI handles the implementation. The most valuable skill is not coding; it is knowing WHAT to automate.\n\nThe core building block of any automation is a node — a single step that takes input, processes it, and produces output. A node follows the pattern: TRIGGER (the event that starts the workflow) → ACTION (what the AI does) → CONDITION (a decision point that branches the flow) → OUTPUT (the final result delivered to you or a system). Even a single node can be useful. Complexity comes from chaining nodes together, not from any individual step.\n\nWhat should you automate? Repetitive, rule-based, high-volume tasks that follow a consistent pattern — like copying data from 50 emails into a spreadsheet every morning. What should you NOT fully automate? Work that needs human creativity, taste, and emotional context — like a creative brainstorm for a brand name. Use AI as a thought partner there, not a replacement.\n\nSarah runs a marketing agency with 12 clients. Every Monday she spent 4 hours pulling analytics, writing summaries and recommendations, formatting reports, and emailing each client. After building one automation — AI pulls analytics, writes the summary, formats the report, drafts the email, and she reviews for 20 minutes and hits send — she reclaimed 3.5 hours every Monday.\n\nFinally: don't let perfect be the enemy of good. An automation that categorizes emails correctly 95% of the time, routing the other 5% to a review folder, is a massive win. Review the edge cases manually and refine over time.",
+      "concepts": [
+        { "tag": "systems_not_prompts", "label": "Operators build systems, not one-off prompts" },
+        { "tag": "automation_node", "label": "A node = trigger → action → output; chain them into workflows" },
+        { "tag": "automate_repetitive", "label": "Automate repetitive, rule-based, high-volume tasks" },
+        { "tag": "ship_imperfect", "label": "95% automation is a win — handle exceptions manually" }
+      ],
+      "quizzes": [
+        {
+          "concept": "systems_not_prompts",
+          "difficulty": 2,
+          "question": "What separates an AI Operator from a casual AI user?",
+          "options": [
+            { "text": "Building automated workflows instead of one-off prompts", "correct": true, "feedback": "Exactly. Operators build the assembly line; anyone can write a single prompt. The difference is architectural." },
+            { "text": "Using a better, more expensive AI model", "correct": false, "feedback": "No — the model isn't the moat. Operators win by building systems, not by paying for a bigger model." },
+            { "text": "Knowing how to write Python", "correct": false, "feedback": "Not it. You don't need to code. The operator edge is workflow design, not programming." }
+          ]
+        },
+        {
+          "concept": "automation_node",
+          "difficulty": 1,
+          "question": "What is the core building block of any automation?",
+          "options": [
+            { "text": "A node — one step: input → process → output", "correct": true, "feedback": "Right. Chain enough nodes and you have a workflow. Each node does one thing well." },
+            { "text": "A long, perfectly-worded prompt", "correct": false, "feedback": "A prompt is one instruction. Automations are built from nodes — discrete steps wired together." }
+          ]
+        },
+        {
+          "concept": "automate_repetitive",
+          "difficulty": 2,
+          "question": "Copying data from 50 emails into a spreadsheet every morning — automate it or do it by hand?",
+          "options": [
+            { "text": "Automate it — repetitive, rule-based, high-volume", "correct": true, "feedback": "100%. This is the textbook automation candidate. Don't do it manually." },
+            { "text": "Do it by hand — automation is risky here", "correct": false, "feedback": "This is exactly what automation is for. Consistent, repetitive data entry is the sweet spot." }
+          ]
+        },
+        {
+          "concept": "ship_imperfect",
+          "difficulty": 3,
+          "question": "Your email-categorizing automation is right 95% of the time; the other 5% go to a 'review' folder. Best move?",
+          "options": [
+            { "text": "Review the 5% manually — it already saved 95% of the work", "correct": true, "feedback": "Perfect. Don't let perfect be the enemy of shipped. Handle edge cases by hand and refine over time." },
+            { "text": "Scrap it — a 5% error rate is unacceptable", "correct": false, "feedback": "Too harsh. 95% automation is a huge win. The 5% is a manual queue, not a reason to quit." },
+            { "text": "Keep tweaking until it's 100% before using it", "correct": false, "feedback": "You'll never ship. Use it now, route exceptions to review, and improve it live." }
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "concept": "automate_repetitive",
+          "setup": "It's Monday. You face 4 hours of pulling analytics, writing summaries, formatting reports, and emailing 12 clients — the same shape every week. Where do you start as an operator?",
+          "choices": [
+            { "text": "Build one workflow: AI pulls data, drafts the summary + email, I review 20 min and send", "good": true, "outcome": "That's the operator move — 3.5 hours back every Monday, same quality, you keep the final call. One system beats twelve manual passes." },
+            { "text": "Open ChatGPT each Monday and paste each client's data in by hand", "good": false, "outcome": "Faster than fully manual, but you're still the bottleneck repeating the work weekly. Build the node chain once instead of re-prompting every time." },
+            { "text": "Wait until you can make it flawless before automating anything", "good": false, "outcome": "Meanwhile the 4 hours keep disappearing. Ship a rough version, route exceptions to review, and improve it as you go." }
+          ]
+        }
+      ],
+      "flashcards": [
+        { "concept": "automation_node", "front": "Name the four parts of an automation node, in order.", "back": "Trigger → Action → Condition → Output. The event that starts it, what the AI does, the decision that branches it, and the result delivered." },
+        { "concept": "ship_imperfect", "front": "Your automation works 95% of the time. Ship it or wait?", "back": "Ship it. Route the 5% to a review queue and iterate. Perfect is the enemy of shipped." }
+      ]
+    }
+  ]
+}

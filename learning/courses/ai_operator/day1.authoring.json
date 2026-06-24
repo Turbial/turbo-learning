@@ -1,0 +1,64 @@
+{
+  "course": {
+    "title": "AI Operator",
+    "description": "28 days to go from AI user to AI operator — directing AI as a workforce, not poking at a chatbot.",
+    "voice": "direct, plain-spoken, a little contrarian — cuts hype, respects the reader's time",
+    "destination": "student can spot which of their own tasks to offload to AI and thinks like an operator who directs AI rather than a user who pokes at it"
+  },
+  "lessons": [
+    {
+      "title": "Day 1: What AI Actually Is (And Isn't)",
+      "source_text": "AI is not magic. It's not sentient. It's not coming for your job. AI is a prediction engine. Feed it data, it predicts what comes next — the next word, the next pixel, or the next action. Everything else — the 'creativity,' the 'reasoning,' the 'personality' — is emergent from that one mechanism.\n\nAI doesn't replace jobs. It replaces tasks. A job is a bundle of 20 to 50 tasks. AI might automate 5 to 7 of them — the repetitive, high-volume ones. That doesn't eliminate the job; it changes it. The real question isn't 'Will AI take my job?' It's 'Which of my tasks can I offload to AI so I can focus on the ones that actually need me?' That shift — from user to operator — is what this program is about.\n\nThere are three layers of AI capability. Layer 1, Prediction: what AI does natively — predict the next word, classify an image, detect a pattern. Layer 2, Tool Use: AI calls APIs, queries databases, sends emails — this is where AI becomes useful, not just smart. Layer 3, Agency: AI makes decisions, chains actions, operates autonomously — this is where operators live. Most people stop at Layer 1. You're going to Layer 3.\n\nThe operator mindset: you don't use AI, you direct it. You're not asking AI to do your work — you're building systems where AI executes, you decide, and the output is better than either could produce alone. That is the difference between being replaced and being amplified. Example: Sarah ran a marketing agency and spent three hours a day writing client update emails. She built a workflow where AI drafts every client update from project data, she reviews in twenty minutes, and they send automatically. Same quality, 2.5 hours a day saved. She didn't build software — she built a system where AI does the heavy lifting and she stays in control.",
+      "concepts": [
+        { "tag": "prediction_engine", "label": "AI is a prediction engine, not magic" },
+        { "tag": "tasks_not_jobs", "label": "AI automates tasks, not whole jobs" },
+        { "tag": "operator_mindset", "label": "Operators direct AI; they don't just use it" }
+      ],
+      "quizzes": [
+        {
+          "concept": "prediction_engine",
+          "difficulty": 1,
+          "question": "What is AI at its core?",
+          "options": [
+            { "text": "A prediction engine that guesses what comes next", "correct": true, "feedback": "Correct. At its core AI predicts the next token, pixel, or action from patterns in its training data. Everything else is emergent from that." },
+            { "text": "A sentient digital being", "correct": false, "feedback": "No — there's no 'being' in there. It's a prediction engine; the 'personality' is emergent, not a mind." },
+            { "text": "A magic black box that does everything", "correct": false, "feedback": "That's the hype talking. Strip it back: it predicts what comes next. Useful, not magic." }
+          ]
+        },
+        {
+          "concept": "tasks_not_jobs",
+          "difficulty": 2,
+          "question": "Does AI replace whole jobs, or something smaller?",
+          "options": [
+            { "text": "Specific tasks within a job", "correct": true, "feedback": "Right. A job is a bundle of 20–50 tasks; AI takes the repetitive 5–7. The job changes, it isn't erased — and the operator decides which tasks to hand over." },
+            { "text": "Entire jobs, start to finish", "correct": false, "feedback": "Not quite. AI automates tasks, not jobs. Whole-job replacement is the fear headline, not the day-to-day reality." }
+          ]
+        },
+        {
+          "concept": "operator_mindset",
+          "difficulty": 3,
+          "question": "You use ChatGPT to write one email, then do everything else by hand. Is that operating?",
+          "options": [
+            { "text": "No — that's single-use prompting (Layer 1)", "correct": true, "feedback": "Exactly. Writing one email is a task. Building a system where AI handles all the routine emails — that's operating. Think in systems, not one-offs." },
+            { "text": "Yes — you used AI, so you're an operator", "correct": false, "feedback": "Using AI once is being a user. Operators build repeatable systems where AI handles the volume and they stay in control." }
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "concept": "operator_mindset",
+          "setup": "You run a small agency and spend 3 hours a day writing client update emails from project data. You want to reclaim that time. What's the operator move?",
+          "choices": [
+            { "text": "Build a workflow where AI drafts every update, I review 20 min, they send", "good": true, "outcome": "That's it — same quality, 2.5 hours a day back. AI does the heavy lifting, you keep the final call. You directed a system instead of doing the task." },
+            { "text": "Open ChatGPT each time and paste in the details to write that one email", "good": false, "outcome": "That saves a few minutes per email but you're still the bottleneck doing it by hand every time. A user pokes the chatbot; an operator builds the system once." },
+            { "text": "Let AI write and auto-send every email with no review", "good": false, "outcome": "Too far the other way. Operators stay in control of what reaches the client — you decide, AI executes. Remove yourself from the loop and one bad draft goes straight to a customer." }
+          ]
+        }
+      ],
+      "flashcards": [
+        { "concept": "prediction_engine", "front": "In one phrase: what is AI?", "back": "A prediction engine — it predicts the next word, pixel, or action. The 'reasoning' and 'creativity' are emergent from that one mechanism." },
+        { "concept": "operator_mindset", "front": "What's the one-line difference between a user and an operator?", "back": "A user asks AI to do a task. An operator builds a system where AI executes, the operator decides, and the output beats either alone." }
+      ]
+    }
+  ]
+}

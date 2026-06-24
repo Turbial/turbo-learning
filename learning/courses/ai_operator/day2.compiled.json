@@ -1,0 +1,465 @@
+{
+  "course": {
+    "title": "AI Operator",
+    "description": "28 days to go from AI user to AI operator — directing AI as a workforce, not poking at a chatbot.",
+    "voice": "direct, plain-spoken, a little contrarian — cuts hype, respects the reader's time",
+    "destination": "student can design a real AI automation: identify a repetitive task, define trigger → action → output, and think in systems rather than one-off prompts"
+  },
+  "lessons": [
+    {
+      "title": "Day 2: Building Your First AI Automation",
+      "source_text": "AI without automation is a calculator. AI with automation is a factory. The difference between someone who chats with ChatGPT and an AI Operator is simple: operators build systems; everyone else builds prompts. Becoming an operator means thinking in workflows, not isolated requests.\n\nYou do not need to know how to code. Modern AI tools let you build automations through natural language and visual interfaces — you describe what you want and the AI handles the implementation. The most valuable skill is not coding; it is knowing WHAT to automate.\n\nThe core building block of any automation is a node — a single step that takes input, processes it, and produces output. A node follows the pattern: TRIGGER (the event that starts the workflow) → ACTION (what the AI does) → CONDITION (a decision point that branches the flow) → OUTPUT (the final result delivered to you or a system). Even a single node can be useful. Complexity comes from chaining nodes together, not from any individual step.\n\nWhat should you automate? Repetitive, rule-based, high-volume tasks that follow a consistent pattern — like copying data from 50 emails into a spreadsheet every morning. What should you NOT fully automate? Work that needs human creativity, taste, and emotional context — like a creative brainstorm for a brand name. Use AI as a thought partner there, not a replacement.\n\nSarah runs a marketing agency with 12 clients. Every Monday she spent 4 hours pulling analytics, writing summaries and recommendations, formatting reports, and emailing each client. After building one automation — AI pulls analytics, writes the summary, formats the report, drafts the email, and she reviews for 20 minutes and hits send — she reclaimed 3.5 hours every Monday.\n\nFinally: don't let perfect be the enemy of good. An automation that categorizes emails correctly 95% of the time, routing the other 5% to a review folder, is a massive win. Review the edge cases manually and refine over time.",
+      "key_concepts": [
+        {
+          "tag": "systems_not_prompts",
+          "label": "Operators build systems, not one-off prompts"
+        },
+        {
+          "tag": "automation_node",
+          "label": "A node = trigger → action → output; chain them into workflows"
+        },
+        {
+          "tag": "automate_repetitive",
+          "label": "Automate repetitive, rule-based, high-volume tasks"
+        },
+        {
+          "tag": "ship_imperfect",
+          "label": "95% automation is a win — handle exceptions manually"
+        }
+      ],
+      "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d",
+      "items": [
+        {
+          "id": "L1-023",
+          "item_type": "menu",
+          "concept_tag": null,
+          "difficulty": 1,
+          "bot_text": "You're on \"Day 2: Building Your First AI Automation\". How do you want to lock it in?",
+          "buttons": [
+            {
+              "label": "🎯 Quiz me",
+              "action": "goto",
+              "to": "L1-001"
+            },
+            {
+              "label": "🎭 Play a scenario",
+              "action": "goto",
+              "to": "L1-015"
+            },
+            {
+              "label": "🃏 Flashcards",
+              "action": "goto",
+              "to": "L1-019"
+            },
+            {
+              "label": "💬 Ask my own question",
+              "action": "escape"
+            },
+            {
+              "label": "✓ Finish lesson",
+              "action": "goto",
+              "to": "L1-024"
+            }
+          ],
+          "is_entry": true,
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-002",
+          "item_type": "feedback",
+          "concept_tag": "systems_not_prompts",
+          "difficulty": 2,
+          "bot_text": "Exactly. Operators build the assembly line; anyone can write a single prompt. The difference is architectural.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-005"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-003",
+          "item_type": "feedback",
+          "concept_tag": "systems_not_prompts",
+          "difficulty": 2,
+          "bot_text": "No — the model isn't the moat. Operators win by building systems, not by paying for a bigger model.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-005"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-004",
+          "item_type": "feedback",
+          "concept_tag": "systems_not_prompts",
+          "difficulty": 2,
+          "bot_text": "Not it. You don't need to code. The operator edge is workflow design, not programming.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-005"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-001",
+          "item_type": "quiz",
+          "concept_tag": "systems_not_prompts",
+          "difficulty": 2,
+          "bot_text": "What separates an AI Operator from a casual AI user?",
+          "buttons": [
+            {
+              "label": "Building automated workflows instead of one-off prompts",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-002"
+            },
+            {
+              "label": "Using a better, more expensive AI model",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-003"
+            },
+            {
+              "label": "Knowing how to write Python",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-004"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-006",
+          "item_type": "feedback",
+          "concept_tag": "automation_node",
+          "difficulty": 1,
+          "bot_text": "Right. Chain enough nodes and you have a workflow. Each node does one thing well.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-008"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-007",
+          "item_type": "feedback",
+          "concept_tag": "automation_node",
+          "difficulty": 1,
+          "bot_text": "A prompt is one instruction. Automations are built from nodes — discrete steps wired together.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-008"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-005",
+          "item_type": "quiz",
+          "concept_tag": "automation_node",
+          "difficulty": 1,
+          "bot_text": "What is the core building block of any automation?",
+          "buttons": [
+            {
+              "label": "A node — one step: input → process → output",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-006"
+            },
+            {
+              "label": "A long, perfectly-worded prompt",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-007"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-009",
+          "item_type": "feedback",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 2,
+          "bot_text": "100%. This is the textbook automation candidate. Don't do it manually.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-011"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-010",
+          "item_type": "feedback",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 2,
+          "bot_text": "This is exactly what automation is for. Consistent, repetitive data entry is the sweet spot.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-011"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-008",
+          "item_type": "quiz",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 2,
+          "bot_text": "Copying data from 50 emails into a spreadsheet every morning — automate it or do it by hand?",
+          "buttons": [
+            {
+              "label": "Automate it — repetitive, rule-based, high-volume",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-009"
+            },
+            {
+              "label": "Do it by hand — automation is risky here",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-010"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-012",
+          "item_type": "feedback",
+          "concept_tag": "ship_imperfect",
+          "difficulty": 3,
+          "bot_text": "Perfect. Don't let perfect be the enemy of shipped. Handle edge cases by hand and refine over time.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-015"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-013",
+          "item_type": "feedback",
+          "concept_tag": "ship_imperfect",
+          "difficulty": 3,
+          "bot_text": "Too harsh. 95% automation is a huge win. The 5% is a manual queue, not a reason to quit.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-015"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-014",
+          "item_type": "feedback",
+          "concept_tag": "ship_imperfect",
+          "difficulty": 3,
+          "bot_text": "You'll never ship. Use it now, route exceptions to review, and improve it live.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-015"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-011",
+          "item_type": "quiz",
+          "concept_tag": "ship_imperfect",
+          "difficulty": 3,
+          "bot_text": "Your email-categorizing automation is right 95% of the time; the other 5% go to a 'review' folder. Best move?",
+          "buttons": [
+            {
+              "label": "Review the 5% manually — it already saved 95% of the work",
+              "action": "answer",
+              "correct": true,
+              "to": "L1-012"
+            },
+            {
+              "label": "Scrap it — a 5% error rate is unacceptable",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-013"
+            },
+            {
+              "label": "Keep tweaking until it's 100% before using it",
+              "action": "answer",
+              "correct": false,
+              "to": "L1-014"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-016",
+          "item_type": "feedback",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 3,
+          "bot_text": "That's the operator move — 3.5 hours back every Monday, same quality, you keep the final call. One system beats twelve manual passes.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-019"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-017",
+          "item_type": "feedback",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 3,
+          "bot_text": "Faster than fully manual, but you're still the bottleneck repeating the work weekly. Build the node chain once instead of re-prompting every time.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-019"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-018",
+          "item_type": "feedback",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 3,
+          "bot_text": "Meanwhile the 4 hours keep disappearing. Ship a rough version, route exceptions to review, and improve it as you go.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-019"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-015",
+          "item_type": "scenario",
+          "concept_tag": "automate_repetitive",
+          "difficulty": 3,
+          "bot_text": "It's Monday. You face 4 hours of pulling analytics, writing summaries, formatting reports, and emailing 12 clients — the same shape every week. Where do you start as an operator?",
+          "buttons": [
+            {
+              "label": "Build one workflow: AI pulls data, drafts the summary + email, I review 20 min and send",
+              "action": "branch",
+              "to": "L1-016"
+            },
+            {
+              "label": "Open ChatGPT each Monday and paste each client's data in by hand",
+              "action": "branch",
+              "to": "L1-017"
+            },
+            {
+              "label": "Wait until you can make it flawless before automating anything",
+              "action": "branch",
+              "to": "L1-018"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-020",
+          "item_type": "feedback",
+          "concept_tag": "automation_node",
+          "difficulty": 1,
+          "bot_text": "Trigger → Action → Condition → Output. The event that starts it, what the AI does, the decision that branches it, and the result delivered.",
+          "buttons": [
+            {
+              "label": "Next →",
+              "action": "goto",
+              "to": "L1-021"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-019",
+          "item_type": "flash",
+          "concept_tag": "automation_node",
+          "difficulty": 1,
+          "bot_text": "Name the four parts of an automation node, in order.",
+          "buttons": [
+            {
+              "label": "Flip card",
+              "action": "goto",
+              "to": "L1-020"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-022",
+          "item_type": "feedback",
+          "concept_tag": "ship_imperfect",
+          "difficulty": 1,
+          "bot_text": "Ship it. Route the 5% to a review queue and iterate. Perfect is the enemy of shipped.",
+          "buttons": [
+            {
+              "label": "Finish →",
+              "action": "goto",
+              "to": "L1-024"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-021",
+          "item_type": "flash",
+          "concept_tag": "ship_imperfect",
+          "difficulty": 1,
+          "bot_text": "Your automation works 95% of the time. Ship it or wait?",
+          "buttons": [
+            {
+              "label": "Flip card",
+              "action": "goto",
+              "to": "L1-022"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        },
+        {
+          "id": "L1-024",
+          "item_type": "done",
+          "concept_tag": null,
+          "difficulty": 1,
+          "bot_text": "Nice — that's the lesson. Ready for the next piece?",
+          "buttons": [
+            {
+              "label": "↻ Replay this lesson",
+              "action": "goto",
+              "to": "L1-023"
+            }
+          ],
+          "content_version": "84ca83a00ffb8e80027ee57c3a745d13262d4f8460ae74f7da3954fd2253b58d"
+        }
+      ]
+    }
+  ]
+}
