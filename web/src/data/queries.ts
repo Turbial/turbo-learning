@@ -285,3 +285,91 @@ export function usePortfolioResponses(userId?: string) {
     staleTime: 5 * 60_000,
   })
 }
+
+// ─── All programs ───
+export function useAllPrograms() {
+  return useQuery<Program[]>({
+    queryKey: ['all-programs'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('programs')
+        .select('id, slug, title, emoji, description')
+        .order('id', { ascending: true })
+      if (error) throw error
+      return (data ?? []) as Program[]
+    },
+    staleTime: 10 * 60_000,
+  })
+}
+
+// ─── Enroll in program ───
+export function useEnrollInProgram() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (programId: string) => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) throw new Error('Not authenticated')
+      // Upsert — one enrollment per user; replace if switching
+      const { error } = await supabase
+        .from('enrollments')
+        .upsert({ user_id: user.id, program_id: programId }, { onConflict: 'user_id' })
+      if (error) throw error
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['activeProgramSlug'] })
+      queryClient.invalidateQueries({ queryKey: ['units'] })
+    },
+  })
+}
+
+// ─── Lesson notes ───
+export function useLessonNotes(userId?: string, unitId?: string) {
+  return useQuery({
+    queryKey: ['lessonNotes', userId, unitId ?? 'all'],
+    queryFn: async () => {
+      let q = supabase
+        .from('lesson_notes')
+        .select('id, unit_id, content, created_at')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+      if (unitId) q = q.eq('unit_id', unitId)
+      const { data, error } = await q
+      if (error) throw error
+      return (data ?? []) as Array<{ id: string; unit_id: string | null; content: string; created_at: string }>
+    },
+    enabled: !!userId,
+    staleTime: 30_000,
+  })
+}
+
+// ─── Save note ───
+export function useSaveNote() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ unitId, content }: { unitId?: string; content: string }) => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) throw new Error('Not authenticated')
+      const { error } = await supabase
+        .from('lesson_notes')
+        .insert({ user_id: user.id, unit_id: unitId ?? null, content })
+      if (error) throw error
+    },
+    onSuccess: (_, { unitId: _unitId }) => {
+      queryClient.invalidateQueries({ queryKey: ['lessonNotes'] })
+    },
+  })
+}
+
+// ─── Delete note ───
+export function useDeleteNote() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (noteId: string) => {
+      const { error } = await supabase.from('lesson_notes').delete().eq('id', noteId)
+      if (error) throw error
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['lessonNotes'] })
+    },
+  })
+}

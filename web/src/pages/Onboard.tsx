@@ -4,6 +4,7 @@ import { useAuth } from '../data/useAuth'
 import { supabase } from '../lib/supabase'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
+import { useAllPrograms, useEnrollInProgram } from '../data/queries'
 
 const GOALS = [
   { id: 'career', label: 'Advance my career', emoji: '💼' },
@@ -36,6 +37,10 @@ export default function Onboard() {
   const [dailyMins, setDailyMins] = useState(10)
   const [learnTime, setLearnTime] = useState('morning')
   const [loading, setLoading] = useState(false)
+  const [selectedProgramId, setSelectedProgramId] = useState('')
+
+  const { data: programs = [] } = useAllPrograms()
+  const enrollInProgram = useEnrollInProgram()
 
   // Step 1: name validation
   const [nameError, setNameError] = useState('')
@@ -58,19 +63,14 @@ export default function Onboard() {
     if (!user) return
     setLoading(true)
     await supabase.from('profiles').upsert(
-      {
-        id: user.id,
-        email: user.email,
-        name,
-        goal,
-        daily_mins: dailyMins,
-        learn_time: learnTime,
-        onboarded: true,
-      },
+      { id: user.id, email: user.email, name, goal, daily_mins: dailyMins, learn_time: learnTime, onboarded: true },
       { onConflict: 'id' },
     )
     // Also update user metadata so the auth guard knows
     await supabase.auth.updateUser({ data: { onboarded: true, name } })
+    if (selectedProgramId) {
+      await enrollInProgram.mutateAsync(selectedProgramId)
+    }
     setLoading(false)
     navigate('/')
   }
@@ -80,7 +80,7 @@ export default function Onboard() {
       <div className="w-full max-w-lg">
         {/* Progress dots */}
         <div className="flex justify-center gap-2 mb-8">
-          {[0, 1, 2, 3].map((i) => (
+          {[0, 1, 2, 3, 4].map((i) => (
             <div
               key={i}
               className={`w-2.5 h-2.5 rounded-full transition-colors ${
@@ -245,7 +245,40 @@ export default function Onboard() {
                 <Button variant="secondary" onClick={() => setStep(2)} className="flex-1">
                   Back
                 </Button>
-                <Button onClick={handleFinish} loading={loading} className="flex-1">
+                <Button onClick={() => setStep(4)} className="flex-1">
+                  Continue
+                </Button>
+              </div>
+            </div>
+          )}
+          {/* Step 4: Program picker */}
+          {step === 4 && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Pick your program</h2>
+              <p className="text-gray-500 mb-6">Start with one — you can switch anytime.</p>
+              <div className="space-y-2 mb-6">
+                {programs.map((prog) => (
+                  <button
+                    key={prog.id}
+                    onClick={() => setSelectedProgramId(prog.id)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-colors ${
+                      selectedProgramId === prog.id
+                        ? 'border-green-600 bg-green-50 text-green-700'
+                        : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                    }`}
+                  >
+                    <span className="text-2xl">{prog.emoji ?? '📚'}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-sm">{prog.title}</p>
+                      {prog.description && <p className="text-xs text-gray-500 truncate mt-0.5">{prog.description}</p>}
+                    </div>
+                    {selectedProgramId === prog.id && <span className="text-green-600 flex-shrink-0">✓</span>}
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <Button variant="secondary" onClick={() => setStep(3)} className="flex-1">Back</Button>
+                <Button onClick={handleFinish} loading={loading} className="flex-1" disabled={!selectedProgramId}>
                   Start Learning!
                 </Button>
               </div>

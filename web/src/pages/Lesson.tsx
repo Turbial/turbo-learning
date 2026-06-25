@@ -2,10 +2,11 @@ import { useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useAuth } from '../data/useAuth'
-import { useUnit, useCompleteLesson } from '../data/queries'
+import { useUnit, useCompleteLesson, useSaveNote } from '../data/queries'
 import { supabase } from '../lib/supabase'
 import { Card } from '../components/ui/Card'
 import { Skeleton } from '../components/ui/Skeleton'
+import { XpBurst } from '../components/ui/XpBurst'
 import { useToast } from '../contexts/ToastContext'
 import { usePageTitle } from '../hooks/usePageTitle'
 
@@ -251,10 +252,14 @@ export default function Lesson() {
   const navigate = useNavigate()
   const toast = useToast()
   const completeLesson = useCompleteLesson()
+  const saveNote = useSaveNote()
 
   const [phase, setPhase] = useState<'intro' | 'playing' | 'complete'>('intro')
   const [stepIdx, setStepIdx] = useState(0)
   const [completing, setCompleting] = useState(false)
+  const [noteOpen, setNoteOpen] = useState(false)
+  const [noteText, setNoteText] = useState('')
+  const [noteSaved, setNoteSaved] = useState(false)
 
   const { data: unit, isLoading: unitLoading } = useUnit(unitId)
   const { data: lesson, isLoading: lessonLoading } = useLessonSteps(unitId)
@@ -301,6 +306,21 @@ export default function Lesson() {
     }
   }
 
+  async function handleSaveNote() {
+    if (!noteText.trim()) return
+    try {
+      await saveNote.mutateAsync({ unitId, content: noteText.trim() })
+      setNoteSaved(true)
+      setNoteText('')
+      setTimeout(() => {
+        setNoteSaved(false)
+        setNoteOpen(false)
+      }, 1500)
+    } catch {
+      toast.error('Could not save note. Try again.')
+    }
+  }
+
   // ── Phase: complete ──
   if (phase === 'complete') {
     return (
@@ -309,9 +329,8 @@ export default function Lesson() {
           <div className="text-6xl mb-4">🎉</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Lesson Complete!</h1>
           <p className="text-gray-500 mb-2">{unit?.title ?? 'Lesson'}</p>
-          <div className="bg-green-50 rounded-xl p-4 mb-6 inline-block mx-auto">
-            <p className="text-2xl font-bold text-green-600">+{LESSON_XP} XP</p>
-            <p className="text-sm text-green-600/70">earned</p>
+          <div className="mb-6">
+            <XpBurst xp={LESSON_XP} />
           </div>
           <div className="space-y-3">
             <button
@@ -460,7 +479,7 @@ export default function Lesson() {
     (currentStep.type === 'mc' || currentStep.type === 'tf' || currentStep.type === 'fill_blank')
 
   return (
-    <div className="max-w-2xl mx-auto space-y-4">
+    <div className="max-w-2xl mx-auto space-y-4 relative pb-20">
       {/* Header */}
       <div className="flex items-center justify-between">
         <button
@@ -513,6 +532,52 @@ export default function Lesson() {
         >
           Skip step →
         </button>
+      )}
+
+      {/* Floating note button */}
+      <button
+        onClick={() => { setNoteOpen(o => !o); setNoteSaved(false) }}
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-12 h-12 bg-yellow-400 hover:bg-yellow-500 rounded-full shadow-lg flex items-center justify-center text-xl transition-all z-30"
+        aria-label="Take a note"
+        title="Take a note"
+      >
+        📝
+      </button>
+
+      {/* Note drawer */}
+      {noteOpen && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40 shadow-2xl md:left-60">
+          <div className="max-w-2xl mx-auto">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-semibold text-gray-900 text-sm">📝 Add a note</h3>
+              <button onClick={() => setNoteOpen(false)} className="text-gray-400 hover:text-gray-600 text-lg leading-none">×</button>
+            </div>
+            {noteSaved ? (
+              <p className="text-green-600 font-medium text-sm py-3 text-center">✓ Note saved!</p>
+            ) : (
+              <>
+                <textarea
+                  value={noteText}
+                  onChange={e => setNoteText(e.target.value)}
+                  placeholder="Write your note…"
+                  rows={3}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2"
+                  autoFocus
+                />
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-400">{noteText.length}/500</span>
+                  <button
+                    onClick={handleSaveNote}
+                    disabled={!noteText.trim() || saveNote.isPending}
+                    className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 text-sm font-semibold px-4 py-1.5 rounded-lg disabled:opacity-50 transition-colors"
+                  >
+                    {saveNote.isPending ? 'Saving…' : 'Save note'}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       )}
     </div>
   )
