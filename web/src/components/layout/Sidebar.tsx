@@ -22,6 +22,9 @@ const navItems = [
   { to: '/leaderboard', label: 'Leaderboard', icon: '🏆' },
   { to: '/challenge', label: 'Daily Challenge', icon: '⚡' },
   { to: '/review', label: 'Review', icon: '🔁' },
+  { to: '/programs', label: 'Programs', icon: '📚' },
+  { to: '/practice', label: 'AI Practice', icon: '🧪' },
+  { to: '/notes', label: 'My Notes', icon: '📝' },
   { to: '/profile', label: 'Profile', icon: '👤' },
 ]
 

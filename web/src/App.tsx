@@ -25,6 +25,9 @@ const Shop = lazy(() => import('./pages/Shop'))
 const Pricing = lazy(() => import('./pages/Pricing'))
 const Lesson = lazy(() => import('./pages/Lesson'))
 const Review = lazy(() => import('./pages/Review'))
+const Programs = lazy(() => import('./pages/Programs'))
+const Notes = lazy(() => import('./pages/Notes'))
+const Practice = lazy(() => import('./pages/Practice'))
 const AdminIndex = lazy(() => import('./pages/admin/Index'))
 const Billing = lazy(() => import('./pages/profile/Billing'))
 const Badges = lazy(() => import('./pages/profile/Badges'))
@@ -119,6 +122,9 @@ function AppRoutes() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/lesson/:unitId" element={<Lesson />} />
           <Route path="/review" element={<Review />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/practice" element={<Practice />} />
           <Route path="/admin" element={<AdminGuard><AdminIndex /></AdminGuard>} />
           <Route path="/profile/billing" element={<Billing />} />
           <Route path="/profile/badges" element={<Badges />} />
