@@ -164,6 +164,12 @@ export function getDailyQuestions(): ChallengeQuestion[] {
   return shuffled.slice(0, 5)
 }
 
+export interface ChallengeHistoryEntry {
+  date: string
+  score: number
+  timeSec: number
+}
+
 interface DailyChallengeState {
   date: string
   answers: Record<number, number>
@@ -171,6 +177,7 @@ interface DailyChallengeState {
   score: number
   startTime: number | null
   endTime: number | null
+  history: ChallengeHistoryEntry[]
   setAnswer: (questionId: number, answer: number) => void
   completeChallenge: (score: number) => void
   resetIfNewDay: () => void
@@ -185,6 +192,7 @@ export const useDailyChallengeStore = create<DailyChallengeState>()(
       score: 0,
       startTime: null,
       endTime: null,
+      history: [],
 
       setAnswer: (questionId, answer) => {
         const today = new Date().toISOString().slice(0, 10)
@@ -197,7 +205,11 @@ export const useDailyChallengeStore = create<DailyChallengeState>()(
       },
 
       completeChallenge: (score) => {
-        set({ completed: true, score, endTime: Date.now() })
+        const state = get()
+        const timeSec = state.startTime ? Math.round((Date.now() - state.startTime) / 1000) : 0
+        const entry: ChallengeHistoryEntry = { date: state.date, score, timeSec }
+        const history = [entry, ...state.history.filter(h => h.date !== state.date)].slice(0, 30)
+        set({ completed: true, score, endTime: Date.now(), history })
       },
 
       resetIfNewDay: () => {

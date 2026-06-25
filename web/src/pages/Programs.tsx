@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../data/useAuth'
 import { useAllPrograms, useActiveProgramSlug, useEnrollInProgram } from '../data/queries'
 import { Card } from '../components/ui/Card'
 import { Skeleton } from '../components/ui/Skeleton'

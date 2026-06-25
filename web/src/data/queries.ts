@@ -373,3 +373,84 @@ export function useDeleteNote() {
     },
   })
 }
+
+// ─── Notifications ───
+export interface Notification {
+  id: string
+  type: string
+  title: string
+  body: string | null
+  read: boolean
+  created_at: string
+}
+
+export function useNotifications(userId?: string) {
+  return useQuery<Notification[]>({
+    queryKey: ['notifications', userId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('notifications')
+        .select('id, type, title, body, read, created_at')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(50)
+      if (error) throw error
+      return (data ?? []) as Notification[]
+    },
+    enabled: !!userId,
+    staleTime: 30_000,
+  })
+}
+
+export function useUnreadNotificationCount(userId?: string) {
+  return useQuery<number>({
+    queryKey: ['notificationCount', userId],
+    queryFn: async () => {
+      const { count, error } = await supabase
+        .from('notifications')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId)
+        .eq('read', false)
+      if (error) throw error
+      return count ?? 0
+    },
+    enabled: !!userId,
+    staleTime: 30_000,
+    refetchInterval: 60_000,
+  })
+}
+
+export function useMarkNotificationRead() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (notificationId: string) => {
+      const { error } = await supabase
+        .from('notifications')
+        .update({ read: true })
+        .eq('id', notificationId)
+      if (error) throw error
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notifications'] })
+      queryClient.invalidateQueries({ queryKey: ['notificationCount'] })
+    },
+  })
+}
+
+export function useMarkAllNotificationsRead() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (userId: string) => {
+      const { error } = await supabase
+        .from('notifications')
+        .update({ read: true })
+        .eq('user_id', userId)
+        .eq('read', false)
+      if (error) throw error
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notifications'] })
+      queryClient.invalidateQueries({ queryKey: ['notificationCount'] })
+    },
+  })
+}

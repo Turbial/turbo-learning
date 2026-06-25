@@ -27,6 +27,8 @@ const Lesson = lazy(() => import('./pages/Lesson'))
 const Review = lazy(() => import('./pages/Review'))
 const Programs = lazy(() => import('./pages/Programs'))
 const Notes = lazy(() => import('./pages/Notes'))
+const Notifications = lazy(() => import('./pages/Notifications'))
+const ChallengeHistory = lazy(() => import('./pages/ChallengeHistory'))
 const Practice = lazy(() => import('./pages/Practice'))
 const AdminIndex = lazy(() => import('./pages/admin/Index'))
 const Billing = lazy(() => import('./pages/profile/Billing'))
@@ -125,6 +127,8 @@ function AppRoutes() {
           <Route path="/programs" element={<Programs />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/practice" element={<Practice />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/challenge/history" element={<ChallengeHistory />} />
           <Route path="/admin" element={<AdminGuard><AdminIndex /></AdminGuard>} />
           <Route path="/profile/billing" element={<Billing />} />
           <Route path="/profile/badges" element={<Badges />} />

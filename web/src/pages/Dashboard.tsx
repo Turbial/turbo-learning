@@ -7,6 +7,7 @@ import { Card } from '../components/ui/Card'
 import { ProgressBar } from '../components/ui/ProgressBar'
 import { Skeleton } from '../components/ui/Skeleton'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { RingProgress } from '../components/ui/RingProgress'
 
 function xpToLevel(xp: number) {
   return Math.floor(Math.sqrt(xp / 100)) + 1
@@ -35,6 +36,31 @@ function useTodayProgress(userId?: string) {
       if (error) throw error
       return count ?? 0
     },
+  })
+}
+
+// ─── Lessons completed this week query ───
+function useLessonsThisWeek(userId?: string) {
+  return useQuery({
+    queryKey: ['lessonsThisWeek', userId],
+    enabled: !!userId,
+    queryFn: async () => {
+      // Monday of the current week at midnight
+      const now = new Date()
+      const day = now.getDay() // 0 = Sun
+      const diffToMon = (day + 6) % 7   // days since last Monday
+      const monday = new Date(now)
+      monday.setDate(now.getDate() - diffToMon)
+      monday.setHours(0, 0, 0, 0)
+      const { count, error } = await supabase
+        .from('lesson_progress')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId)
+        .gte('completed_at', monday.toISOString())
+      if (error) throw error
+      return count ?? 0
+    },
+    staleTime: 60_000,
   })
 }
 
@@ -71,6 +97,7 @@ export default function Dashboard() {
   const { data: progressMap } = useLessonProgressMap(user?.id)
   const { data: todayCount, isLoading: todayLoading } = useTodayProgress(user?.id)
   const { data: activeDates, isLoading: daysLoading } = useLast28Days(user?.id)
+  const { data: weeklyCount, isLoading: weeklyLoading } = useLessonsThisWeek(user?.id)
 
   const xp = profile?.xp ?? 0
   const level = xpToLevel(xp)
@@ -121,6 +148,27 @@ export default function Dashboard() {
 
   return (
     <div>
+      {/* Streak at risk banner */}
+      {!todayLoading && (todayCount ?? 0) === 0 && streak > 0 && (
+        <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 flex items-center gap-3 mb-4">
+          <span className="text-2xl flex-shrink-0" aria-hidden="true">🔥</span>
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-orange-800 text-sm">
+              Your {streak}-day streak is at risk!
+            </p>
+            <p className="text-orange-600 text-xs mt-0.5">
+              Complete a lesson today to keep your streak alive.
+            </p>
+          </div>
+          <Link
+            to="/"
+            className="bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex-shrink-0"
+          >
+            Learn now
+          </Link>
+        </div>
+      )}
+
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard</h1>
 
       {/* Stats grid */}
