@@ -16,15 +16,24 @@ create table if not exists step_responses (
 
 alter table step_responses enable row level security;
 
--- Users can only read/write their own responses
-create policy "step_responses_select" on step_responses
-  for select using (auth.uid() = user_id);
+-- Users can only read/write their own responses (idempotent)
+do $$ begin
+  create policy "step_responses_select" on step_responses
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "step_responses_insert" on step_responses
-  for insert with check (auth.uid() = user_id);
+do $$ begin
+  create policy "step_responses_insert" on step_responses
+    for insert with check (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "step_responses_update" on step_responses
-  for update using (auth.uid() = user_id);
+do $$ begin
+  create policy "step_responses_update" on step_responses
+    for update using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 -- Index for fast lookups by user + lesson (deliverable viewer pattern)
 create index if not exists step_responses_user_lesson_idx

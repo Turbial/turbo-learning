@@ -14,31 +14,49 @@
 
 alter table public.profiles enable row level security;
 
-create policy "profiles: select own" on public.profiles
-  for select using (auth.uid() = id);
+do $$ begin
+  create policy "profiles: select own" on public.profiles
+    for select using (auth.uid() = id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "profiles: update own" on public.profiles
-  for update using (auth.uid() = id);
+do $$ begin
+  create policy "profiles: update own" on public.profiles
+    for update using (auth.uid() = id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "profiles: insert own" on public.profiles
-  for insert with check (auth.uid() = id);
+do $$ begin
+  create policy "profiles: insert own" on public.profiles
+    for insert with check (auth.uid() = id);
+exception when duplicate_object then null;
+end $$;
 
 -- ─── lesson_progress ──────────────────────────────────────────────────────────
 
 alter table public.lesson_progress enable row level security;
 
-create policy "lesson_progress: select own" on public.lesson_progress
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "lesson_progress: select own" on public.lesson_progress
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "lesson_progress: insert own" on public.lesson_progress
-  for insert with check (auth.uid() = user_id);
+do $$ begin
+  create policy "lesson_progress: insert own" on public.lesson_progress
+    for insert with check (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 -- ─── user_badges ──────────────────────────────────────────────────────────────
 
 alter table public.user_badges enable row level security;
 
-create policy "user_badges: select own" on public.user_badges
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "user_badges: select own" on public.user_badges
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 -- Badges are inserted by DB triggers/RPCs (server-side), not directly by clients.
 -- No insert policy for client.
@@ -47,11 +65,17 @@ create policy "user_badges: select own" on public.user_badges
 
 alter table public.enrollments enable row level security;
 
-create policy "enrollments: select own" on public.enrollments
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "enrollments: select own" on public.enrollments
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "enrollments: insert own" on public.enrollments
-  for insert with check (auth.uid() = user_id);
+do $$ begin
+  create policy "enrollments: insert own" on public.enrollments
+    for insert with check (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 -- ─── review_queue ─────────────────────────────────────────────────────────────
 -- Note: review_queue rows are written via the schedule_review() RPC (0008).
@@ -60,11 +84,17 @@ create policy "enrollments: insert own" on public.enrollments
 
 alter table public.review_queue enable row level security;
 
-create policy "review_queue: select own" on public.review_queue
-  for select using (auth.uid() = user_id);
+do $$ begin
+  create policy "review_queue: select own" on public.review_queue
+    for select using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
-create policy "review_queue: update own" on public.review_queue
-  for update using (auth.uid() = user_id);
+do $$ begin
+  create policy "review_queue: update own" on public.review_queue
+    for update using (auth.uid() = user_id);
+exception when duplicate_object then null;
+end $$;
 
 -- ─── Already-covered tables (for reference — not re-applied here) ─────────────
 -- programs:         anon SELECT via 0012_anon_read_policies.sql

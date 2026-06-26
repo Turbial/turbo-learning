@@ -13,10 +13,13 @@ CREATE INDEX IF NOT EXISTS idx_lesson_notes_unit_id  ON lesson_notes(unit_id);
 
 ALTER TABLE lesson_notes ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users manage own notes"
-  ON lesson_notes FOR ALL
-  USING  (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+DO $$ BEGIN
+  CREATE POLICY "Users manage own notes"
+    ON lesson_notes FOR ALL
+    USING  (auth.uid() = user_id)
+    WITH CHECK (auth.uid() = user_id);
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
 -- Auto-update updated_at
 CREATE OR REPLACE FUNCTION update_lesson_notes_updated_at()
@@ -24,6 +27,9 @@ RETURNS TRIGGER LANGUAGE plpgsql AS $$
 BEGIN NEW.updated_at = now(); RETURN NEW; END;
 $$;
 
-CREATE TRIGGER trg_lesson_notes_updated_at
-  BEFORE UPDATE ON lesson_notes
-  FOR EACH ROW EXECUTE FUNCTION update_lesson_notes_updated_at();
+DO $$ BEGIN
+  CREATE TRIGGER trg_lesson_notes_updated_at
+    BEFORE UPDATE ON lesson_notes
+    FOR EACH ROW EXECUTE FUNCTION update_lesson_notes_updated_at();
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;

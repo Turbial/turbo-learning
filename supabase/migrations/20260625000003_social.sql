@@ -15,13 +15,19 @@ CREATE INDEX IF NOT EXISTS idx_challenge_completions_date ON challenge_completio
 
 ALTER TABLE challenge_completions ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users insert own scores"
-  ON challenge_completions FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+DO $$ BEGIN
+  CREATE POLICY "Users insert own scores"
+    ON challenge_completions FOR INSERT
+    WITH CHECK (auth.uid() = user_id);
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
-CREATE POLICY "Anyone can read scores for leaderboard"
-  ON challenge_completions FOR SELECT
-  USING (true);
+DO $$ BEGIN
+  CREATE POLICY "Anyone can read scores for leaderboard"
+    ON challenge_completions FOR SELECT
+    USING (true);
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
 -- Referrals tracking
 CREATE TABLE IF NOT EXISTS referrals (
@@ -37,9 +43,12 @@ CREATE INDEX IF NOT EXISTS idx_referrals_referrer ON referrals(referrer_id);
 
 ALTER TABLE referrals ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users view own referrals"
-  ON referrals FOR SELECT
-  USING (auth.uid() = referrer_id);
+DO $$ BEGIN
+  CREATE POLICY "Users view own referrals"
+    ON referrals FOR SELECT
+    USING (auth.uid() = referrer_id);
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
 -- Public profile reads (for share cards and leaderboard names)
 DO $$

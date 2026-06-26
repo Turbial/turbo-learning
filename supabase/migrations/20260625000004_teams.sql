@@ -1,4 +1,13 @@
 -- Phase D: teams and team_members
+-- If the table exists but lacks columns (from a prior partial run), drop it first.
+DO $$ BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'teams' AND table_schema = 'public') THEN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'teams' AND column_name = 'owner_id') THEN
+      DROP TABLE IF EXISTS team_members CASCADE;
+      DROP TABLE IF EXISTS teams CASCADE;
+    END IF;
+  END IF;
+END $$;
 
 CREATE TABLE IF NOT EXISTS teams (
   id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -7,22 +16,6 @@ CREATE TABLE IF NOT EXISTS teams (
   invite_code text        NOT NULL UNIQUE,
   created_at  timestamptz NOT NULL DEFAULT now()
 );
-
-CREATE INDEX IF NOT EXISTS idx_teams_owner ON teams(owner_id);
-CREATE INDEX IF NOT EXISTS idx_teams_invite ON teams(invite_code);
-
-ALTER TABLE teams ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Team members can read their team"
-  ON teams FOR SELECT
-  USING (
-    id IN (SELECT team_id FROM team_members WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY "Owner can update team"
-  ON teams FOR UPDATE
-  USING (auth.uid() = owner_id)
-  WITH CHECK (auth.uid() = owner_id);
 
 CREATE TABLE IF NOT EXISTS team_members (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -33,24 +26,53 @@ CREATE TABLE IF NOT EXISTS team_members (
   UNIQUE (team_id, user_id)
 );
 
+CREATE INDEX IF NOT EXISTS idx_teams_owner ON teams(owner_id);
+CREATE INDEX IF NOT EXISTS idx_teams_invite ON teams(invite_code);
 CREATE INDEX IF NOT EXISTS idx_team_members_team   ON team_members(team_id);
 CREATE INDEX IF NOT EXISTS idx_team_members_user   ON team_members(user_id);
 
+ALTER TABLE teams ENABLE ROW LEVEL SECURITY;
 ALTER TABLE team_members ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Members read own team roster"
-  ON team_members FOR SELECT
-  USING (
-    team_id IN (SELECT team_id FROM team_members WHERE user_id = auth.uid())
-  );
+DO $$ BEGIN
+  CREATE POLICY "Team members can read their team"
+    ON teams FOR SELECT
+    USING (
+      id IN (SELECT team_id FROM team_members WHERE user_id = auth.uid())
+    );
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
-CREATE POLICY "Users insert themselves"
-  ON team_members FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+DO $$ BEGIN
+  CREATE POLICY "Owner can update team"
+    ON teams FOR UPDATE
+    USING (auth.uid() = owner_id)
+    WITH CHECK (auth.uid() = owner_id);
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
-CREATE POLICY "Owner removes members"
-  ON team_members FOR DELETE
-  USING (
-    auth.uid() = user_id OR
-    auth.uid() = (SELECT owner_id FROM teams WHERE id = team_id)
-  );
+DO $$ BEGIN
+  CREATE POLICY "Members read own team roster"
+    ON team_members FOR SELECT
+    USING (
+      team_id IN (SELECT team_id FROM team_members WHERE user_id = auth.uid())
+    );
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE POLICY "Users insert themselves"
+    ON team_members FOR INSERT
+    WITH CHECK (auth.uid() = user_id);
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+  CREATE POLICY "Owner removes members"
+    ON team_members FOR DELETE
+    USING (
+      auth.uid() = user_id OR
+      auth.uid() = (SELECT owner_id FROM teams WHERE id = team_id)
+    );
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
