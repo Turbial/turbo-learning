@@ -176,16 +176,16 @@ export function useCompleteLesson() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async ({
-      unitId,
+      lessonId,
       xpEarned = 50,
       score = 100,
     }: {
-      unitId: string
+      lessonId: string
       xpEarned?: number
       score?: number
     }) => {
       const { data, error } = await supabase.rpc('complete_lesson', {
-        p_unit_id: unitId,
+        p_lesson_id: lessonId,
         p_xp_earned: xpEarned,
         p_score: score,
       })
