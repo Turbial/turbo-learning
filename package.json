@@ -42,7 +42,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "seed": "ts-node scripts/seed-content.ts",
-    "test": "jest"
+    "test": "jest",
+    "ingest:md": "npx tsx tools/ingest/convert.ts",
+    "ingest:gdoc": "npx tsx tools/ingest/from-gdoc.ts",
+    "validate:content": "python3 tools/validate_lesson.py"
   },
   "jest": {
     "preset": "ts-jest",
@@ -57,7 +60,7 @@
       ".claude"
     ],
     "transform": {
-      "^.+\\.tsx?$": [
+      "^.+\.tsx?$": [
         "ts-jest",
         {
           "tsconfig": {
@@ -66,6 +69,7 @@
         }
       ]
     }
+  }
   },
   "private": true
 }
