@@ -8,6 +8,7 @@ import { ProgressBar } from '../components/ui/ProgressBar'
 import { Skeleton } from '../components/ui/Skeleton'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { RingProgress } from '../components/ui/RingProgress'
+import { LineChart } from '../components/ui/LineChart'
 
 function xpToLevel(xp: number) {
   return Math.floor(Math.sqrt(xp / 100)) + 1
@@ -89,6 +90,66 @@ function useLast28Days(userId?: string) {
   })
 }
 
+// ─── Weekly XP chart data query (last 7 days, grouped by day) ───
+function useWeeklyXp(userId?: string) {
+  return useQuery({
+    queryKey: ['weeklyXp', userId],
+    enabled: !!userId,
+    queryFn: async () => {
+      const sevenDaysAgo = new Date()
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6)
+      sevenDaysAgo.setHours(0, 0, 0, 0)
+
+      const { data, error } = await supabase
+        .from('lesson_progress')
+        .select('completed_at, xp_earned')
+        .eq('user_id', userId)
+        .gte('completed_at', sevenDaysAgo.toISOString())
+      if (error) throw error
+
+      // Build a map of dateStr -> totalXp for the last 7 days
+      const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      const xpByDate: Record<string, number> = {}
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date()
+        d.setDate(d.getDate() - i)
+        const dateStr = d.toISOString().slice(0, 10)
+        xpByDate[dateStr] = 0
+      }
+
+      ;(data ?? []).forEach((row: any) => {
+        if (row.completed_at) {
+          const dateStr = row.completed_at.slice(0, 10)
+          if (dateStr in xpByDate) {
+            xpByDate[dateStr] = (xpByDate[dateStr] ?? 0) + (row.xp_earned ?? 0)
+          }
+        }
+      })
+
+      return Object.entries(xpByDate).map(([dateStr, value]) => {
+        const d = new Date(dateStr + 'T00:00:00')
+        return { label: dayLabels[d.getDay()], value }
+      })
+    },
+    staleTime: 60_000,
+  })
+}
+
+const QUICK_ACTIONS = [
+  { label: 'Continue Journey', icon: '→', to: '/' },
+  { label: 'Daily Challenge', icon: '⚡', to: '/challenge' },
+  { label: 'Review Cards', icon: '🔁', to: '/review' },
+  { label: 'My Notes', icon: '📝', to: '/notes' },
+]
+
+function getInsight(streak: number, xp: number): string {
+  if (streak < 3) return '🌱 Build momentum — complete a lesson every day this week!'
+  if (streak >= 7) return '🔥 Amazing streak! You\'re in the top learners.'
+  if (xp < 500) return '⚡ Complete lessons to earn XP and level up faster.'
+  return '🏆 You\'re doing great! Challenge yourself with harder content.'
+}
+
 export default function Dashboard() {
   usePageTitle('Dashboard')
 
@@ -98,6 +159,7 @@ export default function Dashboard() {
   const { data: todayCount, isLoading: todayLoading } = useTodayProgress(user?.id)
   const { data: activeDates, isLoading: daysLoading } = useLast28Days(user?.id)
   const { data: weeklyCount, isLoading: weeklyLoading } = useLessonsThisWeek(user?.id)
+  const { data: weeklyXpData, isLoading: weeklyXpLoading } = useWeeklyXp(user?.id)
 
   const xp = profile?.xp ?? 0
   const level = xpToLevel(xp)
@@ -107,6 +169,11 @@ export default function Dashboard() {
   const levelProgress = xp - currentLevelXp
   const levelTotal = nextLevelXp - currentLevelXp
   const lessonsCompleted = progressMap?.size ?? 0
+
+  // Weekly goal ring — use profile.daily_mins if available, default to 15 min/day
+  const dailyMins: number = (profile as any)?.daily_mins ?? 15
+  const weeklyMinsGoal = dailyMins * 7
+  const weeklyMinsDone = (weeklyCount ?? 0) * 5
 
   // Build 28-day grid from real data
   const days28: { date: string; active: boolean }[] = []
@@ -133,6 +200,10 @@ export default function Dashboard() {
         </div>
         <Card className="mb-6">
           <Skeleton lines={3} />
+        </Card>
+        <Card className="mb-6">
+          <Skeleton className="h-4 w-32 mb-4" />
+          <Skeleton className="h-32 w-full" />
         </Card>
         <Card>
           <Skeleton className="h-4 w-32 mb-4" />
@@ -191,35 +262,108 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      {/* Today's card */}
+      {/* Weekly XP Chart */}
       <Card className="mb-6">
-        <div className="flex items-start justify-between">
-          <div>
-            <h2 className="font-bold text-gray-900 mb-1">Today</h2>
-            <p className="text-sm text-gray-500">
-              {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-            </p>
+        <h2 className="font-bold text-gray-900 mb-4">Weekly XP</h2>
+        {weeklyXpLoading ? (
+          <Skeleton className="h-32 w-full" />
+        ) : (
+          <LineChart
+            data={weeklyXpData ?? []}
+            label="XP Earned"
+          />
+        )}
+      </Card>
+
+      {/* Today's card + Weekly Goal ring */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        {/* Today's card */}
+        <Card>
+          <div className="flex items-start justify-between">
+            <div>
+              <h2 className="font-bold text-gray-900 mb-1">Today</h2>
+              <p className="text-sm text-gray-500">
+                {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+              </p>
+            </div>
+            <span className="text-2xl">☀️</span>
           </div>
-          <span className="text-2xl">☀️</span>
+          <div className="mt-4 grid grid-cols-3 gap-4">
+            <div className="bg-blue-50 rounded-xl p-3 text-center">
+              {todayLoading ? (
+                <Skeleton className="h-7 w-8 mx-auto mb-1" />
+              ) : (
+                <p className="text-xl font-bold text-blue-600">{todayCount ?? 0}</p>
+              )}
+              <p className="text-xs text-gray-500 mt-0.5">Lessons Today</p>
+            </div>
+            <div className="bg-green-50 rounded-xl p-3 text-center">
+              <p className="text-xl font-bold text-green-600">{lessonsCompleted}</p>
+              <p className="text-xs text-gray-500 mt-0.5">Total Done</p>
+            </div>
+            <div className="bg-orange-50 rounded-xl p-3 text-center">
+              <p className="text-xl font-bold text-orange-500">{streak}</p>
+              <p className="text-xs text-gray-500 mt-0.5">Streak 🔥</p>
+            </div>
+          </div>
+        </Card>
+
+        {/* Weekly Goal ring */}
+        <Card>
+          <h2 className="font-bold text-gray-900 mb-3">Weekly Goal</h2>
+          {weeklyLoading ? (
+            <div className="flex items-center gap-4">
+              <Skeleton className="w-20 h-20 rounded-full" />
+              <Skeleton className="h-4 w-32" />
+            </div>
+          ) : (
+            <div className="flex items-center gap-5">
+              <RingProgress
+                value={weeklyMinsDone}
+                max={weeklyMinsGoal}
+                size={80}
+                strokeWidth={8}
+                label={`${weeklyMinsDone}m`}
+              />
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">
+                  {weeklyMinsDone}m / {weeklyMinsGoal}m
+                </p>
+                <p className="text-xs text-gray-500 mt-0.5">this week</p>
+                <p className="text-xs text-gray-400 mt-2">
+                  {weeklyCount ?? 0} lesson{(weeklyCount ?? 0) !== 1 ? 's' : ''} completed
+                </p>
+              </div>
+            </div>
+          )}
+        </Card>
+      </div>
+
+      {/* Quick Actions grid */}
+      <Card className="mb-6">
+        <h2 className="font-bold text-gray-900 mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-2 gap-3">
+          {QUICK_ACTIONS.map((action) => (
+            <Link
+              key={action.to}
+              to={action.to}
+              className="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 border border-gray-100 rounded-xl px-4 py-3 transition-colors group"
+            >
+              <span className="text-xl flex-shrink-0" aria-hidden="true">{action.icon}</span>
+              <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                {action.label}
+              </span>
+            </Link>
+          ))}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-4">
-          <div className="bg-blue-50 rounded-xl p-3 text-center">
-            {todayLoading ? (
-              <Skeleton className="h-7 w-8 mx-auto mb-1" />
-            ) : (
-              <p className="text-xl font-bold text-blue-600">{todayCount ?? 0}</p>
-            )}
-            <p className="text-xs text-gray-500 mt-0.5">Lessons Today</p>
-          </div>
-          <div className="bg-green-50 rounded-xl p-3 text-center">
-            <p className="text-xl font-bold text-green-600">{lessonsCompleted}</p>
-            <p className="text-xs text-gray-500 mt-0.5">Total Done</p>
-          </div>
-          <div className="bg-orange-50 rounded-xl p-3 text-center">
-            <p className="text-xl font-bold text-orange-500">{streak}</p>
-            <p className="text-xs text-gray-500 mt-0.5">Streak 🔥</p>
-          </div>
-        </div>
+      </Card>
+
+      {/* Insights panel */}
+      <Card className="mb-6">
+        <h2 className="font-bold text-gray-900 mb-3">Your Insight</h2>
+        <p className="text-sm text-gray-700 leading-relaxed">
+          {getInsight(streak, xp)}
+        </p>
       </Card>
 
       {/* Level progress */}

@@ -42,6 +42,18 @@ const Certificate = lazy(() => import('./pages/Certificate'))
 const Referral = lazy(() => import('./pages/Referral'))
 const Team = lazy(() => import('./pages/Team'))
 const AdminContent = lazy(() => import('./pages/admin/Content'))
+const Search = lazy(() => import('./pages/Search'))
+const Goals = lazy(() => import('./pages/Goals'))
+const Journal = lazy(() => import('./pages/Journal'))
+const Flashcards = lazy(() => import('./pages/Flashcards'))
+const Quests = lazy(() => import('./pages/Quests'))
+const Resources = lazy(() => import('./pages/Resources'))
+const AiTutor = lazy(() => import('./pages/AiTutor'))
+const Community = lazy(() => import('./pages/Community'))
+const Streaks = lazy(() => import('./pages/Streaks'))
+const Explore = lazy(() => import('./pages/Explore'))
+const Achievements = lazy(() => import('./pages/Achievements'))
+const Bookmarks = lazy(() => import('./pages/Bookmarks'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const PageLoader = (
@@ -144,6 +156,18 @@ function AppRoutes() {
           <Route path="/referral" element={<Referral />} />
           <Route path="/team" element={<Team />} />
           <Route path="/admin/content" element={<AdminGuard><AdminContent /></AdminGuard>} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/goals" element={<Goals />} />
+          <Route path="/journal" element={<Journal />} />
+          <Route path="/flashcards" element={<Flashcards />} />
+          <Route path="/quests" element={<Quests />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/ai-tutor" element={<AiTutor />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/streaks" element={<Streaks />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
         </Route>
 
         {/* 404 */}
