@@ -454,3 +454,45 @@ export function useMarkAllNotificationsRead() {
     },
   })
 }
+
+// ─── Challenge leaderboard ───
+export function useSaveChallengeScore() {
+  return useMutation({
+    mutationFn: async ({ score, timeSec }: { score: number; timeSec: number }) => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+      const today = new Date().toISOString().slice(0, 10)
+      const { error } = await supabase
+        .from('challenge_completions')
+        .upsert(
+          { user_id: user.id, date: today, score, time_sec: timeSec },
+          { onConflict: 'user_id,date' },
+        )
+      if (error) console.warn('Could not save challenge score:', error.message)
+    },
+  })
+}
+
+export function useTodayChallengeLeaderboard() {
+  return useQuery({
+    queryKey: ['challengeLeaderboard'],
+    queryFn: async () => {
+      const today = new Date().toISOString().slice(0, 10)
+      const { data, error } = await supabase
+        .from('challenge_completions')
+        .select('user_id, score, time_sec, profiles!inner(name, xp)')
+        .eq('date', today)
+        .order('score', { ascending: false })
+        .order('time_sec', { ascending: true })
+        .limit(20)
+      if (error) throw error
+      return (data ?? []) as Array<{
+        user_id: string
+        score: number
+        time_sec: number | null
+        profiles: { name?: string; xp: number } | { name?: string; xp: number }[]
+      }>
+    },
+    staleTime: 60_000,
+  })
+}

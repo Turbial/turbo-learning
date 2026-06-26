@@ -1,11 +1,76 @@
 import { useEffect, useState } from 'react'
 import { useDailyChallengeStore, getDailyQuestions, ChallengeQuestion } from '../store/dailyChallengeStore'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { useSaveChallengeScore, useTodayChallengeLeaderboard } from '../data/queries'
 
 const LETTER = ['A', 'B', 'C', 'D']
 
 function ScoreEmoji({ correct }: { correct: boolean }) {
   return <span className={`text-2xl ${correct ? 'opacity-100' : 'opacity-30'}`} aria-hidden="true">{correct ? '🟩' : '🟥'}</span>
+}
+
+function LeaderboardPanel({
+  entries,
+  isLoading,
+}: {
+  entries: Array<{ user_id: string; score: number; time_sec: number | null; profiles: { name?: string; xp: number } | { name?: string; xp: number }[] }>
+  isLoading: boolean
+}) {
+  const formatTime = (s: number | null) => s ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : '—'
+
+  return (
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="px-5 py-4 border-b border-gray-50">
+        <h2 className="font-bold text-gray-900">Today's Leaderboard</h2>
+        <p className="text-xs text-gray-400 mt-0.5">
+          {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+        </p>
+      </div>
+      {isLoading ? (
+        <div className="flex justify-center py-10">
+          <div className="w-6 h-6 border-2 border-green-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      ) : entries.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-3xl mb-2">🎯</p>
+          <p className="text-gray-500 text-sm">No scores yet today.</p>
+          <p className="text-gray-400 text-xs mt-1">Be the first to complete today's challenge!</p>
+        </div>
+      ) : (
+        <div>
+          {entries.map((entry, idx) => {
+            const prof = Array.isArray(entry.profiles) ? entry.profiles[0] : entry.profiles
+            const name = prof?.name ?? 'Learner'
+            const medals = ['🥇', '🥈', '🥉']
+            return (
+              <div
+                key={entry.user_id}
+                className={`flex items-center gap-3 px-5 py-3 border-b border-gray-50 last:border-0 ${
+                  idx === 0 ? 'bg-yellow-50/60' : ''
+                }`}
+              >
+                <span className="w-6 text-center text-sm font-bold text-gray-400 flex-shrink-0">
+                  {idx < 3 ? medals[idx] : `${idx + 1}`}
+                </span>
+                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-xs font-bold text-green-700 flex-shrink-0">
+                  {name[0].toUpperCase()}
+                </div>
+                <p className="flex-1 text-sm font-medium text-gray-800 truncate">{name}</p>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="text-xs text-gray-400">{formatTime(entry.time_sec)}</span>
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                    entry.score === 5 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+                  }`}>
+                    {entry.score}/5
+                  </span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function Challenge() {
@@ -18,6 +83,9 @@ export default function Challenge() {
   const [phase, setPhase] = useState<'intro' | 'playing' | 'done'>('intro')
   const [localAnswers, setLocalAnswers] = useState<boolean[]>([])
   const [timer, setTimer] = useState(0)
+  const saveScore = useSaveChallengeScore()
+  const { data: leaderboard = [], isLoading: leaderboardLoading } = useTodayChallengeLeaderboard()
+  const [introTab, setIntroTab] = useState<'play' | 'leaderboard'>('play')
 
   useEffect(() => {
     store.resetIfNewDay()
@@ -57,6 +125,8 @@ export default function Challenge() {
       } else {
         const score = newAnswers.filter(Boolean).length
         store.completeChallenge(score)
+        // Save to Supabase for leaderboard
+        saveScore.mutate({ score, timeSec: timer })
         setLocalAnswers(newAnswers)
         setPhase('done')
       }
@@ -108,31 +178,53 @@ export default function Challenge() {
   if (phase === 'intro') {
     return (
       <div className="max-w-xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
-          <div className="text-5xl mb-4" aria-hidden="true">⚡</div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Daily Challenge</h1>
-          <p className="text-gray-500 mb-6">Test your AI knowledge with 5 questions. New questions every day!</p>
-
-          <div className="flex justify-center gap-4 mb-8">
-            {[
-              { icon: '❓', label: '5 Questions' },
-              { icon: '⏱️', label: 'Timed' },
-              { icon: '🔥', label: 'Streak Bonus' },
-            ].map(item => (
-              <div key={item.label} className="flex flex-col items-center gap-1">
-                <span className="text-2xl" aria-hidden="true">{item.icon}</span>
-                <span className="text-xs text-gray-500 font-medium">{item.label}</span>
-              </div>
-            ))}
-          </div>
-
+        {/* Tab bar */}
+        <div className="flex bg-gray-100 rounded-xl p-1 mb-4">
           <button
-            onClick={handleStart}
-            className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl py-3 font-semibold transition-colors"
+            onClick={() => setIntroTab('play')}
+            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+              introTab === 'play' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
+            }`}
           >
-            Start Challenge
+            ⚡ Challenge
+          </button>
+          <button
+            onClick={() => setIntroTab('leaderboard')}
+            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+              introTab === 'leaderboard' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            🏆 Today's Board
           </button>
         </div>
+
+        {introTab === 'play' ? (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
+            <div className="text-5xl mb-4" aria-hidden="true">⚡</div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Daily Challenge</h1>
+            <p className="text-gray-500 mb-6">Test your AI knowledge with 5 questions. New questions every day!</p>
+            <div className="flex justify-center gap-4 mb-8">
+              {[
+                { icon: '❓', label: '5 Questions' },
+                { icon: '⏱️', label: 'Timed' },
+                { icon: '🔥', label: 'Streak Bonus' },
+              ].map(item => (
+                <div key={item.label} className="flex flex-col items-center gap-1">
+                  <span className="text-2xl" aria-hidden="true">{item.icon}</span>
+                  <span className="text-xs text-gray-500 font-medium">{item.label}</span>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={handleStart}
+              className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl py-3 font-semibold transition-colors"
+            >
+              Start Challenge
+            </button>
+          </div>
+        ) : (
+          <LeaderboardPanel entries={leaderboard} isLoading={leaderboardLoading} />
+        )}
       </div>
     )
   }

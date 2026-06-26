@@ -37,6 +37,11 @@ const Portfolio = lazy(() => import('./pages/profile/Portfolio'))
 const Settings = lazy(() => import('./pages/profile/Settings'))
 const Terms = lazy(() => import('./pages/Terms'))
 const Privacy = lazy(() => import('./pages/Privacy'))
+const Share = lazy(() => import('./pages/Share'))
+const Certificate = lazy(() => import('./pages/Certificate'))
+const Referral = lazy(() => import('./pages/Referral'))
+const Team = lazy(() => import('./pages/Team'))
+const AdminContent = lazy(() => import('./pages/admin/Content'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const PageLoader = (
@@ -101,6 +106,7 @@ function AppRoutes() {
         {/* Public — always accessible */}
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/share/:userId" element={<Share />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
 
         {/* Public auth — redirect to app if already logged in */}
@@ -134,6 +140,10 @@ function AppRoutes() {
           <Route path="/profile/badges" element={<Badges />} />
           <Route path="/profile/portfolio" element={<Portfolio />} />
           <Route path="/profile/settings" element={<Settings />} />
+          <Route path="/certificate/:programId" element={<Certificate />} />
+          <Route path="/referral" element={<Referral />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/admin/content" element={<AdminGuard><AdminContent /></AdminGuard>} />
         </Route>
 
         {/* 404 */}

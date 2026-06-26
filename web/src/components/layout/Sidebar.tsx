@@ -27,6 +27,8 @@ const navItems = [
   { to: '/programs', label: 'Programs', icon: '📚' },
   { to: '/practice', label: 'AI Practice', icon: '🧪' },
   { to: '/notes', label: 'My Notes', icon: '📝' },
+  { to: '/referral', label: 'Refer a Friend', icon: '🎁' },
+  { to: '/team', label: 'Team', icon: '🏢' },
   { to: '/profile', label: 'Profile', icon: '👤' },
 ]
 
@@ -34,6 +36,7 @@ const bottomItems = [
   { to: '/leagues', label: 'Leagues', icon: '🎖️' },
   { to: '/shop', label: 'Shop', icon: '🛡️' },
   { to: '/pricing', label: 'Upgrade', icon: '⭐' },
+  { to: '/admin/content', label: 'Content Editor', icon: '✏️' },
 ]
 
 interface SidebarProps {
