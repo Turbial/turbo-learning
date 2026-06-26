@@ -30,6 +30,15 @@ const navItems = [
   { to: '/referral', label: 'Refer a Friend', icon: '🎁' },
   { to: '/team', label: 'Team', icon: '🏢' },
   { to: '/profile', label: 'Profile', icon: '👤' },
+  { to: '/search', label: 'Search', icon: '🔍' },
+  { to: '/goals', label: 'Goals', icon: '🎯' },
+  { to: '/journal', label: 'Journal', icon: '📓' },
+  { to: '/flashcards', label: 'Flashcards', icon: '🃏' },
+  { to: '/quests', label: 'Quests', icon: '⚔️' },
+  { to: '/community', label: 'Community', icon: '💬' },
+  { to: '/explore', label: 'Explore', icon: '🧭' },
+  { to: '/achievements', label: 'Achievements', icon: '🏆' },
+  { to: '/bookmarks', label: 'Bookmarks', icon: '🔖' },
 ]
 
 const bottomItems = [
@@ -37,6 +46,9 @@ const bottomItems = [
   { to: '/shop', label: 'Shop', icon: '🛡️' },
   { to: '/pricing', label: 'Upgrade', icon: '⭐' },
   { to: '/admin/content', label: 'Content Editor', icon: '✏️' },
+  { to: '/resources', label: 'Resources', icon: '📖' },
+  { to: '/ai-tutor', label: 'AI Tutor', icon: '🤖' },
+  { to: '/streaks', label: 'Streak Stats', icon: '📊' },
 ]
 
 interface SidebarProps {
